@@ -1,0 +1,2111 @@
+---
+title: "State of the Ecosystem 2019: Mid-Atlantic"
+output: 
+  pdf_document:
+    includes:
+      in_header: latex/preamble-latex.tex
+    keep_tex: yes
+bibliography: SOE2019.bib
+link-citations: yes
+---
+
+```{r setup, include=FALSE}
+
+# library(tint)
+# # invalidate cache when the package version changes
+# knitr::opts_chunk$set(tidy = FALSE, cache.extra = packageVersion('tint'))
+# options(htmltools.dir.version = FALSE)
+
+#Default Rmd options
+knitr::opts_chunk$set(echo = FALSE,
+                      message = FALSE,
+                      warning = FALSE,
+                      fig.align = 'center') #allows for inserting R code into captions
+
+#Plotting and data libraries
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(ecodata)
+library(here)
+library(kableExtra)
+library(ggrepel)
+library(stringr)
+library(patchwork)
+library(grid)
+library(ggiraph)
+library(vegan)
+library(rpart)
+
+#GIS libraries
+library(sf)
+library(rgdal)
+library(raster)
+library(rnaturalearth)
+
+#Data directories
+image.dir <- here("images")
+gis.dir <- here("gis")
+
+#GIS directory
+#gis.dir <- here::here("inst","extdata","gridded")
+
+#General inline text input for report
+#Council
+council <- "Mid-Atlantic Fishery Management Council"
+council_abbr <- "MAFMC"
+
+#Region identifiers
+epu <- "Mid-Atlantic Bight"
+epu_abbr <- "MAB"
+region <- "Mid-Atlantic"
+region_abbr <- "MA" #Some commercial data organized by "MA" or "NE" regions, not by EPU 
+
+
+```
+
+
+```{r GIS-setup}
+
+#CRS
+crs <- "+proj=longlat +lat_1=35 +lat_2=45 +lat_0=40 +lon_0=-77 +x_0=0 +y_0=0 +datum=NAD83 +no_defs +ellps=GRS80 +towgs84=0,0,0"
+
+#Coastline shapefile
+coast <- ne_countries(scale = 10,
+                          continent = "North America",
+                          returnclass = "sf") %>%
+             sf::st_transform(crs = crs)
+
+#State polygons
+ne_states <- ne_states(country = "united states of america",
+                                      returnclass = "sf") %>%
+  sf::st_transform(crs = crs)
+
+#high-res polygon of Maine
+#new_england <- read_sf(gis.dir,"new_england")
+
+#EPU shapefile
+epu_sf <- ecodata::epu_sf %>% 
+  filter(EPU %in% c("MAB","GB","GOM"))
+
+#Map line parameters
+map.lwd <- 0.4
+
+# Set lat/lon window for maps
+xmin = -77
+xmax = -65
+ymin = 36
+ymax = 45
+xlims <- c(xmin, xmax)
+ylims <- c(ymin, ymax)
+
+#Time series constants
+shade.alpha <- 0.3
+shade.fill <- "lightgrey"
+lwd <- 1
+pcex <- 2
+trend.alpha <- 0.5
+trend.size <- 2
+hline.size <- 1
+hline.alpha <- 0.35
+hline.lty <- "dashed"
+label.size <- 5
+hjust.label <- 1.5
+letter_size <- 4
+feeding.guilds <- c("Apex Predator","Piscivore","Planktivore","Benthivore","Benthos")
+x.shade.min <- 2009
+x.shade.max <- 2018
+#Function for custom ggplot facet labels
+label <- function(variable,value){
+  return(facet_names[value])
+}
+```
+
+<!--# If you read nothing else, read this-->
+
+The purpose of this report is to synthesize available information relevant to fishery management in the Mid-Atlantic portion of the US Northeast Shelf. This 2019 report highlights where management interventions have proven successful to achieve ecological objectives, but also characterizes the considerable challenges for management posed by climate change and increasing trade-offs across conservation, fishing, and other human activities in this region. Finally, we describe combinations of ecological signals that present opportunities for further integrated research and possibly creative management solutions. 
+
+Some management interventions for ecosystems and fisheries have proven beneficial in the Mid-Atlantic and throughout the Northeast US Shelf. For example, the evidence suggests that management limiting nutrient inputs has significantly improved water quality in Chesapeake Bay (Fig. \ref{fig:cb-attainment}). This trend, which has been driven by improvements to dissolved oxygen content and water clarity, has positive implications for aquaculture development and for managed species using the Bay as nursery habitat.  Also encouraging is a continued decrease in harbor porpoise bycatch, which for this year is the lowest on record in the Northeast US, and an apparent stable harbor porpoise population (Fig. \ref{fig:harbor-porpoise-bars}).
+
+However, there are multiple signals indicating challenges to meeting management goals. Despite mostly meeting fishery management objectives at the single species level (Fig. \ref{fig:stock-status}), long term declines in total seafood production and commercial revenue remain apparent (Figs. \ref{fig:total-landings}, \ref{fig:comm-landings}, \ref{fig:comm-revenue}). Indicators highlight a declining diversity of recreational opportunities (fishing modes and species, Fig. \ref{fig:rec-div}). Further, coastal communities with high fishery engagement and reliance are dependent on a smaller number of species than historically. These species are predominantly high valued shellfish vulnerable to increased ocean temperature and acidification. 
+
+Fisheries are significantly affecting protected species, particularly large whale abundance. Changes in fishery management to address this issue could have considerable consequences for the fixed gear fishing sector, particularly for pot gear. The recovery of north Atlantic right whales is jeopardized by anthropogenic mortality (Fig. \ref{fig:NARW-abundance}). Shifts in ecosystem conditions may be contributing to increased interaction between right whales and fishing gear and could be playing a role in other protected species trends. Unusual Mortality Events (UMEs) have been declared for north Atlantic right whales, humpback whales, and minke whales, and preliminary investigations suggest fishing gear entanglement has played a primary role in these mortalities. Gray seal bycatch mortality has also risen in recent years, with an estimated annual mortality that has often totaled more than 1000 animals and a UME has been declared for both gray and harbor seals that may be due to phocine distemper virus. 
+
+Several climate and ecosystem observations are trending towards unprecedented levels. The Northeast US shelf is still among the fastest warming waters globally (Fig. \ref{fig:long-term-sst}) with implications for species physiology, productivity, distribution, and community composition. Globally, 2018 was the 4th warmest year on record with the last four years being the warmest on record. In the Mid-Atlantic, 2018 summer sea surface temperatures were the third highest on record, while temperatures during the other seasons were near or slightly below average (Fig. \ref{fig:MAB-SST-insitu}). Annual average bottom temperature measurements show a significant long term warming trend (Fig. \ref{fig:MAB-bot-temp}). Ocean circulation is changing as well. The position of the northern edge of the Gulf Stream has trended northward since the late 1950s, with an increasing rate since 2009. The most northerly positions on record were observed between 2014-2017 (Fig. \ref{fig:GSI}). A more northerly Gulf Stream position is generally associated with warmer ocean temperature in the Northeast US shelf [@zhang_role_2007] and increased sea surface height along the U.S. east coast [@goddard_extreme_2015]. 
+
+The management implications of these ocean changes vary by region and species, and are not fully understood at this point. Changes in the distribution of managed fish species continue, with aggregate trends on the entire Northeast Shelf shifting towards the northeast and generally into deeper water (Fig. \ref{fig:spec-dist}). These shifts place increasing pressure on a management system based around stable species distributions. The proportion of NEFMC managed benthivore species (righteye flounders, haddock) has declined over time in Mid-Atlantic waters according to bottom trawl surveys (Fig. \ref{fig:NEFMC-in-MAB}), while the proportion of MAFMC managed planktivore (squids, mackerel, and butterfish) species has been increasing in New England waters in both surveys and landings (Figs. \ref{fig:MAFMC-in-NE}, \ref{fig:comm-landings}). Similarly, butterfish have been observed in Gulf of Maine common tern fledgling diets between 2009-2011 and again in 2018 (see New England report). The downward trend in recreational species diversity in the Mid-Atlantic (Fig. \ref{fig:rec-div}) contrasts with an increase in recreational species diversity over time in New England (see New England report), although it is unclear to what extent this result is due to the aggregation of SAFMC species in the indicator itself. Nearshore NEAMAP survey indices show some similar patterns to offshore surveys, although with different magnitudes, perhaps reflecting seasonal importance of nearshore habitats (Fig. \ref{fig:nefsc-biomass-mab}); these patterns will be explored in more detail in future analyses. As temperature and ocean circulation indicators trend toward extremes, fishery management based on static stock areas will likely face continued changes in species distribution.
+
+Observed changes at the base of the food web, including timing and community composition, affect productivity of protected and managed species in ways we do not yet fully understand. There is a trend of increasing primary production in the Mid-Atlantic, but this trend is primarily driven by increased summer production, which is due to warmer temperatures and increased bacterial remineralization and nutrient recycling (Fig. \ref{fig:PP-OCCI}). This increased productivity is most likely from smaller-celled species that contribute less to fish production compared to larger phytoplankton. Current zooplankton trends in the Mid-Atlantic suggest a shift in timing towards a spring peak in the dominant species (Fig. \ref{fig:MAB-oi-zoo}), as well as a shift towards smaller-bodied copepods (Fig. \ref{fig:MAB-sli}). This suggests a possible return to conditions last observed during the 1990s, when small bodied copepods dominated the zooplankton community, regime shifts in groundfish recruitment were observed [@perretti_regime_2017], and north Atlantic right whales experienced lower birth rates [@greene_remote_2013]. The timing of shifts in fish condition may be similar (Fig. \ref{fig:mab-cf}), though potential mechanisms connecting adult fish condition to zooplankton patterns require further study.
+
+# Report Structure
+
+The major messages of the report are synthesized above with reference to key figures. The information in this report is organized around general ecosystem-level management objectives (Table \ref{tab:management-objectives}), and indicators related to these objectives are grouped into four general categories in the four sections below: economic and social, protected species, fish and invertebrates, and habitat quality and ecosystem productivity. Each section begins with a summary of main messages with links to other sections, including any new information added at the request of the Council, and includes figures with brief descriptions of all current indicators. Detailed technical methods documentation^[https://noaa-edab.github.io/tech-memo] and indicator data^[https://github.com/NOAA-EDAB/ecodata] are available online. The details of standard figure formatting, categorization of fish and invertebrate species into feeding groups, and definitions of ecological production units (EPUs, including the Mid-Atlantic Bight, MAB) are provided at the end of the document. 
+
+```{r management-objectives}
+
+mng_obj <- data.frame("Objective Categories" = c("Seafood Production",
+                                                 "Profits","Recreation",
+                                                 "Stability","Social & Cultural",
+                                                 "Biomass","Productivity",
+                                                 "Trophic structure","Habitat"),
+"Indicators reported here" = c("Landings by feeding guild","Revenue by feeding guild",
+                               "Number of anglers and trips; recreational catch",
+                               "Diversity indices (fishery and species)",
+                               "Commercial and recreational reliance",
+                               "Biomass or abundance by feeding guild from surveys",
+                               "Condition and recruitment of MAFMC managed species",
+                               "Relative biomass of feeding guilds, primary productivity",
+                               "Estuarine and offshore habitat conditions"))
+
+knitr::kable(mng_obj,
+      col.names = c("Objective Categories","Indicators reported here"),
+      caption = "Established ecosystem-scale objectives in the Mid-Atlantic Bight",
+      #align = 'c',
+      booktabs = T) %>%
+  kable_styling(latex_options = "hold_position", "scale_down") %>%
+ # column_spec(c(2), width = c("25em")) %>%
+  row_spec(0, bold = TRUE)
+```
+\newpage
+
+# Economic and Social
+
+The objectives of U.S. federal fishery management include providing benefits to the Nation in terms of seafood production and recreational opportunities, while considering economic efficiency and effects on coastal communities. The indicators in this section consider these objectives for commercial and recreational fishing sectors separately where possible. 
+
+Despite mostly meeting fishery management objectives at the single species level (Fig. \ref{fig:stock-status}), long term declines in total seafood production and commercial revenue remain apparent. Indicators highlight a declining diversity of recreational opportunities (fishing modes and species). Further, coastal communities with high fishery engagement and reliance are dependent on a smaller number of species than historically, these species are predominantly high valued shellfish vulnerable to increased ocean temperature and acidification.  
+
+## Commercial sector (MAB)
+Seafood landings overall and for MAFMC managed species are declining (Fig. \ref{fig:total-landings}). Seafood landings for feeding guilds are also stable or declining (Fig. \ref{fig:comm-landings}), with the exception of a long term increase in MAFMC managed benthivores (scup, black sea bass, and tilefish). In 2018, landings of MAFMC managed planktivores increased to account for nearly all planktivore landings in the MAB, likely due to increased squid and decreased Atlantic herring landings.
+
+```{r total-landings, fig.cap = paste0("Total commercial seafood landings (black) shown with ",region," managed seafood landings (red)."), fig.width = 5, fig.asp = 0.45}
+#Get data for plotting
+
+#Managed landings
+managed_landings <- ecodata::comdat  %>%
+  filter(str_detect(Var, paste0(council_abbr," managed species - Landings weight|JOINT managed species - Landings weight")),
+         !str_detect(Var, "Other"),
+         Time >= 1986,
+         EPU == epu_abbr)
+
+#Total landings
+total_landings <- ecodata::comdat  %>%
+  filter(!str_detect(Var, "managed species"),
+         !str_detect(Var, "Other"),
+         str_detect(Var, "Landings"),
+         Time >= 1986,
+         EPU == epu_abbr)
+
+total_landings_agg <- total_landings %>%
+  group_by(Time) %>%
+  dplyr::summarise(Value = sum(Value)) %>% 
+  mutate(Var = "Total",hline = mean(Value))
+managed_landings_agg <- managed_landings %>%
+  group_by(Time) %>%
+  dplyr::summarise(Value = sum(Value)) %>% 
+  mutate(Var = "Managed",hline = mean(Value))
+
+landings_agg <- rbind(total_landings_agg, managed_landings_agg)
+
+#Define constants for figure plot
+x.shade.max <- 2018
+x.shade.min <- 2009
+series.col <- c("indianred","black")
+
+
+ggplot(data = landings_agg)+
+  
+  #Highlight last ten years
+  annotate("rect", fill = shade.fill, alpha = shade.alpha,
+      xmin = x.shade.min , xmax = x.shade.max,
+      ymin = -Inf, ymax = Inf) +
+  geom_gls(aes(x = Time, y = Value,
+               group = Var),
+             alpha = trend.alpha, size = trend.size) +
+  geom_line(aes(x = Time, y = Value, color = Var), size = lwd) +
+  geom_point(aes(x = Time, y = Value, color = Var), size = pcex) +
+
+  scale_y_continuous(labels = function(l){trans = l / 1000})+
+  scale_x_continuous(breaks = seq(1985, 2015, by = 5), expand = c(0.01, 0.01)) +
+  scale_color_manual(values = series.col, aesthetics = "color")+
+  guides(color = FALSE) +
+  ylab(expression("Landings (10"^3*"metric tons)")) +
+
+  geom_hline(aes(yintercept = hline,
+               
+               color = Var),
+           size = hline.size,
+           alpha = hline.alpha,
+           linetype = hline.lty) +
+    theme_ts()
+
+```
+
+```{r comm-landings, fig.height=8, warning=F, fig.width = 5, fig.cap = paste0(council_abbr," managed species landings (red) and total commercial landings (black) by feeding guild.")}
+
+#Assign feeding guild column for plotting with ggplot
+landings <- rbind(managed_landings, total_landings) %>%
+  mutate(feeding.guild = str_extract(Var,paste(feeding.guilds, collapse = "|")),
+         grouping = factor(ifelse(str_detect(Var,council_abbr), "managed",
+                                  ifelse(str_detect(Var, "JOINT"), "joint","total"))),
+         Var = paste(word(feeding.guild), grouping)) %>% 
+  mutate(feeding.guild = factor(feeding.guild, levels = feeding.guilds))
+
+#Add JOINT landings to MANAGED landings and remove
+landings[landings$Var ==  "Piscivore managed",]$Value <- landings[landings$Var ==  "Piscivore managed",]$Value + landings[landings$Var ==  "Piscivore joint",]$Value
+landings <- landings %>%
+  filter(Var != "Piscivore joint")  %>% 
+  group_by(Var) %>% 
+  mutate(hline = mean(Value))
+  
+#Define constants for figure plot
+x.shade.max <- 2018
+x.shade.min <- 2009
+series.col <- c("indianred","black")
+
+
+#facet names for titles
+facet_names <- list("Apex predators" = expression("Apex predators"),
+                    "Piscivores" = expression("Piscivores"),
+                    "Planktivores" = expression("Planktivores"),
+                    "Benthivores" = expression("Benthivores"),
+                    "Benthos" = expression("Benthos"))
+
+ggplot(data = landings,aes(x = Time, y = Value, color = grouping)) +
+  
+  #Highlight last ten years
+  annotate("rect", fill = shade.fill, alpha = shade.alpha,
+      xmin = x.shade.min , xmax = x.shade.max,
+      ymin = -Inf, ymax = Inf) +
+  
+  #Test for trend and add lines
+  geom_gls(aes(x = Time, y = Value,
+               group = Var)) +
+  
+  #Add time series
+  geom_line(size = lwd) +
+  geom_point(size = pcex) +
+  scale_color_manual(values = series.col, aesthetics = "color")+
+  guides(color = FALSE) +
+  geom_hline(aes(yintercept = hline,
+                 color = grouping,
+                 size = grouping),
+             size = hline.size,
+             alpha = hline.alpha,
+             linetype = hline.lty)+
+
+  #Facet 
+  facet_wrap(feeding.guild~.,scales = "free_y", labeller = label, ncol = 1) +
+  
+  #Axis and theme
+  scale_y_continuous(labels = function(l){trans = l / 1000})+
+  scale_x_continuous(breaks = seq(1985, 2015, by = 5), expand = c(0.01, 0.01)) +
+  ylab(expression("Landings, 10"^3*"metric tons")) +
+  theme_facet() +
+  theme(strip.text=element_text(hjust=0))
+
+
+```
+
+
+Revenue for MAFMC managed species has also declined over the long term (Fig. \ref{fig:comm-revenue}), with recent decreases in total revenue driven by decreased landings volume outweighing increased prices for benthos, planktivores, and other species groups (Fig. \ref{fig:bennet}).
+
+```{r comm-revenue, fig.width = 5, fig.asp = 0.45, fig.cap = "Total revenue for the region (black) and revenue from MAFMC managed species (red)."}
+
+#Filtering and aggregation step
+rev_agg <- ecodata::comdat %>% 
+  filter(str_detect(Var, "Revenue"),
+         !str_detect(Var, "prop|Other|NEFMC"), #Remove proportions, "Other" category species, NEFMC managed species in MAB
+         EPU == epu_abbr,
+         Time >= 1986) %>% 
+  mutate(Status = ifelse(str_detect(Var, "Revenue weight"), 
+                         "Managed","Total")) %>% #Create groups for aggregation
+  group_by(Status, Time) %>% 
+  dplyr::summarise(Total = sum(Value)) %>% 
+  group_by(Status) %>% 
+  mutate(hline = mean(Total))
+
+series.col <- c("indianred","black")
+
+#Plotting
+ggplot(data = rev_agg) +
+  
+  #Highlight last ten years
+  annotate("rect", fill = shade.fill, alpha = shade.alpha,
+      xmin = x.shade.min , xmax = x.shade.max,
+      ymin = -Inf, ymax = Inf)+  
+  
+  #lines
+  geom_gls(aes(x = Time, y = Total,
+               group = Status),
+             alpha = trend.alpha, size = trend.size) +
+  geom_line(aes(x = Time, y = Total, color = Status), size = lwd) +
+  geom_point(aes(x = Time, y = Total, color = Status), size = pcex) +
+
+  #axes
+  scale_y_continuous(labels = function(l){trans = l / 1000000})+
+  scale_x_continuous(breaks = seq(1985, 2015, by = 5), expand = c(0.01, 0.01)) +
+      scale_color_manual(values = series.col, aesthetics = "color")+
+  guides(color = FALSE) +
+  ggtitle("Total revenue") +
+  ylab(expression("Revenue (10"^6*"USD)")) +
+  geom_hline(aes(yintercept = hline,
+               color = Status),
+           size = hline.size,
+           alpha = hline.alpha,
+           linetype = hline.lty) +
+  theme_ts()
+
+# rev_inline <- rev_agg %>% 
+#   dplyr::select(Status, Time, Total) %>% 
+#   spread(.,Status, Total) %>% 
+#   mutate(percent_managed = round(Managed/Total * 100)) %>% 
+#   filter(Time > latest_landings_data - 5, Time <= latest_landings_data) %>% 
+#   pull(percent_managed)
+# 
+# min_rev_perc <- min(rev_inline)
+# max_rev_perc <- max(rev_inline)
+```
+
+
+```{r bennet, fig.cap = paste0("Revenue change from the long-term mean in 2015 dollars (black), Price (PI), and Volume Indicators (VI) for commercial landings in the ",region,"."), fig.width = 6, fig.asp = 0.45}
+
+#Filter data into two dataframes for plotting
+indicators <- ecodata::bennet %>% 
+  filter(EPU == epu_abbr,
+         Var %in% c("VI EPU aggregate",
+                    "PI EPU aggregate")) %>% 
+  mutate(Var, Var = plyr::mapvalues(Var, from = c("VI EPU aggregate","PI EPU aggregate"),
+                                    to = c("Volume","Price")))
+
+revchange <- ecodata::bennet %>% 
+  filter(EPU == epu_abbr,
+         Var %in% c("REVCHANGE EPU aggregate"))
+
+#custom bar fill color (color-blind friendly)
+ind_fill <- c("#a6cee3", "#b2df8a")
+
+#limits
+y.lim <- c(-450,450)
+
+#plot
+ggplot(data = indicators)+
+  
+  #Highlight last ten years
+  annotate("rect", fill = shade.fill, alpha = shade.alpha,
+      xmin = x.shade.min , xmax = x.shade.max,
+      ymin = -Inf, ymax = Inf)+
+  
+  geom_bar(aes(x=Time, y= Value, fill = Var), stat="identity")+
+  scale_fill_manual(name = "Indicators", values = ind_fill) +
+  geom_line(data = revchange, aes(x = Time, y = Value, colour="$"))+
+  scale_colour_grey(name ="Revenue Change") +
+  ggtitle("Bennet Indicator")+
+  labs(y="Value $1,000,000 ($2015)") +
+  scale_x_continuous(breaks = seq(1985, 2015, by = 5), expand = c(0.01, 0.01)) +
+  scale_y_continuous(breaks = seq(y.lim[1], y.lim[2], by = 100), limits = y.lim, expand = c(0.01, 0.01)) +
+  theme_ts() +
+  theme(title = element_text(size = 10))
+
+```
+
+MAB fishing communities are heavily reliant on shellfish species (especially scallops) for the majority of revenue. This reliance likely represents heightened risk to fishing communities, particularly along the coasts of New York, New Jersey, and Virginia in ports which are highly engaged and reliant on commercial fishing. This risk is heightened by the high climate vulnerability of shellfish to ocean acidification (Fig. \ref{fig:MAB-comm-reliance-maps-outlined}).
+
+```{r MAB-comm-reliance-maps-outlined, fig.height = 8, fig.cap = "Commercial engagement (total pounds landed, value landed, commercial permits and commercial dealers in a community) and reliance (per capita engagement) based on 2016 landings and the ACS running average of 2012-2016 census data."}
+xmin = -78
+xmax = -70
+ymin = 35
+ymax = 42
+xlims <- c(xmin, xmax)
+ylims <- c(ymin, ymax)
+
+biv_col <- c("4" = "#ca0020", "3" = "#f4a582", "2" = "grey", "1" = "#92c5de", "0" = "#0571b0")
+
+eng_rel <- ecodata::eng_rel %>%
+    filter(PRIMARY_LATITUDE < 42) %>% 
+  dplyr::rename(comeng = ComEng_NE16_ct,
+                comrel = ComRel_NE16_ct,
+                receng = RecEng_NE16_ct,
+                recrel = RecRel_NE16_ct,
+                Latitude = PRIMARY_LATITUDE,
+                Longitude = PRIMARY_LONGITUDE,
+                State = STATEABBR) %>% 
+  mutate(comsum = sum(as.numeric(comeng), as.numeric(comrel))) %>% 
+  mutate(comeng = factor(comeng, ordered = TRUE, levels = 1:4),
+         comrel = factor(comrel, ordered = TRUE, levels = 1:4),
+         receng = factor(receng, ordered = TRUE, levels = 1:4),
+         recrel = factor(recrel, ordered = TRUE, levels = 1:4))
+
+
+
+(com <- eng_rel %>% 
+  dplyr::select(comeng, comrel, comsum, Latitude, Longitude) %>% 
+  filter(comeng != 0 &
+         comrel != 0) %>% 
+ggplot() +
+  geom_sf(data = coast, size = map.lwd) +
+  geom_sf(data  = ne_states, size = map.lwd) +
+  coord_sf(crs = crs, xlim = xlims, ylim = ylims) +
+  geom_point(aes(x = Longitude, y = Latitude,
+                 fill = comeng, size = comrel),
+             color = "black",pch = 21) +
+  guides(fill = guide_legend(override.aes = list(size = 5),
+                            reverse = T,
+                            title = "Engagement"),
+         size = guide_legend(reverse = T,
+                            title = "Reliance")) +
+  scale_fill_manual(values = biv_col) +
+  theme_map() +
+  xlab("Longitude") +
+  ylab("Latitude") +
+      theme(legend.position = c(0.8, 0.25), 
+        legend.box = "horizontal",
+        legend.direction = "vertical",
+        legend.key=element_blank(),
+        legend.key.width = unit(0, "cm"))+
+  ggtitle("Commercial Reliance & Engagement"))
+
+# com + rec + plot_layout(ncol = 2) &
+#   theme(plot.margin = unit(c(0, 0, 0, 0), "cm"))
+
+```
+
+Aquaculture production in the Mid-Atlantic is dominated by shellfish as well. Virginia continues to lead oyster production in the US, though numbers sold stabilized in 2017 after a long term increase. Reported concerns for Virginia growers within the past two years include an increase in wild spat fall preventing farmed oysters from entering higher-value markets. Maryland and New Jersey oyster production continues to increase (Fig. \ref{fig:oyster-aqua}).
+
+```{r oyster-aqua, fig.width = 5, fig.asp = 0.45, fig.cap = "Oyster aquaculture production in terms of number of oysters sold from Virginia, Maryland, and New Jersey."}
+
+aqua <- ecodata::aquaculture %>% 
+  group_by(Var) %>% 
+  mutate(hline = mean(Value)) %>%
+  ungroup() %>% 
+  mutate(Var = plyr::mapvalues(Var, from = c("md oyster harvest","nj oyster harvest","va oyster harvest"),
+                                                    to  = c("MD","NJ","VA"))) %>%
+  dplyr::rename(State = Var)
+
+aqua$State <- factor(aqua$State, levels = c("VA","MD","NJ"))
+
+
+ggplot() + 
+  geom_segment(aes(x=2005,xend=2017,y=mean(aquaculture[aquaculture$Var == "va oyster harvest",]$Value),
+                   yend=mean(aquaculture[aquaculture$Var == "va oyster harvest",]$Value)),
+               size = hline.size,
+           alpha = hline.alpha,
+           linetype = hline.lty,
+           color = "#1b9e77",
+           inherit.aes = F) +
+  geom_segment(aes(x=2012,xend=2016,y=mean(aquaculture[aquaculture$Var == "nj oyster harvest",]$Value),
+                   yend=mean(aquaculture[aquaculture$Var == "nj oyster harvest",]$Value)),
+               size = hline.size,
+           alpha = hline.alpha,
+           linetype = hline.lty,
+           color = "#d95f02",
+           inherit.aes = F) +
+  geom_segment(aes(x=2012,xend=2017,y=mean(aquaculture[aquaculture$Var == "md oyster harvest",]$Value),
+                   yend=mean(aquaculture[aquaculture$Var == "md oyster harvest",]$Value)),
+               size = hline.size,
+           alpha = hline.alpha,
+           linetype = hline.lty,
+           color = "#7570b3",
+           inherit.aes = F) +
+ #Highlight last ten years
+  geom_line(data = aqua, aes(x = Time, y = Value, color = State), size = lwd) +
+  geom_point(data = aqua,aes(x = Time, y = Value, color = State), size = pcex) +
+  scale_color_manual(values = c(VA = "#1b9e77", MD = "#7570b3",NJ = "#d95f02")) +
+  scale_x_continuous(breaks = seq(2005,2018,3),expand = c(0.01, 0.01)) +
+  scale_y_continuous(labels = function(l){trans = l / 1000000})+
+  ggtitle("Oyster harvest")+
+  ylab(expression("Oysters sold (10"^6*" n)")) +
+  xlab("")+
+  theme_ts()
+
+```
+
+Commercial fleet diversity indices were updated with 2017 data. Current diversity remains near the long term average. 
+
+## Recreational sector (Mid-Atlantic states)
+All recreational indicators have been updated with new Marine Recreational Information Program (MRIP) data, and new indicators for recreational diversity are presented in this report at the request of the MAFMC. In contrast to the commercial seafood production trends, recreational seafood production shows an increasing trend since the mid-1990s with the updated MRIP data (Fig. \ref{fig:rec-landings}))
+
+```{r rec-landings, fig.cap = paste0("Total recreational seafood harvest in the ",region," region."), fig.width = 5, fig.asp = 0.45}
+
+landings_rec <- ecodata::recdat %>% 
+  filter(EPU == region_abbr,
+         Var == "Recreational Seafood") %>% 
+  mutate(hline = mean(Value))
+
+series.col <- "black"
+
+ggplot(data = landings_rec)+
+  
+  #Highlight last ten years
+  annotate("rect", fill = shade.fill, alpha = shade.alpha,
+      xmin = x.shade.min , xmax = x.shade.max,
+      ymin = -Inf, ymax = Inf) +
+  geom_gls(aes(x = Time, y = Value,
+               group = Var),
+             alpha = trend.alpha, size = trend.size) +
+  geom_line(aes(x = Time, y = Value, color = Var), size = lwd) +
+  geom_point(aes(x = Time, y = Value, color = Var), size = pcex) +
+
+  scale_y_continuous(labels = function(l){trans = l / 1000000})+
+  scale_x_continuous(breaks = seq(1985, 2015, by = 5), expand = c(0.01, 0.01)) +
+  scale_color_manual(values = series.col, aesthetics = "color")+
+  guides(color = FALSE) +
+  ggtitle("Recreational seafood harvest") +
+  ylab(expression("Fish caught (10"^6*"n)")) +
+
+  geom_hline(aes(yintercept = hline,
+               
+               color = Var),
+           size = hline.size,
+           alpha = hline.alpha,
+           linetype = hline.lty) +
+  theme_ts()
+
+```
+
+
+Updated indicators for recreational opportunities (effort days and number of anglers) show general increases since the 1990s, peaking in the late 2000s and declining since then. This is similar to previously reported trends (Fig. \ref{fig:rec-op}).
+
+```{r rec-op, fig.width = 5, fig.asp = 1, fig.cap = paste0("Recreational effort and number of recreational anglers in the ",region,".")}
+recdat <- ecodata::recdat %>% 
+  filter(EPU == region_abbr) %>% 
+  group_by(Var) %>% 
+  mutate(hline = mean(Value))
+
+ylim_re <- c(2e7, 7e7)
+ylim_rd <- c(1.75,2.75)
+ylim_ra  <- c(1e6, 3.5e6)
+
+# #Create dataframe for label locations
+# label_loc <- data.frame(xloc = min(recdat$Time)+0.3,
+#                         yloc = c(ylim_re[2]*0.975,
+#                                  ylim_rd[2]*0.975,
+#                                  ylim_ra[2]*0.975),
+#                         labels = LETTERS[1:3],
+#                         Var = c("Recreational Effort",
+#                                 "Recreational fleet effort diversity across modes",
+#                                 "Recreational anglers"))
+
+series.col <- "black"
+# x.shade.min <- max(recdat$Time, na.rm = T) - 9
+# x.shade.max <- max(recdat$Time, na.rm = T)
+
+rec_effort <- recdat %>% 
+  filter(Var == "Recreational Effort") %>% 
+  ggplot() + 
+ #Highlight last ten years
+  annotate("rect", fill = shade.fill, alpha = shade.alpha,
+      xmin = x.shade.min , xmax = x.shade.max,
+      ymin = -Inf, ymax = Inf) +
+  #label
+  # annotate("text", 
+  #          x = label_loc[label_loc$Var == "Recreational Effort",]$xloc,
+  #          y = label_loc[label_loc$Var == "Recreational Effort",]$yloc,
+  #          label = label_loc[label_loc$Var == "Recreational Effort",]$labels,
+  #          size = letter_size)+
+  geom_gls(aes(x = Time, y = Value,
+               group = Var),
+             alpha = trend.alpha, size = trend.size) +
+  geom_line(aes(x = Time, y = Value, color = Var), size = lwd) +
+  geom_point(aes(x = Time, y = Value, color = Var), size = pcex) +
+  
+  scale_x_continuous(expand = c(0.01, 0.01)) +
+  scale_y_continuous(labels = function(l){trans = l / 1000000}, limits = ylim_re)+
+  scale_color_manual(values = series.col, aesthetics = "color")+
+  guides(color = FALSE) +
+  ggtitle("Recreational effort")+
+  ylab(expression("Days fished (10"^6*" N)")) +
+  xlab("")+
+  geom_hline(aes(yintercept = hline,
+               color = Var),
+           size = hline.size,
+           alpha = hline.alpha,
+           linetype = hline.lty) +
+  theme_ts() 
+
+
+
+rec_anglers <- recdat %>% 
+  filter(Var == "Recreational anglers") %>% 
+  ggplot() + 
+ #Highlight last ten years
+  annotate("rect", fill = shade.fill, alpha = shade.alpha,
+      xmin = x.shade.min , xmax = x.shade.max,
+      ymin = -Inf, ymax = Inf) +
+    # annotate("text", 
+    #        x = label_loc[label_loc$Var == "Recreational anglers",]$xloc,
+    #        y = label_loc[label_loc$Var == "Recreational anglers",]$yloc,
+    #        label = label_loc[label_loc$Var == "Recreational anglers",]$labels,
+    #        size = letter_size)+
+  geom_gls(aes(x = Time, y = Value,
+               group = Var),
+             alpha = trend.alpha, size = trend.size) +
+  geom_line(aes(x = Time, y = Value, color = Var), size = lwd) +
+  geom_point(aes(x = Time, y = Value, color = Var), size = pcex) +
+  scale_x_continuous(expand = c(0.01, 0.01)) +
+  scale_y_continuous(labels = function(l){trans = l / 1000000}, limits = ylim_ra)+
+  scale_color_manual(values = series.col, aesthetics = "color")+
+  guides(color = FALSE) +
+  ggtitle("Recreational anglers") +
+  ylab(expression("Anglers (10"^6*" n)")) +
+  xlab("Time")+
+  geom_hline(aes(yintercept = hline,
+               color = Var),
+           size = hline.size,
+           alpha = hline.alpha,
+           linetype = hline.lty) +
+  theme_ts()
+
+cowplot::plot_grid(rec_effort, 
+                   #rec_div, 
+                   rec_anglers, 
+                   #rec_div_catch,
+                   ncol = 1, 
+                   align = "hv") +
+    theme(plot.margin = unit(c(0.1, 0, 0, 0), "cm"))
+
+```
+
+Newly developed indicators for the diversity of recreational effort (i.e. access to recreational opportunities) by mode (party/charter boats, private boats, shore-based), and diversity of catch (NEFMC and MAFMC managed species only) show significant long-term downward trends. The downward effort diversity trend is driven by party/charter contraction (from a high of 24% of angler trips to 6% currently), with a shift towards shorebased angling. Effort in private boats remained stable between 36-37% of angler trips across the entire series. The long-term decrease in catch diversity in the Mid-Atlantic states contrasts with an increase in recreational catch diversity in New England states over the same time period; this trend requires further investigation as SAFMC managed species are not currently tracked separately (Fig. \ref{fig:rec-div})
+
+```{r rec-div, fig.width = 5, fig.asp = 1, fig.cap = paste0("Recreational effort diversity and diversity of recreational catch in the ",region,".")}
+
+rec_div <- recdat %>% 
+  filter(Var == "Recreational fleet effort diversity across modes") %>% 
+  ggplot() + 
+ #Highlight last ten years
+  annotate("rect", fill = shade.fill, alpha = shade.alpha,
+      xmin = x.shade.min , xmax = x.shade.max,
+      ymin = -Inf, ymax = Inf) +
+  # annotate("text", 
+  #          x = label_loc[label_loc$Var == "Recreational fleet effort diversity across modes",]$xloc,
+  #          y = label_loc[label_loc$Var == "Recreational fleet effort diversity across modes",]$yloc,
+  #          label = label_loc[label_loc$Var == "Recreational fleet effort diversity across modes",]$labels,
+  #          size = letter_size)+
+  geom_gls(aes(x = Time, y = Value,
+               group = Var),
+             alpha = trend.alpha, size = trend.size) +
+  geom_line(aes(x = Time, y = Value, color = Var), size = lwd) +
+  geom_point(aes(x = Time, y = Value, color = Var), size = pcex) +
+  ylim(ylim_rd)+
+  scale_x_continuous(expand = c(0.01, 0.01)) +
+  scale_color_manual(values = series.col, aesthetics = "color")+
+  guides(color = FALSE) +
+  ggtitle("Rec. fleet effort diversity")+
+  ylab(expression("Effective Shannon")) +
+  xlab("")+
+  geom_hline(aes(yintercept = hline,
+               color = Var),
+           size = hline.size,
+           alpha = hline.alpha,
+           linetype = hline.lty) +
+  theme_ts()
+
+rec_div_catch <- recdat %>% 
+  filter(Var == "Recreational Diversity of Catch") %>% 
+  ggplot() + 
+ #Highlight last ten years
+  annotate("rect", fill = shade.fill, alpha = shade.alpha,
+      xmin = x.shade.min , xmax = x.shade.max,
+      ymin = -Inf, ymax = Inf) +
+    # annotate("text", 
+    #        x = label_loc[label_loc$Var == "Recreational anglers",]$xloc,
+    #        y = label_loc[label_loc$Var == "Recreational anglers",]$yloc,
+    #        label = label_loc[label_loc$Var == "Recreational anglers",]$labels,
+    #        size = letter_size)+
+  geom_gls(aes(x = Time, y = Value,
+               group = Var),
+             alpha = trend.alpha, size = trend.size) +
+  geom_line(aes(x = Time, y = Value, color = Var), size = lwd) +
+  geom_point(aes(x = Time, y = Value, color = Var), size = pcex) +
+
+  scale_x_continuous(expand = c(0.01, 0.01)) +
+  scale_color_manual(values = series.col, aesthetics = "color")+
+  guides(color = FALSE) +
+  ggtitle("Rec. diversity of catch")+
+  ylab(expression("Effective Shannon")) +
+  xlab("Time")+
+  geom_hline(aes(yintercept = hline,
+               color = Var),
+           size = hline.size,
+           alpha = hline.alpha,
+           linetype = hline.lty) +
+  theme_ts()
+
+
+cowplot::plot_grid(#rec_effort, 
+                   rec_div, 
+                   #rec_anglers, 
+                   rec_div_catch,
+                   ncol = 1, 
+                   align = "hv") +
+    theme(plot.margin = unit(c(0.1, 0, 0, 0), "cm"))
+
+```
+
+
+Recreational fishing is important to many Mid-Atlantic communities, particularly on Long Island, the  New Jersey shoreline and the Delaware Bay. Communities that are most socially and economically dependent (both engaged and reliant) on recreational fishing may face additional risk due this downward shift in diversity of recreational opportunity and species catch (Fig. \ref{fig:MAB-rec-engage}).
+
+```{r MAB-rec-engage, fig.height = 8, fig.cap = "Recreational engagement (shore, private vessel and for-hire recreational fishing in a community) and reliance (per capita engagement) based on 2016 landings and the ACS running average of 2012-2016 census data."}
+(rec <- 
+  eng_rel %>% 
+  dplyr::select(receng, recrel, Latitude, Longitude) %>% 
+  filter(receng != 0,
+         recrel != 0) %>% 
+ggplot() +
+  geom_sf(data = coast, size = map.lwd) +
+  geom_sf(data  = ne_states, size = map.lwd) +
+  coord_sf(crs = crs, xlim = xlims, ylim = ylims) +
+  geom_point(aes(x = Longitude, y = Latitude,
+                 fill = receng, size = recrel),
+             color = "black",pch = 21) +
+  guides(fill = guide_legend(override.aes = list(size = 5),
+                            reverse = T,
+                            title = "Engagement"),
+         size = guide_legend(reverse = T,
+                            title = "Reliance")) +
+  scale_fill_manual(values = biv_col) +
+  theme_map() +
+  xlab("Longitude") +
+  ylab("Latitude") +
+  theme(legend.position = c(0.8, 0.25), 
+        legend.box = "horizontal",
+        legend.direction = "vertical",
+        legend.key=element_blank(),
+        legend.key.width = unit(0, "cm"))+
+  ggtitle("Recreational Reliance & Engagement"))
+```
+
+\newpage
+
+# Protected Species
+
+Protected species include marine mammals (under the Marine Mammal Protection Act), endangered and threatened species (under the Endangered Species Act), and migratory birds (under the Migratory Bird Treaty Act). In the Northeast US, endangered/threatened species include Atlantic salmon, Atlantic and shortnose sturgeon, all sea turtle species, and 5 baleen whales. Fishery management objectives for protected species generally focus on reducing threats and on habitat conservation/restoration; here we report on the status of these actions as well as indicating the potential for future interactions driven by observed and predicted ecosystem changes in the Northeast US region. This year four Unusual Mortality Events (UMEs) have been declared for three large whale species and two seal species, with several mortalities attributed to human interactions. Also, a marine mammal climate vulnerability assessment is currently underway and for Atlantic and Gulf of Mexico populations and will be reported on in future versions of this report. Strong evidence exists to suggest that the level of interaction between right whales and the combination of offshore lobster gear in the US and snow crab gear in Canada is contributing substantially to the decline of the species.
+
+## Sea turtles (coastwide)
+Sea turtles are known to be susceptible to climate and ecosystem changes, and their distribution is influenced by water temperature. Sea turtle diets contain a considerable amount of gelatinous zooplankton, which are also influenced by changes in the ecosystem. At present, management measures to reduce sea turtle-fishery interactions are limited to the regions with historical observations of sea turtles and based on historical ocean temperature distributions. However, changes in climate may cause turtles to shift northward into areas with heavy fishing, possibly resulting in increased bycatch.
+
+## Whales (coastwide)
+North Atlantic right whales are among the most endangered large whale populations in the world. Changes in right whale trends can have implications for fisheries management where fisheries interact with these whales. Additional management restrictions could have a large impact on fishing times, gears, etc. Although the population increased steadily from 1990 to 2011, it has decreased recently (FIg. \ref{fig:NARW-abundance}). From @pace_statespace_2017: “The probability that the population’s trajectory post-2010 was a decline was estimated at 99.99%.” Reduced survival rates of adult females and diverging abundance trends between sexes have also been observed. It is estimated that there are only about 100 adult females remaining in the population. Further, right whale distribution has changed since 2010. The reasons for these changes is unclear, but changes in climate and primary prey (*Calanus finmarchicus*) are suspected.
+ 
+Three large whale Unusual Mortality Events (UMEs) have been declared for north Atlantic right whales, humpback whales, and minke whales. In all three cases human interaction appears to have contributed to increased mortalities, although investigations are not complete. Twenty right whale mortalities have been documented in 2017 and 2018 so far. Among the 20 right whale deaths observed in 2017 and 2018 thus far, 5 were due to vessel strike (1 in US waters, 4 in Canadian waters), 6 from entanglement (2 in Canadian gear, 1 in unknown gear, and 3 others found in US waters), and the rest from unknown causes. UMEs have also been declared for humpback whales during 2016-2018 and 2017-2018 minke whales due to elevated strandings. Necropsy investigations on 50% of humpback whales showed evidence of human interaction, either ship strike or entanglement. Similarly, 60% of minke whales show evidence of human interactions or infectious disease. In both cases the investigations are still underway and more research is needed to determine the causes of these UME.
+
+```{r NARW-abundance, fig.width = 6, fig.asp = 0.55,fig.cap = "Right whale abundance estimates with 95\\% credible intervals. These values represent the estimated number of animals alive sometime during the year referenced and NOT at the end of the year referenced. Seventeen known deaths were recorded in 2017 (likely all from anthropogenic causes), but these deaths were not reflected in the 2017 estimate because those animals were alive sometime during the year."}
+hline <- mean(narw[narw$Var == "right whale abundance median",]$Value)
+
+ecodata::narw %>% 
+  spread(.,Var,Value) %>% 
+  ggplot() +
+#Highlight last ten years
+  annotate("rect", fill = shade.fill, alpha = shade.alpha,
+      xmin = x.shade.min , xmax = x.shade.max,
+      ymin = -Inf, ymax = Inf) +
+  geom_line(aes(x = Time, y = `right whale abundance median`), size = lwd-0.75) +
+  geom_point(aes(x = Time, y = `right whale abundance median`), size = pcex-0.75) +
+  geom_errorbar(aes(x = Time,
+                    ymin = `right whale abundance lcl`,
+                  ymax = `right whale abundance ucl`), 
+                width = 0.25) +
+  scale_x_continuous(expand = c(0.01, 0.01)) +
+  scale_color_manual(values = series.col, aesthetics = "color")+
+  guides(color = FALSE) +
+  ggtitle("NARW abundance") +
+  ylab(expression("Abundance (n)")) +
+  xlab("Time")+
+  geom_hline(aes(yintercept = hline),
+           color = "black",
+           size = hline.size,
+           alpha = hline.alpha,
+           linetype = hline.lty) +
+  theme_ts()
+```
+
+## Grey seals (coastwide)
+The number of grey seals (*Halichoerus grypus*) in U.S. waters has risen dramatically in the last 2 decades, with few  observed in the early 1990s to roughly 24,000 observed in southeastern Massachusetts in 2015 (Pace et al. in press). Roughly 30,000 - 40,000 gray seals were estimated in southeastern Massachusetts in 2015, using correction factors applied to seal counts visible in Google Earth imagery. As of 2016, the size of the grey seal population in Canada, which is part of the same stock as the grey seals in the U.S., was estimated to be roughly 425,000, and increasing by 4% a year. Pups born on Muskeget Island MA, currently the largest pupping site for gray seals in the U.S., were first observed in 1988 and now number over 3,500. Trends in pup production at U.S. colonies appear to be increasing, and it is likely that U.S. pup production is being supplemented each year by animals from Canada. A UME for both gray and harbor seals was declared in 2018, triggering an investigation into the cause of this event. Tests so far suggest phocine distemper virus as a potential cause, although the investigation is not yet complete.
+ 
+Fisheries interactions have increased over the past 2 decades, with fewer than 10 total estimated grey seal interactions in 1993, to more than 1000 in 2013 and 2015, and with preliminary 2017 estimates over 900. Analysis of seal diet is currently underway using a variety of techniques (analysis of stomach contents, fatty acids, and DNA) to assess the potential impact of seal population growth on the ecosystem and important commercial fish species.
+
+## Harbor porpoise (coastwide)
+Harbor porpoise bycatch has resulted in fisheries closures in the past, but current bycatch levels suggest that management measures have been effective, reducing this fishery interaction. The 5-year mean bycatch has been below the maximum permitted level (Potential Biological Removal, PBR) since 2011 (Fig. \ref{fig:harbor-porpoise-bars}), and the 2016 and draft 2017 annual bycatch estimates are among the lowest in the time series. Recent compliance with the harbor porpoise take reduction plan and reduced fishing effort are thought to contribute to low bycatch estimates. Potential recent shifts in porpoise distribution could also be contributing to low bycatch and this will be explored during the coming year. A new draft of harbor porpoise abundance estimate suggests stable or increasing abundance of the Gulf of Maine/Bay of Fundy harbor porpoise stock. Recent analyses have examined regional harbor porpoise diet, and suggest that harbor porpoise are not typically feeding on fish caught in gillnets. However, the impact of ecosystem changes on bycatch, population, or distribution remain unclear.
+
+```{r harbor-porpoise-bars, fig.width = 6, fig.asp = 0.55, fig.cap = "Harbor porpoise bycatch estimate (black) shown with Potential Biological Removal (red). Error bars indicate 95\\% confidence interval."}
+ecodata::harborporpoise %>% 
+  spread(.,Var,Value) %>% 
+ggplot() +
+    annotate("rect", fill = shade.fill, alpha = shade.alpha,
+      xmin = x.shade.min , xmax = x.shade.max,
+      ymin = -Inf, ymax = Inf) +
+  geom_line(aes(x = Time, y = `harbor porpoise bycatch estimate`, color = "Harbor Porpoise Bycatch"), size = lwd) +
+  geom_point(aes(x = Time, y = `harbor porpoise bycatch estimate`, color = "Harbor Porpoise Bycatch"), size = pcex) +
+  geom_errorbar(aes(x = Time,
+                    ymin = `harbor porpoise bycatch lo95ci`,
+                  ymax = `harbor porpoise bycatch up95ci`,
+                  color = "Harbor Porpoise Bycatch"), 
+                width = 0.25)+
+  geom_line(aes(x = Time, y = `harbor porpoise bycatch pbr`, color = "PBR"), size = lwd-0.1) +
+  scale_color_manual("", values = c("Harbor Porpoise Bycatch" = "black", "PBR" = "red")) +
+  guides(color = guide_legend(override.aes = list(shape = c(19,NA)))) +
+  scale_x_continuous(expand = c(0.01, 0.01)) +
+  ggtitle("Harbor porpoise bycatch") +
+  ylab("Bycatch Estimate (n)") +
+  theme_ts() +
+  theme(legend.position = c(0.4, 0.85), legend.background = element_rect(
+    fill = "transparent"), legend.text = element_text(size = 10))
+
+```
+
+## Protected Fish (coastwide)
+Shortnose sturgeon (endangered) and five distinct populations segments (DPS) of Atlantic sturgeon are found in coastal waters of the mid-Atlantic (endangered: New York Bight, Chesapeake Bay, Carolina, and South Atlantic; threatened: Gulf of Maine). Multiple populations spawn in mid-Atlantic watersheds and river-ocean connectivity is an important habitat characteristic. These populations are vulnerable to climate and ecosystem changes as their life history results in high biological sensitivity and habitat needs result in very high climate exposure. Threat reductions are focused on protecting critical habitat, habitat restoration, reducing ship-strikes, and bycatch reduction.  Endangered Gulf of Maine Atlantic salmon are rarely found this far south but fish from the Connecticut River legacy program may be found in coastal waters of this area.
+
+\newpage
+
+# Fish and Invertebrates
+
+Fishery management aims to keep individual harvested species within population ranges where productivity is maximized over the long-term. However, these managed species represent a subset of the full ecosystem, interacting with a wider range of predators and prey and relying on diverse habitats. Indicators in this section summarize single species status as well as tracking trends for broad categories of fish within the ecosystem, including changes in biomass, distribution, condition, and diversity. Changes in overall predator and prey levels as well as distribution have implications for managed fish productivity, fishing operations, and regional fishery management. 
+
+## Stock status and aggregate distribution (coastwide)
+Single species management objectives of maintaining biomass above minimum thresholds and fishing mortality below limits are being met for all but one MAFMC managed species, though the status of four stocks is unknown (Fig. \ref{fig:stock-status}).
+
+```{r stock-status, warning=F, fig.cap = paste0("Summary of single species status for ",council_abbr," and jointly managed stocks."), fig.width = 7.5, fig.asp = 0.5}
+
+#Get data, spread for plotting, and filter
+stock_status <- ecodata::stock_status %>%
+  spread(.,Var,Value) %>% 
+  filter(Council %in% c(council_abbr,"Both"))
+
+#Plot constants
+y.max <- 2.0 #1.75 mackerel cut off F/Fmsy is 1.8
+x.max <- 2.6
+
+#A dataframe that defines custom legend for stocks with unknown status
+
+unknown <- data.frame(text = c("Unknown Status", "Longfin",
+                              "Illex", "N. Goosefish", "S. Goosefish"),
+                    x = rep(0.9*x.max,5),
+                    y = seq(0.93*y.max,1.4,-.1))
+
+
+#Plotting code
+ggplot(data = stock_status) +
+  geom_vline(xintercept = 1, linetype = "dotted")+
+  geom_vline(xintercept = 0.5, linetype = "dashed")+
+  geom_hline(yintercept = 1, linetype = "dashed") +
+  geom_point(aes(x = B.Bmsy,
+                 y = F.Fmsy,
+                 color = Council)) +
+  geom_text_repel(aes(x = B.Bmsy, #geom_text_repel auto-jitters text around points
+                      y = F.Fmsy,
+                      label = Code,
+                      color = Council), show.legend = FALSE,nudge_y = 0.05, nudge_x = 0.05) +
+  scale_color_manual(values = c("purple","blue"), #Change legend labels for clarity
+                     name = "Managed by",
+                     breaks = c("Both","MAFMC"),
+                     labels = c("MAFMC/NEFMC","MAFMC"))+
+  ylim(0,y.max) +
+  xlim(0,x.max) +
+  geom_text(data = unknown, aes(x = x, y = y, label = text), #Custom legend for unknown stock status
+            size = c(4.75,rep(4,4)),
+            color = c("black",rep("blue",2), rep("purple",2))) +
+  annotate("rect", xmin = 0.8*x.max,
+           xmax = x.max,
+           ymin = 0.65*y.max,
+           ymax = 0.90*y.max,
+           alpha = 0.1) +
+  xlab(expression(~B/B[msy])) +
+  ylab(expression(~F/F[msy])) +
+  theme_ts()
+```
+
+
+Changes in the distribution of managed fish species continue, with aggregate trends on the entire Northeast Shelf towards the northeast and generally into deeper water (Fig. \ref{fig:spec-dist}). These shifts will place increasing pressure on a management system based around stable species distributions. 
+
+```{r spec-dist,fig.width = 5, fig.asp = 1.25, fig.cap = "Aggregate species distribution metrics for species in the Northeast Large Marine Ecosystem."}
+
+spec_dist <- ecodata::species_dist %>% 
+  group_by(Var) %>% 
+  mutate(hline = mean(Value))
+
+asd <- spec_dist %>% 
+  filter(Var == "along-shelf distance") %>% 
+  ggplot(aes(x = Time, y = Value,
+               group = Var)) + 
+ #Highlight last ten years
+  annotate("rect", fill = shade.fill, alpha = shade.alpha,
+      xmin = x.shade.min , xmax = x.shade.max,
+      ymin = -Inf, ymax = Inf) +
+  geom_gls() +
+  geom_line() +
+  geom_point() +
+  scale_x_continuous(expand = c(0.01, 0.01)) +
+  ggtitle("Along-shelf distance")+
+  ylab(expression("Distance (km)")) +
+  xlab("")+
+  geom_hline(aes(yintercept = hline),
+           size = hline.size,
+           alpha = hline.alpha,
+           linetype = hline.lty) +
+  theme_ts() 
+
+depth <- spec_dist %>% 
+  filter(Var == "depth") %>% 
+  ggplot(aes(x = Time, y = Value,
+               group = Var)) + 
+ #Highlight last ten years
+  annotate("rect", fill = shade.fill, alpha = shade.alpha,
+      xmin = x.shade.min , xmax = x.shade.max,
+      ymin = -Inf, ymax = Inf) +
+  geom_gls() +
+  geom_line() +
+  geom_point() +
+  scale_x_continuous(expand = c(0.01, 0.01)) +
+  ggtitle("Depth")+
+  ylab(expression("Depth (m)")) +
+  xlab("")+
+  geom_hline(aes(yintercept = hline),
+           size = hline.size,
+           alpha = hline.alpha,
+           linetype = hline.lty) +
+  theme_ts() 
+
+dtc <- spec_dist %>% 
+  filter(Var == "distance to coast") %>% 
+  ggplot(aes(x = Time, y = Value,
+               group = Var)) + 
+ #Highlight last ten years
+  annotate("rect", fill = shade.fill, alpha = shade.alpha,
+      xmin = x.shade.min , xmax = x.shade.max,
+      ymin = -Inf, ymax = Inf) +
+  geom_gls() +
+  geom_line() +
+  geom_point() +
+  scale_x_continuous(expand = c(0.01, 0.01)) +
+  ggtitle("Distance to coast")+
+  ylab(expression("Distance (km)")) +
+  xlab("Time")+
+  geom_hline(aes(yintercept = hline),
+           size = hline.size,
+           alpha = hline.alpha,
+           linetype = hline.lty) +
+  theme_ts() 
+
+asd + depth + dtc + plot_layout(ncol = 1) 
+
+```
+
+## Survey biomass (MAB)
+As in past years, piscivore trends differ by season, with a significant long term decline in fall and an increase in spring (Fig. \ref{fig:nefsc-biomass-mab}). However, nearshore survey indices (Northeast Area Monitoring and Assessment Program; NEAMAP) suggest a decline for piscivores in spring. Surveys in both seasons may be sampling different groups of dominant species; for example the divergence in spring piscivores between offshore and NEAMAP surveys may represent the difference in inshore versus offshore distribution of spiny dogfish. Overall the NEAMAP surveys show similar patterns to offshore surveys for planktivores and benthivores, although with different magnitudes, perhaps reflecting seasonal importance of nearshore habitats. These patterns will be explored in more detail in future analyses. 
+
+```{r nefsc-biomass-mab, fig.cap = paste0("Fall (left) and spring (right) surveyed biomass in the Mid-Atlantic Bight. Data from the NEFSC Bottom Trawl Survey are shown in black, with NEAMAP shown in red."), fig.width=8, fig.asp = 0.75}
+total_surv <- nefsc_survey %>% 
+  filter(EPU == epu_abbr,
+         !str_detect(Var, "Other|Apex|managed"),
+         Time >= 1968) %>% 
+  group_by(Var) %>% 
+  mutate(hline = mean(Value)) %>% 
+  ungroup() %>% 
+  mutate(Var = word(Var, 1,2))
+series.col <- rep("black",length(unique(total_surv$Var)))
+total_surv$Var <- factor(total_surv$Var,levels = c("Piscivore Fall",
+                                                   "Piscivore Spring",
+                                                    "Benthivore Fall",
+                                                    "Benthivore Spring",
+                                                    "Planktivore Fall",
+                                                    "Planktivore Spring",
+                                                    "Benthos Fall",
+                                                    "Benthos Spring"))
+#Create dataframe for label locations
+label_loc <- total_surv %>%
+  group_by(Var) %>%
+  dplyr::summarise(yloc = max(Value)*0.95,
+                   xloc = min(Time)) %>% 
+  mutate(label = LETTERS[1:8])
+#facet names for titles
+facet_names <- list("Piscivores" = expression("Piscivores"),
+                    "Planktivores" = expression("Planktivores"),
+                    "Benthivores" = expression("Benthivores"),
+                    "Benthos" = expression("Benthos"))
+
+#Get NEAMAP
+neamap <- ecodata::mab_inshore_survey %>% 
+  mutate(season = str_to_title(word(Var),1),
+         feeding.guild = str_to_title(word(Var,2))) %>% 
+   filter(str_detect(Var, "index")) %>% 
+ unite(.,Var,c("feeding.guild","season"), sep = " ") %>% 
+  group_by(Var) %>% 
+  mutate(hline = mean(Value))
+
+neamap$Var <- factor(neamap$Var,levels = c("Piscivore Fall",
+                                                   "Piscivore Spring",
+                                                    "Benthivore Fall",
+                                                    "Benthivore Spring",
+                                                    "Planktivore Fall",
+                                                    "Planktivore Spring",
+                                                    "Benthos Fall",
+                                                    "Benthos Spring"))
+
+ggplot(data = total_surv, aes(x = Time, y = Value, color = Var)) +
+  
+  #Highlight last ten years
+  annotate("rect", fill = shade.fill, alpha = shade.alpha,
+      xmin = x.shade.min , xmax = x.shade.max ,
+      ymin = -Inf, ymax = Inf) +
+  
+  #Test for trend and add lines
+  geom_gls(aes(x = Time, y = Value,
+               color = Var),
+             alpha = trend.alpha, size = trend.size) +
+  
+  #Add time series
+  geom_line(size = lwd-0.5) +
+  geom_point(size = pcex-0.5) +
+  scale_color_manual(values = series.col, aesthetics = "color")+
+  guides(color = FALSE) +
+  geom_hline(aes(yintercept = hline,
+                 group = Var),
+             size = hline.size,
+             alpha = hline.alpha,
+             linetype = hline.lty)+
+  
+  #Add NEAMAP
+  geom_line(data = neamap, aes(x = Time, y = Value, color = Var),
+            size = lwd-0.5,
+            color = "#ca0020")+
+  geom_point(data = neamap, aes(x = Time, y = Value, color = Var),
+             size = pcex-0.5,
+             color = "#ca0020")+
+
+  #Facet 
+  facet_wrap(Var~.,scales = "free_y", ncol = 2) +
+  
+  #Axis and theme
+  scale_x_continuous(breaks = seq(1965, 2015, by = 10), expand = c(0.01, 0.01)) +
+  ylab(expression("Biomass (kg tow"^-1*")")) +
+  theme_facet()+
+  theme(strip.text=element_text(hjust=0))
+```
+
+
+The proportion of NEFMC managed benthivore species (righteye flounders, haddock) has declined over time in Mid-Atlantic waters according to bottom trawl surveys (Fig. \ref{fig:NEFMC-in-MAB}), while the proportion of MAFMC managed planktivore (squids, mackerel and butterfish) species has been increasing in New England waters in both surveys and landings (Fig. \ref{fig:MAFMC-in-NE}, Fig. \ref{fig:comm-landings}). 
+
+```{r NEFMC-in-MAB, fig.width = 7, fig.asp = 0.35, fig.cap = "New England-managed survey proportion of MAB benthivores."}
+
+nefmc_ma <- nefsc_survey_disaggregated %>% 
+  distinct() %>% 
+  filter(EPU %in% c("MAB"),
+         Management == "NEFMC",
+         !str_detect(`Feeding guild`,"Other")) %>% 
+  group_by(EPU, `Feeding guild`, Season, Time) %>% 
+  dplyr::summarise(Value = sum(Proportion)) %>% 
+  unite(.,Var,c("Feeding guild","Season"), sep = " ") %>% 
+  group_by(EPU,Var) %>% 
+  mutate(hline = mean(Value)) %>% 
+  filter(str_detect(Var,"Benthivore")) %>% 
+  ungroup() %>% 
+  mutate(Var = paste(str_to_title(str_extract(Var, "fall|spring")),
+         "survey"))
+
+mab_nefmc_props <- nefmc_ma %>% 
+ ggplot(aes(x = Time, y = Value, group = Var)) +
+  
+  #Highlight last ten years
+  annotate("rect", fill = shade.fill, alpha = shade.alpha,
+      xmin = x.shade.min , xmax = x.shade.max ,
+      ymin = -Inf, ymax = Inf) +
+  
+  #Add time series
+  geom_line(size = lwd-0.5) +
+  geom_point(size = pcex-0.5) +
+  # scale_color_manual(values = series.col, aesthetics = "color")+
+  guides(color = FALSE) +
+  geom_hline(aes(yintercept = hline,
+                 group = Var),
+             size = hline.size,
+             alpha = hline.alpha,
+             linetype = hline.lty)+
+
+  #Facet 
+  facet_wrap(Var~.,scales = "free_y", ncol = 2) +
+  ggtitle("NEFMC benthivores in the Mid-Atlantic")+
+  #Axis and theme
+  scale_x_continuous(breaks = seq(1965, 2015, by = 10), expand = c(0.01, 0.01)) +
+  ylab(expression("Proportion of MAB survey")) +
+  theme_facet()+
+  theme(strip.text=element_text(hjust=0))
+
+
+
+mab_nefmc_props
+
+```
+
+```{r MAFMC-in-NE, fig.width = 7, fig.asp = .7, fig.cap = "Mid-Atlantic-managed survey proportion of GOM and GB planktivores."}
+
+mafmc_ne <- nefsc_survey_disaggregated %>% 
+  distinct() %>% 
+  filter(EPU %in% c("GOM","GB"),
+         Management == "MAFMC",
+         !str_detect(`Feeding guild`,"Other")) %>% 
+  group_by(EPU, `Feeding guild`, Season, Time) %>% 
+  dplyr::summarise(Value = sum(Proportion)) %>% 
+  unite(.,Var,c("Feeding guild","Season"), sep = " ") %>% 
+  group_by(EPU,Var) %>% 
+  mutate(hline = mean(Value)) %>% 
+  filter(str_detect(Var,"Planktivore")) %>% 
+  ungroup() %>% 
+  mutate(Var = paste(str_to_title(str_extract(Var, "fall|spring")),
+         "survey"))
+
+gom_mafmc_props <- mafmc_ne %>% 
+  filter(EPU == "GOM") %>% 
+ ggplot(aes(x = Time, y = Value, group = Var)) +
+  
+  #Highlight last ten years
+  annotate("rect", fill = shade.fill, alpha = shade.alpha,
+      xmin = x.shade.min , xmax = x.shade.max ,
+      ymin = -Inf, ymax = Inf) +
+  
+  #Add time series
+  geom_line(size = lwd-0.5) +
+  geom_point(size = pcex-0.5) +
+  # scale_color_manual(values = series.col, aesthetics = "color")+
+  guides(color = FALSE) +
+  geom_hline(aes(yintercept = hline,
+                 group = Var),
+             size = hline.size,
+             alpha = hline.alpha,
+             linetype = hline.lty)+
+
+  #Facet 
+  facet_wrap(Var~.,scales = "free_y", ncol = 2) +
+  ggtitle("MAFMC planktivores in Gulf of Maine")+
+  #Axis and theme
+  scale_x_continuous(breaks = seq(1965, 2015, by = 10), expand = c(0.01, 0.01)) +
+  ylab(expression("Proportion of GOM survey")) +
+  theme_facet()+
+  theme(strip.text=element_text(hjust=0))
+
+gb_mafmc_props <- mafmc_ne %>% 
+  filter(EPU == "GB") %>% 
+ggplot(aes(x = Time, y = Value, group = Var)) +
+  
+  #Highlight last ten years
+  annotate("rect", fill = shade.fill, alpha = shade.alpha,
+      xmin = x.shade.min , xmax = x.shade.max ,
+      ymin = -Inf, ymax = Inf) +
+  
+  #Test for trend and add lines
+  # geom_gls(aes(x = Time, y = Value,
+  #              color = Var),
+  #            alpha = trend.alpha, size = trend.size) +
+  
+  #Add time series
+  geom_line(size = lwd-0.5) +
+  geom_point(size = pcex-0.5) +
+  # scale_color_manual(values = series.col, aesthetics = "color")+
+  guides(color = FALSE) +
+  geom_hline(aes(yintercept = hline,
+                 group = Var),
+             size = hline.size,
+             alpha = hline.alpha,
+             linetype = hline.lty)+
+
+  #Facet 
+  facet_wrap(Var~.,scales = "free_y", ncol = 2) +
+  ggtitle("MAFMC planktivores on Georges Bank")+
+  #Axis and theme
+  scale_x_continuous(breaks = seq(1965, 2015, by = 10), expand = c(0.01, 0.01)) +
+  ylab("Proportion of GB survey") +
+  theme_facet()+
+  theme(strip.text=element_text(hjust=0))
+
+
+gom_mafmc_props + gb_mafmc_props + plot_layout(ncol = 1)
+
+```
+
+Other observations corroborate these survey trends. For example, butterfish have been observed in Gulf of Maine common tern fledgling diets between 2009-2011 and again in 2018 (see New England report). The downward trend in recreational species diversity in the Mid-Atlantic (Fig. \ref{fig:rec-div}) contrasts with an increase in recreational species diversity over time in New England (see New England report), although it is unclear to what extent this result is due to the aggregation of SAFMC species in the indicator itself. As temperature and ocean circulation indicators trend toward extremes (next section), fishery management will likely face continued changes in species distribution.
+
+## Fish condition (coastwide, MAFMC managed stocks)
+Fish condition is measured as the weight at a given length in relation to the average - a measure of 'fatness' and a factor that influences fecundity. This information is from fall NEFSC bottom trawl surveys. Overall, condition factor has been mixed for the past decade, in contrast to overall high condition up to 2000 and overall lower condition for 2001-2010 (Fig. \ref{fig:mab-cf}). The timing of these shifts is similar to shifts in the small-large zooplankton indicator (Fig. \ref{fig:MAB-sli}). Condition factor for some MAFMC managed predators (bluefish, spiny dogfish) was high in 2018. Black sea bass condition was low in 2018. 2017 information is missing for some species due to the incomplete 2017 fall survey. 
+
+```{r mab-cf, fig.cap = "Condition factor for MAFMC managed species.", out.width = '\\textwidth'}
+
+knitr::include_graphics(file.path(image.dir, "MAFMC_Fish_Condition_2019.jpg"))
+
+```
+
+## Fish productivity (MAB)
+We describe patterns of aggregate fish productivity in the Mid-Atlantic with the small fish per large fish anomaly indicator, derived from NEFSC bottom trawl survey data (Fig. \ref{fig:MAB-recruitment}). The indicator shows that productivity has been relatively low in this region since 2010. Recent increases in the indicator have been driven by strong productivity years for witch flounder, silver hake, and winter flounder.
+
+```{r MAB-recruitment, fig.cap = "Small fish per large fish biomass anomaly in the Mid-Atlantic Bight. The summed anomaly across species is shown by the black line.", fig.width = 8, fig.asp = .55}
+
+#### Adjust plot properties -------------------------------
+adjustAxes <- 
+  ggplot2::theme(axis.title   = element_text(size = 18),
+                 axis.text    = element_text(size = 15),
+                 plot.title   = element_text(size = 20))
+
+
+#### Plot stacked bar with cpts for single var ------------
+plot_stackbarcpts_single <- function(YEAR, var2bar,
+                                     x, xlab, ylab,
+                                     titl,
+                                     file_suffix,
+                                     leg_font_size = 10,
+                                     remove_leg = FALSE,
+                                     leg_ncol = 1,
+                                     wcpts = TRUE,
+                                     wdashed = TRUE,
+                                     height = 5.5,
+                                     width = 8,
+                                     filt = TRUE,
+                                     label = label,
+                                     y.text = y.text,
+                                     aggregate = FALSE) {
+  
+  dat2bar <- data.frame(YEAR, var2bar,
+                        x)
+  if (filt == TRUE){mab_species <-  list("SUMMER FLOUNDER","SCUP","BLACK SEA BASS","BLUEFISH",
+                                         "NORTHERN SHORTFIN SQUID", "LONGFIN SQUID", "ATLANTIC MACKEREL",
+                                         "BUTTERFISH","ATLANTIC SURFCLAM", "OCEAN QUAHOG", "TILEFISH",
+                                         "BLUELINE TILEFISH","SPINY DOGFISH", "GOOSEFISH")
+  dat2plot <-
+    dat2bar %>%
+    tidyr::gather(variable, value, -YEAR, -var2bar) %>%
+    dplyr::mutate(var2bar = gsub(pattern      = "_", 
+                                 replacement  = " ", 
+                                 x            = var2bar),
+                  var2bar = gsub(pattern      = "Atl.", 
+                                 replacement  = "ATLANTIC", 
+                                 x            = var2bar),
+                  var2bar = gsub(pattern      = "Atl", 
+                                 replacement  = "ATLANTIC", 
+                                 x            = var2bar),
+                  var2bar = gsub(pattern      = "NS and combined", 
+                                 replacement  = "", 
+                                 x            = var2bar),
+                  var2bar = gsub(pattern      = "YT", 
+                                 replacement  = "Yellowtail", 
+                                 x            = var2bar),
+                  var2bar = gsub(pattern      = " GoM", 
+                                 replacement  = " GOM", 
+                                 x            = var2bar),
+                  var2bar = gsub(pattern      = " by EPU", 
+                                 replacement  = "", 
+                                 x            = var2bar)) %>%
+    filter(var2bar %in% mab_species)
+} else if (filt == FALSE){
+    dat2plot <-
+    dat2bar %>%
+    tidyr::gather(variable, value, -YEAR, -var2bar) %>%
+    dplyr::mutate(var2bar = gsub(pattern      = "_", 
+                                 replacement  = " ", 
+                                 x            = var2bar),
+                  var2bar = gsub(pattern      = "Atl.", 
+                                 replacement  = "ATLANTIC", 
+                                 x            = var2bar),
+                  var2bar = gsub(pattern      = "Atl", 
+                                 replacement  = "ATLANTIC", 
+                                 x            = var2bar),
+                  var2bar = gsub(pattern      = "NS and combined", 
+                                 replacement  = "", 
+                                 x            = var2bar),
+                  var2bar = gsub(pattern      = "YT", 
+                                 replacement  = "Yellowtail", 
+                                 x            = var2bar),
+                  var2bar = gsub(pattern      = " GoM", 
+                                 replacement  = " GOM", 
+                                 x            = var2bar),
+                  var2bar = gsub(pattern      = " by EPU", 
+                                 replacement  = "", 
+                                 x            = var2bar))
+}
+  if (aggregate){
+   agg <- dat2plot %>%
+     group_by(YEAR) %>%
+     dplyr::summarise(Total = sum(value, na.rm = T)) %>% 
+     mutate(Total = ifelse(Total == 0, NA, Total))
+  }
+  
+  p <-   
+    ggplot(dat2plot,
+           aes(x = YEAR)) +
+    geom_bar(data = dat2plot %>% filter(value > 0),
+             aes(y = value, fill = var2bar),
+             stat = "identity") +
+    geom_bar(data = dat2plot %>% filter(value < 0),
+             aes(y = value, fill = var2bar),
+             stat = "identity") +
+    {if(aggregate) geom_line(data = agg,aes(x = YEAR, y = Total),
+                             size = 1)} +
+    geom_hline(size = 0.3, aes(yintercept = 0)) +
+    xlab(xlab) +
+    ylab(ylab) +
+    ggtitle(titl) +
+    guides(fill = guide_legend(ncol = leg_ncol)) +
+    theme_ts()+
+    theme(axis.title   = element_text(size = 16),
+          axis.text    = element_text(size = 15),
+          plot.title   = element_text(size = 20),
+          legend.text  = element_text(size = leg_font_size),
+          legend.title = element_blank()) +
+    annotate("text", label = label, x = 1980, y = y.text,size = 8, colour = "black")
+  
+
+  
+  if(remove_leg) p <- p + theme(legend.position = "none")
+  
+  return(p)
+  
+  #ggsave(plot = p,
+  #       filename = "./productivity_all.eps",
+  #       width = width,
+  #       height = height)
+}
+
+bar_dat <- ecodata::productivity_anomaly %>% 
+  filter(EPU == "MAB")
+
+# mafmc <-plot_stackbarcpts_single(YEAR = bar_dat$Time,
+#                          var2bar = bar_dat$Var,
+#                          x = bar_dat$Value,
+#                          titl = "",
+#                          xlab = "",
+#                          ylab = "Small fish per large fish biomass (anomaly)",
+#                          height = 5.5,
+#                          width = 9,
+#                          filt = TRUE,
+#                          label = "A",
+#                          y.text = 4.5)
+
+# 
+mid <- plot_stackbarcpts_single(YEAR = bar_dat$Time,
+                         var2bar = bar_dat$Var,
+                         x = bar_dat$Value,
+                         titl = "",
+                         xlab = "",
+                         ylab = "Small fish per large fish biomass (anomaly)",
+                         height = 5.5,
+                         width = 9,
+                         filt = FALSE,
+                         label = "",
+                         y.text = 10,
+                         aggregate = TRUE)
+
+mid
+
+
+
+```
+
+
+## Larval diversity (MAB)
+Fluctuations in larval diversity from NEFSC ECOMON and bottom trawl surveys reflect changing dominance of forage fish, hake, and haddock. In fall, the decrease in diversity since 2010 is driven by high abundance of menhaden and hake larvae. In spring, both diversity and species richness declined to a time series low due to the dominance of sandlance and haddock, which are common in the northern portion of the MAB (Fig. \ref{fig:mab-larval-div}). Too few stations were sampled in spring 2014 and 2016 and in fall 2017 to detect departures from trends in the MAB. 
+
+```{r mab-larval-div, fig.cap = "Larval diversity indices from ECOMON surveys in the Mid-Atlantic.", fig.width = 7, fig.asp = .7}
+ma_larv_div <- ecodata::ichthyo_diversity %>%
+  filter(EPU == "MAB",
+         str_detect(Var, "Ich Shannon")) %>%
+  mutate(Var = word(Var,1)) %>% 
+  group_by(Var) %>% 
+  mutate(hline = mean(Value, na.rm = T)) %>% 
+  ggplot(aes(x = Time, y = Value, group = Var)) +
+  geom_line() +
+  geom_point() +
+       annotate("rect", fill = shade.fill, alpha = shade.alpha,
+      xmin = x.shade.min , xmax = x.shade.max,
+      ymin = -Inf, ymax = Inf) +
+  ggtitle("Mid-Atlantic larval diversity") +
+  ylab("Shannon Diversity") +
+  facet_wrap(Var~., ncol = 2, scales = "free_y") +
+  scale_x_continuous(expand = c(0.01, 0.01))+
+      geom_hline(aes(yintercept = hline),
+           size = hline.size,
+           alpha = hline.alpha,
+           linetype = hline.lty)+
+  theme_facet() +
+  theme(strip.text=element_text(hjust=0))
+
+ma_spec_rich <- ecodata::ichthyo_diversity %>%
+  filter(EPU == "MAB",
+         str_detect(Var, "Species Caught")) %>%
+  mutate(Var = word(Var,1)) %>% 
+  group_by(Var) %>% 
+  mutate(hline = mean(Value, na.rm = T)) %>% 
+  ggplot(aes(x = Time, y = Value, group = Var)) +
+  geom_line() +
+  geom_point() +
+       annotate("rect", fill = shade.fill, alpha = shade.alpha,
+      xmin = x.shade.min , xmax = x.shade.max,
+      ymin = -Inf, ymax = Inf) +
+  ggtitle("Mid-Atlantic larval species richness") +
+  ylab("Species richness") +
+  facet_wrap(Var~., ncol = 2, scales = "free_y") +
+  scale_x_continuous(expand = c(0.01, 0.01))+
+      geom_hline(aes(yintercept = hline),
+           size = hline.size,
+           alpha = hline.alpha,
+           linetype = hline.lty)+
+  theme_facet() +
+  theme(strip.text=element_text(hjust=0))
+
+ ma_larv_div + ma_spec_rich + plot_layout(ncol = 1)
+```
+
+Investigations are underway to evaluate changes in timing of spawning for managed fish species. Preliminary work with flatfishes suggests that some inshore stocks are spawning earlier as temperatures increase. There are implications for changes in spawning timing for fish condition and for larval survival as match or mismatch with food sources changes; changes in timing of peak zooplankton biomass has already been observed for some Mid-Atlantic species (next section).  
+
+\newpage
+
+# Habitat Quality and Ecosystem Productivity
+
+Productivity of harvested fish and protected species, and therefore sustainability of fisheries, depends on adequate habitat, which encompasses physical and chemical conditions and biological productivity at the base of the food web. Many harvested and protected species on the Northeast US shelf occupy several distinct habitats throughout their life cycle, including estuaries, nearshore coastal, and offshore environments. The indicators in this section provide information on the changing conditions encountered by managed species in different seasons and across habitats, which may explain observed changes in species distribution and productivity. Ultimately, a better understanding of these ecological drivers may permit proactive management in a changing system. 
+
+Some habitat management interventions have proven beneficial in the Mid-Atlantic and throughout the Northeast US Shelf. For example, the evidence suggests that management limiting nutrient inputs has significantly improved water quality in Chesapeake Bay. However, temperature in coastal and offshore habitats is trending towards unprecedented levels, accompanied by alterations in ocean circulation patterns. Observed changes at the base of the food web, including timing of production and plankton community composition, affect productivity of protected and managed species in ways we do not yet fully understand. 
+
+## Estuarine habitat quality (Chesapeake Bay)
+Many important MAFMC managed species use estuarine habitats as nurseries or are considered estuarine and nearshore coastal-dependent (summer flounder, scup, black sea bass, and bluefish), and interact with other important estuarine-dependent species (e.g., striped bass and menhaden). An integrated measure of multiple water quality criteria shows a significantly increasing proportion of Chesapeake Bay waters meeting or exceeding EPA water quality standards over time (@zhang_chesapeake_2018; Fig. \ref{fig:cb-attainment}). This pattern was statistically linked to total nitrogen reduction, indicating responsiveness of water quality status to management actions implemented to reduce nutrients. Water quality trends and status may be used to inform aquaculture siting decisions in Chesapeake Bay. 
+
+```{r cb-attainment,fig.width = 6, fig.asp = 0.55, fig.cap = "Estimated water quality standards attainment of Chesapeake Bay tidal waters for the combined assessment of dissolved oxygen, underwater bay grasses/water clarity and chlorophyll a using rolling three year assessment periods."}
+
+minlab <- seq(1985,2015,5)
+maxlab <- seq(1987,2017,5)
+
+
+
+ches_bay_wq %>% 
+  mutate(hline = mean(Value)) %>% 
+  ggplot(aes(x = Time, y = Value)) +
+       annotate("rect", fill = shade.fill, alpha = shade.alpha,
+      xmin = x.shade.min , xmax = x.shade.max,
+      ymin = -Inf, ymax = Inf) +
+  geom_line() +
+  geom_point() +
+  geom_gls() +
+    ylab(expression("Estimated attainment, percent")) +
+  ggtitle("Chesapeake Bay Estimated Water Quality Standards Attainment Indicator Score") +
+  scale_x_continuous(breaks = minlab,labels = paste0(minlab,"-",maxlab),expand = c(0.01, 0.01)) +
+    geom_hline(aes(yintercept = hline),
+           size = hline.size,
+           alpha = hline.alpha,
+           linetype = hline.lty) +
+  theme_ts()
+```
+
+
+## Ocean circulation and surface temperature (coastwide)
+The position of the northern edge of the Gulf Stream has been moving to the north since the late 1950s, with an increasing rate since 2009 (Fig. \ref{fig:GSI}). The most northerly positions ever recorded were observed over the most recent years (2014-2017). A more northerly Gulf Stream position is associated with warmer ocean temperature on the Northeast US shelf [@zhang_role_2007], a higher proportion of Atlantic Temperate Slope Water in the Northeast Channel, and increased sea surface height along the U.S. east coast [@goddard_extreme_2015]. 
+
+```{r GSI, fig.width = 5, fig.asp = 0.55, fig.cap = "Index representing the north wall of the Gulf Stream. Positive values represent a more northerly Gulf Stream position."}
+gsi %>% 
+  mutate(Year = floor(Time)) %>% 
+  group_by(Year) %>% 
+  dplyr::summarise(Value = mean(Value)) %>% 
+  mutate(hline = mean(Value)) %>% 
+  dplyr::rename(Time = Year) %>% 
+  ggplot(aes(x = Time, y = Value)) +
+         annotate("rect", fill = shade.fill, alpha = shade.alpha,
+      xmin = x.shade.min , xmax = x.shade.max,
+      ymin = -Inf, ymax = Inf) +
+  geom_gls() +
+  geom_line() +
+  geom_point() +
+  ylab("Gulf Stream position anomaly") +
+  ggtitle("Gulf Stream Index") +
+    scale_x_continuous(expand = c(0.01, 0.01))+
+      geom_hline(aes(yintercept = hline),
+           size = hline.size,
+           alpha = hline.alpha,
+           linetype = hline.lty)+
+  theme_ts() +
+  theme(strip.text=element_text(hjust=0,
+                                face = "italic"))
+```
+
+
+Globally, 2018 was the 4th warmest year on record and the last four years were the warmest on record. Since the 1860’s, the Northeast US shelf sea surface temperature (SST) has exhibited an overall warming trend, with the past decade measuring well above the long term average (and the trendline; Fig. \ref{fig:long-term-sst}).
+
+```{r long-term-sst, fig.width = 5, fig.asp = 0.55, fig.cap = "Average annual sea surface temperature (SST) over the Northeast US Shelf"}
+lt_sst <- ecodata::long_term_sst %>% 
+  mutate(hline = mean(Value))
+
+lt_sst %>% 
+  ggplot(aes(x = Time, y = Value, group = Var)) +
+         annotate("rect", fill = shade.fill, alpha = shade.alpha,
+      xmin = x.shade.min , xmax = x.shade.max,
+      ymin = -Inf, ymax = Inf) +
+  geom_gls() +
+  geom_line() +
+  geom_point() +
+  ylab("Temperature (°C)") +
+  ggtitle("Long-term SST") +
+    scale_x_continuous(expand = c(0.01, 0.01), breaks = seq(1840,2010,20))+
+      geom_hline(aes(yintercept = hline),
+           size = hline.size,
+           alpha = hline.alpha,
+           linetype = hline.lty)+
+  theme_facet() +
+  theme(strip.text=element_text(hjust=0,
+                                face = "italic"))
+```
+
+
+## Ocean temperature, surface and bottom (MAB)
+The regional ocean is warming. Surface and bottom temperature in the MAB averaged over all seasons has trended warmer since the early 1980s; while seasonally temperatures have trended warmer in spring, summer, and fall. The 2018 summer sea surface temperatures were the third highest on record in the Mid-Atlantic, although temperatures during the other seasons were near or slightly below average (Figs. \ref{fig:MAB-SST-insitu}, \ref{fig:MAB-bot-temp}).  
+
+```{r MAB-SST-insitu, fig.width = 8, fig.height = 7, fig.cap = "MAB seasonal sea surface time series overlaid onto 2018 seasonal spatial anomalies."}
+annotation_custom2 <- function (grob, xmin = -Inf, xmax = Inf, ymin = -Inf, ymax = Inf, data) 
+{
+  layer(data = data, stat = StatIdentity, position = PositionIdentity, 
+        geom = ggplot2:::GeomCustomAnn,
+        inherit.aes = TRUE, params = list(grob = grob, 
+                                          xmin = xmin, xmax = xmax, 
+                                          ymin = ymin, ymax = ymax))
+}
+
+#EPU shapefile
+epu_sf <- ecodata::epu_sf %>% 
+  filter(EPU %in% c("MAB"))
+
+#Map line parameters
+map.lwd <- 0.4
+
+# Set lat/lon window for maps
+xmin = -81
+xmax = -66
+ymin = 35.5
+ymax = 43
+xlims <- c(xmin, xmax)
+ylims <- c(ymin, ymax)
+sst <- seasonal_oisst_anom_gridded 
+
+sst$Season <- factor(sst$Season, levels = c("Winter",
+                                            "Spring",
+                                            "Summer",
+                                            "Fall"))
+sst_map <- 
+  ggplot() +
+  geom_tile(data = sst, aes(x = Longitude, y = Latitude,fill = Value)) +
+  geom_sf(data = coast, size = map.lwd) +
+  geom_sf(data = epu_sf, fill = "transparent", size = map.lwd) +
+  scale_fill_gradient2(name = "Temp.\nAnomaly (°C)",
+                       low = scales::muted("blue"),
+                       mid = "white",
+                       high = scales::muted("red"),
+                       limits = c(-5,5)) +
+  coord_sf(crs = crs, xlim = xlims, ylim = ylims) +
+  facet_wrap(Season~.) +
+  theme_map() +
+  ggtitle("SST anomaly (2018)") +
+  xlab("Longitude") +
+  ylab("Latitude") +
+  theme(panel.border = element_rect(colour = "black", fill=NA, size=0.75),
+        legend.key = element_blank(),
+        axis.title = element_text(size = 11),
+        strip.background = element_blank(),
+        strip.text=element_text(hjust=0),
+        axis.text = element_text(size = 8))
+
+winter_anom <-  ggplotGrob( seasonal_oisst_anom %>% 
+                              filter(EPU == "MAB",
+                                     str_detect(Var, "winter")) %>% 
+                              mutate(hline = mean(Value)) %>% 
+                              ggplot(aes(x = Time, y = Value)) +
+                              annotate("rect", fill = shade.fill, alpha = shade.alpha,
+                                       xmin = x.shade.min , xmax = x.shade.max,
+                                       ymin = -Inf, ymax = Inf) +
+                              geom_line() +
+                              geom_point() +
+                              geom_gls(alpha = trend.alpha + 0.25) +
+                              ylab("SST anomaly (°C)")+
+                              scale_x_continuous(expand = c(0.01, 0.01)) +
+                              geom_hline(aes(yintercept = hline)) +
+                              theme_ts()+
+                              theme(axis.title = element_text(size = 6),
+                                    axis.text = element_text(size = 6),
+                                    panel.background = element_rect(fill = "transparent"), 
+                                    plot.background = element_rect(fill = "transparent", color = NA), 
+                                    panel.grid.major = element_blank(),
+                                    panel.grid.minor = element_blank(), 
+                                    legend.background = element_rect(fill = "transparent"), 
+                                    legend.box.background = element_rect(fill = "transparent"), 
+                                    legend.key = element_rect(fill = "transparent", colour = NA), 
+                                    axis.line = element_blank(),
+                                    panel.border = element_blank())
+)
+
+spring_anom <-  ggplotGrob( seasonal_oisst_anom %>% 
+                              filter(EPU == "MAB",
+                                     str_detect(Var, "spring")) %>% 
+                              mutate(hline = mean(Value)) %>% 
+                              ggplot(aes(x = Time, y = Value)) +
+                              annotate("rect", fill = shade.fill, alpha = shade.alpha,
+                                       xmin = x.shade.min , xmax = x.shade.max,
+                                       ymin = -Inf, ymax = Inf) +
+                              geom_line() +
+                              geom_point() +
+                              geom_gls(alpha = trend.alpha + 0.25) +
+                              ylab("SST anomaly (°C)")+
+                              scale_x_continuous(expand = c(0.01, 0.01)) +
+                              geom_hline(aes(yintercept = hline)) +
+                              theme_ts()+
+                              theme(axis.title = element_text(size = 6),
+                                    axis.text = element_text(size = 6),
+                                    panel.background = element_rect(fill = "transparent"), 
+                                    plot.background = element_rect(fill = "transparent", color = NA),
+                                    panel.grid.major = element_blank(),
+                                    panel.grid.minor = element_blank(), 
+                                    legend.background = element_rect(fill = "transparent"), 
+                                    legend.box.background = element_rect(fill = "transparent"), 
+                                    legend.key = element_rect(fill = "transparent", colour = NA), 
+                                    axis.line = element_blank(),
+                                    panel.border = element_blank())
+)
+
+summer_anom <-  ggplotGrob( seasonal_oisst_anom %>% 
+                              filter(EPU == "MAB",
+                                     str_detect(Var, "summer")) %>% 
+                              mutate(hline = mean(Value)) %>% 
+                              ggplot(aes(x = Time, y = Value)) +
+                              annotate("rect", fill = shade.fill, alpha = shade.alpha,
+                                       xmin = x.shade.min , xmax = x.shade.max,
+                                       ymin = -Inf, ymax = Inf) +
+                              geom_line() +
+                              geom_point() +
+                              geom_gls(alpha = trend.alpha + 0.25) +
+                              ylab("SST anomaly (°C)")+
+                              scale_x_continuous(expand = c(0.01, 0.01)) +
+                              geom_hline(aes(yintercept = hline)) +
+                              theme_ts()+
+                              theme(axis.title = element_text(size = 6),
+                                    axis.text = element_text(size = 6),
+                                    panel.background = element_rect(fill = "transparent"),
+                                    plot.background = element_rect(fill = "transparent", color = NA),
+                                    panel.grid.major = element_blank(), 
+                                    panel.grid.minor = element_blank(), 
+                                    legend.background = element_rect(fill = "transparent"),
+                                    legend.box.background = element_rect(fill = "transparent"), 
+                                    legend.key = element_rect(fill = "transparent", colour = NA), 
+                                    axis.line = element_blank(),
+                                    panel.border = element_blank())
+)
+
+fall_anom <-  ggplotGrob( seasonal_oisst_anom %>% 
+                            filter(EPU == "MAB",
+                                   str_detect(Var, "fall")) %>% 
+                            mutate(hline = mean(Value)) %>% 
+                            ggplot(aes(x = Time, y = Value)) +
+                            annotate("rect", fill = shade.fill, alpha = shade.alpha,
+                                     xmin = x.shade.min , xmax = x.shade.max,
+                                     ymin = -Inf, ymax = Inf) +
+                            geom_line() +
+                            geom_point() +
+                            geom_gls(alpha = trend.alpha + 0.25) +
+                            ylab("SST anomaly (°C)")+
+                            scale_x_continuous(expand = c(0.01, 0.01)) +
+                            geom_hline(aes(yintercept = hline)) +
+                            theme_ts()+
+                            theme(axis.title = element_text(size = 6),
+                                  axis.text = element_text(size = 6),
+                                  panel.background = element_rect(fill = "transparent"), 
+                                  plot.background = element_rect(fill = "transparent", color = NA), 
+                                  panel.grid.major = element_blank(), 
+                                  panel.grid.minor = element_blank(), 
+                                  legend.background = element_rect(fill = "transparent"), 
+                                  legend.box.background = element_rect(fill = "transparent"),
+                                  legend.key = element_rect(fill = "transparent", colour = NA),
+                                  axis.line = element_blank(),
+                                  panel.border = element_blank())
+)
+
+sst_map + 
+  annotation_custom2(grob = winter_anom,  xmin=-82, xmax=-73.75,
+                     ymin=39, ymax=43.5, data = data.frame(Season = "Winter")) +
+  annotation_custom2(grob = spring_anom,  xmin=-82, xmax=-73.75,
+                     ymin=39, ymax=43.5, data = data.frame(Season = "Spring")) +
+  annotation_custom2(grob = summer_anom,  xmin=-82, xmax=-73.75,
+                     ymin=39, ymax=43.5, data = data.frame(Season = "Summer")) +
+  annotation_custom2(grob = fall_anom,  xmin=-82, xmax=-73.75,
+                     ymin=39, ymax=43.5, data = data.frame(Season = "Fall"))
+
+```
+
+```{r MAB-bot-temp, fig.width = 6, fig.asp = .55, fig.cap = "Annual bottom temperatures in the Mid-Atlantic Bight."}
+temp_anom <- oceantemp_insitu %>% 
+  filter(EPU == epu_abbr) %>% 
+  complete(Time = full_seq(min(oceantemp_insitu$Time):max(oceantemp_insitu$Time),1),
+           nesting(Var)) %>% 
+  mutate(hline = 0)
+
+bot_temp_insitu <- temp_anom %>%
+ filter(Var == "bottom temp anomaly in situ") %>%
+ggplot2::ggplot() +
+  annotate("rect", fill = shade.fill, alpha = shade.alpha,
+      xmin = x.shade.min , xmax = x.shade.max,
+      ymin = -Inf, ymax = Inf) +
+  geom_line(aes(x = Time, y = Value)) +
+  geom_gls(aes(x = Time, y = Value)) +
+  geom_point(aes(x = Time, y = Value), size = 1) +
+  ylab("Temperature (°C)") +
+  ggtitle("Bottom temperature anomaly") +
+  scale_x_continuous(expand = c(0.01, 0.01)) +
+  theme_ts() +
+  theme(strip.text=element_text(hjust=0),
+        plot.title = element_text(size = 12))+
+  geom_hline(aes(yintercept = hline),
+           size = hline.size,
+           alpha = hline.alpha,
+           linetype = hline.lty) +
+ theme_ts()
+
+
+bot_temp_insitu 
+
+```
+
+## Primary production (MAB)
+Phytoplankton primary production is a function of biomass, light, and temperature, and sets the overall level of potential fish and fishery productivity in an ecosystem (Fig. \ref{fig:prod-potential}). There is a trend of increasing primary production in the Mid-Atlantic, primarily driven by increased summer production, which is due to warmer temperatures and increased bacterial remineralization and nutrient recycling (Fig. \ref{fig:PP-OCCI}). This increased productivity is most likely from smaller-celled species that contribute less to fish production compared to larger phytoplankton. The fall of 2018 had an above average phytoplankton bloom (Fig. \ref{fig:mab-chl-weekly}), most likely comprised of larger diatom species, with the highest concentrations near the shelf break, which is the same region that experienced below average temperatures in the fall (Fig. \ref{fig:MAB-SST-insitu}).
+
+```{r prod-potential, fig.cap = "Simplified representation of the pathways linking primary production and environmental driver throughout a fishery ecosystem. The important societal benefits that derive from sustainable fisheries depend directly on a sequence of events starting at the base of the food web. The production of fish and shellfish available for harvest by the fisheries follows pathways of energy flow from phytoplankton and zooplankton to different parts of the food web. The production at each component further depends on the effect of a host of environmental drivers including temperature, salinity, and other factors.", out.width='\\linewidth'}
+
+knitr::include_graphics(file.path(image.dir, "SOE_Network_Diagram.png"))
+```
+
+```{r PP-OCCI, fig.width=8, fig.cap = "Monthly primary production trends show the annual cycle (i.e. the peak during the summer months) and the changes over time for each month."}
+out_pp <- ecodata::chl_pp %>% 
+  filter(EPU == epu_abbr,
+         str_detect(Var, "MONTHLY_PPD_MEDIAN")) %>% 
+  separate(.,Time, into = c("Year","Month"), sep = 4) %>% 
+    mutate(Month = plyr::mapvalues(Month, from = c("01","02","03","04","05","06",
+                                                   "07","08","09","10","11","12"),
+                                   to = c(month.abb))) %>% 
+  group_by(Month) %>% 
+  mutate(hline = mean(Value))
+out_pp$Month <- factor(out_pp$Month, levels = month.abb)
+
+
+(pp_cci <- ggplot(out_pp) +
+   # geom_gls(aes(x = Year, y = Value, group = Month))+
+    geom_point(aes(x = Year, y = Value, group = Month)) +
+    geom_line(aes(x = Year, y = Value, group = Month)) +
+    scale_x_discrete(name = "Time", breaks = seq(min(out_pp$Year),max(out_pp$Year),10)) +  
+        geom_hline(aes(yintercept = hline),
+           size = hline.size,
+           alpha = hline.alpha,
+           linetype = hline.lty) +
+    facet_wrap(Month~., ncol = 6) +
+    ggtitle("Monthly median PPD") +
+    ylab(expression("PP (gC m"^-2*" d"^-1*")")) +
+    theme_facet() +
+    theme(axis.text.x = element_text(angle=45, hjust = 1),
+          panel.spacing = unit(1, "lines"),
+          plot.margin = unit(c(0.1, 0, 0, 0), "cm")))
+```
+
+```{r mab-chl-weekly,fig.width = 6, fig.asp = 0.55, fig.cap = "Weekly chlorophyll concentrations in the Mid-Atlantic are shown by the colored line for 2018. The long-term mean is shown in black, and shading indicates +/- 1 sample SD."}
+
+interp_chl_pp <- function(epu, year = 2018, Variable){
+  out <- ecodata::chl_pp %>% 
+    filter(str_detect(Var,Variable),
+           EPU == epu) %>% 
+    separate(.,Time, c("Year","Week"),sep = 4) %>% 
+    filter(Year == year) %>% 
+    group_by(EPU) %>% 
+    mutate(Time = 1:length(Year))
+  
+  ltm_out <- ecodata::chl_pp %>% 
+    filter(str_detect(Var,Variable),
+           EPU == epu) %>% 
+    separate(.,Time, c("Year","Week"),sep = 4) %>% 
+    group_by(Week) %>% 
+    dplyr::summarise(LTM = mean(Value, na.rm = T),
+                     SD = sd(Value, na.rm = T)) %>% 
+    mutate(Time = 1:length(Week),
+           sd.low = LTM - SD,
+           sd.high = LTM + SD) %>% 
+    left_join(.,out, by = c("Time")) %>% 
+    mutate(status = ifelse(Value < sd.high & Value > sd.low, "near_mean",
+                           ifelse(Value > sd.high, "high",
+                                  ifelse(Value < sd.low,"low",NA))),
+           group = "PLOT")
+  
+  return(ltm_out)
+}
+
+
+MAB_chl <- interp_chl_pp(epu = "MAB", Variable = "WEEKLY_CHLOR_A_MEDIAN MODIS-Aqua PAN")
+
+MAB_chl_weekly <- ggplot(data = MAB_chl) +
+  geom_line(aes(x = Time, y = LTM)) +
+  geom_ribbon(aes(x = Time, ymin = sd.low, ymax = sd.high), 
+              alpha = 0.1,
+              fill = "grey1") +
+  geom_line(aes(x = Time, y = Value),
+            size = 1,color = "#33a02c") +
+  ggtitle(expression("Chlorophyll"~italic(a)~"")) +
+  guides(color = F) +
+  xlab("")+
+  ylab(expression("CHL (mg m"^-3*")")) +
+  scale_x_continuous(breaks = seq(1,52,10),
+                   labels = c("Jan.","Mar.","May","July","Oct.","Dec."),
+                   expand = c(0.01,0.01)) +
+  scale_color_manual(values = c("#ef8a62","#2c7fb8","#a1d99b"))+
+  theme_ts()
+
+MAB_pp <- interp_chl_pp(epu = "MAB", Variable =  "WEEKLY_PPD_MEDIAN")
+
+MAB_pp_weekly <- ggplot(data = MAB_pp) +
+  geom_line(aes(x = Time, y = LTM)) +
+  geom_ribbon(aes(x = Time, ymin = sd.low, ymax = sd.high),
+              alpha = 0.1,
+              fill = "grey1") +
+  geom_line(aes(x = Time, y = Value),
+            size = 1,color = "#33a02c") +
+  ggtitle(expression("Primary production")) +
+  guides(color = F) +
+  xlab("")+
+  ylab(expression("PP (gC m"^-2*" d"^-1*")")) +
+  scale_x_continuous(breaks = seq(1,52,10),
+                   labels = c("Jan.","Mar.","May","July","Oct.","Dec."),
+                   expand = c(0.01,0.01)) +
+  scale_color_manual(values = c("#ef8a62","#2c7fb8","#a1d99b"))+
+  theme_ts()
+
+#MAB_chl_weekly + MAB_pp_weekly + plot_layout(ncol = 1)
+MAB_chl_weekly
+```
+
+
+## Zooplankton (MAB)
+The most abundant zooplankton species in the MAB are *Centropages typicus*, *Psuedocalanus* spp., and *Temora longicornis* [@morse_distinct_2017].  *Calanus finmarchicus* are also abundant in the MAB and are important prey for larval fish and the North Atlantic Right Whale.  Annually, there has been a significant decrease in *Pseudocalanus* and in recent years a decreasing trend of *Calanus finmarchicus* (Fig. \ref{fig:MAB-zoo-abund}).  Seasonally, *Temora longicornis* have decreased during the fall, while a decrease in fall concentration and an increase in spring concentration of *Centropages typicus* (Fig. \ref{fig:MAB-oi-zoo}) corresponds to a shift in timing of their peak concentration from late fall to early spring beginning in the late 1980s [@bi_decadal_2014].
+
+```{r MAB-zoo-abund, fig.width = 8, fig.asp = .35, fig.cap = "Abundance anomaly time series for key zooplankton species found in the MAB."}
+zoo_abund <- ecodata::zoo_anom_sli %>% 
+  filter(EPU == epu_abbr,
+         !str_detect(Var, "small-large")) %>% 
+  mutate(hline = 0,
+         Var = str_to_title(str_remove(Var, "anomaly"))) 
+
+zoo_abund %>% 
+  ggplot(aes(x = Time, y = Value, group = Var)) +
+         annotate("rect", fill = shade.fill, alpha = shade.alpha,
+      xmin = x.shade.min , xmax = x.shade.max,
+      ymin = -Inf, ymax = Inf) +
+  geom_gls() +
+  geom_line() +
+  geom_point() +
+  ylab("Abundance anomaly") +
+  ggtitle("Zooplankton abundance anomaly") +
+  facet_wrap(Var~., ncol = 3) +
+  scale_x_continuous(expand = c(0.01, 0.01))+
+      geom_hline(aes(yintercept = hline),
+           size = hline.size,
+           alpha = hline.alpha,
+           linetype = hline.lty)+
+  theme_facet() +
+  theme(strip.text=element_text(hjust=0,
+                                face = "italic"))
+  
+
+```
+
+```{r MAB-oi-zoo, fig.width=8, fig.cap = "Seasonal abundance of key zooplankton species in the MAB."}
+facet_names <- list(
+  'centropages spring'=expression(paste(italic("Centropages "), "spring")),
+  'centropages fall'=expression(paste(italic("Centropages "), "fall")),
+  'temora spring'=expression(paste(italic("Temora "), "spring")),
+  'temora fall' = expression(paste(italic("Temora "), "fall")),
+  'pseudocalanus spring'=expression(paste(italic("Pseudocalanus "), "spring")),
+  'pseudocalanus fall' = expression(paste(italic("Pseudocalanus "), "fall")))
+
+zoo_oi_mab <- ecodata::zoo_oi %>% 
+  filter(!str_detect(Var,"SD"),
+         EPU == "MAB") %>% 
+  mutate(Var = str_remove(Var, " zoo")) %>% 
+  group_by(EPU, Var) %>% 
+  mutate(hline = mean(Value, na.rm = T))
+
+zoo_oi_mab %>%  
+ggplot(aes(x = Time, y = Value, group = Var)) +
+  geom_gls() +
+  geom_line()+
+  geom_point()+
+  ylab(expression("Abundance log num m"^-3*"")) +
+  facet_wrap(Var ~ ., ncol = 2,scales = "free_y", labeller = label) +
+  ggtitle("Zooplankton abundance (OI)") +
+  theme_facet() +
+    theme(strip.text=element_text(hjust=0,
+                                face = "italic"))
+
+```
+
+Changes in the abundance of the larger *Calanus finmarchicus* are also reflected in the size distribution of the copepods. The small-large copepod index is a measure of the relative size composition of the dominant copepod taxa. During the 1990s and early 2000s the positive index was driven by high relative abundance of smaller bodied copepods and a lower relative abundance of *Calanus finmarchicus*. This period was also identified with regime shifts to lower fish recruitment [@perretti_regime_2017]. The current trend in the index suggests an increase in the relative abundance of smaller bodied copepods (Fig. \ref{fig:MAB-sli}).
+
+```{r MAB-sli, fig.cap = "MAB small-large zooplankton index and the annual primary production anomaly."}
+sli <- ecodata::zoo_anom_sli %>% 
+  filter(EPU == epu_abbr,
+         str_detect(Var, "small-large")) %>% 
+  mutate(hline = 0) 
+
+pp_anom <- ecodata::chl_pp %>% 
+  filter(str_detect(Var, "ANNUAL_PPD_RATIO_ANOMALY"),
+         EPU == "MAB") %>% 
+  mutate(hline = 1,
+         Time = as.numeric(as.character(Time)),
+         Var = "ANNUAL_PPD_RATIO_ANOMALY")
+
+sli_plt <- sli %>% 
+  ggplot(aes(x = Time, y = Value, group = Var)) +
+         annotate("rect", fill = shade.fill, alpha = shade.alpha,
+      xmin = x.shade.min , xmax = x.shade.max,
+      ymin = -Inf, ymax = Inf) +
+  geom_line() +
+  geom_point() +
+  guides(color = F) +
+  xlab("")+
+  ylab("Small-large abundance") +
+  ggtitle("Small-large copepod abundance") +
+    scale_x_continuous(expand = c(0.01, 0.01), limits = c(1988, 2018))+
+      geom_hline(aes(yintercept = hline,
+                     group = Var),
+           size = hline.size,
+           alpha = hline.alpha,
+           linetype = hline.lty)+
+  theme_ts() +
+  theme(strip.text=element_text(hjust=0,
+                                face = "italic"))
+
+pp_anom_plt <- pp_anom %>% 
+    ggplot(aes(x = Time, y = Value, group = Var)) +
+         annotate("rect", fill = shade.fill, alpha = shade.alpha,
+      xmin = x.shade.min , xmax = x.shade.max,
+      ymin = -Inf, ymax = Inf) +
+  geom_line() +
+  geom_point() +
+  guides(color = F) +
+  ylab("Anomaly ratio") +
+  ggtitle("Primary production anomaly ratio") +
+    scale_x_continuous(expand = c(0.01, 0.01), limits = c(1988, 2018))+
+    scale_y_continuous(limits = c(0.8,1.2)) +
+      geom_hline(aes(yintercept = hline,
+                     group = Var),
+           size = hline.size,
+           alpha = hline.alpha,
+           linetype = hline.lty)+
+  theme_ts() +
+  theme(strip.text=element_text(hjust=0,
+                                face = "italic"))
+
+
+sli_plt + pp_anom_plt + plot_layout(ncol = 1) & theme(plot.margin = margin(t = 0))
+```
+
+
+Changes in primary productivity, phytoplankton and zooplankton composition and abundance affect the food web and may be related to observed changes in fish condition, recruitment patterns, and forage fish energy content. However, more research and analyses are needed to directly link these connections. Any attempt to predict how the ecosystem will respond to changes in climate and fishing patterns ultimately will depend on understanding these connections. Our objective is to shed light on these fundamental issues and to document changes affecting human communities and the fishery ecosystem on which we depend.  
+
+# Contributors
+
+To be filled in
+
+\newpage 
+
+# Document Orientation
+
+The figure format is explained in Fig \ref{fig:figformat}. 
+
+```{r figformat, fig.cap = "Key to figures. Trend lines are shown when slope is significantly different from 0 at the p < 0.05 level. An orange line signifies an overall positive trend, and purple signifies a negative trend. To minimize bias introduced by small sample size, no trend is fit for < 30 year time series. Dashed lines represent mean values of time series unless the indicator is an anomaly, in which case the dashed line is equal to 0. Shaded regions indicate the past ten years. If there are no new data for 2018, the shaded region will still cover this time period.", fig.height = 2.5, fig.width = 4}
+
+m <- 0.1
+x <- 1985:2018
+y <-  m*x + rnorm(30, sd = 0.35)
+
+data <- data.frame(x = x,
+                  y = y)
+
+#Define constants for figure plot
+x.shade.max <- max(x)
+x.shade.min <- x.shade.max - 9 
+hline = mean(y)
+
+#Plot series with trend 
+ggplot2::ggplot(data = data,aes(x = x, y = y)) +
+  #Highlight last ten years
+  annotate("rect", fill = shade.fill, alpha = shade.alpha,
+      xmin = x.shade.min , xmax = x.shade.max,
+      ymin = -Inf, ymax = Inf) +
+  geom_point(size = pcex) +
+  scale_color_manual(aesthetics = "color")+
+  guides(color = FALSE) +
+  geom_hline(aes(yintercept = hline),
+              size = hline.size,
+             alpha = hline.alpha,
+             linetype = hline.lty)+
+  geom_line() +
+  geom_gls() +
+  scale_y_continuous(labels = function(l){trans = l / 1000})+
+  scale_x_continuous(breaks = seq(1985, 2015, by = 5), expand = c(0.01, 0.01)) +
+  ylab(expression("Invented Index, 10"^3*"widgets")) +
+  xlab("Year") +
+  theme_ts()
+
+```
+
+Fish and invertebrates are aggregated into similar feeding categories (Table \ref{tab:species-groupings}) to evaluate ecosystem level trends in predators and prey. 
+
+```{r species-groupings, warning=F}
+
+# new table with all species listed by management entity
+df <- ecodata::species_groupings %>%
+  dplyr::select(SOE_18, COMNAME, Fed_Managed) %>%
+  filter(SOE_18 != "Other") %>%
+  distinct() %>%
+  group_by(SOE_18, Fed_Managed) %>%
+  summarize_all(funs(paste(na.omit(.), collapse = ", "))) %>%
+  spread(Fed_Managed, COMNAME) %>%
+  arrange(factor(SOE_18, levels = c("Apex Predator", "Piscivore", "Planktivore", "Benthivore", "Benthos")))
+df<-df[-6,c(1,4,3,5,6)] %>%
+  mutate_all(tolower)
+
+
+knitr::kable(df, booktabs = TRUE, caption = 'Feeding guilds and management bodies.', 
+             col.names = c("Guild", "MAFMC", "Joint", "NEFMC", "State or Other")) %>%
+  kable_styling(font_size=10, latex_options=c("repeat_header", "scale_down", "hold_position")) %>%
+  column_spec(1, width="2cm") %>%
+  column_spec(2, width="5cm") %>%
+  column_spec(3, width="2cm") %>%
+  column_spec(4:5, width="5cm") %>%
+  #column_spec(3, width="7.5cm") #%>%
+  collapse_rows(columns = 1, latex_hline = "major", valign = "middle")
+
+```
+
+The spatial scale of indicators is either coastwide, Mid-Atlantic states (New York, New Jersey, Delaware, Maryland, Virginia, North Carolina), or at the Mid-Atlantic Bight (MAB) Ecosystem Production Unit (EPU, Fig. \ref{fig:EPU-MAP}) level. 
+
+```{r EPU-MAP, fig.cap = "The Northeast Large Marine Ecosystem.", fig.width = 3.4, fig.asp = 1.25}
+
+#CRS
+crs <- "+proj=longlat +lat_1=35 +lat_2=45 +lat_0=40 +lon_0=-77 +x_0=0 +y_0=0 +datum=NAD83 +no_defs +ellps=GRS80 +towgs84=0,0,0"
+
+#Specify data frame with lat/lon locations for labels
+epu_labels <- data.frame(EPU = c("Mid-Atlantic\n Bight",
+                                 "Gulf of Maine",
+                                 "Georges Bank"),
+                         latitude = c(40,42.85,41),
+                         longitude = c(-72.7,-69,-68.5))
+
+#Map of NE LME
+ggplot() +
+  geom_sf(data = coast, size = map.lwd) +
+  geom_sf(data = epu_sf, fill = "transparent", size = map.lwd) +
+  coord_sf(crs = crs, xlim = xlims, ylim = ylims) +
+  geom_text(data = epu_labels, aes(x = longitude,
+                                    y = latitude,
+                                    label = EPU),
+            size = 3.2)+
+  theme_map() +
+  xlab("Longitude") +
+  ylab("Latitude")
+
+```
+
+\newpage 
+
+# References
