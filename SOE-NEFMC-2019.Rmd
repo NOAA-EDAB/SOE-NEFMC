@@ -860,7 +860,7 @@ ggplot() +
 Protected species include marine mammals (under the Marine Mammal Protection Act), endangered and threatened species (under the Endangered Species Act), and migratory birds (under the Migratory Bird Treaty Act). In the Northeast US, endangered/threatened species include Atlantic salmon, Atlantic and shortnose sturgeon, all sea turtle species, and 5 baleen whales. Fishery management objectives for protected species generally focus on reducing threats and on habitat conservation/restoration; here we report on the status of these actions as well as indicating the potential for future interactions driven by observed and predicted ecosystem changes in the Northeast US region. This year four Unusual Mortality Events (UMEs) have been declared for three large whale species and two seal species, with several mortalities attributed to human interactions. Also, a marine mammal climate vulnerability assessment is currently underway and for Atlantic and Gulf of Mexico populations and will be reported on in future versions of this report. Strong evidence exists to suggest that the level of interaction between right whales and the combination of offshore lobster gear in the US and snow crab gear in Canada is contributing substantially to the decline of the species.
 
 ## Sea turtles (coastwide)
-Sea turtles are known to be susceptible to climate and ecosystem changes, and their distribution is influenced by water temperature. Sea turtle diets contain a considerable amount of gelatinous zooplankton, which are also influenced by changes in the ecosystem. At present, management measures to reduce sea turtle-fishery interactions are limited to the regions with historical observations of sea turtles and based on historical ocean temperature distributions. However, changes in climate may cause turtles to shift northward into areas with heavy fishing, possibly resulting in increased bycatch.
+Sea turtles are known to be susceptible to climate and ecosystem changes, and their distribution is influenced by water temperature. Sea turtle diets contain a considerable amount of gelatinous zooplankton, which are also influenced by changes in the ecosystem. At present, management measures to reduce sea turtle-fishery interactions are limited to the regions with historical observations of sea turtles and based on historical ocean temperature distributions. However, changes in climate may cause turtles to shift northward into areas with heavy fishing, possibly resulting in increased bycatch. It has been hypothesized that seasonal distribution of Kemp's Ridley sea turtles has shifted northward due to the warming of the Gulf of Maine, which in turn, appears to be resulting in a near record number of cold-stunned turtles stranding in Cape Cod Bay as waters cooled during the fall of 2018.
 
 ## Whales (coastwide)
 North Atlantic right whales are among the most endangered large whale populations in the world. Changes in right whale trends can have implications for fisheries management where fisheries interact with these whales. Additional management restrictions could have a large impact on fishing times, gears, etc. Although the population increased steadily from 1990 to 2011, it has decreased recently (FIg. \ref{fig:NARW-abundance}). From @pace_statespace_2017: “The probability that the population’s trajectory post-2010 was a decline was estimated at 99.99%.” Reduced survival rates of adult females and diverging abundance trends between sexes have also been observed. It is estimated that there are only about 100 adult females remaining in the population. Further, right whale distribution has changed since 2010. The reasons for these changes is unclear, but changes in climate and primary prey (*Calanus finmarchicus*) are suspected.
@@ -931,8 +931,147 @@ ggplot() +
 
 ```
 
-## Protected Fish (coastwide)
-Shortnose sturgeon (endangered) and five distinct populations segments (DPS) of Atlantic sturgeon are found in coastal waters of the mid-Atlantic (endangered: New York Bight, Chesapeake Bay, Carolina, and South Atlantic; threatened: Gulf of Maine). Multiple populations spawn in mid-Atlantic watersheds and river-ocean connectivity is an important habitat characteristic. These populations are vulnerable to climate and ecosystem changes as their life history results in high biological sensitivity and habitat needs result in very high climate exposure. Threat reductions are focused on protecting critical habitat, habitat restoration, reducing ship-strikes, and bycatch reduction.  Endangered Gulf of Maine Atlantic salmon are rarely found this far south but fish from the Connecticut River legacy program may be found in coastal waters of this area.
+## Atlantic salmon (coastwide)
+
+## Common terns (GOM)
+Seabird breeding colonies in the GOM are monitored and managed to promote recovery of formerly harvested species. Common terns breed on islands throughout the Gulf of Maine, feeding on a wide range of invertebrates and fish including Atlantic herring, juvenile hakes, and sand lance. As surface feeding birds, terns are sensitive to vertical distribution of prey as well as nearshore conditions in general, with a foraging distance of 10-20 km from a nesting colony. GOM common tern average productivity (fledgelings per nest) across 7 colonies has varied over time but was low in 2018 (Fig. \ref{fig:aggregate-prod}), a year with record-high summer SST in the GOM (Fig. \ref{fig:NE-SST-anom-series}), and substantial butterfish in tern diets (Fig. \ref{fig:stacked-bar-prey-freq}). 
+
+```{r aggregate-prod, fig.cap = "Mean common tern productivity at nesting sites in Gulf of Maine. Error bars show +/- 1 SE of the mean.",fig.width = 5, fig.asp = 0.55 }
+aggregate_prod <- ecodata::common_tern %>% 
+    filter(!str_detect(Var, "Diet|Sum"))  %>% 
+  mutate(Island = word(Var, 1),
+         Var = word(Var, 3),
+         Island = plyr::mapvalues(Island, from = c("EER","JI","MR","OGI","PINWR","SINWR","STI"),
+                                  to = c("Eastern Egg Rock", "Jenny Island", "Matinicus Rock", "Outer Green Island", "Pond Island", "Seal Island","Stratton Island"))) %>%
+  group_by(Time) %>% 
+  dplyr::summarise(Mean = mean(Value, na.rm = T),
+                   SE = sd(Value, na.rm = T)/sqrt(n()),
+                   SD = sd(Value, na.rm = T),
+                   n = n()) %>% 
+  mutate(Mean = ifelse(is.na(SE),NA,Mean),
+         se.low = Mean - SE,
+         se.high = Mean + SE,
+         hline = mean(Mean, na.rm = T))
+
+aggregate_prod %>% 
+  ggplot() +
+#Highlight last ten years
+  annotate("rect", fill = shade.fill, alpha = shade.alpha,
+      xmin = x.shade.min , xmax = x.shade.max,
+      ymin = -Inf, ymax = Inf) +
+  geom_line(aes(x = Time, y = Mean), size = lwd-0.75) +
+  geom_point(aes(x = Time, y = Mean), size = pcex-0.75) +
+  geom_gls(aes(x = Time, y = Mean)) +
+  geom_errorbar(aes(x = Time,
+                    ymin = se.low,
+                  ymax = se.high), 
+                width = 0.25) +
+  scale_x_continuous(expand = c(0.01, 0.01),limits = c(1991,2018)) +
+  guides(color = FALSE) +
+  ggtitle("Common tern productivity") +
+  ylab(expression("Fledged chicks per nest")) +
+  xlab("Time")+
+  geom_hline(aes(yintercept = hline),
+           color = "black",
+           size = hline.size,
+           alpha = hline.alpha,
+           linetype = hline.lty) +
+  theme_ts()
+
+
+```
+
+```{r stacked-bar-prey-freq, fig.cap = "Prey frequencies in the diets of common tern observed at seven different islands in Gulf of Maine. Prey occurring in <5% of common tern diets were excluded for clarity.", fig.height = 4, fig.width = 8}
+
+prey_freq <- ecodata::common_tern %>% 
+  filter(str_detect(Var, "Diet"),
+         !str_detect(Var, "Sum")) %>% 
+    mutate(Island = word(Var, 1),
+         Var = word(Var, 4)) %>%
+    group_by(Var, Time) %>% 
+    dplyr::summarise(Value = sum(Value, na.rm = T)) %>% 
+    group_by(Time) %>% 
+    mutate(Freq = Value/sum(Value, na.rm = T)) %>% 
+    group_by(Var) %>% 
+  mutate(hline = mean(Freq, na.rm = T))
+
+diet_freq_bar <- prey_freq %>% 
+  filter(Freq > 0.05) %>% 
+  dplyr::rename(Prey = Var) %>% 
+  ggplot(aes(x = Time, y = Freq, fill = Prey)) +
+  geom_bar_interactive(aes(tooltip = paste(Prey,round(Freq,2),Time)),stat = "identity") +
+  viridis::scale_fill_viridis(discrete = TRUE) +
+  ggtitle("Prey frequency") +
+  ylab("Frequency of occurrence") +
+  theme_ts()
+
+
+diet_freq_bar <- girafe(ggobj = diet_freq_bar)
+diet_freq_bar <- girafe_options(diet_freq_bar, opts_zoom(max = 5) )
+diet_freq_bar
+```
+
+Increased butterfish in diets reflects the extension of this warm water species into GOM. Due to their thin, deep body form, butterfish are often difficult for small seabird chicks to ingest and swallow, causing chicks to starve and/or parent birds to increase foraging effort. GOM common tern diet diversity was mainly above the long term mean since 2006 (Fig. \ref{fig:tern-diet-diversity}). High diet diversity may be related to lower availability of preferred prey types such as herring and sand lance relative to increased availability of other species associated with warmer SST.
+
+```{r tern-diet-diversity, fig.cap = "Shannon diversity of common tern diets observed at nesting sites in Gulf of Maine. Diversity of common tern diets has been predominantly above the long-term mean since 2006.",fig.width = 5, fig.asp = 0.55}
+
+diet_div <- ecodata::common_tern %>% 
+  filter(str_detect(Var, "Diet"),
+         !str_detect(Var, "Sum")) %>% 
+  mutate(Island = word(Var, 1),
+         Var = word(Var, 4)) %>% 
+  group_by(Island, Time) %>%
+  dplyr::summarise(evenness = diversity(Value)/log(specnumber(Value)),
+                   shannon = diversity(Value),
+                   simpson = diversity(Value, index = "simpson")) %>% 
+  gather(.,Var,Value,-Island, -Time) %>% 
+  group_by(Var, Time) %>%
+  dplyr::summarize(Value = mean(Value, na.rm = T),
+                   sd = sd(Value, na.rm = T),
+                   n = n()) %>%
+  group_by(Var) %>% 
+  mutate(hline = mean(Value, na.rm = T))
+
+# evenness <- diet_div %>% 
+#   filter(Var == "evenness") %>% 
+# ggplot(aes(x = Time, y = Value)) +
+#       annotate("rect", fill = shade.fill, alpha = shade.alpha,
+#       xmin = x.shade.min , xmax = x.shade.max,
+#       ymin = -Inf, ymax = Inf) +
+#   geom_line() +
+#   geom_point() +
+#  # geom_gls() +
+#   scale_x_continuous(expand = c(0.01, 0.01),limits = c(1992,2018)) +
+#   ggtitle("Evenness")+
+#   ylab(expression("Evenness")) +
+#   xlab("")+
+#   geom_hline(aes(yintercept = hline),
+#            size = hline.size,
+#            alpha = hline.alpha,
+#            linetype = hline.lty) +
+#   theme_ts() 
+
+shannon <- diet_div %>% 
+  filter(Var == "shannon") %>% 
+ggplot(aes(x = Time, y = Value)) +
+      annotate("rect", fill = shade.fill, alpha = shade.alpha,
+      xmin = x.shade.min , xmax = x.shade.max,
+      ymin = -Inf, ymax = Inf) +
+  geom_line() +
+  geom_point() +
+  #geom_gls() +
+  scale_x_continuous(expand = c(0.01, 0.01),limits = c(1992,2018)) +
+  ggtitle("Common tern diet diversity")+
+  ylab(expression("Shannon Diversity")) +
+  xlab("")+
+  geom_hline(aes(yintercept = hline),
+           size = hline.size,
+           alpha = hline.alpha,
+           linetype = hline.lty) +
+  theme_ts() 
+
+shannon 
+```
 
 \newpage
 
