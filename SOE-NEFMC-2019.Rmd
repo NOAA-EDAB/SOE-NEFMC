@@ -159,7 +159,7 @@ mng_obj <- data.frame("Objective Categories" = c("Seafood Production",
 
 knitr::kable(mng_obj,
       col.names = c("Objective Categories","Indicators reported here"),
-      caption = "Established ecosystem-scale objectives in the Mid-Atlantic Bight",
+      caption = "Established ecosystem-scale objectives in New England",
       #align = 'c',
       booktabs = T) %>%
   kable_styling(latex_options = "hold_position", "scale_down") %>%
@@ -177,42 +177,20 @@ Despite mostly meeting fishery management objectives at the single species level
 ## Commercial sector (MAB)
 Seafood landings overall and for MAFMC managed species are declining (Fig. \ref{fig:total-landings}). Seafood landings for feeding guilds are also stable or declining (Fig. \ref{fig:comm-landings}), with the exception of a long term increase in MAFMC managed benthivores (scup, black sea bass, and tilefish). In 2018, landings of MAFMC managed planktivores increased to account for nearly all planktivore landings in the MAB, likely due to increased squid and decreased Atlantic herring landings.
 
-```{r total-landings, fig.cap = paste0("Total commercial seafood landings (black) shown with ",region," managed seafood landings (red)."), fig.width = 5, fig.asp = 0.45}
-#Get data for plotting
-
-#Managed landings
-managed_landings <- ecodata::comdat  %>%
-  filter(str_detect(Var, paste0(council_abbr," managed species - Landings weight|JOINT managed species - Landings weight")),
-         !str_detect(Var, "Other"),
-         Time >= 1986,
-         EPU == epu_abbr)
-
-#Total landings
-total_landings <- ecodata::comdat  %>%
-  filter(!str_detect(Var, "managed species"),
-         !str_detect(Var, "Other"),
-         str_detect(Var, "Landings"),
-         Time >= 1986,
-         EPU == epu_abbr)
-
+```{r total-landings-ne, fig.cap = paste0("Total commercial seafood landings (black) shown with NEFMC managed seafood landings (red) in Gulf of Maine (left) and Georges Bank (right)."), fig.width = 8, fig.asp = 0.35}
 total_landings_agg <- total_landings %>%
-  group_by(Time) %>%
+  group_by(EPU,Time) %>%
   dplyr::summarise(Value = sum(Value)) %>% 
   mutate(Var = "Total",hline = mean(Value))
 managed_landings_agg <- managed_landings %>%
-  group_by(Time) %>%
+  group_by(EPU,Time) %>%
   dplyr::summarise(Value = sum(Value)) %>% 
   mutate(Var = "Managed",hline = mean(Value))
 
-landings_agg <- rbind(total_landings_agg, managed_landings_agg)
+landings_agg <- rbind(total_landings_agg, managed_landings_agg) 
 
-#Define constants for figure plot
-x.shade.max <- 2018
-x.shade.min <- 2009
-series.col <- c("indianred","black")
-
-
-ggplot(data = landings_agg)+
+gom_total <- landings_agg %>% filter(EPU == "GOM") %>% 
+ggplot()+
   
   #Highlight last ten years
   annotate("rect", fill = shade.fill, alpha = shade.alpha,
@@ -236,11 +214,59 @@ ggplot(data = landings_agg)+
            size = hline.size,
            alpha = hline.alpha,
            linetype = hline.lty) +
-    theme_ts()
+    theme_ts() +
+  ggtitle("Gulf of Maine")
+
+gb_total <- landings_agg %>% filter(EPU == "GB") %>% 
+ggplot()+
+  
+  #Highlight last ten years
+  annotate("rect", fill = shade.fill, alpha = shade.alpha,
+      xmin = x.shade.min , xmax = x.shade.max,
+      ymin = -Inf, ymax = Inf) +
+  geom_gls(aes(x = Time, y = Value,
+               group = Var),
+             alpha = trend.alpha, size = trend.size) +
+  geom_line(aes(x = Time, y = Value, color = Var), size = lwd) +
+  geom_point(aes(x = Time, y = Value, color = Var), size = pcex) +
+
+  scale_y_continuous(labels = function(l){trans = l / 1000})+
+  scale_x_continuous(breaks = seq(1985, 2015, by = 5), expand = c(0.01, 0.01)) +
+  scale_color_manual(values = series.col, aesthetics = "color")+
+  guides(color = FALSE) +
+  ylab(expression("Landings (10"^3*"metric tons)")) +
+
+  geom_hline(aes(yintercept = hline,
+               
+               color = Var),
+           size = hline.size,
+           alpha = hline.alpha,
+           linetype = hline.lty) +
+    theme_ts() +
+  ggtitle("Georges Bank")
+
+cowplot::plot_grid(gom_total, gb_total, ncol = 2)
 
 ```
 
-```{r comm-landings, fig.height=8, warning=F, fig.width = 5, fig.cap = paste0(council_abbr," managed species landings (red) and total commercial landings (black) by feeding guild.")}
+
+```{r comm_landings-ne,warning=F, fig.width = 8, fig.height = 9,fig.cap = paste0(council_abbr," managed species landings (red) and total commercial landings (black) by feeding guild in Gulf of Maine (left) and Georges Bank (right).")}
+#Get data for plotting
+
+#Managed landings
+managed_landings <- ecodata::comdat  %>%
+  filter(str_detect(Var, paste0(council_abbr," managed species - Landings weight|JOINT managed species - Landings weight")),
+         !str_detect(Var, "Other"),
+         Time >= 1986,
+         EPU %in% epu_abbr)
+
+#Total landings
+total_landings <- ecodata::comdat  %>%
+  filter(!str_detect(Var, "managed species"),
+         !str_detect(Var, "Other"),
+         str_detect(Var, "Landings"),
+         Time >= 1986,
+         EPU %in% epu_abbr)
 
 #Assign feeding guild column for plotting with ggplot
 landings <- rbind(managed_landings, total_landings) %>%
@@ -251,17 +277,23 @@ landings <- rbind(managed_landings, total_landings) %>%
   mutate(feeding.guild = factor(feeding.guild, levels = feeding.guilds))
 
 #Add JOINT landings to MANAGED landings and remove
-landings[landings$Var ==  "Piscivore managed",]$Value <- landings[landings$Var ==  "Piscivore managed",]$Value + landings[landings$Var ==  "Piscivore joint",]$Value
+landings[landings$Var ==  "Piscivore managed" & landings$EPU == "GOM",]$Value <- landings[landings$Var ==  "Piscivore managed" & landings$EPU == "GOM",]$Value + landings[landings$Var ==  "Piscivore joint" & landings$EPU == "GOM",]$Value
+
+landings[landings$Var ==  "Piscivore managed" & landings$EPU == "GB",]$Value <- landings[landings$Var ==  "Piscivore managed" & landings$EPU == "GB",]$Value + landings[landings$Var ==  "Piscivore joint" & landings$EPU == "GB",]$Value
+
 landings <- landings %>%
   filter(Var != "Piscivore joint")  %>% 
-  group_by(Var) %>% 
+  group_by(Var, EPU) %>% 
   mutate(hline = mean(Value))
   
-#Define constants for figure plot
-x.shade.max <- 2018
-x.shade.min <- 2009
 series.col <- c("indianred","black")
 
+#Create dataframe for label locations
+label_loc <- landings %>%
+  group_by(feeding.guild) %>%
+  dplyr::summarise(yloc = max(Value)*0.95,
+                   xloc = min(Time)) %>% 
+  mutate(label = LETTERS[1:5])
 
 #facet names for titles
 facet_names <- list("Apex predators" = expression("Apex predators"),
@@ -270,7 +302,8 @@ facet_names <- list("Apex predators" = expression("Apex predators"),
                     "Benthivores" = expression("Benthivores"),
                     "Benthos" = expression("Benthos"))
 
-ggplot(data = landings,aes(x = Time, y = Value, color = grouping)) +
+gom_landings <- landings %>% filter(EPU == "GOM") %>% 
+  ggplot(aes(x = Time, y = Value, color = grouping)) +
   
   #Highlight last ten years
   annotate("rect", fill = shade.fill, alpha = shade.alpha,
@@ -301,33 +334,71 @@ ggplot(data = landings,aes(x = Time, y = Value, color = grouping)) +
   scale_x_continuous(breaks = seq(1985, 2015, by = 5), expand = c(0.01, 0.01)) +
   ylab(expression("Landings, 10"^3*"metric tons")) +
   theme_facet() +
-  theme(strip.text=element_text(hjust=0))
+  theme(strip.text=element_text(hjust=0)) +
+  ggtitle("Gulf of Maine")
 
+gb_landings <- landings %>% filter(EPU == "GB") %>% 
+  ggplot(aes(x = Time, y = Value, color = grouping)) +
+  
+  #Highlight last ten years
+  annotate("rect", fill = shade.fill, alpha = shade.alpha,
+      xmin = x.shade.min , xmax = x.shade.max,
+      ymin = -Inf, ymax = Inf) +
+  
+  #Test for trend and add lines
+  geom_gls(aes(x = Time, y = Value,
+               group = Var)) +
+  
+  #Add time series
+  geom_line(size = lwd) +
+  geom_point(size = pcex) +
+  scale_color_manual(values = series.col, aesthetics = "color")+
+  guides(color = FALSE) +
+  geom_hline(aes(yintercept = hline,
+                 color = grouping,
+                 size = grouping),
+             size = hline.size,
+             alpha = hline.alpha,
+             linetype = hline.lty)+
+
+  #Facet 
+  facet_wrap(feeding.guild~.,scales = "free_y", labeller = label, ncol = 1) +
+  
+  #Axis and theme
+  scale_y_continuous(labels = function(l){trans = l / 1000})+
+  scale_x_continuous(breaks = seq(1985, 2015, by = 5), expand = c(0.01, 0.01)) +
+  ylab(expression("Landings, 10"^3*"metric tons")) +
+  theme_facet() +
+  theme(strip.text=element_text(hjust=0)) +
+  ggtitle("Georges Bank")
+
+cowplot::plot_grid(gom_landings, gb_landings, ncol = 2)
 
 ```
 
 
 Revenue for MAFMC managed species has also declined over the long term (Fig. \ref{fig:comm-revenue}), with recent decreases in total revenue driven by decreased landings volume outweighing increased prices for benthos, planktivores, and other species groups (Fig. \ref{fig:bennet}).
 
-```{r comm-revenue, fig.width = 5, fig.asp = 0.45, fig.cap = "Total revenue for the region (black) and revenue from MAFMC managed species (red)."}
+```{r comm-revenue-ne, fig.cap = "Total commercial revenue (black) and revenue from NEFMC managed species (red) in Gulf of Maine (left) and Georges Bank (right).", fig.width = 8, fig.asp = 0.35}
 
 #Filtering and aggregation step
 rev_agg <- ecodata::comdat %>% 
   filter(str_detect(Var, "Revenue"),
-         !str_detect(Var, "prop|Other|NEFMC"), #Remove proportions, "Other" category species, NEFMC managed species in MAB
-         EPU == epu_abbr,
+         !str_detect(Var, "prop|Other|MAFMC"), #Remove proportions, "Other" category species, NEFMC managed species in MAB
+         EPU %in% epu_abbr,
          Time >= 1986) %>% 
   mutate(Status = ifelse(str_detect(Var, "Revenue weight"), 
                          "Managed","Total")) %>% #Create groups for aggregation
-  group_by(Status, Time) %>% 
+  group_by(EPU,Status, Time) %>% 
   dplyr::summarise(Total = sum(Value)) %>% 
-  group_by(Status) %>% 
+  group_by(EPU,Status) %>% 
   mutate(hline = mean(Total))
 
 series.col <- c("indianred","black")
 
 #Plotting
-ggplot(data = rev_agg) +
+gom_rev_agg <- rev_agg %>% filter(EPU == "GOM") %>% 
+ggplot() +
   
   #Highlight last ten years
   annotate("rect", fill = shade.fill, alpha = shade.alpha,
@@ -344,20 +415,52 @@ ggplot(data = rev_agg) +
   #axes
   scale_y_continuous(labels = function(l){trans = l / 1000000})+
   scale_x_continuous(breaks = seq(1985, 2015, by = 5), expand = c(0.01, 0.01)) +
-      scale_color_manual(values = series.col, aesthetics = "color")+
+  scale_color_manual(values = series.col, aesthetics = "color")+
   guides(color = FALSE) +
-  ggtitle("Total revenue") +
   ylab(expression("Revenue (10"^6*"USD)")) +
   geom_hline(aes(yintercept = hline,
                color = Status),
            size = hline.size,
            alpha = hline.alpha,
            linetype = hline.lty) +
-  theme_ts()
+  theme_ts() +
+    ggtitle("Gulf of Maine")
+
+gb_rev_agg <- rev_agg %>% filter(EPU == "GB") %>% 
+ggplot() +
+  
+  #Highlight last ten years
+  annotate("rect", fill = shade.fill, alpha = shade.alpha,
+      xmin = x.shade.min , xmax = x.shade.max,
+      ymin = -Inf, ymax = Inf)+  
+  
+  #lines
+  geom_gls(aes(x = Time, y = Total,
+               group = Status),
+             alpha = trend.alpha, size = trend.size) +
+  geom_line(aes(x = Time, y = Total, color = Status), size = lwd) +
+  geom_point(aes(x = Time, y = Total, color = Status), size = pcex) +
+
+  #axes
+  scale_y_continuous(labels = function(l){trans = l / 1000000})+
+  scale_x_continuous(breaks = seq(1985, 2015, by = 5), expand = c(0.01, 0.01)) +
+  scale_color_manual(values = series.col, aesthetics = "color")+
+  guides(color = FALSE) +
+  ylab(expression("Revenue (10"^6*"USD)")) +
+  geom_hline(aes(yintercept = hline,
+               color = Status),
+           size = hline.size,
+           alpha = hline.alpha,
+           linetype = hline.lty) +
+  theme_ts() +
+    ggtitle("Georges Bank")
+
+cowplot::plot_grid(gom_rev_agg, gb_rev_agg, ncol = 2)
 
 # rev_inline <- rev_agg %>% 
 #   dplyr::select(Status, Time, Total) %>% 
 #   spread(.,Status, Total) %>% 
+#   group_by(EPU) %>% 
 #   mutate(percent_managed = round(Managed/Total * 100)) %>% 
 #   filter(Time > latest_landings_data - 5, Time <= latest_landings_data) %>% 
 #   pull(percent_managed)
@@ -366,29 +469,49 @@ ggplot(data = rev_agg) +
 # max_rev_perc <- max(rev_inline)
 ```
 
-
-```{r bennet, fig.cap = paste0("Revenue change from the long-term mean in 2015 dollars (black), Price (PI), and Volume Indicators (VI) for commercial landings in the ",region,"."), fig.width = 6, fig.asp = 0.45}
+```{r bennet-ne, fig.cap = paste0("Revenue change from the long-term mean in 2015 dollars (black), Price (PI), and Volume Indicators (VI) for commercial landings in Gulf of Maine (left) and Georges Bank."), fig.height = 3, fig.width=8}
 
 #Filter data into two dataframes for plotting
 indicators <- ecodata::bennet %>% 
-  filter(EPU == epu_abbr,
+  filter(EPU %in% epu_abbr,
          Var %in% c("VI EPU aggregate",
                     "PI EPU aggregate")) %>% 
   mutate(Var, Var = plyr::mapvalues(Var, from = c("VI EPU aggregate","PI EPU aggregate"),
                                     to = c("Volume","Price")))
 
 revchange <- ecodata::bennet %>% 
-  filter(EPU == epu_abbr,
+  filter(EPU %in% epu_abbr,
          Var %in% c("REVCHANGE EPU aggregate"))
 
 #custom bar fill color (color-blind friendly)
 ind_fill <- c("#a6cee3", "#b2df8a")
 
 #limits
-y.lim <- c(-450,450)
+y.lim <- c(-350,350)
 
 #plot
-ggplot(data = indicators)+
+
+gom_bennet <- indicators %>% filter(EPU == "GOM") %>% 
+ggplot()+
+  
+  #Highlight last ten years
+  annotate("rect", fill = shade.fill, alpha = shade.alpha,
+      xmin = x.shade.min , xmax = x.shade.max,
+      ymin = -Inf, ymax = Inf)+
+  guides(color = F, fill = F)+
+  geom_bar(aes(x=Time, y= Value, fill = Var), stat="identity")+
+  scale_fill_manual(name = "Indicators", values = ind_fill) +
+  geom_line(data = revchange[revchange$EPU == "GOM",], aes(x = Time, y = Value, colour="$"))+
+  scale_colour_grey(name ="Revenue Change") +
+  ggtitle("Gulf of Maine")+
+  labs(y="Value $1,000,000 ($2015)") +
+  scale_x_continuous(breaks = seq(1965, 2015, by = 10), expand = c(0.01, 0.01)) +
+  scale_y_continuous(breaks = seq(y.lim[1], y.lim[2], by = 100), limits = y.lim, expand = c(0.01, 0.01)) +
+  theme_ts() +
+  theme(title = element_text(size = 10))
+
+gb_bennet <- indicators %>% filter(EPU == "GB") %>% 
+ggplot()+
   
   #Highlight last ten years
   annotate("rect", fill = shade.fill, alpha = shade.alpha,
@@ -397,31 +520,34 @@ ggplot(data = indicators)+
   
   geom_bar(aes(x=Time, y= Value, fill = Var), stat="identity")+
   scale_fill_manual(name = "Indicators", values = ind_fill) +
-  geom_line(data = revchange, aes(x = Time, y = Value, colour="$"))+
+  geom_line(data = revchange[revchange$EPU == "GB",], aes(x = Time, y = Value, colour="$"))+
   scale_colour_grey(name ="Revenue Change") +
-  ggtitle("Bennet Indicator")+
-  labs(y="Value $1,000,000 ($2015)") +
-  scale_x_continuous(breaks = seq(1985, 2015, by = 5), expand = c(0.01, 0.01)) +
+  ggtitle("Georges Bank")+
+  labs(y="") +
+  scale_x_continuous(breaks = seq(1965, 2015, by = 10), expand = c(0.01, 0.01)) +
   scale_y_continuous(breaks = seq(y.lim[1], y.lim[2], by = 100), limits = y.lim, expand = c(0.01, 0.01)) +
   theme_ts() +
   theme(title = element_text(size = 10))
+
+cowplot::plot_grid(gom_bennet, gb_bennet, ncol = 2, rel_widths = c(0.7,1))
 
 ```
 
 MAB fishing communities are heavily reliant on shellfish species (especially scallops) for the majority of revenue. This reliance likely represents heightened risk to fishing communities, particularly along the coasts of New York, New Jersey, and Virginia in ports which are highly engaged and reliant on commercial fishing. This risk is heightened by the high climate vulnerability of shellfish to ocean acidification (Fig. \ref{fig:MAB-comm-reliance-maps-outlined}).
 
-```{r MAB-comm-reliance-maps-outlined, fig.height = 8, fig.cap = "Commercial engagement (total pounds landed, value landed, commercial permits and commercial dealers in a community) and reliance (per capita engagement) based on 2016 landings and the ACS running average of 2012-2016 census data."}
-xmin = -78
-xmax = -70
-ymin = 35
-ymax = 42
+```{r NE-comm-reliance-maps-outlined, fig.height = 8, fig.cap = "Commercial engagement (total pounds landed, value landed, commercial permits and commercial dealers in a community) and reliance (per capita engagement) based on 2016 landings and the ACS running average of 2012-2016 census data."}
+# Set lat/lon window for maps
+xmin = -76
+xmax = -66
+ymin = 40
+ymax = 46
 xlims <- c(xmin, xmax)
 ylims <- c(ymin, ymax)
 
 biv_col <- c("4" = "#ca0020", "3" = "#f4a582", "2" = "grey", "1" = "#92c5de", "0" = "#0571b0")
 
 eng_rel <- ecodata::eng_rel %>%
-    filter(PRIMARY_LATITUDE < 42) %>% 
+    filter(PRIMARY_LATITUDE > 40) %>% 
   dplyr::rename(comeng = ComEng_NE16_ct,
                 comrel = ComRel_NE16_ct,
                 receng = RecEng_NE16_ct,
@@ -469,62 +595,12 @@ ggplot() +
 
 ```
 
-Aquaculture production in the Mid-Atlantic is dominated by shellfish as well. Virginia continues to lead oyster production in the US, though numbers sold stabilized in 2017 after a long term increase. Reported concerns for Virginia growers within the past two years include an increase in wild spat fall preventing farmed oysters from entering higher-value markets. Maryland and New Jersey oyster production continues to increase (Fig. \ref{fig:oyster-aqua}).
-
-```{r oyster-aqua, fig.width = 5, fig.asp = 0.45, fig.cap = "Oyster aquaculture production in terms of number of oysters sold from Virginia, Maryland, and New Jersey."}
-
-aqua <- ecodata::aquaculture %>% 
-  group_by(Var) %>% 
-  mutate(hline = mean(Value)) %>%
-  ungroup() %>% 
-  mutate(Var = plyr::mapvalues(Var, from = c("md oyster harvest","nj oyster harvest","va oyster harvest"),
-                                                    to  = c("MD","NJ","VA"))) %>%
-  dplyr::rename(State = Var)
-
-aqua$State <- factor(aqua$State, levels = c("VA","MD","NJ"))
-
-
-ggplot() + 
-  geom_segment(aes(x=2005,xend=2017,y=mean(aquaculture[aquaculture$Var == "va oyster harvest",]$Value),
-                   yend=mean(aquaculture[aquaculture$Var == "va oyster harvest",]$Value)),
-               size = hline.size,
-           alpha = hline.alpha,
-           linetype = hline.lty,
-           color = "#1b9e77",
-           inherit.aes = F) +
-  geom_segment(aes(x=2012,xend=2016,y=mean(aquaculture[aquaculture$Var == "nj oyster harvest",]$Value),
-                   yend=mean(aquaculture[aquaculture$Var == "nj oyster harvest",]$Value)),
-               size = hline.size,
-           alpha = hline.alpha,
-           linetype = hline.lty,
-           color = "#d95f02",
-           inherit.aes = F) +
-  geom_segment(aes(x=2012,xend=2017,y=mean(aquaculture[aquaculture$Var == "md oyster harvest",]$Value),
-                   yend=mean(aquaculture[aquaculture$Var == "md oyster harvest",]$Value)),
-               size = hline.size,
-           alpha = hline.alpha,
-           linetype = hline.lty,
-           color = "#7570b3",
-           inherit.aes = F) +
- #Highlight last ten years
-  geom_line(data = aqua, aes(x = Time, y = Value, color = State), size = lwd) +
-  geom_point(data = aqua,aes(x = Time, y = Value, color = State), size = pcex) +
-  scale_color_manual(values = c(VA = "#1b9e77", MD = "#7570b3",NJ = "#d95f02")) +
-  scale_x_continuous(breaks = seq(2005,2018,3),expand = c(0.01, 0.01)) +
-  scale_y_continuous(labels = function(l){trans = l / 1000000})+
-  ggtitle("Oyster harvest")+
-  ylab(expression("Oysters sold (10"^6*" n)")) +
-  xlab("")+
-  theme_ts()
-
-```
-
 Commercial fleet diversity indices were updated with 2017 data. Current diversity remains near the long term average. 
 
 ## Recreational sector (Mid-Atlantic states)
 All recreational indicators have been updated with new Marine Recreational Information Program (MRIP) data, and new indicators for recreational diversity are presented in this report at the request of the MAFMC. In contrast to the commercial seafood production trends, recreational seafood production shows an increasing trend since the mid-1990s with the updated MRIP data (Fig. \ref{fig:rec-landings}))
 
-```{r rec-landings, fig.cap = paste0("Total recreational seafood harvest in the ",region," region."), fig.width = 5, fig.asp = 0.45}
+```{r rec-landings-ne, fig.cap = paste0("Total recreational seafood harvest in ",region,"."), fig.width = 5, fig.asp = 0.45}
 
 landings_rec <- ecodata::recdat %>% 
   filter(EPU == region_abbr,
@@ -544,12 +620,11 @@ ggplot(data = landings_rec)+
              alpha = trend.alpha, size = trend.size) +
   geom_line(aes(x = Time, y = Value, color = Var), size = lwd) +
   geom_point(aes(x = Time, y = Value, color = Var), size = pcex) +
-
+  ggtitle("NE Recreational seafood harvest")+
   scale_y_continuous(labels = function(l){trans = l / 1000000})+
   scale_x_continuous(breaks = seq(1985, 2015, by = 5), expand = c(0.01, 0.01)) +
   scale_color_manual(values = series.col, aesthetics = "color")+
   guides(color = FALSE) +
-  ggtitle("Recreational seafood harvest") +
   ylab(expression("Fish caught (10"^6*"n)")) +
 
   geom_hline(aes(yintercept = hline,
@@ -571,11 +646,11 @@ recdat <- ecodata::recdat %>%
   group_by(Var) %>% 
   mutate(hline = mean(Value))
 
-ylim_re <- c(2e7, 7e7)
+ylim_re <- c(5e6, 30e6)
 ylim_rd <- c(1.75,2.75)
-ylim_ra  <- c(1e6, 3.5e6)
+ylim_ra  <- c(0, 2e6)
 
-# #Create dataframe for label locations
+#Create dataframe for label locations
 # label_loc <- data.frame(xloc = min(recdat$Time)+0.3,
 #                         yloc = c(ylim_re[2]*0.975,
 #                                  ylim_rd[2]*0.975,
@@ -586,8 +661,10 @@ ylim_ra  <- c(1e6, 3.5e6)
 #                                 "Recreational anglers"))
 
 series.col <- "black"
-# x.shade.min <- max(recdat$Time, na.rm = T) - 9
-# x.shade.max <- max(recdat$Time, na.rm = T)
+x.shade.min <- max(recdat$Time, na.rm = T) - 9
+x.shade.max <- max(recdat$Time, na.rm = T)
+
+series.col <- "black"
 
 rec_effort <- recdat %>% 
   filter(Var == "Recreational Effort") %>% 
@@ -596,7 +673,7 @@ rec_effort <- recdat %>%
   annotate("rect", fill = shade.fill, alpha = shade.alpha,
       xmin = x.shade.min , xmax = x.shade.max,
       ymin = -Inf, ymax = Inf) +
-  #label
+    #label
   # annotate("text", 
   #          x = label_loc[label_loc$Var == "Recreational Effort",]$xloc,
   #          y = label_loc[label_loc$Var == "Recreational Effort",]$yloc,
@@ -607,13 +684,13 @@ rec_effort <- recdat %>%
              alpha = trend.alpha, size = trend.size) +
   geom_line(aes(x = Time, y = Value, color = Var), size = lwd) +
   geom_point(aes(x = Time, y = Value, color = Var), size = pcex) +
-  
+
   scale_x_continuous(expand = c(0.01, 0.01)) +
   scale_y_continuous(labels = function(l){trans = l / 1000000}, limits = ylim_re)+
   scale_color_manual(values = series.col, aesthetics = "color")+
   guides(color = FALSE) +
-  ggtitle("Recreational effort")+
-  ylab(expression("Days fished (10"^6*" N)")) +
+  ggtitle("Recreational effort") +
+  ylab(expression("Days fished (10"^6*" days)")) +
   xlab("")+
   geom_hline(aes(yintercept = hline,
                color = Var),
@@ -621,7 +698,6 @@ rec_effort <- recdat %>%
            alpha = hline.alpha,
            linetype = hline.lty) +
   theme_ts() 
-
 
 
 rec_anglers <- recdat %>% 
@@ -641,11 +717,12 @@ rec_anglers <- recdat %>%
              alpha = trend.alpha, size = trend.size) +
   geom_line(aes(x = Time, y = Value, color = Var), size = lwd) +
   geom_point(aes(x = Time, y = Value, color = Var), size = pcex) +
+
   scale_x_continuous(expand = c(0.01, 0.01)) +
   scale_y_continuous(labels = function(l){trans = l / 1000000}, limits = ylim_ra)+
   scale_color_manual(values = series.col, aesthetics = "color")+
   guides(color = FALSE) +
-  ggtitle("Recreational anglers") +
+  ggtitle("Recreational anglers")+
   ylab(expression("Anglers (10"^6*" n)")) +
   xlab("Time")+
   geom_hline(aes(yintercept = hline,
@@ -676,6 +753,7 @@ rec_div <- recdat %>%
   annotate("rect", fill = shade.fill, alpha = shade.alpha,
       xmin = x.shade.min , xmax = x.shade.max,
       ymin = -Inf, ymax = Inf) +
+    #label
   # annotate("text", 
   #          x = label_loc[label_loc$Var == "Recreational fleet effort diversity across modes",]$xloc,
   #          y = label_loc[label_loc$Var == "Recreational fleet effort diversity across modes",]$yloc,
@@ -699,6 +777,7 @@ rec_div <- recdat %>%
            alpha = hline.alpha,
            linetype = hline.lty) +
   theme_ts()
+
 
 rec_div_catch <- recdat %>% 
   filter(Var == "Recreational Diversity of Catch") %>% 
@@ -731,7 +810,6 @@ rec_div_catch <- recdat %>%
            linetype = hline.lty) +
   theme_ts()
 
-
 cowplot::plot_grid(#rec_effort, 
                    rec_div, 
                    #rec_anglers, 
@@ -745,7 +823,7 @@ cowplot::plot_grid(#rec_effort,
 
 Recreational fishing is important to many Mid-Atlantic communities, particularly on Long Island, the  New Jersey shoreline and the Delaware Bay. Communities that are most socially and economically dependent (both engaged and reliant) on recreational fishing may face additional risk due this downward shift in diversity of recreational opportunity and species catch (Fig. \ref{fig:MAB-rec-engage}).
 
-```{r MAB-rec-engage, fig.height = 8, fig.cap = "Recreational engagement (shore, private vessel and for-hire recreational fishing in a community) and reliance (per capita engagement) based on 2016 landings and the ACS running average of 2012-2016 census data."}
+```{r NE-rec-engage, fig.height = 8, fig.cap = "Recreational engagement (shore, private vessel and for-hire recreational fishing in a community) and reliance (per capita engagement) based on 2016 landings and the ACS running average of 2012-2016 census data."}
 (rec <- 
   eng_rel %>% 
   dplyr::select(receng, recrel, Latitude, Longitude) %>% 
