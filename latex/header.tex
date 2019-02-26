@@ -1,0 +1,57 @@
+% Set up the fonts
+\usepackage{fontspec}
+%\setmainfont{Garamond}
+%\setmonofont{Calibri}
+
+% Set the language for 508
+\hypersetup{
+  pdftitle = {title},
+  pdflang = en-US}
+
+% Add accessibility support from http://www.richschwinn.com/accessibility
+\RequirePackage{accsupp}
+\RequirePackage{pdfcomment}
+\newcommand{\AccTool}[2]{\BeginAccSupp{method=pdfstringdef,unicode,Alt={{#1}}}\pdftooltip{{#2}}{{#1}}\EndAccSupp{}}
+
+
+% Set up the headers and footers
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{ifthen}
+\usepackage{everypage}
+\usepackage{float}
+
+% Avoid struggling over figure and table float in Rmarkdown
+\let\origfigure\figure
+\let\endorigfigure\endfigure
+\renewenvironment{figure}[1][2] {
+    \expandafter\origfigure\expandafter[H]
+} {
+    \endorigfigure
+}
+
+\let\origtable\table
+\let\endorigtable\endtable
+\renewenvironment{table}[1][2] {
+    \expandafter\origtable\expandafter[H]
+} {
+    \endorigtable
+}
+
+
+\pagestyle{fancy}
+\fancyhf{}
+\setlength\headheight{40pt}
+\lhead{\texttt{\emph{State of the Ecosystem}} \\ \texttt{\emph{Gulf of Maine and Georges Bank}}}
+\cfoot{\thepage}
+
+\AddEverypageHook{%
+   \ifthenelse{\value{page}=1}%
+     {\rhead{\includegraphics[width=40pt]{NOAA_logo.png} \\ \texttt{\emph{Published March 3, 2018}}}
+     }%
+     {\rhead{}
+     }
+}
+
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
