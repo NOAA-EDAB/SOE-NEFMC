@@ -1,6 +1,6 @@
-# SOE-MAFMC
+# SOE-NEFMC
 
-This repository contains the files necessary to produce the State of the Ecosystem report for the Mid-Atlantic Fishery Management Council. The repository is current for the 2019 report.
+This repository contains the files necessary to produce the State of the Ecosystem report for the New England Fishery Management Council. The repository is current for the 2019 report.
 
 Please see the associated package [ecodata](https://github.com/NOAA-EDAB/ecodata) for necessary data files.
 
