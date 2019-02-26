@@ -1,5 +1,5 @@
 ---
-title: "State of the Ecosystem 2019: Mid-Atlantic"
+title: "State of the Ecosystem 2019: New England"
 output: 
   pdf_document:
     includes:
@@ -52,14 +52,14 @@ gis.dir <- here("gis")
 
 #General inline text input for report
 #Council
-council <- "Mid-Atlantic Fishery Management Council"
-council_abbr <- "MAFMC"
+council <- "New England Fishery Management Council"
+council_abbr <- "NEFMC"
 
-#Region identifiers
-epu <- "Mid-Atlantic Bight"
-epu_abbr <- "MAB"
-region <- "Mid-Atlantic"
-region_abbr <- "MA" #Some commercial data organized by "MA" or "NE" regions, not by EPU 
+#Region identifiers--not used for NE figs now, commented out
+# epu <- "Mid-Atlantic Bight"
+# epu_abbr <- "MAB"
+# region <- "Mid-Atlantic"
+# region_abbr <- "MA" #Some commercial data organized by "MA" or "NE" regions, not by EPU 
 
 
 ```
