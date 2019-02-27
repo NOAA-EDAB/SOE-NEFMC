@@ -1079,7 +1079,7 @@ shannon
 Fishery management aims to keep individual harvested species within population ranges where productivity is maximized over the long-term. However, these managed species represent a subset of the full ecosystem, interacting with a wider range of predators and prey and relying on diverse habitats. Indicators in this section summarize single species status as well as tracking trends for broad categories of fish within the ecosystem, including changes in biomass, distribution, condition, and diversity. Changes in overall predator and prey levels as well as distribution have implications for managed fish productivity, fishing operations, and regional fishery management. 
 
 ## Stock status and aggregate distribution (coastwide)
-Single species management objectives of maintaining biomass above minimum thresholds and fishing mortality below limits are being met for all but one MAFMC managed species, though the status of four stocks is unknown (Fig. \ref{fig:stock-status}).
+Fishery management objectives are being met for 20 stocks at the single species level, but 9 stocks are below biomass (B)  thresholds (Fig. \ref{fig:NE-stock-status}). Barndoor, clearnose, little, rosette, smooth, and winter skate stocks have good B and fishing mortality (F) status according to index based methods, but fishing mortality rates cannot be calculated for this plot. Five stocks have low B status but good F status: thorny skates, Atlantic wolffish, ocean pout, Southern New England winter flounder and Northern windowpane flounder. Another three stocks have low B status with indeterminate F status: GB Atlantic cod, halibut, and witch flounder. Four stocks have F rates exceeding the limits and low B status:  GOM cod, southern red hake, Southern New England and Cape Cod/GOM yellowtail flounders. Assessment-based status for GB yellowtail flounder is unknown, but NMFS-determined stock status is overfished with  overfishing occurring. The remaining five stocks have unknown status for B and F.
 
 ```{r NE-stock-status, warning=F, fig.cap = paste0("Summary of single species status for ",council_abbr," and jointly managed stocks. \\label{stock-status}"), fig.width = 8, fig.asp = 0.65}
 
@@ -1167,7 +1167,6 @@ ggplot(data = stock_status) +
   theme_ts()
 ```
 
-
 Changes in the distribution of managed fish species continue, with aggregate trends on the entire Northeast Shelf towards the northeast and generally into deeper water (Fig. \ref{fig:spec-dist}). These shifts will place increasing pressure on a management system based around stable species distributions. 
 
 ```{r spec-dist,fig.width = 5, fig.asp = 1.25, fig.cap = "Aggregate species distribution metrics for species in the Northeast Large Marine Ecosystem."}
@@ -1243,8 +1242,8 @@ asd + depth + dtc + plot_layout(ncol = 1)
 
 ```
 
-## Survey biomass (MAB)
-As in past years, piscivore trends differ by season, with a significant long term decline in fall and an increase in spring (Fig. \ref{fig:nefsc-biomass-mab}). However, nearshore survey indices (Northeast Area Monitoring and Assessment Program; NEAMAP) suggest a decline for piscivores in spring. Surveys in both seasons may be sampling different groups of dominant species; for example the divergence in spring piscivores between offshore and NEAMAP surveys may represent the difference in inshore versus offshore distribution of spiny dogfish. Overall the NEAMAP surveys show similar patterns to offshore surveys for planktivores and benthivores, although with different magnitudes, perhaps reflecting seasonal importance of nearshore habitats. These patterns will be explored in more detail in future analyses. 
+## Survey biomass (GOM and GB)
+Biomass across trophic levels shows similar trends between the Gulf of Maine and Georges Bank offshore, but nearshore trends differ for some groups. For both the GOM and GB, there are long term increasing trends in aggregate NEFSC (offshore) survey biomass for Piscivores, Planktivores and Benthos in the fall and for Planktivores in the spring (Figs. \ref{fig:gom-biomass-ne}, \ref{fig:gb-biomass-ne}). GB spring Benthos are also increasing over the long term. However, there are some notable departures from these trends recently. 
 
 ```{r gom-biomass-ne, fig.cap = paste0("Fall (left) and spring (right) NEFSC surveyed biomass in the Gulf of Maine."), fig.width=8, fig.asp = 0.75}
 total_surv <- nefsc_survey %>% 
@@ -1352,6 +1351,8 @@ gb_surv
 
 ```
 
+Benthivore biomass catch in both offshore surveys during the fall has declined for the third straight year, with more subtle recent downward trends in the inshore surveys (Figs \ref{fig:MA-inshore}, \ref{fig:menh-survey}). Both the spring and fall biomass of Benthivores from the offshore survey are down from their 2015 highs. Change in haddock catch is the largest contributor to these fluctuations. 
+ 
 ```{r MA-inshore, fig.width=8, fig.asp = 0.75, fig.cap = "Fall (left) and spring (right) surveyed biomass from the MA state inshore bottom trawl survey."}
 mass <- mass_inshore_survey %>% 
   filter(str_detect(Var, "Index")) %>% 
@@ -1461,8 +1462,11 @@ menh %>%
 
 ```
 
+Fall offshore benthivore levels remain high in the Gulf of Maine (Fig. \ref{fig:gom-biomass-ne}), however, the New Hampshire/Maine survey shows a recent decline (Fig. \ref{fig:menh-survey})). Fall offshore planktivore levels returned towards the time series mean in the Gulf of Maine after two high years.
 
-The proportion of NEFMC managed benthivore species (righteye flounders, haddock) has declined over time in Mid-Atlantic waters according to bottom trawl surveys (Fig. \ref{fig:NEFMC-in-MAB}), while the proportion of MAFMC managed planktivore (squids, mackerel and butterfish) species has been increasing in New England waters in both surveys and landings (Fig. \ref{fig:MAFMC-in-NE}, Fig. \ref{fig:comm-landings}). 
+All fall aggregate groups on Georges Bank are at or below their time series mean for the offshore survey (Fig. \ref{fig:gb-biomass-ne}). Spring benthos biomass levels remain high on Georges Bank.
+
+The proportion of NEFMC managed benthivore species (righteye flounders, haddock) has declined over time in Mid-Atlantic waters according to bottom trawl surveys (Fig. \ref{fig:NEFMC-in-MAB}), while the proportion of MAFMC managed planktivore (squids, mackerel and butterfish) species has been increasing in New England waters in both surveys and landings (Fig. \ref{fig:MAFMC-in-NE}, Fig. \ref{fig:comm-landings-ne}). 
 
 ```{r NEFMC-in-MAB, fig.width = 7, fig.asp = 0.35, fig.cap = "New England-managed survey proportion of MAB benthivores."}
 
@@ -1600,10 +1604,11 @@ gom_mafmc_props + gb_mafmc_props + plot_layout(ncol = 1)
 
 ```
 
-Other observations corroborate these survey trends. For example, butterfish have been observed in Gulf of Maine common tern fledgling diets between 2009-2011 and again in 2018 (see New England report). The downward trend in recreational species diversity in the Mid-Atlantic (Fig. \ref{fig:rec-div}) contrasts with an increase in recreational species diversity over time in New England (see New England report), although it is unclear to what extent this result is due to the aggregation of SAFMC species in the indicator itself. As temperature and ocean circulation indicators trend toward extremes (next section), fishery management will likely face continued changes in species distribution.
+Other observations corroborate these survey trends. For example, butterfish have been observed in Gulf of Maine common tern fledgling diets between 2009-2011 and again in 2018 (Fig. \ref{fig:stacked-bar-prey-freq}). The downward trend in recreational species diversity in the Mid-Atlantic (see Mid-Atlantic report) contrasts with an increase in recreational species diversity over time in New England (Fig. \ref{fig:rec-div}), although it is unclear to what extent this result is due to the aggregation of SAFMC species in the indicator itself. As temperature and ocean circulation indicators trend toward extremes (next section), fishery management will likely face continued changes in species distribution.
 
-## Fish condition (coastwide, MAFMC managed stocks)
-Fish condition is measured as the weight at a given length in relation to the average - a measure of 'fatness' and a factor that influences fecundity. This information is from fall NEFSC bottom trawl surveys. Overall, condition factor has been mixed for the past decade, in contrast to overall high condition up to 2000 and overall lower condition for 2001-2010 (Fig. \ref{fig:mab-cf}). The timing of these shifts is similar to shifts in the small-large zooplankton indicator (Fig. \ref{fig:MAB-sli}). Condition factor for some MAFMC managed predators (bluefish, spiny dogfish) was high in 2018. Black sea bass condition was low in 2018. 2017 information is missing for some species due to the incomplete 2017 fall survey. 
+## Fish condition (coastwide, NEFMC managed stocks)
+Fish condition is measured as the weight at a given length relative to the average - a measure of 'fatness', and a factor that influences fecundity. This information is from fall NEFSC bottom trawl surveys. Overall, condition factor has improved for many New England species since 2012, similar to overall high condition prior to 2000, and in contrast to overall lower condition between 2001-2010 (Fig. \ref{fig:ne-cf}). The timing of these shifts is similar to shifts in the small-large zooplankton indicator (Fig. \ref{fig:NE-sli}). Condition factor for some NEFMC managed species (red hake, GOM haddock, ocean pout, spiny dogfish, thorny skates, and components of winter, yellowtail and windowpane flounder stocks) was high in 2018. 
+ 
 
 ```{r ne-cf, fig.cap = "Condition factor for NEFMC managed species.", out.width = '\\textwidth'}
 
@@ -1612,8 +1617,8 @@ kknitr::include_graphics(file.path(image.dir, "NEFMC_Fish_Condition_2019.jpg"))
 ```
 
 
-## Larval diversity (MAB)
-Fluctuations in larval diversity from NEFSC ECOMON and bottom trawl surveys reflect changing dominance of forage fish, hake, and haddock. In fall, the decrease in diversity since 2010 is driven by high abundance of menhaden and hake larvae. In spring, both diversity and species richness declined to a time series low due to the dominance of sandlance and haddock, which are common in the northern portion of the MAB (Fig. \ref{fig:mab-larval-div}). Too few stations were sampled in spring 2014 and 2016 and in fall 2017 to detect departures from trends in the MAB. 
+## Larval diversity (GOM and GB)
+Fluctuations in larval diversity from NEFSC ECOMON and bottom trawl surveys reflect changing dominance of forage fish, hake, and haddock. GOM larval diversity has been difficult to track due to poor recent ECOMON survey coverage in the winter (Fig. \ref{fig:gom-larval-div}). GB spring larval diversity and richness were relatively low in 2017 (the most recent year with adequate coverage) due to high larval abundance of haddock and sand lance (Fig. \ref{fig:gb-larval-div}). 
 
 ```{r gom-larval-div, fig.cap = "Larval diversity indices from ECOMON surveys in the Gulf of Maine.", fig.width = 7, fig.asp = .7}
 gom_larv_div <- ecodata::ichthyo_diversity %>%
@@ -1716,7 +1721,7 @@ gb_spec_rich <- ecodata::ichthyo_diversity %>%
  gb_larv_div + gb_spec_rich + plot_layout(ncol = 1)
 ```
 
-Investigations are underway to evaluate changes in timing of spawning for managed fish species. Preliminary work with flatfishes suggests that some inshore stocks are spawning earlier as temperatures increase. There are implications for changes in spawning timing for fish condition and for larval survival as match or mismatch with food sources changes; changes in timing of peak zooplankton biomass has already been observed for some Mid-Atlantic species (next section).  
+Investigations are underway to evaluate changes in timing of spawning for managed fish species. Preliminary work with New England flatfishes suggests that some inshore stocks are spawning earlier as temperatures increase. There are implications for changes in spawning timing for fish condition and for larval survival as match or mismatch with zooplankton food sources changes (next section).  
 
 \newpage
 
