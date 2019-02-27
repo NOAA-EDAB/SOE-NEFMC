@@ -1727,35 +1727,6 @@ Productivity of harvested fish and protected species, and therefore sustainabili
 
 Some habitat management interventions have proven beneficial in the Mid-Atlantic and throughout the Northeast US Shelf. For example, the evidence suggests that management limiting nutrient inputs has significantly improved water quality in Chesapeake Bay. However, temperature in coastal and offshore habitats is trending towards unprecedented levels, accompanied by alterations in ocean circulation patterns. Observed changes at the base of the food web, including timing of production and plankton community composition, affect productivity of protected and managed species in ways we do not yet fully understand. 
 
-## Estuarine habitat quality (Chesapeake Bay)
-Many important MAFMC managed species use estuarine habitats as nurseries or are considered estuarine and nearshore coastal-dependent (summer flounder, scup, black sea bass, and bluefish), and interact with other important estuarine-dependent species (e.g., striped bass and menhaden). An integrated measure of multiple water quality criteria shows a significantly increasing proportion of Chesapeake Bay waters meeting or exceeding EPA water quality standards over time (@zhang_chesapeake_2018; Fig. \ref{fig:cb-attainment}). This pattern was statistically linked to total nitrogen reduction, indicating responsiveness of water quality status to management actions implemented to reduce nutrients. Water quality trends and status may be used to inform aquaculture siting decisions in Chesapeake Bay. 
-
-```{r cb-attainment,fig.width = 6, fig.asp = 0.55, fig.cap = "Estimated water quality standards attainment of Chesapeake Bay tidal waters for the combined assessment of dissolved oxygen, underwater bay grasses/water clarity and chlorophyll a using rolling three year assessment periods."}
-
-minlab <- seq(1985,2015,5)
-maxlab <- seq(1987,2017,5)
-
-
-
-ches_bay_wq %>% 
-  mutate(hline = mean(Value)) %>% 
-  ggplot(aes(x = Time, y = Value)) +
-       annotate("rect", fill = shade.fill, alpha = shade.alpha,
-      xmin = x.shade.min , xmax = x.shade.max,
-      ymin = -Inf, ymax = Inf) +
-  geom_line() +
-  geom_point() +
-  geom_gls() +
-    ylab(expression("Estimated attainment, percent")) +
-  ggtitle("Chesapeake Bay Estimated Water Quality Standards Attainment Indicator Score") +
-  scale_x_continuous(breaks = minlab,labels = paste0(minlab,"-",maxlab),expand = c(0.01, 0.01)) +
-    geom_hline(aes(yintercept = hline),
-           size = hline.size,
-           alpha = hline.alpha,
-           linetype = hline.lty) +
-  theme_ts()
-```
-
 
 ## Ocean circulation and surface temperature (coastwide)
 The position of the northern edge of the Gulf Stream has been moving to the north since the late 1950s, with an increasing rate since 2009 (Fig. \ref{fig:GSI}). The most northerly positions ever recorded were observed over the most recent years (2014-2017). A more northerly Gulf Stream position is associated with warmer ocean temperature on the Northeast US shelf [@zhang_role_2007], a higher proportion of Atlantic Temperate Slope Water in the Northeast Channel, and increased sea surface height along the U.S. east coast [@goddard_extreme_2015]. 
@@ -1817,28 +1788,79 @@ lt_sst %>%
 ## Ocean temperature, surface and bottom (MAB)
 The regional ocean is warming. Surface and bottom temperature in the MAB averaged over all seasons has trended warmer since the early 1980s; while seasonally temperatures have trended warmer in spring, summer, and fall. The 2018 summer sea surface temperatures were the third highest on record in the Mid-Atlantic, although temperatures during the other seasons were near or slightly below average (Figs. \ref{fig:MAB-SST-insitu}, \ref{fig:MAB-bot-temp}).  
 
-```{r MAB-SST-insitu, fig.width = 8, fig.height = 7, fig.cap = "MAB seasonal sea surface time series overlaid onto 2018 seasonal spatial anomalies."}
-annotation_custom2 <- function (grob, xmin = -Inf, xmax = Inf, ymin = -Inf, ymax = Inf, data) 
-{
-  layer(data = data, stat = StatIdentity, position = PositionIdentity, 
-        geom = ggplot2:::GeomCustomAnn,
-        inherit.aes = TRUE, params = list(grob = grob, 
-                                          xmin = xmin, xmax = xmax, 
-                                          ymin = ymin, ymax = ymax))
-}
+```{r wsw-prop, fig.width=5, fig.asp = 0.55}
 
+sw.df <- slopewater %>% 
+  mutate(Var, Var = plyr::mapvalues(Var, from = c("WSW proportion ne channel",
+                                                  "LSLW proportion ne channel"),
+                                    to = c("WSW","LSLW"))) %>% 
+  dplyr::rename(Flavor  = Var) %>% 
+  group_by(Flavor) %>% 
+  mutate(hline = mean(Value)) 
+
+sw.df$Flavor <- factor(sw.df$Flavor, levels = c("WSW","LSLW"))
+
+ggplot(data = sw.df) +
+  geom_line(aes(x = Time, y = Value, color = Flavor))+
+  geom_point(aes(x = Time, y = Value, color = Flavor)) +
+  ylab("Percent of Total Slopewater") +
+  ggtitle("Slopewater Proportions in NE Channel")+
+    scale_x_continuous(expand = c(0.01, 0.01))+
+      geom_hline(aes(yintercept = hline,
+                     color = Flavor),
+           size = hline.size,
+           alpha = hline.alpha,
+           linetype = hline.lty)+
+  theme_ts() +
+  theme(strip.text=element_text(hjust=0,
+                                face = "italic"))
+
+```
+
+```{r NE-SST-anom-series, fig.width = 8}
+ne_anom <- seasonal_oisst_anom %>% 
+  filter(EPU %in% c("GOM","GB")) %>% 
+    mutate(hline = 0,
+           Var = str_to_title(str_extract(Var,"winter|spring|summer|fall")))
+ne_anom$Var <- factor(ne_anom$Var, levels= c("Winter","Spring","Summer","Fall"))
+
+ne_anom_plt <- ggplot(data = ne_anom, 
+       aes(x = Time, y = Value, color = EPU, group = EPU))+ #plot
+     annotate("rect", fill = shade.fill, alpha = shade.alpha,
+      xmin = x.shade.min , xmax = x.shade.max,
+      ymin = -Inf, ymax = Inf) +
+  geom_line()+
+  geom_point()+
+  ylim(-2,3)+
+  geom_gls() +
+  ylab(expression("SST Anomaly (°C)")) +
+  ggtitle("Gulf of Maine & Georges Bank SST Anomaly") +
+    scale_color_manual(values = c("black","indianred"))+
+    scale_x_continuous(expand = c(0.01, 0.01)) +
+    geom_hline(aes(yintercept = hline),
+           size = hline.size,
+           alpha = hline.alpha,
+           linetype = hline.lty) +
+  facet_wrap(Var ~., ncol = 2, scales = "free_y")+
+  theme_facet() +
+  theme(strip.text=element_text(hjust=0),
+        plot.title = element_text(size = 12))
+ne_anom_plt
+```
+
+```{r NE-SST-insitu, fig.width=8, fig.height = 8}
 #EPU shapefile
 epu_sf <- ecodata::epu_sf %>% 
-  filter(EPU %in% c("MAB"))
+  filter(EPU %in% c("GOM","GB"))
 
 #Map line parameters
 map.lwd <- 0.4
 
 # Set lat/lon window for maps
-xmin = -81
-xmax = -66
-ymin = 35.5
-ymax = 43
+xmin = -73
+xmax = -65
+ymin = 39
+ymax = 45
 xlims <- c(xmin, xmax)
 ylims <- c(ymin, ymax)
 sst <- seasonal_oisst_anom_gridded 
@@ -1870,160 +1892,63 @@ sst_map <-
         strip.text=element_text(hjust=0),
         axis.text = element_text(size = 8))
 
-winter_anom <-  ggplotGrob( seasonal_oisst_anom %>% 
-                              filter(EPU == "MAB",
-                                     str_detect(Var, "winter")) %>% 
-                              mutate(hline = mean(Value)) %>% 
-                              ggplot(aes(x = Time, y = Value)) +
-                              annotate("rect", fill = shade.fill, alpha = shade.alpha,
-                                       xmin = x.shade.min , xmax = x.shade.max,
-                                       ymin = -Inf, ymax = Inf) +
-                              geom_line() +
-                              geom_point() +
-                              geom_gls(alpha = trend.alpha + 0.25) +
-                              ylab("SST anomaly (°C)")+
-                              scale_x_continuous(expand = c(0.01, 0.01)) +
-                              geom_hline(aes(yintercept = hline)) +
-                              theme_ts()+
-                              theme(axis.title = element_text(size = 6),
-                                    axis.text = element_text(size = 6),
-                                    panel.background = element_rect(fill = "transparent"), 
-                                    plot.background = element_rect(fill = "transparent", color = NA), 
-                                    panel.grid.major = element_blank(),
-                                    panel.grid.minor = element_blank(), 
-                                    legend.background = element_rect(fill = "transparent"), 
-                                    legend.box.background = element_rect(fill = "transparent"), 
-                                    legend.key = element_rect(fill = "transparent", colour = NA), 
-                                    axis.line = element_blank(),
-                                    panel.border = element_blank())
-)
 
-spring_anom <-  ggplotGrob( seasonal_oisst_anom %>% 
-                              filter(EPU == "MAB",
-                                     str_detect(Var, "spring")) %>% 
-                              mutate(hline = mean(Value)) %>% 
-                              ggplot(aes(x = Time, y = Value)) +
-                              annotate("rect", fill = shade.fill, alpha = shade.alpha,
-                                       xmin = x.shade.min , xmax = x.shade.max,
-                                       ymin = -Inf, ymax = Inf) +
-                              geom_line() +
-                              geom_point() +
-                              geom_gls(alpha = trend.alpha + 0.25) +
-                              ylab("SST anomaly (°C)")+
-                              scale_x_continuous(expand = c(0.01, 0.01)) +
-                              geom_hline(aes(yintercept = hline)) +
-                              theme_ts()+
-                              theme(axis.title = element_text(size = 6),
-                                    axis.text = element_text(size = 6),
-                                    panel.background = element_rect(fill = "transparent"), 
-                                    plot.background = element_rect(fill = "transparent", color = NA),
-                                    panel.grid.major = element_blank(),
-                                    panel.grid.minor = element_blank(), 
-                                    legend.background = element_rect(fill = "transparent"), 
-                                    legend.box.background = element_rect(fill = "transparent"), 
-                                    legend.key = element_rect(fill = "transparent", colour = NA), 
-                                    axis.line = element_blank(),
-                                    panel.border = element_blank())
-)
-
-summer_anom <-  ggplotGrob( seasonal_oisst_anom %>% 
-                              filter(EPU == "MAB",
-                                     str_detect(Var, "summer")) %>% 
-                              mutate(hline = mean(Value)) %>% 
-                              ggplot(aes(x = Time, y = Value)) +
-                              annotate("rect", fill = shade.fill, alpha = shade.alpha,
-                                       xmin = x.shade.min , xmax = x.shade.max,
-                                       ymin = -Inf, ymax = Inf) +
-                              geom_line() +
-                              geom_point() +
-                              geom_gls(alpha = trend.alpha + 0.25) +
-                              ylab("SST anomaly (°C)")+
-                              scale_x_continuous(expand = c(0.01, 0.01)) +
-                              geom_hline(aes(yintercept = hline)) +
-                              theme_ts()+
-                              theme(axis.title = element_text(size = 6),
-                                    axis.text = element_text(size = 6),
-                                    panel.background = element_rect(fill = "transparent"),
-                                    plot.background = element_rect(fill = "transparent", color = NA),
-                                    panel.grid.major = element_blank(), 
-                                    panel.grid.minor = element_blank(), 
-                                    legend.background = element_rect(fill = "transparent"),
-                                    legend.box.background = element_rect(fill = "transparent"), 
-                                    legend.key = element_rect(fill = "transparent", colour = NA), 
-                                    axis.line = element_blank(),
-                                    panel.border = element_blank())
-)
-
-fall_anom <-  ggplotGrob( seasonal_oisst_anom %>% 
-                            filter(EPU == "MAB",
-                                   str_detect(Var, "fall")) %>% 
-                            mutate(hline = mean(Value)) %>% 
-                            ggplot(aes(x = Time, y = Value)) +
-                            annotate("rect", fill = shade.fill, alpha = shade.alpha,
-                                     xmin = x.shade.min , xmax = x.shade.max,
-                                     ymin = -Inf, ymax = Inf) +
-                            geom_line() +
-                            geom_point() +
-                            geom_gls(alpha = trend.alpha + 0.25) +
-                            ylab("SST anomaly (°C)")+
-                            scale_x_continuous(expand = c(0.01, 0.01)) +
-                            geom_hline(aes(yintercept = hline)) +
-                            theme_ts()+
-                            theme(axis.title = element_text(size = 6),
-                                  axis.text = element_text(size = 6),
-                                  panel.background = element_rect(fill = "transparent"), 
-                                  plot.background = element_rect(fill = "transparent", color = NA), 
-                                  panel.grid.major = element_blank(), 
-                                  panel.grid.minor = element_blank(), 
-                                  legend.background = element_rect(fill = "transparent"), 
-                                  legend.box.background = element_rect(fill = "transparent"),
-                                  legend.key = element_rect(fill = "transparent", colour = NA),
-                                  axis.line = element_blank(),
-                                  panel.border = element_blank())
-)
-
-sst_map + 
-  annotation_custom2(grob = winter_anom,  xmin=-82, xmax=-73.75,
-                     ymin=39, ymax=43.5, data = data.frame(Season = "Winter")) +
-  annotation_custom2(grob = spring_anom,  xmin=-82, xmax=-73.75,
-                     ymin=39, ymax=43.5, data = data.frame(Season = "Spring")) +
-  annotation_custom2(grob = summer_anom,  xmin=-82, xmax=-73.75,
-                     ymin=39, ymax=43.5, data = data.frame(Season = "Summer")) +
-  annotation_custom2(grob = fall_anom,  xmin=-82, xmax=-73.75,
-                     ymin=39, ymax=43.5, data = data.frame(Season = "Fall"))
+sst_map 
 
 ```
 
-```{r MAB-bot-temp, fig.width = 6, fig.asp = .55, fig.cap = "Annual bottom temperatures in the Mid-Atlantic Bight."}
-temp_anom <- oceantemp_insitu %>% 
-  filter(EPU == epu_abbr) %>% 
-  complete(Time = full_seq(min(oceantemp_insitu$Time):max(oceantemp_insitu$Time),1),
-           nesting(Var)) %>% 
-  mutate(hline = 0)
-
-bot_temp_insitu <- temp_anom %>%
- filter(Var == "bottom temp anomaly in situ") %>%
-ggplot2::ggplot() +
-  annotate("rect", fill = shade.fill, alpha = shade.alpha,
+```{r NE-bot-temp, fig.width = 6, fig.asp = .55, fig.cap = "Annual bottom temperatures in New England."}
+bot_temp_insitu_gom <- oceantemp_insitu %>%
+  filter(EPU == "GOM",
+         Var == "bottom temp anomaly in situ") %>% 
+  mutate(hline = 0) %>% 
+    ggplot()+ #plot
+     annotate("rect", fill = shade.fill, alpha = shade.alpha,
       xmin = x.shade.min , xmax = x.shade.max,
       ymin = -Inf, ymax = Inf) +
   geom_line(aes(x = Time, y = Value)) +
   geom_gls(aes(x = Time, y = Value)) +
   geom_point(aes(x = Time, y = Value), size = 1) +
-  ylab("Temperature (°C)") +
-  ggtitle("Bottom temperature anomaly") +
+  ylab("Temperature Anomaly (°C)") +
+  ggtitle("GOM Bottom Temperature Anomaly") +
   scale_x_continuous(expand = c(0.01, 0.01)) +
-  theme_ts() +
-  theme(strip.text=element_text(hjust=0),
-        plot.title = element_text(size = 12))+
-  geom_hline(aes(yintercept = hline),
+    geom_hline(aes(yintercept = hline),
            size = hline.size,
            alpha = hline.alpha,
            linetype = hline.lty) +
- theme_ts()
+  theme_ts() +
+  theme(strip.text=element_text(hjust=0),
+        plot.title = element_text(size = 12))
 
 
-bot_temp_insitu 
+bot_temp_insitu_gb <- oceantemp_insitu %>%
+  filter(EPU == "GB",
+         Var == "bottom temp anomaly in situ") %>%
+   mutate(hline = 0) %>% 
+    ggplot()+ #plot
+     annotate("rect", fill = shade.fill, alpha = shade.alpha,
+      xmin = x.shade.min , xmax = x.shade.max,
+      ymin = -Inf, ymax = Inf) +
+  geom_line(aes(x = Time, y = Value)) +
+  geom_gls(aes(x = Time, y = Value)) +
+  geom_point(aes(x = Time, y = Value), size = 1) +
+  ylab("Temperature Anomaly (°C)") +
+  ggtitle("GB Bottom Temperature Anomaly") +
+  scale_x_continuous(expand = c(0.01, 0.01)) +
+    geom_hline(aes(yintercept = hline),
+           size = hline.size,
+           alpha = hline.alpha,
+           linetype = hline.lty) +
+  theme_ts() +
+  theme(strip.text=element_text(hjust=0),
+        plot.title = element_text(size = 12))
+
+
+
+bot_temp_insitu_gom +
+ bot_temp_insitu_gb + 
+  plot_layout(ncol =  1) &
+  theme(plot.margin = unit(c(0, 0, 0, 0), "cm"))
 
 ```
 
