@@ -1729,7 +1729,7 @@ Investigations are underway to evaluate changes in timing of spawning for manage
 
 Productivity of harvested fish and protected species, and therefore sustainability of fisheries, depends on adequate habitat, which encompasses physical and chemical conditions and biological productivity at the base of the food web. Many harvested and protected species on the Northeast US shelf occupy several distinct habitats throughout their life cycle, including estuaries, nearshore coastal, and offshore environments. The indicators in this section provide information on the changing conditions encountered by managed species in different seasons and across habitats, which may explain observed changes in species distribution and productivity. Ultimately, a better understanding of these ecological drivers may permit proactive management in a changing system. 
 
-Some habitat management interventions have proven beneficial in the Mid-Atlantic and throughout the Northeast US Shelf. For example, the evidence suggests that management limiting nutrient inputs has significantly improved water quality in Chesapeake Bay. However, temperature in coastal and offshore habitats is trending towards unprecedented levels, accompanied by alterations in ocean circulation patterns. Observed changes at the base of the food web, including timing of production and plankton community composition, affect productivity of protected and managed species in ways we do not yet fully understand. 
+Ocean temperatures in coastal and offshore habitats are at or near unprecedented levels, accompanied by alterations in ocean circulation patterns. Observed changes at the base of the food web, including timing of production and plankton community composition, affect productivity of protected and managed species in ways we do not yet fully understand. 
 
 
 ## Ocean circulation and surface temperature (coastwide)
@@ -1789,8 +1789,8 @@ lt_sst %>%
 ```
 
 
-## Ocean temperature, surface and bottom (MAB)
-The regional ocean is warming. Surface and bottom temperature in the MAB averaged over all seasons has trended warmer since the early 1980s; while seasonally temperatures have trended warmer in spring, summer, and fall. The 2018 summer sea surface temperatures were the third highest on record in the Mid-Atlantic, although temperatures during the other seasons were near or slightly below average (Figs. \ref{fig:MAB-SST-insitu}, \ref{fig:MAB-bot-temp}).  
+## Ocean circulation and temperature (GOM and GB)
+The changing position of Gulf Stream north wall described above is directly linked to ocean conditions in the GOM.  Since the mid-2000’s, the warmer, saltier shelf slope water associated with the Gulf Stream has dominated the input into the GOM at the Northeast Channel (Fig. \ref{fig:wsw-prop}). This represents a new feature of the ecosystem overall, and is related to the observed GOM ocean heat wave summer to fall 2018 GOM. 
 
 ```{r wsw-prop, fig.width=5, fig.asp = 0.55}
 
@@ -1818,6 +1818,63 @@ ggplot(data = sw.df) +
   theme_ts() +
   theme(strip.text=element_text(hjust=0,
                                 face = "italic"))
+
+```
+
+The regional ocean is warming. Surface and bottom temperatures (Fig. \ref{fig:NE-bot-temp}) in the GOM and GB averaged annually have trended warmer since the early 1980s, and seasonal surface temperatures have trended warmer in spring, summer, and fall. The 2018 summer sea surface temperatures were the highest on record in the GOM, although temperatures during the other seasons were near or slightly below average (Figs. \ref{fig:NE-SST-anom-series}, \ref{fig:NE-SST-insitu}). 
+  
+```{r NE-bot-temp, fig.width = 6, fig.asp = .55, fig.cap = "Annual bottom temperatures in New England."}
+bot_temp_insitu_gom <- oceantemp_insitu %>%
+  filter(EPU == "GOM",
+         Var == "bottom temp anomaly in situ") %>% 
+  mutate(hline = 0) %>% 
+    ggplot()+ #plot
+     annotate("rect", fill = shade.fill, alpha = shade.alpha,
+      xmin = x.shade.min , xmax = x.shade.max,
+      ymin = -Inf, ymax = Inf) +
+  geom_line(aes(x = Time, y = Value)) +
+  geom_gls(aes(x = Time, y = Value)) +
+  geom_point(aes(x = Time, y = Value), size = 1) +
+  ylab("Temperature Anomaly (°C)") +
+  ggtitle("GOM Bottom Temperature Anomaly") +
+  scale_x_continuous(expand = c(0.01, 0.01)) +
+    geom_hline(aes(yintercept = hline),
+           size = hline.size,
+           alpha = hline.alpha,
+           linetype = hline.lty) +
+  theme_ts() +
+  theme(strip.text=element_text(hjust=0),
+        plot.title = element_text(size = 12))
+
+
+bot_temp_insitu_gb <- oceantemp_insitu %>%
+  filter(EPU == "GB",
+         Var == "bottom temp anomaly in situ") %>%
+   mutate(hline = 0) %>% 
+    ggplot()+ #plot
+     annotate("rect", fill = shade.fill, alpha = shade.alpha,
+      xmin = x.shade.min , xmax = x.shade.max,
+      ymin = -Inf, ymax = Inf) +
+  geom_line(aes(x = Time, y = Value)) +
+  geom_gls(aes(x = Time, y = Value)) +
+  geom_point(aes(x = Time, y = Value), size = 1) +
+  ylab("Temperature Anomaly (°C)") +
+  ggtitle("GB Bottom Temperature Anomaly") +
+  scale_x_continuous(expand = c(0.01, 0.01)) +
+    geom_hline(aes(yintercept = hline),
+           size = hline.size,
+           alpha = hline.alpha,
+           linetype = hline.lty) +
+  theme_ts() +
+  theme(strip.text=element_text(hjust=0),
+        plot.title = element_text(size = 12))
+
+
+
+bot_temp_insitu_gom +
+ bot_temp_insitu_gb + 
+  plot_layout(ncol =  1) &
+  theme(plot.margin = unit(c(0, 0, 0, 0), "cm"))
 
 ```
 
@@ -1901,68 +1958,16 @@ sst_map
 
 ```
 
-```{r NE-bot-temp, fig.width = 6, fig.asp = .55, fig.cap = "Annual bottom temperatures in New England."}
-bot_temp_insitu_gom <- oceantemp_insitu %>%
-  filter(EPU == "GOM",
-         Var == "bottom temp anomaly in situ") %>% 
-  mutate(hline = 0) %>% 
-    ggplot()+ #plot
-     annotate("rect", fill = shade.fill, alpha = shade.alpha,
-      xmin = x.shade.min , xmax = x.shade.max,
-      ymin = -Inf, ymax = Inf) +
-  geom_line(aes(x = Time, y = Value)) +
-  geom_gls(aes(x = Time, y = Value)) +
-  geom_point(aes(x = Time, y = Value), size = 1) +
-  ylab("Temperature Anomaly (°C)") +
-  ggtitle("GOM Bottom Temperature Anomaly") +
-  scale_x_continuous(expand = c(0.01, 0.01)) +
-    geom_hline(aes(yintercept = hline),
-           size = hline.size,
-           alpha = hline.alpha,
-           linetype = hline.lty) +
-  theme_ts() +
-  theme(strip.text=element_text(hjust=0),
-        plot.title = element_text(size = 12))
-
-
-bot_temp_insitu_gb <- oceantemp_insitu %>%
-  filter(EPU == "GB",
-         Var == "bottom temp anomaly in situ") %>%
-   mutate(hline = 0) %>% 
-    ggplot()+ #plot
-     annotate("rect", fill = shade.fill, alpha = shade.alpha,
-      xmin = x.shade.min , xmax = x.shade.max,
-      ymin = -Inf, ymax = Inf) +
-  geom_line(aes(x = Time, y = Value)) +
-  geom_gls(aes(x = Time, y = Value)) +
-  geom_point(aes(x = Time, y = Value), size = 1) +
-  ylab("Temperature Anomaly (°C)") +
-  ggtitle("GB Bottom Temperature Anomaly") +
-  scale_x_continuous(expand = c(0.01, 0.01)) +
-    geom_hline(aes(yintercept = hline),
-           size = hline.size,
-           alpha = hline.alpha,
-           linetype = hline.lty) +
-  theme_ts() +
-  theme(strip.text=element_text(hjust=0),
-        plot.title = element_text(size = 12))
-
-
-
-bot_temp_insitu_gom +
- bot_temp_insitu_gb + 
-  plot_layout(ncol =  1) &
-  theme(plot.margin = unit(c(0, 0, 0, 0), "cm"))
-
-```
 
 ## Primary production (MAB)
-Phytoplankton primary production is a function of biomass, light, and temperature, and sets the overall level of potential fish and fishery productivity in an ecosystem (Fig. \ref{fig:prod-potential}). There is a trend of increasing primary production in the Mid-Atlantic, primarily driven by increased summer production, which is due to warmer temperatures and increased bacterial remineralization and nutrient recycling (Fig. \ref{fig:PP-OCCI}). This increased productivity is most likely from smaller-celled species that contribute less to fish production compared to larger phytoplankton. The fall of 2018 had an above average phytoplankton bloom (Fig. \ref{fig:mab-chl-weekly}), most likely comprised of larger diatom species, with the highest concentrations near the shelf break, which is the same region that experienced below average temperatures in the fall (Fig. \ref{fig:MAB-SST-insitu}).
+Phytoplankton primary production is a function of biomass, light, and temperature, and sets the overall level of potential fish and fishery productivity in an ecosystem (Fig. \ref{fig:prod-potential}). 
 
 ```{r prod-potential, fig.cap = "Simplified representation of the pathways linking primary production and environmental driver throughout a fishery ecosystem. The important societal benefits that derive from sustainable fisheries depend directly on a sequence of events starting at the base of the food web. The production of fish and shellfish available for harvest by the fisheries follows pathways of energy flow from phytoplankton and zooplankton to different parts of the food web. The production at each component further depends on the effect of a host of environmental drivers including temperature, salinity, and other factors.", out.width='\\linewidth'}
 
 knitr::include_graphics(file.path(image.dir, "SOE_Network_Diagram.png"))
 ```
+
+There is a trend of increasing primary production in both New England systems, primarily driven by increased summer production, which is due to warmer temperatures and increased bacterial remineralization and nutrient recycling (Fig. \ref{fig:NE-PP-OCCI}). This increased productivity is most likely from smaller-celled species that contribute less to fish production compared to larger phytoplankton. However, the spring of 2018 had an above average phytoplankton bloom in both the GOM and GB (Fig. \ref{fig:NE-chl-weekly}), most likely comprised of larger diatom species.
 
 ```{r NE-PP-OCCI, fig.width=8, fig.height = 8, fig.cap = "Monthly primary production trends show the annual cycle (i.e. the peak during the summer months) and the changes over time for each month."}
 out_pp <- ecodata::chl_pp %>% 
@@ -2106,7 +2111,7 @@ GOM_chl + GB_chl + GOM_ppd + GB_ppd + plot_layout(ncol = 2) & theme(plot.margin 
 
 
 ## Zooplankton (MAB)
-The most abundant zooplankton species in the MAB are *Centropages typicus*, *Psuedocalanus* spp., and *Temora longicornis* [@morse_distinct_2017].  *Calanus finmarchicus* are also abundant in the MAB and are important prey for larval fish and the North Atlantic Right Whale.  Annually, there has been a significant decrease in *Pseudocalanus* and in recent years a decreasing trend of *Calanus finmarchicus* (Fig. \ref{fig:MAB-zoo-abund}).  Seasonally, *Temora longicornis* have decreased during the fall, while a decrease in fall concentration and an increase in spring concentration of *Centropages typicus* (Fig. \ref{fig:MAB-oi-zoo}) corresponds to a shift in timing of their peak concentration from late fall to early spring beginning in the late 1980s [@bi_decadal_2014].
+The most abundant zooplankton species in the GOM are *Calanus finmarchicus* (an important prey for larval fish and the north Atlantic right whale),  *Centropages typicus*, and *Psuedocalanus* spp. [@morse_distinct_2017].  *Calanus finmarchicus* had low overall abundance in the GoM from 2009-2014, with higher than normal abundance in 2015-2016 and a return to normal levels in 2017 (Fig. \ref(fig:NE-zoo-abund}). On GB, *Calanus finmarchicus* annual abundance has been low continually since 2009. *Centropages typicus* has had higher than normal abundance from 2012-2017 on both GB and GoM. *Pseudocalanus* abundance trends were similar to *Calanus* in recent years, with low abundance from 2001-2014 in the GoM and higher than normal 2015-2016, but normal abundance in 2017. On GB, *Pseudocalanus* abundance has a significant long term decline (Fig. \ref(fig:NE-zoo-abund}).
 
 ```{r NE-zoo-abund, fig.width = 8, fig.asp = .35, fig.cap = "Abundance anomaly time series for key zooplankton species found in the GOM and GB."}
 zoo_abund <- ecodata::zoo_anom_sli %>% 
@@ -2161,8 +2166,7 @@ gom_zoo_abund + gb_zoo_abund + plot_layout(ncol = 1)
 
 ```
 
-
-Changes in the abundance of the larger *Calanus finmarchicus* are also reflected in the size distribution of the copepods. The small-large copepod index is a measure of the relative size composition of the dominant copepod taxa. During the 1990s and early 2000s the positive index was driven by high relative abundance of smaller bodied copepods and a lower relative abundance of *Calanus finmarchicus*. This period was also identified with regime shifts to lower fish recruitment [@perretti_regime_2017]. The current trend in the index suggests an increase in the relative abundance of smaller bodied copepods (Fig. \ref{fig:MAB-sli}).
+Changes in the abundance of the larger *Calanus finmarchicus* are also reflected in the size distribution of the copepods. The small-large copepod index is a measure of the relative size composition of the dominant copepod taxa. During the 1990s and early 2000s, the positive index was driven by high relative abundance of smaller bodied copepods and a lower relative abundance of *Calanus finmarchicus*. This period also corresponds with regime shifts to lower fish recruitment [@perretti_regime_2017]. The current trend in the index suggests an increase in the relative abundance of smaller bodied copepods (Fig. \ref{fig:NE-sli}).
 
 ```{r NE-sli, fig.cap = "GOM and GB small-large zooplankton index and the annual primary production anomaly."}
 sli <- ecodata::zoo_anom_sli %>% 
