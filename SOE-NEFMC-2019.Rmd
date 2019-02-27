@@ -420,7 +420,7 @@ cowplot::plot_grid(gom_total, gb_total, ncol = 2)
 
 One notable signal suggesting increased importance of non-NEFMC managed species is the divergence between NEFMC managed and non-NEFMC managed Planktivore landings in last 5 years in the GOM (Fig. \ref{fig:comm-landings-ne}), the result of lower Atlantic herring landings relative to other planktivores. Additionally, the importance of state-managed fisheries continues to increase, with highly dependant and thus highly vulnerable ports in Maine relying on lobster.
 
-```{r comm_landings-ne,warning=F, fig.width = 8, fig.height = 9,fig.cap = paste0(council_abbr," managed species landings (red) and total commercial landings (black) by feeding guild in Gulf of Maine (left) and Georges Bank (right).")}
+```{r comm-landings-ne, warning=F, fig.width = 8, fig.height = 9,fig.cap = paste0(council_abbr," managed species landings (red) and total commercial landings (black) by feeding guild in Gulf of Maine (left) and Georges Bank (right).")}
 #Get data for plotting
 
 #Managed landings
@@ -627,6 +627,8 @@ ylim_re <- c(5e6, 30e6)
 ylim_rd <- c(1.75,2.75)
 ylim_ra  <- c(0, 2e6)
 
+series.col <- "black"
+
 rec_div <- recdat %>% 
   filter(Var == "Recreational fleet effort diversity across modes") %>% 
   ggplot() + 
@@ -763,8 +765,8 @@ ylim_ra  <- c(0, 2e6)
 #                                 "Recreational anglers"))
 
 series.col <- "black"
-x.shade.min <- max(recdat$Time, na.rm = T) - 9
-x.shade.max <- max(recdat$Time, na.rm = T)
+#x.shade.min <- max(recdat$Time, na.rm = T) - 9
+#x.shade.max <- max(recdat$Time, na.rm = T)
 
 series.col <- "black"
 
@@ -1004,7 +1006,7 @@ aggregate_prod %>%
 
 ```
 
-```{r stacked-bar-prey-freq, fig.cap = "Prey frequencies in the diets of common tern observed at seven different islands in Gulf of Maine. Prey occurring in <5% of common tern diets were excluded for clarity.", fig.height = 4, fig.width = 8}
+```{r stacked-bar-prey-freq, fig.cap = "Prey frequencies in the diets of common tern observed at seven different islands in Gulf of Maine. Prey occurring in <5 percent of common tern diets were excluded for clarity.", fig.height = 4, fig.width = 8}
 
 prey_freq <- ecodata::common_tern %>% 
   filter(str_detect(Var, "Diet"),
@@ -1816,26 +1818,26 @@ lt_sst %>%
 ## Ocean circulation and temperature (GOM and GB)
 The changing position of Gulf Stream north wall described above is directly linked to ocean conditions in the GOM.  Since the mid-2000’s, the warmer, saltier shelf slope water associated with the Gulf Stream has dominated the input into the GOM at the Northeast Channel (Fig. \ref{fig:wsw-prop}). This represents a new feature of the ecosystem overall, and is related to the observed GOM ocean heat wave summer to fall 2018 GOM. 
 
-```{r wsw-prop, fig.width=5, fig.asp = 0.55}
+```{r wsw-prop, fig.width=5, fig.asp = 0.55, fig.cap = "Proportion of warm slope water (WSW) and Labrador slope water (LSLW) entering the GOM through the Northeast Channel."}
 
 sw.df <- slopewater %>% 
   mutate(Var, Var = plyr::mapvalues(Var, from = c("WSW proportion ne channel",
                                                   "LSLW proportion ne channel"),
                                     to = c("WSW","LSLW"))) %>% 
-  dplyr::rename(Flavor  = Var) %>% 
-  group_by(Flavor) %>% 
+  dplyr::rename(Origin  = Var) %>% 
+  group_by(Origin) %>% 
   mutate(hline = mean(Value)) 
 
-sw.df$Flavor <- factor(sw.df$Flavor, levels = c("WSW","LSLW"))
+sw.df$Flavor <- factor(sw.df$Origin, levels = c("WSW","LSLW"))
 
 ggplot(data = sw.df) +
-  geom_line(aes(x = Time, y = Value, color = Flavor))+
-  geom_point(aes(x = Time, y = Value, color = Flavor)) +
+  geom_line(aes(x = Time, y = Value, color = Origin))+
+  geom_point(aes(x = Time, y = Value, color = Origin)) +
   ylab("Percent of Total Slopewater") +
   ggtitle("Slopewater Proportions in NE Channel")+
     scale_x_continuous(expand = c(0.01, 0.01))+
       geom_hline(aes(yintercept = hline,
-                     color = Flavor),
+                     color = Origin),
            size = hline.size,
            alpha = hline.alpha,
            linetype = hline.lty)+
@@ -1847,7 +1849,7 @@ ggplot(data = sw.df) +
 
 The regional ocean is warming. Surface and bottom temperatures (Fig. \ref{fig:NE-bot-temp}) in the GOM and GB averaged annually have trended warmer since the early 1980s, and seasonal surface temperatures have trended warmer in spring, summer, and fall. The 2018 summer sea surface temperatures were the highest on record in the GOM, although temperatures during the other seasons were near or slightly below average (Figs. \ref{fig:NE-SST-anom-series}, \ref{fig:NE-SST-insitu}). 
   
-```{r NE-bot-temp, fig.width = 6, fig.asp = .55, fig.cap = "Annual bottom temperatures in New England."}
+```{r NE-bot-temp, fig.width = 6, fig.asp = .7, fig.cap = "Annual bottom temperatures in New England."}
 bot_temp_insitu_gom <- oceantemp_insitu %>%
   filter(EPU == "GOM",
          Var == "bottom temp anomaly in situ") %>% 
@@ -1902,7 +1904,7 @@ bot_temp_insitu_gom +
 
 ```
 
-```{r NE-SST-anom-series, fig.width = 8}
+```{r NE-SST-anom-series, fig.width = 8, fig.asp = 0.7, fig.cap = "GOM and GB seasonal sea surface temperature anomaly time series."}
 ne_anom <- seasonal_oisst_anom %>% 
   filter(EPU %in% c("GOM","GB")) %>% 
     mutate(hline = 0,
@@ -1933,7 +1935,7 @@ ne_anom_plt <- ggplot(data = ne_anom,
 ne_anom_plt
 ```
 
-```{r NE-SST-insitu, fig.width=8, fig.height = 8}
+```{r NE-SST-insitu, fig.width=8, fig.height = 8, fig.cap = "GOM and GB 2018 seasonal sea surface temperature spatial anomalies."}
 #EPU shapefile
 epu_sf <- ecodata::epu_sf %>% 
   filter(EPU %in% c("GOM","GB"))
@@ -2048,7 +2050,7 @@ pp_cci_gom <- out_pp %>%
  pp_cci_gom + pp_cci_gb + plot_layout(ncol = 1)
 ```
 
-```{r NE-chl-weekly, fig.width = 8, fig.cap = "Weekly chlorophyll concentrations and primary productivity for 2018 in Gulf of Maine and Georges Bank are shown by the colored lines in the above figures. The long-term mean is shown in black and shading indicates +/- 1 sample SD."}
+```{r NE-chl-weekly, fig.width = 8, fig.asp = 0.35, fig.cap = "Weekly chlorophyll concentrations and primary productivity for 2018 in Gulf of Maine and Georges Bank are shown by the colored lines in the above figures. The long-term mean is shown in black and shading indicates +/- 1 sample SD."}
 
 interp_chl_pp <- function(epu, year = 2018, Variable){
   out <- ecodata::chl_pp %>% 
@@ -2157,15 +2159,15 @@ GOM_ppd <- ggplot(data = GOM_ppd_weekly) +
   theme_ts()
 
 
-GOM_chl + GB_chl + GOM_ppd + GB_ppd + plot_layout(ncol = 2) & theme(plot.margin = margin(r = 0.5))
-
+#GOM_chl + GB_chl + GOM_ppd + GB_ppd + plot_layout(ncol = 2) & theme(plot.margin = margin(r = 0.5))
+GOM_chl + GB_chl + plot_layout(ncol = 2) & theme(plot.margin = margin(r = 0.5))
 ```
 
 
 ## Zooplankton (MAB)
-The most abundant zooplankton species in the GOM are *Calanus finmarchicus* (an important prey for larval fish and the north Atlantic right whale),  *Centropages typicus*, and *Psuedocalanus* spp. [@morse_distinct_2017].  *Calanus finmarchicus* had low overall abundance in the GoM from 2009-2014, with higher than normal abundance in 2015-2016 and a return to normal levels in 2017 (Fig. \ref(fig:NE-zoo-abund}). On GB, *Calanus finmarchicus* annual abundance has been low continually since 2009. *Centropages typicus* has had higher than normal abundance from 2012-2017 on both GB and GoM. *Pseudocalanus* abundance trends were similar to *Calanus* in recent years, with low abundance from 2001-2014 in the GoM and higher than normal 2015-2016, but normal abundance in 2017. On GB, *Pseudocalanus* abundance has a significant long term decline (Fig. \ref(fig:NE-zoo-abund}).
+The most abundant zooplankton species in the GOM are *Calanus finmarchicus* (an important prey for larval fish and the north Atlantic right whale),  *Centropages typicus*, and *Psuedocalanus* spp. [@morse_distinct_2017].  *Calanus finmarchicus* had low overall abundance in the GoM from 2009-2014, with higher than normal abundance in 2015-2016 and a return to normal levels in 2017 (Fig. \ref(fig:NE-zoo-abund}). On GB, *Calanus finmarchicus* annual abundance has been low continually since 2009. *Centropages typicus* has had higher than normal abundance from 2012-2017 on both GB and GoM. *Pseudocalanus* abundance trends were similar to *Calanus* in recent years, with low abundance from 2001-2014 in the GoM and higher than normal 2015-2016, but normal abundance in 2017. On GB, *Pseudocalanus* abundance has a significant long term decline (Fig. \ref{fig:NE-zoo-abund}).
 
-```{r NE-zoo-abund, fig.width = 8, fig.asp = .35, fig.cap = "Abundance anomaly time series for key zooplankton species found in the GOM and GB."}
+```{r NE-zoo-abund, fig.width = 8, fig.asp = .7, fig.cap = "Abundance anomaly time series for key zooplankton species found in the GOM and GB."}
 zoo_abund <- ecodata::zoo_anom_sli %>% 
   filter(EPU %in% c("GOM","GB"),
          !str_detect(Var, "small-large")) %>% 
