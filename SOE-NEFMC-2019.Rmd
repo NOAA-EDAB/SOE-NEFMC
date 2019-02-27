@@ -332,6 +332,21 @@ cowplot::plot_grid(gom_bennet, gb_bennet, ncol = 2, rel_widths = c(0.7,1))
 There is a concurrent significant decrease in NEFMC-managed commercial seafood production and landings (Fig. \ref{fig:total-landings-ne}), with Piscivores, Planktivores, and NEFMC-managed Benthivores showing long term negative trends (Fig. \ref{fig:comm-landings-ne}). This trend is a continuation on the reliance on a small number of species, which could induce additional risk in the social system. 
 
 ```{r total-landings-ne, fig.cap = paste0("Total commercial seafood landings (black) shown with NEFMC managed seafood landings (red) in Gulf of Maine (left) and Georges Bank (right)."), fig.width = 8, fig.asp = 0.35}
+#Managed landings
+managed_landings <- ecodata::comdat  %>%
+  filter(str_detect(Var, paste0(council_abbr," managed species - Landings weight|JOINT managed species - Landings weight")),
+         !str_detect(Var, "Other"),
+         Time >= 1986,
+         EPU %in% epu_abbr)
+
+#Total landings
+total_landings <- ecodata::comdat  %>%
+  filter(!str_detect(Var, "managed species"),
+         !str_detect(Var, "Other"),
+         str_detect(Var, "Landings"),
+         Time >= 1986,
+         EPU %in% epu_abbr)
+
 total_landings_agg <- total_landings %>%
   group_by(EPU,Time) %>%
   dplyr::summarise(Value = sum(Value)) %>% 
@@ -602,6 +617,15 @@ Commercial fleet diversity indices were updated with 2017 data. Current diversit
 In contrast to commercial species specialization, indicators highlight an increasing diversity of recreational species caught in New England (Fig. \ref{fig:rec-div}), although recreational fleet effort diversity has not changed over the long term. 
 
 ```{r rec-div, fig.width = 5, fig.asp = 1, fig.cap = paste0("Recreational effort diversity and diversity of recreational catch in the ",region,".")}
+
+recdat <- ecodata::recdat %>% 
+  filter(EPU == region_abbr) %>% 
+  group_by(Var) %>% 
+  mutate(hline = mean(Value))
+
+ylim_re <- c(5e6, 30e6)
+ylim_rd <- c(1.75,2.75)
+ylim_ra  <- c(0, 2e6)
 
 rec_div <- recdat %>% 
   filter(Var == "Recreational fleet effort diversity across modes") %>% 
@@ -1612,7 +1636,7 @@ Fish condition is measured as the weight at a given length relative to the avera
 
 ```{r ne-cf, fig.cap = "Condition factor for NEFMC managed species.", out.width = '\\textwidth'}
 
-kknitr::include_graphics(file.path(image.dir, "NEFMC_Fish_Condition_2019.jpg"))
+knitr::include_graphics(file.path(image.dir, "NEFMC_Fish_Condition_2019.jpg"))
 
 ```
 
@@ -2025,6 +2049,34 @@ pp_cci_gom <- out_pp %>%
 ```
 
 ```{r NE-chl-weekly, fig.width = 8, fig.cap = "Weekly chlorophyll concentrations and primary productivity for 2018 in Gulf of Maine and Georges Bank are shown by the colored lines in the above figures. The long-term mean is shown in black and shading indicates +/- 1 sample SD."}
+
+interp_chl_pp <- function(epu, year = 2018, Variable){
+  out <- ecodata::chl_pp %>% 
+    filter(str_detect(Var,Variable),
+           EPU == epu) %>% 
+    separate(.,Time, c("Year","Week"),sep = 4) %>% 
+    filter(Year == year) %>% 
+    group_by(EPU) %>% 
+    mutate(Time = 1:length(Year))
+  
+  ltm_out <- ecodata::chl_pp %>% 
+    filter(str_detect(Var,Variable),
+           EPU == epu) %>% 
+    separate(.,Time, c("Year","Week"),sep = 4) %>% 
+    group_by(Week) %>% 
+    dplyr::summarise(LTM = mean(Value, na.rm = T),
+                     SD = sd(Value, na.rm = T)) %>% 
+    mutate(Time = 1:length(Week),
+           sd.low = LTM - SD,
+           sd.high = LTM + SD) %>% 
+    left_join(.,out, by = c("Time")) %>% 
+    mutate(status = ifelse(Value < sd.high & Value > sd.low, "near_mean",
+                           ifelse(Value > sd.high, "high",
+                                  ifelse(Value < sd.low,"low",NA))),
+           group = "PLOT")
+  
+  return(ltm_out)
+}
 
 GB_chl_weekly <- interp_chl_pp(epu = "GB", year = 2018,Variable = "WEEKLY_CHLOR_A_MEDIAN")
 
