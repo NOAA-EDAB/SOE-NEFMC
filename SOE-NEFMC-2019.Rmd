@@ -1828,7 +1828,7 @@ sw.df <- slopewater %>%
   group_by(Origin) %>% 
   mutate(hline = mean(Value)) 
 
-sw.df$Flavor <- factor(sw.df$Origin, levels = c("WSW","LSLW"))
+sw.df$Origin <- factor(sw.df$Origin, levels = c("WSW","LSLW"))
 
 ggplot(data = sw.df) +
   geom_line(aes(x = Time, y = Value, color = Origin))+
