@@ -1026,8 +1026,8 @@ diet_freq_bar <- prey_freq %>%
   ggplot(aes(x = Time, y = Freq, fill = Prey)) +
   geom_bar_interactive(aes(tooltip = paste(Prey,round(Freq,2),Time)),stat = "identity") +
   viridis::scale_fill_viridis(discrete = TRUE) +
-  ggtitle("Prey frequency") +
-  ylab("Frequency of occurrence") +
+  ggtitle("Prey composition") +
+  ylab("Proportion of prey items") +
   theme_ts()
 
 
@@ -2270,7 +2270,7 @@ pp_anom_plt <- pp_anom %>%
   facet_wrap(EPU~.,ncol = 2)+
   ggtitle("Primary production anomaly ratio") +
     scale_x_continuous(expand = c(0.01, 0.01), limits = c(1988, 2018))+
-    scale_y_continuous(limits = c(0.8,1.2)) +
+    scale_y_continuous(limits = c(0.6,1.4)) +
       geom_hline(aes(yintercept = hline,
                      group = Var),
            size = hline.size,
