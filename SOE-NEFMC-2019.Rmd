@@ -1817,7 +1817,7 @@ lt_sst %>%
 
 
 ## Ocean circulation and temperature (GOM and GB)
-The changing position of Gulf Stream north wall described above is directly linked to ocean conditions in the GOM.  Since the mid-2000’s, the warmer, saltier shelf slope water associated with the Gulf Stream has dominated the input into the GOM at the Northeast Channel (Fig. \ref{fig:wsw-prop}). This represents a new feature of the ecosystem overall, and is related to the observed GOM ocean heat wave summer to fall 2018 GOM. 
+The changing position of the Gulf Stream north wall described above directly influences oceanic conditions in the GOM.  Since the mid-2000’s, the warmer, saltier shelf slope water associated with the Gulf Stream has dominated the input into the GOM at the Northeast Channel (Fig. \ref{fig:wsw-prop}). The changing proportions of source water affect the temperature, salinity and nutrient inputs to the system. This represents a new feature of the ecosystem overall, and is related to the observed GOM ocean heat wave summer to fall 2018 GOM. 
 
 ```{r wsw-prop, fig.width=5, fig.asp = 0.55, fig.cap = "Proportion of warm slope water (WSW) and Labrador slope water (LSLW) entering the GOM through the Northeast Channel."}
 
@@ -1848,7 +1848,7 @@ ggplot(data = sw.df) +
 
 ```
 
-The regional ocean is warming. Surface and bottom temperatures (Fig. \ref{fig:NE-bot-temp}) in the GOM and GB averaged annually have trended warmer since the early 1980s, and seasonal surface temperatures have trended warmer in spring, summer, and fall. The 2018 summer sea surface temperatures were the highest on record in the GOM, although temperatures during the other seasons were near or slightly below average (Figs. \ref{fig:NE-SST-anom-series}, \ref{fig:NE-SST-insitu}). 
+Concurrently, annual surface and bottom temperatures (Fig. \ref{fig:NE-bot-temp}) in the GOM and GB have trended warmer since the early 1980s, and seasonal surface temperatures have trended warmer in spring, summer, and fall. The 2018 summer sea surface temperatures were the highest on record in the GOM, although temperatures during the other seasons were near or slightly below average (Figs. \ref{fig:NE-SST-anom-series}, \ref{fig:NE-SST-insitu}). 
   
 ```{r NE-bot-temp, fig.width = 6, fig.asp = .7, fig.cap = "GOM and GB annual bottom temperature anomalies."}
 bot_temp_insitu_gom <- oceantemp_insitu %>%
@@ -1994,7 +1994,7 @@ Phytoplankton primary production is a function of biomass, light, and temperatur
 knitr::include_graphics(file.path(image.dir, "SOE_Network_Diagram.png"))
 ```
 
-There is a trend of increasing primary production in both New England systems, primarily driven by increased summer production, which is due to warmer temperatures and increased bacterial remineralization and nutrient recycling (Fig. \ref{fig:NE-PP-OCCI}). This increased productivity is most likely from smaller-celled species that contribute less to fish production compared to larger phytoplankton. However, the spring of 2018 had an above average phytoplankton bloom in both the GOM and GB (Fig. \ref{fig:NE-chl-weekly}), most likely comprised of larger diatom species.
+There is a trend of increasing primary production in both New England systems, primarily driven by increased summer production, which is due to warmer temperatures and increased bacterial remineralization and nutrient recycling (Fig. \ref{fig:NE-PP-OCCI}). This increased productivity is most likely from smaller-celled species that contribute less to fish production compared to larger phytoplankton. The winter-spring phytoplankton bloom, comprised primarily of diatoms, was above average in both the GOM and GB, however the timing in the GB was earlier than normal (Fig. \ref{fig:NE-chl-weekly}). Summer biomass was below average throughout most of the region, while the fall bloom was below average nearshore in the GOM and slightly above average offshore and in parts of GB.
 
 ```{r NE-PP-OCCI, fig.width=8, fig.height = 8, fig.cap = "Monthly primary production trends show the annual cycle (i.e. the peak during the summer months) and the changes over time for each month."}
 out_pp <- ecodata::chl_pp %>% 
