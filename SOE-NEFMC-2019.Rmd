@@ -1938,7 +1938,7 @@ ne_anom_plt
 
 ```{r NE-SST-insitu, fig.width=8, fig.height = 8, fig.cap = "GOM and GB 2018 seasonal sea surface temperature spatial anomalies."}
 #EPU shapefile
-epu_sf <- ecodata::epu_sf %>% 
+epu_sf_ne <- ecodata::epu_sf %>% 
   filter(EPU %in% c("GOM","GB"))
 
 #Map line parameters
@@ -1961,7 +1961,7 @@ sst_map <-
   ggplot() +
   geom_tile(data = sst, aes(x = Longitude, y = Latitude,fill = Value)) +
   geom_sf(data = coast, size = map.lwd) +
-  geom_sf(data = epu_sf, fill = "transparent", size = map.lwd) +
+  geom_sf(data = epu_sf_ne, fill = "transparent", size = map.lwd) +
   scale_fill_gradient2(name = "Temp.\nAnomaly (°C)",
                        low = scales::muted("blue"),
                        mid = "white",
@@ -2366,6 +2366,14 @@ knitr::kable(df, booktabs = TRUE, caption = 'Feeding guilds and management bodie
 The spatial scale of indicators is either coastwide, Mid-Atlantic states (New York, New Jersey, Delaware, Maryland, Virginia, North Carolina), or at the Mid-Atlantic Bight (MAB) Ecosystem Production Unit (EPU, Fig. \ref{fig:EPU-MAP}) level. 
 
 ```{r EPU-MAP, fig.cap = "The Northeast Large Marine Ecosystem.", fig.width = 3.4, fig.asp = 1.25}
+
+# Set lat/lon window for map
+xmin = -77
+xmax = -65
+ymin = 36
+ymax = 45
+xlims <- c(xmin, xmax)
+ylims <- c(ymin, ymax)
 
 #CRS
 crs <- "+proj=longlat +lat_1=35 +lat_2=45 +lat_0=40 +lon_0=-77 +x_0=0 +y_0=0 +datum=NAD83 +no_defs +ellps=GRS80 +towgs84=0,0,0"
