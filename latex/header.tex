@@ -1,7 +1,7 @@
 % Set up the fonts
-\usepackage{fontspec}
-%\setmainfont{Garamond}
-%\setmonofont{Calibri}
+\usepackage[urw-palatino]{mathdesign}
+\usepackage[T1]{fontenc}
+
 
 % Set the language for 508
 \hypersetup{
@@ -38,20 +38,26 @@
     \endorigtable
 }
 
-
+% First page has the large title and NOAA logo
 \pagestyle{fancy}
 \fancyhf{}
 \setlength\headheight{40pt}
-\lhead{\texttt{\emph{State of the Ecosystem}} \\ \texttt{\emph{Gulf of Maine and Georges Bank}}}
 \cfoot{\thepage}
 
 \AddEverypageHook{%
    \ifthenelse{\value{page}=1}%
-     {\rhead{\includegraphics[width=40pt]{NOAA_logo.png} \\ \texttt{\emph{Published March 3, 2018}}}
-     }%
+     {\rhead{\includegraphics[width=40pt]{images/NOAA_logo.png} \\ \textsf{\emph{Published March 12, 2019}}}
+      \lhead{\textsf{\LARGE State of the Ecosystem 2019: New England}}
+      }%
      {\rhead{}
+      \lhead{\textsf{\emph{State of the Ecosystem 2019: New England}}}
      }
 }
 
 \renewcommand{\headrulewidth}{0.4pt}
 \renewcommand{\footrulewidth}{0pt}
+
+
+% Change section labels to san serif
+\usepackage{sectsty}
+\allsectionsfont{\normalfont\sffamily\bfseries}

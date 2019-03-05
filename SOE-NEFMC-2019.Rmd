@@ -1,12 +1,15 @@
 ---
-title: "State of the Ecosystem 2019: New England"
+title:
+geometry: left=2cm, right=2cm, top=2cm, bottom=3cm, footskip = .5cm
 output: 
   pdf_document:
     includes:
-      in_header: latex/preamble-latex.tex
+      in_header: latex/header.tex
     keep_tex: yes
 bibliography: SOE2019.bib
+csl: plos.csl
 link-citations: yes
+subparagraph: yes
 ---
 
 ```{r setup, include=FALSE}
@@ -33,7 +36,7 @@ library(ggrepel)
 library(stringr)
 library(patchwork)
 library(grid)
-library(ggiraph)
+# library(ggiraph)
 library(vegan)
 library(rpart)
 
@@ -139,7 +142,7 @@ Observed changes at the base of the food web, including timing and community com
 
 # Report Structure
 
-The major messages of the report are synthesized above with reference to key figures. The information in this report is organized around general ecosystem-level management objectives (Table \ref{tab:management-objectives}), and indicators related to these objectives are grouped into four general categories in the four sections below: economic and social, protected species, fish and invertebrates, and habitat quality and ecosystem productivity. Each section begins with a summary of main messages with links to other sections, including any new information added at the request of the Council, and includes figures with brief descriptions of all current indicators. Detailed technical methods documentation^[https://noaa-edab.github.io/tech-memo] and indicator data^[https://github.com/NOAA-EDAB/ecodata] are available online. The details of standard figure formatting, categorization of fish and invertebrate species into feeding groups, and definitions of ecological production units (EPUs, including the Mid-Atlantic Bight, MAB) are provided at the end of the document. 
+The major messages of the report are synthesized above with reference to key figures. The information in this report is organized around general ecosystem-level management objectives (Table \ref{tab:management-objectives}), and indicators related to these objectives are grouped into four general categories in the four sections below: economic and social, protected species, fish and invertebrates, and habitat quality and ecosystem productivity. Each section begins with a summary of main messages with links to other sections, including any new information added at the request of the Council, and includes figures with brief descriptions of all current indicators. Detailed technical methods documentation^[https://NOAA-EDAB.github.io/tech-memo] and indicator data^[https://github.com/NOAA-EDAB/ecodata] are available online. The details of standard figure formatting (Fig. \ref{fig:figformat}), categorization of fish and invertebrate species into feeding groups (Table \ref{tab:species-groupings}), and definitions of ecological production units (EPUs, Fig. \ref{fig:EPU-MAP}) are provided at the end of the document.
 
 ```{r management-objectives}
 
@@ -1023,17 +1026,19 @@ prey_freq <- ecodata::common_tern %>%
 
 diet_freq_bar <- prey_freq %>% 
   filter(Freq > 0.05) %>% 
-  dplyr::rename(Prey = Var) %>% 
+  dplyr::mutate(Prey = gsub("\\.", " ", Var)) %>% 
+  # dplyr::rename(Prey = Var) %>%
   ggplot(aes(x = Time, y = Freq, fill = Prey)) +
-  geom_bar_interactive(aes(tooltip = paste(Prey,round(Freq,2),Time)),stat = "identity") +
+  geom_bar(stat = "identity") +
+    # geom_bar_interactive(aes(tooltip = paste(Prey,round(Freq,2),Time)),stat = "identity") +
   viridis::scale_fill_viridis(discrete = TRUE) +
   ggtitle("Prey composition") +
   ylab("Proportion of prey items") +
   theme_ts()
 
 
-diet_freq_bar <- girafe(ggobj = diet_freq_bar)
-diet_freq_bar <- girafe_options(diet_freq_bar, opts_zoom(max = 5) )
+# diet_freq_bar <- girafe(ggobj = diet_freq_bar)
+# diet_freq_bar <- girafe_options(diet_freq_bar, opts_zoom(max = 5) )
 diet_freq_bar
 ```
 
@@ -1151,12 +1156,13 @@ f.df <- data.frame(text = f_missing$Code,
 
 #Plotting code
 ggplot(data = stock_status) +
-  geom_vline(xintercept = 1, linetype = "dotted")+
-  geom_vline(xintercept = 0.5, linetype = "dashed")+
-  geom_hline(yintercept = 1, linetype = "dashed") +
+  geom_vline(xintercept = 1, linetype = "dotted", color = "grey60")+
+  geom_vline(xintercept = 0.5, linetype = "dashed", color = "grey60")+
+  geom_hline(yintercept = 1, linetype = "dashed", color = "grey60") +
   geom_point(aes(x = B.Bmsy,
                  y = F.Fmsy,
-                 color = Council)) +
+                 color = Council,
+                 shape = Council)) +
   geom_text_repel(aes(x = B.Bmsy, #geom_text_repel auto-jitters text around points
                       y = F.Fmsy,
                       label = Code,
@@ -1166,28 +1172,32 @@ ggplot(data = stock_status) +
   geom_text(data = all.df, aes(x = x, y = y, label = text, color = color),show.legend = FALSE, size = 3)+
   geom_text(data = b.df, aes(x = x, y = y, label = text, color = color),show.legend = FALSE, size = 3)+
   geom_text(data = f.df, aes(x = x, y = y, label = text, color = color),show.legend = FALSE, size = 3)+
-  scale_color_manual(values = c("purple","blue"), #Change legend labels for clarity
+  scale_color_manual(values = c("purple","blue"),#c("purple","blue"), #Change legend labels for clarity
                    name = "Managed by",
                    breaks = c("Both","NEFMC"),
                    labels = c("MAFMC/NEFMC","NEFMC"))+
+  scale_shape_manual(values = c(1, 19), #Change legend labels for clarity
+                     name = "Managed by",
+                     breaks = c("Both","NEFMC"),
+                     labels = c("MAFMC/NEFMC","NEFMC"))+
   annotate("rect", xmin = 0.924*x.max,
            xmax = 1.08*x.max,
            ymin = 0.645*y.max,
            ymax = 0.98*y.max,
-           alpha = 0.1) +
+           alpha = 0.01) +
   annotate("text", x = 7.5, y = 4.5, label = "F and B missing", fontface =2, size = 3)+
     annotate("rect", 
              xmin = 0.729*x.max,
            xmax = 0.871*x.max,
            ymin = 0.905*y.max,
            ymax = 0.98*y.max,
-           alpha = 0.1) +
+           alpha = 0.01) +
   annotate("text", x = 6, y = 4.5, label = "B missing", fontface =2, size = 3)+
     annotate("rect", xmin = 0.509*x.max,
            xmax = 0.681*x.max,
            ymin = 0.65*y.max,
            ymax = 0.98*y.max,
-           alpha = 0.1) +
+           alpha = 0.01) +
   annotate("text", x = 4.5, y = 4.5, label = "F missing", fontface =2, size = 3)+
   xlab(expression(~B/B[msy])) +
   ylab(expression(~F/F[msy])) +
@@ -1483,7 +1493,7 @@ menh %>%
   #Axis and theme
   scale_x_continuous(breaks = seq(1965, 2015, by = 10), expand = c(0.01, 0.01)) +
   ylab(expression("Biomass (kg tow"^-1*")")) +
-  ggtitle("MA Inshore BTS") +
+  ggtitle("ME/NH Inshore BTS") +
   theme_facet()+
   theme(strip.text=element_text(hjust=0))
 
