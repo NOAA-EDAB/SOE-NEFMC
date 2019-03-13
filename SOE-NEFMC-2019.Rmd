@@ -963,7 +963,105 @@ ggplot() +
 The Gulf of Maine DPS of Atlantic salmon is listed as endangered. These salmon are found in coastal waters of New England and now spawn only in Maine rivers. Spawner abundance is less than 10% of historic levels with returns averaging around 1,000 annually since 2012.  They are highly reliant on connectivity between ocean and freshwater habitats to complete their life cycle. They are also extremely sensitive to climate and ecosystem changes since they have specific habitat requirements for each of their life stages. These populations migrate through some of the most rapidly warming marine regions and marine regime shifts have impacted their ocean productivity. The Recovery Plan for the Gulf of Maine DPS of Atlantic Salmon was published in 2019, and it highlights specific actions to conserve and recover the species: enhancing river-ocean connectivity; maintaining genetic diversity; increasing the number of spawning adults; and furthering our understanding of marine and estuarine habitats.  Shortnose sturgeon (endangered) and five distinct populations segments (DPS) of Atlantic sturgeon are found in coastal waters of New England (endangered: New York Bight, Chesapeake Bay, Carolina, and South Atlantic; threatened: Gulf of Maine). Several populations spawn in New England watersheds, and river-ocean connectivity is an important habitat characteristic. These populations are vulnerable to climate and ecosystem changes as their life history results in high biological sensitivity and habitat needs result in very high climate exposure. Threat reductions are focused on protecting critical habitat, habitat restoration, reducing ship-strikes, and bycatch reduction.  
 
 ## Common terns (GOM)
-Seabird breeding colonies in the GOM are monitored and managed to promote recovery of formerly harvested species. Common terns breed on islands throughout the Gulf of Maine, feeding on a wide range of invertebrates and fish including Atlantic herring, juvenile hakes, and sand lance. As surface feeding birds, terns are sensitive to vertical distribution of prey as well as nearshore conditions in general, with a foraging distance of 10-20 km from a nesting colony. GOM common tern average productivity (fledgelings per nest) across 7 colonies has varied over time but was low in 2018 (Fig. \ref{fig:aggregate-prod}), a year with record-high summer SST in the GOM (Fig. \ref{fig:NE-SST-anom-series}), and substantial butterfish in tern diets (Fig. \ref{fig:stacked-bar-prey-freq}). 
+Seabird breeding colonies in the GOM are monitored and managed to promote recovery of formerly harvested species. Common terns are well-monitored and are considered good nearshore ecosystem indictators due to their wide distribution and generalist diet. Common terns breed on islands throughout the Gulf of Maine (Fig. \ref{fig:map-and-prey}a), feeding on a wide range of invertebrates and fish including Atlantic herring, juvenile (mainly white) hakes, and sand lance (Fig. \ref{fig:map-and-prey}b). As surface feeding birds, terns are sensitive to vertical distribution of prey as well as nearshore conditions in general, with a foraging distance of 10-20 km from a nesting colony. 
+
+```{r map-and-prey, fig.cap = "Common terns: a. Locations of the seven sampled common tern nesting sites in Gulf of Maine (EER = Eastern Egg Rock, JI = Jenny Island, MR = Matinicus Rock, OGI = Outer Green Island, PINWR = Pond Island National Wildlife Refuge, SINWR = Seal Island National Wildlife Refuge, STI = Stratton Island), and b. Prey frequencies in the diets of common tern observed across the seven colonies in Gulf of Maine. Prey occurring in <5 percent of common tern diets were excluded for clarity.", fig.height = 4, fig.width = 8}
+
+#Map subfig
+# Set lat/lon window for maps
+xmin = -70.5
+xmax = -68.25
+ymin = 43
+ymax = 44.5
+xlims <- c(xmin, xmax)
+ylims <- c(ymin, ymax)
+island_loc <- data.frame(Island = c("EER","JI","MR","OGI",
+                                    "PINWR","SINWR","STI"),
+                         Latitude = c(43.861,43.764,43.785,43.650,
+                                      43.739,43.886,43.505),
+                         Longitude = c(-69.382,-69.909,-68.854,-70.124,
+                                       -69.771,-68.742,-70.312))
+islands <- ggplot() +
+  geom_sf(data = new_england, size = map.lwd) +
+  geom_point(data = island_loc, aes(x = Longitude, y = Latitude)) +
+  geom_label_repel(data = island_loc, aes(x = Longitude, y = Latitude,
+                                          label = Island), nudge_y  = -0.1, 
+                   size = 2.5) +
+  coord_sf(crs = crs, xlim = xlims, ylim = ylims) +
+  theme_map() +
+  ggtitle("Common tern study sites") +
+  xlab("Longitude") +
+  ylab("Latitude") +
+  theme(panel.border = element_rect(colour = "black", fill=NA, size=0.75),
+        legend.key = element_blank(),
+        axis.title = element_text(size = 11),
+        strip.background = element_blank(),
+        strip.text=element_text(hjust=0),
+        axis.text = element_text(size = 8))
+# inset_states <- new_england %>% filter(STATE_NAME %in% c("Maine",
+#                                                          "New Hampshire",
+#                                                          "Massachusetts"))
+# Set lat/lon window for maps
+xmin2 = -72
+xmax2 = -66.25
+ymin2 = 42.5
+ymax2 = 47.5
+xlims2 <- c(xmin2, xmax2)
+ylims2 <- c(ymin2, ymax2)
+NE <- ggplotGrob(
+ggplot()+
+  geom_sf(data = new_england, size = map.lwd) +
+  coord_sf(crs = crs, xlim = xlims2, ylim = ylims2) +
+  annotate("rect", xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax, color = "black",
+           size = 0.1, fill = "transparent") +
+  theme_map() +
+  xlab("") +
+  ylab("") +
+  theme(panel.border = element_rect(colour = "black", fill = "transparent", size=0.75),
+        plot.background = element_rect(fill = "transparent", colour = NA),
+        legend.key = element_blank(),
+        axis.title = element_text(size = 11),
+        strip.background = element_blank(),
+        strip.text=element_text(hjust=0),
+        axis.text = element_blank())
+)
+full_map <- islands +
+  annotation_custom(grob = NE, xmin = -69, xmax = -68.25, ymin = 42.9, ymax = 43.6)
+
+
+# Prey freq stacked bar
+prey_freq <- ecodata::common_tern %>% 
+  filter(str_detect(Var, "Diet"),
+         !str_detect(Var, "Sum")) %>% 
+    mutate(Island = word(Var, 1),
+         Var = word(Var, 4)) %>%
+    group_by(Var, Time) %>% 
+    dplyr::summarise(Value = sum(Value, na.rm = T)) %>% 
+    group_by(Time) %>% 
+    mutate(Freq = Value/sum(Value, na.rm = T)) %>% 
+    group_by(Var) %>% 
+  mutate(hline = mean(Freq, na.rm = T))
+
+diet_freq_bar <- prey_freq %>% 
+  filter(Freq > 0.05) %>% 
+  dplyr::mutate(Prey = gsub("\\.", " ", Var)) %>% 
+  # dplyr::rename(Prey = Var) %>%
+  ggplot(aes(x = Time, y = Freq, fill = Prey)) +
+  geom_bar(stat = "identity") +
+    # geom_bar_interactive(aes(tooltip = paste(Prey,round(Freq,2),Time)),stat = "identity") +
+  viridis::scale_fill_viridis(discrete = TRUE) +
+  ggtitle("Prey composition") +
+  ylab("Proportion of prey items") +
+  theme_ts()
+
+
+# diet_freq_bar <- girafe(ggobj = diet_freq_bar)
+# diet_freq_bar <- girafe_options(diet_freq_bar, opts_zoom(max = 5) )
+
+full_map + diet_freq_bar + plot_layout(ncol = 2, widths=c(4,4))
+```
+
+GOM common tern average productivity (fledgelings per nest) across 7 colonies has varied over time but was low in 2018 (Fig. \ref{fig:aggregate-prod}), a year with record-high summer SST in the GOM (Fig. \ref{fig:NE-SST-anom-series}), and substantial butterfish in tern diets (Fig. \ref{fig:map-and-prey}b). 
 
 ```{r aggregate-prod, fig.cap = "Mean common tern productivity at nesting sites in Gulf of Maine. Error bars show +/- 1 SE of the mean.",fig.width = 5, fig.asp = 0.55 }
 aggregate_prod <- ecodata::common_tern %>% 
@@ -1008,38 +1106,6 @@ aggregate_prod %>%
   theme_ts()
 
 
-```
-
-```{r stacked-bar-prey-freq, fig.cap = "Prey frequencies in the diets of common tern observed at seven different islands in Gulf of Maine. Prey occurring in <5 percent of common tern diets were excluded for clarity.", fig.height = 4, fig.width = 8}
-
-prey_freq <- ecodata::common_tern %>% 
-  filter(str_detect(Var, "Diet"),
-         !str_detect(Var, "Sum")) %>% 
-    mutate(Island = word(Var, 1),
-         Var = word(Var, 4)) %>%
-    group_by(Var, Time) %>% 
-    dplyr::summarise(Value = sum(Value, na.rm = T)) %>% 
-    group_by(Time) %>% 
-    mutate(Freq = Value/sum(Value, na.rm = T)) %>% 
-    group_by(Var) %>% 
-  mutate(hline = mean(Freq, na.rm = T))
-
-diet_freq_bar <- prey_freq %>% 
-  filter(Freq > 0.05) %>% 
-  dplyr::mutate(Prey = gsub("\\.", " ", Var)) %>% 
-  # dplyr::rename(Prey = Var) %>%
-  ggplot(aes(x = Time, y = Freq, fill = Prey)) +
-  geom_bar(stat = "identity") +
-    # geom_bar_interactive(aes(tooltip = paste(Prey,round(Freq,2),Time)),stat = "identity") +
-  viridis::scale_fill_viridis(discrete = TRUE) +
-  ggtitle("Prey composition") +
-  ylab("Proportion of prey items") +
-  theme_ts()
-
-
-# diet_freq_bar <- girafe(ggobj = diet_freq_bar)
-# diet_freq_bar <- girafe_options(diet_freq_bar, opts_zoom(max = 5) )
-diet_freq_bar
 ```
 
 Increased butterfish in diets reflects the extension of this warm water species into GOM. Due to their thin, deep body form, butterfish are often difficult for small seabird chicks to ingest and swallow, causing chicks to starve and/or parent birds to increase foraging effort. GOM common tern diet diversity was mainly above the long term mean since 2006 (Fig. \ref{fig:tern-diet-diversity}). High diet diversity may be related to lower availability of preferred prey types such as herring and sand lance relative to increased availability of other species associated with warmer SST.
