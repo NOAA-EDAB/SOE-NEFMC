@@ -141,7 +141,7 @@ Fisheries are significantly affecting protected species, particularly large whal
 
 Several climate and ecosystem observations are trending towards or have reached unprecedented levels. The Northeast US shelf is among the fastest warming waters globally (Fig. \ref{fig:long-term-sst}) with implications for species physiology, productivity, distribution, and community composition. Globally, 2018 was the 4th warmest year on record with the last four years being the warmest on record. In both the GOM and GB, 2018 seasonal sea surface temperatures were above average, while while the summer temperatures in the Gulf of Maine were the highest on record (Fig. \ref{fig:NE-SST-anom-series}). Annual average bottom temperature measurements show a significant long term warming trend in the GOM (Fig. \ref{fig:NE-bot-temp}). Ocean circulation is changing as well. The position of the northern edge of the Gulf Stream has trended northward since the late 1950s, with an increasing rate since 2009. The most northerly positions on record were observed between 2014-2017 (Fig. \ref{fig:GSI}). Since the mid-2000’s, the warmer, saltier shelf slope water associated with the Gulf Stream has dominated the input into the GOM at the Northeast Channel (Fig. \ref{fig:wsw-prop}). A more northerly Gulf Stream position is generally associated with warmer ocean temperature in the Northeast US shelf [@zhang_role_2007] and increased sea surface height along the U.S. east coast [@goddard_extreme_2015]. 
 
-The management implications of these ocean changes vary by region and species, and are not fully understood at this point. Changes in the distribution of managed fish species continue, with aggregate trends on the entire Northeast Shelf shifting towards the northeast and generally into deeper water (Fig. \ref{fig:spec-dist}). These shifts place increasing pressure on the management system. The proportion of NEFMC managed benthivore species (righteye flounders, haddock) has declined over time in Mid-Atlantic waters according to bottom trawl surveys (Fig. \ref{fig:NEFMC-in-MAB}), while the proportion of MAFMC managed planktivore (squids, mackerel, and butterfish) species has been increasing in New England waters in both surveys and landings (Figs. \ref{fig:MAFMC-in-NE}, \ref{fig:comm-landings-ne}). Butterfish have been observed in Gulf of Maine common tern fledgling diets between 2009-2011 and again in 2018 (Fig. \ref{fig:stacked-bar-prey-freq}), which negatively impacts tern productivity. The downward trend in recreational species diversity in the Mid-Atlantic (see Mid-Atlantic report) contrasts with an increase in recreational species diversity over time in New England (Fig. \ref{fig:rec-div}), although it is unclear to what extent this result is due to the aggregation of SAFMC species in the indicator itself. Nearshore MA and ME/NH survey indices show some similar patterns to offshore surveys, although with different magnitudes, perhaps reflecting seasonal importance of nearshore habitats (Figs. \ref{fig:gom-biomass-ne},  \ref{fig:MA-inshore}, \ref{fig:menh-survey}); these patterns will be explored in more detail in future analyses. As temperature and ocean circulation indicators trend toward extremes, fishery management based on static stock areas will likely face continued changes in species distribution.
+The management implications of these ocean changes vary by region and species, and are not fully understood at this point. Changes in the distribution of managed fish species continue, with aggregate trends on the entire Northeast Shelf shifting towards the northeast and generally into deeper water (Fig. \ref{fig:spec-dist}). These shifts place increasing pressure on the management system. The proportion of NEFMC managed benthivore species (righteye flounders, haddock) has declined over time in Mid-Atlantic waters according to bottom trawl surveys (Fig. \ref{fig:NEFMC-in-MAB}), while the proportion of MAFMC managed planktivore (squids, mackerel, and butterfish) species has been increasing in New England waters in both surveys and landings (Figs. \ref{fig:MAFMC-in-NE}, \ref{fig:comm-landings-ne}). Butterfish have been observed in Gulf of Maine common tern fledgling diets between 2009-2011 and again in 2018 (Fig. \ref{fig:map-and-prey}b), which negatively impacts tern productivity. The downward trend in recreational species diversity in the Mid-Atlantic (see Mid-Atlantic report) contrasts with an increase in recreational species diversity over time in New England (Fig. \ref{fig:rec-div}), although it is unclear to what extent this result is due to the aggregation of SAFMC species in the indicator itself. Nearshore MA and ME/NH survey indices show some similar patterns to offshore surveys, although with different magnitudes, perhaps reflecting seasonal importance of nearshore habitats (Figs. \ref{fig:gom-biomass-ne},  \ref{fig:MA-inshore}, \ref{fig:menh-survey}); these patterns will be explored in more detail in future analyses. As temperature and ocean circulation indicators trend toward extremes, fishery management based on static stock areas will likely face continued changes in species distribution.
 
 Observed changes at the base of the food web, including timing and community composition, affect productivity of protected and managed species in ways we do not yet fully understand. There is a trend of increasing primary production in New England, but this trend is primarily driven by increased summer production, which is due to warmer temperatures and increased bacterial remineralization and nutrient recycling (Fig. \ref{fig:NE-PP-OCCI}). This increased productivity is most likely from smaller-celled species that contribute less to fish production compared to larger phytoplankton. Current zooplankton trends show a shift towards smaller-bodied copepods (Fig. \ref{fig:NE-sli}). This suggests a possible return to conditions last observed during the 1990s, when small bodied copepods dominated the zooplankton community, regime shifts in groundfish recruitment were observed [@perretti_regime_2017], and north Atlantic right whales experienced lower birth rates [@greene_remote_2013]. The timing of shifts in fish condition may be similar (Fig. \ref{fig:ne-cf}), though potential mechanisms connecting adult fish condition to zooplankton patterns require further study.
 
@@ -1074,9 +1074,9 @@ diet_freq_bar <- prey_freq %>%
 full_map + diet_freq_bar + plot_layout(ncol = 2, widths=c(4,4))
 ```
 
-GOM common tern average productivity (fledgelings per nest) across 7 colonies has varied over time but was low in 2018 (Fig. \ref{fig:aggregate-prod}), a year with record-high summer SST in the GOM (Fig. \ref{fig:NE-SST-anom-series}), and substantial butterfish in tern diets (Fig. \ref{fig:map-and-prey}b). 
+GOM common tern average productivity (fledgelings per nest) across 7 colonies has varied over time but was low in 2018 (Fig. \ref{fig:tern-prod-div}a), a year with record-high summer SST in the GOM (Fig. \ref{fig:NE-SST-anom-series}), and substantial butterfish in tern diets (Fig. \ref{fig:map-and-prey}b). 
 
-```{r aggregate-prod, fig.cap = "Mean common tern productivity at nesting sites in Gulf of Maine. Error bars show +/- 1 SE of the mean.",fig.width = 5, fig.asp = 0.55 }
+```{r tern-prod-div, fig.cap = "a. Mean common tern productivity at nesting sites in Gulf of Maine. Error bars show +/- 1 SE of the mean. b. Shannon diversity of common tern diets observed at nesting sites in Gulf of Maine. Diversity of common tern diets has been predominantly above the long-term mean since 2006.",fig.width = 8, fig.asp = 0.25 }
 aggregate_prod <- ecodata::common_tern %>% 
     filter(!str_detect(Var, "Diet|Sum"))  %>% 
   mutate(Island = word(Var, 1),
@@ -1093,8 +1093,7 @@ aggregate_prod <- ecodata::common_tern %>%
          se.high = Mean + SE,
          hline = mean(Mean, na.rm = T))
 
-aggregate_prod %>% 
-  ggplot() +
+prodplot <- aggregate_prod %>% ggplot() +
 #Highlight last ten years
   annotate("rect", fill = shade.fill, alpha = shade.alpha,
       xmin = x.shade.min , xmax = x.shade.max,
@@ -1116,14 +1115,8 @@ aggregate_prod %>%
            size = hline.size,
            alpha = hline.alpha,
            linetype = hline.lty) +
+  labs(tag = "a")  +
   theme_ts()
-
-
-```
-
-Increased butterfish in diets reflects the extension of this warm water species into GOM. Due to their thin, deep body form, butterfish are often difficult for small seabird chicks to ingest and swallow, causing chicks to starve and/or parent birds to increase foraging effort. GOM common tern diet diversity was mainly above the long term mean since 2006 (Fig. \ref{fig:tern-diet-diversity}). High diet diversity may be related to lower availability of preferred prey types such as herring and sand lance relative to increased availability of other species associated with warmer SST.
-
-```{r tern-diet-diversity, fig.cap = "Shannon diversity of common tern diets observed at nesting sites in Gulf of Maine. Diversity of common tern diets has been predominantly above the long-term mean since 2006.",fig.width = 5, fig.asp = 0.55}
 
 diet_div <- ecodata::common_tern %>% 
   filter(str_detect(Var, "Diet"),
@@ -1178,10 +1171,13 @@ ggplot(aes(x = Time, y = Value)) +
            size = hline.size,
            alpha = hline.alpha,
            linetype = hline.lty) +
+  labs(tag = "b")  +
   theme_ts() 
 
-shannon 
+prodplot + shannon + plot_layout(ncol = 2, widths=c(4,4))
 ```
+
+Increased butterfish in diets reflects the extension of this warm water species into GOM. Due to their thin, deep body form, butterfish are often difficult for small seabird chicks to ingest and swallow, causing chicks to starve and/or parent birds to increase foraging effort. GOM common tern diet diversity was mainly above the long term mean since 2006 (Fig. \ref{fig:tern-prod-div}b). High diet diversity may be related to lower availability of preferred prey types such as herring and sand lance relative to increased availability of other species associated with warmer SST.
 
 \newpage
 
