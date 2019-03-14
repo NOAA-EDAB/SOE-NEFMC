@@ -182,7 +182,7 @@ The objectives of U.S. federal fishery management include providing benefits to 
 ## Gulf of Maine
 A long term significant decrease in NEFMC managed species revenue was offset by non-NEFMC managed species (Fig. \ref{fig:comm-revenue-ne}), likely lobster, as indicated by the focal component-level Bennet Volume Indicator for Benthivores (Fig. \ref{fig:bennet-ne}). 
 
-```{r comm-revenue-ne, fig.cap = "Total commercial revenue (black) and revenue from NEFMC managed species (red) in Gulf of Maine (left) and Georges Bank (right).", fig.width = 8, fig.asp = 0.35}
+```{r comm-revenue-ne, fig.cap = "Total commercial revenue (black) and revenue from NEFMC managed species (red) in Gulf of Maine (left) and Georges Bank (right).", fig.width = 8, fig.asp = 0.25}
 
 #Filtering and aggregation step
 rev_agg <- ecodata::comdat %>% 
@@ -315,7 +315,8 @@ ggplot()+
   scale_x_continuous(breaks = seq(1965, 2015, by = 10), expand = c(0.01, 0.01)) +
   scale_y_continuous(breaks = seq(y.lim[1], y.lim[2], by = 100), limits = y.lim, expand = c(0.01, 0.01)) +
   theme_ts() +
-  theme(title = element_text(size = 10))
+  theme(title = element_text(size = 10)) +
+  theme(legend.position = c(0.3, 0.15), legend.direction = "horizontal")
 
 gb_bennet <- indicators %>% filter(EPU == "GB" & Var %in% c("Benthos Volume","Benthos Price")) %>% 
 ggplot()+
@@ -334,7 +335,8 @@ ggplot()+
   scale_x_continuous(breaks = seq(1965, 2015, by = 10), expand = c(0.01, 0.01)) +
   scale_y_continuous(breaks = seq(y.lim[1], y.lim[2], by = 100), limits = y.lim, expand = c(0.01, 0.01)) +
   theme_ts() +
-  theme(title = element_text(size = 10))
+  theme(title = element_text(size = 10)) +
+  theme(legend.position = c(0.3, 0.15), legend.direction = "horizontal")
 
 cowplot::plot_grid(gom_bennet, gb_bennet, ncol = 2, rel_widths = c(1,1))
 
@@ -342,7 +344,7 @@ cowplot::plot_grid(gom_bennet, gb_bennet, ncol = 2, rel_widths = c(1,1))
 
 There is a concurrent significant decrease in NEFMC-managed commercial seafood production and landings (Fig. \ref{fig:total-landings-ne}), with Piscivores, Planktivores, and NEFMC-managed Benthivores showing long term negative trends (Fig. \ref{fig:comm-landings-ne}). This trend is a continuation on the reliance on a small number of species, which could induce additional risk in the social system. 
 
-```{r total-landings-ne, fig.cap = paste0("Total commercial seafood landings (black) shown with NEFMC managed seafood landings (red) in Gulf of Maine (left) and Georges Bank (right)."), fig.width = 8, fig.asp = 0.35}
+```{r total-landings-ne, fig.cap = paste0("Total commercial seafood landings (black) shown with NEFMC managed seafood landings (red) in Gulf of Maine (left) and Georges Bank (right)."), fig.width = 8, fig.asp = 0.25}
 #Managed landings
 managed_landings <- ecodata::comdat  %>%
   filter(str_detect(Var, paste0(council_abbr," managed species - Landings weight|JOINT managed species - Landings weight")),
@@ -431,7 +433,7 @@ cowplot::plot_grid(gom_total, gb_total, ncol = 2)
 
 One notable signal suggesting increased importance of non-NEFMC managed species is the divergence between NEFMC managed and non-NEFMC managed Planktivore landings in last 5 years in the GOM (Fig. \ref{fig:comm-landings-ne}), the result of lower Atlantic herring landings relative to other planktivores. Additionally, the importance of state-managed fisheries continues to increase, with highly dependant and thus highly vulnerable ports in Maine relying on lobster.
 
-```{r comm-landings-ne, warning=F, fig.width = 8, fig.height = 9,fig.cap = paste0(council_abbr," managed species landings (red) and total commercial landings (black) by feeding guild in Gulf of Maine (left) and Georges Bank (right).")}
+```{r comm-landings-ne, warning=F, fig.width = 8, fig.asp = .75,fig.cap = paste0(council_abbr," managed species landings (red) and total commercial landings (black) by feeding guild in Gulf of Maine (left) and Georges Bank (right).")}
 #Get data for plotting
 
 #Managed landings
@@ -627,7 +629,7 @@ Commercial fleet diversity indices were updated with 2017 data. Current diversit
 
 In contrast to commercial species specialization, indicators highlight an increasing diversity of recreational species caught in New England (Fig. \ref{fig:rec-div}), although recreational fleet effort diversity has not changed over the long term. 
 
-```{r rec-div, fig.width = 5, fig.asp = 1, fig.cap = paste0("Recreational effort diversity and diversity of recreational catch in the ",region,".")}
+```{r rec-div, fig.width = 4, fig.asp = 0.8, fig.cap = paste0("Recreational effort diversity and diversity of recreational catch in the ",region,".")}
 
 recdat <- ecodata::recdat %>% 
   filter(EPU == region_abbr) %>% 
@@ -716,7 +718,7 @@ cowplot::plot_grid(#rec_effort,
 
 Recreational seafood production shows an increasing trend since the mid-1990s with the updated Marine Recreational Information Program (MRIP) data (Fig. \ref{fig:rec-landings-ne})). 
 
-```{r rec-landings-ne, fig.cap = paste0("Total recreational seafood harvest in ",region,"."), fig.width = 5, fig.asp = 0.45}
+```{r rec-landings-ne, fig.cap = paste0("Total recreational seafood harvest in ",region,"."), fig.width = 4, fig.asp = 0.45}
 
 landings_rec <- ecodata::recdat %>% 
   filter(EPU == region_abbr,
@@ -755,7 +757,7 @@ ggplot(data = landings_rec)+
 
 Updated indicators for recreational opportunities (effort days and number of anglers) show general increases since the 1990s, peaking in the late 2000s and declining since then. This is similar to previously reported trends (Fig. \ref{fig:rec-op}). All recreational indicators have been updated with new MRIP data, and indicators for recreational diversity are new for this report. 
 
-```{r rec-op, fig.width = 5, fig.asp = 1, fig.cap = paste0("Recreational effort and number of recreational anglers in the ",region,".")}
+```{r rec-op, fig.width = 4, fig.asp = 0.8, fig.cap = paste0("Recreational effort and number of recreational anglers in the ",region,".")}
 recdat <- ecodata::recdat %>% 
   filter(EPU == region_abbr) %>% 
   group_by(Var) %>% 
