@@ -1281,7 +1281,7 @@ ggplot(data = stock_status) +
 
 Changes in the distribution of managed fish species continue, with aggregate trends on the entire Northeast Shelf towards the northeast and generally into deeper water (Fig. \ref{fig:spec-dist}). These shifts will place increasing pressure on a management system based around stable species distributions. 
 
-```{r spec-dist,fig.width = 5, fig.asp = 1.25, fig.cap = "Aggregate species distribution metrics for species in the Northeast Large Marine Ecosystem."}
+```{r spec-dist,fig.width = 4, fig.asp = 1.2, fig.cap = "Aggregate species distribution metrics for species in the Northeast Large Marine Ecosystem."}
 
 spec_dist <- ecodata::species_dist %>% 
   group_by(Var) %>% 
@@ -1422,7 +1422,7 @@ ggplot(aes(x = Time, y = Value, color = Var)) +
 gom_surv
 ```
 
-```{r gb-biomass-ne, fig.cap = paste0("Fall (left) and spring (right) NEFSC surveyed biomass in Georges Bank."), fig.width=8, fig.asp = 0.75}
+```{r gb-biomass-ne, fig.cap = paste0("Fall (left) and spring (right) NEFSC surveyed biomass on Georges Bank."), fig.width=8, fig.asp = 0.75}
 
 gb_surv <- total_surv %>% 
   filter(EPU == "GB") %>% 
@@ -1463,7 +1463,7 @@ gb_surv
 
 ```
 
-Benthivore biomass catch in both offshore surveys during the fall has declined for the third straight year, with more subtle recent downward trends in the inshore surveys (Figs \ref{fig:MA-inshore}, \ref{fig:menh-survey}). Both the spring and fall biomass of Benthivores from the offshore survey are down from their 2015 highs. Change in haddock catch is the largest contributor to these fluctuations. 
+Benthivore biomass catch in both offshore surveys during the fall has declined for the third straight year from 2015 highs, with more subtle recent downward trends in the inshore surveys (Figs \ref{fig:MA-inshore}, \ref{fig:menh-survey}). Change in haddock catch is the largest contributor to these fluctuations. 
  
 ```{r MA-inshore, fig.width=8, fig.asp = 0.75, fig.cap = "Fall (left) and spring (right) surveyed biomass from the MA state inshore bottom trawl survey."}
 mass <- mass_inshore_survey %>% 
@@ -1716,7 +1716,7 @@ gom_mafmc_props + gb_mafmc_props + plot_layout(ncol = 1)
 
 ```
 
-Other observations corroborate these survey trends. For example, butterfish have been observed in Gulf of Maine common tern fledgling diets between 2009-2011 and again in 2018 (Fig. \ref{fig:stacked-bar-prey-freq}). The downward trend in recreational species diversity in the Mid-Atlantic (see Mid-Atlantic report) contrasts with an increase in recreational species diversity over time in New England (Fig. \ref{fig:rec-div}), although it is unclear to what extent this result is due to the aggregation of SAFMC species in the indicator itself. As temperature and ocean circulation indicators trend toward extremes (next section), fishery management will likely face continued changes in species distribution.
+Other observations corroborate these survey trends. For example, butterfish have been observed in Gulf of Maine common tern fledgling diets between 2009-2011 and again in 2018 (Fig. \ref{fig:map-and-prey}b). The downward trend in recreational species diversity in the Mid-Atlantic (see Mid-Atlantic report) contrasts with an increase in recreational species diversity over time in New England (Fig. \ref{fig:rec-div}), although it is unclear to what extent this result is due to the aggregation of SAFMC species in the indicator itself. As temperature and ocean circulation indicators trend toward extremes (next section), fishery management will likely face continued changes in species distribution.
 
 ## Fish condition (coastwide, NEFMC managed stocks)
 Fish condition is measured as the weight at a given length relative to the average - a measure of 'fatness', and a factor that influences fecundity. This information is from fall NEFSC bottom trawl surveys. Overall, condition factor has improved for many New England species since 2012, similar to overall high condition prior to 2000, and in contrast to overall lower condition between 2001-2010 (Fig. \ref{fig:ne-cf}). The timing of these shifts is similar to shifts in the small-large zooplankton indicator (Fig. \ref{fig:NE-sli}). Condition factor for some NEFMC managed species (red hake, GOM haddock, ocean pout, spiny dogfish, thorny skates, and components of winter, yellowtail and windowpane flounder stocks) was high in 2018. 
@@ -1732,7 +1732,7 @@ knitr::include_graphics(file.path(image.dir, "NEFMC_Fish_Condition_2019.jpg"))
 ## Larval diversity (GOM and GB)
 Fluctuations in larval diversity from NEFSC ECOMON and bottom trawl surveys reflect changing dominance of forage fish, hake, and haddock. GOM larval diversity has been difficult to track due to poor recent ECOMON survey coverage in the winter (Fig. \ref{fig:gom-larval-div}). GB spring larval diversity and richness were relatively low in 2017 (the most recent year with adequate coverage) due to high larval abundance of haddock and sand lance (Fig. \ref{fig:gb-larval-div}). 
 
-```{r gom-larval-div, fig.cap = "Larval diversity indices from ECOMON surveys in the Gulf of Maine.", fig.width = 7, fig.asp = .7}
+```{r gom-larval-div, fig.cap = "Larval diversity indices from ECOMON surveys in the Gulf of Maine.", fig.width = 8, fig.asp = .5}
 gom_larv_div <- ecodata::ichthyo_diversity %>%
   filter(EPU == "GOM",
          str_detect(Var, "Ich Shannon")) %>%
@@ -1783,7 +1783,7 @@ gom_spec_rich <- ecodata::ichthyo_diversity %>%
 
 ```
 
-```{r gb-larval-div, fig.cap = "Larval diversity indices from ECOMON surveys on Georges Bank.", fig.width = 7, fig.asp = .7}
+```{r gb-larval-div, fig.cap = "Larval diversity indices from ECOMON surveys on Georges Bank.", fig.width = 8, fig.asp = .5}
 gb_larv_div <- ecodata::ichthyo_diversity %>%
   filter(EPU == "GB",
          str_detect(Var, "Ich Shannon")) %>%
@@ -1839,15 +1839,15 @@ Investigations are underway to evaluate changes in timing of spawning for manage
 
 # Habitat Quality and Ecosystem Productivity
 
-Productivity of harvested fish and protected species, and therefore sustainability of fisheries, depends on adequate habitat, which encompasses physical and chemical conditions and biological productivity at the base of the food web. Many harvested and protected species on the Northeast US shelf occupy several distinct habitats throughout their life cycle, including estuaries, nearshore coastal, and offshore environments. The indicators in this section provide information on the changing conditions encountered by managed species in different seasons and across habitats, which may explain observed changes in species distribution and productivity. Ultimately, a better understanding of these ecological drivers may permit proactive management in a changing system. 
+Productivity of harvested fish and protected species, and therefore sustainability of fisheries, depends on adequate habitat. Habitat encompasses physical, chemical, and biological factors, including biological productivity at the base of the food web. Many harvested and protected species on the Northeast US shelf occupy several distinct habitats throughout their life cycle, including estuaries, nearshore coastal, and offshore environments. The indicators in this section provide information on the changing conditions encountered by managed species in different seasons and across habitats, which may explain observed changes in species distribution and productivity. Ultimately, a better understanding of these ecological drivers may permit proactive management in a changing system. 
 
 Ocean temperatures in coastal and offshore habitats are at or near unprecedented levels, accompanied by alterations in ocean circulation patterns. Observed changes at the base of the food web, including timing of production and plankton community composition, affect productivity of protected and managed species in ways we do not yet fully understand. 
 
 
 ## Ocean circulation and surface temperature (coastwide)
-The position of the northern edge of the Gulf Stream has been moving to the north since the late 1950s, with an increasing rate since 2009 (Fig. \ref{fig:GSI}). The most northerly positions ever recorded were observed over the most recent years (2014-2017). A more northerly Gulf Stream position is associated with warmer ocean temperature on the Northeast US shelf [@zhang_role_2007], a higher proportion of Atlantic Temperate Slope Water in the Northeast Channel, and increased sea surface height along the U.S. east coast [@goddard_extreme_2015]. 
+The position of the northern edge of the Gulf Stream has moved to the north since the late 1950s, with an increasing rate since 2009 (Fig. \ref{fig:GSI}). The most northerly positions ever recorded were observed over the most recent 2014-2017 period. A more northerly Gulf Stream position is associated with warmer ocean temperature on the Northeast US shelf [@zhang_role_2007], a higher proportion of Atlantic Temperate Slope Water entering the GOM through the Northeast Channel, and increased sea surface height along the U.S. east coast [@goddard_extreme_2015]. 
 
-```{r GSI, fig.width = 5, fig.asp = 0.55, fig.cap = "Index representing the north wall of the Gulf Stream. Positive values represent a more northerly Gulf Stream position."}
+```{r GSI, fig.width = 4, fig.asp = 0.45, fig.cap = "Index representing the north wall of the Gulf Stream. Positive values represent a more northerly Gulf Stream position."}
 gsi %>% 
   mutate(Year = floor(Time)) %>% 
   group_by(Year) %>% 
@@ -1876,7 +1876,7 @@ gsi %>%
 
 Globally, 2018 was the 4th warmest year on record and the last four years were the warmest on record. Since the 1860’s, the Northeast US shelf sea surface temperature (SST) has exhibited an overall warming trend, with the past decade measuring well above the long term average (and the trendline; Fig. \ref{fig:long-term-sst}).
 
-```{r long-term-sst, fig.width = 5, fig.asp = 0.55, fig.cap = "Average annual sea surface temperature (SST) over the Northeast US Shelf"}
+```{r long-term-sst, fig.width = 8, fig.asp = 0.25, fig.cap = "Average annual sea surface temperature (SST) over the Northeast US Shelf"}
 lt_sst <- ecodata::long_term_sst %>% 
   mutate(hline = mean(Value))
 
@@ -1902,9 +1902,9 @@ lt_sst %>%
 
 
 ## Ocean circulation and temperature (GOM and GB)
-The changing position of the Gulf Stream north wall described above directly influences oceanic conditions in the GOM.  Since the mid-2000’s, the warmer, saltier shelf slope water associated with the Gulf Stream has dominated the input into the GOM at the Northeast Channel (Fig. \ref{fig:wsw-prop}). The changing proportions of source water affect the temperature, salinity and nutrient inputs to the system. This represents a new feature of the ecosystem overall, and is related to the observed GOM ocean heat wave summer to fall 2018 GOM. 
+The changing position of the Gulf Stream north wall described above directly influences oceanic conditions in the GOM.  Since the mid-2000’s, the warmer, saltier shelf slope water associated with the Gulf Stream has dominated the input into the GOM at the Northeast Channel (Fig. \ref{fig:wsw-prop}). The changing proportions of source water affect the temperature, salinity and nutrient inputs to the system. 
 
-```{r wsw-prop, fig.width=5, fig.asp = 0.55, fig.cap = "Proportion of warm slope water (WSW) and Labrador slope water (LSLW) entering the GOM through the Northeast Channel."}
+```{r wsw-prop, fig.width=5, fig.asp = 0.45, fig.cap = "Proportion of warm slope water (WSW) and Labrador slope water (LSLW) entering the GOM through the Northeast Channel."}
 
 sw.df <- slopewater %>% 
   mutate(Var, Var = plyr::mapvalues(Var, from = c("WSW proportion ne channel",
@@ -1935,7 +1935,7 @@ ggplot(data = sw.df) +
 
 Concurrently, annual surface and bottom temperatures (Fig. \ref{fig:NE-bot-temp}) in the GOM and GB have trended warmer since the early 1980s, and seasonal surface temperatures have trended warmer in spring, summer, and fall. The 2018 summer sea surface temperatures were the highest on record in the GOM, although temperatures during the other seasons were near or slightly below average (Figs. \ref{fig:NE-SST-anom-series}, \ref{fig:NE-SST-insitu}). 
   
-```{r NE-bot-temp, fig.width = 6, fig.asp = .7, fig.cap = "GOM and GB annual bottom temperature anomalies."}
+```{r NE-bot-temp, fig.width = 8, fig.asp = .25, fig.cap = "GOM and GB annual bottom temperature anomalies."}
 bot_temp_insitu_gom <- oceantemp_insitu %>%
   filter(EPU == "GOM",
          Var == "bottom temp anomaly in situ") %>% 
@@ -1947,7 +1947,7 @@ bot_temp_insitu_gom <- oceantemp_insitu %>%
   geom_line(aes(x = Time, y = Value)) +
   geom_gls(aes(x = Time, y = Value)) +
   geom_point(aes(x = Time, y = Value), size = 1) +
-  ylab("Temperature Anomaly (°C)") +
+  ylab("Temp. Anomaly (°C)") +
   ggtitle("GOM Bottom Temperature Anomaly") +
   scale_x_continuous(expand = c(0.01, 0.01)) +
     geom_hline(aes(yintercept = hline),
@@ -1970,7 +1970,7 @@ bot_temp_insitu_gb <- oceantemp_insitu %>%
   geom_line(aes(x = Time, y = Value)) +
   geom_gls(aes(x = Time, y = Value)) +
   geom_point(aes(x = Time, y = Value), size = 1) +
-  ylab("Temperature Anomaly (°C)") +
+  ylab("Temp. Anomaly (°C)") +
   ggtitle("GB Bottom Temperature Anomaly") +
   scale_x_continuous(expand = c(0.01, 0.01)) +
     geom_hline(aes(yintercept = hline),
@@ -1984,13 +1984,13 @@ bot_temp_insitu_gb <- oceantemp_insitu %>%
 
 
 bot_temp_insitu_gom +
- bot_temp_insitu_gb + 
-  plot_layout(ncol =  1) &
-  theme(plot.margin = unit(c(0, 0, 0, 0), "cm"))
+ bot_temp_insitu_gb + plot_layout(nrow = 1)
+  #plot_layout(ncol =  1) &
+  #theme(plot.margin = unit(c(0, 0, 0, 0), "cm"))
 
 ```
 
-```{r NE-SST-anom-series, fig.width = 8, fig.asp = 0.7, fig.cap = "GOM and GB seasonal sea surface temperature anomaly time series."}
+```{r NE-SST-anom-series, fig.width = 8, fig.asp = 0.45, fig.cap = "GOM and GB seasonal sea surface temperature anomaly time series."}
 ne_anom <- seasonal_oisst_anom %>% 
   filter(EPU %in% c("GOM","GB")) %>% 
     mutate(hline = 0,
@@ -2021,7 +2021,7 @@ ne_anom_plt <- ggplot(data = ne_anom,
 ne_anom_plt
 ```
 
-```{r NE-SST-insitu, fig.width=8, fig.height = 8, fig.cap = "GOM and GB 2018 seasonal sea surface temperature spatial anomalies."}
+```{r NE-SST-insitu, fig.width=8, fig.height = 5, fig.cap = "GOM and GB 2018 seasonal sea surface temperature spatial anomalies."}
 #EPU shapefile
 epu_sf_ne <- ecodata::epu_sf %>% 
   filter(EPU %in% c("GOM","GB"))
@@ -2032,8 +2032,8 @@ map.lwd <- 0.4
 # Set lat/lon window for maps
 xmin = -73
 xmax = -65
-ymin = 39
-ymax = 45
+ymin = 39.5
+ymax = 44.5
 xlims <- c(xmin, xmax)
 ylims <- c(ymin, ymax)
 sst <- seasonal_oisst_anom_gridded 
@@ -2071,7 +2071,7 @@ sst_map
 ```
 
 
-## Primary production (MAB)
+## Primary production (GOM and GB)
 Phytoplankton primary production is a function of biomass, light, and temperature, and sets the overall level of potential fish and fishery productivity in an ecosystem (Fig. \ref{fig:prod-potential}). 
 
 ```{r prod-potential, fig.cap = "Simplified representation of the pathways linking primary production and environmental driver throughout a fishery ecosystem. The important societal benefits that derive from sustainable fisheries depend directly on a sequence of events starting at the base of the food web. The production of fish and shellfish available for harvest by the fisheries follows pathways of energy flow from phytoplankton and zooplankton to different parts of the food web. The production at each component further depends on the effect of a host of environmental drivers including temperature, salinity, and other factors.", out.width='\\linewidth'}
@@ -2079,7 +2079,7 @@ Phytoplankton primary production is a function of biomass, light, and temperatur
 knitr::include_graphics(file.path(image.dir, "SOE_Network_Diagram.png"))
 ```
 
-There is a trend of increasing primary production in both New England systems, primarily driven by increased summer production, which is due to warmer temperatures and increased bacterial remineralization and nutrient recycling (Fig. \ref{fig:NE-PP-OCCI}). This increased productivity is most likely from smaller-celled species that contribute less to fish production compared to larger phytoplankton. The winter-spring phytoplankton bloom, comprised primarily of diatoms, was above average in both the GOM and GB, however the timing in the GB was earlier than normal (Fig. \ref{fig:NE-chl-weekly}). Summer biomass was below average throughout most of the region, while the fall bloom was below average nearshore in the GOM and slightly above average offshore and in parts of GB.
+There is a trend of increasing primary production in both New England systems, primarily driven by increased summer production, which is due to warmer temperatures and increased bacterial remineralization and nutrient recycling (Fig. \ref{fig:NE-PP-OCCI}). This increased productivity is most likely from smaller-celled species that contribute less to fish production compared to larger phytoplankton. The 2018 winter-spring phytoplankton bloom, comprised primarily of larger diatoms, was above average in both the GOM and GB, however the timing in the GB was earlier than normal (Fig. \ref{fig:NE-chl-weekly}). Summer biomass was below average throughout most of the region, while the fall bloom was below average nearshore in the GOM and slightly above average offshore and in parts of GB.
 
 ```{r NE-PP-OCCI, fig.width=8, fig.height = 8, fig.cap = "Monthly primary production trends show the annual cycle (i.e. the peak during the summer months) and the changes over time for each month."}
 out_pp <- ecodata::chl_pp %>% 
@@ -2180,7 +2180,7 @@ GB_chl <- ggplot(data = GB_chl_weekly) +
   xlab("")+
   ylab("") +
   scale_x_continuous(breaks = seq(1,52,10),
-                   labels = c("","","","","",""),
+                   labels = c("Jan.","Mar.","May","July","Oct.","Dec."),
                    expand = c(0.01,0.01)) +
   scale_color_manual(values = c("#ef8a62","#2c7fb8","#a1d99b"))+
   theme_ts()
@@ -2200,7 +2200,7 @@ GOM_chl <- ggplot(data = GOM_chl_weekly) +
   xlab("")+
   ylab(expression("CHL (mg m"^-3*")")) +
   scale_x_continuous(breaks = seq(1,52,10),
-                   labels = c("","","","","",""),
+                   labels = c("Jan.","Mar.","May","July","Oct.","Dec."),
                    expand = c(0.01,0.01)) +
   scale_color_manual(values = c("#ef8a62","#2c7fb8","#a1d99b"))+
   theme_ts()
@@ -2251,9 +2251,9 @@ GOM_chl + GB_chl + plot_layout(ncol = 2) & theme(plot.margin = margin(r = 0.5))
 
 
 ## Zooplankton (MAB)
-The most abundant zooplankton species in the GOM are *Calanus finmarchicus* (an important prey for larval fish and the north Atlantic right whale),  *Centropages typicus*, and *Psuedocalanus* spp. [@morse_distinct_2017].  *Calanus finmarchicus* had low overall abundance in the GOM from 2009-2014, with higher than normal abundance in 2015-2016 and a return to normal levels in 2017 (Fig. \ref(fig:NE-zoo-abund}). On GB, *Calanus finmarchicus* annual abundance has been low continually since 2009. *Centropages typicus* has had higher than normal abundance from 2012-2017 on both GB and GOM. *Pseudocalanus* abundance trends were similar to *Calanus* in recent years, with low abundance from 2001-2014 in the GOM and higher than normal 2015-2016, but normal abundance in 2017. On GB, *Pseudocalanus* abundance has a significant long term decline (Fig. \ref{fig:NE-zoo-abund}).
+The most abundant zooplankton species in the GOM are *Calanus finmarchicus* (an important prey for larval fish and the north Atlantic right whale),  *Centropages typicus*, and *Psuedocalanus* spp. [@morse_distinct_2017].  *Calanus finmarchicus* had low overall abundance in the GOM from 2009-2014, with higher than normal abundance in 2015-2016 and a return to normal levels in 2017 (Fig. \ref{fig:NE-zoo-abund}). On GB, *Calanus finmarchicus* annual abundance has been low continually since 2009. *Centropages typicus* has had higher than normal abundance from 2012-2017 on both GB and GOM. *Pseudocalanus* abundance trends were similar to *Calanus* in recent years, with low abundance from 2001-2014 in the GOM and higher than normal 2015-2016, but normal abundance in 2017. On GB, *Pseudocalanus* abundance has a significant long term decline (Fig. \ref{fig:NE-zoo-abund}).
 
-```{r NE-zoo-abund, fig.width = 8, fig.asp = .7, fig.cap = "Abundance anomaly time series for key zooplankton species found in the GOM and GB."}
+```{r NE-zoo-abund, fig.width = 8, fig.asp = .5, fig.cap = "Abundance anomaly time series for key zooplankton species found in the GOM and GB."}
 zoo_abund <- ecodata::zoo_anom_sli %>% 
   filter(EPU %in% c("GOM","GB"),
          !str_detect(Var, "small-large")) %>% 
@@ -2308,7 +2308,7 @@ gom_zoo_abund + gb_zoo_abund + plot_layout(ncol = 1)
 
 Changes in the abundance of the larger *Calanus finmarchicus* are also reflected in the size distribution of the copepods. The small-large copepod index is a measure of the relative size composition of the dominant copepod taxa. During the 1990s and early 2000s, the positive index was driven by high relative abundance of smaller bodied copepods and a lower relative abundance of *Calanus finmarchicus*. This period also corresponds with regime shifts to lower fish recruitment [@perretti_regime_2017]. The current trend in the index suggests an increase in the relative abundance of smaller bodied copepods (Fig. \ref{fig:NE-sli}).
 
-```{r NE-sli, fig.cap = "GOM and GB small-large zooplankton index and the annual primary production anomaly."}
+```{r NE-sli, fig.width = 8, fig.asp = 0.45, fig.cap = "GOM and GB small-large zooplankton index and the annual primary production anomaly."}
 sli <- ecodata::zoo_anom_sli %>% 
   filter(EPU %in% c("GOM","GB"),
          str_detect(Var, "small-large")) %>% 
