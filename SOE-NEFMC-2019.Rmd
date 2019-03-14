@@ -316,7 +316,7 @@ ggplot()+
   scale_y_continuous(breaks = seq(y.lim[1], y.lim[2], by = 100), limits = y.lim, expand = c(0.01, 0.01)) +
   theme_ts() +
   theme(title = element_text(size = 10)) +
-  theme(legend.position = c(0.3, 0.15), legend.direction = "horizontal", legend.background = element_rect(fill = "transparent"), legend.text = element_text(size = 8))
+  theme(legend.position="bottom", legend.direction = "horizontal", legend.background = element_rect(fill = "transparent"), legend.text = element_text(size = 8))
 
 gb_bennet <- indicators %>% filter(EPU == "GB" & Var %in% c("Benthos Volume","Benthos Price")) %>% 
 ggplot()+
@@ -336,7 +336,7 @@ ggplot()+
   scale_y_continuous(breaks = seq(y.lim[1], y.lim[2], by = 100), limits = y.lim, expand = c(0.01, 0.01)) +
   theme_ts() +
   theme(title = element_text(size = 10)) +
-  theme(legend.position = c(0.3, 0.15), legend.direction = "horizontal", legend.background = element_rect(fill = "transparent"), legend.text = element_text(size = 8))
+  theme(legend.position="bottom", legend.direction = "horizontal", legend.background = element_rect(fill = "transparent"), legend.text = element_text(size = 8))
 
 cowplot::plot_grid(gom_bennet, gb_bennet, ncol = 2, rel_widths = c(1,1))
 
@@ -1064,7 +1064,8 @@ diet_freq_bar <- prey_freq %>%
   ggtitle("Prey composition") +
   ylab("Proportion of prey items") +
   labs(tag = "b")  +
-  theme_ts()
+  theme_ts() + 
+  theme(legend.text = element_text(size = 8))
 
 
 # diet_freq_bar <- girafe(ggobj = diet_freq_bar)
