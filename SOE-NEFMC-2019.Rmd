@@ -993,6 +993,7 @@ islands <- ggplot() +
   ggtitle("Common tern study sites") +
   xlab("Longitude") +
   ylab("Latitude") +
+  labs(tag = "a")  +
   theme(panel.border = element_rect(colour = "black", fill=NA, size=0.75),
         legend.key = element_blank(),
         axis.title = element_text(size = 11),
@@ -1053,6 +1054,7 @@ diet_freq_bar <- prey_freq %>%
   viridis::scale_fill_viridis(discrete = TRUE) +
   ggtitle("Prey composition") +
   ylab("Proportion of prey items") +
+  labs(tag = "b")  +
   theme_ts()
 
 
