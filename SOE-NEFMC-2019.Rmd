@@ -9,6 +9,7 @@ output:
 bibliography: SOE2019.bib
 csl: plos.csl
 link-citations: yes
+fontsize: 10pt
 subparagraph: yes
 ---
 
@@ -2365,16 +2366,19 @@ Changes in primary productivity, phytoplankton and zooplankton composition and a
 
 # Contributors
 
-To be filled in
+**Editors** (NOAA NMFS Northeast Fisheries Science Center, NEFSC): Sarah Gaichas, Sean Hardison, Scott Large, Sean Lucey
+
+**Contributors** (NEFSC unless otherwise noted): Lisa Calvo (Rutgers), Patricia Clay, Lisa Colburn, Geret DePiper, Michael Fogarty, Paula Fratantoni, Kevin Friedland, Sarah Gaichas, James Gartland (Virginia Institute of Marine Science), Heather Haas, Sean Hardison, Kimberly Hyde, Terry Joyce (Woods Hole Oceanographic Institute), John Kosik, Steve Kress and Don Lyons (National Audubon Society's Seabird Restoration Program), Sean Lucey, Chris Melrose, Ryan Morse, Kimberly Murray, Chris Orphanides, Richard Pace, Charles Perretti, Karl Roscher (Maryland Department of Natural Resources), Vincent Saba, Laurel Smith, Mark Terceiro, John Walden, Harvey Walsh, Mark Wuenschel, and Qian Zhang (Unversity of Maryland and US EPA Chesapeake Bay Program).  
 
 \newpage 
 
 # Document Orientation
 
-The figure format is explained in Fig \ref{fig:figformat}. 
+The figure format is illustrated in Fig \ref{fig:docformat}a. Trend lines are shown when slope is significantly different from 0 at the p < 0.05 level. An orange line signifies an overall positive trend, and purple signifies a negative trend. To minimize bias introduced by small sample size, no trend is fit for < 30 year time series. Dashed lines represent mean values of time series unless the indicator is an anomaly, in which case the dashed line is equal to 0. Shaded regions indicate the past ten years. If there are no new data for 2018, the shaded region will still cover this time period. The spatial scale of indicators is either coastwide, Mid-Atlantic states (New York, New Jersey, Delaware, Maryland, Virginia, North Carolina), or at the Mid-Atlantic Bight (MAB) Ecosystem Production Unit (EPU, Fig. \ref{fig:docformat}b) level.
 
-```{r figformat, fig.cap = "Key to figures. Trend lines are shown when slope is significantly different from 0 at the p < 0.05 level. An orange line signifies an overall positive trend, and purple signifies a negative trend. To minimize bias introduced by small sample size, no trend is fit for < 30 year time series. Dashed lines represent mean values of time series unless the indicator is an anomaly, in which case the dashed line is equal to 0. Shaded regions indicate the past ten years. If there are no new data for 2018, the shaded region will still cover this time period.", fig.height = 2.5, fig.width = 4}
-
+```{r docformat, fig.cap = "Document orientation. a. Key to figures. b.The Northeast Large Marine Ecosystem.",  fig.width = 8, fig.height = 2.5}
+#fig.subcap= c('Key to figures.', 'The Northeast Large Marine Ecosystem.'), out.width = '.49\\linewidth', fig.show="hold" 
+# FIgure orientation subfigure
 m <- 0.1
 x <- 1985:2018
 y <-  m*x + rnorm(30, sd = 0.35)
@@ -2388,7 +2392,7 @@ x.shade.min <- x.shade.max - 9
 hline = mean(y)
 
 #Plot series with trend 
-ggplot2::ggplot(data = data,aes(x = x, y = y)) +
+psample <- ggplot2::ggplot(data = data,aes(x = x, y = y)) +
   #Highlight last ten years
   annotate("rect", fill = shade.fill, alpha = shade.alpha,
       xmin = x.shade.min , xmax = x.shade.max,
@@ -2405,8 +2409,46 @@ ggplot2::ggplot(data = data,aes(x = x, y = y)) +
   scale_y_continuous(labels = function(l){trans = l / 1000})+
   scale_x_continuous(breaks = seq(1985, 2015, by = 5), expand = c(0.01, 0.01)) +
   ylab(expression("Invented Index, 10"^3*"widgets")) +
-  xlab("Year") +
+  xlab("Time") +
+  labs(tag = "a")  +
   theme_ts()
+
+
+# EPU map subfigure
+# Set lat/lon window for map
+xmin = -78
+xmax = -65
+ymin = 36
+ymax = 45
+xlims <- c(xmin, xmax)
+ylims <- c(ymin, ymax)
+
+#CRS
+crs <- "+proj=longlat +lat_1=35 +lat_2=45 +lat_0=40 +lon_0=-77 +x_0=0 +y_0=0 +datum=NAD83 +no_defs +ellps=GRS80 +towgs84=0,0,0"
+
+#Specify data frame with lat/lon locations for labels
+epu_labels <- data.frame(EPU = c("Mid-Atlantic\n Bight",
+                                 "Gulf of Maine",
+                                 "Georges Bank"),
+                         latitude = c(40,42.85,41),
+                         longitude = c(-72.7,-69,-68.5))
+
+#Map of NE LME
+epumap <- ggplot() +
+  geom_sf(data = coast, size = map.lwd) +
+  geom_sf(data = epu_sf, fill = "transparent", size = map.lwd) +
+  coord_sf(crs = crs, xlim = xlims, ylim = ylims) +
+  geom_text(data = epu_labels, aes(x = longitude,
+                                    y = latitude,
+                                    label = EPU),
+            size = 1.7)+
+  theme_map() +
+  scale_x_continuous(breaks = seq(-78, -65, by = 4), expand = c(0.01, 0.01)) +
+  xlab("Longitude") +
+  ylab("Latitude") +
+  labs(tag = "b")
+
+psample + plot_spacer() + epumap + plot_layout(ncol = 3, widths=c(3,.5,4.5))
 
 ```
 
@@ -2431,48 +2473,12 @@ knitr::kable(df, booktabs = TRUE, caption = 'Feeding guilds and management bodie
              col.names = c("Guild", "MAFMC", "Joint", "NEFMC", "State or Other")) %>%
   kable_styling(font_size=10, latex_options=c("repeat_header", "scale_down", "hold_position")) %>%
   column_spec(1, width="2cm") %>%
-  column_spec(2, width="5cm") %>%
+  column_spec(2, width="4cm") %>%
   column_spec(3, width="2cm") %>%
-  column_spec(4:5, width="5cm") %>%
+  column_spec(4, width="5cm") %>%
+  column_spec(5, width="6cm") %>%
   #column_spec(3, width="7.5cm") #%>%
   collapse_rows(columns = 1, latex_hline = "major", valign = "middle")
-
-```
-
-The spatial scale of indicators is either coastwide, Mid-Atlantic states (New York, New Jersey, Delaware, Maryland, Virginia, North Carolina), or at the Mid-Atlantic Bight (MAB) Ecosystem Production Unit (EPU, Fig. \ref{fig:EPU-MAP}) level. 
-
-```{r EPU-MAP, fig.cap = "The Northeast Large Marine Ecosystem.", fig.width = 3.4, fig.asp = 1.25}
-
-# Set lat/lon window for map
-xmin = -77
-xmax = -65
-ymin = 36
-ymax = 45
-xlims <- c(xmin, xmax)
-ylims <- c(ymin, ymax)
-
-#CRS
-crs <- "+proj=longlat +lat_1=35 +lat_2=45 +lat_0=40 +lon_0=-77 +x_0=0 +y_0=0 +datum=NAD83 +no_defs +ellps=GRS80 +towgs84=0,0,0"
-
-#Specify data frame with lat/lon locations for labels
-epu_labels <- data.frame(EPU = c("Mid-Atlantic\n Bight",
-                                 "Gulf of Maine",
-                                 "Georges Bank"),
-                         latitude = c(40,42.85,41),
-                         longitude = c(-72.7,-69,-68.5))
-
-#Map of NE LME
-ggplot() +
-  geom_sf(data = coast, size = map.lwd) +
-  geom_sf(data = epu_sf, fill = "transparent", size = map.lwd) +
-  coord_sf(crs = crs, xlim = xlims, ylim = ylims) +
-  geom_text(data = epu_labels, aes(x = longitude,
-                                    y = latitude,
-                                    label = EPU),
-            size = 3.2)+
-  theme_map() +
-  xlab("Longitude") +
-  ylab("Latitude")
 
 ```
 
