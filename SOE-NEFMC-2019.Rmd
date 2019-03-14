@@ -316,7 +316,7 @@ ggplot()+
   scale_y_continuous(breaks = seq(y.lim[1], y.lim[2], by = 100), limits = y.lim, expand = c(0.01, 0.01)) +
   theme_ts() +
   theme(title = element_text(size = 10)) +
-  theme(legend.position = c(0.3, 0.15), legend.direction = "horizontal")
+  theme(legend.position = c(0.3, 0.15), legend.direction = "horizontal", legend.background = element_rect(fill = "transparent"), legend.text = element_text(size = 8))
 
 gb_bennet <- indicators %>% filter(EPU == "GB" & Var %in% c("Benthos Volume","Benthos Price")) %>% 
 ggplot()+
@@ -336,7 +336,7 @@ ggplot()+
   scale_y_continuous(breaks = seq(y.lim[1], y.lim[2], by = 100), limits = y.lim, expand = c(0.01, 0.01)) +
   theme_ts() +
   theme(title = element_text(size = 10)) +
-  theme(legend.position = c(0.3, 0.15), legend.direction = "horizontal")
+  theme(legend.position = c(0.3, 0.15), legend.direction = "horizontal", legend.background = element_rect(fill = "transparent"), legend.text = element_text(size = 8))
 
 cowplot::plot_grid(gom_bennet, gb_bennet, ncol = 2, rel_widths = c(1,1))
 
@@ -859,7 +859,7 @@ cowplot::plot_grid(rec_effort,
 
 ```
 
-Recreational fishing is important to many New England communities, particularly in Southern New England (MA, RI, CT; Fig. \ref{fig.NE-rec-engage}). Communities that are most socially and economically dependent (both engaged and reliant) on recreational fishing may benefit from the increased diversity of recreational species catch.
+Recreational fishing is important to many New England communities, particularly in Southern New England (MA, RI, CT; Fig. \ref{fig:NE-rec-engage}). Communities that are most socially and economically dependent (both engaged and reliant) on recreational fishing may benefit from the increased diversity of recreational species catch.
 
 ```{r NE-rec-engage, fig.height = 8, fig.cap = "Recreational engagement (shore, private vessel and for-hire recreational fishing in a community) and reliance (per capita engagement) based on 2016 landings and the ACS running average of 2012-2016 census data."}
 (rec <- 
@@ -905,7 +905,7 @@ North Atlantic right whales are among the most endangered large whale population
  
 Three large whale Unusual Mortality Events (UMEs) have been declared for north Atlantic right whales, humpback whales, and minke whales. In all three cases human interaction appears to have contributed to increased mortalities, although investigations are not complete. Twenty right whale mortalities have been documented in 2017 and 2018 so far. Among the 20 right whale deaths observed in 2017 and 2018 thus far, 5 were due to vessel strike (1 in US waters, 4 in Canadian waters), 6 from entanglement (2 in Canadian gear, 1 in unknown gear, and 3 others found in US waters), and the rest from unknown causes. UMEs have also been declared for humpback whales during 2016-2018 and 2017-2018 minke whales due to elevated strandings. Necropsy investigations on 50% of humpback whales showed evidence of human interaction, either ship strike or entanglement. Similarly, 60% of minke whales show evidence of human interactions or infectious disease. In both cases the investigations are still underway and more research is needed to determine the causes of these UME.
 
-```{r NARW-abundance, fig.width = 6, fig.asp = 0.55,fig.cap = "Right whale abundance estimates with 95\\% credible intervals. These values represent the estimated number of animals alive sometime during the year referenced and NOT at the end of the year referenced. Seventeen known deaths were recorded in 2017 (likely all from anthropogenic causes), but these deaths were not reflected in the 2017 estimate because those animals were alive sometime during the year."}
+```{r NARW-abundance, fig.width = 5, fig.asp = 0.45,fig.cap = "Right whale abundance estimates with 95\\% credible intervals. These values represent the estimated number of animals alive sometime during the year referenced and NOT at the end of the year referenced. Seventeen known deaths were recorded in 2017 (likely all from anthropogenic causes), but these deaths were not reflected in the 2017 estimate because those animals were alive sometime during the year."}
 hline <- mean(narw[narw$Var == "right whale abundance median",]$Value)
 
 ecodata::narw %>% 
@@ -943,7 +943,7 @@ Fisheries interactions have increased over the past 2 decades, with fewer than 1
 ## Harbor porpoise (coastwide)
 Harbor porpoise bycatch has resulted in fisheries closures in the past, but current bycatch levels suggest that management measures have been effective, reducing this fishery interaction. The 5-year mean bycatch has been below the maximum permitted level (Potential Biological Removal, PBR) since 2011 (Fig. \ref{fig:harbor-porpoise-bars}), and the 2016 and draft 2017 annual bycatch estimates are among the lowest in the time series. Recent compliance with the harbor porpoise take reduction plan and reduced fishing effort are thought to contribute to low bycatch estimates. Potential recent shifts in porpoise distribution could also be contributing to low bycatch and this will be explored during the coming year. A new draft of harbor porpoise abundance estimate suggests stable or increasing abundance of the Gulf of Maine/Bay of Fundy harbor porpoise stock. Recent analyses have examined regional harbor porpoise diet, and suggest that harbor porpoise are not typically feeding on fish caught in gillnets. However, the impact of ecosystem changes on bycatch, population, or distribution remain unclear.
 
-```{r harbor-porpoise-bars, fig.width = 6, fig.asp = 0.55, fig.cap = "Harbor porpoise bycatch estimate (black) shown with Potential Biological Removal (red). Error bars indicate 95\\% confidence interval."}
+```{r harbor-porpoise-bars, fig.width = 5, fig.asp = 0.45, fig.cap = "Harbor porpoise bycatch estimate (black) shown with Potential Biological Removal (red). Error bars indicate 95\\% confidence interval."}
 ecodata::harborporpoise %>% 
   spread(.,Var,Value) %>% 
 ggplot() +
