@@ -147,7 +147,7 @@ Observed changes at the base of the food web, including timing and community com
 
 # Report Structure
 
-The major messages of the report are synthesized above with reference to key figures. The information in this report is organized around general ecosystem-level management objectives (Table \ref{tab:management-objectives}), and indicators related to these objectives are grouped into four general categories in the four sections below: economic and social, protected species, fish and invertebrates, and habitat quality and ecosystem productivity. Each section begins with a summary of main messages with links to other sections, including any new information added at the request of the Council, and includes figures with brief descriptions of all current indicators. Detailed technical methods documentation^[https://NOAA-EDAB.github.io/tech-memo] and indicator data^[https://github.com/NOAA-EDAB/ecodata] are available online. The details of standard figure formatting (Fig. \ref{fig:figformat}), categorization of fish and invertebrate species into feeding groups (Table \ref{tab:species-groupings}), and definitions of ecological production units (EPUs, Fig. \ref{fig:EPU-MAP}) are provided at the end of the document.
+The major messages of the report are synthesized above with reference to key figures. The information in this report is organized around general ecosystem-level management objectives (Table \ref{tab:management-objectives}), and indicators related to these objectives are grouped into four general categories in the four sections below: economic and social, protected species, fish and invertebrates, and habitat quality and ecosystem productivity. Each section begins with a summary of main messages with links to other sections, including any new information added at the request of the Council, and includes figures with brief descriptions of all current indicators. Detailed technical methods documentation^[https://NOAA-EDAB.github.io/tech-memo] and indicator data^[https://github.com/NOAA-EDAB/ecodata] are available online. The details of standard figure formatting (Fig. \ref{fig:docformat}a), categorization of fish and invertebrate species into feeding groups (Table \ref{tab:species-groupings}), and definitions of ecological production units (EPUs, including the Mid-Atlantic Bight, MAB; Fig. \ref{fig:docformat}b) are provided at the end of the document.
 
 ```{r management-objectives}
 
@@ -174,14 +174,13 @@ knitr::kable(mng_obj,
  # column_spec(c(2), width = c("25em")) %>%
   row_spec(0, bold = TRUE)
 ```
-\newpage
 
 # Economic and Social
 
 The objectives of U.S. federal fishery management include providing benefits to the Nation in terms of seafood production and recreational opportunities, while considering economic efficiency and effects on coastal communities. The indicators in this section consider these objectives for the GOM and GB ecological production units separately where possible.
 
 ## Gulf of Maine
-A long term significant decrease in NEFMC managed species revenue was offset by non-NEFMC managed species (Fig. \ref{fig:comm-revenue-ne}), likely lobster, as indicated by the focal component-level Bennet Volume Indicator (Fig. \ref{fig:bennet-ne}). 
+A long term significant decrease in NEFMC managed species revenue was offset by non-NEFMC managed species (Fig. \ref{fig:comm-revenue-ne}), likely lobster, as indicated by the focal component-level Bennet Volume Indicator for Benthivores (Fig. \ref{fig:bennet-ne}). 
 
 ```{r comm-revenue-ne, fig.cap = "Total commercial revenue (black) and revenue from NEFMC managed species (red) in Gulf of Maine (left) and Georges Bank (right).", fig.width = 8, fig.asp = 0.35}
 
@@ -273,15 +272,19 @@ cowplot::plot_grid(gom_rev_agg, gb_rev_agg, ncol = 2)
 # max_rev_perc <- max(rev_inline)
 ```
 
-```{r bennet-ne, fig.cap = paste0("Revenue change from the long-term mean in 2015 dollars (black), Price (PI), and Volume Indicators (VI) for commercial landings in Gulf of Maine (left) and Georges Bank."), fig.height = 3, fig.width=8}
+```{r bennet-ne, fig.cap = paste0("Revenue change from the long-term mean in 2015 dollars (black), Price (PI), and Volume Indicators (VI) for commercial benthivore landings in Gulf of Maine (left) and for commercial benthos landings on Georges Bank (right)."), fig.height = 3, fig.width=8}
 
 #Filter data into two dataframes for plotting
 indicators <- ecodata::bennet %>% 
   filter(EPU %in% epu_abbr,
-         Var %in% c("VI EPU aggregate",
-                    "PI EPU aggregate")) %>% 
-  mutate(Var, Var = plyr::mapvalues(Var, from = c("VI EPU aggregate","PI EPU aggregate"),
-                                    to = c("Volume","Price")))
+         Var %in% c("Benthivore VI",
+                    "Benthivore PI", 
+                    "Benthos VI",
+                    "Benthos PI")) %>% 
+  mutate(Var, Var = plyr::mapvalues(Var, from = c("Benthivore VI","Benthivore PI",
+                                                  "Benthos VI", "Benthos PI"),
+                                    to = c("Benthivore Volume","Benthivore Price",
+                                           "Benthos Volume","Benthos Price")))
 
 revchange <- ecodata::bennet %>% 
   filter(EPU %in% epu_abbr,
@@ -295,26 +298,26 @@ y.lim <- c(-350,350)
 
 #plot
 
-gom_bennet <- indicators %>% filter(EPU == "GOM") %>% 
+gom_bennet <- indicators %>% filter(EPU == "GOM" & Var %in% c("Benthivore Volume","Benthivore Price")) %>% 
 ggplot()+
   
   #Highlight last ten years
   annotate("rect", fill = shade.fill, alpha = shade.alpha,
       xmin = x.shade.min , xmax = x.shade.max,
       ymin = -Inf, ymax = Inf)+
-  guides(color = F, fill = F)+
+  #guides(color = F, fill = F)+
   geom_bar(aes(x=Time, y= Value, fill = Var), stat="identity")+
   scale_fill_manual(name = "Indicators", values = ind_fill) +
   geom_line(data = revchange[revchange$EPU == "GOM",], aes(x = Time, y = Value, colour="$"))+
-  scale_colour_grey(name ="Revenue Change") +
-  ggtitle("Gulf of Maine")+
+  scale_colour_grey(name ="Total Revenue Change") +
+  ggtitle("Gulf of Maine Benthivores Component")+
   labs(y="Value $1,000,000 ($2015)") +
   scale_x_continuous(breaks = seq(1965, 2015, by = 10), expand = c(0.01, 0.01)) +
   scale_y_continuous(breaks = seq(y.lim[1], y.lim[2], by = 100), limits = y.lim, expand = c(0.01, 0.01)) +
   theme_ts() +
   theme(title = element_text(size = 10))
 
-gb_bennet <- indicators %>% filter(EPU == "GB") %>% 
+gb_bennet <- indicators %>% filter(EPU == "GB" & Var %in% c("Benthos Volume","Benthos Price")) %>% 
 ggplot()+
   
   #Highlight last ten years
@@ -325,15 +328,15 @@ ggplot()+
   geom_bar(aes(x=Time, y= Value, fill = Var), stat="identity")+
   scale_fill_manual(name = "Indicators", values = ind_fill) +
   geom_line(data = revchange[revchange$EPU == "GB",], aes(x = Time, y = Value, colour="$"))+
-  scale_colour_grey(name ="Revenue Change") +
-  ggtitle("Georges Bank")+
+  scale_colour_grey(name ="Total Revenue Change") +
+  ggtitle("Georges Bank Benthos Component")+
   labs(y="") +
   scale_x_continuous(breaks = seq(1965, 2015, by = 10), expand = c(0.01, 0.01)) +
   scale_y_continuous(breaks = seq(y.lim[1], y.lim[2], by = 100), limits = y.lim, expand = c(0.01, 0.01)) +
   theme_ts() +
   theme(title = element_text(size = 10))
 
-cowplot::plot_grid(gom_bennet, gb_bennet, ncol = 2, rel_widths = c(0.7,1))
+cowplot::plot_grid(gom_bennet, gb_bennet, ncol = 2, rel_widths = c(1,1))
 
 ```
 
