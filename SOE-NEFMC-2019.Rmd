@@ -1074,7 +1074,7 @@ diet_freq_bar <- prey_freq %>%
 full_map + diet_freq_bar + plot_layout(ncol = 2, widths=c(4,4))
 ```
 
-GOM common tern average productivity (fledgelings per nest) across 7 colonies has varied over time but was low in 2018 (Fig. \ref{fig:tern-prod-div}a), a year with record-high summer SST in the GOM (Fig. \ref{fig:NE-SST-anom-series}), and substantial butterfish in tern diets (Fig. \ref{fig:map-and-prey}b). 
+GOM common tern average productivity (fledglings per nest) across 7 colonies has varied over time but was low in 2018 (Fig. \ref{fig:tern-prod-div}a), a year with record-high summer SST in the GOM (Fig. \ref{fig:NE-SST-anom-series}), and substantial butterfish in tern diets (Fig. \ref{fig:map-and-prey}b). 
 
 ```{r tern-prod-div, fig.cap = "a. Mean common tern productivity at nesting sites in Gulf of Maine. Error bars show +/- 1 SE of the mean. b. Shannon diversity of common tern diets observed at nesting sites in Gulf of Maine. Diversity of common tern diets has been predominantly above the long-term mean since 2006.",fig.width = 8, fig.asp = 0.25 }
 aggregate_prod <- ecodata::common_tern %>% 
