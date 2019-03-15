@@ -39,6 +39,7 @@ library(patchwork)
 library(grid)
 # library(ggiraph)
 library(vegan)
+library(RColorBrewer)
 library(rpart)
 
 #GIS libraries
@@ -1056,11 +1057,12 @@ prey_freq <- ecodata::common_tern %>%
 diet_freq_bar <- prey_freq %>% 
   filter(Freq > 0.05) %>% 
   dplyr::mutate(Prey = gsub("\\.", " ", Var)) %>% 
+  dplyr::mutate(Prey = gsub("Invertebrate", "Invert.", Prey)) %>% 
   # dplyr::rename(Prey = Var) %>%
   ggplot(aes(x = Time, y = Freq, fill = Prey)) +
   geom_bar(stat = "identity") +
     # geom_bar_interactive(aes(tooltip = paste(Prey,round(Freq,2),Time)),stat = "identity") +
-  viridis::scale_fill_viridis(discrete = TRUE) +
+  scale_fill_manual(values = RColorBrewer::brewer.pal(10,"Paired")) +
   ggtitle("Prey composition") +
   ylab("Proportion of prey items") +
   labs(tag = "b")  +
