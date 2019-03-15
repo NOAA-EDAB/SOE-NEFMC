@@ -337,7 +337,9 @@ ggplot()+
   scale_y_continuous(breaks = seq(y.lim[1], y.lim[2], by = 100), limits = y.lim, expand = c(0.01, 0.01)) +
   theme_ts() +
   theme(title = element_text(size = 10)) +
-  theme(legend.position="bottom", legend.direction = "horizontal", legend.background = element_rect(fill = "transparent"), legend.text = element_text(size = 8))
+  theme(legend.position="bottom", legend.direction = "horizontal", legend.background = element_rect(fill = "transparent"), legend.text = element_text(size = 8)) +
+  guides(color = guide_legend(order = 1),
+         fill = guide_legend(order = 0))
 
 cowplot::plot_grid(gom_bennet, gb_bennet, ncol = 2, rel_widths = c(1,1))
 
