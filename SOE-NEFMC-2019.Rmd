@@ -285,7 +285,7 @@ indicators <- ecodata::bennet %>%
   mutate(Var, Var = plyr::mapvalues(Var, from = c("Benthivore VI","Benthivore PI",
                                                   "Benthos VI", "Benthos PI"),
                                     to = c("Benthivore Volume","Benthivore Price",
-                                           "Benthos Volume","Benthos Price")))
+                                           "Volume","Price")))
 
 revchange <- ecodata::bennet %>% 
   filter(EPU %in% epu_abbr,
@@ -308,7 +308,7 @@ ggplot()+
       ymin = -Inf, ymax = Inf)+
   #guides(color = F, fill = F)+
   geom_bar(aes(x=Time, y= Value, fill = Var), stat="identity")+
-  scale_fill_manual(name = "Indicators", values = ind_fill) +
+  scale_fill_manual(name = "Indicators", values = ind_fill, guide = FALSE) +
   geom_line(data = revchange[revchange$EPU == "GOM",], aes(x = Time, y = Value, colour="$"))+
   scale_colour_grey(name ="Total Revenue Change") +
   ggtitle("Gulf of Maine Benthivores Component")+
@@ -317,9 +317,9 @@ ggplot()+
   scale_y_continuous(breaks = seq(y.lim[1], y.lim[2], by = 100), limits = y.lim, expand = c(0.01, 0.01)) +
   theme_ts() +
   theme(title = element_text(size = 10)) +
-  theme(legend.position="bottom", legend.direction = "horizontal", legend.background = element_rect(fill = "transparent"), legend.text = element_text(size = 8))
+  theme(legend.position="bottom", legend.direction = "horizontal", legend.background = element_rect(fill = "transparent"), legend.title = element_blank(), legend.text = element_blank())
 
-gb_bennet <- indicators %>% filter(EPU == "GB" & Var %in% c("Benthos Volume","Benthos Price")) %>% 
+gb_bennet <- indicators %>% filter(EPU == "GB" & Var %in% c("Volume","Price")) %>% 
 ggplot()+
   
   #Highlight last ten years
@@ -337,7 +337,7 @@ ggplot()+
   scale_y_continuous(breaks = seq(y.lim[1], y.lim[2], by = 100), limits = y.lim, expand = c(0.01, 0.01)) +
   theme_ts() +
   theme(title = element_text(size = 10)) +
-  theme(legend.position="bottom", legend.direction = "horizontal", legend.background = element_rect(fill = "transparent"), legend.text = element_text(size = 8)) +
+  theme(legend.position="bottom", legend.direction = "horizontal", legend.background = element_rect(fill = "transparent"), legend.title = element_text(size = 8), legend.text = element_text(size = 8)) +
   guides(color = guide_legend(order = 1),
          fill = guide_legend(order = 0))
 
