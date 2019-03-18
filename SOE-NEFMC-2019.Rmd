@@ -1587,15 +1587,16 @@ The proportion of NEFMC managed benthivore species (righteye flounders, haddock)
 ```{r NEFMC-in-MAB, fig.width = 7, fig.asp = 0.35, fig.cap = "New England-managed survey proportion of MAB benthivores."}
 
 nefmc_ma <- nefsc_survey_disaggregated %>% 
-  distinct() %>% 
+  # distinct() %>% 
   filter(EPU %in% c("MAB"),
          Management == "NEFMC",
          !str_detect(`Feeding guild`,"Other")) %>% 
   group_by(EPU, `Feeding guild`, Season, Time) %>% 
-  dplyr::summarise(Value = sum(Proportion)) %>% 
+  dplyr::summarise(Value = sum(Proportion,na.rm = T)) %>% #IMPORTANT: Turn zeros to NA before taking mean
+  mutate(Value = ifelse(Value == 0, NA, Value)) %>% #Turn zeros to NA
   unite(.,Var,c("Feeding guild","Season"), sep = " ") %>% 
-  group_by(EPU,Var) %>% 
-  mutate(hline = mean(Value)) %>% 
+  group_by(EPU,Var, .drop = FALSE) %>% 
+  mutate(hline = mean(Value, na.rm = T)) %>% 
   filter(str_detect(Var,"Benthivore")) %>% 
   ungroup() %>% 
   mutate(Var = paste(str_to_title(str_extract(Var, "fall|spring")),
@@ -1643,7 +1644,8 @@ mafmc_ne <- nefsc_survey_disaggregated %>%
          Management == "MAFMC",
          !str_detect(`Feeding guild`,"Other")) %>% 
   group_by(EPU, `Feeding guild`, Season, Time) %>% 
-  dplyr::summarise(Value = sum(Proportion)) %>% 
+  dplyr::summarise(Value = sum(Proportion,na.rm = T)) %>% #IMPORTANT: Turn zeros to NA before taking mean
+  mutate(Value = ifelse(Value == 0, NA, Value)) %>% #Turn zeros to NA
   unite(.,Var,c("Feeding guild","Season"), sep = " ") %>% 
   group_by(EPU,Var) %>% 
   mutate(hline = mean(Value)) %>% 
