@@ -1367,7 +1367,7 @@ total_surv <- nefsc_survey %>%
          !str_detect(Var, "Other|Apex|managed"),
          Time >= 1968) %>% 
   group_by(EPU,Var) %>% 
-  mutate(hline = mean(Value)) %>% 
+  mutate(hline = mean(Value, na.rm = T)) %>% 
   ungroup() %>% 
   mutate(Var = word(Var, 1,2))
 series.col <- rep("black",length(unique(total_surv$Var)))
@@ -1648,7 +1648,7 @@ mafmc_ne <- nefsc_survey_disaggregated %>%
   mutate(Value = ifelse(Value == 0, NA, Value)) %>% #Turn zeros to NA
   unite(.,Var,c("Feeding guild","Season"), sep = " ") %>% 
   group_by(EPU,Var) %>% 
-  mutate(hline = mean(Value)) %>% 
+  mutate(hline = mean(Value, na.rm = T)) %>% 
   filter(str_detect(Var,"Planktivore")) %>% 
   ungroup() %>% 
   mutate(Var = paste(str_to_title(str_extract(Var, "fall|spring")),
