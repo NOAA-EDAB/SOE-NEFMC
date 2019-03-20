@@ -1578,7 +1578,7 @@ menh %>%
 
 ```
 
-Fall offshore benthivore levels remain high in the Gulf of Maine (Fig. \ref{fig:gom-biomass-ne}), however, the New Hampshire/Maine survey shows a recent decline (Fig. \ref{fig:menh-survey})). Fall offshore planktivore levels returned towards the time series mean in the Gulf of Maine after two high years.
+Fall offshore benthivore levels remain high in the Gulf of Maine (Fig. \ref{fig:gom-biomass-ne}), however, the New Hampshire/Maine survey shows a recent decline (Fig. \ref{fig:menh-survey}). Fall offshore planktivore levels returned towards the time series mean in the Gulf of Maine after two high years.
 
 All fall aggregate groups on Georges Bank are at or below their time series mean for the offshore survey (Fig. \ref{fig:gb-biomass-ne}). Spring benthos biomass levels remain high on Georges Bank, and show significant increases over the long-term.
 
