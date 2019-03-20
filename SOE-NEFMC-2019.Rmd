@@ -148,7 +148,7 @@ Observed changes at the base of the food web, including timing and community com
 
 # Report Structure
 
-The major messages of the report are synthesized above with reference to key figures. The information in this report is organized around general ecosystem-level management objectives (Table \ref{tab:management-objectives}), and indicators related to these objectives are grouped into four general categories in the four sections below: economic and social, protected species, fish and invertebrates, and habitat quality and ecosystem productivity. Each section begins with a summary of main messages with links to other sections, including any new information added at the request of the Council, and includes figures with brief descriptions of all current indicators. Detailed technical methods documentation^[https://NOAA-EDAB.github.io/tech-memo] and indicator data^[https://github.com/NOAA-EDAB/ecodata] are available online. The details of standard figure formatting (Fig. \ref{fig:docformat}a), categorization of fish and invertebrate species into feeding groups (Table \ref{tab:species-groupings}), and definitions of ecological production units (EPUs, including the Mid-Atlantic Bight, MAB; Fig. \ref{fig:docformat}b) are provided at the end of the document.
+The major messages of the report are synthesized above with reference to key figures. The information in this report is organized around general ecosystem-level management objectives (Table \ref{tab:management-objectives}), and indicators related to these objectives are grouped into four general categories in the four sections below: economic and social, protected species, fish and invertebrates, and habitat quality and ecosystem productivity. Each section begins with a summary of main messages with links to other sections, including any new information added at the request of the Council, and includes figures with brief descriptions of all current indicators. Detailed technical methods documentation^[https://NOAA-EDAB.github.io/tech-doc] and indicator data^[https://github.com/NOAA-EDAB/ecodata] are available online. The details of standard figure formatting (Fig. \ref{fig:docformat}a), categorization of fish and invertebrate species into feeding groups (Table \ref{tab:species-groupings}), and definitions of ecological production units (EPUs, including the Mid-Atlantic Bight, MAB; Fig. \ref{fig:docformat}b) are provided at the end of the document.
 
 ```{r management-objectives}
 
@@ -1359,7 +1359,7 @@ asd + depth + dtc + plot_layout(ncol = 1)
 ```
 
 ## Survey biomass (GOM and GB)
-Biomass across trophic levels shows similar trends between the Gulf of Maine and Georges Bank offshore, but nearshore trends differ for some groups. For both the GOM and GB, there are long term increasing trends in aggregate NEFSC (offshore) survey biomass for Piscivores, Planktivores and Benthos in the fall and for Planktivores in the spring (Figs. \ref{fig:gom-biomass-ne}, \ref{fig:gb-biomass-ne}). GB spring Benthos are also increasing over the long term. However, there are some notable departures from these trends recently. 
+Biomass across trophic levels shows similar trends between the Gulf of Maine and Georges Bank offshore, but nearshore trends differ for some groups. For both the GOM and GB, there are long term increasing trends in aggregate NEFSC (offshore) survey biomass for Piscivores, Planktivores and Benthos in the fall. (Figs. \ref{fig:gom-biomass-ne}, \ref{fig:gb-biomass-ne}). GB spring Benthos and GOM spring Planktivores are also increasing over the long term. However, there are some notable departures from these trends recently. 
 
 ```{r gom-biomass-ne, fig.cap = paste0("Fall (left) and spring (right) NEFSC surveyed biomass in the Gulf of Maine."), fig.width=8, fig.asp = 0.75}
 total_surv <- nefsc_survey %>% 
@@ -1367,7 +1367,7 @@ total_surv <- nefsc_survey %>%
          !str_detect(Var, "Other|Apex|managed"),
          Time >= 1968) %>% 
   group_by(EPU,Var) %>% 
-  mutate(hline = mean(Value)) %>% 
+  mutate(hline = mean(Value, na.rm = T)) %>% 
   ungroup() %>% 
   mutate(Var = word(Var, 1,2))
 series.col <- rep("black",length(unique(total_surv$Var)))
@@ -1467,7 +1467,7 @@ gb_surv
 
 ```
 
-Benthivore biomass catch in both offshore surveys during the fall has declined for the third straight year from 2015 highs, with more subtle recent downward trends in the inshore surveys (Figs \ref{fig:MA-inshore}, \ref{fig:menh-survey}). Change in haddock catch is the largest contributor to these fluctuations. 
+Benthivore biomass catch in both offshore surveys has shown recent declines from 2015 highs in both fall and spring. This contrasts with inshore surveys showing more stable Benthivore biomass in the past few years (Figs \ref{fig:MA-inshore}, \ref{fig:menh-survey}). Change in haddock catch is the largest contributor to these fluctuations. 
  
 ```{r MA-inshore, fig.width=8, fig.asp = 0.75, fig.cap = "Fall (left) and spring (right) surveyed biomass from the MA state inshore bottom trawl survey."}
 mass <- mass_inshore_survey %>% 
@@ -1580,7 +1580,7 @@ menh %>%
 
 Fall offshore benthivore levels remain high in the Gulf of Maine (Fig. \ref{fig:gom-biomass-ne}), however, the New Hampshire/Maine survey shows a recent decline (Fig. \ref{fig:menh-survey})). Fall offshore planktivore levels returned towards the time series mean in the Gulf of Maine after two high years.
 
-All fall aggregate groups on Georges Bank are at or below their time series mean for the offshore survey (Fig. \ref{fig:gb-biomass-ne}). Spring benthos biomass levels remain high on Georges Bank.
+All fall aggregate groups on Georges Bank are at or below their time series mean for the offshore survey (Fig. \ref{fig:gb-biomass-ne}). Spring benthos biomass levels remain high on Georges Bank, and show significant increases over the long-term.
 
 The proportion of NEFMC managed benthivore species (righteye flounders, haddock) has declined over time in Mid-Atlantic waters according to bottom trawl surveys (Fig. \ref{fig:NEFMC-in-MAB}), while the proportion of MAFMC managed planktivore (squids, mackerel and butterfish) species has been increasing in New England waters in both surveys and landings (Fig. \ref{fig:MAFMC-in-NE}, Fig. \ref{fig:comm-landings-ne}). 
 
@@ -1648,7 +1648,7 @@ mafmc_ne <- nefsc_survey_disaggregated %>%
   mutate(Value = ifelse(Value == 0, NA, Value)) %>% #Turn zeros to NA
   unite(.,Var,c("Feeding guild","Season"), sep = " ") %>% 
   group_by(EPU,Var) %>% 
-  mutate(hline = mean(Value)) %>% 
+  mutate(hline = mean(Value, na.rm = T)) %>% 
   filter(str_detect(Var,"Planktivore")) %>% 
   ungroup() %>% 
   mutate(Var = paste(str_to_title(str_extract(Var, "fall|spring")),
