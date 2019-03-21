@@ -23,6 +23,7 @@ subparagraph: yes
 #Default Rmd options
 knitr::opts_chunk$set(echo = FALSE,
                       message = FALSE,
+                      dev = "cairo_pdf",
                       warning = FALSE,
                       fig.align = 'center') #allows for inserting R code into captions
 
