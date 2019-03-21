@@ -341,7 +341,22 @@ ggplot()+
   guides(color = guide_legend(order = 1),
          fill = guide_legend(order = 0))
 
-cowplot::plot_grid(gom_bennet, gb_bennet, ncol = 2, rel_widths = c(1,1))
+#cowplot::plot_grid(gom_bennet, gb_bennet, ncol = 2, rel_widths = c(1,1))
+
+#extract legend
+#https://github.com/hadley/ggplot2/wiki/Share-a-legend-between-two-ggplot2-graphs
+g_legend<-function(a.gplot){
+  tmp <- ggplot_gtable(ggplot_build(a.gplot))
+  leg <- which(sapply(tmp$grobs, function(x) x$name) == "guide-box")
+  legend <- tmp$grobs[[leg]]
+  return(legend)}
+
+mylegend<-g_legend(gb_bennet)
+
+p3 <- gridExtra::grid.arrange(gridExtra::arrangeGrob(gom_bennet + theme(legend.position="none"),
+                         gb_bennet + theme(legend.position="none"),
+                         nrow=1),
+             mylegend, nrow=2,heights=c(6, 1))
 
 ```
 
