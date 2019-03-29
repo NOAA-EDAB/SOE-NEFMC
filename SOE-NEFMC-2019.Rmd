@@ -878,7 +878,7 @@ cowplot::plot_grid(rec_effort,
 
 ```
 
-Recreational fishing is important to many New England communities, particularly in Southern New England (MA, RI, CT; Fig. \ref{fig:NE-rec-engage}). Communities that are most socially and economically dependent (both engaged and reliant) on recreational fishing may benefit from the increased diversity of recreational species catch. Additional social indicators for New England communities area available online^[https://www.st.nmfs.noaa.gov/humandimensions/social-indicators/]. 
+Recreational fishing is important to many New England communities, particularly in Southern New England (MA, RI, CT; Fig. \ref{fig:NE-rec-engage}). Communities that are most socially and economically dependent (both engaged and reliant) on recreational fishing may benefit from the increased diversity of recreational species catch. Additional social indicators for New England communities are available online^[https://www.st.nmfs.noaa.gov/humandimensions/social-indicators/]. 
 
 ```{r NE-rec-engage, fig.height = 8, fig.cap = "Recreational engagement (shore, private vessel and for-hire recreational fishing in a community) and reliance (per capita engagement) based on 2016 landings and the ACS running average of 2012-2016 census data."}
 (rec <- 
