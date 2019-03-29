@@ -130,7 +130,7 @@ label <- function(variable,value){
 # Overview
 The purpose of this report is to synthesize available information relevant to fishery management in the New England portion of the US Northeast Shelf (the Gulf of Maine, GOM, and Georges Bank, GB). This 2019 report highlights where management interventions have proven successful to achieve ecological objectives, but also characterizes the considerable challenges for management posed by climate change and increasing trade-offs across conservation, fishing, and other human activities in this region (Fig. \ref{fig:conceptual-model}). Finally, we describe combinations of ecological signals that present opportunities for further integrated research and possibly creative management solutions. 
 
-```{r conceptual-model, echo=FALSE, out.width = "\\textwidth", fig.cap="A conceptual model places detailed species-level management in context by highlighting relationships between focal species groups organized by the New England Fisheries Management Council (NEFMC) Fishery Management Plan (FMP), managed human activities, environmental drivers, habitats, and key ecological links."}
+```{r conceptual-model, echo=FALSE, out.width = "\\textwidth", fig.cap="A conceptual model places detailed species-level management in context by highlighting relationships between focal species groups organized by the New England Fishery Management Council (NEFMC) Fishery Management Plan (FMP), managed human activities, environmental drivers, habitats, and key ecological links."}
 
 knitr::include_graphics("images/GOM_GB_conmod_overview.jpg")
 ```
