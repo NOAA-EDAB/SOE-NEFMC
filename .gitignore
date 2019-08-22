@@ -7,3 +7,8 @@
 *.log
 *.txt
 *.html
+# latex stuff
+*.tex
+*.upa
+*.upb
+*.md
