@@ -1,16 +1,19 @@
 ---
-title:
-geometry: left=2cm, right=2cm, top=2cm, bottom=3cm, footskip = .5cm
-output: 
+title: "null"
+csl: plos.csl
+fontsize: 10pt
+output:
   pdf_document:
+    latex_engine: xelatex
     includes:
       in_header: latex/header.tex
     keep_tex: yes
-bibliography: SOE2019.bib
-csl: plos.csl
+  html_document:
+    df_print: paged
 link-citations: yes
-fontsize: 10pt
+geometry: left=2cm, right=2cm, top=2cm, bottom=3cm, footskip = .5cm
 subparagraph: yes
+bibliography: SOE2019.bib
 ---
 
 ```{r setup, include=FALSE}
@@ -76,7 +79,7 @@ region_abbr <- "NE" #Some commercial data organized by "MA" or "NE" regions, not
 #CRS
 crs <- "+proj=longlat +lat_1=35 +lat_2=45 +lat_0=40 +lon_0=-77 +x_0=0 +y_0=0 +datum=NAD83 +no_defs +ellps=GRS80 +towgs84=0,0,0"
 
-#Coastline shapefile
+#Coastline shapefile   
 coast <- ne_countries(scale = 10,
                           continent = "North America",
                           returnclass = "sf") %>%
@@ -141,7 +144,7 @@ However, there are multiple signals indicating challenges to meeting management 
 
 Fisheries are significantly affecting protected species, particularly large whale abundance. Changes in fishery management to address this issue could have considerable consequences for the fixed gear fishing sector, particularly for pot gear such as for lobster. The recovery of north Atlantic right whales is affected by anthropogenic mortality (Fig. \ref{fig:NARW-abundance}). Shifts in ecosystem conditions may be contributing to increased interaction between right whales and fishing gear and could be playing a role in other protected species trends. Unusual Mortality Events (UMEs) have been declared for north Atlantic right whales, humpback whales, and minke whales, and preliminary investigations suggest fishing gear entanglement has played a primary role in these mortalities. Gray seal bycatch mortality has also risen in recent years, with an estimated annual mortality that has often totaled more than 1000 animals and a UME has been declared for both gray and harbor seals that may be due to phocine distemper virus. 
 
-Several climate and ecosystem observations are trending towards or have reached unprecedented levels. The Northeast US shelf is among the fastest warming waters globally (Fig. \ref{fig:long-term-sst}) with implications for species physiology, productivity, distribution, and community composition. Globally, 2018 was the 4th warmest year on record with the last four years being the warmest on record. In both the GOM and GB, 2018 seasonal sea surface temperatures were above average, while while the summer temperatures in the Gulf of Maine were the highest on record (Fig. \ref{fig:NE-SST-anom-series}). Annual average bottom temperature measurements show a significant long term warming trend in the GOM (Fig. \ref{fig:NE-bot-temp}). Ocean circulation is changing as well. The position of the northern edge of the Gulf Stream has trended northward since the late 1950s, with an increasing rate since 2009. The most northerly positions on record were observed between 2014-2017 (Fig. \ref{fig:GSI}). Since the mid-2000’s, the warmer, saltier shelf slope water associated with the Gulf Stream has dominated the input into the GOM at the Northeast Channel (Fig. \ref{fig:wsw-prop}). A more northerly Gulf Stream position is generally associated with warmer ocean temperature in the Northeast US shelf [@zhang_role_2007] and increased sea surface height along the U.S. east coast [@goddard_extreme_2015]. 
+Several climate and ecosystem observations are trending towards or have reached unprecedented levels. The Northeast US shelf is among the fastest warming waters globally (Fig. \ref{fig:long-term-sst}) with implications for species physiology, productivity, distribution, and community composition. Globally, 2018 was the 4th warmest year on record with the last four years being the warmest on record. In both the GOM and GB, 2018 seasonal sea surface temperatures were above average, while while the summer temperatures in the Gulf of Maine were the highest on record (Fig. \ref{fig:NE-SST-anom-series}). Annual average bottom temperature measurements show a significant long term warming trend in the GOM (Fig. \ref{fig:NE-bot-temp}). Ocean circulation is changing as well. The position of the northern edge of the Gulf Stream has trended northward since the late 1950s, with an increasing rate since 2009. The most northerly positions on record were observed between 2014-2017 (Fig. \ref{fig:GSI}). Since the mid-2000'??s, the warmer, saltier shelf slope water associated with the Gulf Stream has dominated the input into the GOM at the Northeast Channel (Fig. \ref{fig:wsw-prop}). A more northerly Gulf Stream position is generally associated with warmer ocean temperature in the Northeast US shelf [@zhang_role_2007] and increased sea surface height along the U.S. east coast [@goddard_extreme_2015]. 
 
 The management implications of these ocean changes vary by region and species, and are not fully understood at this point. Changes in the distribution of managed fish species continue, with aggregate trends on the entire Northeast Shelf shifting towards the northeast and generally into deeper water (Fig. \ref{fig:spec-dist}). These shifts place increasing pressure on the management system. The proportion of NEFMC managed benthivore species (righteye flounders, haddock) has declined over time in Mid-Atlantic waters according to bottom trawl surveys (Fig. \ref{fig:NEFMC-in-MAB}), while the proportion of MAFMC managed planktivore (squids, mackerel, and butterfish) species has been increasing in New England waters in both surveys and landings (Figs. \ref{fig:MAFMC-in-NE}, \ref{fig:comm-landings-ne}). Butterfish have been observed in Gulf of Maine common tern fledgling diets between 2009-2011 and again in 2018 (Fig. \ref{fig:map-and-prey}b), which negatively impacts tern productivity. The downward trend in recreational species diversity in the Mid-Atlantic (see Mid-Atlantic report) contrasts with an increase in recreational species diversity over time in New England (Fig. \ref{fig:rec-div}), although it is unclear to what extent this result is due to the aggregation of SAFMC species in the indicator itself. Nearshore MA and ME/NH survey indices show some similar patterns to offshore surveys, although with different magnitudes, perhaps reflecting seasonal importance of nearshore habitats (Figs. \ref{fig:gom-biomass-ne},  \ref{fig:MA-inshore}, \ref{fig:menh-survey}); these patterns will be explored in more detail in future analyses. As temperature and ocean circulation indicators trend toward extremes, fishery management based on static stock areas will likely face continued changes in species distribution.
 
@@ -158,21 +161,22 @@ mng_obj <- data.frame("Objective Categories" = c("Seafood Production",
                                                  "Stability","Social & Cultural",
                                                  "Biomass","Productivity",
                                                  "Trophic structure","Habitat"),
-"Indicators reported here" = c("Landings by feeding guild","Revenue by feeding guild",
-                               "Number of anglers and trips; recreational catch",
-                               "Diversity indices (fishery and species)",
-                               "Commercial and recreational reliance",
-                               "Biomass or abundance by feeding guild from surveys",
-                               "Condition and recruitment of MAFMC managed species",
-                               "Relative biomass of feeding guilds, primary productivity",
-                               "Estuarine and offshore habitat conditions"))
+                      "Indicators reported here" = c("Landings by feeding guild",
+                                                     "Revenue by feeding guild",
+                                                     "Number of anglers and trips; recreational catch",
+                                                     "Diversity indices (fishery and species)",
+                                                     "Commercial and recreational reliance",
+                                                     "Biomass or abundance by feeding guild from surveys",
+                                                     "Condition and recruitment of MAFMC managed species",
+                                                     "Relative biomass of feeding guilds, primary productivity",
+                                                     "Estuarine and offshore habitat conditions"))
 
 knitr::kable(mng_obj,
       col.names = c("Objective Categories","Indicators reported here"),
       caption = "Established ecosystem-scale objectives in New England",
-      #align = 'c',
+      #align = aca,
       booktabs = T) %>%
-  kable_styling(latex_options = "hold_position", "scale_down") %>%
+  kable_styling(latex_options = "hold_position","scale_down") %>%
  # column_spec(c(2), width = c("25em")) %>%
   row_spec(0, bold = TRUE)
 ```
@@ -917,10 +921,10 @@ ggplot() +
 Protected species include marine mammals (under the Marine Mammal Protection Act), endangered and threatened species (under the Endangered Species Act), and migratory birds (under the Migratory Bird Treaty Act). In the Northeast US, endangered/threatened species include Atlantic salmon, Atlantic and shortnose sturgeon, all sea turtle species, and 5 baleen whales. Fishery management objectives for protected species generally focus on reducing threats and on habitat conservation/restoration; here we report on the status of these actions as well as indicating the potential for future interactions driven by observed and predicted ecosystem changes in the Northeast US region. Atlantic salmon are among the most critically endangered fish and are a NOAA Species in the Spotlight. This year four Unusual Mortality Events (UMEs) have been declared for three large whale species and two seal species, with several mortalities attributed to human interactions. Also, a marine mammal climate vulnerability assessment is currently underway for Atlantic and Gulf of Mexico populations and will be reported on in future versions of this report. Strong evidence exists to suggest that the level of interaction between right whales and the combination of fixed gear in the US and Canada is contributing substantially to the decline of the species.
 
 ## Sea turtles (coastwide)
-Sea turtles are known to be susceptible to climate and ecosystem changes, and their distribution is influenced by water temperature. Sea turtle diets contain a considerable amount of gelatinous zooplankton, which are also influenced by changes in the ecosystem. At present, management measures to reduce sea turtle-fishery interactions are limited to the regions with historical observations of sea turtles and based on historical ocean temperature distributions. However, changes in climate may cause turtles to shift northward into areas with heavy fishing, possibly resulting in increased bycatch. It has been hypothesized that seasonal distribution of Kemp's Ridley sea turtles has shifted northward due to the warming of the Gulf of Maine, which in turn, appears to be resulting in a near record number of cold-stunned turtles stranding in Cape Cod Bay as waters cooled during the fall of 2018.
+Sea turtles are known to be susceptible to climate and ecosystem changes, and their distribution is influenced by water temperature. Sea turtle diets contain a considerable amount of gelatinous zooplankton, which are also influenced by changes in the ecosystem. At present, management measures to reduce sea turtle-fishery interactions are limited to the regions with historical observations of sea turtles and based on historical ocean temperature distributions. However, changes in climate may cause turtles to shift northward into areas with heavy fishing, possibly resulting in increased bycatch. It has been hypothesized that seasonal distribution of Kempas Ridley sea turtles has shifted northward due to the warming of the Gulf of Maine, which in turn, appears to be resulting in a near record number of cold-stunned turtles stranding in Cape Cod Bay as waters cooled during the fall of 2018.
 
 ## Whales (coastwide)
-North Atlantic right whales are among the most endangered large whale populations in the world. Changes in right whale trends can have implications for fisheries management where fisheries interact with these whales. Additional management restrictions could have a large impact on fishing times, gears, etc. Although the population increased steadily from 1990 to 2011, it has decreased recently (Fig. \ref{fig:NARW-abundance}). From @pace_statespace_2017: “The probability that the population’s trajectory post-2010 was a decline was estimated at 99.99%.” Reduced survival rates of adult females and diverging abundance trends between sexes have also been observed. It is estimated that there are only about 100 adult females remaining in the population. Further, right whale distribution has changed since 2010. The reasons for these changes is unclear, but changes in climate and primary prey (*Calanus finmarchicus*) are suspected.
+North Atlantic right whales are among the most endangered large whale populations in the world. Changes in right whale trends can have implications for fisheries management where fisheries interact with these whales. Additional management restrictions could have a large impact on fishing times, gears, etc. Although the population increased steadily from 1990 to 2011, it has decreased recently (Fig. \ref{fig:NARW-abundance}). From @pace_statespace_2017: '??The probability that the population'??s trajectory post-2010 was a decline was estimated at 99.99%.'?? Reduced survival rates of adult females and diverging abundance trends between sexes have also been observed. It is estimated that there are only about 100 adult females remaining in the population. Further, right whale distribution has changed since 2010. The reasons for these changes is unclear, but changes in climate and primary prey (*Calanus finmarchicus*) are suspected.
  
 Three large whale Unusual Mortality Events (UMEs) have been declared for north Atlantic right whales, humpback whales, and minke whales. In all three cases human interaction appears to have contributed to increased mortalities, although investigations are not complete. Twenty right whale mortalities have been documented in 2017 and 2018 so far. Among the 20 right whale deaths observed in 2017 and 2018 thus far, 5 were due to vessel strike (1 in US waters, 4 in Canadian waters), 6 from entanglement (2 in Canadian gear, 1 in unknown gear, and 3 others found in US waters), and the rest from unknown causes. UMEs have also been declared for humpback whales during 2016-2018 and 2017-2018 minke whales due to elevated strandings. Necropsy investigations on 50% of humpback whales showed evidence of human interaction, either ship strike or entanglement. Similarly, 60% of minke whales show evidence of human interactions or infectious disease. In both cases the investigations are still underway and more research is needed to determine the causes of these UME.
 
@@ -1741,7 +1745,7 @@ gom_mafmc_props + gb_mafmc_props + plot_layout(ncol = 1)
 Other observations corroborate these survey trends. For example, butterfish have been observed in Gulf of Maine common tern fledgling diets between 2009-2011 and again in 2018 (Fig. \ref{fig:map-and-prey}b). The downward trend in recreational species diversity in the Mid-Atlantic (see Mid-Atlantic report) contrasts with an increase in recreational species diversity over time in New England (Fig. \ref{fig:rec-div}), although it is unclear to what extent this result is due to the aggregation of SAFMC species in the indicator itself. As temperature and ocean circulation indicators trend toward extremes (next section), fishery management will likely face continued changes in species distribution.
 
 ## Fish condition (coastwide, NEFMC managed stocks)
-Fish condition is measured as the weight at a given length relative to the average - a measure of 'fatness', and a factor that influences fecundity. This information is from fall NEFSC bottom trawl surveys. Overall, condition factor has improved for many New England species since 2012, similar to overall high condition prior to 2000, and in contrast to overall lower condition between 2001-2010 (Fig. \ref{fig:ne-cf}). The timing of these shifts is similar to shifts in the small-large zooplankton indicator (Fig. \ref{fig:NE-sli}). Condition factor for some NEFMC managed species (red hake, GOM haddock, ocean pout, spiny dogfish, thorny skates, and components of winter, yellowtail and windowpane flounder stocks) was high in 2018. 
+Fish condition is measured as the weight at a given length relative to the average - a measure of afatnessa, and a factor that influences fecundity. This information is from fall NEFSC bottom trawl surveys. Overall, condition factor has improved for many New England species since 2012, similar to overall high condition prior to 2000, and in contrast to overall lower condition between 2001-2010 (Fig. \ref{fig:ne-cf}). The timing of these shifts is similar to shifts in the small-large zooplankton indicator (Fig. \ref{fig:NE-sli}). Condition factor for some NEFMC managed species (red hake, GOM haddock, ocean pout, spiny dogfish, thorny skates, and components of winter, yellowtail and windowpane flounder stocks) was high in 2018. 
  
 
 ```{r ne-cf, fig.cap = "Condition factor for NEFMC managed species.", out.width = '\\textwidth'}
@@ -1896,7 +1900,7 @@ gsi %>%
 ```
 
 
-Globally, 2018 was the 4th warmest year on record and the last four years were the warmest on record. Since the 1860’s, the Northeast US shelf sea surface temperature (SST) has exhibited an overall warming trend, with the past decade measuring well above the long term average (and the trendline; Fig. \ref{fig:long-term-sst}).
+Globally, 2018 was the 4th warmest year on record and the last four years were the warmest on record. Since the 1860'??s, the Northeast US shelf sea surface temperature (SST) has exhibited an overall warming trend, with the past decade measuring well above the long term average (and the trendline; Fig. \ref{fig:long-term-sst}).
 
 ```{r long-term-sst, fig.width = 8, fig.asp = 0.25, fig.cap = "Average annual sea surface temperature (SST) over the Northeast US Shelf"}
 lt_sst <- ecodata::long_term_sst %>% 
@@ -1924,7 +1928,7 @@ lt_sst %>%
 
 
 ## Ocean circulation and temperature (GOM and GB)
-The changing position of the Gulf Stream north wall described above directly influences oceanic conditions in the GOM.  Since the mid-2000’s, the warmer, saltier shelf slope water associated with the Gulf Stream has dominated the input into the GOM at the Northeast Channel, with 2017 having 99% warm slope water (Fig. \ref{fig:wsw-prop}), the highest estimated in the time series. The changing proportions of source water affect the temperature, salinity and nutrient inputs to the system. 
+The changing position of the Gulf Stream north wall described above directly influences oceanic conditions in the GOM.  Since the mid-2000'??s, the warmer, saltier shelf slope water associated with the Gulf Stream has dominated the input into the GOM at the Northeast Channel, with 2017 having 99% warm slope water (Fig. \ref{fig:wsw-prop}), the highest estimated in the time series. The changing proportions of source water affect the temperature, salinity and nutrient inputs to the system. 
 
 ```{r wsw-prop, fig.width=5, fig.asp = 0.45, fig.cap = "Proportion of warm slope water (WSW) and Labrador slope water (LSLW) entering the GOM through the Northeast Channel."}
 
@@ -2028,7 +2032,7 @@ ne_anom_plt <- ggplot(data = ne_anom,
   geom_point()+
   ylim(-2,3)+
   geom_gls() +
-  ylab(expression("SST Anomaly (°C)")) +
+  ylab("SST Anomaly (°C)") +
   ggtitle("Gulf of Maine & Georges Bank SST Anomaly") +
     scale_color_manual(values = c("black","indianred"))+
     scale_x_continuous(expand = c(0.01, 0.01)) +
@@ -2398,7 +2402,7 @@ Changes in primary productivity, phytoplankton and zooplankton composition and a
 
 **Editors** (NOAA NMFS Northeast Fisheries Science Center, NEFSC): Sarah Gaichas, Sean Hardison, Scott Large, Sean Lucey
 
-**Contributors** (NEFSC unless otherwise noted): Lisa Calvo (Rutgers), Matthew Camisa (MA Division of Marine Fisheries), Patricia Clay, Lisa Colburn, Geret DePiper, Michael Fogarty, Paula Fratantoni, Kevin Friedland, Sarah Gaichas, James Gartland (Virginia Institute of Marine Science), Heather Haas, Sean Hardison, Kimberly Hyde, Terry Joyce (Woods Hole Oceanographic Institute), John Kosik, Steve Kress and Don Lyons (National Audubon Society's Seabird Restoration Program), Sean Lucey, Chris Melrose, Ryan Morse, Kimberly Murray, Chris Orphanides, Richard Pace, Charles Perretti, Karl Roscher (Maryland Department of Natural Resources), Vincent Saba, Laurel Smith, Mark Terceiro, John Walden, Harvey Walsh, Mark Wuenschel, and Qian Zhang (Unversity of Maryland and US EPA Chesapeake Bay Program).  
+**Contributors** (NEFSC unless otherwise noted): Lisa Calvo (Rutgers), Matthew Camisa (MA Division of Marine Fisheries), Patricia Clay, Lisa Colburn, Geret DePiper, Michael Fogarty, Paula Fratantoni, Kevin Friedland, Sarah Gaichas, James Gartland (Virginia Institute of Marine Science), Heather Haas, Sean Hardison, Kimberly Hyde, Terry Joyce (Woods Hole Oceanographic Institute), John Kosik, Steve Kress and Don Lyons (National Audubon Societyas Seabird Restoration Program), Sean Lucey, Chris Melrose, Ryan Morse, Kimberly Murray, Chris Orphanides, Richard Pace, Charles Perretti, Karl Roscher (Maryland Department of Natural Resources), Vincent Saba, Laurel Smith, Mark Terceiro, John Walden, Harvey Walsh, Mark Wuenschel, and Qian Zhang (Unversity of Maryland and US EPA Chesapeake Bay Program).  
 
 \newpage 
 
@@ -2407,7 +2411,7 @@ Changes in primary productivity, phytoplankton and zooplankton composition and a
 The figure format is illustrated in Fig \ref{fig:docformat}a. Trend lines are shown when slope is significantly different from 0 at the p < 0.05 level. An orange line signifies an overall positive trend, and purple signifies a negative trend. To minimize bias introduced by small sample size, no trend is fit for < 30 year time series. Dashed lines represent mean values of time series unless the indicator is an anomaly, in which case the dashed line is equal to 0. Shaded regions indicate the past ten years. If there are no new data for 2018, the shaded region will still cover this time period. The spatial scale of indicators is either coastwide, New England states (Maine, New Hampshire, Massachusetts, Rhode Island, Connecticut), or at the Gulf of Maine (GOM) and Georges Bank (GB) Ecosystem Production Unit (EPU, Fig. \ref{fig:docformat}b) level.
 
 ```{r docformat, fig.cap = "Document orientation. a. Key to figures. b.The Northeast Large Marine Ecosystem.",  fig.width = 8, fig.height = 2.5}
-#fig.subcap= c('Key to figures.', 'The Northeast Large Marine Ecosystem.'), out.width = '.49\\linewidth', fig.show="hold" 
+#fig.subcap= c(aKey to figures.a, aThe Northeast Large Marine Ecosystem.a), out.width = a.49\\linewidtha, fig.show="hold" 
 # FIgure orientation subfigure
 m <- 0.1
 x <- 1985:2018
