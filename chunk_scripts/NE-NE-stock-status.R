@@ -2,7 +2,7 @@
 #Get data, spread for plotting, and filter
 stock_status <- ecodata::stock_status %>%
   spread(.,Var,Value) %>% 
-  filter(Council %in% c(council_abbr,"Both"))
+  filter(Council %in% c("NEFMC","Both"))
 
 #Plot constants
 y.max <- 4.5
