@@ -22,17 +22,17 @@ f_missing <- stock_status %>%
 
 #A dataframe that defines custom legend for stocks with unknown status
 
-all.df <- data.frame(text = all_missing$Code,
+all.df <- tibble(text = all_missing$Code,
                     x = rep(x.max,length(all_missing$Code)),
                     y = seq(4.35,2.85,-0.22),
                     color = all_missing$Council)
 
-b.df <- data.frame(text = b_missing$Code,
+b.df <- tibble(text = b_missing$Code,
                     x = rep(x.max*0.8,length(b_missing$Code)),
                     y = c(4.35,4.14),
                     color = b_missing$Council)
 
-f.df <- data.frame(text = f_missing$Code,
+f.df <- tibble(text = f_missing$Code,
                     x = rep(x.max*0.6,length(f_missing$Code)),
                     y = seq(4.35,2.85,-0.22),
                     color = f_missing$Council)
