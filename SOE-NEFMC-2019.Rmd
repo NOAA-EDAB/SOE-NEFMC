@@ -1212,12 +1212,12 @@ Fishery management aims to keep individual harvested species within population r
 ## Stock status and aggregate distribution (coastwide)
 Fishery management objectives are being met for 20 (including 6 skate) stocks at the single species level. Stocks in Fig. \ref{fig:NE-stock-status} which are above the F threshold (horizontal line) are experiencing overfishing (F > Fmsy). Stocks in Fig. \ref{fig:NE-stock-status} which are below the B threshold (dashed vertical line) are overfished (B < 0.5Bmsy). For the stocks with either missing F or B values in Fig. \ref{fig:NE-stock-status}, additional information has been used to determine overfishing and overfished status. Official stock status for New England stocks^[https://www.st.nmfs.noaa.gov/sisPortal/mapTool.jsp] lists 6 stocks subject to overfishing (GOM cod, GB cod, southern red hake, and all 3 yellowtail flounder stocks), and 13 stocks as overfished (GOM cod, GB cod, southern red hake, Atlantic halibut, Atlantic wolffish, ocean pout, thorny skate, GOM/GB windowpane flounder, southern New England/mid-Atlantic winter flounder, witch flounder, and all 3 yellowtail flounder stocks). Five stocks have unknown status for B and F.
 
-```{r NE-stock-status, warning=F, fig.cap = paste0("Summary of single species status for ",council_abbr," and jointly managed stocks. \\label{stock-status}"), fig.width = 8, fig.asp = 0.65}
+```{r NE-stock-status, warning=F, fig.cap = paste0("Summary of single species status for NEFMC and jointly managed stocks. \\label{stock-status}"), fig.width = 8, fig.asp = 0.65}
 
 #Get data, spread for plotting, and filter
 stock_status <- ecodata::stock_status %>%
   spread(.,Var,Value) %>% 
-  filter(Council %in% c(council_abbr,"Both"))
+  filter(Council %in% c("NEFMC","Both"))
 
 #Plot constants
 y.max <- 4.5
