@@ -655,7 +655,7 @@ In contrast to commercial species specialization, indicators highlight an increa
 ```{r rec-div, fig.width = 4, fig.asp = 0.8, fig.cap = paste0("Recreational effort diversity and diversity of recreational catch in the ",region,".")}
 
 recdat <- ecodata::recdat %>% 
-  filter(EPU == region_abbr) %>% 
+  filter(EPU == "NE") %>% 
   group_by(Var) %>% 
   mutate(hline = mean(Value))
 
@@ -744,7 +744,7 @@ Recreational seafood production shows an increasing trend since the mid-1990s wi
 ```{r rec-landings-ne, fig.cap = paste0("Total recreational seafood harvest in ",region,"."), fig.width = 4, fig.asp = 0.45}
 
 landings_rec <- ecodata::recdat %>% 
-  filter(EPU == region_abbr,
+  filter(EPU == "NE",
          Var == "Recreational Seafood") %>% 
   mutate(hline = mean(Value))
 
@@ -782,7 +782,7 @@ Updated indicators for recreational opportunities (effort days and number of ang
 
 ```{r rec-op, fig.width = 4, fig.asp = 0.8, fig.cap = paste0("Recreational effort and number of recreational anglers in the ",region,".")}
 recdat <- ecodata::recdat %>% 
-  filter(EPU == region_abbr) %>% 
+  filter(EPU == "NE") %>% 
   group_by(Var) %>% 
   mutate(hline = mean(Value))
 

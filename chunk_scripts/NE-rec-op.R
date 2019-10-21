@@ -1,6 +1,6 @@
 
 recdat <- ecodata::recdat %>% 
-  filter(EPU == region_abbr) %>% 
+  filter(EPU == "NE") %>% 
   group_by(Var) %>% 
   mutate(hline = mean(Value))
 

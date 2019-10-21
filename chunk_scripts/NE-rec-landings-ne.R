@@ -1,6 +1,6 @@
 
 landings_rec <- ecodata::recdat %>% 
-  filter(EPU == region_abbr,
+  filter(EPU == "NE",
          Var == "Recreational Seafood") %>% 
   mutate(hline = mean(Value))
 
