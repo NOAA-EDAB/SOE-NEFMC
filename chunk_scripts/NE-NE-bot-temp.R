@@ -10,7 +10,7 @@ bot_temp_insitu_gom <- oceantemp_insitu %>%
   geom_line(aes(x = Time, y = Value)) +
   geom_gls(aes(x = Time, y = Value)) +
   geom_point(aes(x = Time, y = Value), size = 1) +
-  ylab("Temp. Anomaly (°C)") +
+  ylab("Temp. Anomaly (Â°C)") +
   ggtitle("GOM Bottom Temperature Anomaly") +
   scale_x_continuous(expand = c(0.01, 0.01)) +
     geom_hline(aes(yintercept = hline),
@@ -33,7 +33,7 @@ bot_temp_insitu_gb <- oceantemp_insitu %>%
   geom_line(aes(x = Time, y = Value)) +
   geom_gls(aes(x = Time, y = Value)) +
   geom_point(aes(x = Time, y = Value), size = 1) +
-  ylab("Temp. Anomaly (°C)") +
+  ylab("Temp. Anomaly (Â°C)") +
   ggtitle("GB Bottom Temperature Anomaly") +
   scale_x_continuous(expand = c(0.01, 0.01)) +
     geom_hline(aes(yintercept = hline),
@@ -49,4 +49,4 @@ bot_temp_insitu_gb <- oceantemp_insitu %>%
 bot_temp_insitu_gom +
  bot_temp_insitu_gb + plot_layout(nrow = 1)
   #plot_layout(ncol =  1) &
-  #theme(plot.margin = unit(c(0, 0, 0, 0), "cm"))
+  #theme(plot.margin = unit(c(0, 0, 0, 0), "cm")) #
