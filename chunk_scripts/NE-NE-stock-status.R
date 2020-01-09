@@ -53,10 +53,14 @@ ggplot(data = stock_status) +
                       color = Council), show.legend = FALSE,nudge_y = 0.05, nudge_x = 0.05) +
   ylim(0,y.max) +
   xlim(0,x.max*1.1) +
-  geom_text(data = all.df, aes(x = x, y = y, label = text, color = color),show.legend = FALSE, size = 3)+
-  geom_text(data = b.df, aes(x = x, y = y, label = text, color = color),show.legend = FALSE, size = 3)+
-  geom_text(data = f.df, aes(x = x, y = y, label = text, color = color),show.legend = FALSE, size = 3)+
-  scale_color_manual(values = c("purple","blue"),#c("purple","blue"), #Change legend labels for clarity
+  geom_text(data = all.df, aes(x = x, y = y, label = text, color = color),
+            show.legend = FALSE, size = 3)+
+  geom_text(data = b.df, aes(x = x, y = y, label = text, color = color),
+            show.legend = FALSE, size = 3)+
+  geom_text(data = f.df, aes(x = x, y = y, label = text, color = color),
+            show.legend = FALSE, size = 3)+
+  scale_color_manual(values = c("purple","blue"),#c("purple","blue"),
+                     #Change legend labels for clarity
                    name = "Managed by",
                    breaks = c("Both","NEFMC"),
                    labels = c("MAFMC/NEFMC","NEFMC"))+
