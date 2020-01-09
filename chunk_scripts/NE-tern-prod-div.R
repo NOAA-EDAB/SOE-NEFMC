@@ -3,8 +3,11 @@ aggregate_prod <- ecodata::common_tern %>%
     filter(!str_detect(Var, "Diet|Sum"))  %>% 
   mutate(Island = word(Var, 1),
          Var = word(Var, 3),
-         Island = plyr::mapvalues(Island, from = c("EER","JI","MR","OGI","PINWR","SINWR","STI"),
-                                  to = c("Eastern Egg Rock", "Jenny Island", "Matinicus Rock", "Outer Green Island", "Pond Island", "Seal Island","Stratton Island"))) %>%
+         Island = plyr::mapvalues(Island, 
+                                  from = c("EER","JI","MR","OGI","PINWR","SINWR","STI"),
+                                  to = c("Eastern Egg Rock", "Jenny Island", 
+                                         "Matinicus Rock", "Outer Green Island", 
+                                         "Pond Island", "Seal Island","Stratton Island"))) %>%
   group_by(Time) %>% 
   dplyr::summarise(Mean = mean(Value, na.rm = T),
                    SE = sd(Value, na.rm = T)/sqrt(n()),
