@@ -19,9 +19,12 @@ rec_div <- recdat %>%
       ymin = -Inf, ymax = Inf) +
     #label
   # annotate("text", 
-  #          x = label_loc[label_loc$Var == "Recreational fleet effort diversity across modes",]$xloc,
-  #          y = label_loc[label_loc$Var == "Recreational fleet effort diversity across modes",]$yloc,
-  #          label = label_loc[label_loc$Var == "Recreational fleet effort diversity across modes",]$labels,
+  #          x = label_loc[label_loc$Var == 
+# "Recreational fleet effort diversity across modes",]$xloc,
+  #          y = label_loc[label_loc$Var == 
+# "Recreational fleet effort diversity across modes",]$yloc,
+  #          label = label_loc[label_loc$Var == 
+# "Recreational fleet effort diversity across modes",]$labels,
   #          size = letter_size)+
   geom_gls(aes(x = Time, y = Value,
                group = Var),
