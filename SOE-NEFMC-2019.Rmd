@@ -31,6 +31,7 @@ knitr::opts_chunk$set(echo = FALSE,
                       fig.align = 'center') #allows for inserting R code into captions
 
 #Plotting and data libraries
+remotes::install_github("noaa-edab/ecodata@0.1.0")
 library(ggplot2)
 library(dplyr)
 library(tidyr)
