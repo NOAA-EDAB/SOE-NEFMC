@@ -1,26 +1,13 @@
-<<<<<<< HEAD
 .Rproj.user
 .Rhistory
 .RData
 .Ruserdata
-
 *.pdf
 *.log
 *.txt
 *.html
-=======
-.Rproj.user
-.Rhistory
-.RData
-.Ruserdata
-
-*.pdf
-*.log
-*.txt
-*.html
-# latex stuff
-*.tex
+Rplot.png
+Rplot01.png
+.DS_Store
 *.upa
 *.upb
-*.md
->>>>>>> 92167954eb6aa283717b132520dd17ee38278662
