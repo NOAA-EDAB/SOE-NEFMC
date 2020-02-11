@@ -13,7 +13,7 @@ output:
 link-citations: yes
 geometry: left=2cm, right=2cm, top=2cm, bottom=3cm, footskip = .5cm
 subparagraph: yes
-bibliography: SOE2019.bib
+bibliography: SOE2020.bib
 ---
 
 ```{r setup, include=FALSE}
@@ -31,7 +31,7 @@ knitr::opts_chunk$set(echo = FALSE,
                       fig.align = 'center') #allows for inserting R code into captions
 
 #Plotting and data libraries
-remotes::install_github("noaa-edab/ecodata@0.1.0")
+#remotes::install_github("noaa-edab/ecodata@0.1.0")
 library(ggplot2)
 library(dplyr)
 library(tidyr)
@@ -44,8 +44,9 @@ library(patchwork)
 library(grid)
 # library(ggiraph)
 library(vegan)
-library(RColorBrewer)
 library(rpart)
+library(ks)
+library(cowplot)
 
 #GIS libraries
 library(sf)
@@ -122,9 +123,10 @@ hline.lty <- "dashed"
 label.size <- 5
 hjust.label <- 1.5
 letter_size <- 4
+feeding.guilds1<- c("Piscivore","Planktivore","Benthivore","Benthos")
 feeding.guilds <- c("Apex Predator","Piscivore","Planktivore","Benthivore","Benthos")
 x.shade.min <- 2009
-x.shade.max <- 2018
+x.shade.max <- 2019
 #Function for custom ggplot facet labels
 label <- function(variable,value){
   return(facet_names[value])
@@ -2401,9 +2403,9 @@ Changes in primary productivity, phytoplankton and zooplankton composition and a
 
 # Contributors
 
-**Editors** (NOAA NMFS Northeast Fisheries Science Center, NEFSC): Sarah Gaichas, Sean Hardison, Scott Large, Sean Lucey
+**Editors** (NOAA NMFS Northeast Fisheries Science Center, NEFSC): Sarah Gaichas, Kimberly Bastille, Geret DePiper, Kimberly Hyde, Scott Large, Sean Lucey, Chris Orphanides
 
-**Contributors** (NEFSC unless otherwise noted): Lisa Calvo (Rutgers), Matthew Camisa (MA Division of Marine Fisheries), Patricia Clay, Lisa Colburn, Geret DePiper, Michael Fogarty, Paula Fratantoni, Kevin Friedland, Sarah Gaichas, James Gartland (Virginia Institute of Marine Science), Heather Haas, Sean Hardison, Kimberly Hyde, Terry Joyce (Woods Hole Oceanographic Institute), John Kosik, Steve Kress and Don Lyons (National Audubon Societyas Seabird Restoration Program), Sean Lucey, Chris Melrose, Ryan Morse, Kimberly Murray, Chris Orphanides, Richard Pace, Charles Perretti, Karl Roscher (Maryland Department of Natural Resources), Vincent Saba, Laurel Smith, Mark Terceiro, John Walden, Harvey Walsh, Mark Wuenschel, and Qian Zhang (Unversity of Maryland and US EPA Chesapeake Bay Program).  
+**Contributors** (NEFSC unless otherwise noted): Patricia Clay, Lisa Colburn, Geret DePiper, Michael Fogarty, Paula Fratantoni, Kevin Friedland, Sarah Gaichas, James Gartland (Virginia Institute of Marine Science), Heather Haas, Sean Hardison, Kimberly Hyde, Terry Joyce (Woods Hole Oceanographic Institute), Don Lyons (National Audubon Societyas Seabird Restoration Program), Sean Lucey, Chris Melrose, Ryan Morse, Kimberly Murray, Chris Orphanides, Richard Pace, Charles Perretti, Karl Roscher (Maryland Department of Natural Resources), Vincent Saba, Laurel Smith, Mark Terceiro, John Walden, Harvey Walsh, Mark Wuenschel, and Qian Zhang (Unversity of Maryland and US EPA Chesapeake Bay Program).  
 
 \newpage 
 
@@ -2493,14 +2495,14 @@ Fish and invertebrates are aggregated into similar feeding categories (Table \re
 
 # new table with all species listed by management entity
 df <- ecodata::species_groupings %>%
-  dplyr::select(SOE_18, COMNAME, Fed_Managed) %>%
-  filter(SOE_18 != "Other") %>%
+  dplyr::select(SOE.20, COMNAME, Fed.Managed) %>%
+  filter(SOE.20 != "Other") %>%
   distinct() %>%
-  group_by(SOE_18, Fed_Managed) %>%
+  group_by(SOE.20, Fed.Managed) %>%
   summarize_all(funs(paste(na.omit(.), collapse = ", "))) %>%
-  spread(Fed_Managed, COMNAME) %>%
-  arrange(factor(SOE_18, levels = c("Apex Predator", "Piscivore", "Planktivore", "Benthivore", "Benthos")))
-df<-df[-6,c(1,4,3,5,6)] %>%
+  spread(Fed.Managed, COMNAME) %>%
+  arrange(factor(SOE.20, levels = c("Apex Predator", "Piscivore", "Planktivore", "Benthivore", "Benthos")))
+df<-df[c(1,3,2,4,5)] %>%
   mutate_all(tolower)
 
 
