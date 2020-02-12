@@ -1134,7 +1134,7 @@ diet_freq_bar
 
 ```
 
-GOM common tern average productivity (fledglings per nest) across 7 colonies has varied over time (Fig. \ref{fig:tern-prod}). The pattern is similar to that observed for fish condition (high before 2000, lower 2001-2009, higher/variable since 2010; Fig. \ref{fig:ne-cf}). Productivity is affected by both food and predation mortality. While data on predation is lacking, productivity lows in 2004-2006 were associated with euphausiids  (Fig. \ref{fig:tern-prey}), and the 2018 productivity low with butterfish in tern diets (Fig. \ref{fig:tern-prey}). The presence of butterfish in tern diets reflects the extension of this warm water species into GOM. Due to their thin, deep body form, butterfish are often difficult for small seabird chicks to ingest and swallow, causing chicks to starve and/or parent birds to increase foraging effort.
+GOM common tern average productivity (fledglings per nest) across 7 colonies has varied over time (Fig. \ref{fig:tern-prod}). The pattern is similar to that observed for fish condition (high before 2000, lower 2001-2009, higher/variable since 2010; Figs. \ref{fig:gom-cf}-\ref{fig:gb-cf}). Productivity is affected by both food and predation mortality. While data on predation is lacking, productivity lows in 2004-2006 were associated with euphausiids  (Fig. \ref{fig:tern-prey}), and the 2018 productivity low with butterfish in tern diets (Fig. \ref{fig:tern-prey}). The presence of butterfish in tern diets reflects the extension of this warm water species into GOM. Due to their thin, deep body form, butterfish are often difficult for small seabird chicks to ingest and swallow, causing chicks to starve and/or parent birds to increase foraging effort.
 
 ```{r tern-prod, fig.width = 4, fig.asp = 0.45, fig.cap = "Mean common tern productivity at nesting sites in Gulf of Maine. Error bars show +/- 1 SE of the mean."}
 aggregate_prod <- ecodata::common_tern %>% 
@@ -1408,27 +1408,37 @@ blue_map
 ```
 
 ## Survey biomass (GOM and GB)
-Biomass across trophic levels shows similar trends between the Gulf of Maine and Georges Bank offshore, but nearshore trends differ for some groups. For both the GOM and GB, there are long term increasing trends in aggregate NEFSC (offshore) survey biomass for Piscivores, Planktivores and Benthos in the fall. (Figs. \ref{fig:gom-biomass-ne}, \ref{fig:gb-biomass-ne}). GB spring Benthos and GOM spring Planktivores are also increasing over the long term. However, there are some notable departures from these trends recently. 
+Examining trends in biomass by aggregate groups rather than individual species reveals the overall stability of the trophic structure within the system.  In past reports we noted several trends in aggregate biomass which might suggest an instability in this structure. Biomass across trophic levels shows similar patterns between the Gulf of Maine and Georges Bank offshore, but nearshore patterns differ for some groups. This year we include information on survey biomass uncertainty as well as the mean trend. When considering variable catch between survey stations within strata for each year (Figs. \ref{fig:gom-biomass-ne}-\ref{fig:MA-inshore}), several previously identified trends are no longer significant, and others are unlikely to be ecologically significant. For example, our statistical analysis based on annual means suggests that benthos had a positive trend in both region’s fall NEFSC surveys and the GB spring NEFSC survey. However, including sampling variability suggests that this trend is driven by uncertain estimates late in the time series. NEFSC survey biomass estimates for GB fall planktivores and GOM spring planktivores and fall piscivores show a similar pattern. The remaining potential trends to be investigated further in the coming year are increasing trends over time for GB piscivores in the fall  and GOM planktivores in the fall (Figs. \ref{fig:gom-biomass-ne}, \ref{fig:gb-biomass-ne}).
 
-```{r gom-biomass-ne, fig.cap = paste0("Fall (left) and spring (right) NEFSC surveyed biomass in the Gulf of Maine."), fig.width=8, fig.asp = 0.75}
-total_surv <- nefsc_survey %>% 
-  filter(EPU %in% c("GOM","GB"),
-         !str_detect(Var, "Other|Apex|managed"),
+```{r gom-biomass-ne, fig.cap = paste0("Spring (left) and fall (right) NEFSC surveyed biomass in the Gulf of Maine."), fig.width=8, fig.asp = 0.75}
+
+agg<-ecodata::agg_bio %>% 
+  filter(!str_detect(Var, "Apex|inshore|offshore|managed|NEFMC|MAFMC|JOINT|NA")) %>% #remove unused datasets
+  separate(Var, c("feeding.guild", "season", "Biomass", "Var1"), sep = " ") %>% 
+  unite("Var", feeding.guild:season, sep = " ") %>% 
+  mutate(stat = recode(Var1, Index = "Mean", 
+                      Standard = "SD")) %>% 
+  dplyr::select(-Biomass, -Var1) %>% 
+  group_by(Var, Time, EPU) %>% 
+  spread(stat, Value) %>% 
+  mutate(upper = Mean + (2*SD), 
+         lower = Mean - (2*SD))
+
+agg_bio<-agg %>% filter(EPU %in% c("GOM","GB"),
          Time >= 1968) %>% 
-  group_by(EPU,Var) %>% 
-  mutate(hline = mean(Value, na.rm = T)) %>% 
-  ungroup() %>% 
-  mutate(Var = word(Var, 1,2))
-series.col <- rep("black",length(unique(total_surv$Var)))
-total_surv$Var <- factor(total_surv$Var,levels = c("Piscivore Fall",
-                                                   "Piscivore Spring",
-                                                    "Benthivore Fall",
-                                                    "Benthivore Spring",
-                                                    "Planktivore Fall",
-                                                    "Planktivore Spring",
-                                                    "Benthos Fall",
-                                                    "Benthos Spring"))
+  group_by(Var, EPU) %>% 
+  mutate(hline = mean(Mean, na.rm = T)) %>% 
+  ungroup() 
 
+agg_bio$Var <- factor(agg_bio$Var,levels = c("Piscivore Spring",
+                                                   "Piscivore Fall",
+                                                    "Benthivore Spring",
+                                                   "Benthivore Fall",
+                                                    "Planktivore Spring",
+                                                    "Planktivore Fall",
+                                                    "Benthos Spring",
+                                                   "Benthos Fall"))
+series.col <- rep("black",length(unique(agg_bio$Var)))
 
 
 #facet names for titles
@@ -1437,9 +1447,13 @@ facet_names <- list("Piscivores" = expression("Piscivores"),
                     "Benthivores" = expression("Benthivores"),
                     "Benthos" = expression("Benthos"))
 
-gom_surv <- total_surv %>% 
-  filter(EPU == "GOM") %>% 
-ggplot(aes(x = Time, y = Value, color = Var)) +
+gom_surv <-agg_bio %>% 
+  filter(EPU == "GOM") 
+
+#### Plot 1
+p1<-gom_surv %>% 
+  filter(str_detect(Var, "Piscivore")) %>% 
+ggplot(aes(x = Time, y = Mean)) +
   
   #Highlight last ten years
   annotate("rect", fill = shade.fill, alpha = shade.alpha,
@@ -1447,11 +1461,14 @@ ggplot(aes(x = Time, y = Value, color = Var)) +
       ymin = -Inf, ymax = Inf) +
   
   #Test for trend and add lines
-  geom_gls(aes(x = Time, y = Value,
+  geom_gls(aes(x = Time, y = Mean,
                color = Var),
              alpha = trend.alpha, size = trend.size) +
   
   #Add time series
+  geom_ribbon(aes(x = Time, ymin = pmax(lower,0), ymax = upper), 
+              alpha = 0.5,
+              fill = "grey") + 
   geom_line(size = lwd-0.5) +
   geom_point(size = pcex-0.5) +
   scale_color_manual(values = series.col, aesthetics = "color")+
@@ -1463,23 +1480,20 @@ ggplot(aes(x = Time, y = Value, color = Var)) +
              linetype = hline.lty)+
 
   #Facet 
-  facet_wrap(Var~.,scales = "free_y", ncol = 2) +
+  facet_wrap(Var~., ncol = 2) +
   
   #Axis and theme
   scale_x_continuous(breaks = seq(1965, 2015, by = 10), expand = c(0.01, 0.01)) +
   ylab(expression("Biomass (kg tow"^-1*")")) +
-  ggtitle("GOM NEFSC BTS") +
+  #ggtitle("GOM NEFSC BTS") +
   theme_facet()+
-  theme(strip.text=element_text(hjust=0))
+  theme(strip.text=element_text(hjust=0),
+        axis.title.x=element_blank())
 
-gom_surv
-```
-
-```{r gb-biomass-ne, fig.cap = paste0("Fall (left) and spring (right) NEFSC surveyed biomass on Georges Bank."), fig.width=8, fig.asp = 0.75}
-
-gb_surv <- total_surv %>% 
-  filter(EPU == "GB") %>% 
-ggplot(aes(x = Time, y = Value, color = Var)) +
+#### Plot 2 
+p2<-gom_surv %>% 
+  filter(str_detect(Var, "Benthivore")) %>% 
+ggplot(aes(x = Time, y = Mean)) +
   
   #Highlight last ten years
   annotate("rect", fill = shade.fill, alpha = shade.alpha,
@@ -1487,11 +1501,14 @@ ggplot(aes(x = Time, y = Value, color = Var)) +
       ymin = -Inf, ymax = Inf) +
   
   #Test for trend and add lines
-  geom_gls(aes(x = Time, y = Value,
+  geom_gls(aes(x = Time, y = Mean,
                color = Var),
              alpha = trend.alpha, size = trend.size) +
   
   #Add time series
+  geom_ribbon(aes(x = Time, ymin = pmax(lower,0), ymax = upper), 
+              alpha = 0.5,
+              fill = "grey") + 
   geom_line(size = lwd-0.5) +
   geom_point(size = pcex-0.5) +
   scale_color_manual(values = series.col, aesthetics = "color")+
@@ -1503,41 +1520,312 @@ ggplot(aes(x = Time, y = Value, color = Var)) +
              linetype = hline.lty)+
 
   #Facet 
-  facet_wrap(Var~.,scales = "free_y", ncol = 2) +
+  facet_wrap(Var~., ncol = 2) +
   
   #Axis and theme
   scale_x_continuous(breaks = seq(1965, 2015, by = 10), expand = c(0.01, 0.01)) +
   ylab(expression("Biomass (kg tow"^-1*")")) +
-  ggtitle("GB NEFSC BTS") +
   theme_facet()+
-  theme(strip.text=element_text(hjust=0))
+  theme(strip.text=element_text(hjust=0),
+        axis.title.x=element_blank())
 
-gb_surv
+## Plot 3
+p3<-gom_surv %>% 
+  filter(str_detect(Var, "Planktivore")) %>% 
+ggplot(aes(x = Time, y = Mean)) +
+  
+  #Highlight last ten years
+  annotate("rect", fill = shade.fill, alpha = shade.alpha,
+      xmin = x.shade.min , xmax = x.shade.max,
+      ymin = -Inf, ymax = Inf) +
+  
+  #Test for trend and add lines
+  geom_gls(aes(x = Time, y = Mean,
+               color = Var),
+             alpha = trend.alpha, size = trend.size) +
+  
+  #Add time series
+  geom_ribbon(aes(x = Time, ymin = pmax(lower,0), ymax = upper), 
+              alpha = 0.5,
+              fill = "grey") + 
+  geom_line(size = lwd-0.5) +
+  geom_point(size = pcex-0.5) +
+  scale_color_manual(values = series.col, aesthetics = "color")+
+  guides(color = FALSE) +
+  geom_hline(aes(yintercept = hline,
+                 group = Var),
+             size = hline.size,
+             alpha = hline.alpha,
+             linetype = hline.lty)+
 
-```
+  #Facet 
+  facet_wrap(Var~., ncol = 2) +  
 
-Benthivore biomass catch in both offshore surveys has shown recent declines from 2015 highs in both fall and spring. This contrasts with inshore surveys showing more stable Benthivore biomass in the past few years (Figs \ref{fig:MA-inshore}, \ref{fig:menh-survey}). Change in haddock catch is the largest contributor to these fluctuations. 
+  #Axis and theme
+  scale_x_continuous(breaks = seq(1965, 2015, by = 10), expand = c(0.01, 0.01)) +
+  ylab(expression("Biomass (kg tow"^-1*")")) +
+  theme_facet()+
+  theme(strip.text=element_text(hjust=0),
+        axis.title.x=element_blank())
+
+##Plot 4
+p4<-gom_surv %>% 
+  filter(str_detect(Var, "Benthos")) %>% 
+ggplot(aes(x = Time, y = Mean)) +
+  
+  #Highlight last ten years
+  annotate("rect", fill = shade.fill, alpha = shade.alpha,
+      xmin = x.shade.min , xmax = x.shade.max,
+      ymin = -Inf, ymax = Inf) +
+  
+  #Test for trend and add lines
+  geom_gls(aes(x = Time, y = Mean,
+               color = Var),
+             alpha = trend.alpha, size = trend.size) +
+  
+  #Add time series
+  geom_ribbon(aes(x = Time, ymin = pmax(lower,0), ymax = upper), 
+              alpha = 0.5,
+              fill = "grey") + 
+  geom_line(size = lwd-0.5) +
+  geom_point(size = pcex-0.5) +
+  scale_color_manual(values = series.col, aesthetics = "color")+
+  guides(color = FALSE) +
+  geom_hline(aes(yintercept = hline,
+                 group = Var),
+             size = hline.size,
+             alpha = hline.alpha,
+             linetype = hline.lty)+
+
+  #Facet 
+  facet_wrap(Var~., ncol = 2) +
  
-```{r MA-inshore, fig.width=8, fig.asp = 0.75, fig.cap = "Fall (left) and spring (right) surveyed biomass from the MA state inshore bottom trawl survey."}
-mass <- mass_inshore_survey %>% 
-  filter(str_detect(Var, "Index")) %>% 
-  mutate(feeding.guild = str_extract(Var, paste(feeding.guilds, collapse = "|")),
-         Season = str_extract(Var, "Spring|Fall")) %>%
-  filter(!is.na(feeding.guild)) %>% 
-  unite(.,Var, c("feeding.guild","Season"),sep = " ") %>% 
-  group_by(Var) %>% 
-  mutate(hline = mean(Value))
-mass$Var <- factor(mass$Var,levels = c("Piscivore Fall",
-                                                   "Piscivore Spring",
-                                                    "Benthivore Fall",
-                                                    "Benthivore Spring",
-                                                    "Planktivore Fall",
-                                                    "Planktivore Spring",
-                                                    "Benthos Fall",
-                                                    "Benthos Spring"))
+  #Axis and theme
+  scale_x_continuous(breaks = seq(1965, 2015, by = 10), expand = c(0.01, 0.01)) +
+  theme_facet()+
+  ylab(expression("Biomass (kg tow"^-1*")")) +
+  theme(strip.text=element_text(hjust=0),
+        axis.title.x=element_blank())
 
-mass %>% 
-  ggplot(aes(x = Time, y = Value, color = Var)) +
+ptitle <- ggdraw() + 
+  draw_label(
+    "GOM NEFSC BTS",
+    fontface = 'bold',
+    x = 0,
+    hjust = 0
+  ) +
+  theme(
+    # add margin on the left of the drawing canvas,
+    # so title is aligned with left edge of first plot
+    plot.margin = margin(0, 0, 0, 7)
+  )
+
+plot_grid(ptitle, p1, p2, p3, p4, nrow=5,   rel_heights = c(0.1, 1,1,1,1))
+
+
+```
+
+```{r gb-biomass-ne, fig.cap = paste0("Spring (left) and fall (right) NEFSC surveyed biomass on Georges Bank."), fig.width=8, fig.asp = 0.75}
+
+gb_surv <- agg_bio %>% 
+  filter(EPU == "GB") 
+
+## plot 1
+p1<- gb_surv %>% 
+  filter(str_detect(Var, "Piscivore")) %>% 
+  ggplot(aes(x = Time, y = Mean)) +
+  
+  #Highlight last ten years
+  annotate("rect", fill = shade.fill, alpha = shade.alpha,
+      xmin = x.shade.min , xmax = x.shade.max,
+      ymin = -Inf, ymax = Inf) +
+  
+  #Test for trend and add lines
+  geom_gls(aes(x = Time, y = Mean,
+               color = Var),
+             alpha = trend.alpha, size = trend.size) +
+  
+  #Add time series
+  geom_ribbon(aes(x = Time, ymin = pmax(lower,0), ymax = upper), 
+              alpha = 0.5,
+              fill = "grey") + 
+  geom_line(size = lwd-0.5) +
+  geom_point(size = pcex-0.5) +
+  scale_color_manual(values = series.col, aesthetics = "color")+
+  guides(color = FALSE) +
+  geom_hline(aes(yintercept = hline,
+                 group = Var),
+             size = hline.size,
+             alpha = hline.alpha,
+             linetype = hline.lty)+
+
+  #Facet 
+  facet_wrap(Var~., ncol = 2) +
+ 
+  #Axis and theme
+  scale_x_continuous(breaks = seq(1965, 2015, by = 10), expand = c(0.01, 0.01)) +
+  ylab(expression("Biomass (kg tow"^-1*")")) +
+  #ggtitle("GB NEFSC BTS") +
+  theme_facet()+
+  theme(strip.text=element_text(hjust=0),
+        axis.title.x=element_blank())
+
+## plot 2
+p2<- gb_surv %>% 
+  filter(str_detect(Var, "Benthivore")) %>% 
+  ggplot(aes(x = Time, y = Mean)) +
+  
+  #Highlight last ten years
+  annotate("rect", fill = shade.fill, alpha = shade.alpha,
+      xmin = x.shade.min , xmax = x.shade.max,
+      ymin = -Inf, ymax = Inf) +
+  
+  #Test for trend and add lines
+  geom_gls(aes(x = Time, y = Mean,
+               color = Var),
+             alpha = trend.alpha, size = trend.size) +
+  
+  #Add time series
+  geom_ribbon(aes(x = Time, ymin = pmax(lower,0), ymax = upper), 
+              alpha = 0.5,
+              fill = "grey") + 
+  geom_line(size = lwd-0.5) +
+  geom_point(size = pcex-0.5) +
+  scale_color_manual(values = series.col, aesthetics = "color")+
+  guides(color = FALSE) +
+  geom_hline(aes(yintercept = hline,
+                 group = Var),
+             size = hline.size,
+             alpha = hline.alpha,
+             linetype = hline.lty)+
+
+  #Facet 
+  facet_wrap(Var~., ncol = 2) +
+  #Axis and theme
+  scale_x_continuous(breaks = seq(1965, 2015, by = 10), expand = c(0.01, 0.01)) +
+  ylab(expression("Biomass (kg tow"^-1*")")) +
+  theme_facet()+
+  theme(strip.text=element_text(hjust=0),
+        axis.title.x=element_blank())
+
+## plot 3
+p3<- gb_surv %>% 
+  filter(str_detect(Var, "Planktivore")) %>% 
+  ggplot(aes(x = Time, y = Mean)) +
+  
+  #Highlight last ten years
+  annotate("rect", fill = shade.fill, alpha = shade.alpha,
+      xmin = x.shade.min , xmax = x.shade.max,
+      ymin = -Inf, ymax = Inf) +
+  
+  #Test for trend and add lines
+  geom_gls(aes(x = Time, y = Mean,
+               color = Var),
+             alpha = trend.alpha, size = trend.size) +
+  
+  #Add time series
+  geom_ribbon(aes(x = Time, ymin = pmax(lower,0), ymax = upper), 
+              alpha = 0.5,
+              fill = "grey") +
+  geom_line(size = lwd-0.5) +
+  geom_point(size = pcex-0.5) +
+  scale_color_manual(values = series.col, aesthetics = "color")+
+  guides(color = FALSE) +
+  geom_hline(aes(yintercept = hline,
+                 group = Var),
+             size = hline.size,
+             alpha = hline.alpha,
+             linetype = hline.lty)+
+ 
+  #Facet 
+  facet_wrap(Var~., ncol = 2) +
+
+  #Axis and theme
+  scale_x_continuous(breaks = seq(1965, 2015, by = 10), expand = c(0.01, 0.01)) +
+  ylab(expression("Biomass (kg tow"^-1*")")) +
+  theme_facet()+
+  theme(strip.text=element_text(hjust=0),
+        axis.title.x=element_blank())
+
+## plot 4
+p4<- gb_surv %>% 
+  filter(str_detect(Var, "Benthos")) %>% 
+  ggplot(aes(x = Time, y = Mean)) +
+  
+  #Highlight last ten years
+  annotate("rect", fill = shade.fill, alpha = shade.alpha,
+      xmin = x.shade.min , xmax = x.shade.max,
+      ymin = -Inf, ymax = Inf) +
+  
+  #Test for trend and add lines
+  geom_gls(aes(x = Time, y = Mean,
+               color = Var),
+             alpha = trend.alpha, size = trend.size) +
+  
+  #Add time series
+    geom_ribbon(aes(x = Time, ymin = pmax(lower,0), ymax = upper), 
+              alpha = 0.5,
+              fill = "grey") + 
+  geom_line(size = lwd-0.5) +
+  geom_point(size = pcex-0.5) +
+  scale_color_manual(values = series.col, aesthetics = "color")+
+  guides(color = FALSE) +
+  geom_hline(aes(yintercept = hline,
+                 group = Var),
+             size = hline.size,
+             alpha = hline.alpha,
+             linetype = hline.lty)+
+
+  #Facet 
+  facet_wrap(Var~., ncol = 2) +
+
+  #Axis and theme
+  scale_x_continuous(breaks = seq(1965, 2015, by = 10), expand = c(0.01, 0.01)) +
+  ylab(expression("Biomass (kg tow"^-1*")")) +
+  theme_facet()+
+  theme(strip.text=element_text(hjust=0),
+        axis.title.x=element_blank())
+
+ptitle <- ggdraw() + 
+  draw_label(
+    "GB NEFSC BTS",
+    fontface = 'bold',
+    x = 0,
+    hjust = 0
+  ) +
+  theme(
+    # add margin on the left of the drawing canvas,
+    # so title is aligned with left edge of first plot
+    plot.margin = margin(0, 0, 0, 7)
+  )
+
+plot_grid(ptitle, p1, p2, p3, p4, nrow=5,   rel_heights = c(0.1, 1,1,1,1))
+
+```
+
+Stability in biomass for these aggregate groups would suggest no major disturbances to overall trophic structure in the GOM and GB. There is little evidence of ecologically significant long term biomass trends in NEFSC spring surveys in either region. There are notable short term increases in benthivore biomass in both seasons and both regions that are apparent in the NEFSC as well as the inshore surveys, even when uncertainty is considered (Figs \ref{fig:gom-biomass-ne}-\ref{fig:menh-survey}). This is largely driven by changes in haddock biomass. Further, there is some evidence of a long term decline in piscivores nearshore in the MA survey (Fig. \ref{fig:MA-inshore}). Given the wide range of stock status for managed fish in New England, with haddock in a high biomass state (Fig. \ref{fig:NE-stock-status}) more detailed investigation into trophic structure is warranted. These patterns will be explored in more detail using spatio-temporal analyses that include both inshore and offshore surveys at once.
+ 
+```{r MA-inshore, fig.width=8, fig.asp = 0.75, fig.cap = "Spring (left) and fall (right) surveyed biomass from the MA state inshore bottom trawl survey."}
+mass <- mass_inshore_survey %>% 
+  filter(EPU == "GB",
+         Time>1980) %>% 
+  separate(Var, c("feeding.guild", "season", "biomass", "stat")) %>% 
+  unite(.,Var, c("feeding.guild","season"),sep = " ") %>% 
+  group_by(Time, Var) %>% 
+  spread(stat, Value) %>% 
+  mutate(upper = Index + (2*SD), 
+         lower = Index - (2*SD)) %>% 
+  group_by(Var) %>% 
+  mutate(hline = mean(Index))
+mass$Var <- factor(mass$Var,levels = c("Piscivore Spring","Piscivore Fall",
+                                       "Benthivore Spring","Benthivore Fall",
+                                       "Planktivore Spring","Planktivore Fall",
+                                       "Benthos Spring","Benthos Fall")) 
+###Plot 1
+p1<-mass %>% 
+  filter(!is.na(Var), 
+         str_detect(Var, "Piscivore")) %>% 
+  ggplot(aes(x = Time, y = Index)) +
   
   #Highlight last ten years
   annotate("rect", fill = shade.fill, alpha = shade.alpha,
@@ -1545,64 +1833,180 @@ mass %>%
       ymin = -Inf, ymax = Inf) +
   
   #Test for trend and add lines
-  geom_gls(aes(x = Time, y = Value,
+  geom_gls(aes(x = Time, y = Index,
                color = Var),
              alpha = trend.alpha, size = trend.size) +
   
   #Add time series
+    geom_ribbon(aes(x = Time, ymin = pmax(lower,0), ymax = upper), 
+              alpha = 0.5,
+              fill = "grey") + 
   geom_line(size = lwd-0.5) +
   geom_point(size = pcex-0.5) +
-  scale_color_manual(values = series.col, aesthetics = "color")+
   guides(color = FALSE) +
   geom_hline(aes(yintercept = hline,
                  group = Var),
              size = hline.size,
              alpha = hline.alpha,
              linetype = hline.lty)+
-
   #Facet 
-  facet_wrap(Var~.,scales = "free_y", ncol = 2) +
-  
+  facet_wrap(Var~., ncol = 2) +
   #Axis and theme
   scale_x_continuous(breaks = seq(1965, 2015, by = 10), expand = c(0.01, 0.01)) +
   ylab(expression("Biomass (kg tow"^-1*")")) +
-  ggtitle("MA Inshore BTS") +
+  #ggtitle("MA Inshore BTS") +
   theme_facet()+
-  theme(strip.text=element_text(hjust=0))
+  theme(strip.text=element_text(hjust=0),
+        axis.title.x=element_blank())
 
+###Plot 2
+p2<-mass %>% 
+  filter(!is.na(Var), 
+         str_detect(Var, "Benthivore")) %>% 
+  ggplot(aes(x = Time, y = Index)) +
+  
+  #Highlight last ten years
+  annotate("rect", fill = shade.fill, alpha = shade.alpha,
+      xmin = x.shade.min , xmax = x.shade.max ,
+      ymin = -Inf, ymax = Inf) +
+  
+  #Test for trend and add lines
+  geom_gls(aes(x = Time, y = Index,
+               color = Var),
+             alpha = trend.alpha, size = trend.size) +
+  
+  #Add time series
+  geom_ribbon(aes(x = Time, ymin = pmax(lower,0), ymax = upper), 
+              alpha = 0.5,
+              fill = "grey") + 
+  geom_line(size = lwd-0.5) +
+  geom_point(size = pcex-0.5) +
+  guides(color = FALSE) +
+  geom_hline(aes(yintercept = hline,
+                 group = Var),
+             size = hline.size,
+             alpha = hline.alpha,
+             linetype = hline.lty)+
+  #Facet 
+  facet_wrap(Var~., ncol = 2) +
+
+  #Axis and theme
+  scale_x_continuous(breaks = seq(1965, 2015, by = 10), expand = c(0.01, 0.01)) +
+  ylab(expression("Biomass (kg tow"^-1*")")) +
+  theme_facet()+
+  theme(strip.text=element_text(hjust=0),
+        axis.title.x=element_blank())
+
+###Plot 3
+p3<-mass %>% 
+  filter(!is.na(Var), 
+         str_detect(Var, "Planktivore")) %>% 
+  ggplot(aes(x = Time, y = Index)) +
+  
+  #Highlight last ten years
+  annotate("rect", fill = shade.fill, alpha = shade.alpha,
+      xmin = x.shade.min , xmax = x.shade.max ,
+      ymin = -Inf, ymax = Inf) +
+  
+  #Test for trend and add lines
+  geom_gls(aes(x = Time, y = Index,
+               color = Var),
+             alpha = trend.alpha, size = trend.size) +
+  
+  #Add time series
+  geom_ribbon(aes(x = Time, ymin = pmax(lower,0), ymax = upper), 
+              alpha = 0.5,
+              fill = "grey") + 
+  geom_line(size = lwd-0.5) +
+  geom_point(size = pcex-0.5) +
+  guides(color = FALSE) +
+  geom_hline(aes(yintercept = hline,
+                 group = Var),
+             size = hline.size,
+             alpha = hline.alpha,
+             linetype = hline.lty)+
+  #Facet 
+  facet_wrap(Var~., ncol = 2) +
+ 
+  #Axis and theme
+  scale_x_continuous(breaks = seq(1965, 2015, by = 10), expand = c(0.01, 0.01)) +
+  ylab(expression("Biomass (kg tow"^-1*")")) +
+  theme_facet()+
+  theme(strip.text=element_text(hjust=0),
+        axis.title.x=element_blank())
+
+###Plot 4
+p4<-mass %>% 
+  filter(!is.na(Var), 
+         str_detect(Var, "Benthos")) %>% 
+  ggplot(aes(x = Time, y = Index)) +
+  
+  #Highlight last ten years
+  annotate("rect", fill = shade.fill, alpha = shade.alpha,
+      xmin = x.shade.min , xmax = x.shade.max ,
+      ymin = -Inf, ymax = Inf) +
+  
+  #Test for trend and add lines
+  geom_gls(aes(x = Time, y = Index,
+               color = Var),
+             alpha = trend.alpha, size = trend.size) +
+  
+  #Add time series
+  geom_ribbon(aes(x = Time, ymin = pmax(lower,0), ymax = upper), 
+              alpha = 0.5,
+              fill = "grey") + 
+  geom_line(size = lwd-0.5) +
+  geom_point(size = pcex-0.5) +
+  guides(color = FALSE) +
+  geom_hline(aes(yintercept = hline,
+                 group = Var),
+             size = hline.size,
+             alpha = hline.alpha,
+             linetype = hline.lty)+
+  #Facet 
+  facet_wrap(Var~., ncol = 2) +
+ 
+  #Axis and theme
+  scale_x_continuous(breaks = seq(1965, 2015, by = 10), expand = c(0.01, 0.01)) +
+  ylab(expression("Biomass (kg tow"^-1*")")) +
+  theme_facet()+
+  theme(strip.text=element_text(hjust=0),
+        axis.title.x=element_blank())
+
+ptitle <- ggdraw() + 
+  draw_label(
+    "MA Inshore BTS",
+    fontface = 'bold',
+    x = 0,
+    hjust = 0
+  ) +
+  theme(
+    # add margin on the left of the drawing canvas,
+    # so title is aligned with left edge of first plot
+    plot.margin = margin(0, 0, 0, 7)
+  )
+
+plot_grid(ptitle, p1, p2, p3, p4, nrow=5,   rel_heights = c(0.1, 1,1,1,1))
 ```
 
-```{r menh-survey,fig.width=8, fig.asp = 0.75, fig.cap = "Fall (left) and spring (right) surveyed biomass from the ME/NH state inshore bottom trawl survey."}
+```{r menh-survey,fig.width=8, fig.asp = 0.75, fig.cap = "Spring (left) and fall (right) surveyed biomass from the ME/NH state inshore bottom trawl survey."}
 
 menh <- ecodata::ne_inshore_survey %>% 
-  filter(Units != "CV",
-         !str_detect(Var, " se| ci")) %>% 
-  mutate(feeding.guild = str_to_title(str_extract(Var, paste(tolower(feeding.guilds), collapse = "|"))),
-         Season = str_to_title(str_extract(Var, "fall|spring"))) %>% 
-    unite(.,Var, c("feeding.guild","Season"),sep = " ") %>% 
   group_by(Var) %>% 
   mutate(hline = mean(Value))
   
 
-menh$Var <- factor(menh$Var,levels = c("Piscivore Fall",
-                                                   "Piscivore Spring",
-                                                    "Benthivore Fall",
-                                                    "Benthivore Spring",
-                                                    "Planktivore Fall",
-                                                    "Planktivore Spring",
-                                                    "Benthos Fall",
-                                                    "Benthos Spring"))
-menh %>% 
+menh$Var <- factor(menh$Var,levels = c("Piscivore Spring","Piscivore Fall",
+                                       "Benthivore Spring","Benthivore Fall",            
+                                       "Planktivore Spring","Planktivore Fall",             
+                                       "Benthos Spring",  "Benthos Fall"))
+p1<-menh %>% 
+  filter(str_detect(Var, "Piscivore")) %>% 
   ggplot(aes(x = Time, y = Value, color = Var)) +
   #Highlight last ten years
   annotate("rect", fill = shade.fill, alpha = shade.alpha,
       xmin = x.shade.min , xmax = x.shade.max ,
       ymin = -Inf, ymax = Inf) +
-  
-  #Test for trend and add lines
-  # geom_gls(aes(x = Time, y = Value,
-  #              color = Var),
-  #            alpha = trend.alpha, size = trend.size) +
   
   #Add time series
   geom_line(size = lwd-0.5) +
@@ -1616,44 +2020,19 @@ menh %>%
              linetype = hline.lty)+
 
   #Facet 
-  facet_wrap(Var~.,scales = "free_y", ncol = 2) +
+  facet_wrap(Var~., ncol = 2) +
   
   #Axis and theme
   scale_x_continuous(breaks = seq(1965, 2015, by = 10), expand = c(0.01, 0.01)) +
   ylab(expression("Biomass (kg tow"^-1*")")) +
-  ggtitle("ME/NH Inshore BTS") +
+  #ggtitle("ME/NH Inshore BTS") +
   theme_facet()+
-  theme(strip.text=element_text(hjust=0))
+  theme(strip.text=element_text(hjust=0),
+        axis.title.x=element_blank())
 
-```
-
-Fall offshore benthivore levels remain high in the Gulf of Maine (Fig. \ref{fig:gom-biomass-ne}), however, the New Hampshire/Maine survey shows a recent decline (Fig. \ref{fig:menh-survey}). Fall offshore planktivore levels returned towards the time series mean in the Gulf of Maine after two high years.
-
-All fall aggregate groups on Georges Bank are at or below their time series mean for the offshore survey (Fig. \ref{fig:gb-biomass-ne}). Spring benthos biomass levels remain high on Georges Bank, and show significant increases over the long-term.
-
-The proportion of NEFMC managed benthivore species (righteye flounders, haddock) has declined over time in Mid-Atlantic waters according to bottom trawl surveys (Fig. \ref{fig:NEFMC-in-MAB}), while the proportion of MAFMC managed planktivore (squids, mackerel and butterfish) species has been increasing in New England waters in both surveys and landings (Fig. \ref{fig:MAFMC-in-NE}, Fig. \ref{fig:comm-landings-ne}). 
-
-```{r NEFMC-in-MAB, fig.width = 7, fig.asp = 0.35, fig.cap = "New England-managed survey proportion of MAB benthivores."}
-
-nefmc_ma <- nefsc_survey_disaggregated %>% 
-  # distinct() %>% 
-  filter(EPU %in% c("MAB"),
-         Management == "NEFMC",
-         !str_detect(`Feeding guild`,"Other")) %>% 
-  group_by(EPU, `Feeding guild`, Season, Time) %>% 
-  dplyr::summarise(Value = sum(Proportion,na.rm = T)) %>% #IMPORTANT: Turn zeros to NA before taking mean
-  mutate(Value = ifelse(Value == 0, NA, Value)) %>% #Turn zeros to NA
-  unite(.,Var,c("Feeding guild","Season"), sep = " ") %>% 
-  group_by(EPU,Var, .drop = FALSE) %>% 
-  mutate(hline = mean(Value, na.rm = T)) %>% 
-  filter(str_detect(Var,"Benthivore")) %>% 
-  ungroup() %>% 
-  mutate(Var = paste(str_to_title(str_extract(Var, "fall|spring")),
-         "survey"))
-
-mab_nefmc_props <- nefmc_ma %>% 
- ggplot(aes(x = Time, y = Value, group = Var)) +
-  
+p2<-menh %>% 
+  filter(str_detect(Var, "Benthivore")) %>% 
+  ggplot(aes(x = Time, y = Value, color = Var)) +
   #Highlight last ten years
   annotate("rect", fill = shade.fill, alpha = shade.alpha,
       xmin = x.shade.min , xmax = x.shade.max ,
@@ -1662,7 +2041,7 @@ mab_nefmc_props <- nefmc_ma %>%
   #Add time series
   geom_line(size = lwd-0.5) +
   geom_point(size = pcex-0.5) +
-  # scale_color_manual(values = series.col, aesthetics = "color")+
+  scale_color_manual(values = series.col, aesthetics = "color")+
   guides(color = FALSE) +
   geom_hline(aes(yintercept = hline,
                  group = Var),
@@ -1671,42 +2050,18 @@ mab_nefmc_props <- nefmc_ma %>%
              linetype = hline.lty)+
 
   #Facet 
-  facet_wrap(Var~.,scales = "free_y", ncol = 2) +
-  ggtitle("NEFMC benthivores in the Mid-Atlantic")+
+  facet_wrap(Var~., ncol = 2) +
+  
   #Axis and theme
   scale_x_continuous(breaks = seq(1965, 2015, by = 10), expand = c(0.01, 0.01)) +
-  ylab(expression("Proportion of MAB survey")) +
+  ylab(expression("Biomass (kg tow"^-1*")")) +
   theme_facet()+
-  theme(strip.text=element_text(hjust=0))
+  theme(strip.text=element_text(hjust=0),
+        axis.title.x=element_blank())
 
-
-
-mab_nefmc_props
-
-```
-
-```{r MAFMC-in-NE, fig.width = 7, fig.asp = .7, fig.cap = "Mid-Atlantic-managed survey proportion of GOM and GB planktivores."}
-
-mafmc_ne <- nefsc_survey_disaggregated %>% 
-  distinct() %>% 
-  filter(EPU %in% c("GOM","GB"),
-         Management == "MAFMC",
-         !str_detect(`Feeding guild`,"Other")) %>% 
-  group_by(EPU, `Feeding guild`, Season, Time) %>% 
-  dplyr::summarise(Value = sum(Proportion,na.rm = T)) %>% #IMPORTANT: Turn zeros to NA before taking mean
-  mutate(Value = ifelse(Value == 0, NA, Value)) %>% #Turn zeros to NA
-  unite(.,Var,c("Feeding guild","Season"), sep = " ") %>% 
-  group_by(EPU,Var) %>% 
-  mutate(hline = mean(Value, na.rm = T)) %>% 
-  filter(str_detect(Var,"Planktivore")) %>% 
-  ungroup() %>% 
-  mutate(Var = paste(str_to_title(str_extract(Var, "fall|spring")),
-         "survey"))
-
-gom_mafmc_props <- mafmc_ne %>% 
-  filter(EPU == "GOM") %>% 
- ggplot(aes(x = Time, y = Value, group = Var)) +
-  
+p3<-menh %>% 
+  filter(str_detect(Var, "Planktivore")) %>% 
+  ggplot(aes(x = Time, y = Value, color = Var)) +
   #Highlight last ten years
   annotate("rect", fill = shade.fill, alpha = shade.alpha,
       xmin = x.shade.min , xmax = x.shade.max ,
@@ -1715,7 +2070,7 @@ gom_mafmc_props <- mafmc_ne %>%
   #Add time series
   geom_line(size = lwd-0.5) +
   geom_point(size = pcex-0.5) +
-  # scale_color_manual(values = series.col, aesthetics = "color")+
+  scale_color_manual(values = series.col, aesthetics = "color")+
   guides(color = FALSE) +
   geom_hline(aes(yintercept = hline,
                  group = Var),
@@ -1724,32 +2079,27 @@ gom_mafmc_props <- mafmc_ne %>%
              linetype = hline.lty)+
 
   #Facet 
-  facet_wrap(Var~.,scales = "free_y", ncol = 2) +
-  ggtitle("MAFMC planktivores in Gulf of Maine")+
+  facet_wrap(Var~., ncol = 2) +
+  
   #Axis and theme
   scale_x_continuous(breaks = seq(1965, 2015, by = 10), expand = c(0.01, 0.01)) +
-  ylab(expression("Proportion of GOM survey")) +
+  ylab(expression("Biomass (kg tow"^-1*")")) +
   theme_facet()+
-  theme(strip.text=element_text(hjust=0))
+  theme(strip.text=element_text(hjust=0),
+        axis.title.x=element_blank())
 
-gb_mafmc_props <- mafmc_ne %>% 
-  filter(EPU == "GB") %>% 
-ggplot(aes(x = Time, y = Value, group = Var)) +
-  
+p4<-menh %>% 
+  filter(str_detect(Var, "Benthos")) %>% 
+  ggplot(aes(x = Time, y = Value, color = Var)) +
   #Highlight last ten years
   annotate("rect", fill = shade.fill, alpha = shade.alpha,
       xmin = x.shade.min , xmax = x.shade.max ,
       ymin = -Inf, ymax = Inf) +
   
-  #Test for trend and add lines
-  # geom_gls(aes(x = Time, y = Value,
-  #              color = Var),
-  #            alpha = trend.alpha, size = trend.size) +
-  
   #Add time series
   geom_line(size = lwd-0.5) +
   geom_point(size = pcex-0.5) +
-  # scale_color_manual(values = series.col, aesthetics = "color")+
+  scale_color_manual(values = series.col, aesthetics = "color")+
   guides(color = FALSE) +
   geom_hline(aes(yintercept = hline,
                  group = Var),
@@ -1758,137 +2108,249 @@ ggplot(aes(x = Time, y = Value, group = Var)) +
              linetype = hline.lty)+
 
   #Facet 
-  facet_wrap(Var~.,scales = "free_y", ncol = 2) +
-  ggtitle("MAFMC planktivores on Georges Bank")+
+  facet_wrap(Var~., ncol = 2) +
+  
   #Axis and theme
   scale_x_continuous(breaks = seq(1965, 2015, by = 10), expand = c(0.01, 0.01)) +
-  ylab("Proportion of GB survey") +
+  ylab(expression("Biomass (kg tow"^-1*")")) +
   theme_facet()+
-  theme(strip.text=element_text(hjust=0))
+  theme(strip.text=element_text(hjust=0),
+        axis.title.x=element_blank())
 
+ptitle <- ggdraw() + 
+  draw_label(
+    "ME/NH Inshore BTS",
+    fontface = 'bold',
+    x = 0,
+    hjust = 0
+  ) +
+  theme(
+    # add margin on the left of the drawing canvas,
+    # so title is aligned with left edge of first plot
+    plot.margin = margin(0, 0, 0, 7)
+  )
 
-gom_mafmc_props + gb_mafmc_props + plot_layout(ncol = 1)
+plot_grid(ptitle, p1, p2, p3, p4, nrow=5,   rel_heights = c(0.1, 1,1,1,1))
 
 ```
-
-Other observations corroborate these survey trends. For example, butterfish have been observed in Gulf of Maine common tern fledgling diets between 2009-2011 and again in 2018 (Fig. \ref{fig:map-and-prey}b). The downward trend in recreational species diversity in the Mid-Atlantic (see Mid-Atlantic report) contrasts with an increase in recreational species diversity over time in New England (Fig. \ref{fig:rec-div}), although it is unclear to what extent this result is due to the aggregation of SAFMC species in the indicator itself. As temperature and ocean circulation indicators trend toward extremes (next section), fishery management will likely face continued changes in species distribution.
 
 ## Fish condition (coastwide, NEFMC managed stocks)
-Fish condition is measured as the weight at a given length relative to the average - a measure of afatnessa, and a factor that influences fecundity. This information is from fall NEFSC bottom trawl surveys. Overall, condition factor has improved for many New England species since 2012, similar to overall high condition prior to 2000, and in contrast to overall lower condition between 2001-2010 (Fig. \ref{fig:ne-cf}). The timing of these shifts is similar to shifts in the small-large zooplankton indicator (Fig. \ref{fig:NE-sli}). Condition factor for some NEFMC managed species (red hake, GOM haddock, ocean pout, spiny dogfish, thorny skates, and components of winter, yellowtail and windowpane flounder stocks) was high in 2018. 
+Fish condition, a measure of ‘fatness’ as an indicator of fish health and a factor that influences fecundity, is measured as the weight at a given length relative to the average. For this report, females of all species with adequate sampling in the Gulf of Maine and Georges Bank portions of the fall NEFSC bottom trawl surveys were analyzed (rather than both sexes of NEFMC managed species across the full Northeast US Shelf as in past years). Overall, condition factor has improved for many species since 2012, similar to overall high condition prior to 2000, and in contrast to overall lower condition between 2001-2010 (Figs. \ref{fig:gom-cf}-\ref{fig:gb-cf}). The timing of these shifts is similar to shifts in the small-large zooplankton indicator (Fig. \ref{fig:NE-sli}). Condition factors were generally better on Georges Bank than in the Gulf of Maine in 2019, and were especially high on Georges Bank for winter flounder, windowpane flounder and ocean pout (Fig.  \ref{fig:gb-cf}). Atlantic mackerel, white hake, pollock and Atlantic herring had particularly low condition factors in the Gulf of Maine in 2019 (Fig. \ref{fig:gom-cf}).
+
+Statistical analyses indicate that these trends in condition may be related to temperature changes and copepod size structure, but are not likely related to density dependence for most species. Fish condition is an important driver of population productivity as well as market prices, so we will investigate these potential links to changing habitat (temperature) and ecosystem productivity to evaluate whether they can inform decisions on annual catch limits. Work will continue over the coming year to explore relationships between fish condition and other indicators in this report (Fig. **2 Pager #2**)
+
+ 
+```{r gom-cf, fig.cap = "Condition factor for fish species in the Gulf of Maine.", out.width = '100%'}
+
+knitr::include_graphics(file.path(image.dir, "GOMcondition_2019_viridis_final.jpg"))
+
+```
  
 
-```{r ne-cf, fig.cap = "Condition factor for NEFMC managed species.", out.width = '\\textwidth'}
+```{r gb-cf, fig.cap = "Condition factor for fish species on Georges Bank.", out.width = '100%'}
 
-knitr::include_graphics(file.path(image.dir, "NEFMC_Fish_Condition_2019.jpg"))
-
-```
-
-
-## Larval diversity (GOM and GB)
-Fluctuations in larval diversity from NEFSC ECOMON and bottom trawl surveys reflect changing dominance of forage fish, hake, and haddock. GOM larval diversity has been difficult to track due to poor recent ECOMON survey coverage in the winter (Fig. \ref{fig:gom-larval-div}). GB spring larval diversity and richness were relatively low in 2017 (the most recent year with adequate coverage) due to high larval abundance of haddock and sand lance (Fig. \ref{fig:gb-larval-div}). 
-
-```{r gom-larval-div, fig.cap = "Larval diversity indices from ECOMON surveys in the Gulf of Maine.", fig.width = 8, fig.asp = .5}
-gom_larv_div <- ecodata::ichthyo_diversity %>%
-  filter(EPU == "GOM",
-         str_detect(Var, "Ich Shannon")) %>%
-  mutate(Var = word(Var,1)) %>% 
-  group_by(Var) %>% 
-  mutate(hline = mean(Value, na.rm = T)) %>% 
-  ggplot(aes(x = Time, y = Value, group = Var)) +
-  geom_line() +
-  geom_point() +
-       annotate("rect", fill = shade.fill, alpha = shade.alpha,
-      xmin = x.shade.min , xmax = x.shade.max,
-      ymin = -Inf, ymax = Inf) +
-  ggtitle("GOM larval diversity") +
-  ylab("Shannon Diversity") +
-  facet_wrap(Var~., ncol = 2, scales = "free_y") +
-  scale_x_continuous(expand = c(0.01, 0.01))+
-      geom_hline(aes(yintercept = hline),
-           size = hline.size,
-           alpha = hline.alpha,
-           linetype = hline.lty)+
-  theme_facet() +
-  theme(strip.text=element_text(hjust=0))
-
-gom_spec_rich <- ecodata::ichthyo_diversity %>%
-  filter(EPU == "GOM",
-         str_detect(Var, "Species Caught")) %>%
-  mutate(Var = word(Var,1)) %>% 
-  group_by(Var) %>% 
-  mutate(hline = mean(Value, na.rm = T)) %>% 
-  ggplot(aes(x = Time, y = Value, group = Var)) +
-  geom_line() +
-  geom_point() +
-       annotate("rect", fill = shade.fill, alpha = shade.alpha,
-      xmin = x.shade.min , xmax = x.shade.max,
-      ymin = -Inf, ymax = Inf) +
-  ggtitle("GOM larval species richness") +
-  ylab("Species richness") +
-  facet_wrap(Var~., ncol = 2, scales = "free_y") +
-  scale_x_continuous(expand = c(0.01, 0.01))+
-      geom_hline(aes(yintercept = hline),
-           size = hline.size,
-           alpha = hline.alpha,
-           linetype = hline.lty)+
-  theme_facet() +
-  theme(strip.text=element_text(hjust=0))
-
- gom_larv_div + gom_spec_rich + plot_layout(ncol = 1)
+knitr::include_graphics(file.path(image.dir, "GBcondition_2019_viridis_final.jpg"))
 
 ```
 
-```{r gb-larval-div, fig.cap = "Larval diversity indices from ECOMON surveys on Georges Bank.", fig.width = 8, fig.asp = .5}
-gb_larv_div <- ecodata::ichthyo_diversity %>%
-  filter(EPU == "GB",
-         str_detect(Var, "Ich Shannon")) %>%
-  mutate(Var = word(Var,1)) %>% 
-  group_by(Var) %>% 
-  mutate(hline = mean(Value, na.rm = T)) %>% 
-  ggplot(aes(x = Time, y = Value, group = Var)) +
-  geom_line() +
-  geom_point() +
-       annotate("rect", fill = shade.fill, alpha = shade.alpha,
-      xmin = x.shade.min , xmax = x.shade.max,
-      ymin = -Inf, ymax = Inf) +
-  ggtitle("GB larval diversity") +
-  ylab("Shannon Diversity") +
-  facet_wrap(Var~., ncol = 2, scales = "free_y") +
-  scale_x_continuous(expand = c(0.01, 0.01))+
-      geom_hline(aes(yintercept = hline),
-           size = hline.size,
-           alpha = hline.alpha,
-           linetype = hline.lty)+
-  theme_facet() +
-  theme(strip.text=element_text(hjust=0))
+## Fish productivity (GOM and GB) 
+We describe patterns of aggregate fish productivity in New England with the small fish per large fish anomaly indicator derived from NEFSC bottom trawl survey data (Figs. \ref{fig:GOM-productivity}-\ref{fig:GB-productivity}). The indicator shows that fish productivity has been fluctuating in this region since 2010, although productivity across all species was relatively high in 2018. In 2017, Mid-Atlantic managed species accounted for most of the above average productivity with Summer flounder the only species above average in the Gulf of Maine, and butterfish one of two above average on Georges Bank (yellowtail was the other) based on this indicator. In 2018, it was mainly New England managed species with above average productivity in the New England systems, in particular yellowtail and windowpane flounder on Georges Bank, and Acadian redfish in the Gulf of Maine. Species with above average 2018 productivity in the Mid-Atlantic are New-England managed: witch flounder, silver hake, and red hake^[https://noaa-edab.github.io/ecodata/TestInteractive].
+ 
+```{r prod-plot-function}
+#### Adjust plot properties -------------------------------
+adjustAxes <- 
+  ggplot2::theme(axis.title   = element_text(size = 18),
+                 axis.text    = element_text(size = 15),
+                 plot.title   = element_text(size = 20))
 
-gb_spec_rich <- ecodata::ichthyo_diversity %>%
-  filter(EPU == "GB",
-         str_detect(Var, "Species Caught")) %>%
-  mutate(Var = word(Var,1)) %>% 
-  group_by(Var) %>% 
-  mutate(hline = mean(Value, na.rm = T)) %>% 
-  ggplot(aes(x = Time, y = Value, group = Var)) +
-  geom_line() +
-  geom_point() +
-       annotate("rect", fill = shade.fill, alpha = shade.alpha,
-      xmin = x.shade.min , xmax = x.shade.max,
-      ymin = -Inf, ymax = Inf) +
-  ggtitle("GB larval species richness") +
-  ylab("Species richness") +
-  facet_wrap(Var~., ncol = 2, scales = "free_y") +
-  scale_x_continuous(expand = c(0.01, 0.01))+
-      geom_hline(aes(yintercept = hline),
-           size = hline.size,
-           alpha = hline.alpha,
-           linetype = hline.lty)+
-  theme_facet() +
-  theme(strip.text=element_text(hjust=0))
 
- gb_larv_div + gb_spec_rich + plot_layout(ncol = 1)
+#### Plot stacked bar with cpts for single var ------------
+plot_stackbarcpts_single <- function(YEAR, var2bar,
+                                     x, xlab, ylab,
+                                     titl,
+                                     file_suffix,
+                                     leg_font_size = 10,
+                                     remove_leg = FALSE,
+                                     leg_ncol = 1,
+                                     wcpts = TRUE,
+                                     wdashed = TRUE,
+                                     height = 5.5,
+                                     width = 8,
+                                     filt = TRUE,
+                                     label = label,
+                                     y.text = y.text,
+                                     aggregate = FALSE) {
+  
+  dat2bar <- data.frame(YEAR, var2bar,
+                        x)
+  if (filt == TRUE){mab_species <-  list("SUMMER FLOUNDER","SCUP","BLACK SEA BASS","BLUEFISH",
+                                         "NORTHERN SHORTFIN SQUID", "LONGFIN SQUID", "ATLANTIC MACKEREL",
+                                         "BUTTERFISH","ATLANTIC SURFCLAM", "OCEAN QUAHOG", "TILEFISH",
+                                         "BLUELINE TILEFISH","SPINY DOGFISH", "GOOSEFISH")
+  dat2plot <-
+    dat2bar %>%
+    tidyr::gather(variable, value, -YEAR, -var2bar) %>%
+    dplyr::mutate(var2bar = gsub(pattern      = "_", 
+                                 replacement  = " ", 
+                                 x            = var2bar),
+                  var2bar = gsub(pattern      = "Atl.", 
+                                 replacement  = "ATLANTIC", 
+                                 x            = var2bar),
+                  var2bar = gsub(pattern      = "Atl", 
+                                 replacement  = "ATLANTIC", 
+                                 x            = var2bar),
+                  var2bar = gsub(pattern      = "NS and combined", 
+                                 replacement  = "", 
+                                 x            = var2bar),
+                  var2bar = gsub(pattern      = "YT", 
+                                 replacement  = "Yellowtail", 
+                                 x            = var2bar),
+                  var2bar = gsub(pattern      = " GoM", 
+                                 replacement  = " GOM", 
+                                 x            = var2bar),
+                  var2bar = gsub(pattern      = " by EPU", 
+                                 replacement  = "", 
+                                 x            = var2bar)) %>%
+    filter(var2bar %in% mab_species)
+} else if (filt == FALSE){
+    dat2plot <-
+    dat2bar %>%
+    tidyr::gather(variable, value, -YEAR, -var2bar) %>%
+    dplyr::mutate(var2bar = gsub(pattern      = "_", 
+                                 replacement  = " ", 
+                                 x            = var2bar),
+                  var2bar = gsub(pattern      = "Atl.", 
+                                 replacement  = "ATLANTIC", 
+                                 x            = var2bar),
+                  var2bar = gsub(pattern      = "Atl", 
+                                 replacement  = "ATLANTIC", 
+                                 x            = var2bar),
+                  var2bar = gsub(pattern      = "NS and combined", 
+                                 replacement  = "", 
+                                 x            = var2bar),
+                  var2bar = gsub(pattern      = "YT", 
+                                 replacement  = "Yellowtail", 
+                                 x            = var2bar),
+                  var2bar = gsub(pattern      = " GoM", 
+                                 replacement  = " GOM", 
+                                 x            = var2bar),
+                  var2bar = gsub(pattern      = " by EPU", 
+                                 replacement  = "", 
+                                 x            = var2bar))
+}
+  if (aggregate){
+   agg <- dat2plot %>%
+     group_by(YEAR) %>%
+     dplyr::summarise(Total = sum(value, na.rm = T)) %>% 
+     mutate(Total = ifelse(Total == 0, NA, Total))
+  }
+  
+  p <-   
+    ggplot(dat2plot,
+           aes(x = YEAR)) +
+    geom_bar(data = dat2plot %>% filter(value > 0),
+             aes(y = value, fill = var2bar),
+             stat = "identity") +
+    geom_bar(data = dat2plot %>% filter(value < 0),
+             aes(y = value, fill = var2bar),
+             stat = "identity") +
+    {if(aggregate) geom_line(data = agg,aes(x = YEAR, y = Total),
+                             size = 1)} +
+    geom_hline(size = 0.3, aes(yintercept = 0)) +
+    xlab(xlab) +
+    ylab(ylab) +
+    ggtitle(titl) +
+    guides(fill = guide_legend(ncol = leg_ncol)) +
+    theme_ts()+
+    theme(axis.title   = element_text(size = 16),
+          axis.text    = element_text(size = 15),
+          plot.title   = element_text(size = 20),
+          legend.text  = element_text(size = leg_font_size),
+          legend.title = element_blank()) +
+    annotate("text", label = label, x = 1980, y = y.text,size = 8, colour = "black")
+  
+
+  
+  if(remove_leg) p <- p + theme(legend.position = "none")
+  
+  return(p)
+}
+
+```
+ 
+```{r GOM-productivity, fig.cap = "Small fish per large fish biomass anomaly in the Gulf of Maine."}
+
+
+## GOM
+bar_dat <- ecodata::productivity_anomaly %>% 
+  filter(EPU == "GOM")
+
+gom <- plot_stackbarcpts_single(YEAR = bar_dat$Time,
+                         var2bar = bar_dat$Var,
+                         x = bar_dat$Value,
+                         titl = "Gulf of Maine",
+                         xlab = "",
+                         ylab = "Small fish per large fish biomass (anomaly)",
+                         height = 5.5,
+                         width = 9,
+                         filt = FALSE,
+                         label = "",
+                         y.text = 10,
+                         aggregate = TRUE)
+gom
 ```
 
-Investigations are underway to evaluate changes in timing of spawning for managed fish species. Preliminary work with New England flatfishes suggests that some inshore stocks are spawning earlier as temperatures increase. There are implications for changes in spawning timing for fish condition and for larval survival as match or mismatch with zooplankton food sources changes (next section).  
+ 
+```{r GB-productivity, fig.cap = "Small fish per large fish biomass anomaly in Georges Bank."}
+
+## GB
+bar_dat <- ecodata::productivity_anomaly %>% 
+  filter(EPU == "GB")
+
+gb <- plot_stackbarcpts_single(YEAR = bar_dat$Time,
+                         var2bar = bar_dat$Var,
+                         x = bar_dat$Value,
+                         titl = "Georges Bank",
+                         xlab = "",
+                         ylab = "Small fish per large fish biomass (anomaly)",
+                         height = 5.5,
+                         width = 9,
+                         filt = FALSE,
+                         label = "",
+                         y.text = 10,
+                         aggregate = TRUE)
+
+gb
+```
+
+## Forage fish energy content (coastwide) 
+
+Nutritional value of forage fishes as prey (energy content) is related to both environmental conditions and fish growth and reproductive cycles. Energy content is now being measured systematically on NEFSC trawl surveys, revealing both seasonal and interannual variation as well as differences from older measurements (Table \ref{tab:forage}). Notably, the energy density of Atlantic herring was almost half the value (5.69 +/- 0.07 kJ/g wet weight) reported in earlier studies (10.6-9.4 kJ/ g wet weight). Silver hake, sandlance, longfin squid (*Loligo* below) and shortfin squid (*Illex* below) were also lower than previous estimates. Energy density of Alewife, butterfish and Atlantic mackerel were higher than earlier estimates. Sampling and laboratory analysis is ongoing, with the goal of continuing routine monitoring of energy density of these species.
+
+```{r forage, eval=T, echo=F, out.width='80%'}
+d<-ecodata::energy_density #%>% 
+    # rename("Mean ED (SD)" = "Mean.ED..SD.", 
+    #        "N" = "n",
+    #        "Mean ED (SD)" = "Mean.ED..SD..1", 
+    #        "N" = "n.1", 
+    #        "Mean ED (SD)" = "Mean.ED..SD..2", 
+    #        "N" = "n.2", 
+    #        "Mean ED (SD)" = "Mean.ED..SD..3", 
+    #        "N" = "n.3",
+    #        "Mean ED (SD)" = "Mean.ED..SD..4", 
+    #        "N" = "X",
+    #        "Mean ED (SD)" = "Mean.ED..SD..5", 
+    #        "Mean ED" = "Mean.ED" )
+kable(d, booktabs = T, linesep = "",
+      col.names = c("Species", "ED (SD)", "N", "ED (SD)", "N",
+                    "ED (SD)", "N","ED (SD)", "N",
+                    "ED (SD)", "N","ED", "ED (SD)"),
+      caption = "Forage fish mean energy density (ED) mean and standard deviation (SD) by season and year, compared with 1980s (Steimle and Terranove 1985) and 1990s (Lawson et al. 1998) values. N = number sampled.") %>% 
+  kable_styling(latex_options = c("hold_position", "scale_down")) %>% 
+  add_header_above(c(" " = 1, "Spring" = 2, "Fall" = 2, "Spring" = 2, "Fall" = 2, " " = 4)) %>% 
+  add_header_above(c(" " = 1, "2017" = 4, "2018" = 4, "Total" = 2, "1980s" = 1, "1990s" = 1))
+
+```
 
 \newpage
 
