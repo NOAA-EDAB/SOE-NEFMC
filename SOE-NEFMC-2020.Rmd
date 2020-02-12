@@ -1186,51 +1186,46 @@ aggregate_prod %>%
 
 # Fish and Invertebrates
 
-Fishery management aims to keep individual harvested species within population ranges where productivity is maximized over the long-term. However, these managed species represent a subset of the full ecosystem, interacting with a wider range of predators and prey and relying on diverse habitats. Indicators in this section summarize single species status as well as tracking trends for broad categories of fish within the ecosystem, including changes in biomass, distribution, condition, and diversity. Changes in overall predator and prey levels as well as distribution have implications for managed fish productivity, fishing operations, and regional fishery management. 
+Fishery management aims to keep individual harvested species within population ranges where productivity is maximized over the long-term. However, these managed species represent a subset of the full ecosystem, interacting with a wider range of predators and prey and relying on diverse habitats. Indicators in this section summarize single species status as well as tracking trends for broad categories of fish within the ecosystem, including changes in biomass, distribution, condition, and productivity. Changes in overall predator and prey levels as well as distribution have implications for managed fish productivity, fishing operations, and regional fishery management. 
 
 ## Stock status and aggregate distribution (coastwide)
-Fishery management objectives are being met for 20 (including 6 skate) stocks at the single species level. Stocks in Fig. \ref{fig:NE-stock-status} which are above the F threshold (horizontal line) are experiencing overfishing (F > Fmsy). Stocks in Fig. \ref{fig:NE-stock-status} which are below the B threshold (dashed vertical line) are overfished (B < 0.5Bmsy). For the stocks with either missing F or B values in Fig. \ref{fig:NE-stock-status}, additional information has been used to determine overfishing and overfished status. Official stock status for New England stocks^[https://www.st.nmfs.noaa.gov/sisPortal/mapTool.jsp] lists 6 stocks subject to overfishing (GOM cod, GB cod, southern red hake, and all 3 yellowtail flounder stocks), and 13 stocks as overfished (GOM cod, GB cod, southern red hake, Atlantic halibut, Atlantic wolffish, ocean pout, thorny skate, GOM/GB windowpane flounder, southern New England/mid-Atlantic winter flounder, witch flounder, and all 3 yellowtail flounder stocks). Five stocks have unknown status for B and F.
+Fishery management objectives are being met for 20 (including 6 skate) stocks at the single species level. Stocks in Fig. \ref{fig:NE-stock-status} which are above the F threshold (horizontal line) are experiencing overfishing (F > Fmsy). Stocks in Fig. \ref{fig:NE-stock-status} which are below the B threshold (dashed vertical line) are overfished (B < 0.5Bmsy). For the stocks with either missing F or B values in Fig. \ref{fig:NE-stock-status}, additional information has been used to determine overfishing and overfished status. Official stock status for New England stocks^[https://www.fisheries.noaa.gov/national/population-assessments/fishery-stock-status-updates] lists 4 stocks subject to overfishing (GOM cod, GB cod, southern red hake, and GB yellowtail flounder), and 14 stocks as overfished (GOM cod, GB cod, southern red hake, GOM/GB white hake, Atlantic halibut, Atlantic wolffish, ocean pout, thorny skate, GOM/GB windowpane flounder, southern New England/mid-Atlantic winter flounder, GB winter flounder, witch flounder, GB yellowtail flounder, and southern New Englad yellowtail flounder). 
 
-```{r NE-stock-status, warning=F, fig.cap = paste0("Summary of single species status for NEFMC and jointly managed stocks. \\label{stock-status}"), fig.width = 8, fig.asp = 0.65}
+```{r NE-stock-status, warning=F, fig.cap = paste0("Summary of single species status for NEFMC and jointly managed stocks (Goosefish and Spiny dogfish)."), fig.width = 8, fig.asp = 0.65}
 
 #Get data, spread for plotting, and filter
 stock_status <- ecodata::stock_status %>%
+  mutate(Code = recode(Code, "Dogfish" = "Sp. Dogfish" )) %>% 
   spread(.,Var,Value) %>% 
-  filter(Council %in% c("NEFMC","Both"))
-
+  filter(Council %in% c("NEFMC","Both")) %>% 
+  group_by(Stock) %>% 
+  mutate(score = case_when(
+    (B.Bmsy <0.5) ~"a",
+    (F.Fmsy >1) ~ "a", 
+    (F.Fmsy < 1 & B.Bmsy > 0.5 & B.Bmsy < 1) ~ "b",
+    (F.Fmsy < 1 & B.Bmsy > 1) ~ "c"))
 #Plot constants
-y.max <- 4.5
-x.max <- 7.5
-
+y.max <- 2
+x.max <- 10
 all_missing <- stock_status %>%
   filter(is.na(B.Bmsy),is.na(F.Fmsy)) %>% 
   dplyr::select(Code, Council)
-
 b_missing <- stock_status %>%
   filter(is.na(B.Bmsy), !is.na(F.Fmsy)) %>% 
   dplyr::select(Code, Council)
-
 f_missing <- stock_status %>%
   filter(is.na(F.Fmsy), !is.na(B.Bmsy)) %>% 
   dplyr::select(Code, Council)
-
 #A dataframe that defines custom legend for stocks with unknown status
-
-all.df <- tibble(text = all_missing$Code,
-                    x = rep(x.max,length(all_missing$Code)),
-                    y = seq(4.35,2.85,-0.22),
-                    color = all_missing$Council)
-
-b.df <- tibble(text = b_missing$Code,
-                    x = rep(x.max*0.8,length(b_missing$Code)),
-                    y = c(4.35,4.14),
-                    color = b_missing$Council)
-
-f.df <- tibble(text = f_missing$Code,
-                    x = rep(x.max*0.6,length(f_missing$Code)),
-                    y = seq(4.35,2.85,-0.22),
-                    color = f_missing$Council)
-
+all.df <- data.frame(text = all_missing$Code,
+                    x = rep(x.max*0.9,length(all_missing$Code)),
+                    y = seq(1.85,1.25, length.out = 7))
+b.df <- data.frame(text = b_missing$Code,
+                    x = rep(x.max*0.7,length(b_missing$Code)),
+                    y = c(1.85,2.15))
+f.df <- data.frame(text = f_missing$Code,
+                    x = rep(x.max*0.5,length(f_missing$Code)),
+                    y = seq(1.85,1.15, length.out = 7))
 
 #Plotting code
 ggplot(data = stock_status) +
@@ -1239,52 +1234,47 @@ ggplot(data = stock_status) +
   geom_hline(yintercept = 1, linetype = "dashed", color = "grey60") +
   geom_point(aes(x = B.Bmsy,
                  y = F.Fmsy,
-                 color = Council,
-                 shape = Council)) +
+                 color = stock_status$score)) +
   geom_text_repel(aes(x = B.Bmsy, #geom_text_repel auto-jitters text around points
                       y = F.Fmsy,
                       label = Code,
-                      color = Council), show.legend = FALSE,nudge_y = 0.05, nudge_x = 0.05) +
+                      color = stock_status$score), show.legend = FALSE,nudge_y = -0.01, nudge_x = 0.05) +
   ylim(0,y.max) +
   xlim(0,x.max*1.1) +
-  geom_text(data = all.df, aes(x = x, y = y, label = text, color = color),show.legend = FALSE, size = 3)+
-  geom_text(data = b.df, aes(x = x, y = y, label = text, color = color),show.legend = FALSE, size = 3)+
-  geom_text(data = f.df, aes(x = x, y = y, label = text, color = color),show.legend = FALSE, size = 3)+
-  scale_color_manual(values = c("purple","blue"),#c("purple","blue"), #Change legend labels for clarity
-                   name = "Managed by",
-                   breaks = c("Both","NEFMC"),
-                   labels = c("MAFMC/NEFMC","NEFMC"))+
-  scale_shape_manual(values = c(1, 19), #Change legend labels for clarity
-                     name = "Managed by",
-                     breaks = c("Both","NEFMC"),
-                     labels = c("MAFMC/NEFMC","NEFMC"))+
+  geom_text(data = all.df, aes(x = x, y = y, label = text),show.legend = FALSE, size = 3)+
+  geom_text(data = b.df, aes(x = x, y = y, label = text),show.legend = FALSE, size = 3)+
+  geom_text(data = f.df, aes(x = x, y = y, label = text),show.legend = FALSE, size = 3)+
+  scale_color_brewer(palette = "Dark2", #Change legend labels for clarity
+                     breaks = stock_status$score) +
   annotate("rect", xmin = 0.924*x.max,
            xmax = 1.08*x.max,
            ymin = 0.645*y.max,
            ymax = 0.98*y.max,
            alpha = 0.01) +
-  annotate("text", x = 7.5, y = 4.5, label = "F and B missing", fontface =2, size = 3)+
-    annotate("rect", 
-             xmin = 0.729*x.max,
-           xmax = 0.871*x.max,
-           ymin = 0.905*y.max,
-           ymax = 0.98*y.max,
-           alpha = 0.01) +
-  annotate("text", x = 6, y = 4.5, label = "B missing", fontface =2, size = 3)+
-    annotate("rect", xmin = 0.509*x.max,
+  annotate("text", x = 9, y = 2, label = "F and B missing", fontface =2, size = 3)+
+  annotate("rect",  
+             xmin = 0.70*x.max,
+             xmax = 0.85*x.max,
+             ymin = 0.90*y.max,
+             ymax = 1.8,
+             alpha = 0.01) +
+  annotate("text", x = 7, y = 2, label = "B missing", fontface =2, size = 3)+
+  annotate("rect", xmin = 0.509*x.max,
            xmax = 0.681*x.max,
            ymin = 0.65*y.max,
            ymax = 0.98*y.max,
            alpha = 0.01) +
-  annotate("text", x = 4.5, y = 4.5, label = "F missing", fontface =2, size = 3)+
+  annotate("text", x = 5, y = 2, label = "F missing", fontface =2, size = 3)+
   xlab(expression(~B/B[msy])) +
   ylab(expression(~F/F[msy])) +
+  guides(color = FALSE) +
   theme_ts()
+
 ```
 
-Changes in the distribution of managed fish species continue, with aggregate trends on the entire Northeast Shelf towards the northeast and generally into deeper water (Fig. \ref{fig:spec-dist}). These shifts will place increasing pressure on a management system based around stable species distributions. 
+Trends for a suite of 48 commercially or ecologically important species along the entire Northeast Shelf continue to show movement towards the northeast and generally into deeper water (Fig. \ref{fig:spec-dist}). These shifts will place increasing pressure on a management system based around stable species distributions. Marine mammal distribution maps are available online^[https://www.nefsc.noaa.gov/AMAPPSviewer/]; updated maps and trends are currently being developed.
 
-```{r spec-dist,fig.width = 4, fig.asp = 1.2, fig.cap = "Aggregate species distribution metrics for species in the Northeast Large Marine Ecosystem."}
+```{r spec-dist,fig.width = 4, fig.asp = 1.0, fig.cap = "Aggregate species distribution metrics for species in the Northeast Large Marine Ecosystem. Along-shelf distance measures the center of biomass along an axis oriented from the southwest to the northwest generally following the slope of coastline."}
 
 spec_dist <- ecodata::species_dist %>% 
   group_by(Var) %>% 
@@ -1313,6 +1303,8 @@ asd <- spec_dist %>%
 
 depth <- spec_dist %>% 
   filter(Var == "depth") %>% 
+  mutate(Value = Value* -1, 
+         hline = mean(Value)) %>% 
   ggplot(aes(x = Time, y = Value,
                group = Var)) + 
  #Highlight last ten years
@@ -1323,7 +1315,7 @@ depth <- spec_dist %>%
   geom_line() +
   geom_point() +
   scale_x_continuous(expand = c(0.01, 0.01)) +
-  ggtitle("Depth")+
+  ggtitle("Depth") +
   ylab(expression("Depth (m)")) +
   xlab("")+
   geom_hline(aes(yintercept = hline),
@@ -1353,8 +1345,66 @@ dtc <- spec_dist %>%
            linetype = hline.lty) +
   theme_ts() 
 
-asd + depth + dtc + plot_layout(ncol = 1) 
+asd + depth + plot_layout(ncol = 1) 
 
+
+```
+
+## Southeast US fish occurrence (coastwide)
+Preliminary analysis of NEFSC trawl survey data shows limited occurrence of South Atlantic Fishery Management Council (SAFMC) managed species groups during the fall, but almost never in spring. Lack of these species on spring surveys suggests that they are not overwintering in our region. There is no detectable trend in fall frequency of occurrence of SAFMC managed species as a group over time, nor are there detectable trends for the most common southeast US shelf species in the trawl surveys: blue runner, Spanish mackerel, chub mackerel, cobia. 
+
+Blue runner (*Caranx crysos*) was the southeast US shelf species with the highest frequency of occurrence over time. While there were no detectable trends, recent warm years have led to some observations of blue runner further north within the timing of the fall survey (Fig. \ref{fig:blue-runner}). Four of the five the most northerly catches have happened since 2010, with the furthest north in 2012 in GOM and 3 on GB in 2018. Other indicators corroborate these observations. For example, butterfish have been observed in Gulf of Maine common tern fledgling diets between 2009-2011 and again in 2018 (Fig. \ref{fig:tern-prey}). As temperature and ocean circulation indicators trend toward extremes (next section), fishery management will likely face continued changes in species distribution.
+
+```{r blue-runner, fig.cap = "Blue runner presence on Northeast Shelf"}
+blue<-ecodata::blue_runner %>% 
+  separate(Var, c("Var", "Pos"), "L") %>% 
+  spread(., Pos, Value) %>% 
+  rename(Lat = at, 
+         Lon = on) %>% 
+  mutate(Var = recode(Var,
+                      "Positive Blue Runner Tows before 2001 - " = "Prior to 2000",
+                      "Positive Blue Runner Tows 2001 - 2010 - " = "2001-2010", 
+                      "Positive Blue Runner Tows since 2010 - " = "Since 2010"))
+blue$Var <- factor(blue$Var, levels = c("Prior to 2000", "2001-2010", "Since 2010"))
+  
+#EPU shapefile
+epu_sf <- ecodata::epu_sf %>% 
+  filter(EPU %in% c("GOM","GB", "MAB"))
+
+#Map line parameters
+map.lwd <- 0.4
+
+# Set lat/lon window for maps
+xmin = -77
+xmax = -65
+ymin = 35
+ymax = 45
+xlims <- c(xmin, xmax)
+ylims <- c(ymin, ymax)
+
+## Map plotting blue runner
+blue_map <- 
+  ggplot() +
+  geom_sf(data = coast, size = map.lwd) +
+  geom_sf(data = epu_sf, fill = "transparent", size = map.lwd) +
+  geom_point(data = blue, aes(x = Lon, y = Lat, color = Var, shape = Var))+
+  scale_shape_manual(values=c(16, 3, 17))+
+  scale_color_manual(values = c("blue", "black", "red"))+
+  coord_sf(crs = crs, xlim = xlims, ylim = ylims) +
+  theme_map() +
+  ggtitle("Blue Runner Presence") +
+  xlab("") +
+  ylab("") +
+  theme(panel.border = element_rect(colour = "black", fill=NA, size=0.75),
+        legend.key = element_blank(),
+        axis.title = element_text(size = 11),
+        strip.background = element_blank(),
+        strip.text=element_text(hjust=0),
+        axis.text = element_text(size = 8), 
+        legend.title = element_blank(), 
+        legend.position = c(0.6, 0.15))
+
+blue_map
 ```
 
 ## Survey biomass (GOM and GB)
