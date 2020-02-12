@@ -1013,36 +1013,59 @@ ggplot() +
 
 # Protected Species
 
-Protected species include marine mammals (under the Marine Mammal Protection Act), endangered and threatened species (under the Endangered Species Act), and migratory birds (under the Migratory Bird Treaty Act). In the Northeast US, endangered/threatened species include Atlantic salmon, Atlantic and shortnose sturgeon, all sea turtle species, and 5 baleen whales. Fishery management objectives for protected species generally focus on reducing threats and on habitat conservation/restoration; here we report on the status of these actions as well as indicating the potential for future interactions driven by observed and predicted ecosystem changes in the Northeast US region. Atlantic salmon are among the most critically endangered fish and are a NOAA Species in the Spotlight. This year four Unusual Mortality Events (UMEs) have been declared for three large whale species and two seal species, with several mortalities attributed to human interactions. Also, a marine mammal climate vulnerability assessment is currently underway for Atlantic and Gulf of Mexico populations and will be reported on in future versions of this report. Strong evidence exists to suggest that the level of interaction between right whales and the combination of fixed gear in the US and Canada is contributing substantially to the decline of the species.
+Protected species include marine mammals (under the Marine Mammal Protection Act), endangered and threatened species (under the Endangered Species Act), and migratory birds (under the Migratory Bird Treaty Act). In the Northeast US, endangered/threatened species include Atlantic salmon, Atlantic and shortnose sturgeon, all sea turtle species, and 5 baleen whales. Fishery management objectives for protected species generally focus on reducing threats and on habitat conservation/restoration; here we report on the status of these actions as well as indicating the potential for future interactions driven by observed and predicted ecosystem changes in the Northeast US region. Also, a marine mammal climate vulnerability assessment is currently underway and for Atlantic and Gulf of Mexico populations and will be reported on in future versions of this report. 
 
-## Sea turtles (coastwide)
-Sea turtles are known to be susceptible to climate and ecosystem changes, and their distribution is influenced by water temperature. Sea turtle diets contain a considerable amount of gelatinous zooplankton, which are also influenced by changes in the ecosystem. At present, management measures to reduce sea turtle-fishery interactions are limited to the regions with historical observations of sea turtles and based on historical ocean temperature distributions. However, changes in climate may cause turtles to shift northward into areas with heavy fishing, possibly resulting in increased bycatch. It has been hypothesized that seasonal distribution of Kempas Ridley sea turtles has shifted northward due to the warming of the Gulf of Maine, which in turn, appears to be resulting in a near record number of cold-stunned turtles stranding in Cape Cod Bay as waters cooled during the fall of 2018.
+While Harbor porpoise bycatch continues to be quite low as reported previously, this year saw the continuation of four Unusual Mortality Events (UMEs) for three large whale species and two seal species, with several mortalities attributed to human interactions. Strong evidence exists to suggest that the level of interaction between right whales and the combination of offshore lobster fishery in the US and snow crab fishery in Canada is contributing substantially to the decline of the species.
 
 ## Whales (coastwide)
-North Atlantic right whales are among the most endangered large whale populations in the world. Changes in right whale trends can have implications for fisheries management where fisheries interact with these whales. Additional management restrictions could have a large impact on fishing times, gears, etc. Although the population increased steadily from 1990 to 2011, it has decreased recently (Fig. \ref{fig:NARW-abundance}). From @pace_statespace_2017: '??The probability that the population'??s trajectory post-2010 was a decline was estimated at 99.99%.'?? Reduced survival rates of adult females and diverging abundance trends between sexes have also been observed. It is estimated that there are only about 100 adult females remaining in the population. Further, right whale distribution has changed since 2010. The reasons for these changes is unclear, but changes in climate and primary prey (*Calanus finmarchicus*) are suspected.
+North Atlantic right whales are among the most endangered large whale populations in the world. Changes in right whale trends can have implications for fisheries management where fisheries interact with these whales. Additional management restrictions could have a large impact on fishing times, gears, etc. Although the population increased steadily from 1990 to 2011, it has decreased recently (Fig. \ref{fig:NARW-abundance}). Reduced survival rates of adult females and diverging abundance trends between sexes have also been observed. It is estimated that there are only about 100 reproductive adult females remaining in the population. In 2018 there were no  new calves observed, and a drop in annual calf production roughly mirrors the abundance decline (Fig. \ref{fig:NARW-calf-abundance}), however seven new calves were born in 2019. Right whale distribution has changed since 2010. New research suggests that recent climate driven changes in ocean circulation has resulted in right whale distribution changes driven by increased warm water influx through the Northeast Channel, which has reduced the primary right whale prey (*Calanus finmarchicus*) in the central and eastern portions of the Gulf of Maine.
  
-Three large whale Unusual Mortality Events (UMEs) have been declared for north Atlantic right whales, humpback whales, and minke whales. In all three cases human interaction appears to have contributed to increased mortalities, although investigations are not complete. Twenty right whale mortalities have been documented in 2017 and 2018 so far. Among the 20 right whale deaths observed in 2017 and 2018 thus far, 5 were due to vessel strike (1 in US waters, 4 in Canadian waters), 6 from entanglement (2 in Canadian gear, 1 in unknown gear, and 3 others found in US waters), and the rest from unknown causes. UMEs have also been declared for humpback whales during 2016-2018 and 2017-2018 minke whales due to elevated strandings. Necropsy investigations on 50% of humpback whales showed evidence of human interaction, either ship strike or entanglement. Similarly, 60% of minke whales show evidence of human interactions or infectious disease. In both cases the investigations are still underway and more research is needed to determine the causes of these UME.
+Three large whale Unusual Mortality Events (UMEs) are ongoing for North Atlantic right whales, humpback whales, and minke whales. In all three cases human interaction appears to have contributed to increased mortalities, although investigations are not complete. Since 2017, 30 right whale mortalities have been documented, 9 in the US and 21 in Canada. During 2019, 9 dead right whales have been documented in Canada and one in the US. Three of these mortalities were determined to have been due to vessel strike while the remainder are undetermined at this time.
 
-```{r NARW-abundance, fig.width = 5, fig.asp = 0.45,fig.cap = "Right whale abundance estimates with 95\\% credible intervals. These values represent the estimated number of animals alive sometime during the year referenced and NOT at the end of the year referenced. Seventeen known deaths were recorded in 2017 (likely all from anthropogenic causes), but these deaths were not reflected in the 2017 estimate because those animals were alive sometime during the year."}
-hline <- mean(narw[narw$Var == "right whale abundance median",]$Value)
+```{r NARW-abundance, fig.width = 5, fig.asp = 0.45,fig.cap = "1990-2018 right whale abundance estimates with 95\\% credible intervals. These values represent the estimated number of animals alive sometime during the year referenced and NOT at the end of the year referenced. Three known deaths were recorded in 2018, but these deaths were not reflected in the 2018 estimate because those animals were alive sometime during the year. An additional 10 known deaths occurred in 2019."}
+#hline <- mean(narw[narw$Var == "right whale abundance median",]$Value)
 
 ecodata::narw %>% 
-  spread(.,Var,Value) %>% 
+  dplyr::filter(Var != "Calves") %>% 
+  tidyr::spread(Var, Value) %>% 
+  dplyr::rename(Value = Median) %>% 
+  dplyr::mutate(hline = mean(Value, na.rm = T)) %>% 
   ggplot() +
 #Highlight last ten years
   annotate("rect", fill = shade.fill, alpha = shade.alpha,
       xmin = x.shade.min , xmax = x.shade.max,
       ymin = -Inf, ymax = Inf) +
-  geom_line(aes(x = Time, y = `right whale abundance median`), size = lwd-0.75) +
-  geom_point(aes(x = Time, y = `right whale abundance median`), size = pcex-0.75) +
-  geom_errorbar(aes(x = Time,
-                    ymin = `right whale abundance lcl`,
-                  ymax = `right whale abundance ucl`), 
-                width = 0.25) +
+  geom_line(aes(x = Time, y = Value), size = lwd-0.75) +
+  geom_point(aes(x = Time, y = Value), size = pcex-0.75) +
+  geom_ribbon(aes(ymin = Lower95, ymax = Upper95, x = Time), alpha = 0.3)+
   scale_x_continuous(expand = c(0.01, 0.01)) +
-  scale_color_manual(values = series.col, aesthetics = "color")+
   guides(color = FALSE) +
   ggtitle("NARW abundance") +
+  ylab(expression("Abundance (n)")) +
+  xlab("Time")+
+  geom_hline(aes(yintercept = hline),
+          color = "black",
+          size = hline.size,
+          alpha = hline.alpha,
+          linetype = hline.lty) +
+  theme_ts()
+```
+
+```{r NARW-calf-abundance, fig.width = 5, fig.asp = 0.45, fig.cap = "Number of North Atlantic right whale calf births, 1990 - 2019."}
+
+ecodata::narw %>% 
+  dplyr::filter(Var == "Calves") %>%
+  dplyr::mutate(hline = mean(Value, na.rm = T)) %>% 
+  ggplot() +
+#Highlight last ten years
+  annotate("rect", fill = shade.fill, alpha = shade.alpha,
+      xmin = x.shade.min , xmax = x.shade.max,
+      ymin = -Inf, ymax = Inf) +
+  geom_line(aes(x = Time, y = Value), size = lwd-0.75) +
+  geom_point(aes(x = Time, y = Value), size = pcex-0.75) +
+  scale_x_continuous(expand = c(0.01, 0.01)) +
+  guides(color = FALSE) +
+  ggtitle("NARW calf abundance") +
   ylab(expression("Abundance (n)")) +
   xlab("Time")+
   geom_hline(aes(yintercept = hline),
@@ -1053,112 +1076,20 @@ ecodata::narw %>%
   theme_ts()
 ```
 
-## Grey seals (coastwide)
-The number of grey seals (*Halichoerus grypus*) in U.S. waters has risen dramatically in the last 2 decades, with few observed in the early 1990s to roughly 24,000 observed in southeastern Massachusetts in 2015 (Pace et al. in press). Roughly 30,000 - 40,000 gray seals were estimated in southeastern Massachusetts in 2015, using correction factors applied to seal counts visible in Google Earth imagery. As of 2016, the size of the grey seal population in Canada, which is part of the same stock as the grey seals in the U.S., was estimated to be roughly 425,000, and increasing by 4% a year. Pups born on Muskeget Island MA, currently the largest pupping site for gray seals in the U.S., were first observed in 1988 and now number over 3,500. Trends in pup production at U.S. colonies appear to be increasing, and it is likely that U.S. pup production is being supplemented each year by animals from Canada. A UME for both gray and harbor seals was declared in 2018, triggering an investigation into the cause of this event. Tests so far suggest phocine distemper virus as a potential cause, although the investigation is not yet complete.
- 
-Fisheries interactions have increased over the past 2 decades, with fewer than 10 total estimated grey seal interactions in 1993, to more than 1000 in 2013 and 2015, and with the preliminary 2017 estimate over 900. Analysis of seal diet is currently underway using a variety of techniques (analysis of stomach contents, fatty acids, and DNA) to assess the potential impact of seal population growth on the ecosystem and important commercial fish species.
 
-## Harbor porpoise (coastwide)
-Harbor porpoise bycatch has resulted in fisheries closures in the past, but current bycatch levels suggest that management measures have been effective, reducing this fishery interaction. The 5-year mean bycatch has been below the maximum permitted level (Potential Biological Removal, PBR) since 2011 (Fig. \ref{fig:harbor-porpoise-bars}), and the 2016 and draft 2017 annual bycatch estimates are among the lowest in the time series. Recent compliance with the harbor porpoise take reduction plan and reduced fishing effort are thought to contribute to low bycatch estimates. Potential recent shifts in porpoise distribution could also be contributing to low bycatch and this will be explored during the coming year. A new draft harbor porpoise abundance estimate suggests stable or increasing abundance of the Gulf of Maine/Bay of Fundy harbor porpoise stock. Recent analyses have examined regional harbor porpoise diet, and suggest that harbor porpoise are not typically feeding on fish caught in gillnets. However, the impact of ecosystem changes on bycatch, population, or distribution remain unclear.
+## Seals (coastwide)
+The best current abundance estimate of harbor seals (*Phoca vitulina*) is 75,834 (CV = 0.15), based on a survey conducted during the pupping season in 2012. A population survey was conducted in 2018 to provide updated abundance estimates and these data are in the process of being analyzed, as part of a larger trend analysis. Tagging studies of both gray and harbor seals demonstrate long-range movements throughout the Gulf of Maine and mid-Atlantic.
 
-```{r harbor-porpoise-bars, fig.width = 5, fig.asp = 0.45, fig.cap = "Harbor porpoise bycatch estimate (black) shown with Potential Biological Removal (red). Error bars indicate 95\\% confidence interval."}
-ecodata::harborporpoise %>% 
-  spread(.,Var,Value) %>% 
-ggplot() +
-    annotate("rect", fill = shade.fill, alpha = shade.alpha,
-      xmin = x.shade.min , xmax = x.shade.max,
-      ymin = -Inf, ymax = Inf) +
-  geom_line(aes(x = Time, y = `harbor porpoise bycatch estimate`, color = "Harbor Porpoise Bycatch"), size = lwd) +
-  geom_point(aes(x = Time, y = `harbor porpoise bycatch estimate`, color = "Harbor Porpoise Bycatch"), size = pcex) +
-  geom_errorbar(aes(x = Time,
-                    ymin = `harbor porpoise bycatch lo95ci`,
-                  ymax = `harbor porpoise bycatch up95ci`,
-                  color = "Harbor Porpoise Bycatch"), 
-                width = 0.25)+
-  geom_line(aes(x = Time, y = `harbor porpoise bycatch pbr`, color = "PBR"), size = lwd-0.1) +
-  scale_color_manual("", values = c("Harbor Porpoise Bycatch" = "black", "PBR" = "red")) +
-  guides(color = guide_legend(override.aes = list(shape = c(19,NA)))) +
-  scale_x_continuous(expand = c(0.01, 0.01)) +
-  ggtitle("Harbor porpoise bycatch") +
-  ylab("Bycatch Estimate (n)") +
-  theme_ts() +
-  theme(legend.position = c(0.4, 0.85), legend.background = element_rect(
-    fill = "transparent"), legend.text = element_text(size = 10))
+The number of grey seals (*Halichoerus grypus*) in U.S. waters has risen dramatically in the last 2 decades, with few observed in the early 1990s to roughly 24,000 observed in southeastern Massachusetts in 2015. Roughly 30,000 - 40,000 gray seals were estimated in southeastern Massachusetts in 2015, using correction factors applied to seal counts visible in Google Earth imagery. As of 2016, the size of the grey seal population in Canada, which is part of the same stock as the grey seals in the U.S., was estimated to be roughly 425,000, and increasing by 4% a year. In U.S. waters, the number of pupping sites has increased from 1 in 1988 to 9 in 2019. Mean rates of increase in the number of pups born at various times since 1988 at 4 of the more data-rich pupping sites (Muskeget, Monomoy, Seal, and Green Islands) ranged from -0.2% (95%CI: -2.3 - 1.9%) to 26.3% (95%CI: 21.6 - 31.4%). These high rates of increase provide further support that seals from Canada are continually supplementing the breeding population in U.S. waters. Fisheries interactions have also increased over the past 2 decades, with fewer than 10 total estimated grey seal interactions in 1993, to more than 1000 annually in four out of the last 5 years. A UME for both gray and harbor seals was declared in 2018, triggering an investigation into the cause of this event. Tests so far suggest phocine distemper virus as a potential cause, although the investigation is not yet complete. 
 
-```
-
-## Protected fish (coastwide)
-The Gulf of Maine DPS of Atlantic salmon is listed as endangered. These salmon are found in coastal waters of New England and now spawn only in Maine rivers. Spawner abundance is less than 10% of historic levels with returns averaging around 1,000 annually since 2012.  They are highly reliant on connectivity between ocean and freshwater habitats to complete their life cycle. They are also extremely sensitive to climate and ecosystem changes since they have specific habitat requirements for each of their life stages. These populations migrate through some of the most rapidly warming marine regions and marine regime shifts have impacted their ocean productivity. The Recovery Plan for the Gulf of Maine DPS of Atlantic Salmon was published in 2019, and it highlights specific actions to conserve and recover the species: enhancing river-ocean connectivity; maintaining genetic diversity; increasing the number of spawning adults; and furthering our understanding of marine and estuarine habitats.  Shortnose sturgeon (endangered) and five distinct populations segments (DPS) of Atlantic sturgeon are found in coastal waters of New England (endangered: New York Bight, Chesapeake Bay, Carolina, and South Atlantic; threatened: Gulf of Maine). Several populations spawn in New England watersheds, and river-ocean connectivity is an important habitat characteristic. These populations are vulnerable to climate and ecosystem changes as their life history results in high biological sensitivity and habitat needs result in very high climate exposure. Threat reductions are focused on protecting critical habitat, habitat restoration, reducing ship-strikes, and bycatch reduction.  
+Current information suggests that gray seals eat primarily sand lance, hakes and flatfish, and squids, while harbor seals consume a variety of groundfish (hakes, cod, haddock, flatfish), redfish, herring and squids, however much of this information comes from juvenile animals and more research is needed on animals at other life stages. Additional analysis of gray and harbor seal diet is currently underway at the NEFSC using a variety of techniques (analysis of stomach contents, fatty acids, and DNA). This information can eventually be coupled with estimates of population abundance and consumption rates to estimate total biomass removals of fish due to pinniped predation. 
 
 ## Common terns (GOM)
-Seabird breeding colonies in the GOM are monitored and managed to promote recovery of formerly harvested species. Common terns are well-monitored and are considered good nearshore ecosystem indictators due to their wide distribution and generalist diet. Common terns breed on islands throughout the Gulf of Maine (Fig. \ref{fig:map-and-prey}a), feeding on a wide range of invertebrates and fish including Atlantic herring, juvenile (mainly white) hakes, and sand lance (Fig. \ref{fig:map-and-prey}b). As surface feeding birds, terns are sensitive to vertical distribution of prey as well as nearshore conditions in general, with a foraging distance of 10-20 km from a nesting colony. 
+Seabird breeding colonies in the GOM are monitored and managed to promote recovery of formerly harvested species. Common terns are well-monitored and are considered good nearshore ecosystem indictators due to their wide distribution and generalist diet. Common terns breed on islands throughout the Gulf of Maine, feeding on a wide range of invertebrates and fish including Atlantic herring, juvenile (mainly white) hakes, and sand lance (Fig. \ref{fig:tern-prey}). As surface feeding birds, terns are sensitive to vertical distribution of prey as well as nearshore conditions in general, with a foraging distance of 10-20 km from a nesting colony. 
 
-```{r map-and-prey, fig.cap = "Common terns: a. Locations of the seven sampled common tern nesting sites in Gulf of Maine (EER = Eastern Egg Rock, JI = Jenny Island, MR = Matinicus Rock, OGI = Outer Green Island, PINWR = Pond Island National Wildlife Refuge, SINWR = Seal Island National Wildlife Refuge, STI = Stratton Island), and b. Prey frequencies in the diets of common tern observed across the seven colonies in Gulf of Maine. Prey occurring in <5 percent of common tern diets were excluded for clarity.", fig.height = 4, fig.width = 8}
-
-#Map subfig
-# Set lat/lon window for maps
-xmin = -70.5
-xmax = -68.25
-ymin = 43
-ymax = 44.5
-xlims <- c(xmin, xmax)
-ylims <- c(ymin, ymax)
-island_loc <- data.frame(Island = c("EER","JI","MR","OGI",
-                                    "PINWR","SINWR","STI"),
-                         Latitude = c(43.861,43.764,43.785,43.650,
-                                      43.739,43.886,43.505),
-                         Longitude = c(-69.382,-69.909,-68.854,-70.124,
-                                       -69.771,-68.742,-70.312))
-islands <- ggplot() +
-  geom_sf(data = new_england, size = map.lwd) +
-  geom_point(data = island_loc, aes(x = Longitude, y = Latitude)) +
-  geom_label_repel(data = island_loc, aes(x = Longitude, y = Latitude,
-                                          label = Island), nudge_y  = -0.1, 
-                   size = 2.5) +
-  coord_sf(crs = crs, xlim = xlims, ylim = ylims) +
-  theme_map() +
-  ggtitle("Common tern study sites") +
-  xlab("Longitude") +
-  ylab("Latitude") +
-  labs(tag = "a")  +
-  theme(panel.border = element_rect(colour = "black", fill=NA, size=0.75),
-        legend.key = element_blank(),
-        axis.title = element_text(size = 11),
-        strip.background = element_blank(),
-        strip.text=element_text(hjust=0),
-        axis.text = element_text(size = 8))
-# inset_states <- new_england %>% filter(STATE_NAME %in% c("Maine",
-#                                                          "New Hampshire",
-#                                                          "Massachusetts"))
-# Set lat/lon window for maps
-xmin2 = -72
-xmax2 = -66.25
-ymin2 = 42.5
-ymax2 = 47.5
-xlims2 <- c(xmin2, xmax2)
-ylims2 <- c(ymin2, ymax2)
-NE <- ggplotGrob(
-ggplot()+
-  geom_sf(data = new_england, size = map.lwd) +
-  coord_sf(crs = crs, xlim = xlims2, ylim = ylims2) +
-  annotate("rect", xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax, color = "black",
-           size = 0.1, fill = "transparent") +
-  theme_map() +
-  xlab("") +
-  ylab("") +
-  theme(panel.border = element_rect(colour = "black", fill = "transparent", size=0.75),
-        plot.background = element_rect(fill = "transparent", colour = NA),
-        legend.key = element_blank(),
-        axis.title = element_text(size = 11),
-        strip.background = element_blank(),
-        strip.text=element_text(hjust=0),
-        axis.text = element_blank())
-)
-full_map <- islands +
-  annotation_custom(grob = NE, xmin = -69, xmax = -68.25, ymin = 42.9, ymax = 43.6)
+```{r tern-prey, fig.cap = "Prey frequencies in the diets of common tern observed across the seven colonies in Gulf of Maine. Prey occurring in <5 percent of common tern diets were aggregated for clarity.", fig.height = 4, fig.width = 8}
 
 
-# Prey freq stacked bar
 prey_freq <- ecodata::common_tern %>% 
   filter(str_detect(Var, "Diet"),
          !str_detect(Var, "Sum")) %>% 
@@ -1168,34 +1099,44 @@ prey_freq <- ecodata::common_tern %>%
     dplyr::summarise(Value = sum(Value, na.rm = T)) %>% 
     group_by(Time) %>% 
     mutate(Freq = Value/sum(Value, na.rm = T)) %>% 
-    group_by(Var) %>% 
-  mutate(hline = mean(Freq, na.rm = T))
+  ungroup()
 
-diet_freq_bar <- prey_freq %>% 
+prey_freq1 <- prey_freq %>% 
   filter(Freq > 0.05) %>% 
   dplyr::mutate(Prey = gsub("\\.", " ", Var)) %>% 
-  dplyr::mutate(Prey = gsub("Invertebrate", "Invert.", Prey)) %>% 
-  # dplyr::rename(Prey = Var) %>%
-  ggplot(aes(x = Time, y = Freq, fill = Prey)) +
-  geom_bar(stat = "identity") +
-    # geom_bar_interactive(aes(tooltip = paste(Prey,round(Freq,2),Time)),stat = "identity") +
-  scale_fill_manual(values = RColorBrewer::brewer.pal(10,"Paired")) +
+  dplyr::mutate(Prey = gsub("Other Invertebrate", "Unknown Invertebrate", Prey))
+
+prey_freq2<- prey_freq %>% 
+  filter(Freq < 0.05) %>% 
+  mutate(Prey = c("<5% Occurance"))
+
+prey_freq3<-prey_freq1 %>% 
+  rbind(prey_freq2)
+ colors<- c("grey", "#a6cee3", "#1f78b4", "#b2df8a", 
+            "#33a02c", "#fb9a99", "#fdbf6f", 
+            "#ff7f00", "#cab2d6", "#6a3d9a")
+
+diet_freq_bar <-
+  ggplot() +
+  geom_bar(data = prey_freq3, 
+           aes(x = Time, y = Freq, fill = Prey), 
+           stat = "identity") +
+  scale_x_continuous(expand = c(0.01, 0.01))+
+  scale_fill_manual(values = colors) +
   ggtitle("Prey composition") +
   ylab("Proportion of prey items") +
-  labs(tag = "b")  +
-  theme_ts() + 
-  theme(legend.text = element_text(size = 8))
+  theme_ts()
 
+diet_freq_bar
 
 # diet_freq_bar <- girafe(ggobj = diet_freq_bar)
 # diet_freq_bar <- girafe_options(diet_freq_bar, opts_zoom(max = 5) )
 
-full_map + diet_freq_bar + plot_layout(ncol = 2, widths=c(4,4))
 ```
 
-GOM common tern average productivity (fledglings per nest) across 7 colonies has varied over time but was low in 2018 (Fig. \ref{fig:tern-prod-div}a), a year with record-high summer SST in the GOM (Fig. \ref{fig:NE-SST-anom-series}), and substantial butterfish in tern diets (Fig. \ref{fig:map-and-prey}b). 
+GOM common tern average productivity (fledglings per nest) across 7 colonies has varied over time (Fig. \ref{fig:tern-prod}). The pattern is similar to that observed for fish condition (high before 2000, lower 2001-2009, higher/variable since 2010; Fig. \ref{fig:ne-cf}). Productivity is affected by both food and predation mortality. While data on predation is lacking, productivity lows in 2004-2006 were associated with euphausiids  (Fig. \ref{fig:tern-prey}), and the 2018 productivity low with butterfish in tern diets (Fig. \ref{fig:tern-prey}). The presence of butterfish in tern diets reflects the extension of this warm water species into GOM. Due to their thin, deep body form, butterfish are often difficult for small seabird chicks to ingest and swallow, causing chicks to starve and/or parent birds to increase foraging effort.
 
-```{r tern-prod-div, fig.cap = "a. Mean common tern productivity at nesting sites in Gulf of Maine. Error bars show +/- 1 SE of the mean. b. Shannon diversity of common tern diets observed at nesting sites in Gulf of Maine. Diversity of common tern diets has been predominantly above the long-term mean since 2006.",fig.width = 8, fig.asp = 0.25 }
+```{r tern-prod, fig.width = 4, fig.asp = 0.45, fig.cap = "Mean common tern productivity at nesting sites in Gulf of Maine. Error bars show +/- 1 SE of the mean."}
 aggregate_prod <- ecodata::common_tern %>% 
     filter(!str_detect(Var, "Diet|Sum"))  %>% 
   mutate(Island = word(Var, 1),
@@ -1212,7 +1153,8 @@ aggregate_prod <- ecodata::common_tern %>%
          se.high = Mean + SE,
          hline = mean(Mean, na.rm = T))
 
-prodplot <- aggregate_prod %>% ggplot() +
+aggregate_prod %>% 
+  ggplot() +
 #Highlight last ten years
   annotate("rect", fill = shade.fill, alpha = shade.alpha,
       xmin = x.shade.min , xmax = x.shade.max,
@@ -1224,7 +1166,8 @@ prodplot <- aggregate_prod %>% ggplot() +
                     ymin = se.low,
                   ymax = se.high), 
                 width = 0.25) +
-  scale_x_continuous(expand = c(0.01, 0.01),limits = c(1991,2018)) +
+  scale_x_continuous(expand = c(0.01, 0.01),limits = c(1991,2019)) +
+  expand_limits(y=0) +
   guides(color = FALSE) +
   ggtitle("Common tern productivity") +
   ylab(expression("Fledged chicks per nest")) +
@@ -1234,69 +1177,10 @@ prodplot <- aggregate_prod %>% ggplot() +
            size = hline.size,
            alpha = hline.alpha,
            linetype = hline.lty) +
-  labs(tag = "a")  +
   theme_ts()
 
-diet_div <- ecodata::common_tern %>% 
-  filter(str_detect(Var, "Diet"),
-         !str_detect(Var, "Sum")) %>% 
-  mutate(Island = word(Var, 1),
-         Var = word(Var, 4)) %>% 
-  group_by(Island, Time) %>%
-  dplyr::summarise(evenness = diversity(Value)/log(specnumber(Value)),
-                   shannon = diversity(Value),
-                   simpson = diversity(Value, index = "simpson")) %>% 
-  gather(.,Var,Value,-Island, -Time) %>% 
-  group_by(Var, Time) %>%
-  dplyr::summarize(Value = mean(Value, na.rm = T),
-                   sd = sd(Value, na.rm = T),
-                   n = n()) %>%
-  group_by(Var) %>% 
-  mutate(hline = mean(Value, na.rm = T))
 
-# evenness <- diet_div %>% 
-#   filter(Var == "evenness") %>% 
-# ggplot(aes(x = Time, y = Value)) +
-#       annotate("rect", fill = shade.fill, alpha = shade.alpha,
-#       xmin = x.shade.min , xmax = x.shade.max,
-#       ymin = -Inf, ymax = Inf) +
-#   geom_line() +
-#   geom_point() +
-#  # geom_gls() +
-#   scale_x_continuous(expand = c(0.01, 0.01),limits = c(1992,2018)) +
-#   ggtitle("Evenness")+
-#   ylab(expression("Evenness")) +
-#   xlab("")+
-#   geom_hline(aes(yintercept = hline),
-#            size = hline.size,
-#            alpha = hline.alpha,
-#            linetype = hline.lty) +
-#   theme_ts() 
-
-shannon <- diet_div %>% 
-  filter(Var == "shannon") %>% 
-ggplot(aes(x = Time, y = Value)) +
-      annotate("rect", fill = shade.fill, alpha = shade.alpha,
-      xmin = x.shade.min , xmax = x.shade.max,
-      ymin = -Inf, ymax = Inf) +
-  geom_line() +
-  geom_point() +
-  #geom_gls() +
-  scale_x_continuous(expand = c(0.01, 0.01),limits = c(1992,2018)) +
-  ggtitle("Common tern diet diversity")+
-  ylab(expression("Shannon Diversity")) +
-  xlab("")+
-  geom_hline(aes(yintercept = hline),
-           size = hline.size,
-           alpha = hline.alpha,
-           linetype = hline.lty) +
-  labs(tag = "b")  +
-  theme_ts() 
-
-prodplot + shannon + plot_layout(ncol = 2, widths=c(4,4))
 ```
-
-The presence of butterfish in tern diets reflects the extension of this warm water species into GOM. Due to their thin, deep body form, butterfish are often difficult for small seabird chicks to ingest and swallow, causing chicks to starve and/or parent birds to increase foraging effort. GOM common tern diet diversity was mainly above the long term mean since 2006 (Fig. \ref{fig:tern-prod-div}b). High diet diversity may be related to lower availability of preferred prey types such as herring and sand lance relative to increased availability of other species associated with warmer SST.
 
 \newpage
 
