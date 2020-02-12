@@ -2484,7 +2484,7 @@ ggplot(data = sw.df) +
 ```
 
 ## Ocean temperature, surface and bottom (GOM and GB)
-Concurrently, annual surface and bottom temperatures (Fig. \ref{fig:NE-bot-temp}) in the GOM and GB have trended warmer since the early 1980s, and seasonal surface temperatures have trended warmer in spring, summer, and fall. The 2018 summer sea surface temperatures were the highest on record in the GOM, although temperatures during the other seasons were near or slightly below average (Figs. \ref{fig:NE-SST-anom-series}, \ref{fig:NE-SST-insitu}). 
+The regional ocean is warming. Annual surface and bottom temperatures (Figs. \ref{fig:NE-SST-anom-series}, \ref{fig:NE-bot-temp}) in the GOM and GB have trended warmer since the early 1980s. GOM bottom temperature was nearly 1°C warmer than average in 2019. Seasonal surface temperatures have trended warmer in spring, summer, and fall throughout New England. The 2018 summer sea surface temperatures were the highest on record in the GOM with temperature moderating slightly in 2019. Surface temperatures during the other seasons were near or slightly below average (Figs. \ref{fig:NE-SST-anom-series}, \ref{fig:NE-SST-insitu}). In contrast, 2019 seasonal temperatures in the core portions of Georges Bank were at or below average, while at the outer edge were above average partially due to the influence of a number of Gulf Stream warm core rings surrounding the Bank (personal communication G. Gawarkiewicz and A. Gangopadhyay, 2020).
   
 ```{r NE-bot-temp, fig.width = 8, fig.asp = .25, fig.cap = "GOM and GB annual bottom temperature anomalies."}
 bot_temp_insitu_gom <- oceantemp_insitu %>%
@@ -2498,7 +2498,9 @@ bot_temp_insitu_gom <- oceantemp_insitu %>%
   geom_line(aes(x = Time, y = Value)) +
   geom_gls(aes(x = Time, y = Value)) +
   geom_point(aes(x = Time, y = Value), size = 1) +
-  ylab("Temp. Anomaly (°C)") +
+  #ylab("Temperature Anomaly (°C)") +
+  ylab(element_blank())+
+  xlab(element_blank())+
   ggtitle("GOM Bottom Temperature Anomaly") +
   scale_x_continuous(expand = c(0.01, 0.01)) +
     geom_hline(aes(yintercept = hline),
@@ -2521,7 +2523,8 @@ bot_temp_insitu_gb <- oceantemp_insitu %>%
   geom_line(aes(x = Time, y = Value)) +
   geom_gls(aes(x = Time, y = Value)) +
   geom_point(aes(x = Time, y = Value), size = 1) +
-  ylab("Temp. Anomaly (°C)") +
+  ylab("Temperature Anomaly (°C)") +
+  xlab(element_blank())+
   ggtitle("GB Bottom Temperature Anomaly") +
   scale_x_continuous(expand = c(0.01, 0.01)) +
     geom_hline(aes(yintercept = hline),
@@ -2533,23 +2536,22 @@ bot_temp_insitu_gb <- oceantemp_insitu %>%
         plot.title = element_text(size = 12))
 
 
-
+bot_temp_insitu_gb +
 bot_temp_insitu_gom +
- bot_temp_insitu_gb + plot_layout(nrow = 1)
-  #plot_layout(ncol =  1) &
-  #theme(plot.margin = unit(c(0, 0, 0, 0), "cm"))
+  plot_layout(ncol =  2) &
+  theme(plot.margin = unit(c(0, 0, 0, 0), "cm"))
 
 ```
 
 ```{r NE-SST-anom-series, fig.width = 8, fig.asp = 0.45, fig.cap = "GOM and GB seasonal sea surface temperature anomaly time series."}
 ne_anom <- seasonal_oisst_anom %>% 
-  filter(EPU %in% c("GOM","GB")) %>% 
+  filter(EPU %in% c("GB","GOM")) %>% 
     mutate(hline = 0,
            Var = str_to_title(str_extract(Var,"winter|spring|summer|fall")))
 ne_anom$Var <- factor(ne_anom$Var, levels= c("Winter","Spring","Summer","Fall"))
 
 ne_anom_plt <- ggplot(data = ne_anom, 
-       aes(x = Time, y = Value, color = EPU, group = EPU))+ #plot
+       aes(x = Time, y = Value, color = EPU, group = EPU))+
      annotate("rect", fill = shade.fill, alpha = shade.alpha,
       xmin = x.shade.min , xmax = x.shade.max,
       ymin = -Inf, ymax = Inf) +
@@ -2557,7 +2559,8 @@ ne_anom_plt <- ggplot(data = ne_anom,
   geom_point()+
   ylim(-2,3)+
   geom_gls() +
-  ylab("SST Anomaly (°C)") +
+  ylab(expression("SST Anomaly (°C)")) +
+  xlab(element_blank())+
   ggtitle("Gulf of Maine & Georges Bank SST Anomaly") +
     scale_color_manual(values = c("black","indianred"))+
     scale_x_continuous(expand = c(0.01, 0.01)) +
@@ -2574,7 +2577,7 @@ ne_anom_plt
 
 ```{r NE-SST-insitu, fig.width=8, fig.height = 5, fig.cap = "GOM and GB 2018 seasonal sea surface temperature spatial anomalies."}
 #EPU shapefile
-epu_sf_ne <- ecodata::epu_sf %>% 
+ne_epu_sf <- ecodata::epu_sf %>% 
   filter(EPU %in% c("GOM","GB"))
 
 #Map line parameters
@@ -2583,11 +2586,11 @@ map.lwd <- 0.4
 # Set lat/lon window for maps
 xmin = -73
 xmax = -65
-ymin = 39.5
-ymax = 44.5
+ymin = 39
+ymax = 45
 xlims <- c(xmin, xmax)
 ylims <- c(ymin, ymax)
-sst <- seasonal_oisst_anom_gridded 
+sst <- ecodata::seasonal_sst_anomaly_gridded 
 
 sst$Season <- factor(sst$Season, levels = c("Winter",
                                             "Spring",
@@ -2597,7 +2600,7 @@ sst_map <-
   ggplot() +
   geom_tile(data = sst, aes(x = Longitude, y = Latitude,fill = Value)) +
   geom_sf(data = coast, size = map.lwd) +
-  geom_sf(data = epu_sf_ne, fill = "transparent", size = map.lwd) +
+  geom_sf(data = ne_epu_sf, fill = "transparent", size = map.lwd) +
   scale_fill_gradient2(name = "Temp.\nAnomaly (°C)",
                        low = scales::muted("blue"),
                        mid = "white",
@@ -2606,7 +2609,63 @@ sst_map <-
   coord_sf(crs = crs, xlim = xlims, ylim = ylims) +
   facet_wrap(Season~.) +
   theme_map() +
-  ggtitle("SST anomaly (2018)") +
+  ggtitle("SST anomaly (2019)") +
+  xlab("Longitude") +
+  ylab("Latitude") +
+  theme(panel.border = element_rect(colour = "black", fill=NA, size=0.75),
+        legend.key = element_blank(),
+        axis.title = element_text(size = 11),
+        strip.background = element_blank(),
+        strip.text=element_text(hjust=0),
+        axis.text = element_text(size = 8), 
+        axis.title.y = element_text(angle = 90))
+
+
+sst_map 
+```
+
+## Marine heat waves (GOM and GB) 
+Marine heatwaves measure not just temperature, but how long the ecosystem is subjected to the high temperature. They are driven by both atmospheric and oceanographic factors and can have dramatic impacts on marine ecosystems. Marine heatwaves are measured in terms of intensity (water temperature) and duration (the cumulative number of degree days) using satellite measurements of daily sea surface temperature. Plotted below are maximum intensity and cumulative intensity, which is intensity times duration. Here we define a marine heatwave as a warming event that lasts for five or more days with sea surface temperatures above the 90th percentile of the  historical daily climatology (1982-2010) [@hobday_hierarchical_2016]. 
+
+In 2019, the Gulf of Maine experienced four distinct marine heatwaves in the summer and fall with the strongest event beginning on July 3 and lasting 53 days (Figs. \ref{fig:gom-timesseries-heatwave1}, \ref{fig:gom-heatwave-max}).  Relative to prior years, this marine heatwave ranked 12th on record in terms of maximum intensity (+3.27 °C above average on Aug 1) and 12th on record in terms of cumulative intensity (112 °C-days ) (Fig. \ref{fig:gom-heatwave}).  The strongest heatwaves on record in the Gulf of Maine occurred in the summer of 2010 in terms of maximum intensity (+4.83 °C above average) and in the summer of 2012 in terms of cumulative intensity (630 °C-days). The impacts of the 2012 marine heatwave in the Gulf of Maine have been well documented within the lobster fishery [@mills_fisheries_2013].
+
+```{r gom-timesseries-heatwave1, fig.cap = "Marine heatwave events (red) in the Gulf of Maine occuring in 2019.", eval= T, echo = F}
+
+knitr::include_graphics(file.path(image.dir,"GOM_heatwave.jpeg"))
+```
+
+```{r gom-heatwave-max, fig.cap="Maximum intensity heatwave anomaly in Gulf of Maine occuring on August 1, 2019."}
+#EPU shapefile
+ne_epu_sf <- ecodata::epu_sf %>% 
+  filter(EPU %in% c("GOM","GB"))
+
+#Map line parameters
+map.lwd <- 0.4
+
+# Set lat/lon window for maps
+xmin = -73
+xmax = -65
+ymin = 39
+ymax = 45
+xlims <- c(xmin, xmax)
+ylims <- c(ymin, ymax)
+hw <- ecodata::hw_anom_gridded %>% 
+  filter(EPU == "GOM")
+
+gom_map <- 
+  ggplot() +
+  geom_tile(data =hw, aes(x = Longitude, y = Latitude,fill = Value)) +
+  geom_sf(data = coast, size = map.lwd) +
+  geom_sf(data = ne_epu_sf, fill = "transparent", size = map.lwd) +
+  scale_fill_gradient2(name = "Temp.\nAnomaly (°C)",
+                       low = scales::muted("blue"),
+                       mid = "white",
+                       high = scales::muted("red"),
+                       limits = c(-5,7)) +
+  coord_sf(crs = crs, xlim = xlims, ylim = ylims) +
+  #facet_wrap(Season~.) +
+  theme_map() +
+  ggtitle("GOM heatwave anomaly (Aug 1, 2019)") +
   xlab("Longitude") +
   ylab("Latitude") +
   theme(panel.border = element_rect(colour = "black", fill=NA, size=0.75),
@@ -2617,10 +2676,149 @@ sst_map <-
         axis.text = element_text(size = 8))
 
 
-sst_map 
+gom_map 
 
 ```
 
+```{r gom-heatwave, eval= T, echo = F, fig.width = 8, fig.asp = .35, fig.cap="Marine heatwave cumulative intesity (left) and maximum intensity (right) in the Gulf of Maine ."}
+cumu <- ecodata::heatwave %>% 
+  filter(Var == "cumulative intensity") %>% 
+  mutate(Var = recode(Var, "cumulative intensity" = "Cumulative Intensity (degree C x days)"))
+
+maxin <- ecodata::heatwave %>% 
+  filter(Var == "maximum intensity") %>% 
+  group_by(Time, EPU, Var, Units) %>% 
+  summarise(Value = max(Value)) %>% 
+  ungroup() %>% 
+  mutate(Var = recode(Var, "maximum intensity" = "Maximum Intensity (degree C)"))
+
+hw<- cumu %>%
+  rbind(maxin) %>% 
+  group_by(Var, EPU) %>% 
+  mutate(hline = mean(Value))
+
+gom.hw<-hw %>% filter(EPU == "GOM") %>% 
+  ggplot() +
+  annotate("rect", fill = shade.fill, alpha = shade.alpha,
+      xmin = x.shade.min , xmax = x.shade.max,
+      ymin = -Inf, ymax = Inf) +
+  geom_line(aes(x = Time, y = Value)) +
+  geom_point(aes(x = Time, y = Value)) +
+  geom_gls(aes(x = Time, y = Value)) +
+  ylab("") +
+  xlab(element_blank())+
+  ggtitle("Gulf of Maine") +
+  scale_x_continuous(expand = c(0.01, 0.01))+
+  geom_hline(aes(yintercept = hline),
+           size = hline.size,
+           alpha = hline.alpha,
+           linetype = hline.lty)+
+  facet_wrap(~Var, scales = "free") +
+  theme_ts()+
+  theme(strip.text=element_text(hjust=0,
+                                face = "italic"), 
+        axis.title.y = element_text(angle = 90))
+
+gom.hw
+
+```
+
+In 2019, Georges Bank experienced three distinct marine heatwaves in the summer and fall with the strongest event beginning on August 17 and lasting 20 days (Figs. \ref{fig:gb-timesseries-heatwave}, \ref{fig:gb-heatwave-max}). Relative to prior years, this marine heatwave ranked 15th on record in terms of maximum intensity (+3.14 °C above average on Aug 23)  (Fig. \ref{fig:gb-heatwave}).  The strongest heatwaves on record in the Georges Bank occurred in the summer of 2016 in terms of maximum intensity (+4.06 °C above average) and in the winter/spring/summer of 2012 in terms of cumulative intensity (485 °C-days).
+
+```{r gb-timesseries-heatwave, fig.cap="Marine heatwave events (red) on Georges Bank occuring in 2019.", eval= T, echo = F}
+
+knitr::include_graphics(file.path(image.dir,"GB_heatwave.jpeg"))
+```
+
+```{r gb-heatwave-max, fig.cap="Maximum intensity heatwave anomaly in Georges Bank occuring on August 23, 2019."}
+#EPU shapefile
+ne_epu_sf <- ecodata::epu_sf %>% 
+  filter(EPU %in% c("GOM","GB"))
+
+#Map line parameters
+map.lwd <- 0.4
+
+# Set lat/lon window for maps
+xmin = -73
+xmax = -65
+ymin = 39
+ymax = 45
+xlims <- c(xmin, xmax)
+ylims <- c(ymin, ymax)
+hw <- ecodata::hw_anom_gridded %>% 
+  filter(EPU == "GB")
+
+gb_map <- 
+  ggplot() +
+  geom_tile(data =hw, aes(x = Longitude, y = Latitude,fill = Value)) +
+  geom_sf(data = coast, size = map.lwd) +
+  geom_sf(data = ne_epu_sf, fill = "transparent", size = map.lwd) +
+  scale_fill_gradient2(name = "Temp.\nAnomaly (°C)",
+                       low = scales::muted("blue"),
+                       mid = "white",
+                       high = scales::muted("red"),
+                       limits = c(-5,7)) +
+  coord_sf(crs = crs, xlim = xlims, ylim = ylims) +
+  #facet_wrap(Season~.) +
+  theme_map() +
+  ggtitle("GB heatwave anomaly (Aug 23, 2019)") +
+  xlab("Longitude") +
+  ylab("Latitude") +
+  theme(panel.border = element_rect(colour = "black", fill=NA, size=0.75),
+        legend.key = element_blank(),
+        axis.title = element_text(size = 11),
+        strip.background = element_blank(),
+        strip.text=element_text(hjust=0),
+        axis.text = element_text(size = 8))
+
+
+gb_map 
+
+```
+
+```{r gb-heatwave, eval= T, echo = F, fig.width = 8, fig.asp = .35, fig.cap="Marine heatwave cumulative intesity (left) and maximum intensity (right) in the Gulf of Maine ."}
+# cumu <- ecodata::heatwave %>% 
+#   filter(Var == "cumulative intensity") %>% 
+#   mutate(Var = recode(Var, "cumulative intensity" = "Cumulative Intensity (degree C x days)"))
+# 
+# maxin <- ecodata::heatwave %>% 
+#   filter(Var == "maximum intensity") %>% 
+#   group_by(Time, EPU, Var, Units) %>% 
+#   summarise(Value = max(Value)) %>% 
+#   ungroup() %>% 
+#   mutate(Var = recode(Var, "maximum intensity" = "Maximum Intensity (degree C)"))
+# 
+# hw<- cumu %>%
+#   rbind(maxin) %>% 
+#   group_by(Var, EPU) %>% 
+#   mutate(hline = mean(Value))
+
+gb.hw<-hw %>% filter(EPU == "GB") %>% 
+  ggplot() +
+  annotate("rect", fill = shade.fill, alpha = shade.alpha,
+      xmin = x.shade.min , xmax = x.shade.max,
+      ymin = -Inf, ymax = Inf) +
+  geom_line(aes(x = Time, y = Value)) +
+  geom_point(aes(x = Time, y = Value)) +
+  geom_gls(aes(x = Time, y = Value)) +
+  ylab("") +
+  xlab(element_blank())+
+  ggtitle("Georges Bank") +
+  scale_x_continuous(expand = c(0.01, 0.01))+
+  geom_hline(aes(yintercept = hline),
+           size = hline.size,
+           alpha = hline.alpha,
+           linetype = hline.lty)+
+  
+  facet_wrap(~Var, scales = "free") +
+  theme_ts()+
+  theme(strip.text=element_text(hjust=0,
+                                face = "italic"), 
+        axis.title.y = element_text(angle = 90))
+
+gb.hw
+
+```
 
 ## Primary production (GOM and GB)
 Phytoplankton primary production is a function of biomass, light, and temperature, and sets the overall level of potential fish and fishery productivity in an ecosystem (Fig. \ref{fig:prod-potential}). 
