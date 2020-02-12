@@ -2966,27 +2966,26 @@ knitr::include_graphics(file.path(image.dir,"CHL_SEASONAL_ANOMS_2019.png"))
 ```
 
 ## Zooplankton (GOM and GB)
-The most abundant zooplankton species in the GOM are *Calanus finmarchicus* (an important prey for larval fish and the north Atlantic right whale),  *Centropages typicus*, and *Psuedocalanus* spp. [@morse_distinct_2017].  *Calanus finmarchicus* had low overall abundance in the GOM from 2009-2014, with higher than normal abundance in 2015-2016 and a return to normal levels in 2017 (Fig. \ref{fig:NE-zoo-abund}). On GB, *Calanus finmarchicus* annual abundance has been low continually since 2009. *Centropages typicus* has had higher than normal abundance from 2012-2017 on both GB and GOM. *Pseudocalanus* abundance trends were similar to *Calanus* in recent years, with low abundance from 2001-2014 in the GOM and higher than normal 2015-2016, but normal abundance in 2017. On GB, *Pseudocalanus* abundance has a significant long term decline (Fig. \ref{fig:NE-zoo-abund}) with an increase to the long term mean in 2016-2017.
+The most abundant zooplankton species in the GOM are the large-bodied *Calanus finmarchicus* (an important prey for larval fish and the north Atlantic right whale), and the small-bodied *Centropages typicus* and *Psuedocalanus* spp. [@morse_distinct_2017].  *Calanus finmarchicus* had low overall abundance in the GOM from 2010-2014, with higher than normal abundance in 2015-2016, normal levels in 2017, and higher abundance in 2018 (Fig. \ref{fig:NE-zoo-abund}). On GB, *Calanus finmarchicus*  annual abundance has been lower than normal since from 2010-2017 with slightly higher than normal values in 2018. 
 
-```{r NE-zoo-abund, fig.width = 8, fig.asp = .65, fig.cap = "Abundance anomaly time series for key zooplankton species found in the GOM and GB."}
-zoo_abund <- ecodata::zoo_anom_sli %>% 
-  filter(EPU %in% c("GOM","GB"),
-         !str_detect(Var, "small-large")) %>% 
-  mutate(hline = 0,
-         Var = str_to_title(str_remove(Var, "anomaly"))) 
+The mean abundance anomaly of the small-bodied copepod taxa shows a distinct pattern of higher than normal abundance during the period from 1989-2001 for both GB and GOM, followed by a low period from 2002-2010 for the GOM and 2002-2012 for GB (Fig. \ref{fig:NE-zoo-abund}). In recent years, this index has trended up again with higher values from 2012-2018 for the GOM and during 2014-2017 for GB, with 2018 falling right at the mean value. This was driven by lower abundance of *Centropages hamatus* and higher values for both *Temora longicornis* and *Centropages typicus* in 2018. The abundance of both *Temora longicornis* and *Centropages typicus* was the highest value observed in the time series in both GOM and on GB in 2018.
 
-gom_zoo_abund <- zoo_abund %>% 
-  filter(EPU == "GOM") %>% 
-  ggplot(aes(x = Time, y = Value, group = Var)) +
+```{r NE-zoo-abund, fig.width = 8, fig.asp = .65, fig.cap = "Abundance anomaly time series for copepod size groups found in the GOM and GB."}
+
+ecodata::zoo_abund %>%
+  filter(EPU %in% c("GOM","GB")) %>%
+  mutate(hline = 0) %>% 
+  ggplot(aes(x = Time, y = Value, color = Var)) +
          annotate("rect", fill = shade.fill, alpha = shade.alpha,
       xmin = x.shade.min , xmax = x.shade.max,
       ymin = -Inf, ymax = Inf) +
-  geom_gls() +
+  #geom_gls() +
   geom_line() +
   geom_point() +
   ylab("Abundance anomaly") +
-  ggtitle("GOM Zooplankton abundance anomaly") +
-  facet_wrap(Var~., ncol = 3, scales = "free_y") +
+  xlab(element_blank())+
+  ggtitle("Small and large-bodied copepod abundance anomaly") +
+  facet_wrap(EPU~., nrow = 2) +
   scale_x_continuous(expand = c(0.01, 0.01))+
       geom_hline(aes(yintercept = hline),
            size = hline.size,
@@ -2994,22 +2993,36 @@ gom_zoo_abund <- zoo_abund %>%
            linetype = hline.lty)+
   theme_facet() +
   theme(strip.text=element_text(hjust=0,
-                                face = "italic"))
+                                face = "italic"), 
+        legend.title = element_blank())
 
-gb_zoo_abund <- zoo_abund %>% 
-  filter(EPU == "GB") %>% 
-  ggplot(aes(x = Time, y = Value, group = Var)) +
-         annotate("rect", fill = shade.fill, alpha = shade.alpha,
+```
+
+Cnidarians (jellyfish) exhibit an increasing trend in abundance over the long term record, and higher than normal abundance during the 1990's when the abundance of small-bodied copepods was highest (Fig. \ref{fig:ne-euph-cnid}). Euphausiids (krill), important prey items for many fish species, also exhibit a long term increasing trend in abundance in the GOM and GB (Fig. \ref{fig:ne-euph-cnid}).
+
+```{r ne-euph-cnid, fig.width = 8, fig.cap="Stratified abundance of cnidarians and euphausiids in Mid-Atlantic Bight."}
+zoo_abund <- ecodata::zoo_strat_abun %>% 
+  mutate(Value = log10(Value+1)) %>% 
+  filter(EPU %in% c("GOM", "GB"),
+         !str_detect(Var, "Small|Large")) %>% 
+  group_by(Var, EPU) %>% 
+  mutate(hline = mean(Value)) 
+
+gom_zoo<-zoo_abund %>% 
+  filter(EPU == "GOM") %>% 
+  ggplot() +
+  annotate("rect", fill = shade.fill, alpha = shade.alpha,
       xmin = x.shade.min , xmax = x.shade.max,
       ymin = -Inf, ymax = Inf) +
-  geom_gls() +
-  geom_line() +
-  geom_point() +
-  ylab("Abundance anomaly") +
-  ggtitle("GB Zooplankton abundance anomaly") +
-  facet_wrap(Var~., ncol = 3, scales = "free_y") +
+  geom_gls(aes(x = Time, y = Value, group = Var)) +
+  geom_line(aes(x = Time, y = Value)) +
+  geom_point(aes(x = Time, y = Value)) +
+  ylab(expression("Log Stratified Abundance")) +
+  xlab(element_blank())+
+  ggtitle("GOM large zooplankton abundance") +
+  facet_wrap(Var~., ncol = 3) +
   scale_x_continuous(expand = c(0.01, 0.01))+
-      geom_hline(aes(yintercept = hline),
+  geom_hline(aes(yintercept = hline),
            size = hline.size,
            alpha = hline.alpha,
            linetype = hline.lty)+
@@ -3017,8 +3030,29 @@ gb_zoo_abund <- zoo_abund %>%
   theme(strip.text=element_text(hjust=0,
                                 face = "italic"))
   
-gom_zoo_abund + gb_zoo_abund + plot_layout(ncol = 1)
-
+gb_zoo<-zoo_abund %>% 
+  filter(EPU == "GB") %>% 
+  ggplot(aes(x = Time, y = Value)) +
+  annotate("rect", fill = shade.fill, alpha = shade.alpha,
+      xmin = x.shade.min , xmax = x.shade.max,
+      ymin = -Inf, ymax = Inf) +
+  geom_gls() +
+  geom_line() +
+  geom_point() +
+  ylab(expression("Log Stratified Abundance")) +
+  xlab(element_blank())+
+  ggtitle("GB large zooplankton abundance") +
+  facet_wrap(Var~., ncol = 3) +
+  scale_x_continuous(expand = c(0.01, 0.01))+
+  geom_hline(aes(yintercept = hline),
+           size = hline.size,
+           alpha = hline.alpha,
+           linetype = hline.lty)+
+  theme_facet() +
+  theme(strip.text=element_text(hjust=0,
+                                face = "italic"))
+  
+cowplot::plot_grid(gb_zoo, gom_zoo, nrow = 2)
 ```
 
 Changes in the abundance of the larger *Calanus finmarchicus* are also reflected in the size distribution of the copepods. The small-large copepod index is a measure of the relative size composition of the dominant copepod taxa. During the 1990s and early 2000s, the positive index was driven by high relative abundance of smaller bodied copepods and a lower relative abundance of *Calanus finmarchicus*. This period also corresponds with regime shifts to lower fish recruitment [@perretti_regime_2017]. The current trend in the index suggests an increase in the relative abundance of smaller bodied copepods (Fig. \ref{fig:NE-sli}).
@@ -3091,7 +3125,7 @@ Changes in primary productivity, phytoplankton and zooplankton composition and a
 
 **Editors** (NOAA NMFS Northeast Fisheries Science Center, NEFSC): Sarah Gaichas, Kimberly Bastille, Geret DePiper, Kimberly Hyde, Scott Large, Sean Lucey, Chris Orphanides
 
-**Contributors** (NEFSC unless otherwise noted): Patricia Clay, Lisa Colburn, Geret DePiper, Michael Fogarty, Paula Fratantoni, Kevin Friedland, Sarah Gaichas, James Gartland (Virginia Institute of Marine Science), Heather Haas, Sean Hardison, Kimberly Hyde, Terry Joyce (Woods Hole Oceanographic Institute), Don Lyons (National Audubon Societyas Seabird Restoration Program), Sean Lucey, Chris Melrose, Ryan Morse, Kimberly Murray, Chris Orphanides, Richard Pace, Charles Perretti, Karl Roscher (Maryland Department of Natural Resources), Vincent Saba, Laurel Smith, Mark Terceiro, John Walden, Harvey Walsh, Mark Wuenschel, and Qian Zhang (Unversity of Maryland and US EPA Chesapeake Bay Program).  
+**Contributors** (NEFSC unless otherwise noted): Patricia Clay, Lisa Colburn, Geret DePiper, Michael Fogarty, Paula Fratantoni, Kevin Friedland, Sarah Gaichas, Avijit Gangopadhyay (School for Marine Science and Technology, University of Massachusetts Dartmouth), James Gartland (Virginia Institute of Marine Science), Glen Gawarkiewicz (Woods Hole Oceanographic Institution), Sean Hardison, Kimberly Hyde, John Kosik, Steve Kress and Don Lyons (National Audubon Society’s Seabird Restoration Program), Young-Oh Kwon and Zhuomin Chen (Woods Hole Oceanographic Institute), Sean Lucey, Chris Melrose, Ryan Morse, Kimberly Murray, Chris Orphanides, Richard Pace, Charles Perretti, Vincent Saba, Laurel Smith, John Walden, Harvey Walsh, Mark Wuenschel. 
 
 \newpage 
 
