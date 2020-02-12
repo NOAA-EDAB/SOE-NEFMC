@@ -31,18 +31,16 @@ knitr::opts_chunk$set(echo = FALSE,
                       fig.align = 'center') #allows for inserting R code into captions
 
 #Plotting and data libraries
-#remotes::install_github("noaa-edab/ecodata@0.1.0")
-library(ggplot2)
-library(dplyr)
+#remotes::install_github("noaa-edab/ecodata@0.1.0") #change to 2020 ecodata version for release
+library(tidyverse)
 library(tidyr)
 library(ecodata)
 library(here)
 library(kableExtra)
 library(ggrepel)
-library(stringr)
 library(patchwork)
 library(grid)
-# library(ggiraph)
+library(ggiraph)
 library(vegan)
 library(rpart)
 library(ks)
@@ -133,26 +131,6 @@ label <- function(variable,value){
 }
 ```
 
-# Overview
-The purpose of this report is to synthesize available information relevant to fishery management in the New England portion of the US Northeast Shelf (the Gulf of Maine, GOM, and Georges Bank, GB). This 2019 report highlights where management interventions have proven successful to achieve ecological objectives, but also characterizes the considerable challenges for management posed by climate change and increasing trade-offs across conservation, fishing, and other human activities in this region (Fig. \ref{fig:conceptual-model}). Finally, we describe combinations of ecological signals that present opportunities for further integrated research and possibly creative management solutions. 
-
-```{r conceptual-model, echo=FALSE, out.width = "\\textwidth", fig.cap="A conceptual model places detailed species-level management in context by highlighting relationships between focal species groups organized by the New England Fishery Management Council (NEFMC) Fishery Management Plan (FMP), managed human activities, environmental drivers, habitats, and key ecological links."}
-
-knitr::include_graphics("images/GOM_GB_conmod_overview.jpg")
-```
-
-Some management interventions for ecosystems and fisheries have proven beneficial in New England and throughout the Northeast US Shelf. For example, harbor porpoise bycatch continues to decrease. The 2016 and 2017 harbor porpoise bycatch estimates are among the lowest on record in the Northeast US (Fig. \ref{fig:harbor-porpoise-bars}), coinciding with an apparently stablized harbor porpoise population.
-
-However, there are multiple signals indicating challenges to meeting management goals. Fishery management objectives are being met for 20 stocks at the single species level, but 9 stocks are below biomass thresholds (Fig. \ref{fig:NE-stock-status}). Both New England social-ecological systems are reliant on a single species for the majority of revenue (lobster in GOM, scallop in GB). These species have moderate to high climate vulnerability, likely representing heightened risk to fishing communities, particularly along the coast of Maine and the South Coast of Massachusetts where ports are highly engaged and reliant on commercial fishing (Fig. \ref{fig:NE-comm-reliance-maps-outlined}). There are long term declines in total seafood production and commercial revenue for New England-managed species in the GOM (Figs. \ref{fig:comm-landings-ne}, \ref{fig:total-landings-ne}, \ref{fig:comm-revenue-ne}). However, indicators highlight an increasing diversity of recreational species caught in New England (Fig. \ref{fig:rec-div}).
-
-Fisheries are significantly affecting protected species, particularly large whale abundance. Changes in fishery management to address this issue could have considerable consequences for the fixed gear fishing sector, particularly for pot gear such as for lobster. The recovery of north Atlantic right whales is affected by anthropogenic mortality (Fig. \ref{fig:NARW-abundance}). Shifts in ecosystem conditions may be contributing to increased interaction between right whales and fishing gear and could be playing a role in other protected species trends. Unusual Mortality Events (UMEs) have been declared for north Atlantic right whales, humpback whales, and minke whales, and preliminary investigations suggest fishing gear entanglement has played a primary role in these mortalities. Gray seal bycatch mortality has also risen in recent years, with an estimated annual mortality that has often totaled more than 1000 animals and a UME has been declared for both gray and harbor seals that may be due to phocine distemper virus. 
-
-Several climate and ecosystem observations are trending towards or have reached unprecedented levels. The Northeast US shelf is among the fastest warming waters globally (Fig. \ref{fig:long-term-sst}) with implications for species physiology, productivity, distribution, and community composition. Globally, 2018 was the 4th warmest year on record with the last four years being the warmest on record. In both the GOM and GB, 2018 seasonal sea surface temperatures were above average, while while the summer temperatures in the Gulf of Maine were the highest on record (Fig. \ref{fig:NE-SST-anom-series}). Annual average bottom temperature measurements show a significant long term warming trend in the GOM (Fig. \ref{fig:NE-bot-temp}). Ocean circulation is changing as well. The position of the northern edge of the Gulf Stream has trended northward since the late 1950s, with an increasing rate since 2009. The most northerly positions on record were observed between 2014-2017 (Fig. \ref{fig:GSI}). Since the mid-2000'??s, the warmer, saltier shelf slope water associated with the Gulf Stream has dominated the input into the GOM at the Northeast Channel (Fig. \ref{fig:wsw-prop}). A more northerly Gulf Stream position is generally associated with warmer ocean temperature in the Northeast US shelf [@zhang_role_2007] and increased sea surface height along the U.S. east coast [@goddard_extreme_2015]. 
-
-The management implications of these ocean changes vary by region and species, and are not fully understood at this point. Changes in the distribution of managed fish species continue, with aggregate trends on the entire Northeast Shelf shifting towards the northeast and generally into deeper water (Fig. \ref{fig:spec-dist}). These shifts place increasing pressure on the management system. The proportion of NEFMC managed benthivore species (righteye flounders, haddock) has declined over time in Mid-Atlantic waters according to bottom trawl surveys (Fig. \ref{fig:NEFMC-in-MAB}), while the proportion of MAFMC managed planktivore (squids, mackerel, and butterfish) species has been increasing in New England waters in both surveys and landings (Figs. \ref{fig:MAFMC-in-NE}, \ref{fig:comm-landings-ne}). Butterfish have been observed in Gulf of Maine common tern fledgling diets between 2009-2011 and again in 2018 (Fig. \ref{fig:map-and-prey}b), which negatively impacts tern productivity. The downward trend in recreational species diversity in the Mid-Atlantic (see Mid-Atlantic report) contrasts with an increase in recreational species diversity over time in New England (Fig. \ref{fig:rec-div}), although it is unclear to what extent this result is due to the aggregation of SAFMC species in the indicator itself. Nearshore MA and ME/NH survey indices show some similar patterns to offshore surveys, although with different magnitudes, perhaps reflecting seasonal importance of nearshore habitats (Figs. \ref{fig:gom-biomass-ne},  \ref{fig:MA-inshore}, \ref{fig:menh-survey}); these patterns will be explored in more detail in future analyses. As temperature and ocean circulation indicators trend toward extremes, fishery management based on static stock areas will likely face continued changes in species distribution.
-
-Observed changes at the base of the food web, including timing and community composition, affect productivity of protected and managed species in ways we do not yet fully understand. There is a trend of increasing primary production in New England, but this trend is primarily driven by increased summer production, which is due to warmer temperatures and increased bacterial remineralization and nutrient recycling (Fig. \ref{fig:NE-PP-OCCI}). This increased productivity is most likely from smaller-celled species that contribute less to fish production compared to larger phytoplankton. Current zooplankton trends show a shift towards smaller-bodied copepods (Fig. \ref{fig:NE-sli}). This suggests a possible return to conditions last observed during the 1990s, when small bodied copepods dominated the zooplankton community, regime shifts in groundfish recruitment were observed [@perretti_regime_2017], and north Atlantic right whales experienced lower birth rates [@greene_remote_2013]. The timing of shifts in fish condition may be similar (Fig. \ref{fig:ne-cf}), though potential mechanisms connecting adult fish condition to zooplankton patterns require further study.
-
 # Report Structure
 
 The major messages of the report are synthesized above with reference to key figures. The information in this report is organized around general ecosystem-level management objectives (Table \ref{tab:management-objectives}), and indicators related to these objectives are grouped into four general categories in the four sections below: economic and social, protected species, fish and invertebrates, and habitat quality and ecosystem productivity. Each section begins with a summary of main messages with links to other sections, including any new information added at the request of the Council, and includes figures with brief descriptions of all current indicators. Detailed technical methods documentation^[https://NOAA-EDAB.github.io/tech-doc] and indicator data^[https://github.com/NOAA-EDAB/ecodata] are available online. The details of standard figure formatting (Fig. \ref{fig:docformat}a), categorization of fish and invertebrate species into feeding groups (Table \ref{tab:species-groupings}), and definitions of ecological production units (EPUs, including the Gulf of Maine (GOM) and Georges Bank (GB); Fig. \ref{fig:docformat}b) are provided at the end of the document.
@@ -188,10 +166,42 @@ knitr::kable(mng_obj,
 
 The objectives of U.S. federal fishery management include providing benefits to the Nation in terms of seafood production and recreational opportunities, while considering economic efficiency and effects on coastal communities. The indicators in this section consider these objectives for the GOM and GB ecological production units separately where possible.
 
-## Gulf of Maine
-A long term significant decrease in NEFMC managed species revenue was offset by non-NEFMC managed species (Fig. \ref{fig:comm-revenue-ne}), likely lobster, as indicated by the focal component-level Bennet Volume Indicator for Benthivores (Fig. \ref{fig:bennet-ne}). 
+The amount of potential yield we can expect from a marine ecosystem depends on the amount of production entering at the base of the food web, primarily in the form of phytoplankton; the pathways this energy follows to reach harvested species; the efficiency of transfer of energy at each step in the food web; and the fraction of this production that is removed by the fisheries.  Species such as scallops and clams primarily feed directly on larger phytoplankton species and therefore require only one step in the transfer of energy. The loss of energy at each step can exceed 80-90%.  For many fish species, as many as 2-4 steps may be necessary. Given the trophic level and the efficiency of energy transfer of the species in the ecosystem the amount phytoplankton production required (PPR) to account for the observed catch can be estimated.
 
-```{r comm-revenue-ne, fig.cap = "Total commercial revenue (black) and revenue from NEFMC managed species (red) in Gulf of Maine (left) and Georges Bank (right).", fig.width = 8, fig.asp = 0.25}
+Primary production required has declined over the past 20 years (Fig. \ref{fig:ppr-ne}). The periodicity in the PPR index reflects both the periodicity in primary production (see Fig. \ref{fig:NE-sli}) and the periodicity in the closed areas for scallop harvest.
+
+```{r ppr-ne, fig.cap="Primary production required to support the commercial landings on Georges Bank (left) and in the Gulf of Maine (right). Included are the top species accounting for 80\\% of the landings in each year, with 15\\% transfer efficiency assumed between trophic levels.", fig.width = 8, fig.asp = 0.25}
+
+
+ecodata::ppr %>% 
+  group_by(EPU) %>% 
+  mutate(hline = mean(Value)) %>% 
+  filter(EPU != "MAB") %>% 
+  ggplot() +
+  annotate("rect", fill = shade.fill, alpha = shade.alpha,
+      xmin = x.shade.min , xmax = x.shade.max,
+      ymin = -Inf, ymax = Inf) +
+  geom_point(aes(x = Time, y = Value))+
+  geom_line(aes(x = Time, y = Value))+
+  geom_hline(aes(yintercept = hline),
+           size = hline.size,
+           alpha = hline.alpha,
+           linetype = hline.lty)+
+  scale_x_continuous(expand = c(0.01, 0.01)) +
+  expand_limits(y=0) +
+  facet_wrap(. ~ EPU, labeller = 
+               labeller(EPU = c(GB = "Georges Bank", 
+                                GOM = "Gulf of Maine")))+
+  ggtitle("Primary Production Required")+
+  ylab("Proportion of Total Primary Production")+
+  theme_ts()
+```
+
+
+## Gulf of Maine
+Although the demand of fisheries in terms of ecosystem energy is decreasing, the social-ecological system is becoming more reliant on a smaller number of species, inducing system risk through a secondary pathway. A long term significant decrease in NEFMC managed species revenue was offset by non-NEFMC managed species (Fig. \ref{fig:comm-revenue-ne}), primarily lobster, as indicated by the focal component-level Bennet Volume Indicator for Benthivores (Fig. \ref{fig:bennet-ne}).  Presently, 2019 lobster catch is down substantially compared with previous years, so a drop in revenue is expected.
+
+```{r comm-revenue-ne, fig.cap = "Total commercial revenue (black) and revenue from NEFMC managed species (red) on Georges Bank (left) and in the Gulf of Maine (right).", fig.width = 8, fig.asp = 0.25}
 
 #Filtering and aggregation step
 rev_agg <- ecodata::comdat %>% 
@@ -267,8 +277,7 @@ ggplot() +
   theme_ts() +
     ggtitle("Georges Bank")
 
-cowplot::plot_grid(gom_rev_agg, gb_rev_agg, ncol = 2)
-
+cowplot::plot_grid(gb_rev_agg, gom_rev_agg, ncol = 2)
 # rev_inline <- rev_agg %>% 
 #   dplyr::select(Status, Time, Total) %>% 
 #   spread(.,Status, Total) %>% 
@@ -281,24 +290,30 @@ cowplot::plot_grid(gom_rev_agg, gb_rev_agg, ncol = 2)
 # max_rev_perc <- max(rev_inline)
 ```
 
-```{r bennet-ne, fig.cap = paste0("Revenue change from the long-term mean in 2015 dollars (black), Price (PI), and Volume Indicators (VI) for commercial benthivore landings in Gulf of Maine (left) and for commercial benthos landings on Georges Bank (right)."), fig.height = 3, fig.width=8}
+```{r bennet-ne, fig.cap = paste0("Revenue change from the 2015 base year in 2015 dollars (black), Price (PI), and Volume Indicators (VI) for commercial benthos landings on Georges Bank (left) and for commercial benthivore landings in the Gulf of Maine (right)"), fig.height = 3, fig.width=8}
 
 #Filter data into two dataframes for plotting
+
 indicators <- ecodata::bennet %>% 
-  filter(EPU %in% epu_abbr,
-         Var %in% c("Benthivore VI",
-                    "Benthivore PI", 
-                    "Benthos VI",
-                    "Benthos PI")) %>% 
-  mutate(Var, Var = plyr::mapvalues(Var, from = c("Benthivore VI","Benthivore PI",
-                                                  "Benthos VI", "Benthos PI"),
-                                    to = c("Benthivore Volume","Benthivore Price",
-                                           "Volume","Price")))
+  filter(!EPU == "MAB") %>% 
+  filter(stringr::str_detect(Var, pattern="Benth"),
+         #!Var == "Total Revenue Change - Bennet", 
+         !Time < 1985) %>% 
+  mutate(Var, Var = plyr::mapvalues(Var, from = c("Benthos Value Index - Bennet","Benthos Price Index - Bennet","Benthivore Value Index - Bennet","Benthivore Price Index - Bennet"),
+                                    to = c("Benthos Volume","Benthos Price","Benthivore Volume","Benthivore Price"))) 
+revchange1<-indicators %>% 
+  group_by(Time, EPU) %>% 
+  summarise(revchange.line = sum(Value))
+
 
 revchange <- ecodata::bennet %>% 
-  filter(EPU %in% epu_abbr,
-         Var %in% c("REVCHANGE EPU aggregate"))
-
+  filter(!EPU == "MAB",
+         Var %in% c("Total Revenue Change - Bennet"),
+         !Time<1985)
+revchange.gom<-revchange1 %>% 
+  filter(EPU == "GOM") 
+revchange.gb<-revchange1 %>% 
+  filter(EPU == "GB")
 #custom bar fill color (color-blind friendly)
 ind_fill <- c("#a6cee3", "#b2df8a")
 
@@ -307,7 +322,9 @@ y.lim <- c(-350,350)
 
 #plot
 
-gom_bennet <- indicators %>% filter(EPU == "GOM" & Var %in% c("Benthivore Volume","Benthivore Price")) %>% 
+gom_bennet <- indicators %>% 
+  filter(EPU == "GOM", 
+         stringr::str_detect(Var, pattern="Benthivore")) %>% 
 ggplot()+
   
   #Highlight last ten years
@@ -317,17 +334,23 @@ ggplot()+
   #guides(color = F, fill = F)+
   geom_bar(aes(x=Time, y= Value, fill = Var), stat="identity")+
   scale_fill_manual(name = "Indicators", values = ind_fill, guide = FALSE) +
-  geom_line(data = revchange[revchange$EPU == "GOM",], aes(x = Time, y = Value, colour="$"))+
-  scale_colour_grey(name ="Total Revenue Change") +
-  ggtitle("Gulf of Maine Benthivores Component")+
+  geom_line(data = revchange.gom, 
+            aes(x = Time, y = revchange.line, colour = "$"))+
+  scale_colour_grey(name ="Revenue Change") +
+  ggtitle("Gulf of Maine Benthivore Component")+
   labs(y="Value $1,000,000 ($2015)") +
   scale_x_continuous(breaks = seq(1965, 2015, by = 10), expand = c(0.01, 0.01)) +
-  scale_y_continuous(breaks = seq(y.lim[1], y.lim[2], by = 100), limits = y.lim, expand = c(0.01, 0.01)) +
+  scale_y_continuous(breaks = seq(y.lim[1], y.lim[2], by = 100), limits = y.lim,
+                     expand = c(0.01, 0.01)) +
   theme_ts() +
-  theme(title = element_text(size = 10)) +
-  theme(legend.position="bottom", legend.direction = "horizontal", legend.background = element_rect(fill = "transparent"), legend.title = element_blank(), legend.text = element_blank())
+  theme(title = element_text(size = 10))+
+  theme(legend.position="bottom", legend.direction = "horizontal",
+        legend.background = element_rect(fill = "transparent"), 
+        legend.title = element_blank(), legend.text = element_blank())
 
-gb_bennet <- indicators %>% filter(EPU == "GB" & Var %in% c("Volume","Price")) %>% 
+gb_bennet <- indicators %>% 
+  filter(EPU == "GB", 
+         stringr::str_detect(Var, pattern="Benthos")) %>% 
 ggplot()+
   
   #Highlight last ten years
@@ -337,40 +360,41 @@ ggplot()+
   
   geom_bar(aes(x=Time, y= Value, fill = Var), stat="identity")+
   scale_fill_manual(name = "Indicators", values = ind_fill) +
-  geom_line(data = revchange[revchange$EPU == "GB",], aes(x = Time, y = Value, colour="$"))+
-  scale_colour_grey(name ="Total Revenue Change") +
+  geom_line(data = revchange.gb, 
+            aes(x = Time, y = revchange.line, colour = "$"))+
+  scale_colour_grey(name ="Revenue Change") +
   ggtitle("Georges Bank Benthos Component")+
   labs(y="") +
   scale_x_continuous(breaks = seq(1965, 2015, by = 10), expand = c(0.01, 0.01)) +
   scale_y_continuous(breaks = seq(y.lim[1], y.lim[2], by = 100), limits = y.lim, expand = c(0.01, 0.01)) +
   theme_ts() +
   theme(title = element_text(size = 10)) +
-  theme(legend.position="bottom", legend.direction = "horizontal", legend.background = element_rect(fill = "transparent"), legend.title = element_text(size = 8), legend.text = element_text(size = 8)) +
+  theme(legend.position="bottom", legend.direction = "horizontal",
+        legend.background = element_rect(fill = "transparent"), 
+        legend.title = element_text(size = 8), 
+        legend.text = element_text(size = 8)) +
   guides(color = guide_legend(order = 1),
          fill = guide_legend(order = 0))
 
-#cowplot::plot_grid(gom_bennet, gb_bennet, ncol = 2, rel_widths = c(1,1))
+#cowplot::plot_grid(gom_bennet, gb_bennet, ncol = 2, rel_widths = c(0.7,1))
 
-#extract legend
-#https://github.com/hadley/ggplot2/wiki/Share-a-legend-between-two-ggplot2-graphs
 g_legend<-function(a.gplot){
   tmp <- ggplot_gtable(ggplot_build(a.gplot))
   leg <- which(sapply(tmp$grobs, function(x) x$name) == "guide-box")
   legend <- tmp$grobs[[leg]]
   return(legend)}
-
 mylegend<-g_legend(gb_bennet)
-
-p3 <- gridExtra::grid.arrange(gridExtra::arrangeGrob(gom_bennet + theme(legend.position="none"),
-                         gb_bennet + theme(legend.position="none"),
+p3 <- gridExtra::grid.arrange(gridExtra::arrangeGrob(gb_bennet + theme(legend.position="none"),
+                         gom_bennet + theme(legend.position="none"),
                          nrow=1),
              mylegend, nrow=2,heights=c(6, 1))
 
 ```
 
-There is a concurrent significant decrease in NEFMC-managed commercial seafood production and landings (Fig. \ref{fig:total-landings-ne}), with Piscivores, Planktivores, and NEFMC-managed Benthivores showing long term negative trends (Fig. \ref{fig:comm-landings-ne}). This trend is a continuation on the reliance on a small number of species, which could induce additional risk in the social system. 
+There is a concurrent significant decrease in NEFMC-managed commercial seafood production and landings (Fig. \ref{fig:total-landings-ne}), with Piscivores, Planktivores, and NEFMC-managed Benthivores showing long term negative trends (Fig. \ref{fig:comm-landings-ne}). The opposite trends of non-NEFMC managed benthivores (increasing) and NEFMC managed benthivores (decreasing) is notable in the GOM (Fig. \ref{fig:comm-landings-ne}). The overall benthivore increase is driven by state-managed fisheries, with highly dependant and thus highly vulnerable ports in Maine relying on lobster. This trend is a continuation on the reliance on a small number of species, which could induce additional risk in the social system. Given the previously highlighted drop in lobster landings to date in the 2019 fishing year, there are likely to be substantial impacts on the horizon, particularly on fishermen in the Gulf of Maine. 
+ 
 
-```{r total-landings-ne, fig.cap = paste0("Total commercial seafood landings (black) shown with NEFMC managed seafood landings (red) in Gulf of Maine (left) and Georges Bank (right)."), fig.width = 8, fig.asp = 0.25}
+```{r total-landings-ne, fig.cap = paste0("Total commercial seafood landings (black) shown with NEFMC managed seafood landings (red) on Georges Bank (left) and in the Gulf of Maine (right)."), fig.width = 8, fig.asp = 0.25}
 #Managed landings
 managed_landings <- ecodata::comdat  %>%
   filter(str_detect(Var, paste0(council_abbr," managed species - Landings weight|JOINT managed species - Landings weight")),
@@ -453,13 +477,12 @@ ggplot()+
     theme_ts() +
   ggtitle("Georges Bank")
 
-cowplot::plot_grid(gom_total, gb_total, ncol = 2)
+cowplot::plot_grid(gb_total, gom_total, ncol = 2)
 
 ```
 
-One notable signal suggesting increased importance of non-NEFMC managed species is the divergence between NEFMC managed and non-NEFMC managed Planktivore landings in last 5 years in the GOM (Fig. \ref{fig:comm-landings-ne}), the result of lower Atlantic herring landings relative to other planktivores. Additionally, the importance of state-managed fisheries continues to increase, with highly dependant and thus highly vulnerable ports in Maine relying on lobster.
 
-```{r comm-landings-ne, warning=F, fig.width = 8, fig.asp = .75,fig.cap = paste0(council_abbr," managed species landings (red) and total commercial landings (black) by feeding guild in Gulf of Maine (left) and Georges Bank (right).")}
+```{r comm-landings-ne, warning=F, fig.width = 8, fig.asp = .75,fig.cap = paste0(council_abbr," managed species landings (red) and total commercial landings (black) by feeding guild on Georges Bank (left) and in the Gulf of Maine (right).")}
 #Get data for plotting
 
 #Managed landings
@@ -581,79 +604,73 @@ gb_landings <- landings %>% filter(EPU == "GB") %>%
   theme(strip.text=element_text(hjust=0)) +
   ggtitle("Georges Bank")
 
-cowplot::plot_grid(gom_landings, gb_landings, ncol = 2)
+cowplot::plot_grid(gb_landings, gom_landings, ncol = 2)
 
 ```
 
 ## Georges Bank
-In contrast with the GOM, GB total landings and revenue have no long term trends for NEFMC-managed species (Fig. \ref{fig:total-landings-ne}). Rather, fluctuations in GB total revenue and in particular benthos landings (Fig. \ref{fig:comm-landings-ne}) may be associated with rotational management for scallops altering effort between the GB and MAB ecological production units. Planktivore landings on GB have increased over the long term, but have returned to the long term average in 2017.  Price and volume components of revenue are both lower since 2015 (slightly down from the long-run average, Fig. \ref{fig:bennet-ne}), driven by generally decreased landings and despite improved Benthivore, Other, and Planktivore prices. Scallop revenue continues to play an oversized role in Georges Bank dynamics.
+In contrast with the GOM, GB total landings and revenue have no long term trends for NEFMC-managed species (Fig. \ref{fig:total-landings-ne}). Rather, fluctuations in GB total revenue and in particular benthos landings (Fig. \ref{fig:comm-landings-ne}) may be associated with rotational management for scallops altering effort between the GB and MAB ecological production units. Benthos landings have declined over the long term on GB, though they have increased since 2015 and include both scallops (NEFMC managed) and clams (MAFMC managed; Fig. \ref{fig:comm-landings-ne}). Planktivore landings on GB have increased over the long term (mainly reflecting Atlantic herring), but have returned to the long term average in 2016-2018. Scallop revenue continues to play an oversized role in Georges Bank dynamics. 2018 revenue was above the long term mean, driven mainly by volume of benthos landings revenue (Fig. \ref{fig:bennet-ne}).
 
 ## New England-wide
-New England social-ecological systems are each reliant on a single crustacean or shellfish species for the majority of commercial fisheries revenue (lobster in GOM, scallop in GB). This reliance likely represents heightened risk to fishing communities, particularly along the coast of Maine and the South Coast in MA in ports which are highly engaged and reliant on commercial fishing (Fig. \ref{fig:NE-comm-reliance-maps-outlined}). This risk is heightened by the moderate to high climate vulnerability of crustaceans and shellfish, which face risks from ocean acidification as well as increased temperature [@hare_vulnerability_2016]. 
+This reliance likely represents heightened risk to fishing communities, particularly along the coast of Maine and the South Coast in MA in ports which are highly engaged and/or reliant on commercial fishing. This risk is heightened by the moderate to high climate vulnerability of crustaceans and shellfish, which face risks from ocean acidification as well as increased temperature [@hare_vulnerability_2016]. The decrease in lobster landings to date in 2019 thus has the potential for substantial impacts on these communities.
 
-```{r NE-comm-reliance-maps-outlined, fig.height = 8, fig.cap = "Commercial engagement (total pounds landed, value landed, commercial permits and commercial dealers in a community) and reliance (per capita engagement) based on 2016 landings and the ACS running average of 2012-2016 census data."}
-# Set lat/lon window for maps
-xmin = -76
-xmax = -66
-ymin = 40
-ymax = 46
-xlims <- c(xmin, xmax)
-ylims <- c(ymin, ymax)
+The trend in the number of New England fishing communities that were moderate to highly engaged (blue, green and red bars) has shown an increase since 2004 (Fig. \ref{fig:NE-comm-eng}). Significant changes in engagement scores have been observed in medium-highly engaged communities. The average engagement score for medium-highly engaged communities decreased from 2004 to 2011, and then has bounced back since 2011. These changes may be driven by the changes in value landed for primary species such as sea scallops and lobsters in this group of communities. 
 
-biv_col <- c("4" = "#ca0020", "3" = "#f4a582", "2" = "grey", "1" = "#92c5de", "0" = "#0571b0")
+```{r NE-comm-eng, message=F, fig.width = 8, fig.asp = 0.4, fig.cap= "Commercial engagement scores (total pounds landed, value landed, commercial permits, and commercial dealers in a community)  for New England fishing communities, 2004-2018."}
 
-eng_rel <- ecodata::eng_rel %>%
-    filter(PRIMARY_LATITUDE > 40) %>% 
-  dplyr::rename(comeng = ComEng_NE16_ct,
-                comrel = ComRel_NE16_ct,
-                receng = RecEng_NE16_ct,
-                recrel = RecRel_NE16_ct,
-                Latitude = PRIMARY_LATITUDE,
-                Longitude = PRIMARY_LONGITUDE,
-                State = STATEABBR) %>% 
-  mutate(comsum = sum(as.numeric(comeng), as.numeric(comrel))) %>% 
-  mutate(comeng = factor(comeng, ordered = TRUE, levels = 1:4),
-         comrel = factor(comrel, ordered = TRUE, levels = 1:4),
-         receng = factor(receng, ordered = TRUE, levels = 1:4),
-         recrel = factor(recrel, ordered = TRUE, levels = 1:4))
+eng<-ecodata::engagement %>% 
+  filter(!Var == "med.high.scores")
+eng$Var <- factor(eng$Var, levels = c("%High","%Medium High","%Moderate", "%Low"))
 
+engbar <- eng %>% filter(EPU == "NE") %>% 
+  ggplot()+
+   #ylim(0.8, NA)+
+  geom_bar(aes(x = Time, y = Value, 
+               fill = Var), 
+           stat = "identity")+
+  #scale_y_continuous(labels = Value(suffix = "%", prefix = "")) +
+  #geom_text(aes(x = Time, y = Value,
+  #             label = paste0(Value,"%")), size=4) +
+  theme(#legend.position="bottom", legend.direction="horizontal",
+        legend.title = element_blank())+
+  coord_cartesian(ylim=c(0.75,1))+
+  xlab("Time") +
+  ylab("% Communities in each category (Low to High)")+
+  ggtitle("Commercial Engagement")+
+  theme_ts()
 
 
-(com <- eng_rel %>% 
-  dplyr::select(comeng, comrel, comsum, Latitude, Longitude) %>% 
-  filter(comeng != 0 &
-         comrel != 0) %>% 
-ggplot() +
-  geom_sf(data = coast, size = map.lwd) +
-  geom_sf(data  = ne_states, size = map.lwd) +
-  coord_sf(crs = crs, xlim = xlims, ylim = ylims) +
-  geom_point(aes(x = Longitude, y = Latitude,
-                 fill = comeng, size = comrel),
-             color = "black",pch = 21) +
-  guides(fill = guide_legend(override.aes = list(size = 5),
-                            reverse = T,
-                            title = "Engagement"),
-         size = guide_legend(reverse = T,
-                            title = "Reliance")) +
-  scale_fill_manual(values = biv_col) +
-  theme_map() +
-  xlab("Longitude") +
-  ylab("Latitude") +
-      theme(legend.position = c(0.8, 0.25), 
-        legend.box = "horizontal",
-        legend.direction = "vertical",
-        legend.key=element_blank(),
-        legend.key.width = unit(0, "cm"))+
-  ggtitle("Commercial Reliance & Engagement"))
+mhtrend <- ecodata::engagement %>% 
+  filter(Var == "med.high.scores", 
+         EPU == "NE") %>% 
+  mutate(hline = mean(Value)) %>% 
+  ggplot()+
+  annotate("rect", fill = shade.fill, alpha = shade.alpha,
+      xmin = x.shade.min , xmax = x.shade.max,
+      ymin = -Inf, ymax = Inf) +
+  geom_line(aes(x = Time, y = Value), size = lwd) +
+  geom_point(aes(x = Time, y = Value), size = pcex) +
+  scale_x_continuous(expand = c(0.01, 0.01)) +
+  ggtitle("Medium-High communities ") +
+  ylab(expression("Average score for Med High communities")) +
+  geom_hline(aes(yintercept = hline),
+           size = hline.size,
+           alpha = hline.alpha,
+           linetype = hline.lty) +
+ theme_ts()
 
-# com + rec + plot_layout(ncol = 2) &
-#   theme(plot.margin = unit(c(0, 0, 0, 0), "cm"))
+cowplot::plot_grid(engbar, 
+                   mhtrend,
+                   ncol = 2, 
+                   align = "h", 
+                   rel_widths = c(1, 0.7)) +
+    theme(plot.margin = unit(c(0.1, 0, 0, 0), "cm"))
 
 ```
 
-Commercial fleet diversity indices were updated with 2017 data. Current diversity remains near the long term average. 
+Commercial fleet diversity indices were updated with 2018 data and remain near the long term average^[hhttps://noaa-edab.github.io/ecodata/human_dimensions#new_england].
 
-In contrast to commercial species specialization, indicators highlight an increasing diversity of recreational species caught in New England (Fig. \ref{fig:rec-div}), although recreational fleet effort diversity has not changed over the long term. 
+Similar to commercial fisheries, indicators show no significant trends in diversity of recreational species caught in New England, and recreational fleet effort diversity has not changed over the long term (Fig. \ref{fig:rec-div}). 
 
 ```{r rec-div, fig.width = 4, fig.asp = 0.8, fig.cap = paste0("Recreational effort diversity and diversity of recreational catch in the ",region,".")}
 
@@ -742,7 +759,7 @@ cowplot::plot_grid(#rec_effort,
 
 ```
 
-Recreational seafood production shows an increasing trend since the mid-1990s with the updated Marine Recreational Information Program (MRIP) data (Fig. \ref{fig:rec-landings-ne})). 
+Recreational seafood production decreased in 2018 to the lowest level since 1996, with the drop primarily driven by decreases in Atlantic mackerel, striped bass, haddock, bluefish, and cod kept fish (Fig. \ref{fig:rec-landings-ne})). 
 
 ```{r rec-landings-ne, fig.cap = paste0("Total recreational seafood harvest in ",region,"."), fig.width = 4, fig.asp = 0.45}
 
@@ -781,9 +798,9 @@ ggplot(data = landings_rec)+
 
 ```
 
-Updated indicators for recreational opportunities (effort days and number of anglers) show general increases since the 1990s, peaking in the late 2000s and declining since then. This is similar to previously reported trends (Fig. \ref{fig:rec-op}). All recreational indicators have been updated with new MRIP data, and indicators for recreational diversity are new for this report. 
+Updated indicators for recreational opportunities (effort days and number of anglers) show general increases since the 1990s, peaking in the early 2010s and declining since then. This is similar to previously reported trends (Fig. \ref{fig:rec-op}). 
 
-```{r rec-op, fig.width = 4, fig.asp = 0.8, fig.cap = paste0("Recreational effort and number of recreational anglers in the ",region,".")}
+```{r rec-op, fig.width = 4, fig.asp = 0.45, fig.cap = paste0("Recreational effort and number of recreational anglers in the ",region,".")}
 recdat <- ecodata::recdat %>% 
   filter(EPU == "NE") %>% 
   group_by(Var) %>% 
@@ -877,7 +894,7 @@ rec_anglers <- recdat %>%
 
 cowplot::plot_grid(rec_effort, 
                    #rec_div, 
-                   rec_anglers, 
+                   #rec_anglers, 
                    #rec_div_catch,
                    ncol = 1, 
                    align = "hv") +
@@ -885,37 +902,112 @@ cowplot::plot_grid(rec_effort,
 
 ```
 
-Recreational fishing is important to many New England communities, particularly in Southern New England (MA, RI, CT; Fig. \ref{fig:NE-rec-engage}). Communities that are most socially and economically dependent (both engaged and reliant) on recreational fishing may benefit from the increased diversity of recreational species catch. Additional social indicators for New England communities are available online^[https://www.st.nmfs.noaa.gov/humandimensions/social-indicators/]. 
+Additional social indicators for New England communities are available online^[https://www.st.nmfs.noaa.gov/humandimensions/social-indicators/]. 
 
-```{r NE-rec-engage, fig.height = 8, fig.cap = "Recreational engagement (shore, private vessel and for-hire recreational fishing in a community) and reliance (per capita engagement) based on 2016 landings and the ACS running average of 2012-2016 census data."}
-(rec <- 
-  eng_rel %>% 
-  dplyr::select(receng, recrel, Latitude, Longitude) %>% 
-  filter(receng != 0,
-         recrel != 0) %>% 
-ggplot() +
-  geom_sf(data = coast, size = map.lwd) +
-  geom_sf(data  = ne_states, size = map.lwd) +
-  coord_sf(crs = crs, xlim = xlims, ylim = ylims) +
-  geom_point(aes(x = Longitude, y = Latitude,
-                 fill = receng, size = recrel),
-             color = "black",pch = 21) +
-  guides(fill = guide_legend(override.aes = list(size = 5),
-                            reverse = T,
-                            title = "Engagement"),
-         size = guide_legend(reverse = T,
-                            title = "Reliance")) +
-  scale_fill_manual(values = biv_col) +
-  theme_map() +
-  xlab("Longitude") +
-  ylab("Latitude") +
-  theme(legend.position = c(0.8, 0.25), 
-        legend.box = "horizontal",
-        legend.direction = "vertical",
-        legend.key=element_blank(),
-        legend.key.width = unit(0, "cm"))+
-  ggtitle("Recreational Reliance & Engagement"))
+## Fish habitat overlap with offshore wind lease areas  (coastwide) 
+
+Habitat modeling [@friedland_changes_2020] indicates that Atlantic herring, little skate, winter skate, windowpane, and winter flounder are among fish species highly likely to occupy wind energy lease areas (Fig. \ref{fig:wind-hab}). Habitat conditions for all but Atlantic herring have become more favorable over time within wind lease areas (increasing trend in probability of occupancy). Table \ref{tab:wind-habitat-table} lists the top 5 species in each season most likely to occupy the wind lease areas in the northern, central, and southern portions of the Mid-Atlantic Bight, along with observed trends in probability of occupancy.
+
+```{r wind-habitat-table, eval = T, echo = F, fig.cap='', out.width='80%'}
+wind1 <- ecodata::wind_occupancy
+
+wind1$trend<- ifelse(wind1$Trend == "pos", 
+                    "$\\nearrow$",
+                    ifelse(wind1$Trend == "neg",
+                    "$\\searrow$", 
+                    " ")) 
+
+
+wind2<-wind1 %>% dplyr::select(Area, Season, Species, trend)
+names<-c("Area", "Season", "Species", "trend")
+bnew<-c("Area.1", "Season.1", "Species.1", "trend.1")
+cnew<-c("Area.2", "Season.2", "Species.2", "trend.2")
+dnew<-c("Area.3", "Season.3", "Species.3", "trend.3")
+enew<-c("Area.4", "Season.4", "Species.4", "trend.4")
+
+a<-wind2 %>% filter(Area == "Existing-North") 
+b<-wind2 %>% filter(Area == "Proposed-North") %>% 
+  dplyr::rename_at(vars(names), ~ bnew)
+c<-wind2 %>% filter(Area == "Existing-Mid")%>% 
+  dplyr::rename_at(vars(names), ~ cnew)
+d<-wind2 %>% filter(Area == "Proposed-Mid")%>% 
+  dplyr::rename_at(vars(names), ~ dnew)
+e<-wind2 %>% filter(Area == "Existing-South")%>% 
+  dplyr::rename_at(vars(names), ~ enew)
+
+all<- a %>% cbind(b,c,d,e) %>% 
+  dplyr::select(2:4,7:8,11:12,15:16,19:20) #%>% 
+  # rename(Trend = trend, 
+  #        Species = Species.1, 
+  #        Trend = trend.1, 
+  #        Species = Species.2, 
+  #        Trend = trend.2, 
+  #        Species = Species.3, 
+  #        Trend = trend.3, 
+  #        Species = Species.4, 
+  #        Trend = trend.4 )
+  
+kable(all, escape = FALSE,
+      col.names = c("Season", "Species", "Trend", "Species", "Trend", "Species","Trend", "Species","Trend", "Species", "Trend"),
+      caption = "Species with highest probability of occupancy species each season and area, with observed trends",
+      #align = 'c',
+      booktabs = T) %>%
+    add_header_above(c(" " = 1, "Existing - North" = 2, "Proposed - North" = 2, 
+                     "Existing - Mid" = 2, "Proposed - Mid" = 2, 
+                     "Existing - South" = 2)) %>%
+  kable_styling(latex_options = c("hold_position", "scale_down")) 
+
 ```
+
+
+```{r wind-hab, eval = T, echo = F, fig.cap="Map of BOEM existing (black) and proposed (red) lease areas as of February 2019.", message=FALSE, results=FALSE}
+library(rnaturalearthhires)
+library(sf)
+library(raster)
+library(ggspatial)
+library(marmap)
+
+crs <- "+proj=longlat +lat_1=35 +lat_2=45 +lat_0=40 +lon_0=-77 +x_0=0 +y_0=0 +datum=NAD83 +no_defs +ellps=GRS80 +towgs84=0,0,0"
+#gis.dir <- here::here("data-raw/gis")
+nesbath <- fortify.bathy(getNOAA.bathy(lon1 = -77, lon2 = -65, lat1 = 35, lat2 = 45,
+              resolution = 5))
+
+lease_s<-st_read(file.path(gis.dir, 'BOEM lease areas/ne_existing_leasesSPoly.shp'))
+lease_n<-st_read(file.path(gis.dir, 'BOEM lease areas/ne_existing_leasesNPoly.shp'))
+lease_m<-st_read(file.path(gis.dir, 'BOEM lease areas/ne_existing_leasesMPoly.shp'))
+prop_n<-st_read(file.path(gis.dir, 'BOEM lease areas/ne_proposed_leases_NPoly.shp'))
+prop_m<-st_read(file.path(gis.dir, 'BOEM lease areas/ne_proposed_leases_MPoly.shp'))
+
+invisible(st_crs(lease_s)<-crs)
+invisible(st_crs(lease_n)<-crs)
+invisible(st_crs(lease_m)<-crs)
+invisible(st_crs(prop_n)<-crs)
+invisible(st_crs(prop_m)<-crs)
+
+ggplot() +
+  geom_raster(data = nesbath, aes(x=x,y=y, fill = z)) +
+  scale_fill_gradientn(colors =c("lightcyan","lightblue4"))+
+  geom_sf(data = coast, size = map.lwd) +
+  geom_sf(data = epu_sf, fill = "transparent", size = map.lwd) +
+  geom_sf(data = lease_s, size = map.lwd, color = "black")+
+  geom_sf(data = lease_n, size = map.lwd, color = "black")+
+  geom_sf(data = lease_m, size = map.lwd, color = "black")+
+  geom_sf(data = prop_n, size = map.lwd, color = "red3")+
+  geom_sf(data = prop_m, size = map.lwd, color = "red3")+
+  coord_sf(crs = crs, xlim = c(-77, -69), ylim = c(36,42))+
+  geom_segment(aes(x = -74.6, y = 37.4, xend =-75.4, yend =38), colour = "blue4")+
+  geom_segment(aes(x = -71.1, y = 40.2, xend =-71.6, yend =41.1), colour = "blue4")+
+  annotate("text", x = -74.9, y = 37, label = "S")+
+  annotate("text", x = -73.5, y = 38.7, label = "M")+
+  annotate("text", x = -70.5, y = 40.2, label = "N")+
+  annotation_scale(location = "br", width_hint = 0.4) +
+  theme_bw( ) +
+  ylab("")+
+  xlab("")+
+  theme(legend.position = "none") +
+  ggtitle("BOEM lease areas")
+
+``` 
 
 \newpage
 
