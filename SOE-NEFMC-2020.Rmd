@@ -2821,14 +2821,7 @@ gb.hw
 ```
 
 ## Primary production (GOM and GB)
-Phytoplankton primary production is a function of biomass, light, and temperature, and sets the overall level of potential fish and fishery productivity in an ecosystem (Fig. \ref{fig:prod-potential}). 
-
-```{r prod-potential, fig.cap = "Simplified representation of the pathways linking primary production and environmental driver throughout a fishery ecosystem. The important societal benefits that derive from sustainable fisheries depend directly on a sequence of events starting at the base of the food web. The production of fish and shellfish available for harvest by the fisheries follows pathways of energy flow from phytoplankton and zooplankton to different parts of the food web. The production at each component further depends on the effect of a host of environmental drivers including temperature, salinity, and other factors.", out.width='\\linewidth'}
-
-knitr::include_graphics(file.path(image.dir, "SOE_Network_Diagram.png"))
-```
-
-There is a trend of increasing primary production in both New England systems, primarily driven by increased summer production, which is due to warmer temperatures and increased bacterial remineralization and nutrient recycling (Fig. \ref{fig:NE-PP-OCCI}). This increased productivity is most likely from smaller-celled species that contribute less to fish production compared to larger phytoplankton. The 2018 winter-spring phytoplankton bloom, comprised primarily of larger diatoms, was above average in both the GOM and GB, however the timing in the GB was earlier than normal (Fig. \ref{fig:NE-chl-weekly}). Summer biomass was below average throughout most of the region, while the fall bloom was below average nearshore in the GOM and slightly above average offshore and in parts of GB.
+Phytoplankton primary production is a function of biomass, light, and temperature, and sets the overall level of potential fish and fishery productivity in an ecosystem. There is a trend of increasing primary production in both New England systems, primarily driven by increased summer production, which is due to warmer temperatures and increased bacterial remineralization and nutrient recycling (Fig. \ref{fig:NE-PP-OCCI}). This increased productivity is most likely from smaller-celled species that contribute less to fish production compared to larger phytoplankton. The 2019 winter-spring phytoplankton bloom, comprised primarily of larger diatoms, was average in both the GOM and GB, however the timing in the GOM was later than normal (Fig. \ref{fig:NE-chl-weekly}). The spring bloom period was below average for both GOM and GB, while the fall bloom was near average for both regions, but varied spatially (Fig. \ref{fig:NE-chl-map}).
 
 ```{r NE-PP-OCCI, fig.width=8, fig.height = 8, fig.cap = "Monthly primary production trends show the annual cycle (i.e. the peak during the summer months) and the changes over time for each month."}
 out_pp <- ecodata::chl_pp %>% 
@@ -2848,8 +2841,8 @@ pp_cci_gom <- out_pp %>%
    # geom_gls(aes(x = Year, y = Value, group = Month))+
     geom_point(aes(x = Year, y = Value, group = Month)) +
     geom_line(aes(x = Year, y = Value, group = Month)) +
-    scale_x_discrete(name = "Time", breaks = seq(min(out_pp$Year),max(out_pp$Year),10)) +  
-    facet_wrap(Month~., ncol = 6) +
+    scale_x_discrete(name = "", breaks = seq(min(out_pp$Year),max(out_pp$Year),10)) +  
+    facet_wrap(Month~., ncol = 12) +
     ggtitle("GOM Monthly median PPD") +
     ylab(expression("PP (gC m"^-2*" d"^-1*")")) +
         geom_hline(aes(yintercept = hline,
@@ -2868,8 +2861,8 @@ pp_cci_gom <- out_pp %>%
    # geom_gls(aes(x = Year, y = Value, group = Month))+
     geom_point(aes(x = Year, y = Value, group = Month)) +
     geom_line(aes(x = Year, y = Value, group = Month)) +
-    scale_x_discrete(name = "Time", breaks = seq(min(out_pp$Year),max(out_pp$Year),10)) +  
-    facet_wrap(Month~., ncol = 6) +
+    scale_x_discrete(name = "", breaks = seq(min(out_pp$Year),max(out_pp$Year),10)) +  
+    facet_wrap(Month~., ncol = 12) +
     ggtitle("GB Monthly median PPD") +
     ylab(expression("PP (gC m"^-2*" d"^-1*")")) +
         geom_hline(aes(yintercept = hline,
@@ -2882,12 +2875,12 @@ pp_cci_gom <- out_pp %>%
           panel.spacing = unit(1, "lines"),
           plot.margin = unit(c(0.1, 0, 0, 0), "cm"))
  
- pp_cci_gom + pp_cci_gb + plot_layout(ncol = 1)
+ pp_cci_gb + pp_cci_gom + plot_layout(ncol = 1)
 ```
 
-```{r NE-chl-weekly, fig.width = 8, fig.asp = 0.25, fig.cap = "Weekly chlorophyll concentrations and primary productivity for 2018 in Gulf of Maine and Georges Bank are shown by the colored lines in the above figures. The long-term mean is shown in black and shading indicates +/- 1 sample SD."}
+```{r NE-chl-weekly, fig.width = 8, fig.asp = 0.35, fig.cap = "Weekly chlorophyll concentrations and primary productivity for 2018 in Gulf of Maine and Georges Bank are shown by the colored lines in the above figures. The long-term mean is shown in black and shading indicates +/- 1 sample SD."}
 
-interp_chl_pp <- function(epu, year = 2018, Variable){
+interp_chl_pp <- function(epu, year = 2019, Variable){
   out <- ecodata::chl_pp %>% 
     filter(str_detect(Var,Variable),
            EPU == epu) %>% 
@@ -2915,16 +2908,20 @@ interp_chl_pp <- function(epu, year = 2018, Variable){
   return(ltm_out)
 }
 
-GB_chl_weekly <- interp_chl_pp(epu = "GB", year = 2018,Variable = "WEEKLY_CHLOR_A_MEDIAN")
+GB_chl_weekly <- interp_chl_pp(epu = "GB", year = 2019,Variable = "WEEKLY_CHLOR_A_MEDIAN")
+GOM_chl_weekly <- interp_chl_pp(epu = "GOM", year = 2019,Variable = "WEEKLY_CHLOR_A_MEDIAN")
+ne_chl_weekly<-rbind(GB_chl_weekly, GOM_chl_weekly)
 
-GB_chl <- ggplot(data = GB_chl_weekly) +
+ne_chl <- ggplot(data = ne_chl_weekly) +
   geom_line(aes(x = Time, y = LTM)) +
   geom_ribbon(aes(x = Time, ymin = pmax(sd.low,0), ymax = sd.high), 
               alpha = 0.1,
               fill = "grey1") +
   geom_line(aes(x = Time, y = Value),
             size = 1,color = "#33a02c") +
-  ggtitle(expression("GB chlorophyll"~italic(a)~"")) +
+  ggtitle(expression("Chlorophyll"~italic(a)~"")) +
+  ylim(c(0, 3))+
+  facet_wrap(EPU~., ncol = 2)+
   guides(color = F) +
   xlab("")+
   ylab("") +
@@ -2935,36 +2932,20 @@ GB_chl <- ggplot(data = GB_chl_weekly) +
   theme_ts()
 
 
-GOM_chl_weekly <- interp_chl_pp(epu = "GOM", year = 2018,Variable = "WEEKLY_CHLOR_A_MEDIAN")
+GB_ppd_weekly <- interp_chl_pp(epu = "GB",  year = 2019,Variable = "WEEKLY_PPD_MEDIAN")
+GOM_ppd_weekly <- interp_chl_pp(epu = "GOM",  year = 2019,Variable = "WEEKLY_PPD_MEDIAN")
+ne_ppd_weekly<-rbind(GB_ppd_weekly, GOM_ppd_weekly)
 
-GOM_chl <- ggplot(data = GOM_chl_weekly) +
-  geom_line(aes(x = Time, y = LTM)) +
-  geom_ribbon(aes(x = Time, ymin = sd.low, ymax = sd.high), 
-              alpha = 0.1,
-              fill = "grey1") +
-  geom_line(aes(x = Time, y = Value),
-            size = 1,color = "#33a02c") +
-  ggtitle(expression("GOM chlorophyll"~italic(a)~"")) +
-  guides(color = F) +
-  xlab("")+
-  ylab(expression("CHL (mg m"^-3*")")) +
-  scale_x_continuous(breaks = seq(1,52,10),
-                   labels = c("Jan.","Mar.","May","July","Oct.","Dec."),
-                   expand = c(0.01,0.01)) +
-  scale_color_manual(values = c("#ef8a62","#2c7fb8","#a1d99b"))+
-  theme_ts()
-
-GB_ppd_weekly <- interp_chl_pp(epu = "GB",  year = 2018,Variable = "WEEKLY_PPD_MEDIAN")
-
-GB_ppd <- ggplot(data = GB_ppd_weekly) +
+ne_ppd <- ggplot(data = ne_ppd_weekly) +
   geom_line(aes(x = Time, y = LTM)) +
   geom_ribbon(aes(x = Time, ymin = pmax(sd.low,0), ymax = sd.high), 
               alpha = 0.1,
               fill = "grey1") +
   geom_line(aes(x = Time, y = Value),
             size = 1,color = "#33a02c") +
-  ggtitle(expression("GB primary production")) +
+  ggtitle(expression("Primary production")) +
   guides(color = F) +
+  facet_wrap(EPU~., ncol = 2)+
   xlab("")+
   ylab("") +
   scale_x_continuous(breaks = seq(1,52,10),
@@ -2973,31 +2954,16 @@ GB_ppd <- ggplot(data = GB_ppd_weekly) +
   scale_color_manual(values = c("#ef8a62","#2c7fb8","#a1d99b"))+
   theme_ts()
 
+ne_ppd
+ne_chl
 
-GOM_ppd_weekly <- interp_chl_pp(epu = "GOM",  year = 2018,Variable = "WEEKLY_PPD_MEDIAN")
-
-GOM_ppd <- ggplot(data = GOM_ppd_weekly) +
-  geom_line(aes(x = Time, y = LTM)) +
-  geom_ribbon(aes(x = Time, ymin = sd.low, ymax = sd.high), 
-              alpha = 0.1,
-              fill = "grey1") +
-  geom_line(aes(x = Time, y = Value),
-            size = 1,color = "#33a02c") +
-  guides(color = F) +
-  xlab("")+
-  ggtitle(expression("GOM primary production")) +
-  scale_x_continuous(breaks = seq(1,52,10),
-                   labels = c("Jan.","Mar.","May","July","Oct.","Dec."),
-                   expand = c(0.01,0.01)) +
-  ylab((expression("PP (gC m"^-2*" d"^-1*")"))) +
-  scale_color_manual(values = c("#ef8a62","#2c7fb8","#a1d99b"))+
-  theme_ts()
-
-
-#GOM_chl + GB_chl + GOM_ppd + GB_ppd + plot_layout(ncol = 2) & theme(plot.margin = margin(r = 0.5))
-GOM_chl + GB_chl + plot_layout(ncol = 2) & theme(plot.margin = margin(r = 0.5))
 ```
 
+```{r NE-chl-map, eval= T, echo = F, out.width = "80%", fig.cap="Seasonal chlorophyll a anomalies in 2019."}
+
+knitr::include_graphics(file.path(image.dir,"CHL_SEASONAL_ANOMS_2019.png"))
+
+```
 
 ## Zooplankton (GOM and GB)
 The most abundant zooplankton species in the GOM are *Calanus finmarchicus* (an important prey for larval fish and the north Atlantic right whale),  *Centropages typicus*, and *Psuedocalanus* spp. [@morse_distinct_2017].  *Calanus finmarchicus* had low overall abundance in the GOM from 2009-2014, with higher than normal abundance in 2015-2016 and a return to normal levels in 2017 (Fig. \ref{fig:NE-zoo-abund}). On GB, *Calanus finmarchicus* annual abundance has been low continually since 2009. *Centropages typicus* has had higher than normal abundance from 2012-2017 on both GB and GOM. *Pseudocalanus* abundance trends were similar to *Calanus* in recent years, with low abundance from 2001-2014 in the GOM and higher than normal 2015-2016, but normal abundance in 2017. On GB, *Pseudocalanus* abundance has a significant long term decline (Fig. \ref{fig:NE-zoo-abund}) with an increase to the long term mean in 2016-2017.
