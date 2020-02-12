@@ -169,7 +169,6 @@ Primary production required has declined over the past 20 years (Fig. \ref{fig:p
 
 ```{r ppr-ne, fig.cap="Primary production required to support the commercial landings on Georges Bank (left) and in the Gulf of Maine (right). Included are the top species accounting for 80\\% of the landings in each year, with 15\\% transfer efficiency assumed between trophic levels.", fig.width = 8, fig.asp = 0.25}
 
-
 ecodata::ppr %>% 
   group_by(EPU) %>% 
   mutate(hline = mean(Value)) %>% 
@@ -190,7 +189,7 @@ ecodata::ppr %>%
                labeller(EPU = c(GB = "Georges Bank", 
                                 GOM = "Gulf of Maine")))+
   ggtitle("Primary Production Required")+
-  ylab("Proportion of Total Primary Production")+
+  ylab("Proportion of Total PPD")+
   theme_ts()
 ```
 
@@ -648,6 +647,7 @@ mhtrend <- ecodata::engagement %>%
   geom_line(aes(x = Time, y = Value), size = lwd) +
   geom_point(aes(x = Time, y = Value), size = pcex) +
   scale_x_continuous(expand = c(0.01, 0.01)) +
+  expand_limits(y=0) +
   ggtitle("Medium-High communities ") +
   ylab(expression("Average score for Med High communities")) +
   geom_hline(aes(yintercept = hline),
@@ -2275,7 +2275,7 @@ plot_stackbarcpts_single <- function(YEAR, var2bar,
 
 ```
  
-```{r GOM-productivity, fig.cap = "Small fish per large fish biomass anomaly in the Gulf of Maine."}
+```{r GOM-productivity, fig.cap = "Small fish per large fish biomass anomaly in the Gulf of Maine.", fig.width = 8, fig.asp = .55}
 
 
 ## GOM
@@ -2298,7 +2298,7 @@ gom
 ```
 
  
-```{r GB-productivity, fig.cap = "Small fish per large fish biomass anomaly in Georges Bank."}
+```{r GB-productivity, fig.cap = "Small fish per large fish biomass anomaly in Georges Bank." ,fig.width = 8, fig.asp = .55}
 
 ## GB
 bar_dat <- ecodata::productivity_anomaly %>% 
@@ -2626,7 +2626,7 @@ Marine heatwaves measure not just temperature, but how long the ecosystem is sub
 
 In 2019, the Gulf of Maine experienced four distinct marine heatwaves in the summer and fall with the strongest event beginning on July 3 and lasting 53 days (Figs. \ref{fig:gom-timesseries-heatwave1}, \ref{fig:gom-heatwave-max}).  Relative to prior years, this marine heatwave ranked 12th on record in terms of maximum intensity (+3.27 °C above average on Aug 1) and 12th on record in terms of cumulative intensity (112 °C-days ) (Fig. \ref{fig:gom-heatwave}).  The strongest heatwaves on record in the Gulf of Maine occurred in the summer of 2010 in terms of maximum intensity (+4.83 °C above average) and in the summer of 2012 in terms of cumulative intensity (630 °C-days). The impacts of the 2012 marine heatwave in the Gulf of Maine have been well documented within the lobster fishery [@mills_fisheries_2013].
 
-```{r gom-timesseries-heatwave1, fig.cap = "Marine heatwave events (red) in the Gulf of Maine occuring in 2019.", eval= T, echo = F}
+```{r gom-timesseries-heatwave1, out.width = "50%", fig.cap = "Marine heatwave events (red) in the Gulf of Maine occuring in 2019.", eval= T, echo = F}
 
 knitr::include_graphics(file.path(image.dir,"GOM_heatwave.jpeg"))
 ```
@@ -2722,7 +2722,7 @@ gom.hw
 
 In 2019, Georges Bank experienced three distinct marine heatwaves in the summer and fall with the strongest event beginning on August 17 and lasting 20 days (Figs. \ref{fig:gb-timesseries-heatwave}, \ref{fig:gb-heatwave-max}). Relative to prior years, this marine heatwave ranked 15th on record in terms of maximum intensity (+3.14 °C above average on Aug 23)  (Fig. \ref{fig:gb-heatwave}).  The strongest heatwaves on record in the Georges Bank occurred in the summer of 2016 in terms of maximum intensity (+4.06 °C above average) and in the winter/spring/summer of 2012 in terms of cumulative intensity (485 °C-days).
 
-```{r gb-timesseries-heatwave, fig.cap="Marine heatwave events (red) on Georges Bank occuring in 2019.", eval= T, echo = F}
+```{r gb-timesseries-heatwave, out.width = "50%", fig.cap="Marine heatwave events (red) on Georges Bank occuring in 2019.", eval= T, echo = F}
 
 knitr::include_graphics(file.path(image.dir,"GB_heatwave.jpeg"))
 ```
