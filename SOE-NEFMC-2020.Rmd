@@ -2361,10 +2361,42 @@ Productivity of harvested fish and protected species, and therefore sustainabili
 Ocean temperatures in coastal and offshore habitats are at or near unprecedented levels, accompanied by alterations in ocean circulation patterns. Observed changes at the base of the food web, including timing of production and plankton community composition, affect productivity of protected and managed species in ways we do not yet fully understand. 
 
 
-## Ocean circulation and surface temperature (coastwide)
-The position of the northern edge of the Gulf Stream has moved to the north since the late 1950s, with an increasing rate since 2009 (Fig. \ref{fig:GSI}). The most northerly positions ever recorded were observed over the most recent 2014-2017 period. A more northerly Gulf Stream position is associated with warmer ocean temperature on the Northeast US shelf [@zhang_role_2007], a higher proportion of Atlantic Temperate Slope Water entering the GOM through the Northeast Channel, and increased sea surface height along the U.S. east coast [@goddard_extreme_2015]. 
+## Oceanographic conditions (coastwide) 
+Globally, 2019 was the 2nd warmest year on record and the last five years have been the warmest in the last 140 years^[https://www.nasa.gov/press-release/nasa-noaa-analyses-reveal-2019-second-warmest-year-on-record]. 
 
-```{r GSI, fig.width = 4, fig.asp = 0.45, fig.cap = "Index representing the north wall of the Gulf Stream. Positive values represent a more northerly Gulf Stream position."}
+Since the 1860’s, the Northeast US shelf sea surface temperature (SST) has exhibited an overall warming trend, with the past decade measuring well above the long term average (and the trendline; \ref{fig:long-term-sst}). Changes in the Gulf Stream, increases in the number of warm core ring formations and anomalous onshore intrusions of warm salt water are affecting the coastal ocean dynamics with important implications for commercial fisheries (@gawarkiewicz_changing_2018).
+
+```{r long-term-sst, fig.width = 8, fig.asp = 0.25, fig.cap = "Average annual sea surface temperature (SST) over the Northeast US Shelf"}
+lt_sst <- ecodata::long_term_sst %>% 
+  mutate(hline = mean(Value, na.rm = TRUE))
+
+hline <- mean(lt_sst$Value)
+
+lt_sst %>% 
+  ggplot(aes(x = Time, y = Value, group = Var)) +
+  annotate("rect", fill = shade.fill, alpha = shade.alpha,
+      xmin = x.shade.min , xmax = x.shade.max,
+      ymin = -Inf, ymax = Inf) +
+  geom_gls() +
+  geom_line() +
+  geom_point() +
+  geom_hline(aes(yintercept = hline),
+             size = hline.size,
+             alpha = hline.alpha,
+           linetype = hline.lty)+
+  ylab("Temperature (°C)") +
+  xlab(element_blank())+
+  ggtitle("Long-term SST") +
+  scale_x_continuous(expand = c(0.01, 0.01), breaks = seq(1840,2010,10))+
+  theme_facet() +
+  theme(strip.text=element_text(hjust=0,
+                                face = "italic"))
+```
+
+## Gulf Stream and Warm Core Rings
+The Gulf Stream is shifting further northward and becoming more unstable.  Over the last decade, the Gulf Stream Index (GSI) has an increasing trend indicating a northern shift in the Gulf Stream.  In 2018, the GSI was at its most northerly position recorded since the year 1995 (Fig. \ref{fig:GSI}). A more northerly Gulf Stream position is associated with warmer ocean temperature on the Northeast US shelf [@zhang_role_2007], a higher proportion of Atlantic Temperate Slope Water in the Northeast Channel, and increased sea surface height along the U.S. east coast [@goddard_extreme_2015]. 
+
+```{r GSI, fig.width = 4, fig.asp = 0.45, fig.cap = "Index representing changes in the location of the Gulf Stream north wall. Positive values represent a more northerly Gulf Stream position."}
 gsi %>% 
   mutate(Year = floor(Time)) %>% 
   group_by(Year) %>% 
@@ -2379,6 +2411,7 @@ gsi %>%
   geom_line() +
   geom_point() +
   ylab("Gulf Stream position anomaly") +
+  xlab(element_blank())+
   ggtitle("Gulf Stream Index") +
     scale_x_continuous(expand = c(0.01, 0.01))+
       geom_hline(aes(yintercept = hline),
@@ -2390,36 +2423,39 @@ gsi %>%
                                 face = "italic"))
 ```
 
+Concurrently, large amplitude Gulf Stream meanders are forming more frequently further west [@andres_recent_2016]. There has also been a regime shift since 2000 after which there has been a significant increase in the number of warm core rings formed each year (Fig \ref{fig:warm-core-rings}; @gangopadhyay_observed_2019. The greater number of warm core rings increases the probability of intrusions of warm/salty Gulf Stream water onto the continental shelf as well as the rate at which the geographical centroid of marine species moves to the north [@gangopadhyay_observed_2019].
 
-Globally, 2018 was the 4th warmest year on record and the last four years were the warmest on record. Since the 1860'??s, the Northeast US shelf sea surface temperature (SST) has exhibited an overall warming trend, with the past decade measuring well above the long term average (and the trendline; Fig. \ref{fig:long-term-sst}).
+```{r warm-core-rings, fig.width = 4, fig.asp = 0.45, fig.cap= "Interannual Variability of the WCR formation between 1980 and 2019. The regime shift (denoted by the split in the red solid line) is significant at the turn of the century.  Figure reproduced with permission from Gangopadhyay, et al. (2019).  2018 and 2019 data points based on personal communication with A. Gangopadhyay (2020)."}
+upper.line<-ecodata::wcr %>%
+  filter(Time>2000) %>% 
+  mutate(hline = c(mean(Value)))
+lower.line<-ecodata::wcr%>%
+  filter(Time<2000) %>% 
+  mutate(hline = c(mean(Value)))
+wcr<- upper.line %>% 
+  rbind(lower.line)
 
-```{r long-term-sst, fig.width = 8, fig.asp = 0.25, fig.cap = "Average annual sea surface temperature (SST) over the Northeast US Shelf"}
-lt_sst <- ecodata::long_term_sst %>% 
-  mutate(hline = mean(Value))
-
-lt_sst %>% 
-  ggplot(aes(x = Time, y = Value, group = Var)) +
-         annotate("rect", fill = shade.fill, alpha = shade.alpha,
+wcr %>% 
+  ggplot(aes(x = Time, y = Value))+
+  geom_point()+
+  geom_line()+
+  annotate("rect", fill = shade.fill, alpha = shade.alpha,
       xmin = x.shade.min , xmax = x.shade.max,
       ymin = -Inf, ymax = Inf) +
-  geom_gls() +
-  geom_line() +
-  geom_point() +
-  ylab("Temperature (°C)") +
-  ggtitle("Long-term SST") +
-    scale_x_continuous(expand = c(0.01, 0.01), breaks = seq(1840,2010,20))+
-      geom_hline(aes(yintercept = hline),
-           size = hline.size,
-           alpha = hline.alpha,
-           linetype = hline.lty)+
-  theme_facet() +
-  theme(strip.text=element_text(hjust=0,
-                                face = "italic"))
+  ylab("Warm Core Ring Births")+
+  xlab(element_blank())+
+  ggtitle("Warm Core Rings")+
+  theme_ts()+
+  geom_segment(data = upper.line, aes(x = min(Time), y = hline, 
+                                      xend = max(Time), yend = hline, color = "segment") )+
+  geom_segment(data = lower.line, aes(x = min(Time), y = hline, 
+                                      xend = max(Time), yend = hline, color = "segment") )+
+  theme(legend.position = "none")
 ```
 
-
-## Ocean circulation and temperature (GOM and GB)
-The changing position of the Gulf Stream north wall described above directly influences oceanic conditions in the GOM.  Since the mid-2000'??s, the warmer, saltier shelf slope water associated with the Gulf Stream has dominated the input into the GOM at the Northeast Channel, with 2017 having 99% warm slope water (Fig. \ref{fig:wsw-prop}), the highest estimated in the time series. The changing proportions of source water affect the temperature, salinity and nutrient inputs to the system. 
+## Gulf of Maine Sourcewater 
+The changing position of the Gulf Stream north wall described above directly influences oceanic conditions in the GOM. Since the mid-2000’s, warmer, saltier  slope water associated with the Gulf Stream has dominated the input into the GOM at the Northeast Channel, with 2017 and 2019 consisting of  99% warm slope water (Fig. \ref{fig:wsw-prop}), the highest estimated in the time series. The changing proportions of source water affect the temperature, salinity, and nutrient inputs to the system. 
+  
 
 ```{r wsw-prop, fig.width=5, fig.asp = 0.45, fig.cap = "Proportion of warm slope water (WSW) and Labrador slope water (LSLW) entering the GOM through the Northeast Channel."}
 
@@ -2427,29 +2463,27 @@ sw.df <- slopewater %>%
   mutate(Var, Var = plyr::mapvalues(Var, from = c("WSW proportion ne channel",
                                                   "LSLW proportion ne channel"),
                                     to = c("WSW","LSLW"))) %>% 
-  dplyr::rename(Origin  = Var) %>% 
-  group_by(Origin) %>% 
+  dplyr::rename(Flavor  = Var) %>% 
+  group_by(Flavor) %>% 
   mutate(hline = mean(Value)) 
 
-sw.df$Origin <- factor(sw.df$Origin, levels = c("WSW","LSLW"))
+sw.df$Origin <- factor(sw.df$Flavor, levels = c("WSW","LSLW"))
 
 ggplot(data = sw.df) +
   geom_line(aes(x = Time, y = Value, color = Origin))+
   geom_point(aes(x = Time, y = Value, color = Origin)) +
   ylab("Percent of Total Slopewater") +
+  xlab(element_blank())+
   ggtitle("Slopewater Proportions in NE Channel")+
-    scale_x_continuous(expand = c(0.01, 0.01))+
-      geom_hline(aes(yintercept = hline,
-                     color = Origin),
-           size = hline.size,
-           alpha = hline.alpha,
+  scale_x_continuous(expand = c(0.01, 0.01))+
+  geom_hline(aes(yintercept = hline, color = Origin),
+           size = hline.size, alpha = hline.alpha,
            linetype = hline.lty)+
-  theme_ts() +
-  theme(strip.text=element_text(hjust=0,
-                                face = "italic"))
+  theme_ts() 
 
 ```
 
+## Ocean temperature, surface and bottom (GOM and GB)
 Concurrently, annual surface and bottom temperatures (Fig. \ref{fig:NE-bot-temp}) in the GOM and GB have trended warmer since the early 1980s, and seasonal surface temperatures have trended warmer in spring, summer, and fall. The 2018 summer sea surface temperatures were the highest on record in the GOM, although temperatures during the other seasons were near or slightly below average (Figs. \ref{fig:NE-SST-anom-series}, \ref{fig:NE-SST-insitu}). 
   
 ```{r NE-bot-temp, fig.width = 8, fig.asp = .25, fig.cap = "GOM and GB annual bottom temperature anomalies."}
