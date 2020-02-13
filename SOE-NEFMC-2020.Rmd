@@ -3052,14 +3052,14 @@ gb_zoo<-zoo_abund %>%
 cowplot::plot_grid(gb_zoo, gom_zoo, nrow = 2)
 ```
 
-Changes in the abundance of the larger *Calanus finmarchicus* are also reflected in the size distribution of the copepods. The small-large copepod index is a measure of the relative size composition of the dominant copepod taxa. During the 1990s and early 2000s, the positive index was driven by high relative abundance of smaller bodied copepods and a lower relative abundance of *Calanus finmarchicus*. This period also corresponds with regime shifts to lower fish recruitment [@perretti_regime_2017]. The current trend in the index suggests an increase in the relative abundance of smaller bodied copepods (Fig. \ref{fig:NE-sli}).
+Fluctuations in primary production over time (Fig. \ref{fig:NE-sli})  may relate to observed patterns in copeopod size structure (Fig. \ref{fig:NE-zoo-abund}). This period also corresponds with regime shifts in fish recruitment [@perretti_regime_2017].
 
-```{r NE-sli, fig.width = 8, fig.asp = 0.45, fig.cap = "GOM and GB small-large zooplankton index and the annual primary production anomaly."}
-sli <- ecodata::zoo_sli_anom %>%
-  filter(EPU %in% c("GOM","GB"),
-         str_detect(Var, "Sm-Lg copepod anom")) %>%
-  mutate(hline = 0)
-sli$EPU <- factor(sli$EPU, levels = c("GOM","GB"))
+```{r NE-sli, fig.width = 8, fig.asp = 0.45, fig.cap = "GOM and GB annual primary production anomaly."}
+# sli <- ecodata::zoo_sli_anom %>%
+#   filter(EPU %in% c("GOM","GB"),
+#          str_detect(Var, "Sm-Lg copepod anom")) %>%
+#   mutate(hline = 0)
+# sli$EPU <- factor(sli$EPU, levels = c("GOM","GB"))
 
 pp_anom <- ecodata::chl_pp %>%
   filter(str_detect(Var, "ANNUAL_PPD_RATIO_ANOMALY"),
@@ -3069,27 +3069,27 @@ pp_anom <- ecodata::chl_pp %>%
          Var = "ANNUAL_PPD_RATIO_ANOMALY")
 pp_anom$EPU <- factor(pp_anom$EPU, levels = c("GOM","GB"))
 
-sli_plt <- sli %>%
-  ggplot(aes(x = Time, y = Value, group = Var)) +
-         annotate("rect", fill = shade.fill, alpha = shade.alpha,
-      xmin = x.shade.min , xmax = x.shade.max,
-      ymin = -Inf, ymax = Inf) +
-  geom_line() +
-  geom_point() +
-  guides(color = F) +
-  facet_wrap(EPU~.,ncol = 2)+
-  xlab("")+
-  ylab("Small-large abundance") +
-  xlab(element_blank())+
-  ggtitle("Small-large copepod abundance") +
-    scale_x_continuous(expand = c(0.01, 0.01), limits = c(1998, 2018))+
-      geom_hline(aes(yintercept = hline,
-                     group = Var),
-           size = hline.size,
-           alpha = hline.alpha,
-           linetype = hline.lty)+
-  theme_facet() +
-  theme(strip.text=element_text(hjust=0))
+# sli_plt <- sli %>%
+#   ggplot(aes(x = Time, y = Value, group = Var)) +
+#          annotate("rect", fill = shade.fill, alpha = shade.alpha,
+#       xmin = x.shade.min , xmax = x.shade.max,
+#       ymin = -Inf, ymax = Inf) +
+#   geom_line() +
+#   geom_point() +
+#   guides(color = F) +
+#   facet_wrap(EPU~.,ncol = 2)+
+#   xlab("")+
+#   ylab("Small-large abundance") +
+#   xlab(element_blank())+
+#   ggtitle("Small-large copepod abundance") +
+#     scale_x_continuous(expand = c(0.01, 0.01), limits = c(1998, 2018))+
+#       geom_hline(aes(yintercept = hline,
+#                      group = Var),
+#            size = hline.size,
+#            alpha = hline.alpha,
+#            linetype = hline.lty)+
+#   theme_facet() +
+#   theme(strip.text=element_text(hjust=0))
 
 pp_anom_plt <- pp_anom %>%
     ggplot(aes(x = Time, y = Value, group = Var)) +
@@ -3113,8 +3113,8 @@ pp_anom_plt <- pp_anom %>%
   theme_facet() +
   theme(strip.text=element_text(hjust=0))
 
-
-sli_plt + pp_anom_plt + plot_layout(ncol = 1) & theme(plot.margin = margin(t = 0))
+pp_anom_plt
+#sli_plt + pp_anom_plt + plot_layout(ncol = 1) & theme(plot.margin = margin(t = 0))
 
 ```
 
