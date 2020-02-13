@@ -2875,7 +2875,7 @@ pp_cci_gom <- out_pp %>%
  pp_cci_gb + pp_cci_gom + plot_layout(ncol = 1)
 ```
 
-```{r NE-chl-weekly, fig.width = 8, fig.asp = 0.35, fig.cap = "Weekly chlorophyll concentrations and primary productivity for 2018 in Gulf of Maine and Georges Bank are shown by the colored lines in the above figures. The long-term mean is shown in black and shading indicates +/- 1 sample SD."}
+```{r NE-chl-weekly, fig.width = 8, fig.asp = 0.7, fig.cap = "Weekly chlorophyll concentrations and primary productivity for 2018 in Gulf of Maine and Georges Bank are shown by the colored lines in the above figures. The long-term mean is shown in black and shading indicates +/- 1 sample SD."}
 
 interp_chl_pp <- function(epu, year = 2019, Variable){
   out <- ecodata::chl_pp %>% 
@@ -2951,8 +2951,7 @@ ne_ppd <- ggplot(data = ne_ppd_weekly) +
   scale_color_manual(values = c("#ef8a62","#2c7fb8","#a1d99b"))+
   theme_ts()
 
-ne_ppd
-ne_chl
+ne_ppd + ne_chl + plot_layout(ncol = 1)
 
 ```
 
@@ -3054,7 +3053,7 @@ cowplot::plot_grid(gb_zoo, gom_zoo, nrow = 2)
 
 Fluctuations in primary production over time (Fig. \ref{fig:NE-sli})  may relate to observed patterns in copeopod size structure (Fig. \ref{fig:NE-zoo-abund}). This period also corresponds with regime shifts in fish recruitment [@perretti_regime_2017].
 
-```{r NE-sli, fig.width = 8, fig.asp = 0.45, fig.cap = "GOM and GB annual primary production anomaly."}
+```{r NE-sli, fig.width = 8, fig.asp = 0.25, fig.cap = "GOM and GB annual primary production anomaly."}
 # sli <- ecodata::zoo_sli_anom %>%
 #   filter(EPU %in% c("GOM","GB"),
 #          str_detect(Var, "Sm-Lg copepod anom")) %>%
@@ -3124,7 +3123,7 @@ Changes in primary productivity, phytoplankton and zooplankton composition and a
 
 **Editors** (NOAA NMFS Northeast Fisheries Science Center, NEFSC): Sarah Gaichas, Kimberly Bastille, Geret DePiper, Kimberly Hyde, Scott Large, Sean Lucey, Chris Orphanides
 
-**Contributors** (NEFSC unless otherwise noted): Patricia Clay, Lisa Colburn, Geret DePiper, Michael Fogarty, Paula Fratantoni, Kevin Friedland, Sarah Gaichas, Avijit Gangopadhyay (School for Marine Science and Technology, University of Massachusetts Dartmouth), James Gartland (Virginia Institute of Marine Science), Glen Gawarkiewicz (Woods Hole Oceanographic Institution), Sean Hardison, Kimberly Hyde, John Kosik, Steve Kress and Don Lyons (National Audubon Society’s Seabird Restoration Program), Young-Oh Kwon and Zhuomin Chen (Woods Hole Oceanographic Institute), Sean Lucey, Chris Melrose, Ryan Morse, Kimberly Murray, Chris Orphanides, Richard Pace, Charles Perretti, Vincent Saba, Laurel Smith, John Walden, Harvey Walsh, Mark Wuenschel. 
+**Contributors** (NEFSC unless otherwise noted): Andy Beet, Patricia Clay, Lisa Colburn, Geret DePiper, Michael Fogarty, Paula Fratantoni, Kevin Friedland, Sarah Gaichas, Robert Gamble, Avijit Gangopadhyay (School for Marine Science and Technology, University of Massachusetts Dartmouth), James Gartland (Virginia Institute of Marine Science), Glen Gawarkiewicz (Woods Hole Oceanographic Institution), Sean Hardison, Kimberly Hyde, John Kosik, Steve Kress and Don Lyons (National Audubon Society’s Seabird Restoration Program), Young-Oh Kwon and Zhuomin Chen (Woods Hole Oceanographic Institute), Sean Lucey, Chris Melrose, Ryan Morse, Kimberly Murray, Chris Orphanides, Richard Pace, Charles Perretti, Vincent Saba, Laurel Smith, John Walden, Harvey Walsh, Mark Wuenschel. 
 
 \newpage 
 
