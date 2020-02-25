@@ -127,6 +127,7 @@ label <- function(variable,value){
   return(facet_names[value])
 }
 ```
+\setcounter{page}{3}
 
 # Report Structure
 
@@ -2450,7 +2451,7 @@ wcr %>%
   theme(legend.position = "none")
 ```
 
-## Gulf of Maine Sourcewater 
+## Gulf Stream Index and Labrador Slope Water interaction 
 The changing position of the Gulf Stream north wall described above directly influences oceanic conditions in the GOM. Since the mid-2000’s, warmer, saltier  slope water associated with the Gulf Stream has dominated the input into the GOM at the Northeast Channel, with 2017 and 2019 consisting of  99% warm slope water (Fig. \ref{fig:wsw-prop}), the highest estimated in the time series. The changing proportions of source water affect the temperature, salinity, and nutrient inputs to the system. 
   
 
@@ -2818,7 +2819,7 @@ gb.hw
 ```
 
 ## Primary production (GOM and GB)
-Phytoplankton primary production is a function of biomass, light, and temperature, and sets the overall level of potential fish and fishery productivity in an ecosystem. There is a trend of increasing primary production in both New England systems, primarily driven by increased summer production, which is due to warmer temperatures and increased bacterial remineralization and nutrient recycling (Fig. \ref{fig:NE-PP-OCCI}). This increased productivity is most likely from smaller-celled species that contribute less to fish production compared to larger phytoplankton. The 2019 winter-spring phytoplankton bloom, comprised primarily of larger diatoms, was average in both the GOM and GB, however the timing in the GOM was later than normal (Fig. \ref{fig:NE-chl-weekly}). The spring bloom period was below average for both GOM and GB, while the fall bloom was near average for both regions, but varied spatially (Fig. \ref{fig:NE-chl-map}).
+Phytoplankton primary production is a function of biomass, light, and temperature, and sets the overall level of potential fish and fishery productivity in an ecosystem. All primary production and chlorophyll estimates presented here are satellite-derived. There is a trend of increasing primary production in both New England systems, primarily driven by increased summer production, which is due to warmer temperatures and increased bacterial remineralization and nutrient recycling (Fig. \ref{fig:NE-PP-OCCI}). This increased productivity is most likely from smaller-celled species that contribute less to fish production compared to larger phytoplankton. The 2019 winter-spring phytoplankton bloom, comprised primarily of larger diatoms, was average in both the GOM and GB, however the timing in the GOM was later than normal (Fig. \ref{fig:NE-chl-weekly}). The spring bloom period was below average for both GOM and GB, while the fall bloom was near average for both regions, but varied spatially (Fig. \ref{fig:NE-chl-map}).
 
 ```{r NE-PP-OCCI, fig.width=8, fig.height = 8, fig.cap = "Monthly primary production trends show the annual cycle (i.e. the peak during the summer months) and the changes over time for each month."}
 out_pp <- ecodata::chl_pp %>% 
