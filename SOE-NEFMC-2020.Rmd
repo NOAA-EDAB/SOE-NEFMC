@@ -2876,7 +2876,7 @@ pp_cci_gom <- out_pp %>%
  pp_cci_gb + pp_cci_gom + plot_layout(ncol = 1)
 ```
 
-```{r NE-chl-weekly, fig.width = 8, fig.asp = 0.7, fig.cap = "Weekly chlorophyll concentrations and primary productivity for 2018 in Gulf of Maine and Georges Bank are shown by the colored lines in the above figures. The long-term mean is shown in black and shading indicates +/- 1 sample SD."}
+```{r NE-chl-weekly, fig.width = 8, fig.asp = 0.7, fig.cap = "Weekly chlorophyll concentrations and primary productivity for 2019 in Gulf of Maine and Georges Bank are shown by the colored lines in the above figures. The long-term mean is shown in black and shading indicates +/- 1 sample SD."}
 
 interp_chl_pp <- function(epu, year = 2019, Variable){
   out <- ecodata::chl_pp %>% 
