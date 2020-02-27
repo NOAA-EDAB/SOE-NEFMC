@@ -1012,12 +1012,12 @@ ggplot() +
 
 Protected species include marine mammals (under the Marine Mammal Protection Act), endangered and threatened species (under the Endangered Species Act), and migratory birds (under the Migratory Bird Treaty Act). In the Northeast US, endangered/threatened species include Atlantic salmon, Atlantic and shortnose sturgeon, all sea turtle species, and 5 baleen whales. Fishery management objectives for protected species generally focus on reducing threats and on habitat conservation/restoration; here we report on the status of these actions as well as indicating the potential for future interactions driven by observed and predicted ecosystem changes in the Northeast US region. Also, a marine mammal climate vulnerability assessment is currently underway and for Atlantic and Gulf of Mexico populations and will be reported on in future versions of this report. 
 
-While Harbor porpoise bycatch continues to be quite low as reported previously, this year saw the continuation of four Unusual Mortality Events (UMEs) for three large whale species and two seal species, with several mortalities attributed to human interactions. Strong evidence exists to suggest that the level of interaction between right whales and the combination of offshore lobster fishery in the US and snow crab fishery in Canada is contributing substantially to the decline of the species.
+While Harbor porpoise bycatch continues to be quite low as reported previously, this year saw the continuation of four Unusual Mortality Events (UMEs) for three large whale species and four seal species, with several mortalities attributed to human interactions. Strong evidence exists to suggest that the level of interaction between right whales and the combination of offshore lobster fishery in the US and snow crab fishery in Canada is contributing substantially to the decline of the species.
 
 ## Whales (coastwide)
 North Atlantic right whales are among the most endangered large whale populations in the world. Changes in right whale trends can have implications for fisheries management where fisheries interact with these whales. Additional management restrictions could have a large impact on fishing times, gears, etc. Although the population increased steadily from 1990 to 2011, it has decreased recently (Fig. \ref{fig:NARW-abundance}). Reduced survival rates of adult females and diverging abundance trends between sexes have also been observed. It is estimated that there are only about 100 reproductive adult females remaining in the population. In 2018 there were no  new calves observed, and a drop in annual calf production roughly mirrors the abundance decline (Fig. \ref{fig:NARW-calf-abundance}), however seven new calves were born in 2019. Right whale distribution has changed since 2010. New research suggests that recent climate driven changes in ocean circulation has resulted in right whale distribution changes driven by increased warm water influx through the Northeast Channel, which has reduced the primary right whale prey (*Calanus finmarchicus*) in the central and eastern portions of the Gulf of Maine.
  
-Three large whale Unusual Mortality Events (UMEs) are ongoing for North Atlantic right whales, humpback whales, and minke whales. In all three cases human interaction appears to have contributed to increased mortalities, although investigations are not complete. Since 2017, 30 right whale mortalities have been documented, 9 in the US and 21 in Canada. During 2019, 9 dead right whales have been documented in Canada and one in the US. Three of these mortalities were determined to have been due to vessel strike while the remainder are undetermined at this time.
+Three large whale Unusual Mortality Events (UMEs) are ongoing for North Atlantic right whales, humpback whales (117 dead to date since January  2016^[https://www.fisheries.noaa.gov/national/marine-life-distress/2016-2020-humpback-whale-unusual-mortality-event-along-atlantic-coast]), and minke whales (80 dead to date since January 2017^[https://www.fisheries.noaa.gov/national/marine-life-distress/2017-2020-minke-whale-unusual-mortality-event-along-atlantic-coast]). In all three cases human interaction appears to have contributed to increased mortalities, although investigations are not complete. Since 2017, 30 right whale mortalities have been documented, 9 in the US and 21 in Canada^[https://www.fisheries.noaa.gov/national/marine-life-distress/2017-2020-north-atlantic-right-whale-unusual-mortality-event]. During 2019, 9 dead right whales have been documented in Canada and one in the US. Three of these mortalities were determined to have been due to vessel strike while the remainder are undetermined at this time.
 
 ```{r NARW-abundance, fig.width = 5, fig.asp = 0.45,fig.cap = "1990-2018 right whale abundance estimates with 95\\% credible intervals. These values represent the estimated number of animals alive sometime during the year referenced and NOT at the end of the year referenced. Three known deaths were recorded in 2018, but these deaths were not reflected in the 2018 estimate because those animals were alive sometime during the year. An additional 10 known deaths occurred in 2019."}
 #hline <- mean(narw[narw$Var == "right whale abundance median",]$Value)
@@ -1073,16 +1073,17 @@ ecodata::narw %>%
   theme_ts()
 ```
 
-
 ## Seals (coastwide)
 The best current abundance estimate of harbor seals (*Phoca vitulina*) is 75,834 (CV = 0.15), based on a survey conducted during the pupping season in 2012. A population survey was conducted in 2018 to provide updated abundance estimates and these data are in the process of being analyzed, as part of a larger trend analysis. Tagging studies of both gray and harbor seals demonstrate long-range movements throughout the Gulf of Maine and mid-Atlantic.
 
-The number of grey seals (*Halichoerus grypus*) in U.S. waters has risen dramatically in the last 2 decades, with few observed in the early 1990s to roughly 24,000 observed in southeastern Massachusetts in 2015. Roughly 30,000 - 40,000 gray seals were estimated in southeastern Massachusetts in 2015, using correction factors applied to seal counts visible in Google Earth imagery. As of 2016, the size of the grey seal population in Canada, which is part of the same stock as the grey seals in the U.S., was estimated to be roughly 425,000, and increasing by 4% a year. In U.S. waters, the number of pupping sites has increased from 1 in 1988 to 9 in 2019. Mean rates of increase in the number of pups born at various times since 1988 at 4 of the more data-rich pupping sites (Muskeget, Monomoy, Seal, and Green Islands) ranged from -0.2% (95%CI: -2.3 - 1.9%) to 26.3% (95%CI: 21.6 - 31.4%). These high rates of increase provide further support that seals from Canada are continually supplementing the breeding population in U.S. waters. Fisheries interactions have also increased over the past 2 decades, with fewer than 10 total estimated grey seal interactions in 1993, to more than 1000 annually in four out of the last 5 years. A UME for both gray and harbor seals was declared in 2018, triggering an investigation into the cause of this event. Tests so far suggest phocine distemper virus as a potential cause, although the investigation is not yet complete. 
+The number of grey seals (*Halichoerus grypus*) in U.S. waters has risen dramatically in the last 2 decades, with few observed in the early 1990s to roughly 24,000 observed in southeastern Massachusetts in 2015. Roughly 30,000 - 40,000 gray seals were estimated in southeastern Massachusetts in 2015, using correction factors applied to seal counts visible in Google Earth imagery. As of 2016, the size of the grey seal population in Canada, which is part of the same stock as the grey seals in the U.S., was estimated to be roughly 425,000, and increasing by 4% a year. In U.S. waters, the number of pupping sites has increased from 1 in 1988 to 9 in 2019. Mean rates of increase in the number of pups born at various times since 1988 at 4 of the more data-rich pupping sites (Muskeget, Monomoy, Seal, and Green Islands) ranged from -0.2% (95%CI: -2.3 - 1.9%) to 26.3% (95%CI: 21.6 - 31.4%). These high rates of increase provide further support that seals from Canada are continually supplementing the breeding population in U.S. waters. Fisheries interactions have also increased over the past 2 decades, with fewer than 10 total estimated grey seal interactions in 1993, to more than 1000 annually in four out of the last 5 years; this is the highest bycatch of any US marine mammal species. 
+
+A UME for both gray and harbor seals was declared in 2018, triggering an investigation into the cause of this event. Tests so far suggest phocine distemper virus as a potential cause, although the investigation is not yet complete. Several cases of phocine distemper in harp (*Pagophilus groenlandicus*) and hooded seals (*Cystophora cristata*) have been identified recently, and these two species have been added to the UME^[https://www.fisheries.noaa.gov/new-england-mid-atlantic/marine-life-distress/2018-2019-pinniped-unusual-mortality-event-along].
 
 Current information suggests that gray seals eat primarily sand lance, hakes and flatfish, and squids, while harbor seals consume a variety of groundfish (hakes, cod, haddock, flatfish), redfish, herring and squids, however much of this information comes from juvenile animals and more research is needed on animals at other life stages. Additional analysis of gray and harbor seal diet is currently underway at the NEFSC using a variety of techniques (analysis of stomach contents, fatty acids, and DNA). This information can eventually be coupled with estimates of population abundance and consumption rates to estimate total biomass removals of fish due to pinniped predation. 
 
 ## Common terns (GOM)
-Seabird breeding colonies in the GOM are monitored and managed to promote recovery of formerly harvested species. Common terns are well-monitored and are considered good nearshore ecosystem indictators due to their wide distribution and generalist diet. Common terns breed on islands throughout the Gulf of Maine, feeding on a wide range of invertebrates and fish including Atlantic herring, juvenile (mainly white) hakes, and sand lance (Fig. \ref{fig:tern-prey}). As surface feeding birds, terns are sensitive to vertical distribution of prey as well as nearshore conditions in general, with a foraging distance of 10-20 km from a nesting colony. 
+Seabird breeding colonies in the GOM are monitored and managed to promote recovery of formerly harvested species. Common terns are well-monitored and are considered good nearshore ecosystem indicators due to their wide distribution and generalist diet. Common terns breed on islands throughout the Gulf of Maine, feeding on a wide range of invertebrates and fish including Atlantic herring, juvenile (mainly white) hakes, and sand lance (Fig. \ref{fig:tern-prey}). As surface feeding birds, terns are sensitive to vertical distribution of prey as well as nearshore conditions in general, with a foraging distance of 10-20 km from a nesting colony. 
 
 ```{r tern-prey, fig.cap = "Prey frequencies in the diets of common tern observed across the seven colonies in Gulf of Maine. Prey occurring in <5 percent of common tern diets were aggregated for clarity.", fig.height = 4, fig.width = 8}
 
@@ -2450,7 +2451,7 @@ wcr %>%
   theme(legend.position = "none")
 ```
 
-## Gulf Stream Index and Labrador Slope Water interaction 
+## Gulf of Maine Sourcewater 
 The changing position of the Gulf Stream north wall described above directly influences oceanic conditions in the GOM. Since the mid-2000’s, warmer, saltier  slope water associated with the Gulf Stream has dominated the input into the GOM at the Northeast Channel, with 2017 and 2019 consisting of  99% warm slope water (Fig. \ref{fig:wsw-prop}), the highest estimated in the time series. The changing proportions of source water affect the temperature, salinity, and nutrient inputs to the system. 
   
 
@@ -2626,12 +2627,12 @@ Marine heatwaves measure not just temperature, but how long the ecosystem is sub
 
 In 2019, the Gulf of Maine experienced four distinct marine heatwaves in the summer and fall with the strongest event beginning on July 3 and lasting 53 days (Figs. \ref{fig:gom-timesseries-heatwave1}, \ref{fig:gom-heatwave-max}).  Relative to prior years, this marine heatwave ranked 12th on record in terms of maximum intensity (+3.27 °C above average on Aug 1) and 12th on record in terms of cumulative intensity (112 °C-days ) (Fig. \ref{fig:gom-heatwave}).  The strongest heatwaves on record in the Gulf of Maine occurred in the summer of 2010 in terms of maximum intensity (+4.83 °C above average) and in the summer of 2012 in terms of cumulative intensity (630 °C-days). The impacts of the 2012 marine heatwave in the Gulf of Maine have been well documented within the lobster fishery [@mills_fisheries_2013].
 
-```{r gom-timesseries-heatwave1, out.width = "50%", fig.cap = "Marine heatwave events (red) in the Gulf of Maine occuring in 2019.", eval= T, echo = F}
+```{r gom-timesseries-heatwave1, out.width = "50%", fig.cap = "Marine heatwave events (red) in the Gulf of Maine occurring in 2019.", eval= T, echo = F}
 
 knitr::include_graphics(file.path(image.dir,"GOM_heatwave.jpeg"))
 ```
 
-```{r gom-heatwave-max, fig.cap="Maximum intensity heatwave anomaly in Gulf of Maine occuring on August 1, 2019."}
+```{r gom-heatwave-max, fig.cap="Maximum intensity heatwave anomaly in Gulf of Maine occurring on August 1, 2019."}
 #EPU shapefile
 ne_epu_sf <- ecodata::epu_sf %>% 
   filter(EPU %in% c("GOM","GB"))
@@ -2677,7 +2678,7 @@ gom_map
 
 ```
 
-```{r gom-heatwave, eval= T, echo = F, fig.width = 8, fig.asp = .35, fig.cap="Marine heatwave cumulative intesity (left) and maximum intensity (right) in the Gulf of Maine ."}
+```{r gom-heatwave, eval= T, echo = F, fig.width = 8, fig.asp = .35, fig.cap="Marine heatwave cumulative intensity (left) and maximum intensity (right) in the Gulf of Maine ."}
 cumu <- ecodata::heatwave %>% 
   filter(Var == "cumulative intensity") %>% 
   mutate(Var = recode(Var, "cumulative intensity" = "Cumulative Intensity (degree C x days)"))
@@ -2722,12 +2723,12 @@ gom.hw
 
 In 2019, Georges Bank experienced three distinct marine heatwaves in the summer and fall with the strongest event beginning on August 17 and lasting 20 days (Figs. \ref{fig:gb-timesseries-heatwave}, \ref{fig:gb-heatwave-max}). Relative to prior years, this marine heatwave ranked 15th on record in terms of maximum intensity (+3.14 °C above average on Aug 23)  (Fig. \ref{fig:gb-heatwave}).  The strongest heatwaves on record in the Georges Bank occurred in the summer of 2016 in terms of maximum intensity (+4.06 °C above average) and in the winter/spring/summer of 2012 in terms of cumulative intensity (485 °C-days).
 
-```{r gb-timesseries-heatwave, out.width = "50%", fig.cap="Marine heatwave events (red) on Georges Bank occuring in 2019.", eval= T, echo = F}
+```{r gb-timesseries-heatwave, out.width = "50%", fig.cap="Marine heatwave events (red) on Georges Bank occurring in 2019.", eval= T, echo = F}
 
 knitr::include_graphics(file.path(image.dir,"GB_heatwave.jpeg"))
 ```
 
-```{r gb-heatwave-max, fig.cap="Maximum intensity heatwave anomaly in Georges Bank occuring on August 23, 2019."}
+```{r gb-heatwave-max, fig.cap="Maximum intensity heatwave anomaly in Georges Bank occurring on August 23, 2019."}
 #EPU shapefile
 ne_epu_sf <- ecodata::epu_sf %>% 
   filter(EPU %in% c("GOM","GB"))
@@ -2773,7 +2774,7 @@ gb_map
 
 ```
 
-```{r gb-heatwave, eval= T, echo = F, fig.width = 8, fig.asp = .35, fig.cap="Marine heatwave cumulative intesity (left) and maximum intensity (right) in the Gulf of Maine ."}
+```{r gb-heatwave, eval= T, echo = F, fig.width = 8, fig.asp = .35, fig.cap="Marine heatwave cumulative intensity (left) and maximum intensity (right) in the Gulf of Maine ."}
 # cumu <- ecodata::heatwave %>% 
 #   filter(Var == "cumulative intensity") %>% 
 #   mutate(Var = recode(Var, "cumulative intensity" = "Cumulative Intensity (degree C x days)"))
@@ -2962,7 +2963,7 @@ knitr::include_graphics(file.path(image.dir,"CHL_SEASONAL_ANOMS_2019.png"))
 ```
 
 ## Zooplankton (GOM and GB)
-The most abundant zooplankton species in the GOM are the large-bodied *Calanus finmarchicus* (an important prey for larval fish and the north Atlantic right whale), and the small-bodied *Centropages typicus* and *Psuedocalanus* spp. [@morse_distinct_2017].  *Calanus finmarchicus* had low overall abundance in the GOM from 2010-2014, with higher than normal abundance in 2015-2016, normal levels in 2017, and higher abundance in 2018 (Fig. \ref{fig:NE-zoo-abund}). On GB, *Calanus finmarchicus*  annual abundance has been lower than normal since from 2010-2017 with slightly higher than normal values in 2018. 
+The most abundant zooplankton species in the GOM are the large-bodied *Calanus finmarchicus* (an important prey for larval fish and the north Atlantic right whale), and the small-bodied *Centropages typicus* and *Psuedocalanus* spp. [@morse_distinct_2017].  *Calanus finmarchicus* had low overall abundance in the GOM from 2010-2014, with higher than normal abundance in 2015-2016, normal levels in 2017, and higher abundance in 2018 (Fig. \ref{fig:NE-zoo-abund}). On GB, *Calanus finmarchicus*  annual abundance has been lower than normal from 2010-2017 with slightly higher than normal values in 2018. 
 
 The mean abundance anomaly of the small-bodied copepod taxa shows a distinct pattern of higher than normal abundance during the period from 1989-2001 for both GB and GOM, followed by a low period from 2002-2010 for the GOM and 2002-2012 for GB (Fig. \ref{fig:NE-zoo-abund}). In recent years, this index has trended up again with higher values from 2012-2018 for the GOM and during 2014-2017 for GB, with 2018 falling right at the mean value. This was driven by lower abundance of *Centropages hamatus* and higher values for both *Temora longicornis* and *Centropages typicus* in 2018. The abundance of both *Temora longicornis* and *Centropages typicus* was the highest value observed in the time series in both GOM and on GB in 2018.
 
