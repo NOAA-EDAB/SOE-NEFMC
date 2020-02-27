@@ -957,7 +957,7 @@ kable(all, escape = FALSE,
 ```
 
 
-```{r wind-hab, eval = T, echo = F, fig.cap="Map of BOEM existing (black) and proposed (red) lease areas as of February 2019.", message=FALSE, results=FALSE}
+```{r wind-hab, eval = T, echo = F, fig.cap="Map of BOEM existing (black) and proposed (red) lease areas in North (N), Mid (M) and South (S) portions of the coast as of February 2019.", message=FALSE, results=FALSE}
 library(rnaturalearthhires)
 library(sf)
 library(raster)
@@ -2362,7 +2362,7 @@ Ocean temperatures in coastal and offshore habitats are at or near unprecedented
 ## Oceanographic conditions (coastwide) 
 Globally, 2019 was the 2nd warmest year on record and the last five years have been the warmest in the last 140 years^[https://www.nasa.gov/press-release/nasa-noaa-analyses-reveal-2019-second-warmest-year-on-record]. 
 
-Since the 1860’s, the Northeast US shelf sea surface temperature (SST) has exhibited an overall warming trend, with the past decade measuring well above the long term average (and the trendline; \ref{fig:long-term-sst}). Changes in the Gulf Stream, increases in the number of warm core ring formations and anomalous onshore intrusions of warm salt water are affecting the coastal ocean dynamics with important implications for commercial fisheries (@gawarkiewicz_changing_2018).
+Since the 1860’s, the Northeast US shelf sea surface temperature (SST) has exhibited an overall warming trend, with the past decade measuring well above the long term average (and the trendline; Fig. \ref{fig:long-term-sst}). Changes in the Gulf Stream, increases in the number of warm core ring formations and anomalous onshore intrusions of warm salty water are affecting the coastal ocean dynamics with important implications for commercial fisheries (@gawarkiewicz_changing_2018).
 
 ```{r long-term-sst, fig.width = 8, fig.asp = 0.25, fig.cap = "Average annual sea surface temperature (SST) over the Northeast US Shelf"}
 lt_sst <- ecodata::long_term_sst %>% 
@@ -2391,8 +2391,8 @@ lt_sst %>%
                                 face = "italic"))
 ```
 
-## Gulf Stream and Warm Core Rings
-The Gulf Stream is shifting further northward and becoming more unstable.  Over the last decade, the Gulf Stream Index (GSI) has an increasing trend indicating a northern shift in the Gulf Stream.  In 2018, the GSI was at its most northerly position recorded since the year 1995 (Fig. \ref{fig:GSI}). A more northerly Gulf Stream position is associated with warmer ocean temperature on the Northeast US shelf [@zhang_role_2007], a higher proportion of Atlantic Temperate Slope Water in the Northeast Channel, and increased sea surface height along the U.S. east coast [@goddard_extreme_2015]. 
+## Gulf Stream and Warm Core Rings (coastwide)
+The Gulf Stream is shifting further northward and becoming more unstable.  Over the last decade, the Gulf Stream Index (GSI) has an increasing trend indicating a northward shift in the Gulf Stream.  In 2018, the GSI was at its most northerly position recorded since the year 1995 (Fig. \ref{fig:GSI}). A more northerly Gulf Stream position is associated with warmer ocean temperature on the Northeast US shelf [@zhang_role_2007], a higher proportion of Warm Slope Water in the Northeast Channel, and increased sea surface height along the U.S. east coast [@goddard_extreme_2015]. 
 
 ```{r GSI, fig.width = 4, fig.asp = 0.45, fig.cap = "Index representing changes in the location of the Gulf Stream north wall. Positive values represent a more northerly Gulf Stream position."}
 gsi %>% 
@@ -2421,7 +2421,7 @@ gsi %>%
                                 face = "italic"))
 ```
 
-Concurrently, large amplitude Gulf Stream meanders are forming more frequently further west [@andres_recent_2016]. There has also been a regime shift since 2000 after which there has been a significant increase in the number of warm core rings formed each year (Fig \ref{fig:warm-core-rings}; @gangopadhyay_observed_2019. The greater number of warm core rings increases the probability of intrusions of warm/salty Gulf Stream water onto the continental shelf as well as the rate at which the geographical centroid of marine species moves to the north [@gangopadhyay_observed_2019].
+Concurrently, large amplitude Gulf Stream meanders are forming more frequently further west [@andres_recent_2016]. There has also been a regime shift since 2000 after which there has been a significant increase in the number of warm core rings formed each year (Fig \ref{fig:warm-core-rings}; @gangopadhyay_observed_2019. The greater number of warm core rings increases the probability of intrusions of warm/salty Gulf Stream water onto the continental shelf. Any resulting accumulation of warmer water will add to the long term warming already occurring on the shelf. This in turn may lead to a response in species distributions [@gangopadhyay_observed_2019].
 
 ```{r warm-core-rings, fig.width = 4, fig.asp = 0.45, fig.cap= "Interannual Variability of the WCR formation between 1980 and 2019. The regime shift (denoted by the split in the red solid line) is significant at the turn of the century.  Figure reproduced with permission from Gangopadhyay, et al. (2019).  2018 and 2019 data points based on personal communication with A. Gangopadhyay (2020)."}
 upper.line<-ecodata::wcr %>%
@@ -2451,11 +2451,11 @@ wcr %>%
   theme(legend.position = "none")
 ```
 
-## Gulf of Maine Sourcewater 
+## Gulf of Maine Sourcewater (Northeast Channel)
 The changing position of the Gulf Stream north wall described above directly influences oceanic conditions in the GOM. Since the mid-2000’s, warmer, saltier  slope water associated with the Gulf Stream has dominated the input into the GOM at the Northeast Channel, with 2017 and 2019 consisting of  99% warm slope water (Fig. \ref{fig:wsw-prop}), the highest estimated in the time series. The changing proportions of source water affect the temperature, salinity, and nutrient inputs to the system. 
   
 
-```{r wsw-prop, fig.width=5, fig.asp = 0.45, fig.cap = "Proportion of warm slope water (WSW) and Labrador slope water (LSLW) entering the GOM through the Northeast Channel."}
+```{r wsw-prop, fig.width=5, fig.asp = 0.45, fig.cap = "Proportion of Warm Slope Water (WSW) and Labrador slope water (LSLW) entering the GOM through the Northeast Channel."}
 
 sw.df <- slopewater %>% 
   mutate(Var, Var = plyr::mapvalues(Var, from = c("WSW proportion ne channel",
@@ -3104,7 +3104,7 @@ pp_anom_plt <- pp_anom %>%
   facet_wrap(EPU~.,ncol = 2)+
   ggtitle("Primary production anomaly ratio") +
     scale_x_continuous(expand = c(0.01, 0.01), limits = c(1998, 2018))+
-    scale_y_continuous(limits = c(0.65,1.35)) +
+    scale_y_continuous(limits = c(0.8,1.2)) +
       geom_hline(aes(yintercept = hline,
                      group = Var),
            size = hline.size,
