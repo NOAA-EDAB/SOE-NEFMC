@@ -242,7 +242,7 @@ ggplot() +
            alpha = hline.alpha,
            linetype = hline.lty) +
   theme_ts() +
-    ggtitle("Gulf of Maine")
+    ggtitle("Gulf of Maine Revenue")
 
 gb_rev_agg <- rev_agg %>% filter(EPU == "GB") %>% 
 ggplot() +
@@ -271,7 +271,7 @@ ggplot() +
            alpha = hline.alpha,
            linetype = hline.lty) +
   theme_ts() +
-    ggtitle("Georges Bank")
+    ggtitle("Georges Bank Revenue")
 
 cowplot::plot_grid(gb_rev_agg, gom_rev_agg, ncol = 2)
 # rev_inline <- rev_agg %>% 
@@ -443,7 +443,7 @@ ggplot()+
            alpha = hline.alpha,
            linetype = hline.lty) +
     theme_ts() +
-  ggtitle("Gulf of Maine")
+  ggtitle("Gulf of Maine landings")
 
 gb_total <- landings_agg %>% filter(EPU == "GB") %>% 
 ggplot()+
@@ -471,7 +471,7 @@ ggplot()+
            alpha = hline.alpha,
            linetype = hline.lty) +
     theme_ts() +
-  ggtitle("Georges Bank")
+  ggtitle("Georges Bank landings")
 
 cowplot::plot_grid(gb_total, gom_total, ncol = 2)
 
@@ -563,7 +563,7 @@ gom_landings <- landings %>% filter(EPU == "GOM") %>%
   ylab(expression("Landings, 10"^3*"metric tons")) +
   theme_facet() +
   theme(strip.text=element_text(hjust=0)) +
-  ggtitle("Gulf of Maine")
+  ggtitle("Gulf of Maine landings by guild")
 
 gb_landings <- landings %>% filter(EPU == "GB") %>% 
   ggplot(aes(x = Time, y = Value, color = grouping)) +
@@ -598,7 +598,7 @@ gb_landings <- landings %>% filter(EPU == "GB") %>%
   ylab(expression("Landings, 10"^3*"metric tons")) +
   theme_facet() +
   theme(strip.text=element_text(hjust=0)) +
-  ggtitle("Georges Bank")
+  ggtitle("Georges Bank landings by guild")
 
 cowplot::plot_grid(gb_landings, gom_landings, ncol = 2)
 
@@ -1408,7 +1408,7 @@ blue_map
 ## Survey biomass (GOM and GB)
 Examining trends in biomass by aggregate groups rather than individual species reveals the overall stability of the trophic structure within the system.  In past reports we noted several trends in aggregate biomass which might suggest an instability in this structure. Biomass across trophic levels shows similar patterns between the Gulf of Maine and Georges Bank offshore, but nearshore patterns differ for some groups. This year we include information on survey biomass uncertainty as well as the mean trend. When considering variable catch between survey stations within strata for each year (Figs. \ref{fig:gom-biomass-ne}-\ref{fig:MA-inshore}), several previously identified trends are no longer significant, and others are unlikely to be ecologically significant. For example, our statistical analysis based on annual means suggests that benthos had a positive trend in both region’s fall NEFSC surveys and the GB spring NEFSC survey. However, including sampling variability suggests that this trend is driven by uncertain estimates late in the time series. NEFSC survey biomass estimates for GB fall planktivores and GOM spring planktivores and fall piscivores show a similar pattern. The remaining potential trends to be investigated further in the coming year are increasing trends over time for GB piscivores in the fall  and GOM planktivores in the fall (Figs. \ref{fig:gom-biomass-ne}, \ref{fig:gb-biomass-ne}).
 
-```{r gom-biomass-ne, fig.cap = paste0("Spring (left) and fall (right) NEFSC surveyed biomass in the Gulf of Maine."), fig.width=8, fig.asp = 0.75}
+```{r gom-biomass-ne, fig.cap = paste0("Spring (left) and fall (right) NEFSC surveyed biomass in the Gulf of Maine. The shaded area around each annual mean represents 2 standard deviations from the mean."), fig.width=8, fig.asp = 0.75}
 
 agg<-ecodata::agg_bio %>% 
   filter(!str_detect(Var, "Apex|inshore|offshore|managed|NEFMC|MAFMC|JOINT|NA")) %>% #remove unused datasets
@@ -1623,7 +1623,7 @@ plot_grid(ptitle, p1, p2, p3, p4, nrow=5,   rel_heights = c(0.1, 1,1,1,1))
 
 ```
 
-```{r gb-biomass-ne, fig.cap = paste0("Spring (left) and fall (right) NEFSC surveyed biomass on Georges Bank."), fig.width=8, fig.asp = 0.75}
+```{r gb-biomass-ne, fig.cap = paste0("Spring (left) and fall (right) NEFSC surveyed biomass on Georges Bank. The shaded area around each annual mean represents 2 standard deviations from the mean."), fig.width=8, fig.asp = 0.75}
 
 gb_surv <- agg_bio %>% 
   filter(EPU == "GB") 
@@ -1803,7 +1803,7 @@ plot_grid(ptitle, p1, p2, p3, p4, nrow=5,   rel_heights = c(0.1, 1,1,1,1))
 
 Stability in biomass for these aggregate groups would suggest no major disturbances to overall trophic structure in the GOM and GB. There is little evidence of ecologically significant long term biomass trends in NEFSC spring surveys in either region. There are notable short term increases in benthivore biomass in both seasons and both regions that are apparent in the NEFSC as well as the inshore surveys, even when uncertainty is considered (Figs \ref{fig:gom-biomass-ne}-\ref{fig:menh-survey}). This is largely driven by changes in haddock biomass. Further, there is some evidence of a long term decline in piscivores nearshore in the MA survey (Fig. \ref{fig:MA-inshore}). Given the wide range of stock status for managed fish in New England, with haddock in a high biomass state (Fig. \ref{fig:NE-stock-status}) more detailed investigation into trophic structure is warranted. These patterns will be explored in more detail using spatio-temporal analyses that include both inshore and offshore surveys at once.
  
-```{r MA-inshore, fig.width=8, fig.asp = 0.75, fig.cap = "Spring (left) and fall (right) surveyed biomass from the MA state inshore bottom trawl survey."}
+```{r MA-inshore, fig.width=8, fig.asp = 0.75, fig.cap = "Spring (left) and fall (right) surveyed biomass from the MA state inshore bottom trawl survey. The shaded area around each annual mean represents 2 standard deviations from the mean."}
 mass <- mass_inshore_survey %>% 
   filter(EPU == "GB",
          Time>1980) %>% 
@@ -2135,7 +2135,7 @@ plot_grid(ptitle, p1, p2, p3, p4, nrow=5,   rel_heights = c(0.1, 1,1,1,1))
 ## Fish condition (coastwide, NEFMC managed stocks)
 Fish condition, a measure of ‘fatness’ as an indicator of fish health and a factor that influences fecundity, is measured as the weight at a given length relative to the average. For this report, females of all species with adequate sampling in the Gulf of Maine and Georges Bank portions of the fall NEFSC bottom trawl surveys were analyzed (rather than both sexes of NEFMC managed species across the full Northeast US Shelf as in past years). Overall, condition factor has improved for many species since 2012, similar to overall high condition prior to 2000, and in contrast to overall lower condition between 2001-2010 (Figs. \ref{fig:gom-cf}-\ref{fig:gb-cf}). The timing of these shifts is similar to shifts in the small-large zooplankton indicator (Fig. \ref{fig:NE-sli}). Condition factors were generally better on Georges Bank than in the Gulf of Maine in 2019, and were especially high on Georges Bank for winter flounder, windowpane flounder and ocean pout (Fig.  \ref{fig:gb-cf}). Atlantic mackerel, white hake, pollock and Atlantic herring had particularly low condition factors in the Gulf of Maine in 2019 (Fig. \ref{fig:gom-cf}).
 
-Statistical analyses indicate that these trends in condition may be related to temperature changes and copepod size structure, but are not likely related to density dependence for most species. Fish condition is an important driver of population productivity as well as market prices, so we will investigate these potential links to changing habitat (temperature) and ecosystem productivity to evaluate whether they can inform decisions on annual catch limits. Work will continue over the coming year to explore relationships between fish condition and other indicators in this report (Fig. **2 Pager #2**)
+Statistical analyses indicate that these trends in condition may be related to temperature changes and copepod size structure, but are not likely related to density dependence for most species. Fish condition is an important driver of population productivity as well as market prices, so we will investigate these potential links to changing habitat (temperature) and ecosystem productivity to evaluate whether they can inform decisions on annual catch limits. Work will continue over the coming year to explore relationships between fish condition and other indicators in this report (Research Spotlight, p. 2).
 
  
 ```{r gom-cf, fig.cap = "Condition factor for fish species in the Gulf of Maine.", out.width = '100%'}
@@ -2594,6 +2594,8 @@ sst$Season <- factor(sst$Season, levels = c("Winter",
                                             "Spring",
                                             "Summer",
                                             "Fall"))
+
+sst<- sst %>% mutate(Value = replace(Value, Value > 4, 4))
 sst_map <- 
   ggplot() +
   geom_tile(data = sst, aes(x = Longitude, y = Latitude,fill = Value)) +
@@ -2603,7 +2605,8 @@ sst_map <-
                        low = scales::muted("blue"),
                        mid = "white",
                        high = scales::muted("red"),
-                       limits = c(-5,5)) +
+                       limits = c(-4,4), 
+                       labels = c("<-4", "-2", "0", "2", ">4")) +
   coord_sf(crs = crs, xlim = xlims, ylim = ylims) +
   facet_wrap(Season~.) +
   theme_map() +
@@ -3103,7 +3106,7 @@ pp_anom_plt <- pp_anom %>%
   xlab(element_blank())+
   facet_wrap(EPU~.,ncol = 2)+
   ggtitle("Primary production anomaly ratio") +
-    scale_x_continuous(expand = c(0.01, 0.01), limits = c(1998, 2018))+
+    scale_x_continuous(expand = c(0.01, 0.01), limits = c(1998, 2019))+
     scale_y_continuous(limits = c(0.8,1.2)) +
       geom_hline(aes(yintercept = hline,
                      group = Var),
