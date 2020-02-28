@@ -2627,7 +2627,7 @@ Marine heatwaves measure not just temperature, but how long the ecosystem is sub
 
 In 2019, the Gulf of Maine experienced four distinct marine heatwaves in the summer and fall with the strongest event beginning on July 3 and lasting 53 days (Figs. \ref{fig:gom-timesseries-heatwave1}, \ref{fig:gom-heatwave-max}).  Relative to prior years, this marine heatwave ranked 12th on record in terms of maximum intensity (+3.27 °C above average on Aug 1) and 12th on record in terms of cumulative intensity (112 °C-days ) (Fig. \ref{fig:gom-heatwave}).  The strongest heatwaves on record in the Gulf of Maine occurred in the summer of 2010 in terms of maximum intensity (+4.83 °C above average) and in the summer of 2012 in terms of cumulative intensity (630 °C-days). The impacts of the 2012 marine heatwave in the Gulf of Maine have been well documented within the lobster fishery [@mills_fisheries_2013].
 
-```{r gom-timesseries-heatwave1, out.width = "50%", fig.cap = "Marine heatwave events in the Gulf of Maine occurring in 2019. Color indicates all heatwaves (orange and red) and strongest heatwave (red).", eval= T, echo = F}
+```{r gom-timesseries-heatwave1, out.width = "70%", fig.cap = "Marine heatwave events (red shading above black threshold line) in the Gulf of Maine occurring in 2019.", eval= T, echo = F}
 
 knitr::include_graphics(file.path(image.dir,"GOM_heatwave.jpeg"))
 ```
@@ -2723,7 +2723,7 @@ gom.hw
 
 In 2019, Georges Bank experienced three distinct marine heatwaves in the summer and fall with the strongest event beginning on August 17 and lasting 20 days (Figs. \ref{fig:gb-timesseries-heatwave}, \ref{fig:gb-heatwave-max}). Relative to prior years, this marine heatwave ranked 15th on record in terms of maximum intensity (+3.14 °C above average on Aug 23)  (Fig. \ref{fig:gb-heatwave}).  The strongest heatwaves on record in the Georges Bank occurred in the summer of 2016 in terms of maximum intensity (+4.06 °C above average) and in the winter/spring/summer of 2012 in terms of cumulative intensity (485 °C-days).
 
-```{r gb-timesseries-heatwave, out.width = "50%", fig.cap="Marine heatwave events on Georges Bank occurring in 2019. Color indicates all heatwaves (orange and red) and strongest heatwave (red).", eval= T, echo = F}
+```{r gb-timesseries-heatwave, out.width = "70%", fig.cap="Marine heatwave events (red shading above black threshold line) on Georges Bank occurring in 2019.", eval= T, echo = F}
 
 knitr::include_graphics(file.path(image.dir,"GB_heatwave.jpeg"))
 ```
