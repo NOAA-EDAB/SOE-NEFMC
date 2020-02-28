@@ -795,9 +795,9 @@ ggplot(data = landings_rec)+
 
 ```
 
-Updated indicators for recreational opportunities (effort days and number of anglers) show general increases since the 1990s, peaking in the early 2010s and declining since then. This is similar to previously reported trends (Fig. \ref{fig:rec-op}). 
+Updated indicators for recreational opportunities (effort days) show general increases since the 1990s, peaking in the early 2010s and declining since then. This is similar to previously reported trends (Fig. \ref{fig:rec-op}). 
 
-```{r rec-op, fig.width = 4, fig.asp = 0.45, fig.cap = paste0("Recreational effort and number of recreational anglers in the ",region,".")}
+```{r rec-op, fig.width = 4, fig.asp = 0.45, fig.cap = paste0("Recreational effort in the ",region,".")}
 recdat <- ecodata::recdat %>% 
   filter(EPU == "NE") %>% 
   group_by(Var) %>% 
