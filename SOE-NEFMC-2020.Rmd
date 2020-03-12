@@ -2731,7 +2731,7 @@ In 2019, Georges Bank experienced three distinct marine heatwaves in the summer 
 knitr::include_graphics(file.path(image.dir,"GB_heatwave.jpeg"))
 ```
 
-```{r gb-heatwave-max, fig.cap="Maximum intensity heatwave anomaly in Georges Bank occurring on August 23, 2019."}
+```{r gb-heatwave-max, fig.cap="Maximum intensity heatwave anomaly on Georges Bank occurring on August 23, 2019."}
 #EPU shapefile
 ne_epu_sf <- ecodata::epu_sf %>% 
   filter(EPU %in% c("GOM","GB"))
@@ -2777,7 +2777,7 @@ gb_map
 
 ```
 
-```{r gb-heatwave, eval= T, echo = F, fig.width = 8, fig.asp = .35, fig.cap="Marine heatwave cumulative intensity (left) and maximum intensity (right) in the Gulf of Maine ."}
+```{r gb-heatwave, eval= T, echo = F, fig.width = 8, fig.asp = .35, fig.cap="Marine heatwave cumulative intensity (left) and maximum intensity (right) on Georges Bank."}
 # cumu <- ecodata::heatwave %>% 
 #   filter(Var == "cumulative intensity") %>% 
 #   mutate(Var = recode(Var, "cumulative intensity" = "Cumulative Intensity (degree C x days)"))
