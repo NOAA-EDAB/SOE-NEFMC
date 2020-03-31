@@ -387,7 +387,7 @@ p3 <- gridExtra::grid.arrange(gridExtra::arrangeGrob(gb_bennet + theme(legend.po
 
 ```
 
-There is a concurrent significant decrease in NEFMC-managed commercial seafood production and landings (Fig. \ref{fig:total-landings-ne}), with Piscivores, Planktivores, and NEFMC-managed Benthivores showing long term negative trends (Fig. \ref{fig:comm-landings-ne}). The opposite trends of non-NEFMC managed benthivores (increasing) and NEFMC managed benthivores (decreasing) is notable in the GOM (Fig. \ref{fig:comm-landings-ne}). The overall benthivore increase is driven by state-managed fisheries, with highly dependant and thus highly vulnerable ports in Maine relying on lobster. This trend is a continuation on the reliance on a small number of species, which could induce additional risk in the social system. Given the previously highlighted drop in lobster landings to date in the 2019 fishing year, there are likely to be substantial impacts on the horizon, particularly on fishermen in the Gulf of Maine. 
+There is a concurrent significant decrease in NEFMC-managed commercial seafood production and landings (Fig. \ref{fig:total-landings-ne}), with Piscivores, Planktivores, and NEFMC-managed Benthivores showing long term negative trends (Fig. \ref{fig:comm-landings-ne}). The opposite trends of non-NEFMC managed benthivores (increasing) and NEFMC managed benthivores (decreasing) is notable in the GOM (Fig. \ref{fig:comm-landings-ne}). The overall benthivore increase is driven by state-managed fisheries, with highly dependent and thus highly vulnerable ports in Maine relying on lobster. This trend is a continuation on the reliance on a small number of species, which could induce additional risk in the social system. Given the previously highlighted drop in lobster landings to date in the 2019 fishing year, there are likely to be substantial impacts on the horizon, particularly on fishermen in the Gulf of Maine. 
  
 
 ```{r total-landings-ne, fig.cap = paste0("Total commercial seafood landings (black) shown with NEFMC managed seafood landings (red) on Georges Bank (left) and in the Gulf of Maine (right)."), fig.width = 8, fig.asp = 0.25}
@@ -665,7 +665,7 @@ cowplot::plot_grid(engbar,
 
 ```
 
-Commercial fleet diversity indices were updated with 2018 data and remain near the long term average^[hhttps://noaa-edab.github.io/ecodata/human_dimensions#new_england].
+Commercial fleet diversity indices were updated with 2018 data and remain near the long term average^[https://noaa-edab.github.io/ecodata/human_dimensions#new_england].
 
 Similar to commercial fisheries, indicators show no significant trends in diversity of recreational species caught in New England, and recreational fleet effort diversity has not changed over the long term (Fig. \ref{fig:rec-div}). 
 
@@ -1106,7 +1106,7 @@ prey_freq1 <- prey_freq %>%
 
 prey_freq2<- prey_freq %>% 
   filter(Freq < 0.05) %>% 
-  mutate(Prey = c("<5% Occurance"))
+  mutate(Prey = c("<5% Occurrence"))
 
 prey_freq3<-prey_freq1 %>% 
   rbind(prey_freq2)
@@ -1187,7 +1187,7 @@ aggregate_prod %>%
 Fishery management aims to keep individual harvested species within population ranges where productivity is maximized over the long-term. However, these managed species represent a subset of the full ecosystem, interacting with a wider range of predators and prey and relying on diverse habitats. Indicators in this section summarize single species status as well as tracking trends for broad categories of fish within the ecosystem, including changes in biomass, distribution, condition, and productivity. Changes in overall predator and prey levels as well as distribution have implications for managed fish productivity, fishing operations, and regional fishery management. 
 
 ## Stock status and aggregate distribution (coastwide)
-Fishery management objectives are being met for 20 (including 6 skate) stocks at the single species level. Stocks in Fig. \ref{fig:NE-stock-status} which are above the F threshold (horizontal line) are experiencing overfishing (F > Fmsy). Stocks in Fig. \ref{fig:NE-stock-status} which are below the B threshold (dashed vertical line) are overfished (B < 0.5Bmsy). For the stocks with either missing F or B values in Fig. \ref{fig:NE-stock-status}, additional information has been used to determine overfishing and overfished status. Official stock status for New England stocks^[https://www.fisheries.noaa.gov/national/population-assessments/fishery-stock-status-updates] lists 4 stocks subject to overfishing (GOM cod, GB cod, southern red hake, and GB yellowtail flounder), and 14 stocks as overfished (GOM cod, GB cod, southern red hake, GOM/GB white hake, Atlantic halibut, Atlantic wolffish, ocean pout, thorny skate, GOM/GB windowpane flounder, southern New England/mid-Atlantic winter flounder, GB winter flounder, witch flounder, GB yellowtail flounder, and southern New Englad yellowtail flounder). 
+Fishery management objectives are being met for 20 (including 6 skate) stocks at the single species level. Stocks in Fig. \ref{fig:NE-stock-status} which are above the F threshold (horizontal line) are experiencing overfishing (F > Fmsy). Stocks in Fig. \ref{fig:NE-stock-status} which are below the B threshold (dashed vertical line) are overfished (B < 0.5Bmsy). For the stocks with either missing F or B values in Fig. \ref{fig:NE-stock-status}, additional information has been used to determine overfishing and overfished status. Official stock status for New England stocks^[https://www.fisheries.noaa.gov/national/population-assessments/fishery-stock-status-updates] lists 4 stocks subject to overfishing (GOM cod, GB cod, southern red hake, and GB yellowtail flounder), and 14 stocks as overfished (GOM cod, GB cod, southern red hake, GOM/GB white hake, Atlantic halibut, Atlantic wolffish, ocean pout, thorny skate, GOM/GB windowpane flounder, southern New England/mid-Atlantic winter flounder, GB winter flounder, witch flounder, GB yellowtail flounder, and southern New England yellowtail flounder). 
 
 ```{r NE-stock-status, warning=F, fig.cap = paste0("Summary of single species status for NEFMC and jointly managed stocks (Goosefish and Spiny dogfish)."), fig.width = 8, fig.asp = 0.65}
 
@@ -2966,7 +2966,7 @@ knitr::include_graphics(file.path(image.dir,"CHL_SEASONAL_ANOMS_2019.png"))
 ```
 
 ## Zooplankton (GOM and GB)
-The most abundant zooplankton species in the GOM are the large-bodied *Calanus finmarchicus* (an important prey for larval fish and the north Atlantic right whale), and the small-bodied *Centropages typicus* and *Psuedocalanus* spp. [@morse_distinct_2017].  *Calanus finmarchicus* had low overall abundance in the GOM from 2010-2014, with higher than normal abundance in 2015-2016, normal levels in 2017, and higher abundance in 2018 (Fig. \ref{fig:NE-zoo-abund}). On GB, *Calanus finmarchicus*  annual abundance has been lower than normal from 2010-2017 with slightly higher than normal values in 2018. 
+The most abundant zooplankton species in the GOM are the large-bodied *Calanus finmarchicus* (an important prey for larval fish and the north Atlantic right whale), and the small-bodied *Centropages typicus* and *Pseudocalanus* spp. [@morse_distinct_2017].  *Calanus finmarchicus* had low overall abundance in the GOM from 2010-2014, with higher than normal abundance in 2015-2016, normal levels in 2017, and higher abundance in 2018 (Fig. \ref{fig:NE-zoo-abund}). On GB, *Calanus finmarchicus*  annual abundance has been lower than normal from 2010-2017 with slightly higher than normal values in 2018. 
 
 The mean abundance anomaly of the small-bodied copepod taxa shows a distinct pattern of higher than normal abundance during the period from 1989-2001 for both GB and GOM, followed by a low period from 2002-2010 for the GOM and 2002-2012 for GB (Fig. \ref{fig:NE-zoo-abund}). In recent years, this index has trended up again with higher values from 2012-2018 for the GOM and during 2014-2017 for GB, with 2018 falling right at the mean value. This was driven by lower abundance of *Centropages hamatus* and higher values for both *Temora longicornis* and *Centropages typicus* in 2018. The abundance of both *Temora longicornis* and *Centropages typicus* was the highest value observed in the time series in both GOM and on GB in 2018.
 
@@ -3055,7 +3055,7 @@ gb_zoo<-zoo_abund %>%
 cowplot::plot_grid(gb_zoo, gom_zoo, nrow = 2)
 ```
 
-Fluctuations in primary production over time (Fig. \ref{fig:NE-sli})  may relate to observed patterns in copeopod size structure (Fig. \ref{fig:NE-zoo-abund}). This period also corresponds with regime shifts in fish recruitment [@perretti_regime_2017].
+Fluctuations in primary production over time (Fig. \ref{fig:NE-sli})  may relate to observed patterns in copepod size structure (Fig. \ref{fig:NE-zoo-abund}). This period also corresponds with regime shifts in fish recruitment [@perretti_regime_2017].
 
 ```{r NE-sli, fig.width = 8, fig.asp = 0.25, fig.cap = "GOM and GB annual primary production anomaly."}
 # sli <- ecodata::zoo_sli_anom %>%
@@ -3127,7 +3127,7 @@ Changes in primary productivity, phytoplankton and zooplankton composition and a
 
 **Editors** (NOAA NMFS Northeast Fisheries Science Center, NEFSC): Sarah Gaichas, Kimberly Bastille, Geret DePiper, Kimberly Hyde, Scott Large, Sean Lucey, Chris Orphanides
 
-**Contributors** (NEFSC unless otherwise noted): Andy Beet, Patricia Clay, Lisa Colburn, Geret DePiper, Michael Fogarty, Paula Fratantoni, Kevin Friedland, Sarah Gaichas, Robert Gamble, Avijit Gangopadhyay (School for Marine Science and Technology, University of Massachusetts Dartmouth), James Gartland (Virginia Institute of Marine Science), Glen Gawarkiewicz (Woods Hole Oceanographic Institution), Sean Hardison, Kimberly Hyde, John Kosik, Steve Kress and Don Lyons (National Audubon Society’s Seabird Restoration Program), Young-Oh Kwon and Zhuomin Chen (Woods Hole Oceanographic Institute), Sean Lucey, Chris Melrose, Ryan Morse, Kimberly Murray, Chris Orphanides, Richard Pace, Charles Perretti, Vincent Saba, Laurel Smith, John Walden, Harvey Walsh, Mark Wuenschel. 
+**Contributors** (NEFSC unless otherwise noted): Andy Beet, Patricia Clay, Lisa Colburn, Geret DePiper, Michael Fogarty, Paula Fratantoni, Kevin Friedland, Sarah Gaichas, Robert Gamble, Avijit Gangopadhyay (School for Marine Science and Technology, University of Massachusetts Dartmouth), James Gartland (Virginia Institute of Marine Science), Glen Gawarkiewicz (Woods Hole Oceanographic Institution), Sean Hardison, Kimberly Hyde, John Kocik, Steve Kress and Don Lyons (National Audubon Society’s Seabird Restoration Program), Young-Oh Kwon and Zhuomin Chen (Woods Hole Oceanographic Institute), Sean Lucey, Chris Melrose, Ryan Morse, Kimberly Murray, Chris Orphanides, Richard Pace, Charles Perretti, Vincent Saba, Laurel Smith, John Walden, Harvey Walsh, Mark Wuenschel. 
 
 \newpage 
 
