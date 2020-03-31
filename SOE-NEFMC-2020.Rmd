@@ -615,46 +615,47 @@ Commerical fishery engagement measures the number of permits, dealers, and landi
 ```{r NE-comm-eng, message=F, fig.width = 8, fig.asp = 0.4, fig.cap= "Commercial engagement scores (total pounds landed, value landed, commercial permits, and commercial dealers in a community)  for New England fishing communities, 2004-2018."}
 
 eng<-ecodata::engagement %>% 
-  filter(!Var == "med.high.scores")
+  dplyr::filter(!Var == "med.high.scores")
 eng$Var <- factor(eng$Var, levels = c("%High","%Medium High","%Moderate", "%Low"))
-
-engbar <- eng %>% filter(EPU == "NE") %>% 
-  ggplot()+
+engbar <- eng %>% dplyr::filter(EPU == "NE") %>% 
+  mutate(Value = Value*100) %>% 
+  ggplot2::ggplot()+
    #ylim(0.8, NA)+
-  geom_bar(aes(x = Time, y = Value, 
+  ggplot2::geom_bar(aes(x = Time, y = Value, 
                fill = Var), 
            stat = "identity")+
   #scale_y_continuous(labels = Value(suffix = "%", prefix = "")) +
   #geom_text(aes(x = Time, y = Value,
   #             label = paste0(Value,"%")), size=4) +
-  theme(#legend.position="bottom", legend.direction="horizontal",
+  ggplot2::theme(#legend.position="bottom", legend.direction="horizontal",
         legend.title = element_blank())+
-  coord_cartesian(ylim=c(0.75,1))+
-  xlab("Time") +
-  ylab("% Communities in each category (Low to High)")+
-  ggtitle("Commercial Engagement")+
-  theme_ts()
+  ggplot2::coord_cartesian(ylim=c(75,100))+
+  ggplot2::xlab("Time") +
+  ggplot2::ylab("% Communities in each category (Low to High)")+
+  ggplot2::ggtitle("Commercial Engagement")+
+  ecodata::theme_ts()
 
 
 mhtrend <- ecodata::engagement %>% 
-  filter(Var == "med.high.scores", 
+  dplyr::filter(Var == "med.high.scores", 
          EPU == "NE") %>% 
-  mutate(hline = mean(Value)) %>% 
-  ggplot()+
-  annotate("rect", fill = shade.fill, alpha = shade.alpha,
+  dplyr::mutate(hline = mean(Value)) %>% 
+  ggplot2::ggplot()+
+  ggplot2::annotate("rect", fill = shade.fill, alpha = shade.alpha,
       xmin = x.shade.min , xmax = x.shade.max,
       ymin = -Inf, ymax = Inf) +
-  geom_line(aes(x = Time, y = Value), size = lwd) +
-  geom_point(aes(x = Time, y = Value), size = pcex) +
-  scale_x_continuous(expand = c(0.01, 0.01)) +
-  expand_limits(y=0) +
-  ggtitle("Medium-High communities ") +
-  ylab(expression("Average score for Med High communities")) +
-  geom_hline(aes(yintercept = hline),
+  ggplot2::geom_line(aes(x = Time, y = Value), size = lwd) +
+  ggplot2::geom_point(aes(x = Time, y = Value), size = pcex) +
+  ggplot2::scale_x_continuous(expand = c(0.01, 0.01)) +
+  ggplot2::expand_limits(y=0) +
+  ggplot2::ggtitle("Medium-High communities ") +
+  ggplot2::ylab(expression("Average score for Med High communities")) +
+  ggplot2::geom_hline(aes(yintercept = hline),
            size = hline.size,
            alpha = hline.alpha,
            linetype = hline.lty) +
- theme_ts()
+  ecodata::theme_ts()
+
 
 cowplot::plot_grid(engbar, 
                    mhtrend,
@@ -1088,7 +1089,7 @@ Seabird breeding colonies in the GOM are monitored and managed to promote recove
 ```{r tern-prey, fig.cap = "Prey frequencies in the diets of common tern observed across the seven colonies in Gulf of Maine. Prey occurring in <5 percent of common tern diets were aggregated for clarity.", fig.height = 4, fig.width = 8}
 
 
-prey_freq <- ecodata::common_tern %>% 
+prey_freq <- ecodata::seabird_ne %>% 
   filter(str_detect(Var, "Diet"),
          !str_detect(Var, "Sum")) %>% 
     mutate(Island = word(Var, 1),
@@ -1135,7 +1136,7 @@ diet_freq_bar
 GOM common tern average productivity (fledglings per nest) across 7 colonies has varied over time (Fig. \ref{fig:tern-prod}). The pattern is similar to that observed for fish condition (high before 2000, lower 2001-2009, higher/variable since 2010; Figs. \ref{fig:gom-cf}-\ref{fig:gb-cf}). Productivity is affected by both food and predation mortality. While data on predation is lacking, productivity lows in 2004-2006 were associated with euphausiids  (Fig. \ref{fig:tern-prey}), and the 2018 productivity low with butterfish in tern diets (Fig. \ref{fig:tern-prey}). The presence of butterfish in tern diets reflects the extension of this warm water species into GOM. Due to their thin, deep body form, butterfish are often difficult for small seabird chicks to ingest and swallow, causing chicks to starve and/or parent birds to increase foraging effort.
 
 ```{r tern-prod, fig.width = 4, fig.asp = 0.45, fig.cap = "Mean common tern productivity at nesting sites in Gulf of Maine. Error bars show +/- 1 SE of the mean."}
-aggregate_prod <- ecodata::common_tern %>% 
+aggregate_prod <- ecodata::seabird_ne %>% 
     filter(!str_detect(Var, "Diet|Sum"))  %>% 
   mutate(Island = word(Var, 1),
          Var = word(Var, 3),
@@ -1410,7 +1411,7 @@ Examining trends in biomass by aggregate groups rather than individual species r
 
 ```{r gom-biomass-ne, fig.cap = paste0("Spring (left) and fall (right) NEFSC surveyed biomass in the Gulf of Maine. The shaded area around each annual mean represents 2 standard deviations from the mean."), fig.width=8, fig.asp = 0.75}
 
-agg<-ecodata::agg_bio %>% 
+agg<-ecodata::aggregate_biomass %>% 
   filter(!str_detect(Var, "Apex|inshore|offshore|managed|NEFMC|MAFMC|JOINT|NA")) %>% #remove unused datasets
   separate(Var, c("feeding.guild", "season", "Biomass", "Var1"), sep = " ") %>% 
   unite("Var", feeding.guild:season, sep = " ") %>% 
@@ -2485,7 +2486,7 @@ ggplot(data = sw.df) +
 The regional ocean is warming. Annual surface and bottom temperatures (Figs. \ref{fig:NE-SST-anom-series}, \ref{fig:NE-bot-temp}) in the GOM and GB have trended warmer since the early 1980s. GOM bottom temperature was nearly 1°C warmer than average in 2019. Seasonal surface temperatures have trended warmer in spring, summer, and fall throughout New England. The 2018 summer sea surface temperatures were the highest on record in the GOM with temperature moderating slightly in 2019. Surface temperatures during the other seasons were near or slightly below average (Figs. \ref{fig:NE-SST-anom-series}, \ref{fig:NE-SST-insitu}). In contrast, 2019 seasonal temperatures in the core portions of Georges Bank were at or below average, while at the outer edge were above average partially due to the influence of a number of Gulf Stream warm core rings surrounding the Bank (personal communication G. Gawarkiewicz and A. Gangopadhyay, 2020).
   
 ```{r NE-bot-temp, fig.width = 8, fig.asp = .25, fig.cap = "GOM and GB annual bottom temperature anomalies."}
-bot_temp_insitu_gom <- oceantemp_insitu %>%
+bot_temp_insitu_gom <- ecodata::bottom_temp %>%
   filter(EPU == "GOM",
          Var == "bottom temp anomaly in situ") %>% 
   mutate(hline = 0) %>% 
@@ -2510,7 +2511,7 @@ bot_temp_insitu_gom <- oceantemp_insitu %>%
         plot.title = element_text(size = 12))
 
 
-bot_temp_insitu_gb <- oceantemp_insitu %>%
+bot_temp_insitu_gb <- ecodata::bottom_temp %>%
   filter(EPU == "GB",
          Var == "bottom temp anomaly in situ") %>%
    mutate(hline = 0) %>% 
@@ -2650,7 +2651,7 @@ ymin = 39
 ymax = 45
 xlims <- c(xmin, xmax)
 ylims <- c(ymin, ymax)
-hw <- ecodata::hw_anom_gridded %>% 
+hw <- ecodata::heatwave_anom_gridded %>% 
   filter(EPU == "GOM")
 
 gom_map <- 
@@ -2746,7 +2747,7 @@ ymin = 39
 ymax = 45
 xlims <- c(xmin, xmax)
 ylims <- c(ymin, ymax)
-hw <- ecodata::hw_anom_gridded %>% 
+hw <- ecodata::heatwave_anom_gridded %>% 
   filter(EPU == "GB")
 
 gb_map <- 
@@ -2913,47 +2914,47 @@ GB_chl_weekly <- interp_chl_pp(epu = "GB", year = 2019,Variable = "WEEKLY_CHLOR_
 GOM_chl_weekly <- interp_chl_pp(epu = "GOM", year = 2019,Variable = "WEEKLY_CHLOR_A_MEDIAN")
 ne_chl_weekly<-rbind(GB_chl_weekly, GOM_chl_weekly)
 
-ne_chl <- ggplot(data = ne_chl_weekly) +
-  geom_line(aes(x = Time, y = LTM)) +
-  geom_ribbon(aes(x = Time, ymin = pmax(sd.low,0), ymax = sd.high), 
+ne_chl <- ggplot2::ggplot(data = ne_chl_weekly) +
+  ggplot2::geom_line(aes(x = Time, y = LTM)) +
+  ggplot2::geom_ribbon(aes(x = Time, ymin = pmax(sd.low,0), ymax = sd.high), 
               alpha = 0.1,
               fill = "grey1") +
-  geom_line(aes(x = Time, y = Value),
+  ggplot2::geom_line(aes(x = Time, y = Value),
             size = 1,color = "#33a02c") +
-  ggtitle(expression("Chlorophyll"~italic(a)~"")) +
-  ylim(c(0, 3))+
-  facet_wrap(EPU~., ncol = 2)+
-  guides(color = F) +
-  xlab("")+
-  ylab("") +
-  scale_x_continuous(breaks = seq(1,52,10),
+  ggplot2::ggtitle(expression("Chlorophyll"~italic(a)~"")) +
+  ggplot2::ylim(c(0, 3))+
+  ggplot2::facet_wrap(EPU~., ncol = 2)+
+  ggplot2::guides(color = F) +
+  ggplot2::xlab("")+
+  ggplot2::ylab("mg m^-3") +
+  ggplot2::scale_x_continuous(breaks = seq(1,52,10),
                    labels = c("Jan.","Mar.","May","July","Oct.","Dec."),
                    expand = c(0.01,0.01)) +
-  scale_color_manual(values = c("#ef8a62","#2c7fb8","#a1d99b"))+
-  theme_ts()
+  ggplot2::scale_color_manual(values = c("#ef8a62","#2c7fb8","#a1d99b"))+
+  ecodata::theme_ts()
 
 
 GB_ppd_weekly <- interp_chl_pp(epu = "GB",  year = 2019,Variable = "WEEKLY_PPD_MEDIAN")
 GOM_ppd_weekly <- interp_chl_pp(epu = "GOM",  year = 2019,Variable = "WEEKLY_PPD_MEDIAN")
 ne_ppd_weekly<-rbind(GB_ppd_weekly, GOM_ppd_weekly)
 
-ne_ppd <- ggplot(data = ne_ppd_weekly) +
-  geom_line(aes(x = Time, y = LTM)) +
-  geom_ribbon(aes(x = Time, ymin = pmax(sd.low,0), ymax = sd.high), 
+ne_ppd <- ggplot2::ggplot(data = ne_ppd_weekly) +
+  ggplot2::geom_line(aes(x = Time, y = LTM)) +
+  ggplot2::geom_ribbon(aes(x = Time, ymin = pmax(sd.low,0), ymax = sd.high), 
               alpha = 0.1,
               fill = "grey1") +
-  geom_line(aes(x = Time, y = Value),
+  ggplot2::geom_line(aes(x = Time, y = Value),
             size = 1,color = "#33a02c") +
-  ggtitle(expression("Primary production")) +
+  ggplot2::ggtitle(expression("Primary production")) +
   guides(color = F) +
-  facet_wrap(EPU~., ncol = 2)+
-  xlab("")+
-  ylab("") +
-  scale_x_continuous(breaks = seq(1,52,10),
+  ggplot2::facet_wrap(EPU~., ncol = 2)+
+  ggplot2::xlab("")+
+  ggplot2::ylab("gC m^-2 d^-1") +
+  ggplot2::scale_x_continuous(breaks = seq(1,52,10),
                    labels = c("Jan.","Mar.","May","July","Oct.","Dec."),
                    expand = c(0.01,0.01)) +
-  scale_color_manual(values = c("#ef8a62","#2c7fb8","#a1d99b"))+
-  theme_ts()
+  ggplot2::scale_color_manual(values = c("#ef8a62","#2c7fb8","#a1d99b"))+
+  ecodata::theme_ts()
 
 ne_ppd + ne_chl + plot_layout(ncol = 1)
 
@@ -3057,7 +3058,7 @@ cowplot::plot_grid(gb_zoo, gom_zoo, nrow = 2)
 
 Fluctuations in primary production over time (Fig. \ref{fig:NE-sli})  may relate to observed patterns in copepod size structure (Fig. \ref{fig:NE-zoo-abund}). This period also corresponds with regime shifts in fish recruitment [@perretti_regime_2017].
 
-```{r NE-sli, fig.width = 8, fig.asp = 0.25, fig.cap = "GOM and GB annual primary production anomaly."}
+```{r NE-sli, fig.width = 8, fig.asp = 0.25, fig.cap = "GB and GOM annual primary production anomaly."}
 # sli <- ecodata::zoo_sli_anom %>%
 #   filter(EPU %in% c("GOM","GB"),
 #          str_detect(Var, "Sm-Lg copepod anom")) %>%
@@ -3070,7 +3071,7 @@ pp_anom <- ecodata::chl_pp %>%
   mutate(hline = 1,
          Time = as.numeric(as.character(Time)),
          Var = "ANNUAL_PPD_RATIO_ANOMALY")
-pp_anom$EPU <- factor(pp_anom$EPU, levels = c("GOM","GB"))
+pp_anom$EPU <- factor(pp_anom$EPU, levels = c("GB","GOM"))
 
 # sli_plt <- sli %>%
 #   ggplot(aes(x = Time, y = Value, group = Var)) +
