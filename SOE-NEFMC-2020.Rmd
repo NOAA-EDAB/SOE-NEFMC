@@ -140,13 +140,13 @@ mng_obj <- data.frame("Objective Categories" = c("Seafood Production",
                                                  "Stability","Social & Cultural",
                                                  "Biomass","Productivity",
                                                  "Trophic structure","Habitat"),
-                      "Indicators reported here" = c("Landings by feeding guild","Revenue decomposed to price and volume",
+                      "Indicators reported here" = c("Landings by feeding group","Revenue decomposed to price and volume",
                                "Days fished; recreational catch",
                                "Diversity indices (fishery and species)",
                                "Commercial engagement trends",
                                "Biomass or abundance by feeding group from surveys",
                                "Condition and recruitment of managed species, Primary productivity",
-                               "Relative biomass of feeding guilds, Zooplankton",
+                               "Relative biomass of feeding groups, Zooplankton",
                                "Continental shelf habitat conditions"))
 
 knitr::kable(mng_obj, linesep = "",
@@ -195,7 +195,7 @@ ecodata::ppr %>%
 
 
 ## Gulf of Maine
-Although the demand of fisheries in terms of ecosystem energy is decreasing, the social-ecological system is becoming more reliant on a smaller number of species, inducing system risk through a secondary pathway. A long term significant decrease in NEFMC managed species revenue was offset by non-NEFMC managed species (Fig. \ref{fig:comm-revenue-ne}), primarily lobster, as indicated by the focal component-level Bennet Volume Indicator for Benthivores (Fig. \ref{fig:bennet-ne}).  Presently, 2019 lobster catch is down substantially compared with previous years, so a drop in revenue is expected.
+Although the demand of fisheries in terms of ecosystem energy is decreasing, the social-ecological system is becoming more reliant on a smaller number of species, inducing system risk through a secondary pathway. A long term significant decrease in NEFMC managed species revenue was offset by non-NEFMC managed species (Fig. \ref{fig:comm-revenue-ne}), primarily lobster, as indicated by the focal component-level Bennet Volume Indicator for benthivores (Fig. \ref{fig:bennet-ne}).  Presently, 2019 lobster catch is down substantially compared with previous years, so a drop in revenue is expected.
 
 ```{r comm-revenue-ne, fig.cap = "Total commercial revenue (black) and revenue from NEFMC managed species (red) on Georges Bank (left) and in the Gulf of Maine (right).", fig.width = 8, fig.asp = 0.25}
 
@@ -387,7 +387,7 @@ p3 <- gridExtra::grid.arrange(gridExtra::arrangeGrob(gb_bennet + theme(legend.po
 
 ```
 
-There is a concurrent significant decrease in NEFMC-managed commercial seafood production and landings (Fig. \ref{fig:total-landings-ne}), with Piscivores, Planktivores, and NEFMC-managed Benthivores showing long term negative trends (Fig. \ref{fig:comm-landings-ne}). The opposite trends of non-NEFMC managed benthivores (increasing) and NEFMC managed benthivores (decreasing) is notable in the GOM (Fig. \ref{fig:comm-landings-ne}). The overall benthivore increase is driven by state-managed fisheries, with highly dependent and thus highly vulnerable ports in Maine relying on lobster. This trend is a continuation on the reliance on a small number of species, which could induce additional risk in the social system. Given the previously highlighted drop in lobster landings to date in the 2019 fishing year, there are likely to be substantial impacts on the horizon, particularly on fishermen in the Gulf of Maine. 
+There is a concurrent significant decrease in NEFMC-managed commercial seafood production (non-bait landings; Fig. \ref{fig:total-landings-ne}), with piscivores, planktivores, and NEFMC-managed benthivores also showing long term negative trends (Fig. \ref{fig:comm-landings-ne}). The opposite trends of non-NEFMC managed benthivores (increasing) and NEFMC managed benthivores (decreasing) is notable in the GOM (Fig. \ref{fig:comm-landings-ne}). The overall benthivore increase is driven by state-managed fisheries, with highly dependent and thus highly vulnerable ports in Maine relying on lobster. This trend is a continuation on the reliance on a small number of species, which could induce additional risk in the social system. Given the previously highlighted drop in lobster landings to date in the 2019 fishing year, there are likely to be substantial impacts on the horizon, particularly on fishermen in the Gulf of Maine. 
  
 
 ```{r total-landings-ne, fig.cap = paste0("Total commercial seafood landings (black) shown with NEFMC managed seafood landings (red) on Georges Bank (left) and in the Gulf of Maine (right)."), fig.width = 8, fig.asp = 0.25}
@@ -478,7 +478,7 @@ cowplot::plot_grid(gb_total, gom_total, ncol = 2)
 ```
 
 
-```{r comm-landings-ne, warning=F, fig.width = 8, fig.asp = .75,fig.cap = paste0(council_abbr," managed species landings (red) and total commercial landings (black) by feeding guild on Georges Bank (left) and in the Gulf of Maine (right).")}
+```{r comm-landings-ne, warning=F, fig.width = 8, fig.asp = .75,fig.cap = paste0(council_abbr," managed species landings (red) and total commercial landings (black) by feeding group on Georges Bank (left) and in the Gulf of Maine (right).")}
 #Get data for plotting
 
 #Managed landings
@@ -563,7 +563,7 @@ gom_landings <- landings %>% filter(EPU == "GOM") %>%
   ylab(expression("Landings, 10"^3*"metric tons")) +
   theme_facet() +
   theme(strip.text=element_text(hjust=0)) +
-  ggtitle("Gulf of Maine landings by guild")
+  ggtitle("Gulf of Maine landings by feeding group")
 
 gb_landings <- landings %>% filter(EPU == "GB") %>% 
   ggplot(aes(x = Time, y = Value, color = grouping)) +
@@ -598,7 +598,7 @@ gb_landings <- landings %>% filter(EPU == "GB") %>%
   ylab(expression("Landings, 10"^3*"metric tons")) +
   theme_facet() +
   theme(strip.text=element_text(hjust=0)) +
-  ggtitle("Georges Bank landings by guild")
+  ggtitle("Georges Bank landings by feeding group")
 
 cowplot::plot_grid(gb_landings, gom_landings, ncol = 2)
 
@@ -608,7 +608,7 @@ cowplot::plot_grid(gb_landings, gom_landings, ncol = 2)
 In contrast with the GOM, GB total landings and revenue have no long term trends for NEFMC-managed species (Fig. \ref{fig:total-landings-ne}). Rather, fluctuations in GB total revenue and in particular benthos landings (Fig. \ref{fig:comm-landings-ne}) may be associated with rotational management for scallops altering effort between the GB and MAB ecological production units. Benthos landings have declined over the long term on GB, though they have increased since 2015 and include both scallops (NEFMC managed) and clams (MAFMC managed; Fig. \ref{fig:comm-landings-ne}). Planktivore landings on GB have increased over the long term (mainly reflecting Atlantic herring), but have returned to the long term average in 2016-2018. Scallop revenue continues to play an oversized role in Georges Bank dynamics. 2018 revenue was above the long term mean, driven mainly by volume of benthos landings revenue (Fig. \ref{fig:bennet-ne}).
 
 ## New England-wide
-This reliance likely represents heightened risk to fishing communities, particularly along the coast of Maine and the South Coast in MA in ports which are highly engaged and/or reliant on commercial fishing. This risk is heightened by the moderate to high climate vulnerability of crustaceans and shellfish, which face risks from ocean acidification as well as increased temperature [@hare_vulnerability_2016]. The decrease in lobster landings to date in 2019 thus has the potential for substantial impacts on these communities.
+Reliance on single species likely represents heightened risk to fishing communities, particularly along the coast of Maine and the South Coast in MA in ports which are highly engaged and/or reliant on commercial fishing. This risk is heightened by the moderate to high climate vulnerability of crustaceans and shellfish, which face risks from ocean acidification as well as increased temperature [@hare_vulnerability_2016]. The decrease in lobster landings to date in 2019 thus has the potential for substantial impacts on these communities.
 
 Commerical fishery engagement measures the number of permits, dealers, and landings in a community^[https://www.fisheries.noaa.gov/national/socioeconomics/social-indicator-definitions#fishing-engagement-and-reliance-indices]. The trend in the number of New England fishing communities that were moderately to highly engaged (blue, green and red bars) has shown an increase since 2004 (Fig. \ref{fig:NE-comm-eng}). Significant changes in engagement scores have been observed in medium-highly engaged communities. The average engagement score for medium-highly engaged communities decreased from 2004 to 2011, and then has bounced back since 2011. These changes may be driven by the changes in value landed for primary species such as sea scallops and lobsters in this group of communities. 
 
@@ -757,7 +757,7 @@ cowplot::plot_grid(#rec_effort,
 
 ```
 
-Recreational seafood production decreased in 2018 to the lowest level since 1996, with the drop primarily driven by decreases in Atlantic mackerel, striped bass, haddock, bluefish, and cod kept fish (Fig. \ref{fig:rec-landings-ne})). 
+Recreational seafood production (kept fish) decreased in 2018 to the lowest level since 1996, with the drop primarily driven by decreases in Atlantic mackerel, striped bass, haddock, bluefish, and cod  (Fig. \ref{fig:rec-landings-ne})). 
 
 ```{r rec-landings-ne, fig.cap = paste0("Total recreational seafood harvest in ",region,"."), fig.width = 4, fig.asp = 0.45}
 
@@ -1190,7 +1190,7 @@ Fishery management aims to keep individual harvested species within population r
 ## Stock status and aggregate distribution (coastwide)
 Fishery management objectives are being met for 20 (including 6 skate) stocks at the single species level. Stocks in Fig. \ref{fig:NE-stock-status} which are above the F threshold (horizontal line) are experiencing overfishing (F > Fmsy). Stocks in Fig. \ref{fig:NE-stock-status} which are below the B threshold (dashed vertical line) are overfished (B < 0.5Bmsy). For the stocks with either missing F or B values in Fig. \ref{fig:NE-stock-status}, additional information has been used to determine overfishing and overfished status. Official stock status for New England stocks^[https://www.fisheries.noaa.gov/national/population-assessments/fishery-stock-status-updates] lists 4 stocks subject to overfishing (GOM cod, GB cod, southern red hake, and GB yellowtail flounder), and 14 stocks as overfished (GOM cod, GB cod, southern red hake, GOM/GB white hake, Atlantic halibut, Atlantic wolffish, ocean pout, thorny skate, GOM/GB windowpane flounder, southern New England/mid-Atlantic winter flounder, GB winter flounder, witch flounder, GB yellowtail flounder, and southern New England yellowtail flounder). 
 
-```{r NE-stock-status, warning=F, fig.cap = paste0("Summary of single species status for NEFMC and jointly managed stocks (Goosefish and Spiny dogfish)."), fig.width = 8, fig.asp = 0.65}
+```{r NE-stock-status, warning=F, fig.cap = paste0("Summary of single species status for NEFMC and jointly managed stocks (goosefish and spiny dogfish)."), fig.width = 8, fig.asp = 0.65}
 
 #Get data, spread for plotting, and filter
 stock_status <- ecodata::stock_status %>%
@@ -2395,7 +2395,7 @@ lt_sst %>%
 ## Gulf Stream and Warm Core Rings (coastwide)
 The Gulf Stream is shifting further northward and becoming more unstable.  Over the last decade, the Gulf Stream Index (GSI) has an increasing trend indicating a northward shift in the Gulf Stream.  In 2018, the GSI was at its most northerly position recorded since the year 1995 (Fig. \ref{fig:GSI}). A more northerly Gulf Stream position is associated with warmer ocean temperature on the Northeast US shelf [@zhang_role_2007], a higher proportion of Warm Slope Water in the Northeast Channel, and increased sea surface height along the U.S. east coast [@goddard_extreme_2015]. 
 
-```{r GSI, fig.width = 4, fig.asp = 0.45, fig.cap = "Index representing changes in the location of the Gulf Stream north wall. Positive values represent a more northerly Gulf Stream position."}
+```{r GSI, fig.width = 4, fig.asp = 0.45, fig.cap = "Index representing changes in the location of the Gulf Stream. Positive values represent a more northerly Gulf Stream position."}
 gsi %>% 
   mutate(Year = floor(Time)) %>% 
   group_by(Year) %>% 
@@ -2424,7 +2424,7 @@ gsi %>%
 
 Concurrently, large amplitude Gulf Stream meanders are forming more frequently further west [@andres_recent_2016]. There has also been a regime shift since 2000 after which there has been a significant increase in the number of warm core rings formed each year (Fig \ref{fig:warm-core-rings}; @gangopadhyay_observed_2019. The greater number of warm core rings increases the probability of intrusions of warm/salty Gulf Stream water onto the continental shelf. Any resulting accumulation of warmer water will add to the long term warming already occurring on the shelf. This in turn may lead to a response in species distributions [@gangopadhyay_observed_2019].
 
-```{r warm-core-rings, fig.width = 4, fig.asp = 0.45, fig.cap= "Interannual Variability of the WCR formation between 1980 and 2019. The regime shift (denoted by the split in the red solid line) is significant at the turn of the century.  Figure reproduced with permission from Gangopadhyay, et al. (2019).  2018 and 2019 data points based on personal communication with A. Gangopadhyay (2020)."}
+```{r warm-core-rings, fig.width = 4, fig.asp = 0.45, fig.cap= "Interannual variability of warm core ring (WCR) formation between 1980 and 2019. The regime shift (denoted by the split in the red solid line) is significant at the turn of the century.  Figure reproduced with permission from Gangopadhyay, et al. (2019).  2018 and 2019 data points based on personal communication with A. Gangopadhyay (2020)."}
 upper.line<-ecodata::wcr %>%
   filter(Time>2000) %>% 
   mutate(hline = c(mean(Value)))
@@ -2441,7 +2441,7 @@ wcr %>%
   annotate("rect", fill = shade.fill, alpha = shade.alpha,
       xmin = x.shade.min , xmax = x.shade.max,
       ymin = -Inf, ymax = Inf) +
-  ylab("Warm Core Ring Births")+
+  ylab("WCR Formations")+
   xlab(element_blank())+
   ggtitle("Warm Core Rings")+
   theme_ts()+
@@ -2574,7 +2574,7 @@ ne_anom_plt <- ggplot(data = ne_anom,
 ne_anom_plt
 ```
 
-```{r NE-SST-insitu, fig.width=8, fig.height = 5, fig.cap = "GOM and GB 2018 seasonal sea surface temperature spatial anomalies."}
+```{r NE-SST-insitu, fig.width=8, fig.height = 5, fig.cap = "GOM and GB 2019 seasonal sea surface temperature spatial anomalies."}
 #EPU shapefile
 ne_epu_sf <- ecodata::epu_sf %>% 
   filter(EPU %in% c("GOM","GB"))
@@ -2627,7 +2627,7 @@ sst_map
 ```
 
 ## Marine heat waves (GOM and GB) 
-Marine heatwaves measure not just temperature, but how long the ecosystem is subjected to the high temperature. They are driven by both atmospheric and oceanographic factors and can have dramatic impacts on marine ecosystems. Marine heatwaves are measured in terms of intensity (water temperature) and duration (the cumulative number of degree days) using satellite measurements of daily sea surface temperature. Plotted below are maximum intensity and cumulative intensity, which is intensity times duration. Here we define a marine heatwave as a warming event that lasts for five or more days with sea surface temperatures above the 90th percentile of the  historical daily climatology (1982-2010) [@hobday_hierarchical_2016]. 
+Marine heatwaves reflect not just temperature, but how long the ecosystem is subjected to the high temperature. They are driven by both atmospheric and oceanographic factors and can have dramatic impacts on marine ecosystems. Marine heatwaves are measured in terms of intensity (water temperature) and duration (the cumulative number of degree days) using satellite measurements of daily sea surface temperature. Plotted below are maximum intensity and cumulative intensity, which is intensity times duration. Here we define a marine heatwave as a warming event that lasts for five or more days with sea surface temperatures above the 90th percentile of the  historical daily climatology (1982-2010) [@hobday_hierarchical_2016]. 
 
 In 2019, the Gulf of Maine experienced four distinct marine heatwaves in the summer and fall with the strongest event beginning on July 3 and lasting 53 days (Figs. \ref{fig:gom-timesseries-heatwave1}, \ref{fig:gom-heatwave-max}).  Relative to prior years, this marine heatwave ranked 12th on record in terms of maximum intensity (+3.27 °C above average on Aug 1) and 12th on record in terms of cumulative intensity (112 °C-days ) (Fig. \ref{fig:gom-heatwave}).  The strongest heatwaves on record in the Gulf of Maine occurred in the summer of 2010 in terms of maximum intensity (+4.83 °C above average) and in the summer of 2012 in terms of cumulative intensity (630 °C-days). The impacts of the 2012 marine heatwave in the Gulf of Maine have been well documented within the lobster fishery [@mills_fisheries_2013].
 
@@ -2823,7 +2823,72 @@ gb.hw
 ```
 
 ## Primary production (GOM and GB)
-Phytoplankton primary production is a function of biomass, light, and temperature, and sets the overall level of potential fish and fishery productivity in an ecosystem. All primary production and chlorophyll estimates presented here are satellite-derived. There is a trend of increasing primary production in both New England systems, primarily driven by increased summer production, which is due to warmer temperatures and increased bacterial remineralization and nutrient recycling (Fig. \ref{fig:NE-PP-OCCI}). This increased productivity is most likely from smaller-celled species that contribute less to fish production compared to larger phytoplankton. The 2019 winter-spring phytoplankton bloom, comprised primarily of larger diatoms, was average in both the GOM and GB, however the timing in the GOM was later than normal (Fig. \ref{fig:NE-chl-weekly}). The spring bloom period was below average for both GOM and GB, while the fall bloom was near average for both regions, but varied spatially (Fig. \ref{fig:NE-chl-map}).
+Phytoplankton primary production is a function of biomass, light, and temperature, and sets the overall level of potential fish and fishery productivity in an ecosystem. All primary production and chlorophyll estimates presented here are satellite-derived. There are recent increases in primary production (Fig. \ref{fig:NE-sli}) in both New England systems, primarily driven by increased summer production, which is due to warmer temperatures and increased bacterial remineralization and nutrient recycling (Fig. \ref{fig:NE-PP-OCCI}). This increased productivity is most likely from smaller-celled species that contribute less to fish production compared to larger phytoplankton. The 2019 winter-spring phytoplankton bloom, comprised primarily of larger diatoms, was average in both the GOM and GB, however the timing in the GOM was later than normal (Fig. \ref{fig:NE-chl-weekly}). The spring bloom period was below average for both GOM and GB, while the fall bloom was near average for both regions, but varied spatially (Fig. \ref{fig:NE-chl-map}).
+
+```{r NE-sli, fig.width = 8, fig.asp = 0.25, fig.cap = "GB and GOM annual primary production anomaly."}
+# sli <- ecodata::zoo_sli_anom %>%
+#   filter(EPU %in% c("GOM","GB"),
+#          str_detect(Var, "Sm-Lg copepod anom")) %>%
+#   mutate(hline = 0)
+# sli$EPU <- factor(sli$EPU, levels = c("GOM","GB"))
+
+pp_anom <- ecodata::chl_pp %>%
+  filter(str_detect(Var, "ANNUAL_PPD_RATIO_ANOMALY"),
+         EPU %in% c("GOM","GB")) %>%
+  mutate(hline = 1,
+         Time = as.numeric(as.character(Time)),
+         Var = "ANNUAL_PPD_RATIO_ANOMALY")
+pp_anom$EPU <- factor(pp_anom$EPU, levels = c("GB","GOM"))
+
+# sli_plt <- sli %>%
+#   ggplot(aes(x = Time, y = Value, group = Var)) +
+#          annotate("rect", fill = shade.fill, alpha = shade.alpha,
+#       xmin = x.shade.min , xmax = x.shade.max,
+#       ymin = -Inf, ymax = Inf) +
+#   geom_line() +
+#   geom_point() +
+#   guides(color = F) +
+#   facet_wrap(EPU~.,ncol = 2)+
+#   xlab("")+
+#   ylab("Small-large abundance") +
+#   xlab(element_blank())+
+#   ggtitle("Small-large copepod abundance") +
+#     scale_x_continuous(expand = c(0.01, 0.01), limits = c(1998, 2018))+
+#       geom_hline(aes(yintercept = hline,
+#                      group = Var),
+#            size = hline.size,
+#            alpha = hline.alpha,
+#            linetype = hline.lty)+
+#   theme_facet() +
+#   theme(strip.text=element_text(hjust=0))
+
+pp_anom_plt <- pp_anom %>%
+    ggplot(aes(x = Time, y = Value, group = Var)) +
+         annotate("rect", fill = shade.fill, alpha = shade.alpha,
+      xmin = x.shade.min , xmax = x.shade.max,
+      ymin = -Inf, ymax = Inf) +
+  geom_line() +
+  geom_point() +
+  guides(color = F) +
+  ylab("Anomaly ratio") +
+  xlab(element_blank())+
+  facet_wrap(EPU~.,ncol = 2)+
+  ggtitle("Primary production anomaly ratio") +
+    scale_x_continuous(expand = c(0.01, 0.01), limits = c(1998, 2019))+
+    scale_y_continuous(limits = c(0.8,1.2)) +
+      geom_hline(aes(yintercept = hline,
+                     group = Var),
+           size = hline.size,
+           alpha = hline.alpha,
+           linetype = hline.lty)+
+  theme_facet() +
+  theme(strip.text=element_text(hjust=0))
+
+pp_anom_plt
+#sli_plt + pp_anom_plt + plot_layout(ncol = 1) & theme(plot.margin = margin(t = 0))
+
+```
+
 
 ```{r NE-PP-OCCI, fig.width=8, fig.height = 8, fig.cap = "Monthly primary production trends show the annual cycle (i.e. the peak during the summer months) and the changes over time for each month."}
 out_pp <- ecodata::chl_pp %>% 
@@ -2966,6 +3031,8 @@ knitr::include_graphics(file.path(image.dir,"CHL_SEASONAL_ANOMS_2019.png"))
 
 ```
 
+Fluctuations in primary production over time (Fig. \ref{fig:NE-sli})  may relate to observed patterns in copepod size structure (Fig. \ref{fig:NE-zoo-abund}). This period also corresponds with regime shifts in fish recruitment [@perretti_regime_2017].
+
 ## Zooplankton (GOM and GB)
 The most abundant zooplankton species in the GOM are the large-bodied *Calanus finmarchicus* (an important prey for larval fish and the north Atlantic right whale), and the small-bodied *Centropages typicus* and *Pseudocalanus* spp. [@morse_distinct_2017].  *Calanus finmarchicus* had low overall abundance in the GOM from 2010-2014, with higher than normal abundance in 2015-2016, normal levels in 2017, and higher abundance in 2018 (Fig. \ref{fig:NE-zoo-abund}). On GB, *Calanus finmarchicus*  annual abundance has been lower than normal from 2010-2017 with slightly higher than normal values in 2018. 
 
@@ -2988,6 +3055,7 @@ ecodata::zoo_abund %>%
   ggtitle("Small and large-bodied copepod abundance anomaly") +
   facet_wrap(EPU~., nrow = 2) +
   scale_x_continuous(expand = c(0.01, 0.01))+
+  scale_colour_discrete(name = "Copeopds", labels = c("small-bodied", "large-bodied"))+
       geom_hline(aes(yintercept = hline),
            size = hline.size,
            alpha = hline.alpha,
@@ -2995,13 +3063,13 @@ ecodata::zoo_abund %>%
   theme_facet() +
   theme(strip.text=element_text(hjust=0,
                                 face = "italic"), 
-        legend.title = element_blank())
+        legend.title = element_blank()) 
 
 ```
 
 Cnidarians (jellyfish) exhibit an increasing trend in abundance over the long term record, and higher than normal abundance during the 1990's when the abundance of small-bodied copepods was highest (Fig. \ref{fig:ne-euph-cnid}). Euphausiids (krill), important prey items for many fish species, also exhibit a long term increasing trend in abundance in the GOM and GB (Fig. \ref{fig:ne-euph-cnid}).
 
-```{r ne-euph-cnid, fig.width = 8, fig.cap="Stratified abundance of cnidarians and euphausiids in Mid-Atlantic Bight."}
+```{r ne-euph-cnid, fig.width = 8, fig.cap="Stratified abundance of cnidarians and euphausiids in New England."}
 zoo_abund <- ecodata::zoo_strat_abun %>% 
   mutate(Value = log10(Value+1)) %>% 
   filter(EPU %in% c("GOM", "GB"),
@@ -3056,71 +3124,6 @@ gb_zoo<-zoo_abund %>%
 cowplot::plot_grid(gb_zoo, gom_zoo, nrow = 2)
 ```
 
-Fluctuations in primary production over time (Fig. \ref{fig:NE-sli})  may relate to observed patterns in copepod size structure (Fig. \ref{fig:NE-zoo-abund}). This period also corresponds with regime shifts in fish recruitment [@perretti_regime_2017].
-
-```{r NE-sli, fig.width = 8, fig.asp = 0.25, fig.cap = "GB and GOM annual primary production anomaly."}
-# sli <- ecodata::zoo_sli_anom %>%
-#   filter(EPU %in% c("GOM","GB"),
-#          str_detect(Var, "Sm-Lg copepod anom")) %>%
-#   mutate(hline = 0)
-# sli$EPU <- factor(sli$EPU, levels = c("GOM","GB"))
-
-pp_anom <- ecodata::chl_pp %>%
-  filter(str_detect(Var, "ANNUAL_PPD_RATIO_ANOMALY"),
-         EPU %in% c("GOM","GB")) %>%
-  mutate(hline = 1,
-         Time = as.numeric(as.character(Time)),
-         Var = "ANNUAL_PPD_RATIO_ANOMALY")
-pp_anom$EPU <- factor(pp_anom$EPU, levels = c("GB","GOM"))
-
-# sli_plt <- sli %>%
-#   ggplot(aes(x = Time, y = Value, group = Var)) +
-#          annotate("rect", fill = shade.fill, alpha = shade.alpha,
-#       xmin = x.shade.min , xmax = x.shade.max,
-#       ymin = -Inf, ymax = Inf) +
-#   geom_line() +
-#   geom_point() +
-#   guides(color = F) +
-#   facet_wrap(EPU~.,ncol = 2)+
-#   xlab("")+
-#   ylab("Small-large abundance") +
-#   xlab(element_blank())+
-#   ggtitle("Small-large copepod abundance") +
-#     scale_x_continuous(expand = c(0.01, 0.01), limits = c(1998, 2018))+
-#       geom_hline(aes(yintercept = hline,
-#                      group = Var),
-#            size = hline.size,
-#            alpha = hline.alpha,
-#            linetype = hline.lty)+
-#   theme_facet() +
-#   theme(strip.text=element_text(hjust=0))
-
-pp_anom_plt <- pp_anom %>%
-    ggplot(aes(x = Time, y = Value, group = Var)) +
-         annotate("rect", fill = shade.fill, alpha = shade.alpha,
-      xmin = x.shade.min , xmax = x.shade.max,
-      ymin = -Inf, ymax = Inf) +
-  geom_line() +
-  geom_point() +
-  guides(color = F) +
-  ylab("Anomaly ratio") +
-  xlab(element_blank())+
-  facet_wrap(EPU~.,ncol = 2)+
-  ggtitle("Primary production anomaly ratio") +
-    scale_x_continuous(expand = c(0.01, 0.01), limits = c(1998, 2019))+
-    scale_y_continuous(limits = c(0.8,1.2)) +
-      geom_hline(aes(yintercept = hline,
-                     group = Var),
-           size = hline.size,
-           alpha = hline.alpha,
-           linetype = hline.lty)+
-  theme_facet() +
-  theme(strip.text=element_text(hjust=0))
-
-pp_anom_plt
-#sli_plt + pp_anom_plt + plot_layout(ncol = 1) & theme(plot.margin = margin(t = 0))
-
-```
 
 Changes in primary productivity, phytoplankton and zooplankton composition and abundance affect the food web and may be related to observed changes in fish condition, recruitment patterns, and forage fish energy content. However, more research and analyses are needed to directly link these connections. Any attempt to predict how the ecosystem will respond to changes in climate and fishing patterns ultimately will depend on understanding these connections. Our objective is to shed light on these fundamental issues and to document changes affecting human communities and the fishery ecosystem on which we depend.  
 
@@ -3128,7 +3131,7 @@ Changes in primary productivity, phytoplankton and zooplankton composition and a
 
 **Editors** (NOAA NMFS Northeast Fisheries Science Center, NEFSC): Sarah Gaichas, Kimberly Bastille, Geret DePiper, Kimberly Hyde, Scott Large, Sean Lucey, Chris Orphanides
 
-**Contributors** (NEFSC unless otherwise noted): Andy Beet, Patricia Clay, Lisa Colburn, Geret DePiper, Michael Fogarty, Paula Fratantoni, Kevin Friedland, Sarah Gaichas, Robert Gamble, Avijit Gangopadhyay (School for Marine Science and Technology, University of Massachusetts Dartmouth), James Gartland (Virginia Institute of Marine Science), Glen Gawarkiewicz (Woods Hole Oceanographic Institution), Sean Hardison, Kimberly Hyde, John Kocik, Steve Kress and Don Lyons (National Audubon Society’s Seabird Restoration Program), Young-Oh Kwon and Zhuomin Chen (Woods Hole Oceanographic Institute), Sean Lucey, Chris Melrose, Ryan Morse, Kimberly Murray, Chris Orphanides, Richard Pace, Charles Perretti, Vincent Saba, Laurel Smith, John Walden, Harvey Walsh, Mark Wuenschel. 
+**Contributors** (NEFSC unless otherwise noted): Andy Beet, Patricia Clay, Lisa Colburn, Geret DePiper, Michael Fogarty, Paula Fratantoni, Kevin Friedland, Sarah Gaichas, Robert Gamble, Avijit Gangopadhyay (School for Marine Science and Technology, University of Massachusetts Dartmouth), James Gartland (Virginia Institute of Marine Science), Glen Gawarkiewicz (Woods Hole Oceanographic Institution), Sean Hardison, Kimberly Hyde, John Kocik, Steve Kress and Don Lyons (National Audubon Society’s Seabird Restoration Program), Young-Oh Kwon and Zhuomin Chen (Woods Hole Oceanographic Institution), Sean Lucey, Chris Melrose, Ryan Morse, Kimberly Murray, Chris Orphanides, Richard Pace, Charles Perretti, Vincent Saba, Laurel Smith, John Walden, Harvey Walsh, Mark Wuenschel. 
 
 \newpage 
 
