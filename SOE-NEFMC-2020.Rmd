@@ -355,10 +355,10 @@ ggplot()+
       ymin = -Inf, ymax = Inf)+
   
   geom_bar(aes(x=Time, y= Value, fill = Var), stat="identity")+
-  scale_fill_manual(name = "Indicators", values = ind_fill) +
+  scale_fill_manual(name = "Indicators:", values = ind_fill, labels = c("Price", "Volume")) +
   geom_line(data = revchange.gb, 
             aes(x = Time, y = revchange.line, colour = "$"))+
-  scale_colour_grey(name ="Revenue Change") +
+  scale_colour_grey(name ="Revenue Change:") +
   ggtitle("Georges Bank Benthos Component")+
   labs(y="") +
   scale_x_continuous(breaks = seq(1965, 2015, by = 10), expand = c(0.01, 0.01)) +
