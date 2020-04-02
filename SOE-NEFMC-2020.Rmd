@@ -163,11 +163,13 @@ knitr::kable(mng_obj, linesep = "",
 
 The objectives of U.S. federal fishery management include providing benefits to the Nation in terms of seafood production and recreational opportunities, while considering economic efficiency and effects on coastal communities. The indicators in this section consider these objectives for the GOM and GB ecological production units separately where possible.
 
-The amount of potential yield we can expect from a marine ecosystem depends on the amount of production entering at the base of the food web, primarily in the form of phytoplankton; the pathways this energy follows to reach harvested species; the efficiency of transfer of energy at each step in the food web; and the fraction of this production that is removed by the fisheries.  Species such as scallops and clams primarily feed directly on larger phytoplankton species and therefore require only one step in the transfer of energy. The loss of energy at each step can exceed 80-90%.  For many fish species, as many as 2-4 steps may be necessary. Given the trophic level and the efficiency of energy transfer of the species in the ecosystem the amount phytoplankton production required (PPR) to account for the observed catch can be estimated.
+Fisheries remove a proportion of the total energy available to the ecosystem (primary production; see details below). Since 2000, the proportion of energy removed by fisheries has been declining in New England (Fig. \ref{fig:ppr-ne}), because commercial landings have been steady while primary production has increased slightly. 
 
-Primary production required has declined over the past 20 years (Fig. \ref{fig:ppr-ne}). The periodicity in the PPR index reflects both the periodicity in primary production (see Fig. \ref{fig:NE-sli}) and the periodicity in the closed areas for scallop harvest.
+The amount of total fish yield we can expect from a marine ecosystem depends on the amount of production entering at the base of the food web, primarily in the form of phytoplankton; the pathways this energy follows to reach harvested species; the efficiency of transfer of energy at each step in the food web; and the fraction of this production that is removed by the fisheries.  Species such as scallops and clams primarily feed directly on larger phytoplankton species and therefore require only one step in the transfer of energy. The loss of energy at each step can exceed 80-90%.  For many fish species, as many as 2-4 steps may be necessary. Given the trophic level and the efficiency of energy transfer of the species in the ecosystem, the proportion of phytoplankton production required (PPR) to account for the observed catch can be estimated.
 
-```{r ppr-ne, fig.cap="Primary production required to support the commercial landings on Georges Bank (left) and in the Gulf of Maine (right). Included are the top species accounting for 80\\% of the landings in each year, with 15\\% transfer efficiency assumed between trophic levels.", fig.width = 8, fig.asp = 0.25}
+The periodicity in the PPR index (Fig. \ref{fig:ppr-ne}) reflects both the periodicity in primary production (see Fig. \ref{fig:NE-sli}) and the periodicity in the closed areas for scallop harvest.
+
+```{r ppr-ne, fig.cap="Proportion of primary production required (PPR) to support the commercial landings on Georges Bank (left) and in the Gulf of Maine (right). Included are the top species accounting for 80\\% of the landings in each year, with 15\\% transfer efficiency assumed between trophic levels.", fig.width = 8, fig.asp = 0.25}
 
 ecodata::ppr %>% 
   group_by(EPU) %>% 
@@ -188,14 +190,14 @@ ecodata::ppr %>%
   facet_wrap(. ~ EPU, labeller = 
                labeller(EPU = c(GB = "Georges Bank", 
                                 GOM = "Gulf of Maine")))+
-  ggtitle("Primary Production Required")+
+  ggtitle("Commercial Landings Proportion of Primary Production")+
   ylab("Proportion of Total PPD")+
   theme_ts()
 ```
 
 
 ## Gulf of Maine
-Although the demand of fisheries in terms of ecosystem energy is decreasing, the social-ecological system is becoming more reliant on a smaller number of species, inducing system risk through a secondary pathway. A long term significant decrease in NEFMC managed species revenue was offset by non-NEFMC managed species (Fig. \ref{fig:comm-revenue-ne}), primarily lobster, as indicated by the focal component-level Bennet Volume Indicator for benthivores (Fig. \ref{fig:bennet-ne}).  Presently, 2019 lobster catch is down substantially compared with previous years, so a drop in revenue is expected.
+Although the demand of fisheries in terms of total ecosystem energy is decreasing, the social-ecological system is becoming more reliant on a smaller number of species, inducing system risk through a secondary pathway. A long term significant decrease in NEFMC managed species revenue was offset by non-NEFMC managed species (Fig. \ref{fig:comm-revenue-ne}), primarily lobster, as indicated by the focal component-level Bennet Volume Indicator for benthivores (Fig. \ref{fig:bennet-ne}).  Presently, 2019 lobster catch is down substantially compared with previous years, so a drop in revenue is expected.
 
 ```{r comm-revenue-ne, fig.cap = "Total commercial revenue (black) and revenue from NEFMC managed species (red) on Georges Bank (left) and in the Gulf of Maine (right).", fig.width = 8, fig.asp = 0.25}
 
