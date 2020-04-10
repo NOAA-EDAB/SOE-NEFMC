@@ -3057,7 +3057,7 @@ ecodata::zoo_abund %>%
   ggtitle("Small and large-bodied copepod abundance anomaly") +
   facet_wrap(EPU~., nrow = 2) +
   scale_x_continuous(expand = c(0.01, 0.01))+
-  scale_colour_discrete(name = "Copeopds", labels = c("small-bodied", "large-bodied"))+
+  scale_colour_discrete(name = "Copeopds", labels = c("large-bodied", "small-bodied"))+
       geom_hline(aes(yintercept = hline),
            size = hline.size,
            alpha = hline.alpha,
