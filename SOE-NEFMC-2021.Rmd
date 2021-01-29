@@ -1,0 +1,614 @@
+---
+title: "null"
+csl: plos.csl
+fontsize: 10pt
+output:
+  pdf_document:
+    includes:
+      in_header: latex/header.tex
+    keep_tex: yes
+  html_document:
+    df_print: paged
+  word_document: default
+link-citations: yes
+geometry: left=2cm, right=2cm, top=2cm, bottom=3cm, footskip = .5cm
+subparagraph: yes
+bibliography: SOE2020.bib
+---
+
+```{r setup, include=FALSE}
+
+# library(tint)
+# # invalidate cache when the package version changes
+# knitr::opts_chunk$set(tidy = FALSE, cache.extra = packageVersion('tint'))
+# options(htmltools.dir.version = FALSE)
+
+#Default Rmd options
+knitr::opts_chunk$set(echo = FALSE,
+                      message = FALSE,
+                      dev = "cairo_pdf",
+                      warning = FALSE,
+                      fig.width = 4,
+                      fig.asp = 0.45,
+                      fig.align = 'center'
+                      ) #allows for inserting R code into captions
+
+#Plotting and data libraries
+#remotes::install_github("noaa-edab/ecodata@0.1.0") #change to 2020 ecodata version for release
+library(tidyverse)
+library(tidyr)
+library(ecodata)
+library(here)
+library(kableExtra)
+
+```
+
+```{r, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-setup.R")}
+```
+
+```{r, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-GIS-setup.R")}
+```
+
+```{r, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_NE.Rmd-setup.R")}
+```
+
+```{r, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_NE.Rmd-setup.R")}
+```
+
+\setcounter{page}{3}
+
+# Characterizing ecosystem change for fishery management
+
+The Northeast shelf ecosystem is changing and affecting the services the ecosystem provides. To illustrate how multiple factors are driving change in this complex ecosystem we are using three overarching concepts: multiple system drivers, regime shifts, and ecosystem reorganization. Physical, chemical, biological, and human factors comprise the **multiple system drivers** that influence the quality and distribution of habitat in the ocean, which affects the amount and diversity of fish in the ocean. These environmental drivers combined with multiple social and economic drivers influence the range of fishing opportunities and the seafood, recreation, and other ecosystem services we derive from the ocean. 
+
+```{r, out.width='72%'}
+
+knitr::include_url("https://github.com/NOAA-EDAB/presentations/raw/master/docs/EDAB_images/multipledrivers.png")
+
+```
+
+Changes in those drivers can lead to **regime shifts** — large, abrupt and persistent changes in the structure and function of an ecosystem. Regime shifts and changes in how the multiple system drivers interact can result in **ecosystem reorganization** as species and humans respond and adapt to the new environment. 
+
+```{r, out.width='72%'}
+
+knitr::include_url("https://github.com/NOAA-EDAB/presentations/raw/master/docs/EDAB_images/RegimeReorg.png")
+```
+
+# Report Structure
+
+The purpose of this report is to synthesize ecosystem information to better meet fishery management objectives, and to update the MAFMC’s Ecosystem Approach to Fishery Management (EAFM) risk assessment. The major messages of the report are synthesized in the 2-page summary. The information in this report is organized into two sections; performance against ecosystem-level management objectives (Table \ref{tab:management-objectives}), and risks to fishery management (Climate change and Other Ocean Uses).  
+
+Detailed technical methods documentation^[https://NOAA-EDAB.github.io/tech-doc] and indicator data^[https://github.com/NOAA-EDAB/ecodata] are available online. The details of standard figure formatting (Fig. \ref{fig:docformat}a), categorization of fish and invertebrate species into feeding groups (Table \ref{tab:species-groupings}), and definitions of ecological production units (EPUs, including the Mid-Atlantic Bight, MAB; Fig. \ref{fig:docformat}b) are provided at the end of the document. 
+
+```{r management-objectives}
+
+mng_obj <- data.frame("Objective Categories" = c("Seafood Production",
+                                                 "Profits","Recreation",
+                                                 "Stability","Social & Cultural",
+                                                 "Protected Species",
+                                                 "Biomass","Productivity",
+                                                 "Trophic structure","Habitat"),
+"Indicators reported here" = c("Landings by feeding guild","Revenue decomposed to price and volume",
+                               "Days fished; recreational catch",
+                               "Diversity indices (fishery and species)",
+                               "Community engagement/reliance status",
+                               "",
+                               "Biomass or abundance by feeding guild from surveys",
+                               "Condition and recruitment of managed species, Primary productivity",
+                               "Relative biomass of feeding guilds, Zooplankton",
+                               "Estuarine and offshore habitat conditions"))
+
+knitr::kable(mng_obj, linesep = "",
+      col.names = c("Objective Categories","Indicators reported here"),
+      caption = "Established ecosystem-scale objectives in the Mid-Atlantic Bight",
+      #align = 'c',
+      booktabs = T) %>%
+  kable_styling(latex_options = "hold_position", "scale_down") %>%
+ # column_spec(c(2), width = c("25em")) %>%
+  row_spec(0, bold = TRUE) %>%
+ # group_rows("Provisioning/Cultural", 1,4) %>%
+ # group_rows("Supporting/Regulating", 5,9)
+  pack_rows("Provisioning/Cultural Services", 1,6) %>%
+  pack_rows("Supporting/Regulating Services", 7,10)
+
+
+```
+ 
+# Performance relative to fishery management objectives
+
+In this section, we examine indicators related to broad, ecosystem-level fishery management objectives. We also provide hypotheses about *why* we are seeing these trends by identifying interacting drivers (other indicators in this report), and where possible, any regime shifts or potential changes in ecosystem structure. Identifying multiple drivers, regime shifts, and potential changes to ecosystem structure, as well as mapping most vulnerable resources, can help managers determine whether we can do anything differently to meet objectives and how to prioritize for upcoming issues/risks. 
+
+## Seafood Production 
+
+### Indicator: Landings
+
+Total commercial landings and MAFMC's managed landings in the MAB continue to trend down. 
+
+```{r, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-comdat-total-landings.R")}
+```
+
+The downward trend is most significant in the benthos (clams and scallops) group.
+
+```{r, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-comdat-commercial-landings.R"), fig.asp=1.5}
+```
+
+Recreational landings are also down overall in the MAB.
+```{r, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-recdat-landings.R")}
+
+```
+
+Recreational shark landings show increased catch of pelagic sharks over the past decade, with a sharp decrease in the two most recent years.
+```{r, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-rec_hms.R")}
+
+```
+
+Aquaculture production is not yet included in total seafood landings, but we are working towards that in future reports. Available aquaculture production of oysters for a subset of Mid-Atlantic states is trending upwards^[https://noaa-edab.github.io/catalog/aquaculture.html]
+
+### Why
+
+Ecosystem overfishing in the MAB is unlikely by two metrics, so unlikely to be driving decreased landings.
+#```{r, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chun#k-scripts/human_dimensions_NE.Rmd-fogarty.R")}
+#```
+
+#```{r, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chun#k-scripts/human_dimensions_NE.Rmd-ryther.R")}
+#```
+
+Fisheries account for a lower proportion of primary production removal now than in the past
+```{r, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-ppr.R")}
+```
+
+
+Stock status is meeting objectives for most MAFMC managed stocks, so stock status and associated management constraints are unlikely to be driving decreased landings.
+```{r, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-stock-status.R"), fig.width = 7.5, fig.asp = 0.5}
+```
+
+Aggregate biomass trends are mostly stable in the MAB, while spring piscivores and fall benthos show long term increases (although many surveys not completed in 2020, NEAMAP Fall is included). Overall biomass does not appear to drive declining landings.
+```{r, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_NE.Rmd-aggregate-biomass.R"), fig.width=8, fig.asp = 0.75}
+```
+
+Commercial landings decline:  
+- Benthos landings decline likely driven by market dynamics  
+    - Surf clam and ocean quahog not binding quotas  
+    - Downward price pressure from international supply [reported in performance reports](https://static1.squarespace.com/static/511cdc7fe4b00307a2628ac6/t/5f075b6737cbe041406404ab/1594317671964/f_FPR_for2020_SurfclamOceanQuahog.pdf), increasing costs of aging fleet/closures  
+    - Climate change increases mixing of 2 species, regulatory restrictions on catching a mix  
+    - Shifting into deeper water and northward.  
+    
+Recreational landings decline: 
+- Recreational shark landings declining due to management (previously less regulated)
+- Most recent lows in all other recreational fish could still be the change in MRIP survey, calibration not quite lining up. Limits actually increased here so less likely management  
+- Won't know till we get more data points  
+- 80s/90s vs recent rec: could also be survey instrument? Could also be change from less management to more active management  
+- Decline in rec effort since 2010, maybe generational shift, not at same rate for catch/landings  
+
+Even if market driven, changes in other indicators require monitoring as they may become important drivers of landings in the future:  
+- Climate trending to uncharted territory (see [Climate Risks section](#climate-and-ecosystem-productivity))  
+- Stocks are shifting distribution throughout the region  
+```{r, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_MAB.Rmd-species-dist.R"), fig.asp=1}
+```  
+- Some ecosystem composition and production changes (see [Stability section](#stability))  
+- Engagement declining (see [Social and Cultural section](#social-and-cultural))  
+
+## Profits 
+
+### Indicators: revenue (a proxy for profits), with price and volume components  
+Total commercial revenue has increased over the long term but the trend may be reversing,with recent total revenue below the long term average. MAFMC managed species revenue continued its downward trend, with recent years near a time series low.
+```{r, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-comdat-comm-revenue.R")}
+```
+
+Revenue trends overall mirror those for the benthos (clams and scallops) group over the past decade.  
+```{r, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-bennet2.R"), fig.width = 7.5, fig.asp = 0.5}
+```
+
+### Why  
+Increasing revenue is due to increasing quantities landed, which offset declining prices. Recent declines in prices contributed to falling revenue as quantities landed did not increase enough to overcome declining prices. Falling prices for surf clams and ocean quahogs in particular were likely due to increased competition from international sources, according to the [fishery performance report](https://static1.squarespace.com/static/511cdc7fe4b00307a2628ac6/t/5f075b6737cbe041406404ab/1594317671964/f_FPR_for2020_SurfclamOceanQuahog.pdf).
+
+Even if market driven, changes in other indicators require monitoring as they may become important drivers of revenue in the future:   
+-  Surf clams and ocean quahogs are vulnerable to climate change because of their sensitivity to warming ocean temperatures and ocean acidification.   
+-  New observations of acidification in surf clam summer habitat are approaching, but not yet at, levels affecting surf clam growth (see [Climate Risks section](#climate-and-ecosystem-productivity)).  
+
+## Recreational Opportunities 
+
+### Indicators: Days fished, fleet diversity  
+Recreational days fished have been stable over the long term, with current days fished near the long term average. However, recreational fleet diversity has declined over the long term.
+```{r, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_MAB.Rmd-recdat-effort.R")}
+```
+
+```{r, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_MAB.Rmd-recdat-diversity.R")}
+
+```
+- Overall effort being steady but change in diversity of recreational fleet effort suggests a changing range of opportunities
+- Changes access to types of species that can be caught
+- impacts?
+
+### Why
+Multiple drivers
+-  Shift from charter party to shore based over the long term
+    -  Shoreside larger component
+    -  Changing species caught
+(ASMFS and SAFMC managed species maintain catch diversity--next section, will break up plots)
+
+
+## Stability 
+
+### Indicators: fishery fleet and catch diversity, ecological component diversity
+Commercial fishery fleet count, fleet diversity and permit diversity has been stable over time in the MAB with current values near the long term average. This indicates similar commercial fleet composition and species targeting opportunities over time. 
+-  Reliant on a smaller number of species relative to mid 90s, but now consistent and near long term average
+-  Good to increase diversity or bad? Losing traditional fisheries, cascading effects on newly entered fisheries?
+
+```{r, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_MAB.Rmd-commercial-div.R"), fig.asp=1}
+```
+
+As noted [above](#recreational-opportunities), recreational fleet effort diversity is unstable (declining). However, recreational species catch diversity is stable.
+```{r, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_MAB.Rmd-recdat-div-catch.R")}
+```
+
+Zooplankton diversity is increasing in the MAB, while larval fish and adult fish diversity indices are stable over time with current values near the long term average.
+
+```{r, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_MAB.Rmd-zoo-diversity.R")}
+```
+
+```{r, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_MAB.Rmd-ichthyo-diversity.R")}
+```
+
+```{r, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_MAB.Rmd-exp-n.R"), fig.width=5}
+```
+
+ 
+### Why
+Stability in commercial fleets reflects...  adequate capacity to respond to current fishery changes? no big shocks from management or the ecosystem so far? permitting structure that enforces similar composition? 
+
+Declining recreational fleet effort diversity, as noted [above](#recreational-opportunities), indicates that the contraction by the party/charter boat sector continues, with shoreside angling becoming more important, by percentage.
+
+Stability in recreational species catch diversity has been maintained by recent increase in ASMFC and SAFMC managed species.
+
+Increasing zooplankton diversity is driven by ... more southern species (tropicalization?) or the loss of a dominant species (Cal fin?) with everything else staying about the same?
+
+Stable larval and adult fish diversity suggests ... the same overall number and evenness over time, but doesn't rule out species substitutions (e.g., warm-water replacing cold-water). Stable but variable (larval) can indicate changes in a dominant species. 
+
+
+## Social and Cultural 
+
+### Indicators: Commercial and recreational engagement and reliance by community
+In 2020, we reported that the number of highly engaged Mid-Atlantic commercial fishing communities have declined over time, and the engagement scores have also declined in medium-highly engaged communities. Here we focus on engagement and reliance scores for individual communities, as well as social vulnerability. 
+```{r, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_MAB.Rmd-commercial-engagement.R"), fig.width = 7.5, fig.asp = 0.75}
+```
+
+```{r, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_MAB.Rmd-recreational-engagement.R"), fig.width = 7.5, fig.asp = 0.75}
+```
+
+
+### Why
+List multiple drivers of community status: landings, permits, etc (definition of engagement and reliance), as well as drivers of social vulnerability.
+
+Provide statement of how managers can use this status plot going forward
+
+## Protected Species
+Protected species include marine mammals (under the Marine Mammal Protection Act), endangered and threatened species (under the Endangered Species Act), and migratory birds (under the Migratory Bird Treaty Act). In the Northeast US, endangered/threatened species include Atlantic salmon, Atlantic and shortnose sturgeon, all sea turtle species, and 5 baleen whales. Fishery management objectives for protected species generally focus on reducing threats and on habitat conservation/restoration; here we report on the status of these actions as well as indicating the potential for future interactions driven by observed and predicted ecosystem changes in the Northeast US region. 
+
+Protected species objectives include managing bycatch to remain below potential biological removal (PBR) thresholds, recovering endangered populations, and monitoring unusual mortality events (UMEs). 
+
+### Indicators: bycatch, population (adult and juvenile) numbers, mortalities
+Both harbor porpoise and gray seal bycatch indices are below current PBR thresholds, meeting management objectives. 
+```{r, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_MAB.Rmd-harborporpoise.R")}
+```
+
+(Blue line here is specific to New England--did we get Mid specific estimates?)
+```{r, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_MAB.Rmd-grayseal.R")}
+```
+
+The North Atlantic right whale population was on a recovery trajectory until 2010, but has since declined. Reduced survival rates of adult females and diverging abundance trends between sexes have also been observed. It is estimated that there are only about 100 adult females remaining in the population. 
+```{r, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_MAB.Rmd-narw-abundance.R")}
+```
+North Atlantic right whale calf counts have also been declining. In 2018 there were zero observed new calves, and a drop in annual calves roughly mirrors the abundance decline (Fig above), however seven new calves were born in 2019. Preliminary data suggest that 2020 calf count is not 0; 12 calves have been observed as of January 2021.  
+```{r, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_MAB.Rmd-NARW-calf-abundance.R")}
+```
+
+This year saw the continuation of four Unusual Mortality Events (UMEs). Three large whale Unusual Mortality Events (UMEs) are ongoing for North Atlantic right whales, humpback whales, and minke whales. In all three cases human interaction appears to have contributed to increased mortalities, although investigations are not complete. Since 2017, the total UME right whale mortalities includes 30 dead stranded whales, 9 in the US and 21 in Canada. During 2019 9 whales have been stranded in Canada and one in the US, 3 of these were determined to have due to vessel strike while the remainder are undetermined at this time. A UME for both gray and harbor seals was declared in 2018, triggering an investigation into the cause of this event. Tests so far suggest phocine distemper virus as a potential cause, although the investigation is not yet complete. 
+
+
+### Why
+Bycatch management measures have been implemented. The downward trend in harbor porpoise bycatch can also be due to changing seasonal distributions of harbor porpoise and fisheries reducing overlap and a decrease in gill net effort. The increasing trend in gray seal bycatch is related to an increase in the gray seal population (US pup counts). 
+
+The number of grey seals (Halichoerus grypus) in U.S. waters has risen dramatically in the last 2 decades, with few observed in the early 1990s to roughly 24,000 observed in southeastern Massachusetts in 2015. Roughly 30,000 - 40,000 gray seals were estimated in southeastern Massachusetts in 2015, using correction factors applied to seal counts visible in Google Earth imagery. As of 2016, the size of the grey seal population in Canada, which is part of the same stock as the grey seals in the U.S., was estimated to be roughly 425,000, and increasing by 4% a year. In U.S. waters, the number of pupping sites has increased from 1 in 1988 to 9 in 2019. Mean rates of increase in the number of pups born at various times since 1988 at 4 of the more data-rich pupping sites (Muskeget, Monomoy, Seal, and Green Islands) ranged from -0.2% (95%CI: -2.3 - 1.9%) to 26.3% (95%CI: 21.6 - 31.4%). These high rates of increase provide further support that seals from Canada are continually supplementing the breeding population in U.S. waters.
+
+Strong evidence exists to suggest that the level of interaction between right whales and the combination of offshore lobster gear in the US and snow crab gear in Canada is contributing substantially to the decline of the species. Further, right whale distribution has changed since 2010. The reasons for these changes is unclear, but changes in climate and primary prey (Calanus finmarchicus) are suspected. 
+
+A marine mammal climate vulnerability assessment is currently underway and for Atlantic and Gulf of Mexico populations and will be reported on in future versions of this report. 
+
+# Risks to meeting fishery management objectives
+
+## Climate and Ecosystem Productivity
+
+### Climate Change Indicators: ocean currents, temperature, heatwaves, acidification
+Regional ocean current indicators remain at unprecedented levels. The Gulf Stream Index shows an all time northward progression of this current in 2019. 
+```{r, code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_MAB.Rmd-gsi.R")}
+```
+In 2019, we also observed the second lowest proportion of Labrador Shelf water entering the Gulf of Maine since 1978. 
+```{r, code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_NE.Rmd-slopewater.R")}
+```
+Ocean temperatures continue to warm at both the surface and bottom. Warming is not seasonally uniform, however: spring 2020 was cooler than average on portions of the shelf.
+```{r, code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_MAB.Rmd-bottom-temp.R")}
+```
+
+```{r, code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_MAB.Rmd-seasonal-sst-anom-gridded.R"), fig.width = 8, fig.height = 7}
+```
+
+Chesapeake Bay also experienced a warmer-than-average winter and a cooler-than-average spring in 2020, relative to the previous decade.  Water temperatures returned to average during the summer and slightly warmer than average October through December. 
+
+The MAB experienced frequent ocean heatwaves of moderate intensity in 2020 that extended well into December, as observed in Chesapeake Bay.
+```{r, code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_MAB.Rmd-heatwave-year.R"), fig.asp=.6}
+```
+
+New measurements show areas of low pH (7.8) in summer in Mid-Atlantic habitats occupied by surfclams and sea scallops. This seasonal pH minimum is associated with cold pool subsurface and bottom water, which is cut off from ventilation with surface water due to strong stratification. 
+
+```{r, fig.asp=1}
+knitr::include_url("https://github.com/NOAA-EDAB/ecodata/raw/master/docs/images/Seasonal%20pH%20on%20MAB%20shelf%20-%20Grace%20Saba.jpg")
+```
+
+Nearshore we see lower pH because of freshwater input - during the fall overturn the pH increases because of the input of the salty water, primary productivity increases pH, but increased respiration decreases pH
+
+The MAB cold pool area was near average in 2018, with smallest areas associated with record-warm years (2012).
+
+### Ecosystem Productivity Indicators: primary production, zooplankton, forage fish, fish condition
+Increased temperatures drive increased rates of photosynthesis in summer
+```{r, code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_MAB.Rmd-pp-monthly.R"), fig.width=8}
+```
+
+Increased overall primary production from summer production, larger winter blooms in 2020?
+```{r, code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_MAB.Rmd-chl-weekly.R"), fig.width = 5, fig.asp = 0.9}
+```
+
+Climatology of seasonal size fractions confirms that summer production dominated by smaller size classes (pico and nano)
+```{r, code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_MAB.Rmd-weekly-phyto-size.R"), fig.asp=.6}
+```
+
+Less efficient transfer to higher trophic levels
+
+Trends in gelatinous zoops, krill are the same across EPUs as last year, data was updated to 2019. Long term increase almost all regions.
+```{r, code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_MAB.Rmd-zoo-strat-abun.R"), fig.width=8, fig.asp=.25}
+```
+
+Larger zooplankton (Cal fin) had above average abundance in 2018-2019.
+```{r, code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_MAB.Rmd-zoo-abund.R")}
+```
+
+Trends in Cal fin overwintering stage important as forage for right whales and forage fish.
+```{r, code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_MAB.Rmd-calanus-stage.R"), fig.width=8, fig.asp=.25}
+```
+
+
+Forage anomaly from zooplankton data, no apparent trend in MAB
+```{r, code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_MAB.Rmd-forage-anomaly.R")}
+```
+
+
+Forage energy density updated; lower now for herring than in 80s-90s, other species seasonal difference but near previous estimates.
+```{r, code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_MAB.Rmd-energy-density.R"), fig.width = 7.5, fig.asp = 0.5}
+```
+
+
+Temperature and zooplankton changes impact fish condition for different species, impacts to fisheries and markets are under investigation.
+```{r, fig.width = 7.5, fig.asp = 0.5}
+knitr::include_url("https://github.com/NOAA-EDAB/ecodata/raw/master/docs/images/condition_proj.png")
+```
+
+
+### Ecosystem Structure Indicators: distribution shifts, diversity, predators
+As noted in the [Landings "Why" section above](#landings), stocks are shifting distribution throughout the region. In aggregate, fish stocks are moving northeast along the shelf and into deeper waters.  
+Zooplankton diversity is increasing in the MAB, while larval fish and adult fish diversity indices are stable over time with current values near the long term average (see [Diversity Indicators section, above](#diversity)).  
+New indicators for shark populations, combined with information on grey seals (see [Protected Species "Why" section, above](#protected-species)), suggests predator populations are stable to increasing in the MAB.
+
+```{r, code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_MAB.Rmd-observed-sharks.R")}
+```
+
+
+```{r}
+#code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_MAB.Rmd-hms-cpue-sharks.R"),
+#sp_cat<- read.csv(here::here("data-raw/hms-mrip/hms_sp_category.csv"))
+sp_cat<- read.csv("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/data-raw/hms-mrip/hms_sp_category.csv")
+ecodata::hms_cpue %>% 
+  filter(str_detect(Var, "SHARK")) %>% 
+  rename(COMMON_POP = Var) %>% 
+  left_join(sp_cat) %>% 
+  group_by(Year, SP_CATEGORY) %>% 
+  summarise(Value = sum(Value)) %>% 
+  rename(Var = SP_CATEGORY) %>% 
+  filter(!Var == "NA") %>% 
+  ggplot()+
+ ggplot2::annotate("rect", fill = shade.fill, alpha = shade.alpha,
+      xmin = x.shade.min , xmax = x.shade.max,
+      ymin = -Inf, ymax = Inf) +
+  ggplot2::geom_point(aes(x=Year, y = Value, color = Var))+
+  ggplot2::geom_line(aes(x=Year, y = Value, color = Var))+
+  #ggplot2::facet_wrap(~Var, scales = "free")+
+  ggplot2::ggtitle("HMS POP SHARK CPUE")+
+  ggplot2::ylab("Number per Haul")+
+  ecodata::theme_ts()
+```
+
+### Habitat Climate Vulnerability
+New habitat climate vulnerability analysis links black sea bass, scup, and summer flounder to several highly vulnerable nearshore habitats from salt marsh through shallow estuarine and marine reefs.
+
+### Implications
+
+Climate-managed species links
+
+The warm winter may have affected key Chesapeake Bay fishery resources during a critical period. Results of the Maryland juvenile striped bass survey, conducted by the Maryland Department of Natural Resources (MDNR), showed low recruitment success in 2020, about fivefold below the long-term average. This low recruitment event may have been caused by a mismatch in striped bass (Morone saxatilis) larval and prey abundance due to the warm winter conditions, resulting in reduced larval survival. Warm winters typically trigger an early plankton bloom, including key copepod prey, which dies out before striped bass larvae are present in the tributary (Millette et al. 2019). 
+
+Conversely, warmer winter temperatures may have reduced overwintering mortality of Chesapeake Bay blue crabs (Callinectes sapidus). Calculations done by MDNR based on data from the annual Bay-wide winter dredge survey indicate that blue crabs experienced the lowest overwintering mortality ever calculated (2020 Chesapeake Bay Blue Crab Advisory Report). Previous studies have demonstrated the correlation between winter water temperature and blue crab survival in the Chesapeake Bay (Bauer & Miller 2010, Hines et al. 2010, Rome et al. 2005). 
+
+In addition to winter water temperature, survival of early life stages of striped bass in the Chesapeake Bay is strongly correlated with freshwater flow (Martino & Houde 2010, Millette et al. 2019, North & Houde 2003); high-flow regimes push zooplankton prey downstream, where they get trapped in the estuarine turbidity maximum with striped bass larvae. In low-flow years, zooplankton prey are less likely to match up with striped bass larvae in space and time, reducing larval survival and recruitment success. The combined effects of warm winter temperatures and low flow in 2020 may be the primary cause of the low recruitment success observed by the MDNR juvenile striped bass survey. 
+
+Conversely, increased salinity often results in high juvenile oyster abundance in the Chesapeake Bay (Kimmel et al. 2014). In Maryland, the 2020 MDNR fall oyster survey documented above-average spatsets along the Eastern Shore as expected given the high salinity; however, the Western Shore did not fare as well, suggesting that local environmental conditions are also important.
+
+Ocean acidification also has different implications, depending on the species and life stage. The decrease of pH decreases the feeding rates. Surfclam more sensitive than sea scallops. Lab studies have found a surfclam threshold metabolic depression in a pH range of 7.46-7.28. 
+Ocean pH from one season of data (mostly 2019) hasn't reached the threshold observed for surfclams in lab studies so far--BUT we haven’t yet tested thresholds for other species or for multiple life stages, specifically larval stages that are typically more vulnerable to OA.
+
+More variable system--not uniformly warmer, more variable too and this makes a wider range of conditions for biota to deal with
+
+2012 still warmest on record, now papers published on impacts to give insight into what the implications of heatwaves can be
+Lobster was a big one--timing of fishing, markets, etc
+Cobia habitat shifts (and other species)--seen off RI now
+
+Fish Condition Links to Environmental Drivers
+
+General Additive Models (GAMs) were used to test how measures of fishing pressure, stock abundance and individual environmental variables performed in explaining the changes of fish condition (fatness) over time. Some species such as Acadian redfish, butterfish and winter flounder were more affected by fishing pressure and stock size, whereas other species such as weakfish, windowpane and American plaice may be more affected by local bottom temperatures and zooplankton. These relationships can potentially provide insights on which species may be more vulnerable to environmental changes such as climate change, as well as what biomass changes may be expected from certain species given current environmental conditions. Correlations were examined between environmental drivers, and as expected there were strong temperature correlations between seasons as well as correlations between temperature and zooplankton indices. Planned future work includes building full GAM models for each fish species, and linking fish condition to socio-economic models to assess whether fish condition impacts the value generated by that species.
+ 
+Socio-Economic Models
+ 
+Economic theory and empirical analyses have highlighted that many factors can affect the price of fish, including the total quantity of fish in the market (sometimes including internationally), increased demand around holidays, time the fish was in storage, and other issues that either affect the quality of the fish or the amount of fish available for purchase. We plan on empirically exploring whether fish condition is a quality metric people care about. Understanding whether people care about fish condition will help us more holistically understand the impacts of condition change on society, if any.
+
+## Other Ocean Uses: Offshore Wind
+
+### Indicators: revenue in lease areas, development timeline, survey overlap
+Commercial fishery revenue in proposed offshore wind lease areas ranges from x-y% of total revenue for MAFMC managed species.
+```{r, code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_MAB.Rmd-wind-revenue.R")}
+```
+
+Offshore wind projects may cover more than 1.5 million acres by 2029.
+```{r, code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_MAB.Rmd-wind-dev-speed0.R")}
+```
+
+Scientific survey area overlap with offshore wind lease areas ranges from 2-25% across ecosystem, shellfish, fish, and protected species surveys.
+```{r}
+knitr::include_url("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/docs/images/SurveysWindFarmAreas_20201229.jpg")
+```
+
+### Implications
+Fishery revenue could be displaced to other areas or foregone if all wind projects are built.  
+Displaced fishing effort can alter fishing methods and change habitat, species (managed and protected), and fleet interactions.  
+Right whales may be displaced and could face possible prey impacts via changed oceanography.  
+Current plans for rapid buildout of offshore wind in a patchwork of areas spreads the impacts differentially throughout the region.  
+```{r, fig.asp=1.5}
+knitr::include_url("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/docs/images/MidAtlantic_2021119-01.jpg")
+```
+
+Offshore wind will pose a risk to scientific data collection for surveys and increased uncertainty for management decision making across physical, low trophic, fish, and protected species.
+
+
+
+
+# Contributors
+
+**Editors** (NOAA NMFS Northeast Fisheries Science Center, NEFSC): Sarah Gaichas, Kimberly Bastille, Geret DePiper, Kimberly Hyde, Scott Large, Sean Lucey, Chris Orphanides 
+
+**Contributors** (NEFSC unless otherwise noted): Andy Beet, Patricia Clay, Lisa Colburn, Geret DePiper, Michael Fogarty, Paula Fratantoni, Kevin Friedland, Sarah Gaichas, Avijit Gangopadhyay (School for Marine Science and Technology, University of Massachusetts Dartmouth), James Gartland (Virginia Institute of Marine Science), Glen Gawarkiewicz (Woods Hole Oceanographic Institution), Sean Hardison, Kimberly Hyde, John Kosik, Steve Kress and Don Lyons (National Audubon Society’s Seabird Restoration Program), Ruth Boettcher (Virginia Department of Game and Inland Fisheries), Young-Oh Kwon and Zhuomin Chen (Woods Hole Oceanographic Institute), Sean Lucey, Chris Melrose, Ryan Morse, Kimberly Murray, Chris Orphanides, Richard Pace, Charles Perretti, Vincent Saba, Laurel Smith, John Walden, Harvey Walsh, Mark Wuenschel.  
+
+
+\newpage 
+
+# Document Orientation
+
+The figure format is illustrated in Fig \ref{fig:docformat}a. Trend lines are shown when slope is significantly different from 0 at the p < 0.05 level. An orange line signifies an overall positive trend, and purple signifies a negative trend. To minimize bias introduced by small sample size, no trend is fit for < 30 year time series. Dashed lines represent mean values of time series unless the indicator is an anomaly, in which case the dashed line is equal to 0. Shaded regions indicate the past ten years. If there are no new data for 2018, the shaded region will still cover this time period. The spatial scale of indicators is either coastwide, Mid-Atlantic states (New York, New Jersey, Delaware, Maryland, Virginia, North Carolina), or at the Mid-Atlantic Bight (MAB) Ecosystem Production Unit (EPU, Fig. \ref{fig:docformat}b) level.
+
+```{r docformat, fig.cap = "Document orientation. a. Key to figures. b.The Northeast Large Marine Ecosystem.",  fig.width = 8, fig.height = 2.5}
+#fig.subcap= c('Key to figures.', 'The Northeast Large Marine Ecosystem.'), out.width = '.49\\linewidth', fig.show="hold" 
+# FIgure orientation subfigure
+m <- 0.1
+x <- 1985:2018
+y <-  m*x + rnorm(30, sd = 0.35)
+
+data <- data.frame(x = x,
+                  y = y)
+
+#Define constants for figure plot
+x.shade.max <- max(x)
+x.shade.min <- x.shade.max - 9 
+hline = mean(y)
+
+#Plot series with trend 
+psample <- ggplot2::ggplot(data = data,aes(x = x, y = y)) +
+  #Highlight last ten years
+  annotate("rect", fill = shade.fill, alpha = shade.alpha,
+      xmin = x.shade.min , xmax = x.shade.max,
+      ymin = -Inf, ymax = Inf) +
+  geom_point(size = pcex) +
+  scale_color_manual(aesthetics = "color")+
+  guides(color = FALSE) +
+  geom_hline(aes(yintercept = hline),
+              size = hline.size,
+             alpha = hline.alpha,
+             linetype = hline.lty)+
+  geom_line() +
+  geom_gls() +
+  scale_y_continuous(labels = function(l){trans = l / 1000})+
+  scale_x_continuous(breaks = seq(1985, 2015, by = 5), expand = c(0.01, 0.01)) +
+  ylab(expression("Invented Index, 10"^3*"widgets")) +
+  xlab("Time") +
+  labs(tag = "a")  +
+  theme_ts()
+
+
+# EPU map subfigure
+# Set lat/lon window for map
+xmin = -78
+xmax = -65
+ymin = 36
+ymax = 45
+xlims <- c(xmin, xmax)
+ylims <- c(ymin, ymax)
+
+#CRS
+crs <- "+proj=longlat +lat_1=35 +lat_2=45 +lat_0=40 +lon_0=-77 +x_0=0 +y_0=0 +datum=NAD83 +no_defs +ellps=GRS80 +towgs84=0,0,0"
+
+#Specify data frame with lat/lon locations for labels
+epu_labels <- data.frame(EPU = c("Mid-Atlantic\n Bight",
+                                 "Gulf of Maine",
+                                 "Georges Bank"),
+                         latitude = c(40,42.85,41),
+                         longitude = c(-72.7,-69,-68.5))
+
+#Map of NE LME
+epumap <- ggplot() +
+  geom_sf(data = coast, size = map.lwd) +
+  geom_sf(data = epu_sf, fill = "transparent", size = map.lwd) +
+  coord_sf(crs = crs, xlim = xlims, ylim = ylims) +
+  geom_text(data = epu_labels, aes(x = longitude,
+                                    y = latitude,
+                                    label = EPU),
+            size = 1.7)+
+  theme_map() +
+  scale_x_continuous(breaks = seq(-78, -65, by = 4), expand = c(0.01, 0.01)) +
+  xlab("Longitude") +
+  ylab("Latitude") +
+  labs(tag = "b")
+
+psample + plot_spacer() + epumap + plot_layout(ncol = 3, widths=c(3,.5,4.5))
+
+```
+
+Fish and invertebrates are aggregated into similar feeding categories (Table \ref{tab:species-groupings}) to evaluate ecosystem level trends in predators and prey. 
+
+```{r species-groupings, warning=F}
+
+# new table with all species listed by management entity
+df <- ecodata::species_groupings %>%
+  dplyr::select(SOE.20, COMNAME, Fed.Managed) %>%
+  filter(SOE.20 != "Other") %>%
+  distinct() %>%
+  group_by(SOE.20, Fed.Managed) %>%
+  summarize_all(funs(paste(na.omit(.), collapse = ", "))) %>%
+  spread(Fed.Managed, COMNAME) %>%
+  arrange(factor(SOE.20, levels = c("Apex Predator", "Piscivore", "Planktivore", "Benthivore", "Benthos")))
+df<-df[c(1,3,2,4,5)] %>%
+  mutate_all(tolower)
+
+
+knitr::kable(df, booktabs = TRUE, caption = 'Feeding guilds and management bodies.', 
+             col.names = c("Guild", "MAFMC", "Joint", "NEFMC", "State or Other")) %>%
+  kable_styling(font_size=10, latex_options=c("repeat_header", "scale_down", "hold_position")) %>%
+  row_spec(0,bold=TRUE) %>%
+  column_spec(1, width="2cm") %>%
+  column_spec(2, width="4cm") %>%
+  column_spec(3, width="2cm") %>%
+  column_spec(4, width="5cm") %>%
+  column_spec(5, width="6cm") %>%
+  #column_spec(3, width="7.5cm") #%>%
+  collapse_rows(columns = 1, latex_hline = "major", valign = "middle")
+
+```
+
+
+\newpage 
+
+# References
