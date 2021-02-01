@@ -12,6 +12,7 @@ output:
   word_document: default
 link-citations: yes
 geometry: left=2cm, right=2cm, top=2cm, bottom=3cm, footskip = .5cm
+always_allow_html: true
 subparagraph: yes
 bibliography: SOE2020.bib
 ---
@@ -103,7 +104,7 @@ knitr::kable(mng_obj, linesep = "",
       caption = "Established ecosystem-scale objectives in the Mid-Atlantic Bight",
       #align = 'c',
       booktabs = T) %>%
-  kable_styling(latex_options = "hold_position", "scale_down") %>%
+ # kable_styling(latex_options = "hold_position", "scale_down") %>%
  # column_spec(c(2), width = c("25em")) %>%
   row_spec(0, bold = TRUE) %>%
  # group_rows("Provisioning/Cultural", 1,4) %>%
@@ -124,7 +125,7 @@ In this section, we examine indicators related to broad, ecosystem-level fishery
 
 Total commercial landings and MAFMC's managed landings in the MAB continue to trend down. 
 
-```{r, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-comdat-total-landings.R")}
+```{r, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-comdat-total-landings.R"), fig.width = 7.5}
 ```
 
 The downward trend is most significant in the benthos (clams and scallops) group.
@@ -142,19 +143,22 @@ Recreational shark landings show increased catch of pelagic sharks over the past
 
 ```
 
-Aquaculture production is not yet included in total seafood landings, but we are working towards that in future reports. Available aquaculture production of oysters for a subset of Mid-Atlantic states is trending upwards^[https://noaa-edab.github.io/catalog/aquaculture.html]
+Aquaculture production is not yet included in total seafood landings, but we are working towards that in future reports. Available aquaculture production of oysters for a subset of Mid-Atlantic states is trending upwards
+```{r, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-aquaculture.R"), fig.asp = 1.5}
+
+```
 
 ### Why
 
 Ecosystem overfishing in the MAB is unlikely by two metrics, so unlikely to be driving decreased landings.
-#```{r, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chun#k-scripts/human_dimensions_NE.Rmd-fogarty.R")}
-#```
+```{r, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-fogarty.R"), fig.width = 7.5}
+```
 
-#```{r, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chun#k-scripts/human_dimensions_NE.Rmd-ryther.R")}
-#```
+```{r, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-ryther.R"), fig.width = 7.5}
+```
 
 Fisheries account for a lower proportion of primary production removal now than in the past
-```{r, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-ppr.R")}
+```{r, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-ppr.R"), fig.width = 7.5}
 ```
 
 
@@ -192,11 +196,11 @@ Even if market driven, changes in other indicators require monitoring as they ma
 
 ### Indicators: revenue (a proxy for profits), with price and volume components  
 Total commercial revenue has increased over the long term but the trend may be reversing,with recent total revenue below the long term average. MAFMC managed species revenue continued its downward trend, with recent years near a time series low.
-```{r, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-comdat-comm-revenue.R")}
+```{r, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-comdat-comm-revenue.R"), fig.width = 7.5}
 ```
 
 Revenue trends overall mirror those for the benthos (clams and scallops) group over the past decade.  
-```{r, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-bennet2.R"), fig.width = 7.5, fig.asp = 0.5}
+```{r, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-bennet.R"), fig.width = 7.5, fig.asp = 0.5, echo = FALSE, message=FALSE, results='hide'}
 ```
 
 ### Why  
@@ -210,10 +214,10 @@ Even if market driven, changes in other indicators require monitoring as they ma
 
 ### Indicators: Days fished, fleet diversity  
 Recreational days fished have been stable over the long term, with current days fished near the long term average. However, recreational fleet diversity has declined over the long term.
-```{r, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_MAB.Rmd-recdat-effort.R")}
+```{r, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-recdat-effort.R")}
 ```
 
-```{r, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_MAB.Rmd-recdat-diversity.R")}
+```{r, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-recdat-diversity.R")}
 
 ```
 - Overall effort being steady but change in diversity of recreational fleet effort suggests a changing range of opportunities
@@ -235,22 +239,22 @@ Commercial fishery fleet count, fleet diversity and permit diversity has been st
 -  Reliant on a smaller number of species relative to mid 90s, but now consistent and near long term average
 -  Good to increase diversity or bad? Losing traditional fisheries, cascading effects on newly entered fisheries?
 
-```{r, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_MAB.Rmd-commercial-div.R"), fig.asp=1}
+```{r, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-commercial-div.R"), fig.asp=1}
 ```
 
 As noted [above](#recreational-opportunities), recreational fleet effort diversity is unstable (declining). However, recreational species catch diversity is stable.
-```{r, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_MAB.Rmd-recdat-div-catch.R")}
+```{r, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-recdat-div-catch.R")}
 ```
 
 Zooplankton diversity is increasing in the MAB, while larval fish and adult fish diversity indices are stable over time with current values near the long term average.
 
-```{r, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_MAB.Rmd-zoo-diversity.R")}
+```{r, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_NE.Rmd-zoo-diversity.R")}
 ```
 
-```{r, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_MAB.Rmd-ichthyo-diversity.R")}
+```{r, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_NE.Rmd-ichthyo-diversity.R"), fig.asp=1}
 ```
 
-```{r, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_MAB.Rmd-exp-n.R"), fig.width=5}
+```{r, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_NE.Rmd-survey-shannon.R"), fig.width = 7.5}
 ```
 
  
@@ -270,10 +274,10 @@ Stable larval and adult fish diversity suggests ... the same overall number and 
 
 ### Indicators: Commercial and recreational engagement and reliance by community
 In 2020, we reported that the number of highly engaged Mid-Atlantic commercial fishing communities have declined over time, and the engagement scores have also declined in medium-highly engaged communities. Here we focus on engagement and reliance scores for individual communities, as well as social vulnerability. 
-```{r, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_MAB.Rmd-commercial-engagement.R"), fig.width = 7.5, fig.asp = 0.75}
+```{r, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-commercial-engagement.R"), fig.width = 7.5, fig.asp = 0.75}
 ```
 
-```{r, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_MAB.Rmd-recreational-engagement.R"), fig.width = 7.5, fig.asp = 0.75}
+```{r, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-recreational-engagement.R"), fig.width = 7.5, fig.asp = 0.75}
 ```
 
 
@@ -327,23 +331,22 @@ In 2019, we also observed the second lowest proportion of Labrador Shelf water e
 ```{r, code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_NE.Rmd-slopewater.R")}
 ```
 Ocean temperatures continue to warm at both the surface and bottom. Warming is not seasonally uniform, however: spring 2020 was cooler than average on portions of the shelf.
-```{r, code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_MAB.Rmd-bottom-temp.R")}
+```{r, code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_NE.Rmd-bottom-temp.R")}
 ```
 
-```{r, code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_MAB.Rmd-seasonal-sst-anom-gridded.R"), fig.width = 8, fig.height = 7}
+```{r, code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_NE.Rmd-seasonal-sst-anomaly-gridded.R"), fig.width = 8, fig.asp = 1}
 ```
 
 Chesapeake Bay also experienced a warmer-than-average winter and a cooler-than-average spring in 2020, relative to the previous decade.  Water temperatures returned to average during the summer and slightly warmer than average October through December. 
 
 The MAB experienced frequent ocean heatwaves of moderate intensity in 2020 that extended well into December, as observed in Chesapeake Bay.
-```{r, code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_MAB.Rmd-heatwave-year.R"), fig.asp=.6}
+```{r, code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_NE.Rmd-heatwave-year-gb.R"), fig.asp=.6}
+```
+
+```{r, code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_NE.Rmd-heatwave-year-gom.R"), fig.asp=.6}
 ```
 
 New measurements show areas of low pH (7.8) in summer in Mid-Atlantic habitats occupied by surfclams and sea scallops. This seasonal pH minimum is associated with cold pool subsurface and bottom water, which is cut off from ventilation with surface water due to strong stratification. 
-
-```{r, fig.asp=1}
-knitr::include_url("https://github.com/NOAA-EDAB/ecodata/raw/master/docs/images/Seasonal%20pH%20on%20MAB%20shelf%20-%20Grace%20Saba.jpg")
-```
 
 Nearshore we see lower pH because of freshwater input - during the fall overturn the pH increases because of the input of the salty water, primary productivity increases pH, but increased respiration decreases pH
 
@@ -351,34 +354,36 @@ The MAB cold pool area was near average in 2018, with smallest areas associated 
 
 ### Ecosystem Productivity Indicators: primary production, zooplankton, forage fish, fish condition
 Increased temperatures drive increased rates of photosynthesis in summer
-```{r, code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_MAB.Rmd-pp-monthly.R"), fig.width=8}
+```{r, code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_NE.Rmd-pp-monthly.R"), fig.width=8, fig.asp=1}
 ```
 
 Increased overall primary production from summer production, larger winter blooms in 2020?
-```{r, code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_MAB.Rmd-chl-weekly.R"), fig.width = 5, fig.asp = 0.9}
+```{r, code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_NE.Rmd-chl-weekly.R"), fig.width = 5, fig.asp = 0.9}
 ```
 
 Climatology of seasonal size fractions confirms that summer production dominated by smaller size classes (pico and nano)
-```{r, code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_MAB.Rmd-weekly-phyto-size.R"), fig.asp=.6}
+```{r, code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_NE.Rmd-weekly-phyto-size.R"), fig.asp=.6}
 ```
 
 Less efficient transfer to higher trophic levels
 
 Trends in gelatinous zoops, krill are the same across EPUs as last year, data was updated to 2019. Long term increase almost all regions.
-```{r, code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_MAB.Rmd-zoo-strat-abun.R"), fig.width=8, fig.asp=.25}
+```{r, code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_NE.Rmd-zoo-strat-abun.R"), fig.width=8, fig.asp=.75}
 ```
 
 Larger zooplankton (Cal fin) had above average abundance in 2018-2019.
-```{r, code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_MAB.Rmd-zoo-abund.R")}
+```{r, code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_NE.Rmd-zoo-abund.R"), fig.asp=1}
 ```
 
 Trends in Cal fin overwintering stage important as forage for right whales and forage fish.
-```{r, code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_MAB.Rmd-calanus-stage.R"), fig.width=8, fig.asp=.25}
+```{r, code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_NE.Rmd-gb-calanus-stage.R"), fig.width=8}
 ```
 
+```{r, code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_NE.Rmd-gom-calanus-stage.R"), fig.width=8, fig.asp=.25}
+```
 
 Forage anomaly from zooplankton data, no apparent trend in MAB
-```{r, code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_MAB.Rmd-forage-anomaly.R")}
+```{r, code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_NE.Rmd-forage-anomaly.R"), fig.asp = .75}
 ```
 
 
@@ -398,7 +403,7 @@ As noted in the [Landings "Why" section above](#landings), stocks are shifting d
 Zooplankton diversity is increasing in the MAB, while larval fish and adult fish diversity indices are stable over time with current values near the long term average (see [Diversity Indicators section, above](#diversity)).  
 New indicators for shark populations, combined with information on grey seals (see [Protected Species "Why" section, above](#protected-species)), suggests predator populations are stable to increasing in the MAB.
 
-```{r, code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_MAB.Rmd-observed-sharks.R")}
+```{r, code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_NE.Rmd-observed-sharks.R"), fig.width = 6}
 ```
 
 
@@ -462,7 +467,7 @@ Economic theory and empirical analyses have highlighted that many factors can af
 
 ### Indicators: revenue in lease areas, development timeline, survey overlap
 Commercial fishery revenue in proposed offshore wind lease areas ranges from x-y% of total revenue for MAFMC managed species.
-```{r, code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_MAB.Rmd-wind-revenue.R")}
+```{r, code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-wind-revenue.R"), fig.width = 6}
 ```
 
 Offshore wind projects may cover more than 1.5 million acres by 2029.
