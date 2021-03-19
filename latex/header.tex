@@ -18,7 +18,7 @@
 \usepackage{graphicx}
 \usepackage{fancyhdr}
 \usepackage{ifthen}
-\usepackage{everypage}
+\usepackage{everypage-1x}
 \usepackage{float}
 
 % Avoid struggling over figure and table float in Rmarkdown
@@ -45,7 +45,7 @@
 \cfoot{\thepage}
 
 \AddEverypageHook{%
-   \ifthenelse{\value{page}=4}%
+   \ifthenelse{\value{page}=5}%
      {\rhead{\includegraphics[width=40pt]{images/NOAA_logo.png} \\ \textsf{\emph{March 17, 2021}}}
       \lhead{\textsf{\LARGE State of the Ecosystem 2021: New England}}
       }%
