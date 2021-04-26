@@ -11,7 +11,7 @@ output:
     df_print: paged
   word_document: default
 link-citations: yes
-geometry: left=2cm, right=2cm, top=2cm, bottom=3cm, footskip = .5cm
+geometry: left=2cm, right=2cm, top=2cm, bottom=2cm, footskip = .5cm
 subparagraph: yes
 bibliography: SOE2021.bib
 urlcolor: blue
@@ -215,7 +215,8 @@ Total revenue trends, decomposed to price and volume indicators (Fig. \ref{fig:b
 ### Implications 
 
 The continued dependence on lobster in the GOM and sea scallops on GB is affected by multiple drivers including resource availability and market conditions.  As both species are sensitive to ocean warming and acidification, it is important to monitor these and other climate drivers.
-        
+
+\newpage{}        
 ## Recreational Opportunities 
         
 ### Indicators: Days fished, fleet diversity  
@@ -286,6 +287,7 @@ Social vulnerability measures social factors that shape a community’s ability 
 ```{r recreational-engagement, fig.cap= "Recreational engagement, reliance, and social vulnerability for the top recreational fishing communities in New England.", code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-recreational-engagement.R"), fig.width = 7.5, fig.asp = 0.55}
 ```
 
+\newpage{}
 In 2020, we reported that the number of moderately to highly engaged New England commercial fishing communities has shown an increase since 2004. Here we focus on top ten most engaged and top ten most reliant fishing communities and their associated social vulnerability (Fig. \ref{fig:commercial-engagement}). Among these communities, Stonington, ME and Chatham, MA are highly engaged and reliant with medium-high to high social vulnerability.
 
 Recreational fishery engagement measures shore, private vessel, and for-hire fishing activity while reliance expresses these numbers based on fishing effort relative to the population of a community. Bourne, MA is the only community highly engaged and reliant with high social vulnerability (Fig. \ref{fig:recreational-engagement}).
@@ -336,7 +338,7 @@ The number of gray seals in U.S. waters has risen dramatically in the last three
 ```{r seals, fig.cap = "Estimated mean rates of increase (solid line) and CIs (shaded area) in number of gray seal pups born at four United States pupping colonies at various times from 1988 to 2019. From Wood et al. 2019", code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_NE.Rmd-seal-pups.R"), fig.width=5, fig.asp = .7}
 ```
 
-Strong evidence exists to suggest that interactions between right whales and fixed gear fisheries in the U.S. and Canada is contributing substantially to the decline of the species^[Erratum: Submitted by the authors. In the initial printing of this report, on page 20, we used an overly precise description of interactions between right whales and fishing gear. Our attention was drawn to this by the Atlantic Offshore Lobstermen's Association. Upon reconsideration, we are replacing the original language (“Strong evidence exists to suggest that interactions between right whales and the offshore lobster gear in the U.S. and snow crab gear in Canada is contributing substantially to the decline of the species.") with a broader description that can be supported by currently available data ("Strong evidence exists to suggest that interactions between right whales and fixed gear fisheries in the U.S. and Canada are contributing substantially to the decline of the species.") The corrected language appears in the revised edition.]. Further, right whale distribution has changed since 2010. New research suggests that recent climate driven changes in ocean circulation have resulted in right whale distribution changes driven by increased warm water influx through the Northeast Channel, which has reduced the primary right whale prey (*Calanus finmarchicus*) in the central and eastern portions of the Gulf of Maine [@hayes_north_2018; @record_rapid_2019; @sorochan_north_2019].
+Strong evidence exists to suggest that interactions between right whales and fixed gear fisheries in the U.S. and Canada is contributing substantially to the decline of the species^[Erratum: Submitted by the authors. In the initial printing of this report, on page 23, we used an overly precise description of interactions between right whales and fishing gear. Our attention was drawn to this by the Atlantic Offshore Lobstermen's Association. Upon reconsideration, we are replacing the original language (“Strong evidence exists to suggest that interactions between right whales and the offshore lobster gear in the U.S. and snow crab gear in Canada is contributing substantially to the decline of the species.") with a broader description that can be supported by currently available data ("Strong evidence exists to suggest that interactions between right whales and fixed gear fisheries in the U.S. and Canada are contributing substantially to the decline of the species.") The corrected language appears in the revised edition.]. Further, right whale distribution has changed since 2010. New research suggests that recent climate driven changes in ocean circulation have resulted in right whale distribution changes driven by increased warm water influx through the Northeast Channel, which has reduced the primary right whale prey (*Calanus finmarchicus*) in the central and eastern portions of the Gulf of Maine [@hayes_north_2018; @record_rapid_2019; @sorochan_north_2019].
 
 The UMEs are under investigation and are likely the result of multiple drivers. For all three large whale UMEs, human interaction appears to have contributed to increased mortalities, although investigations are not complete. An investigation into the cause of the seal UME so far suggests phocine distemper virus as a potential cause. 
 
@@ -392,6 +394,7 @@ Increased temperatures, as reported above, can increase the rate of photosynthes
 ```{r pp-monthly,  fig.cap="Monthly primary production trends show the annual cycle (i.e. the peak during the summer months) and the changes over time for each month.", code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_NE.Rmd-pp-monthly.R"), fig.width=8, fig.asp=.75}
 ```
 
+\newpage{}
 Larger than average phytoplankton blooms were observed from late fall into winter in 2020 (Fig. \ref{fig:chl-weekly}).
 
 ```{r chl-weekly, fig.cap = "Weekly chlorophyll concentrations on Georges Bank and in the Gulf of Maine are shown for by the colored line for 2020. The long-term mean is shown in black and shading indicates +/- 1 sample SD.", code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_NE.Rmd-chl-weekly.R"), fig.width = 5, fig.asp=.4}
@@ -445,6 +448,7 @@ knitr::include_graphics("images/GBcondition_2020_viridis_final.jpg")
 knitr::include_graphics("images/GOMcondition_2020_viridis_final.jpg")
 ```
 
+\newpage{}
 ### Ecosystem Structure Indicators: distribution shifts, diversity, predators
 
 As noted in the [Landings Implications section above](#landings), stocks are shifting their spatial distributions throughout the region. In aggregate, fish stocks are moving northeastward along the shelf and into deeper waters.
