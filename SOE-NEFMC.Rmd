@@ -1,19 +1,19 @@
 ---
-title:
+title: 
 csl: plos.csl
 fontsize: 10pt
 output:
   pdf_document:
     includes:
-      in_header: latex/header.tex
+      in_header: latex/header1.tex
     keep_tex: yes
   html_document:
     df_print: paged
   word_document: default
 link-citations: yes
-geometry: left=2cm, right=2cm, top=2cm, bottom=2cm, footskip = .5cm
+geometry: left=2cm, right=2cm, top=2cm, bottom=3cm, footskip = .5cm
 subparagraph: yes
-bibliography: SOE2021.bib
+bibliography: SOE.bib
 urlcolor: blue
 ---
 
