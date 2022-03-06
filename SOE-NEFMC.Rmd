@@ -251,29 +251,70 @@ Ecological diversity indices can provide insight into ecosystem structure. Chang
 
 As a whole, the examined diversity indicators suggest overall stability in the fisheries and ecosystem components. However, increasing diversity in the recreational catch, GB zooplankton, and GOM adult fish suggests warning signs of a potential regime shift or ecosystem restructuring and warrants continued monitoring to determine if managed species are affected.
 
-## Social and Cultural 
+## Environmental Justice and Social Vulnerability 
 
-### Indicators: Commercial and recreational engagement and reliance by community
+### Indicators: Environmental Justice and Social Vulnerability in commercial and recreational fishing communities
 
-Social vulnerability measures social factors that shape a community’s ability to adapt to change and does not consider gentrification pressure vulnerability. Communities that ranked medium-high or above for one or more of the following indicators: poverty, population composition, personal disruption, or labor force structure, are highlighted in  red. Commercial fishery engagement measures the number of permits, dealers, and landings in a community, while reliance expresses these numbers based on the level of fishing activity relative to the total population of a community.
+Social vulnerability measures social factors that shape a community’s ability to adapt to change. A subset of these can be used to assess potential environmental justice issues. Environmental Justice is defined in Executive Order 12898 as federal actions intended to address disproportionately high and adverse human health and environmental effects of federal actions on minority and low-income populations. Three of the existing NOAA Fisheries Community Social Vulnerability Indicators (CSVIs), the Poverty Index, Population Composition Index, and Personal Disruption Index, can be used for mandated Environmental Justice analysis^[https://www.fisheries.noaa.gov/national/socioeconomics/social-indicators-coastal-communities].
 
+Commercial fishery engagement measures the number of permits and dealers, and pounds and value landed in a community, while reliance expresses these numbers based on the level of fishing activity relative to the total population of a community. Recreational fishery engagement measures shore, private vessel, and for-hire fishing effort while reliance expresses these numbers based on fishing effort relative to the population of a community.
 
+In 2021, we reported the top ten most engaged, and top ten most reliant commercial and recreational fishing communities and their associated social vulnerability. Here we apply the same selection standard for top ten fishing communities for both sectors, and focus on examining the environmental justice vulnerability in these communities.
 
-```{r commercial-engagement, fig.cap= "Commercial engagement, reliance, and social vulnerability for the top commercial fishing communities in New England.", code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-commercial-engagement.R"), fig.width = 7.5, fig.asp = 0.55}
+Communities plotted in the upper right section of Fig.\ref{fig:commercial-engagement} scored high for both commercial engagement and reliance, including Chatham, MA; Newington, NH; Stonington, Vinalhaven, and Beals, ME. Communities that ranked medium-high or above for one or more of the environmental justice indicators are highlighted in bright orange: New Bedford and Boston, MA; and Cranberry Isle, ME.
+
+```{r commercial-engagement, fig.cap= "Commercial engagement, reliance, and environmental justice vulnerability for the top commercially engaged and reliant fishing communities in New England.  Communities ranked medium-high or above for one or more of the environmental justice indicators are highlighted in bright orange. *Community scored high (1.00 and above) for both commercial engagement and reliance indicators.", code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-commercial-engagement.R"), fig.width = 7.5, fig.asp = 0.55}
 ```
+
+Fig. \ref{fig:commercial-EJ} shows the detailed scores of the three environmental justice indicators for the same communities plotted in Fig.\ref{fig:commercial-engagement}. Communities are plotted clockwise in a descending order of commercial engagement scores from high to low, with the most highly engaged community, New Bedford, MA, listed on the top. Among the communities ranked medium-high or above for environmental justice vulnerability, New Bedford VA scored high for the poverty index, and medium-high for personal disruption and population composition indices. Boston scored medium-high for personal disruption index and poverty index. Cranberry Isle scored high for the poverty index.
+
+```{r commercial-EJ, fig.cap="Environmental justice indicators (Poverty Index, population composition index, and personal disruption index) for top commercial fishing communities in Mid-Atlantic. *Community scored high (1.00 and above) for both commercial engagement and reliance indicators.", out.width='80%'}
+
+#knitr::include_graphics("images/EJ_Commercial_MAB.png")
+
+#get rid of the gray excel outline using R package magick
+ComEJ <- magick::image_read("images/EJ_Commercial_MAB.png") 
+
+# from https://stackoverflow.com/questions/64597525/r-magick-square-crop-and-circular-mask
+# get height, width and crop longer side to match shorter side
+ii <- magick::image_info(ComEJ)
+
+cropComEJ <- ComEJ %>%
+  #magick::image_crop(cropComEJ, "820x580+5+5")
+  magick::image_crop(paste0(ii$width-10,"x",ii$height-10, "+5+5"))
+
+cropComEJ
+```
+
+No communities in New England scored high for both recreational engagement and reliance (Fig.\ref{fig:recreational-engagement}).  All of the top recreational communities scored lower than medium-high for all of the three environmental justice indicators, meaning that environmental justice may not be a major concern in these communities at this time, based on this particular analysis.
 
 ```{r recreational-engagement, fig.cap= "Recreational engagement, reliance, and social vulnerability for the top recreational fishing communities in New England.", code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-recreational-engagement.R"), fig.width = 7.5, fig.asp = 0.55}
 ```
 
-\newpage{}
-In 2020, we reported that the number of moderately to highly engaged New England commercial fishing communities has shown an increase since 2004. Here we focus on top ten most engaged and top ten most reliant fishing communities and their associated social vulnerability (Fig. \ref{fig:commercial-engagement}). Among these communities, Stonington, ME and Chatham, MA are highly engaged and reliant with medium-high to high social vulnerability.
+Fig. \ref{fig:recreational-EJ} orders communities clockwise in a descending order of recreational engagement scores from high to low, with the most highly engaged community, Narragansett/Point Judith, RI, listed on the top. Narragansett/Point Judith, like all of these top recreational communities ranked low for environmental justice vulnerability. In fact, the scores below 0 for all three environmental justice indicators implies a lower than average level of vulnerability, based on recreational engagement and reliance,  among the communities included in the analysis. 
 
-Recreational fishery engagement measures shore, private vessel, and for-hire fishing activity while reliance expresses these numbers based on fishing effort relative to the population of a community. Bourne, MA is the only community highly engaged and reliant with high social vulnerability (Fig. \ref{fig:recreational-engagement}).
+```{r recreational-EJ, fig.cap="Environmental justice indicators (Poverty Index, population composition index, and personal disruption index) for top recreational fishing communities in Mid-Atlantic. *Community scored high (1.00 and above) for both commercial engagement and reliance indicators.", out.width='80%'}
+#knitr::include_graphics("images/EJ_Recreational_MAB.png")
 
-Both commercial and recreational fishing are important activities in Chatham and Gloucester, MA; and Narragansett/Point Judith, RI, meaning some of these communities may be impacted simultaneously by commercial and recreational regulatory changes. Of these communities, Chatham, MA scored medium-high or above for social vulnerability.
+
+#get rid of the gray excel outline using R package magick
+RecEJ <- magick::image_read("images/EJ_Recreational_MAB.png") 
+
+# from https://stackoverflow.com/questions/64597525/r-magick-square-crop-and-circular-mask
+# get height, width and crop longer side to match shorter side
+ii <- magick::image_info(RecEJ)
+
+cropRecEJ <- RecEJ %>%
+  #magick::image_crop(cropComEJ, "820x580+5+5")
+  magick::image_crop(paste0(ii$width-10,"x",ii$height-10, "+5+5"))
+
+cropRecEJ
+```
+
+Both commercial and recreational fishing are important activities in Narragansett/Point Judith, RI and Newington, NH, meaning these communities may be impacted simultaneously by commercial and recreational regulatory changes. Both of these communities currently score low for all of the three environmental justice indicators, indicating that environmental justice may not be a major concern in these communities at the moment based on the indicators analyzed.
 
 ### Implications
-These plots provide a snapshot of the relationship between social vulnerability and the most highly engaged and most highly reliant commercial and recreational fishing communities in New England. Similar plots are used to inform the annual California Current Ecosystem Status Report. These communities may be vulnerable to changes in fishing patterns due to regulations, shifting fish distributions, and/or climate change. When any of these communities also experience social vulnerability, they may be less able to successfully respond to change. These indicators may also point to communities that are vulnerable due to environmental justice issues. Additional analysis related to ecosystem shifts and National Standard 8 of the Magnuson-Stevens Act is ongoing.
+These plots provide a snapshot of the presence of environmental justice issues in the most highly engaged and most highly reliant commercial and recreational fishing communities in New England. These communities may be vulnerable to changes in fishing patterns due to regulations and/or climate change. When any of these communities are also experiencing social vulnerability including environmental justice issues, they may have lower ability to successfully respond to change.
 
 ## Protected Species
 
