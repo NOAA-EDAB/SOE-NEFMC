@@ -183,28 +183,19 @@ Other environmental changes require monitoring as they may become important driv
 
 ## Commercial Profits 
         
-### Indicators: revenue (a proxy for profits), with price and volume components  
+### Indicators: revenue (a proxy for profits)  
 
-Total commercial revenues (black) continue to be driven by single species in New England; Sea scallops on GB and American lobster in the GOM (Fig. \ref{fig:comm-revenue}). High GB revenue is due to the high volume and price of scallops. The cyclical nature of these revenues reflects the rotational area management system for the sea scallop resource. Total revenues in the GOM are currently above average due to high lobster prices, despite a lower volume in 2019. The declining trend in revenue from managed species (red) in the GOM probably reflects declines in quotas and low allowable catches for stocks with rebuilding plans.
+Total commercial revenues have not been updated for 2020.  However, we do not anticipate the long-term declining trend in revenue from managed species in the GOM to change, as it probably reflects declines in quotas and low allowable catches for stocks with rebuilding plans.  Additionally, we know that coastwide a number of species managed by the NEFMC, as well as lobster, experienced a decline in revenue when compared to the average revenue generated 2015 - 2019.  This decline was driven by a mix of landings declines (monkfish, lobster, scallops) and price declines (monkfish, lobster, scallops, and groundfish).
         
-```{r comm-revenue, fig.width = 4, fig.asp = 0.45, fig.cap = "Total revenue for the region (black) and revenue from NEFMC managed species (red).", code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-comdat-comm-revenue.R"), fig.width = 7.5, fig.asp = 0.2}
-```
-        
-Revenue earned by harvesting marine resources is a function of both the quantity landed of each species and the prices paid for landings. Beyond monitoring yearly changes in revenue, it is even more valuable to determine what drives these changes:  harvest levels, the mix of species landed, price changes, or a combination of these. The Bennet Indicator decomposes revenue change into two parts, one driven by changing quantities (volumes), and a second driven by changing prices.
-        
-Total revenue trends, decomposed to price and volume indicators (Fig. \ref{fig:bennet}), mirror those for the benthos (sea scallops; orange in fig. \ref{fig:bennet-all}) on GB and benthivores (lobster; purple in fig. \ref{fig:bennet-all}) in the GOM.
-        
-```{r bennet, fig.cap = paste0("Revenue changes from the 2015 values in dollars (black), Price (PI), and Volume Indicators (VI) for commercial landings on Georges Bank and in the Gulf of Maine."), code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-bennet2.R"), fig.width=6, fig.asp=.5, echo = FALSE, message=FALSE, results='hide'}
-```
-        
-```{r bennet-all, fig.cap = "Total component value in dollars (black) for commercial landings on Georges Bank and in the Gulf of Maine.", code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-bennet-all.R"), fig.width = 7.5, fig.asp = 0.5, echo = FALSE, message=FALSE, results='hide'}
+```{r comm-revenue, fig.width = 4, fig.asp = 0.45, fig.cap = "Revenue through 2019 for the for New England region (black) and revenue from NEFMC managed species (red).", code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-comdat-comm-revenue.R"), fig.width = 7.5, fig.asp = 0.2}
 ```
         
 ### Implications 
 
+The Bennet indicator evaluating changes in landings volume and price for the Mid-Atlantic will be updated when 2020 Mid-Atlantic landings become available.
+
 The continued dependence on lobster in the GOM and sea scallops on GB is affected by multiple drivers including resource availability and market conditions.  As both species are sensitive to ocean warming and acidification, it is important to monitor these and other climate drivers.
 
-\newpage{}        
 ## Recreational Opportunities 
         
 ### Indicators: Days fished, fleet diversity  
