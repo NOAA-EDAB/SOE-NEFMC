@@ -108,38 +108,36 @@ knitr::kable(mng_obj, linesep = "",
  
 # Performance relative to fishery management objectives
 
-In this section, we examine indicators related to broad, ecosystem-level fishery management objectives. We also provide hypotheses on the implications of these trends—*why* we are seeing them, what’s driving them, and identify potential or observed regime shifts or changes in ecosystem structure. Identifying multiple drivers, regime shifts, and potential changes to ecosystem structure, as well as identifying the most vulnerable resources, can help managers determine how best to meet objectives and how to address and prioritize for upcoming issues/risks. 
+In this section, we examine indicators related to broad, ecosystem-level fishery management objectives.  These objectives are derived from National legislation as the NEFMC has not formally adopted any ecosystem-level objectives for management. We also provide hypotheses on the implications of these trends—*why* we are seeing them, what’s driving them, and potential or observed regime shifts or changes in ecosystem structure. Identifying multiple drivers, regime shifts, and potential changes to ecosystem structure, as well as identifying the most vulnerable resources, can help managers determine whether we can do anything differently to meet objectives and how to prioritize for upcoming issues/risks. 
+
+*Special note on data availability for the 2022 report*
+
+The Catch Accounting and Monitoring System (CAMS) that will be used to provide commercial landings and discard information at the Ecological Production Unit (EPU) scale is under development.  As of February 2022, our standard indicators relying on EPU scale landings data cannot be calculated for 2020 (commercial seafood production, commercial profits, ecosystem overfishing). We provide information based on coastwide commercial landings information available at this time in @thunberg_northeast_2021^[https://spo.nmfs.noaa.gov/sites/default/files/TM221.pdf], and will calculate our standard indicators at EPU scales with disaggregated 2020 commercial landings data when they are available.
 
 ## Seafood Production 
 
-### Indicator: Landings
+### Indicator: Landings; commercial and recreational
 
-Total commercial landings (black) within the GOM and NEFMC’s managed landings (red) in both regions continue to trend downward (Fig. \ref{fig:total-landings}). 
+Total commercial landings (black) within New England are not yet available for 2020; Figure \ref{fig:total-landings} includes data only through 2019. However, we do not anticipate the long-term declining trend in landings to change. 
 
 ```{r total-landings, fig.cap = "Commercial seafood landings for Georges Bank and the Gulf of Maine.  The red lines are landings of species managed by the New England Fishery Management Council (NEFMC) while the black lines includes both the managed species as well as landings of species not managed by the NEFMC. mt = metric tons", code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-comdat-total-landings.R"), fig.width = 7.5, fig.asp = 0.21}
 ```
 
-```{r comm-landings-gb, fig.cap = "Commercial landings for Georges Bank by feeding guild.  The red lines are landings of species managed by the New England Fishery Management Council (NEFMC) while the black lines includes both the managed species as well as landings of species not managed by the NEFMC.", code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-comdat-commercial-landings-gb.R"), fig.asp = 1.2}
-```
+Although the data has not been updated for 2020, the long term downward trends in commercial landings for the Gulf of Maine and Georges Bank identified in earlier reports are not anticipated to change with the addition of another year’s worth of data. Coastwide landings for a number of species managed by the NEFMC showed mixed trends in 2020 when compared to the average landings between 2015 - 2019. Groundfish landings were above the 5 year average, while monkfish and scallop landings were down. Although scallop decreases are partially explained by a decreased TAC, analyses suggest that the drop in landings is at least partially due to market disruptions due to the Covid pandemic. Lobster landings also decreased in 2020 when compared to the average landings between 2015 - 2019.
 
-The downward trend on Georges Bank is due to declines in the piscivores and benthos groups and slightly offset by increases in the planktivores (Fig. \ref{fig:comm-landings-gb}). The downward trend in the GOM is evident in the piscivores, planktivores, and benthivores groups (Fig. \ref{fig:comm-landings-gom}).
-
-```{r comm-landings-gom, fig.cap = "Commercial landings for the Gulf of Maine by feeding guild.  The red lines are landings of species managed by the New England Fishery Management Council (NEFMC) while the black lines includes both the managed species as well as landings of species not managed by the NEFMC.", code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-comdat-commercial-landings-gom.R"), fig.asp=1.2}
-```
-
-Overall, recreational harvest (retained fish presumed to be eaten) have also declined in New England (Fig. \ref{fig:rec-landings}).
+Overall, recreational harvest (retained fish presumed to be eaten) have also declined in New England (Fig. \ref{fig:rec-landings}).  Recreational harvest in 2020 was the lowest since estimates began.
 
 ```{r rec-landings, fig.cap = paste0("Total recreational seafood harvest (millions of fish) in the ",region," region."), code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-recdat-landings.R")}
 
 ```
 
-Recreational shark landings of pelagic and prohibited sharks have increased over the last couple of years (Fig \ref{fig:rec_hms}). A recent regulatory change implemented in 2018 should help rebuild the shortfin mako stock and should decrease the number of prohibited sharks species landed in the region.
+Recreational shark landings of pelagic and prohibited sharks have increased over the last couple of years (Fig \ref{fig:rec_hms}). This is likely influenced by regulatory changes implemented in 2018 intended to rebuild shortfin mako stocks. In 2021 the International Commission for the Conservation of Atlantic Tunas (ICCAT) finalized recommendations for a two-year retention ban (ICCAT Rec.21-09), which will also affect total overall landings of pelagic sharks in coming years.
 
 ```{r rec_hms, fig.cap="Recreational shark landings from Large Pelagics Survey.", code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-rec_hms.R"), fig.width=5, fig.asp=.35}
 
 ```
 
-Aquaculture production is not yet included in total seafood landings, but we are working towards that in future reports. Available aquaculture production of oysters for a subset of New England states is showing an increase in annual production per acre leased (Fig. \ref{fig:aquaculture}).  This increase in productivity is generally attributed to the increasing use of off-bottom culture methods and improvements in hatchery stocks that reduce mortality rates.
+Aquaculture production is not yet included in total seafood landings, but we are working toward that in future reports. Available aquaculture production of oysters for a subset of New England states was showing an increase in annual production per acre leased until a sharp decline in 2020 caused by the Covid-19 disruptions (Fig. \ref{fig:aquaculture}).
 
 ```{r aquaculture, fig.cap="Total oyster production per acre leased for New England states.", code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-aquaculture-pa.R")}
 
@@ -147,50 +145,38 @@ Aquaculture production is not yet included in total seafood landings, but we are
 
 ### Implications
 
-Declines in commercial and recreational landings in the region may be caused by various factors, including combinations of ecological and stock production, management actions, market conditions, and environmental changes.  While we cannot evaluate all possible drivers at present, here we evaluate the extent to which ecosystem overfishing (total landings exceeding ecosystem productive capacity), stock status, and changes in system biomass play a role.
+Declining commercial and recreational landings can be driven by many interacting factors, including combinations of ecological and stock production, management actions, market conditions (including COVID-19 disruptions), and environmental changes.  While we cannot evaluate all possible drivers at present, here we evaluate the extent to which stock status and changes in system biomass play a role.
 
-#### Ecosystem Overfishing and Stock Status Indices
+#### Stock Status
 
-Thresholds for ecosystem-level overfishing based on system production characteristics have been proposed [@link_global_2019], and are applied here for GB and GOM. The proposed ecosystem overfishing thresholds are calculated based on *total catch* while our preliminary indicators are based on *commercial landings*. Therefore, our current indicators are underestimated compared with the proposed thresholds. In future reports we may be able to include commercial discards and recreational removals to evaluate total catch.
-
-Based on the ratio of total landings to total primary production (Fogarty Index, Fig. \ref{fig:fogarty}) ecosystem overfishing is presently not occurring; although ecosystem overfishing occurred in the past (and as recently as 2000 in the GOM).  Using a different metric based on total landings per unit area (Ryther Index, Fig. \ref{fig:ryther}), there is an indication that marginal ecosystem overfishing may still be occurring in the GOM. This is further corroborated by the nine stocks below $B_{MSY}$ while status relative to $B_{MSY}$ could not be assessed for 14 additional stocks (Fig. \ref{fig:stock-status}). Therefore, stock status and associated management constraints are likely contributing to decreased landings. To better address the role of management in future reports, we could examine how the total allowable catch (TAC) and the percentage of the TAC taken for each species has changed through time.
-
-```{r fogarty, fig.cap="Fogarty Index, the ratio of total landings to total primary production in an ecosystem. Link and Watson (2019) give an optimal range (green shading) of the Fogarty ratio of 0.22 to 0.92 parts per thousand (PPT). Previous work suggested that index values exceeding 1 to 2 PPT (orange shading) lead to ecosystem tipping points.", code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-fogarty.R"), fig.width = 7.5}
-```
-
-```{r ryther, fig.cap="Ryther index; total landings presented on a unit area basis for an ecosystem. Theoretical estimates (Link and Watson, 2019) imply the index should range from 0.3 - 1.1 mt per sq km annually (green shading) with a limit of 3 mt per sq km annually, above which tipping points could occur in fished ecosystems (orange shading). Expected system-wide MSYs can be in the range from 1 to 3 mt per sq km (unshaded).", code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-ryther.R"), fig.width = 7.5}
-```
+Eight stocks are currently estimated to be below BMSY, while status relative to BMSY could not be assessed for 13 additional stocks (Fig. 9). Therefore, stock status and associated management constraints are likely contributing to decreased landings. To better address the role of management in future reports, we could examine how the total allowable catch (TAC) and the percentage of the TAC taken for each species has changed through time.
 
 ```{r stock-status, fig.cap = "Summary of single species status for NEFMC and jointly federally managed stocks (Goosefish and Spiny dogfish).  The dotted vertical line is the target biomass reference point of B\\textsubscript{MSY}.  The dashed lines are the management thresholds of B\\textsubscript{MSY} (verticle) or F\\textsubscript{MSY} (horizontal).", code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-stock-status.R"), fig.width = 7.5, fig.asp = 0.5}
 ```
 
-The amount of potential yield from a marine ecosystem depends on (1) the amount of production entering at the base of the food web, primarily in the form of phytoplankton; (2) the pathways this energy follows to reach harvested species; (3) the efficiency of transfer of energy at each step in the food web; and (4) the fraction of production removed by the fisheries. GB commercial landings are now sustained by a lower proportion of the ecosystem’s primary production compared  to the 1960s and 70s when ecosystem overfishing occurred (Fig. \ref{fig:ppr-ne}).  Conversely, the amount of primary production used to sustain commercial landings in the GOM has remained relatively constant over time (Fig. \ref{fig:ppr-ne}).
-
-```{r ppr-ne, fig.cap="Primary production required to support commercial landings for GB and GOM. Included are the top species accounting for 80\\% of the landings in each year, with 15\\% transfer efficiency assumed between trophic levels. PPD is total primary production. The solid line is based on satellite-derived PPD and the dashed line is based on reconstructed PPD.", code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-ppr.R"), fig.width = 6, fig.asp = .4}
-```
-
 #### System Biomass
 
-Even with potential ecosystem overfishing, aggregate biomass trends derived from scientific resource surveys have been relatively stable in both regions (Fig. \ref{fig:nefsc-biomass-gb} & Fig. \ref{fig:nefsc-biomass-gom}). The lone exception is the benthivores group which spiked during the last decade driven by haddock recruitment but appears to be returning to average levels (although many surveys were not completed in 2020). While managed species comprise varying proportions of aggregate biomass (Figs. \ref{fig:comm-landings-gb} and \ref{fig:comm-landings-gom}), trends in landings are not mirroring shifts in the overall trophic structure of survey-sampled fish and invertebrates.
+Aggregate biomass trends derived from scientific resource surveys have been relatively stable in both regions (Fig. \ref{fig:nefsc-biomass-gb} & Fig. \ref{fig:nefsc-biomass-gom}). The benthivores group spiked during the last decade, due to haddock recruitment, but appears to be returning to average levels (although many surveys were not completed in 2020). There are also increasing trends in piscivores, planktivores, and benthos in at least one season in both regions.  While managed species comprise varying proportions of aggregate biomass, trends in landings are not mirroring shifts in the overall trophic structure of survey-sampled fish and invertebrates.
 
-```{r nefsc-biomass-gb, fig.cap = "Spring (left) and fall (right) surveyed biomass on Georges Bank. The shaded area around each annual mean represents 2 standard deviations from the mean.", code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_NE.Rmd-aggregate-biomass.R"), fig.width=8, fig.asp = 0.75}
+```{r nefsc-biomass-gb, fig.cap = "Spring (left) and fall (right) surveyed biomass on Georges Bank. The shaded area around each annual mean represents 2 standard deviations from the mean.", code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_NE.Rmd-aggregate-biomass-gb.R"), fig.width=8, fig.asp = 0.75}
 ```
 
-```{r nefsc-biomass-gom, fig.cap = "Spring (left) and fall (right) surveyed biomass in the Gulf of Maine. The shaded area around each annual mean represents 2 standard deviations from the mean.", code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_NE.Rmd-agg-bio.R"), fig.width=8, fig.asp = 0.75}
+```{r nefsc-biomass-gom, fig.cap = "Spring (left) and fall (right) surveyed biomass in the Gulf of Maine. The shaded area around each annual mean represents 2 standard deviations from the mean.", code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_NE.Rmd-aggregate-biomass-gom.R"), fig.width=8, fig.asp = 0.75}
 ```
 
 #### Effect on Seafood Production
 
-With potential ecosystem overfishing occurring in the past and poor or unknown stock status of many managed species, the decline in commercial landings is most likely reflects lower catch quotas implemented to rebuild overfished stocks, as well as market dynamics.  
+With the poor or unknown stock status of many managed species, the decline in commercial landings most likely reflects lower catch quotas implemented to rebuild overfished stocks, as well as market dynamics.  
 
-The decline in recreational seafood landings stems from multiple drivers. Some of the decline, such as for recreational shark landings,  is driven by tightening regulations. However, the MRIP survey methodology was updated in 2018, and it is unclear at this point whether the decline in landings estimated in that year is an artifact of those methodological changes or actually driven by changes in fishing behavior. The current recreational harvests are near the lowest in the time series.  
+The decline in recreational seafood landings stems from multiple drivers. Some of the decline, such as for recreational shark landings,  continues to be driven by tightening regulations. However, changes in demographics and preferences over recreational activities likely play a role in non-HMS declines in recreational harvest, with current harvests the lowest in the time series.  
 
 Other environmental changes require monitoring as they may become important drivers of future landings:
   
-  - Climate is trending into uncharted territory. Globally, 2020 was tied with the warmest year on record^[https://www.nasa.gov/press-release/2020-tied-for-warmest-year-on-record-nasa-analysis-shows] with regional marine heatwaves apparent (see [Climate Risks section](#climate-and-ecosystem-productivity)).
+  - Climate is trending into uncharted territory. Globally, 2021 was the sixth warmest year on record^[https://www.climate.gov/news-features/features/2021-global-climate-summary-6th-warmest-year-record] with regional marine heatwaves apparent (see [Climate Risks section](#climate-and-ecosystem-productivity)).
   - Stocks are shifting distribution, moving towards the northeastward and into deeper waters throughout the Northeast US Large Marine Ecosystem (Fig. \ref{fig:species-dist}).
-  - Some ecosystem composition and production changes have been observed (see [Stability section](#stability)). 
-  - Fishing engagement has increased in some communities (see [Social and Cultural section](#social-and-cultural)).  
+  - Some ecosystem composition and production changes have been observed (see [Stability section](#stability)).
+  - Some fishing communities are affected by environmental justice vulnerabilities (see [Environmental Justice and Social Vulnerability section](#social-vulnerability)).
+    
         
 ```{r species-dist, fig.cap = "Aggregate species distribution metrics for species in the Northeast Large Marine Ecosystem.", code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_MAB.Rmd-species-dist.R"), fig.asp=0.8}
 ```
