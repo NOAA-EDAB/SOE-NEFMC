@@ -199,7 +199,8 @@ The continued dependence on lobster in the GOM and sea scallops on GB is affecte
 ## Recreational Opportunities 
         
 ### Indicators: Days fished, fleet diversity  
-Recreational effort (days fished) increased during 1980-2010, but has since declined to the long-term average (Fig. \ref{fig:rec-op}). Recreational fleet diversity has remained relatively stable over the latter half of the time series (Fig. \ref{fig:rec-div}). Recreational fleets are defined as either private vessel, shore-based, or party/charter vessels.
+
+Recreational effort (days fished) increased during 1980-2010, but has since declined to just below the long-term average (Fig. \ref{fig:rec-op}). Recreational fleet are defined as either private vessels, shore-based, or party.charter vessels.  Recreational fleet diversity, or the relative importance of each fleet type, has remained relatively stable over the latter half of the time series (Fig. \ref{fig:rec-div}). 
         
 ```{r rec-op, fig.cap = paste0("Recreational effort in ",region,"."), code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-recdat-effort.R")}
 ```
