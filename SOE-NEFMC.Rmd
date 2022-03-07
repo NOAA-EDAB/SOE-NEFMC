@@ -149,7 +149,7 @@ Declining commercial and recreational landings can be driven by many interacting
 
 #### Stock Status
 
-Eight stocks are currently estimated to be below BMSY, while status relative to BMSY could not be assessed for 13 additional stocks (Fig. 9). Therefore, stock status and associated management constraints are likely contributing to decreased landings. To better address the role of management in future reports, we could examine how the total allowable catch (TAC) and the percentage of the TAC taken for each species has changed through time.
+Eight stocks are currently estimated to be below BMSY, while status relative to BMSY could not be assessed for 13 additional stocks (Fig. \ref{fig:stock-status}). Therefore, stock status and associated management constraints are likely contributing to decreased landings. To better address the role of management in future reports, we could examine how the total allowable catch (TAC) and the percentage of the TAC taken for each species has changed through time.
 
 ```{r stock-status, fig.cap = "Summary of single species status for NEFMC and jointly federally managed stocks (Goosefish and Spiny dogfish).  The dotted vertical line is the target biomass reference point of B\\textsubscript{MSY}.  The dashed lines are the management thresholds of B\\textsubscript{MSY} (verticle) or F\\textsubscript{MSY} (horizontal).", code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-stock-status.R"), fig.width = 7.5, fig.asp = 0.5}
 ```
