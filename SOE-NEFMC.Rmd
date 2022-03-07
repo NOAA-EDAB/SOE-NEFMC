@@ -537,11 +537,21 @@ As noted in the [Protected Species section](#protected-species), gray seal popul
 
 A recent stable isotope study utilizing gray seal scat samples obtained from Massachusetts habitats showed individual gray seals can specialize on particular prey. It also found that gray seals vary their diet seasonally, focusing on demersal inshore species prior to the spring molt, and offshore species such as sand lance after molting. DNA studies on gray seal diet in Gulf of Maine and Massachusetts waters found spiny dogfish and Jonah crab present in gray seal scat samples. Skate and crab remains were also found in gray seal stomach remains. In contrast to direct feeding, it is uncertain if the presence of skates and crabs is due to secondary consumption or scavenging.
 
-### Habitat Risk Indicators: habitat assessments, submerged aquatic vegetation, estuarine habitat quality, fishing gear impacts
+### Habitat Risk Indicators: habitat assessments, harmful algal blooms, fishing gear impacts
 
 #### Habitat Climate Vulnerability
 
-A recent habitat climate vulnerability analysis links several NEFMC species to various highly vulnerable nearshore habitats. In particular, winter flounder, a species deemed highly vulnerable to climate change, is highly dependent on vulnerable habitats throughout New England and in the Mid-Atlantic. Details on highly vulnerable habitats with linkages to a variety of species (including life stages having different levels of dependence on particular habitats) are available in a detailed table.^[https://noaa-edab.github.io/ecodata/Hab_table]
+The Northeast Regional Marine Fish Habitat Assessment (NRHA) is a collaborative effort to describe and characterize estuarine, coastal, and offshore fish habitat distribution, abundance, and quality in the Northeast. This includes mapping inshore and offshore habitat types used by focal fish species, summarizing impacts of habitat climate vulnerability on these species, modeling predicted future species distributions, and developing a publicly accessible decision support tool to visualize these results. This is a three-year project led by the New England and Mid-Atlantic Fishery Management Councils in collaboration with many partners including NOAA Fisheries, and will be completed in July 2022^[https://www.mafmc.org/nrha].
+
+As part of the NRHA work, climate vulnerability information from NOAA’s Habitat Climate Vulnerability Assessment [@farr_assessment_2021] and the Northeast Fish and Shellfish Climate Vulnerability Assessment [@hare_vulnerability_2016]^[https://www.fisheries.noaa.gov/new-england-mid-atlantic/climate/northeast-vulnerability-assessment] is synthesized for approximately 70 species in the northeast region. In particular, winter founder, a species deemed highly vulnerable to climate change, is highly dependent on vulnerable habitats such as submerged aquatic vegetation, kelp, intertidal sand and mud, and tidal wetlands throughout New England and in the Mid-Atlantic. Details on highly vulnerable habitats with linkages to a variety of species, including which life stages have different levels of dependence on a particular habitat, are available in a detailed table^[https://noaa-edab.github.io/ecodata/Hab_table].
+
+#### Harmful Algal Blooms
+
+Water quality as a component of habitat is of concern to managed species. Harmful Algal Blooms can degrade water quality. One example is Alexandrium blooms, which can result in Paralytic Shellfish Poisoning. Alexandrium cyst distribution and abundance are surveyed annually in the Gulf of Maine. After strong bloom events in 2005 and 2009, the time series suggests lower overall cyst abundance through 2020. However, bloom events and shellfishery closures do occur annually on a small scale and economic impacts can be substantial to inshore shellfisheries (mussels, clams, and quahogs). More information on Harmful Algal Blooms are available in the [Synthetic Indicator Catalog](https://noaa-edab.github.io/catalog/harmful-algal-blooms-paralitic-shellfish-poisoning.html).
+
+#### Fishing Gear Impacts
+
+Estimates of the impacts of fishing gear on habitat are available through the habitat section of the [Northeast Ocean Data Portal](https://www.northeastoceandata.org/data-explorer/). The data portal hosts selected outputs from the Northeast Fishing Effects Model which combines seafloor data (sediment type, energy regime) with fishing effort data to generate percent habitat disturbance estimates in space and time. More detailed information can be found in the [Synthetic Indicator Catalog](https://noaa-edab.github.io/catalog/northeast-fishing-effects-model.html).
 
 ### Implications
 
