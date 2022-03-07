@@ -273,7 +273,7 @@ Fig. \ref{fig:commercial-EJ} shows the detailed scores of the three environmenta
 #knitr::include_graphics("images/EJ_Commercial_MAB.png")
 
 #get rid of the gray excel outline using R package magick
-ComEJ <- magick::image_read("images/EJ_Commercial_MAB.png") 
+ComEJ <- magick::image_read("images/EJ_Commercial_NE.png") 
 
 # from https://stackoverflow.com/questions/64597525/r-magick-square-crop-and-circular-mask
 # get height, width and crop longer side to match shorter side
@@ -298,7 +298,7 @@ Fig. \ref{fig:recreational-EJ} orders communities clockwise in a descending orde
 
 
 #get rid of the gray excel outline using R package magick
-RecEJ <- magick::image_read("images/EJ_Recreational_MAB.png") 
+RecEJ <- magick::image_read("images/EJ_Recreational_NE.png") 
 
 # from https://stackoverflow.com/questions/64597525/r-magick-square-crop-and-circular-mask
 # get height, width and crop longer side to match shorter side
@@ -359,9 +359,44 @@ A climate vulnerability assessment is currently underway for Atlantic and Gulf o
 
 ## Climate and Ecosystem Productivity
 
-### Climate Change Indicators: ocean currents, temperature, and heatwaves
+Large scale climate related changes in the ecosystem can lead to changes in important habitats and ecological interactions, potentially resulting in regime shifts and ecosystem reorganization.
 
-Regional ocean current indicators remain at unprecedented levels. In 2019, the Gulf Stream  was at its most northern position since 1993 (Fig. \ref{fig:GSI}). A more northerly Gulf Stream position is associated with warmer ocean temperature on the Northeast US shelf [@zhang_role_2007], a higher proportion of Warm Slope Water in the Northeast Channel, and increased sea surface height along the U.S. east coast [@goddard_extreme_2015].
+### Climate Change Indicators: ocean temperatures, heatwaves, currents, acidification
+
+#### Ocean temperature and salinity
+Ocean temperatures continue to warm at both the surface (Fig. \ref{fig:seasonal-sst-anom-gridded}) and bottom (Fig. \ref{fig:bottom-temp-gb} & Fig. \ref{fig:bottom-temp-gom}) throughout the Northeast Shelf including New England. Seasonal sea surface temperatures in 2021 were above average throughout the year, with some seasons rivaling or exceeding the record warm temperatures observed in 2012.
+
+```{r seasonal-sst-anom-gridded, fig.cap="New England (EPUs outlined in grey) seasonal sea surface temperature (SST) time series overlaid onto 2021 seasonal spatial anomalies. Seasons are defined as: Jan-Mar for winter, Apr-Jun for spring, Jul-Sep for summer, and Oct-Dec for fall.", code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_NE.Rmd-seasonal-sst-anomaly-gridded.R"), fig.width = 8, fig.asp = 1}
+```
+
+```{r bottom-temp-gb, fig.cap="Annual Georges Bank bottom temperature anomalies. (black = observations, red = reanalysis)", code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_NE.Rmd-bottom-temp-gb.R"), fig.width=6}
+```
+
+```{r bottom-temp-gom, fig.cap="Annual Gulf of Maine bottom temperature anomalies. (black = observations, red = reanalysis)", code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_NE.Rmd-bottom-temp-gom.R"), fig.width=6}
+```
+
+#### Marine heatwaves
+A marine heatwave is a warming event that lasts for five or more days with sea surface temperatures warmer than 90% of previously observed (1982-2011) temperatures for that date [@hobday_hierarchical_2016]. Marine heatwaves measure not just high temperature, but how long the ecosystem is subjected to the high temperature. They are driven by both atmospheric and oceanographic factors and can have dramatic impacts on marine ecosystems. The region is experiencing more frequent marine heatwaves over the last decade, including 2021, compared to the historical period.
+
+Georges Bank experienced six distinct marine heatwaves throughout all seasons in 2021, which included the warmest event on record. This record event began on May 27^th^ and lasted 39 days (Fig. \ref{fig:heatwave-year-gb}). Relative to prior years, this marine heatwave ranked 1^st^ on record in terms of maximum intensity (+4.50 $^\circ$C above average on July 1^st^) and 13^th^ on record in terms of cumulative intensity (98 $^\circ$C-days) (Fig \ref{fig:heatwave-intensity-gb}). The strongest four marine heatwaves on record in Georges Bank occurred over the last five years (2015, 2016, 2020, 2021).
+
+```{r heatwave-year-gb, fig.cap="Marine heatwave events (red shading above black line) on Georges Bank occuring in 2021.", code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_NE.Rmd-heatwave-year-gb.R"), fig.asp=.6}
+```
+
+```{r heatwave-intensity-gb, fig.cap="Marine heatwave cumulative intensity (left) and maximum intensity (right) on Georges Bank.", code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_NE.Rmd-heatwave-gb.R"), fig.width=8, fig.asp=.25}
+```
+
+The Gulf of Maine experienced marine heatwaves over 80% of the year in 2021. Six distinct marine heatwaves occurred throughout all seasons with the strongest event beginning on June 6^th^ and lasted 28 days (Fig \ref{fig:heatwave-year-gom}). Relative to prior years, this marine heatwave ranked 8^th^ on record in terms of maximum intensity (+3.81 $^\circ$C above average on June 29^th^). The marine heatwave that began on September 7^th^ currently ranks 6^th^ in cumulative intensity (200 $^\circ$C-days) (Fig \ref{fig:heatwave-intensity-gom}). This marine heatwave continued throughout December.
+
+```{r heatwave-year-gom, fig.cap="Marine heatwave events (red shading above black line) in the Gulf of Maine occuring in 2021.", code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_NE.Rmd-heatwave-year-gom.R"), fig.asp=.6}
+```
+
+```{r heatwave-intensity-gom, fig.cap="Marine heatwave cumulative intensity (left) and maximum intensity (right) in the Gulf of Maine.", code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_NE.Rmd-heatwave-gom.R"), fig.width=8, fig.asp=.25}
+```
+
+#### Ocean currents and features
+
+Variability of the Gulf Stream is one of the major drivers of changes in the oceanographic conditions of the Slope Sea and subsequently the Northeast U.S. continental shelf [@gangopadhyay_census_2020]. Changes in the Gulf Stream and Slope Sea can affect large-scale climate phenomena as well as local ecosystems and coastal communities. During the last decade, the Gulf Stream has become less stable and shifted northward [@andres_recent_2016; @caesar_observed_2018] (Fig. \ref{fig:GSI}).  A more northern Gulf Stream position is associated with warmer ocean temperature on the northeast shelf [@zhang_role_2007], a higher proportion of Warm Slope Water in the Northeast Channel, and increased sea surface height along the U.S. east coast [@goddard_extreme_2015].
 
 ```{r GSI, fig.cap = "Index representing changes in the location of the Gulf Stream north wall. Positive values represent a more northerly Gulf Stream position.", code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_MAB.Rmd-gsi.R"), fig.width=6}
 ```
@@ -371,30 +406,70 @@ In 2019, we also observed the second lowest proportion of Labrador Slope Water e
 ```{r wsw-prop, fig.cap = "Proportion of Warm Slope Water (WSW) and Labrador slope water (LSLW) entering the GOM through the Northeast Channel.", code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_NE.Rmd-slopewater.R"), fig.width=6}
 ```
 
-Ocean temperatures continue to warm at both the bottom (Figs. \ref{fig:bottom-temp-gb} and \ref{fig:bottom-temp-gom}) and the surface (Fig. \ref{fig:seasonal-sst-anom-gridded}). Warming is not seasonally uniform, however: the 2020 winter and spring surface temperatures were just slightly warmer than average, while the summer and fall temperatures were up to 2-4 $^\circ$C above the climatological mean.
+Since 2008, the Gulf Stream has moved closer to the Grand Banks, reducing the supply of cold, fresh, and oxygen-rich Labrador Current waters to the Northwest Atlantic Shelf [@goncalves_neto_changes_2021]. Nearly every year since 2010, warm slope water made up more than 75% of the annual slope water proportions entering the Gulf of Maine.  In 2017 and 2019, almost no cooler Labrador Slope water entered the Gulf of Maine through the Northeast Channel (Fig. \ref{fig:wsw-prop}).  The changing proportions of source water affect the temperature, salinity, and nutrient inputs to the Gulf of Maine ecosystem.  In 2021, warm slope water continued to dominate (86.1%) inputs to the Gulf of Maine. The 2022 position of the north wall of the Gulf Stream is forecasted to be similar to 2021 [@silver_forecasting_2021], extending this pattern.
 
-```{r bottom-temp-gb, fig.cap="Annual Georges Bank bottom temperature anomalies. (black = observations, red = reanalysis)", code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_NE.Rmd-bottom-temp-gb.R"), fig.width=6}
+```{r wsw-prop, fig.cap = "Proportion of Warm Slope Water (WSW) and Labrador Slope Water (LSLW) entering the Gulf of Maine through the Northeast Channel.", code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_NE.Rmd-slopewater.R"), fig.width=5, fig.asp=.35}
 ```
 
-```{r bottom-temp-gom, fig.cap="Annual Gulf of Maine bottom temperature anomalies. (black = observations, red = reanalysis)", code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_NE.Rmd-bottom-temp-gom.R"), fig.width=6}
+The increased instability of the Gulf Stream position and warming of the Slope Sea may also be connected to the regime shift increase in the number of warm core rings formed annually in the Northwest Atlantic [@gangopadhyay_observed_2019; @gangopadhyay_census_2020] (Fig. \ref{fig:wcr}). Timing of ring formation may also be changing. In 2021, a remarkable number of rings were observed simultaneously near the shelf break in June. When warm core ring water moves onto the continental shelf, it can alter the habitat and disrupt seasonal movements of fish [@gawarkiewicz_changing_2018].
+
+```{r wcr, fig.show = 'hold', out.width = "49%", fig.cap= "Warm core ring formation on the Northeast U.S. Shelf: Annual number of rings (left) and June 2021 rings (right), where the black line is the 200 m isobath (the shelf break) and the red lines are the 20 and 24 degree isotherms.", fig.width=8}
+#code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_MAB.Rmd-wcr.R")
+
+#left
+upper.line<-ecodata::wcr %>%
+  dplyr::filter(Time>2000) %>% 
+  dplyr::mutate(hline = c(mean(Value)))
+lower.line<-ecodata::wcr%>%
+  dplyr::filter(Time<2000) %>% 
+  dplyr::mutate(hline = c(mean(Value)))
+wcr<- upper.line %>% 
+  rbind(lower.line)
+
+wcr %>% 
+  ggplot2::ggplot(aes(x = Time, y = Value))+
+    ggplot2::annotate("rect", fill = shade.fill, alpha = shade.alpha,
+      xmin = x.shade.min , xmax = x.shade.max,
+      ymin = -Inf, ymax = Inf) +
+  ggplot2::geom_point()+
+  ggplot2::geom_line()+
+  ggplot2::ylab("Warm Core Ring Births")+
+  ggplot2::xlab(element_blank())+
+  ggplot2::ggtitle("Warm Core Rings")+
+  ecodata::theme_ts()+
+  ggplot2::geom_segment(data = upper.line, aes(x = min(Time), y = hline, 
+                                      xend = max(Time), yend = hline, color = "segment") )+
+  ggplot2::geom_segment(data = lower.line, aes(x = min(Time), y = hline, 
+                                    xend = max(Time), yend = hline, color = "segment") )+
+  ggplot2::theme(legend.position = "none")+
+  ecodata::theme_title()
+
+# right
+knitr::include_graphics("images/D_20210608-MUR-SST-WCR.PNG")
+
 ```
 
-```{r seasonal-sst-anom-gridded, fig.cap="New England seasonal sea surface temperature time series overlaid onto 2020 seasonal spatial anomalies.", code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_NE.Rmd-seasonal-sst-anomaly-gridded.R"), fig.width = 8, fig.asp = 1}
+When warm core rings and eddies interact with the continental slope they can transport warm, salty water to the continental shelf [@chen_mesoscale_2022], and this is now happening more frequently [@gawarkiewicz_changing_2018; @gawarkiewicz_increasing_nodate]. These interactions can be significant contributors to marine heatwaves in the Mid-Atlantic Bight [@gawarkiewicz_characteristics_2019; @chen_mesoscale_2022] as well as the movement of shelf-break species inshore [@gawarkiewicz_changing_2018; @potter_horizontal_2011; @worm_predator_2003]. 
+
+Changes in ocean temperature and circulation alter habitat features such as the seasonal cold pool, a 20–60 m thick band of cold, relatively uniform near-bottom water that persists from spring to fall over the mid and outer shelf of the Mid-Atlantic Bight and southern flank of Georges Bank [@lentz_seasonal_2017; @chen_seasonal_2018]. It is a reservoir of nutrients that feeds phytoplankton productivity, is essential fish spawning and nursery habitat, and affects fish distribution and behavior [@lentz_seasonal_2017; @miles_offshore_2021]. The average temperature of the cold pool is getting warmer over time [@miller_state-space_2016; @du_pontavice_incorporating_nodate], the area is getting smaller [@friedland_middle_2022], and the duration is getting shorter (Fig. \ref{fig:cold-pool}).
+
+```{r cold-pool, fig.cap="Seasonal cold pool indices: mean temperature within the cold pool, cold pool persistence, and spatial extent.",  code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_MAB.Rmd-cold_pool.R"), fig.width=10, fig.asp=.35}
+
 ```
 
-New England experienced frequent marine heatwaves of moderate to severe intensity in 2020 that extended well into December (Fig. \ref{fig:heatwave-year-gb} and Fig. \ref{fig:heatwave-year-gom}). Here we define a marine heatwave as a warming event that lasts for five or more days with sea surface temperatures above the 90th percentile of the  historical daily climatology (1982-2010) [@hobday_hierarchical_2016].  Marine heatwaves are measured in terms of intensity (water temperature) and duration (the cumulative number of degree days) using satellite measurements of daily sea surface temperature (Figs. \ref{fig:heatwave-intensity-gb} and \ref{fig:heatwave-intensity-gom}). Plotted are the maximum intensity and cumulative intensity, which is intensity times duration. These included the warmest heatwave on record on GB at 4.3 $^\circ$C above the heatwave threshold (in mid-August) (Fig. \ref{fig:heatwave-intensity-gb}). This record heatwave on GB began on July 8th and lasted 51 days (Fig. \ref{fig:heatwave-year-gb}).
+#### Ocean Acidification
+Ocean acidification (OA) has caused measured declines in global ocean pH. On the Northeast Shelf, summer bottom pH (2007-2021) varied spatially and temporally, ranging from 7.69-8.07 (Fig. \ref{fig:ne-oa}, left panel). The lowest pH values were recorded in the Gulf of Maine. In summer 2021, water column pH ranged from 7.72-8.18 (Fig. \ref{fig:ne-oa}, right panel) in the Gulf of Maine. The highest values occurred at the surface and decreased with depth, reaching minimum values in the deeper waters (below 200 m) of Jordan and Wilkinson Basins. 
 
-```{r heatwave-year-gb, fig.cap="Marine heatwave events (red) on Georges Bank occuring in 2020.", code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_NE.Rmd-heatwave-year-gb.R"), fig.asp=.6}
+```{r ne-oa, out.width = '80%', fig.cap = "Left: Summer bottom pH collated from all quality-controlled vessel- and glider-based measurements from 2007-2021. Right: Glider-based pH profiles collected during summer 2021 in the Gulf of Maine."}
+
+knitr::include_graphics("images/Saba_Fig_SOE_NEFMC - Grace Saba.png")
+
 ```
 
-```{r heatwave-year-gom, fig.cap="Marine heatwave events (red) in the Gulf of Maine occuring in 2020.", code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_NE.Rmd-heatwave-year-gom.R"), fig.asp=.6}
-```
 
-```{r heatwave-intensity-gb, fig.cap="Marine heatwave cumulative intensity (left) and maximum intensity (right) on Georges Bank.", code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_NE.Rmd-heatwave-gb.R"), fig.width=8, fig.asp=.25}
-```
 
-```{r heatwave-intensity-gom, fig.cap="Marine heatwave cumulative intensity (left) and maximum intensity (right) in the Gulf of Maine.", code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_NE.Rmd-heatwave-gom.R"), fig.width=8, fig.asp=.25}
-```
+
+
 
 ### Ecosystem Productivity Indicators: primary production, zooplankton, forage fish, fish condition
 
