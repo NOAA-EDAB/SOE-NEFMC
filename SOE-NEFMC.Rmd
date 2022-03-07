@@ -466,12 +466,13 @@ knitr::include_graphics("images/Saba_Fig_SOE_NEFMC - Grace Saba.png")
 
 ```
 
+### Ecosystem Productivity Indicators: phytoplankton, zooplankton, forage fish, fish condition
+
+#### Phytoplankton
+
+Phytoplankton are a major component of the food web and a primary food source for zooplankton and filter feeders such as shellfish. Numerous environmental and oceanographic factors interact to influence the abundance, composition, spatial distribution, and productivity of phytoplankton. In 2021, phytoplankton biomass (measured as chlorophyll a concentration) was above average in winter, but below average during the typical spring bloom period in both Georges Bank and Gulf of Maine.  Summer concentrations were also low, but there was an anomalously high fall bloom.  Primary productivity (the rate of photosynthesis) was above average during the winter bloom and well above average on Georges Bank during the summer.
 
 
-
-
-
-### Ecosystem Productivity Indicators: primary production, zooplankton, forage fish, fish condition
 
 Increased temperatures, as reported above, can increase the rate of photosynthesis by phytoplankton (i.e. primary productivity). Annual primary production has increased over time, primarily driven by increased productivity in the summer months (Figs. \ref{fig:pp-monthly}, \ref{fig:chl-weekly}, and \ref{fig:pp-weekly}).
 
