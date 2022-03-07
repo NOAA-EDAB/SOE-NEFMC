@@ -408,9 +408,6 @@ In 2019, we also observed the second lowest proportion of Labrador Slope Water e
 
 Since 2008, the Gulf Stream has moved closer to the Grand Banks, reducing the supply of cold, fresh, and oxygen-rich Labrador Current waters to the Northwest Atlantic Shelf [@goncalves_neto_changes_2021]. Nearly every year since 2010, warm slope water made up more than 75% of the annual slope water proportions entering the Gulf of Maine.  In 2017 and 2019, almost no cooler Labrador Slope water entered the Gulf of Maine through the Northeast Channel (Fig. \ref{fig:wsw-prop}).  The changing proportions of source water affect the temperature, salinity, and nutrient inputs to the Gulf of Maine ecosystem.  In 2021, warm slope water continued to dominate (86.1%) inputs to the Gulf of Maine. The 2022 position of the north wall of the Gulf Stream is forecasted to be similar to 2021 [@silver_forecasting_2021], extending this pattern.
 
-```{r wsw-prop, fig.cap = "Proportion of Warm Slope Water (WSW) and Labrador Slope Water (LSLW) entering the Gulf of Maine through the Northeast Channel.", code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_NE.Rmd-slopewater.R"), fig.width=5, fig.asp=.35}
-```
-
 The increased instability of the Gulf Stream position and warming of the Slope Sea may also be connected to the regime shift increase in the number of warm core rings formed annually in the Northwest Atlantic [@gangopadhyay_observed_2019; @gangopadhyay_census_2020] (Fig. \ref{fig:wcr}). Timing of ring formation may also be changing. In 2021, a remarkable number of rings were observed simultaneously near the shelf break in June. When warm core ring water moves onto the continental shelf, it can alter the habitat and disrupt seasonal movements of fish [@gawarkiewicz_changing_2018].
 
 ```{r wcr, fig.show = 'hold', out.width = "49%", fig.cap= "Warm core ring formation on the Northeast U.S. Shelf: Annual number of rings (left) and June 2021 rings (right), where the black line is the 200 m isobath (the shelf break) and the red lines are the 20 and 24 degree isotherms.", fig.width=8}
@@ -470,70 +467,53 @@ knitr::include_graphics("images/Saba_Fig_SOE_NEFMC - Grace Saba.png")
 
 #### Phytoplankton
 
-Phytoplankton are a major component of the food web and a primary food source for zooplankton and filter feeders such as shellfish. Numerous environmental and oceanographic factors interact to influence the abundance, composition, spatial distribution, and productivity of phytoplankton. In 2021, phytoplankton biomass (measured as chlorophyll a concentration) was above average in winter, but below average during the typical spring bloom period in both Georges Bank and Gulf of Maine.  Summer concentrations were also low, but there was an anomalously high fall bloom.  Primary productivity (the rate of photosynthesis) was above average during the winter bloom and well above average on Georges Bank during the summer.
+Phytoplankton support the food web as the primary food source for zooplankton and filter feeders such as shellfish. Numerous environmental and oceanographic factors interact to drive the abundance, composition, spatial distribution, and productivity of phytoplankton. In 2021, phytoplankton biomass (measured as chlorophyll a concentration) was above average in winter, but below average during the typical spring bloom period in both Georges Bank and Gulf of Maine.  Summer concentrations were also low, but there was an anomalously high fall bloom \ref{fig:chl-weekly}.  Primary productivity (the rate of photosynthesis) was above average during the winter bloom and well above average on Georges Bank during the summer \ref{fig:pp-weekly}.
 
-
-
-Increased temperatures, as reported above, can increase the rate of photosynthesis by phytoplankton (i.e. primary productivity). Annual primary production has increased over time, primarily driven by increased productivity in the summer months (Figs. \ref{fig:pp-monthly}, \ref{fig:chl-weekly}, and \ref{fig:pp-weekly}).
-
-```{r pp-monthly,  fig.cap="Monthly primary production trends show the annual cycle (i.e. the peak during the summer months) and the changes over time for each month.", code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_NE.Rmd-pp-monthly.R"), fig.width=8, fig.asp=.75}
+```{r chl-weekly, fig.cap = "Weekly chlorophyll concentrations on Georges Bank and in the Gulf of Maine are shown for by the colored line for 2021. The long-term mean is shown in black and shading indicates +/- 1 sample SD.", code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_NE.Rmd-chl-weekly.R"), fig.width = 5, fig.asp=.4}
 ```
 
-\newpage{}
-Larger than average phytoplankton blooms were observed from late fall into winter in 2020 (Fig. \ref{fig:chl-weekly}).
-
-```{r chl-weekly, fig.cap = "Weekly chlorophyll concentrations on Georges Bank and in the Gulf of Maine are shown for by the colored line for 2020. The long-term mean is shown in black and shading indicates +/- 1 sample SD.", code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_NE.Rmd-chl-weekly.R"), fig.width = 5, fig.asp=.4}
+```{r pp-weekly, fig.cap = "Weekly primary productivity on Georges Bank and in the Gulf of Maine are shown for by the colored line for 2021. The long-term mean is shown in black and shading indicates +/- 1 sample SD.", code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_NE.Rmd-pp-weekly.R"), fig.width = 5, fig.asp=.4}
 ```
 
-```{r pp-weekly, fig.cap = "Weekly primary productivity on Georges Bank and in the Gulf of Maine are shown for by the colored line for 2020. The long-term mean is shown in black and shading indicates +/- 1 sample SD.", code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_NE.Rmd-pp-weekly.R"), fig.width = 5, fig.asp=.4}
+The seasonal cycle of phytoplankton size distribution of phytoplankton shows that the spring and fall bloom periods are dominated by larger-celled microplankton, while smaller-celled nanoplankton dominate during the warmer summer months. The proportion of the smallest phytoplankton, picoplankton (0.2-2 microns), are relatively constant throughout the year. In 2021, microplankton proportions were above average during the winter and fall bloom periods, but below average for the summer months in both Georges Bank and the Gulf of Maine (Fig. \ref{fig:weekly-phyto-size-gb} & Fig. \ref{fig:weekly-phyto-size-gom}).
+
+```{r weekly-phyto-size-gb, fig.cap="The annual climatology (1998-2020) percent composition of the phytoplankton size classes on Georges Bank based on satellite observations in the shaded portions. The 2021 proportions for the microplankton (>20 microns, green) and nanoplankton (2-20 microns, orange) are shown in the bold lines.", code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_NE.Rmd-weekly-phyto-size-gb.R"), fig.asp=.6}
 ```
 
-```{r weekly-phyto-size-gb, fig.cap="The annual climatology (1998-2019) percent composition of the phytoplankton size classes on Georges Bank based on satellite observations.", code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_NE.Rmd-weekly-phyto-size-gb.R"), fig.asp=.6}
+```{r weekly-phyto-size-gom, fig.cap="The annual climatology (1998-2020) percent composition of the phytoplankton size classes in the Gulf of Maine based on satellite observations in the shaded portions. The 2021 proportions for the microplankton (>20 microns, green) and nanoplankton (2-20 microns, orange) are shown in the bold lines.", code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_NE.Rmd-weekly-phyto-size-gom.R"), fig.asp=.6}
 ```
 
-Climatology of seasonal phytoplankton size fractions confirms that the phytoplankton community in the summer is dominated by smaller (pico and nano) size classes (Figs. \ref{fig:weekly-phyto-size-gb} and \ref{fig:weekly-phyto-size-gom}). This implies less efficient transfer of primary production to higher trophic levels during the peak production summer period.
+#### Zooplankton
+While zooplankton indicators could not be updated for this report due to 2020 survey disruptions and lags in sample processing, data up to 2019 showed long-term increasing trends of gelatinous zooplankton and krill on the northeast shelf (see 2021 report^[https://repository.library.noaa.gov/view/noaa/29525]). Preliminary 2021 observations found the total volume of plankton caught in the bongo net was significantly greater than the previous years due to increased gelatinous zooplankton, predominantly salps (*Thalia democratica*). Unusually high concentrations of salps were found throughout the Northeast shelf and in the Slope Sea during other summer 2021 scientific surveys, which may be associated with water mass intrusions at the shelf break [@madin_periodic_2006; @deibel_predictability_2009]. Salps are filter feeders feeding on phytoplankton and other small particles and may have contributed to the below average phytoplankton biomass in summer 2021 (Fig. \ref{fig:chl-weekly}).
 
-```{r weekly-phyto-size-gom, fig.cap="The annual climatology (1998-2019) percent composition of the phytoplankton size classes in the Gulf of Maine based on satellite observations.", code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_NE.Rmd-weekly-phyto-size-gom.R"), fig.asp=.6}
+#### Forage Fish Energy Content
+Nutritional value (energy content) of juvenile and adult forage fish as prey is related to environmental conditions, fish growth, and reproductive cycles. Forage energy density measurements from NEFSC trawl surveys 2017-2021 are building toward a time series to evaluate trends (Fig. \ref{fig:energy-density}). Limited data from the spring 2020 survey, and complete spring 2021 survey  measurements were consistent with previous reports: the energy density of Atlantic herring was almost half the value (5.69 +/- 0.07 kJ/g wet weight) reported in earlier studies (10.6-9.4 kJ/ g wet weight). Silver hake, longfin squid (*Loligo* in figure) and shortfin squid (*Illex* in figure) were also lower than previous estimates [@steimle_energy_1985; @lawson_important_1998]. Energy density of alewife, butterfish, sand lance, and Atlantic mackerel varies seasonally, with seasonal estimates both higher and lower than estimates from previous decades.
+
+```{r energy-density, fig.cap="Forage fish energy density mean and standard deviation by season and year, compared with 1980s (solid line; Steimle and Terranove 1985) and 1990s (dashed line; Lawson et al. 1998) values.", code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_MAB.Rmd-energy-density.R"), fig.width = 7.5, fig.asp = 0.5}
 ```
 
-Trends in gelatinous zooplankton and krill are the same across ecological production units (EPUs) as last year (data were updated to 2019; Fig. \ref{fig:zoo-strat-abun}). There has been a long term increase in almost all regions.
+#### Fish Condition
+The health and well being of individual fish can be related to body shape condition indices (i.e., weight at a given length) such as relative condition index, which is the ratio of observed weight to predicted weight based on length [@le_cren_length-weight_1951]. Heavier and fatter fish at a given length have higher relative condition which is expected to improve growth, reproductive output, and survival. A pattern of generally good condition was observed across many species prior to 2000, followed by a period of generally poor condition from 2001-2010, with a mix of good and poor condition 2011-2019 and improved condition for many species in 2021 (Fig. \ref{fig:gb-cf} & Fig. \ref{fig:gom-cf}). Preliminary results of synthetic analyses show that changes in temperature, zooplankton, fishing pressure, and population size influence the condition of different fish species. 
 
-```{r zoo-strat-abun, fig.cap="Stratified abundance of cnidarians and euphausiids on Georges Bank and in the Gulf of Maine.", code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_NE.Rmd-zoo-strat-abun.R"), fig.width=7.5, fig.asp=.5}
+```{r gb-cf, fig.cap = "Condition factor for fish species on Georges Bank based on fall NEFSC bottom trawl survey data. No survey was conducted in 2020.", out.width = '100%'}
+
+knitr::include_graphics("images/GB_Condition_allsex_2022_viridis.jpg")
 ```
 
-The dominant type of copepods between small-bodied and large-bodied (*Calanus finmarchicus*) have alternated throughout the time series (Fig. \ref{fig:zoo-abund}). Over the past decade, both GB and GOM have had relatively more small bodied copepods than large, although this trend has been reversed on GB since 2018. 
+```{r gom-cf, fig.cap = "Condition factor for fish species in the Gulf of Maine based on fall NEFSC bottom trawl survey data. No survey was conducted in 2020.", out.width = '100%'}
 
-```{r zoo-abund,  fig.cap= "Large (red) and small-bodied (blue) copepod abundance on Georges Bank and in the Gulf of Maine.", code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_NE.Rmd-ne-sm-lg.R"), fig.width = 6, fig.asp=.5}
+knitr::include_graphics("images/GOM_Condition_allsex_2022_viridis.jpg")
 ```
 
-In the GOM, the abundance of *Calanus finmarchicus* adults and stage-5 copepodites (c5), the primary prey items for right whales, was high between 2000 and 2010 in all seasons (Fig. \ref{fig:calanus-stage}).  The c5 stage was highly abundant in the fall during this period, potentially contributing to a large portion of diapausing  (seasonally dormant and suspended at depth) copepods. A shift in the summer and fall distribution of right whales from the GOM into Canadian waters occurred after 2010, with whales becoming increasingly present in the Gulf of St. Lawrence after 2014, potentially due to changes in food availability [@simard_narw_shift_2019; @sorochan_narw_food_2019].
+#### Fish Productivity
+We describe patterns of aggregate fish productivity on Georges Bank and the Gulf of Maine with the small fish per large fish anomaly indicator, derived from NEFSC bottom trawl survey data (Fig. \ref{fig:productivity-anomaly-gb} & Fig. \ref{fig:productivity-anomaly-gom}). The indicator shows great variability with both regions being below average for much of the past decade.
 
-```{r calanus-stage,  fig.cap= "Abundance of adult and stage 5 copepodites in the Gulf of Maine.", code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_NE.Rmd-gom-calanus-stage.R"), fig.width = 6, fig.asp = .5}
+```{r productivity-anomaly-gb, fig.cap = "Small fish per large fish biomass anomaly on Georges Bank. The summed anomaly across species is shown by the black line.", code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_NE.Rmd-productivity-anomaly-gb.R"), fig.width=5, fig.asp=.7}
 ```
 
-An index of aggregate zooplankton and forage fish fluctuations (forage anomaly) constructed from zooplankton and ichthyoplankton data has no apparent trend for either GB or GOM (Fig. \ref{fig:forage-anomaly}), although the GOM anomaly is above the time series mean.  Changes in environmental conditions, lower tropic levels, and diversity of the plankton community are potentially impacting the prey of zooplankton and ichthyoplankton.
-
-```{r forage-anomaly, fig.cap="Changes from 2000-2019 average abundance for an aggregate of 13 zooplankton and 16 ichthyoplankton groups sampled on NEFSC ECOMON surveys.", code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_NE.Rmd-forage-anomaly.R"), fig.asp = .5}
+```{r productivity-anomaly-gom, fig.cap = "Small fish per large fish biomass anomaly in the Gulf of Maine. The summed anomaly across species is shown by the black line.", code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_NE.Rmd-productivity-anomaly-gom.R"), fig.width=5, fig.asp=.7}
 ```
 
-Nutritional value (energy content) of forage fishes as prey is related to both environmental conditions, fish growth and reproductive cycles. Forage energy density measurements from NEFSC trawl surveys 2017-2019 are building toward a time series to evaluate trends (Fig. \ref{fig:energy-density}). New 2019 measurements were consistent with last year’s report: the energy density of Atlantic herring was almost half the value (5.69 +/- 0.07 kJ/g wet weight) reported in earlier studies (10.6-9.4 kJ/ g wet weight). Silver hake, sandlance, longfin squid (*Loligo* below) and shortfin squid (*Illex* below) were also lower than previous estimates [@steimle_energy_1985; @lawson_important_1998]. Energy density of alewife, butterfish and Atlantic mackerel show seasonal differences, but generally fall within the ranges of previous studies.
-
-```{r energy-density, fig.cap="Forage fish mean energy density mean and standard deviation by season and year, compared with 1980s (Steimle and Terranove 1985) and 1990s (Lawson et al. 1998) values.", code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_MAB.Rmd-energy-density.R"), fig.width = 7.5, fig.asp = 0.5}
-```
-
-The health and well being of individual fish can be related to body shape condition indices (i.e. weight at a given length) such as relative condition index, which is the ratio of observed weight to predicted weight based on length [@le_cren_length-weight_1951]. Heavier and fatter fish at a given length have higher relative condition which is expected to influence growth, reproductive output and survival. A pattern of generally good condition was observed across many species prior to 2000, followed by a period of generally poor condition from 2001-2010, with a mix of good and poor condition 2011-2019  (Figs. \ref{fig:gb-cf} & \ref{fig:gom-cf}). While there were no new data to update the condition indicator this year, preliminary results of synthetic analyses described in the [Implications section](#environmental-drivers-of-fish-condition) show that changes in fishing pressure, population size, temperature, and zooplankton influence the condition of different fish species. Potential links between fish condition, fisheries, and markets are under investigation.
-
-```{r gb-cf, fig.cap = "Condition factor for fish species on GB based on fall NEFSC bottom trawl survey data. No survey was conducted in 2020.", out.width = '100%'}
-
-knitr::include_graphics("images/GBcondition_2020_viridis_final.jpg")
-```
-
-```{r gom-cf, fig.cap = "Condition factor for fish species in the GOM based on fall NEFSC bottom trawl survey data. No survey was conducted in 2020.", out.width = '100%'}
-
-knitr::include_graphics("images/GOMcondition_2020_viridis_final.jpg")
-```
-
-\newpage{}
 ### Ecosystem Structure Indicators: distribution shifts, diversity, predators
 
 As noted in the [Landings Implications section above](#landings), stocks are shifting their spatial distributions throughout the region. In aggregate, fish stocks are moving northeastward along the shelf and into deeper waters.
