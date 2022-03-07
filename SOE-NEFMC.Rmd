@@ -518,7 +518,7 @@ We describe patterns of aggregate fish productivity on Georges Bank and the Gulf
 
 As noted in the [Landings Implications section above](#landings), stocks are shifting their spatial distributions throughout the region. In aggregate, fish stocks are moving northeastward along the shelf and into deeper waters.
 
-Zooplankton and adult fish diversity are increasing in the GOM, while zooplankton diversity is increasing on GB.  The rest of the diversity indices are stable over time with current values near the long term average (see [Diversity Indicators section, above](#diversity)).
+Long-term trends show that zooplankton and adult fish diversity are increasing in the GOM, while zooplankton diversity is increasing on GB.  The rest of the diversity indices are stable over time with current values near the long term average (see [Diversity Indicators section, above](#diversity)).
 
 New indicators for shark populations, combined with information on grey seals (see [Protected Species Implications section, above](#protected-species)), suggests predator populations in New England are either stable (sharks, Figs. \ref{fig:observed-sharks}, \ref{fig:hms-cpue-sharks}) or increasing (gray seals, Fig. \ref{fig:seals}). Stable predator populations suggest stable predation pressure on managed species, but increasing predator populations may reflect increasing predation pressure.
 
@@ -528,11 +528,18 @@ New indicators for shark populations, combined with information on grey seals (s
 ```{r hms-cpue-sharks, fig.cap="Estimated number of sharks per unit effort from Highly Migratory Species Pelagic Observer Program data.", code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_MAB.Rmd-hms-cpue-sharks.R"), fig.width=6, fig.asp = .4}
 ```
 
+Stock status is mixed for Atlantic Highly Migratory Species (HMS) stocks (including sharks, swordfish, billfish, and tunas) occurring in the New England region. While there are several HMS species considered to be overfished or that have unknown stock status, the population status for some managed Atlantic sharks and tunas is at or above the biomass target (Fig. \ref{fig:hms-stock-status} ), suggesting the potential for robust predator populations among these managed species. 
+
+```{r hms-stock-status, fig.cap = "Summary of single species status for HMS stocks; key to species names at https://noaa-edab.github.io/tech-doc/atlantic-highly-migratory-species-stock-status.html.", code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_MAB.Rmd-hms-stock-status.R"), fig.width = 7, fig.asp = 0.5}
+```
+
 As noted in the [Protected Species section](#protected-species), gray seal populations are increasing. Harbor and gray seals occupying New England waters are generalist predators that consume more than 30 different prey species. An evaluation of hard  parts found in seal stomachs showed that harbor and gray seals predominantly exploit abundant demersal fish species (i.e. red, white and silver hake). Other relatively abundant prey species found in hard-part remains include sand lance, yellowtail flounder, four-spotted flounder, Gulf-stream flounder, haddock, herring, redfish, and squids.
 
 A recent stable isotope study utilizing gray seal scat samples obtained from Massachusetts habitats showed individual gray seals can specialize on particular prey. It also found that gray seals vary their diet seasonally, focusing on demersal inshore species prior to the spring molt, and offshore species such as sand lance after molting. DNA studies on gray seal diet in Gulf of Maine and Massachusetts waters found spiny dogfish and Jonah crab present in gray seal scat samples. Skate and crab remains were also found in gray seal stomach remains. In contrast to direct feeding, it is uncertain if the presence of skates and crabs is due to secondary consumption or scavenging.
 
-### Habitat Climate Vulnerability
+### Habitat Risk Indicators: habitat assessments, submerged aquatic vegetation, estuarine habitat quality, fishing gear impacts
+
+#### Habitat Climate Vulnerability
 
 A recent habitat climate vulnerability analysis links several NEFMC species to various highly vulnerable nearshore habitats. In particular, winter flounder, a species deemed highly vulnerable to climate change, is highly dependent on vulnerable habitats throughout New England and in the Mid-Atlantic. Details on highly vulnerable habitats with linkages to a variety of species (including life stages having different levels of dependence on particular habitats) are available in a detailed table.^[https://noaa-edab.github.io/ecodata/Hab_table]
 
