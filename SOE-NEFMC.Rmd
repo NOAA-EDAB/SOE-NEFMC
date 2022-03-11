@@ -127,7 +127,7 @@ Although the data has not been updated for 2020, the long term downward trends i
 
 Overall, recreational harvest (retained fish presumed to be eaten) have also declined in New England (Fig. \ref{fig:rec-landings}).  Recreational harvest in 2020 was the lowest since estimates began.
 
-```{r rec-landings, fig.cap = paste0("Total recreational seafood harvest (millions of fish) in the ",region," region."), code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-recdat-landings.R")}
+```{r rec-landings, fig.cap = paste0("Total recreational seafood harvest (millions of pounds) in the ",region," region."), code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-recdat-landings.R")}
 
 ```
 
