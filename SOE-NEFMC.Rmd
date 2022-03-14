@@ -133,7 +133,7 @@ Overall, recreational harvest (retained fish presumed to be eaten) have also dec
 
 Recreational shark landings of pelagic and prohibited sharks have increased over the last couple of years (Fig \ref{fig:rec_hms}). This is likely influenced by regulatory changes implemented in 2018 intended to rebuild shortfin mako stocks. In 2021 the International Commission for the Conservation of Atlantic Tunas (ICCAT) finalized recommendations for a two-year retention ban (ICCAT Rec.21-09), which will also affect total overall landings of pelagic sharks in coming years.
 
-```{r rec_hms, fig.cap="Recreational shark landings from Large Pelagics Survey.", code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-rec_hms.R"), fig.width=5, fig.asp=.35}
+```{r rec_hms, fig.cap="Recreational shark landings from Marine Recreational Information Program.", code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-rec_hms.R"), fig.width=5, fig.asp=.35}
 
 ```
 
@@ -268,7 +268,7 @@ Communities plotted in the upper right section of Fig.\ref{fig:commercial-engage
 
 Fig. \ref{fig:commercial-EJ} shows the detailed scores of the three environmental justice indicators for the same communities plotted in Fig.\ref{fig:commercial-engagement}. Communities are plotted clockwise in a descending order of commercial engagement scores from high to low, with the most highly engaged community, New Bedford, MA, listed on the top. Among the communities ranked medium-high or above for environmental justice vulnerability, New Bedford VA scored high for the poverty index, and medium-high for personal disruption and population composition indices. Boston scored medium-high for personal disruption index and poverty index. Cranberry Isle scored high for the poverty index.
 
-```{r commercial-EJ, fig.cap="Environmental justice indicators (Poverty Index, population composition index, and personal disruption index) for top commercial fishing communities in Mid-Atlantic. *Community scored high (1.00 and above) for both commercial engagement and reliance indicators.", out.width='80%'}
+```{r commercial-EJ, fig.cap="Environmental justice indicators (Poverty Index, population composition index, and personal disruption index) for top commercial fishing communities in New England. *Community scored high (1.00 and above) for both commercial engagement and reliance indicators.", out.width='80%'}
 
 #knitr::include_graphics("images/EJ_Commercial_MAB.png")
 
@@ -293,7 +293,7 @@ No communities in New England scored high for both recreational engagement and r
 
 Fig. \ref{fig:recreational-EJ} orders communities clockwise in a descending order of recreational engagement scores from high to low, with the most highly engaged community, Narragansett/Point Judith, RI, listed on the top. Narragansett/Point Judith, like all of these top recreational communities ranked low for environmental justice vulnerability. In fact, the scores below 0 for all three environmental justice indicators implies a lower than average level of vulnerability, based on recreational engagement and reliance,  among the communities included in the analysis. 
 
-```{r recreational-EJ, fig.cap="Environmental justice indicators (Poverty Index, population composition index, and personal disruption index) for top recreational fishing communities in Mid-Atlantic. *Community scored high (1.00 and above) for both commercial engagement and reliance indicators.", out.width='80%'}
+```{r recreational-EJ, fig.cap="Environmental justice indicators (Poverty Index, population composition index, and personal disruption index) for top recreational fishing communities in New England. *Community scored high (1.00 and above) for both commercial engagement and reliance indicators.", out.width='80%'}
 #knitr::include_graphics("images/EJ_Recreational_MAB.png")
 
 
