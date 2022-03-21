@@ -120,7 +120,7 @@ The Catch Accounting and Monitoring System (CAMS) that will be used to provide c
 
 Total commercial landings (black) within New England are not yet available for 2020; Figure \ref{fig:total-landings} includes data only through 2019. However, we do not anticipate the long-term declining trend in landings to change. 
 
-```{r total-landings, fig.cap = "Commercial seafood landings for Georges Bank and the Gulf of Maine.  The red lines are landings of species managed by the New England Fishery Management Council (NEFMC) while the black lines includes both the managed species as well as landings of species not managed by the NEFMC. mt = metric tons", code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-comdat-total-landings.R"), fig.width = 7.5, fig.asp = 0.21}
+```{r total-landings, fig.cap = "Commercial seafood landings for Georges Bank and the Gulf of Maine through 2019.  The red lines are landings of species managed by the New England Fishery Management Council (NEFMC) while the black lines includes both the managed species as well as landings of species not managed by the NEFMC. mt = metric tons", code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-comdat-total-landings.R"), fig.width = 7.5, fig.asp = 0.4}
 ```
 
 Although the data has not been updated for 2020, the long term downward trends in commercial landings for the Gulf of Maine and Georges Bank identified in earlier reports are not anticipated to change with the addition of another year’s worth of data. Coastwide landings for a number of species managed by the NEFMC showed mixed trends in 2020 when compared to the average landings between 2015 - 2019. Groundfish landings were above the 5 year average, while monkfish and scallop landings were down. Although scallop decreases are partially explained by a decreased TAC, analyses suggest that the drop in landings is at least partially due to market disruptions due to the COVID-19 pandemic. Lobster landings also decreased in 2020 when compared to the average landings between 2015 - 2019.
@@ -133,7 +133,7 @@ Overall, recreational harvest (retained fish presumed to be eaten) have also dec
 
 Recreational shark landings of pelagic and prohibited sharks have increased over the last couple of years (Fig \ref{fig:rec_hms}). This is likely influenced by regulatory changes implemented in 2018 intended to rebuild shortfin mako stocks. In 2021 the International Commission for the Conservation of Atlantic Tunas (ICCAT) finalized recommendations for a two-year retention ban (ICCAT Rec.21-09), which will also affect total overall landings of pelagic sharks in coming years.
 
-```{r rec_hms, fig.cap="Recreational shark landings from Marine Recreational Information Program.", code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-rec_hms.R"), fig.width=5, fig.asp=.35}
+```{r rec_hms, fig.cap="Recreational shark landings from Marine Recreational Information Program.", code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-rec_hms.R"), fig.width=6, fig.asp=.4}
 
 ```
 
@@ -187,7 +187,7 @@ Other environmental changes require monitoring as they may become important driv
 
 Total commercial revenues have not been updated for 2020.  However, we do not anticipate the long-term declining trend in revenue from managed species in the GOM to change, as it probably reflects declines in quotas and low allowable catches for stocks with rebuilding plans.  Additionally, we know that coastwide a number of species managed by the NEFMC, as well as lobster, experienced a decline in revenue when compared to the average revenue generated 2015 - 2019.  This decline was driven by a mix of landings declines (monkfish, lobster, scallops) and price declines (monkfish, lobster, scallops, and groundfish).
         
-```{r comm-revenue, fig.width = 4, fig.asp = 0.45, fig.cap = "Revenue through 2019 for the New England region (black) and revenue from NEFMC managed species (red).", code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-comdat-comm-revenue.R"), fig.width = 7.5, fig.asp = 0.2}
+```{r comm-revenue, fig.width = 4, fig.asp = 0.45, fig.cap = "Revenue through 2019 for the New England region (black) and revenue from NEFMC managed species (red).", code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-comdat-comm-revenue.R"), fig.width = 7.5, fig.asp = 0.3}
 ```
         
 ### Implications 
@@ -232,12 +232,9 @@ As noted [above](#recreational-opportunities), recreational fleet effort diversi
 
 #### Ecological Diversity
 
-Ecological diversity indices show mixed trends. Up to 2019, zooplankton diversity was increasing in the GB (Fig. \ref{fig:zoo-diversity-gb}), while no trend was evident in the GOM (Fig. \ref{fig:zoo-diversity-gom}). 2020 surveys were incomplete due to COVID-19. Zooplankton and larval fish diversity indicators will be updated once 2021 survey results have been processed. Adult fish diversity is measured as the expected number of species in a standard number of individuals sampled from the NEFSC bottom trawl survey. There is no vessel correction for this metric, so indices collected aboard the research vessel Albatross IV (up to 2008) and the research vessel Henry B. Bigelow (2009 - Present) are calculated separately (Fig. \ref{fig:exp-n}).  This metric shows an increasing trend in the GOM with no trends on GB.
+Ecological diversity indices show mixed trends. Up to 2019, zooplankton diversity was increasing in the GB, while no trend was evident in the GOM (Fig. \ref{fig:zoo-diversity}). 2020 surveys were incomplete due to COVID-19. Zooplankton and larval fish diversity indicators will be updated once 2021 survey results have been processed. Adult fish diversity is measured as the expected number of species in a standard number of individuals sampled from the NEFSC bottom trawl survey. There is no vessel correction for this metric, so indices collected aboard the research vessel Albatross IV (up to 2008) and the research vessel Henry B. Bigelow (2009 - Present) are calculated separately (Fig. \ref{fig:exp-n}).  This metric shows an increasing trend in the GOM with no trends on GB.
 
-```{r zoo-diversity-gb, fig.cap = "Zooplankton diversity on Georges Bank, based on Shannon diversity index.", code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_NE.Rmd-zoo-diversity-gb.R"), fig.asp=0.4}
-```
-
-```{r zoo-diversity-gom, fig.cap = "Zooplankton diversity in the Gulf of Maine, based on Shannon diversity index.", code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_NE.Rmd-zoo-diversity-gom.R"), fig.asp=0.4}
+```{r zoo-diversity-gb, fig.cap = "Zooplankton diversity on Georges Bank and in the Gulf of Maine, based on Shannon diversity index.", code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_NE.Rmd-zoo-diversity.R"), fig.width = 7.5, fig.asp = 0.4}
 ```
 
 ```{r exp-n, fig.cap = "Adult fish diversity for Georges Bank and in the Gulf of Maine, based on expected number of species.", code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_NE.Rmd-exp-n.R"), fig.width=8, fig.asp=.4}
@@ -257,18 +254,18 @@ As a whole, the examined diversity indicators suggest overall stability in the f
 
 Social vulnerability measures social factors that shape a community’s ability to adapt to change. A subset of these can be used to assess potential environmental justice issues. Environmental Justice is defined in Executive Order 12898 as federal actions intended to address disproportionately high and adverse human health and environmental effects of federal actions on minority and low-income populations. Three of the existing NOAA Fisheries Community Social Vulnerability Indicators (CSVIs), the Poverty Index, Population Composition Index, and Personal Disruption Index, can be used for mandated Environmental Justice analysis^[https://www.fisheries.noaa.gov/national/socioeconomics/social-indicators-coastal-communities].
 
+```{r commercial-engagement, fig.cap= "Commercial engagement, reliance, and environmental justice vulnerability for the top commercially engaged and reliant fishing communities in New England.  Communities ranked medium-high or above for one or more of the environmental justice indicators are highlighted in bright orange. *Community scored high (1.00 and above) for both commercial engagement and reliance indicators.", code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-commercial-engagement.R"), fig.width = 7, fig.asp = 0.55}
+```
+
 Commercial fishery engagement measures the number of permits and dealers, and pounds and value landed in a community, while reliance expresses these numbers based on the level of fishing activity relative to the total population of a community. Recreational fishery engagement measures shore, private vessel, and for-hire fishing effort while reliance expresses these numbers based on fishing effort relative to the population of a community.
 
 In 2021, we reported the top ten most engaged, and top ten most reliant commercial and recreational fishing communities and their associated social vulnerability. Here we apply the same selection standard for top ten fishing communities for both sectors, and focus on examining the environmental justice vulnerability in these communities.
 
 Communities plotted in the upper right section of Fig.\ref{fig:commercial-engagement} scored high for both commercial engagement and reliance, including Chatham, MA; Newington, NH; Stonington, Vinalhaven, and Beals, ME. Communities that ranked medium-high or above for one or more of the environmental justice indicators are highlighted in bright orange: New Bedford and Boston, MA; and Cranberry Isle, ME.
 
-```{r commercial-engagement, fig.cap= "Commercial engagement, reliance, and environmental justice vulnerability for the top commercially engaged and reliant fishing communities in New England.  Communities ranked medium-high or above for one or more of the environmental justice indicators are highlighted in bright orange. *Community scored high (1.00 and above) for both commercial engagement and reliance indicators.", code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-commercial-engagement.R"), fig.width = 7.5, fig.asp = 0.55}
-```
-
 Fig. \ref{fig:commercial-EJ} shows the detailed scores of the three environmental justice indicators for the same communities plotted in Fig.\ref{fig:commercial-engagement}. Communities are plotted clockwise in a descending order of commercial engagement scores from high to low, with the most highly engaged community, New Bedford, MA, listed on the top. Among the communities ranked medium-high or above for environmental justice vulnerability, New Bedford, MA scored high for the poverty index, and medium-high for personal disruption and population composition indices. Boston scored medium-high for personal disruption index and poverty index. Cranberry Isle scored high for the poverty index.
 
-```{r commercial-EJ, fig.cap="Environmental justice indicators (Poverty Index, population composition index, and personal disruption index) for top commercial fishing communities in New England. *Community scored high (1.00 and above) for both commercial engagement and reliance indicators.", out.width='80%'}
+```{r commercial-EJ, fig.cap="Environmental justice indicators (Poverty Index, population composition index, and personal disruption index) for top commercial fishing communities in New England. *Community scored high (1.00 and above) for both commercial engagement and reliance indicators.", out.width='75%'}
 
 #knitr::include_graphics("images/EJ_Commercial_MAB.png")
 
@@ -288,10 +285,10 @@ cropComEJ
 
 No communities in New England scored high for both recreational engagement and reliance (Fig.\ref{fig:recreational-engagement}).  All of the top recreational communities scored lower than medium-high for all of the three environmental justice indicators, meaning that environmental justice may not be a major concern in these communities at this time, based on this particular analysis.
 
-```{r recreational-engagement, fig.cap= "Recreational engagement and reliance, and environmental justice vulnerability, for the top recreationally engaged and reliant fishing communities in New England. None of these communities ranked medium-high or above for one or more of the environmental justice indicators.", code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-recreational-engagement.R"), fig.width = 7.5, fig.asp = 0.55}
-```
-
 Fig. \ref{fig:recreational-EJ} orders communities clockwise in a descending order of recreational engagement scores from high to low, with the most highly engaged community, Narragansett/Point Judith, RI, listed on the top. Narragansett/Point Judith, like all of these top recreational communities ranked low for environmental justice vulnerability. In fact, the scores below 0 for all three environmental justice indicators implies a lower than average level of vulnerability, based on recreational engagement and reliance,  among the communities included in the analysis. 
+
+```{r recreational-engagement, fig.cap= "Recreational engagement and reliance, and environmental justice vulnerability, for the top recreationally engaged and reliant fishing communities in New England. None of these communities ranked medium-high or above for one or more of the environmental justice indicators.", code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-recreational-engagement.R"), fig.width = 7, fig.asp = 0.5}
+```
 
 ```{r recreational-EJ, fig.cap="Environmental justice indicators (Poverty Index, population composition index, and personal disruption index) for top recreational fishing communities in New England. *Community scored high (1.00 and above) for both commercial engagement and reliance indicators.", out.width='80%'}
 #knitr::include_graphics("images/EJ_Recreational_MAB.png")
@@ -344,7 +341,7 @@ Bycatch management measures have been implemented to maintain bycatch below PBR 
 
 The number of gray seals in U.S. waters has risen dramatically in the last three  decades. Based on a survey conducted in 2016, the size of the gray seal population in the U.S. during the breeding season was approximately 27,000 animals, while in Canada the population was estimated to be roughly 425,000. A survey conducted in 2021 in both countries will provide updated estimates of abundance. The population in Canada is increasing at roughly 4% per year, and contributing to rates of increase in the U.S., where the number of pupping sites has increased from 1 in 1988 to 9 in 2019. Mean rates of increase in the number of pups born at various times since 1988 at four of the more data-rich pupping sites (Muskeget, Monomoy, Seal, and Green Islands) ranged from no change on Green Island to high rates of increase on the other three islands, with a maximum increase of 26.3% (95\%CI: 21.6 - 31.4\%; @wood_rates_2020 Fig. \ref{fig:seals}). These high rates of increase provide further support for the hypothesis that seals from Canada are continually supplementing the breeding population in U.S. waters.  
 
-```{r seals, fig.cap = "Estimated mean rates of increase (solid line) and CIs (shaded area) in number of gray seal pups born at four United States pupping colonies at various times from 1988 to 2019. From Wood et al. 2019", code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_NE.Rmd-seal-pups.R"), fig.width=5, fig.asp = .7}
+```{r seals, fig.cap = "Estimated mean rates of increase (solid line) and CIs (shaded area) in number of gray seal pups born at four United States pupping colonies at various times from 1988 to 2019. From Wood et al. 2019", code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_NE.Rmd-seal-pups.R"), fig.width = 6, fig.asp = .8}
 ```
 
 Strong evidence exists to suggest that interactions between right whales and both the fixed gear fisheries in the U.S. and Canada and vessel strikes in the U.S. are contributing substantially to the decline of the species [@hayes_north_2018]. Further, right whale distribution has changed since 2010. New research suggests that recent climate driven changes in ocean circulation have resulted in right whale distribution changes driven by increased warm water influx through the Northeast Channel, which has reduced the primary right whale prey (*Calanus finmarchicus*) in the central and eastern portions of the Gulf of Maine [@hayes_north_2018; @record_rapid_2019; @sorochan_north_2019]. Additional potential stressors include offshore wind development, which overlaps with important habitat areas used year-round by right whales, including mother and calf migration corridors and foraging habitat [@schick_whale_2009]. This area is also the only known right whale winter foraging habitat. Additional information can be found in the [offshore wind section](#other-ocean-uses:-offshore-wind) [@quintana-rizzo_narw_wind_2021].
@@ -364,15 +361,12 @@ Large scale climate related changes in the ecosystem can lead to changes in impo
 ### Climate Change Indicators: ocean temperatures, heatwaves, currents, acidification
 
 #### Ocean temperature and salinity
-Ocean temperatures continue to warm at both the surface (Fig. \ref{fig:seasonal-sst-anom-gridded}) and bottom (Fig. \ref{fig:bottom-temp-gb} & Fig. \ref{fig:bottom-temp-gom}) throughout the Northeast Shelf including New England. Seasonal sea surface temperatures in 2021 were above average throughout the year, with some seasons rivaling or exceeding the record warm temperatures observed in 2012.
+Ocean temperatures continue to warm at both the surface (Fig. \ref{fig:seasonal-sst-anom-gridded}) and bottom (Fig. \ref{fig:bottom-temp}) throughout the Northeast Shelf including New England. Seasonal sea surface temperatures in 2021 were above average throughout the year, with some seasons rivaling or exceeding the record warm temperatures observed in 2012.
 
-```{r seasonal-sst-anom-gridded, fig.cap="New England (EPUs outlined in grey) seasonal sea surface temperature (SST) time series overlaid onto 2021 seasonal spatial anomalies. Seasons are defined as: Jan-Mar for winter, Apr-Jun for spring, Jul-Sep for summer, and Oct-Dec for fall.", code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_NE.Rmd-seasonal-sst-anomaly-gridded.R"), fig.width = 8, fig.asp = 1}
+```{r seasonal-sst-anom-gridded, fig.cap="New England (EPUs outlined in grey) seasonal sea surface temperature (SST) time series overlaid onto 2021 seasonal spatial anomalies. Seasons are defined as: Jan-Mar for winter, Apr-Jun for spring, Jul-Sep for summer, and Oct-Dec for fall.", code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_NE.Rmd-seasonal-sst-anomaly-gridded.R"), fig.width = 7, fig.asp = .8}
 ```
 
-```{r bottom-temp-gb, fig.cap="Annual Georges Bank bottom temperature anomalies. (black = observations, red = reanalysis)", code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_NE.Rmd-bottom-temp-gb.R"), fig.width=6}
-```
-
-```{r bottom-temp-gom, fig.cap="Annual Gulf of Maine bottom temperature anomalies. (black = observations, red = reanalysis)", code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_NE.Rmd-bottom-temp-gom.R"), fig.width=6}
+```{r bottom-temp, fig.cap="Annual Georges Bank and Gulf of Maine bottom temperature anomalies. (black = observations, red = reanalysis)", code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_NE.Rmd-bottom-temp.R"), fig.width=6}
 ```
 
 #### Marine heatwaves
@@ -383,7 +377,7 @@ Georges Bank experienced six distinct marine heatwaves throughout all seasons in
 ```{r heatwave-year-gb, fig.cap="Marine heatwave events (red shading above black line) on Georges Bank occuring in 2021.", code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_NE.Rmd-heatwave-year-gb.R"), fig.asp=.6}
 ```
 
-```{r heatwave-intensity-gb, fig.cap="Marine heatwave cumulative intensity (left) and maximum intensity (right) on Georges Bank.", code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_NE.Rmd-heatwave-gb.R"), fig.width=8, fig.asp=.25}
+```{r heatwave-intensity-gb, fig.cap="Marine heatwave cumulative intensity (left) and maximum intensity (right) on Georges Bank.", code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_NE.Rmd-heatwave-gb.R"), fig.width=8, fig.asp=.3}
 ```
 
 The Gulf of Maine experienced marine heatwaves over 80% of the year in 2021. Six distinct marine heatwaves occurred throughout all seasons with the strongest event beginning on June 6^th^ and lasted 28 days (Fig \ref{fig:heatwave-year-gom}). Relative to prior years, this marine heatwave ranked 8^th^ on record in terms of maximum intensity (+3.81 $^\circ$C above average on June 29^th^). The marine heatwave that began on September 7^th^ currently ranks 6^th^ in cumulative intensity (200 $^\circ$C-days) (Fig \ref{fig:heatwave-intensity-gom}). This marine heatwave continued throughout December.
@@ -391,19 +385,19 @@ The Gulf of Maine experienced marine heatwaves over 80% of the year in 2021. Six
 ```{r heatwave-year-gom, fig.cap="Marine heatwave events (red shading above black line) in the Gulf of Maine occuring in 2021.", code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_NE.Rmd-heatwave-year-gom.R"), fig.asp=.6}
 ```
 
-```{r heatwave-intensity-gom, fig.cap="Marine heatwave cumulative intensity (left) and maximum intensity (right) in the Gulf of Maine.", code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_NE.Rmd-heatwave-gom.R"), fig.width=8, fig.asp=.25}
+```{r heatwave-intensity-gom, fig.cap="Marine heatwave cumulative intensity (left) and maximum intensity (right) in the Gulf of Maine.", code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_NE.Rmd-heatwave-gom.R"), fig.width=8, fig.asp=.3}
 ```
 
 #### Ocean currents and features
 
 Variability of the Gulf Stream is one of the major drivers of changes in the oceanographic conditions of the Slope Sea and subsequently the Northeast U.S. continental shelf [@gangopadhyay_census_2020]. Changes in the Gulf Stream and Slope Sea can affect large-scale climate phenomena as well as local ecosystems and coastal communities. During the last decade, the Gulf Stream has become less stable and shifted northward [@andres_recent_2016; @caesar_observed_2018] (Fig. \ref{fig:GSI}).  A more northern Gulf Stream position is associated with warmer ocean temperature on the northeast shelf [@zhang_role_2007], a higher proportion of Warm Slope Water in the Northeast Channel, and increased sea surface height along the U.S. east coast [@goddard_extreme_2015].
 
-```{r GSI, fig.cap = "Index representing changes in the location of the Gulf Stream north wall. Positive values represent a more northerly Gulf Stream position.", code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_MAB.Rmd-gsi.R"), fig.width=6}
+```{r GSI, fig.cap = "Index representing changes in the location of the Gulf Stream north wall. Positive values represent a more northerly Gulf Stream position.", code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_MAB.Rmd-gsi.R"), fig.width=5, fig.asp = 0.4}
 ```
 
 In 2019, we also observed the second lowest proportion of Labrador Slope Water entering the Gulf of Maine since 1978 (Fig. \ref{fig:wsw-prop}). The changing proportions of source water affect the temperature, salinity, and nutrient inputs to the Gulf of Maine ecosystem.
 
-```{r wsw-prop, fig.cap = "Proportion of Warm Slope Water (WSW) and Labrador slope water (LSLW) entering the GOM through the Northeast Channel.", code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_NE.Rmd-slopewater.R"), fig.width=6}
+```{r wsw-prop, fig.cap = "Proportion of Warm Slope Water (WSW) and Labrador slope water (LSLW) entering the GOM through the Northeast Channel.", code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_NE.Rmd-slopewater.R"), fig.width=5.5, fig.asp=.4}
 ```
 
 Since 2008, the Gulf Stream has moved closer to the Grand Banks, reducing the supply of cold, fresh, and oxygen-rich Labrador Current waters to the Northwest Atlantic Shelf [@goncalves_neto_changes_2021]. Nearly every year since 2010, warm slope water made up more than 75% of the annual slope water proportions entering the Gulf of Maine.  In 2017 and 2019, almost no cooler Labrador Slope water entered the Gulf of Maine through the Northeast Channel (Fig. \ref{fig:wsw-prop}).  The changing proportions of source water affect the temperature, salinity, and nutrient inputs to the Gulf of Maine ecosystem.  In 2021, warm slope water continued to dominate (86.1%) inputs to the Gulf of Maine. The 2022 position of the north wall of the Gulf Stream is forecasted to be similar to 2021 [@silver_forecasting_2021], extending this pattern.
@@ -446,18 +440,18 @@ knitr::include_graphics("images/D_20210608-MUR-SST-WCR.PNG")
 
 ```
 
-When warm core rings and eddies interact with the continental slope they can transport warm, salty water to the continental shelf [@chen_mesoscale_2022], and this is now happening more frequently [@gawarkiewicz_changing_2018; @gawarkiewicz_increasing_nodate]. These interactions can be significant contributors to marine heatwaves in the Mid-Atlantic Bight [@gawarkiewicz_characteristics_2019; @chen_mesoscale_2022] as well as the movement of shelf-break species inshore [@gawarkiewicz_changing_2018; @potter_horizontal_2011; @worm_predator_2003]. 
+When warm core rings and eddies interact with the continental slope they can transport warm, salty water to the continental shelf [@chen_mesoscale_2022], and this is now happening more frequently [@gawarkiewicz_changing_2018; @gawarkiewicz_increasing_nodate]. These interactions can be significant contributors to marine heatwaves along the continental shelf [@gawarkiewicz_characteristics_2019; @chen_mesoscale_2022] as well as the movement of shelf-break species inshore [@gawarkiewicz_changing_2018; @potter_horizontal_2011; @worm_predator_2003]. 
 
 Changes in ocean temperature and circulation alter habitat features such as the seasonal cold pool, a 20–60 m thick band of cold, relatively uniform near-bottom water that persists from spring to fall over the mid and outer shelf of the Mid-Atlantic Bight and southern flank of Georges Bank [@lentz_seasonal_2017; @chen_seasonal_2018]. It is a reservoir of nutrients that feeds phytoplankton productivity, is essential fish spawning and nursery habitat, and affects fish distribution and behavior [@lentz_seasonal_2017; @miles_offshore_2021]. The average temperature of the cold pool is getting warmer over time [@miller_state-space_2016; @du_pontavice_incorporating_nodate], the area is getting smaller [@friedland_middle_2022], and the duration is getting shorter (Fig. \ref{fig:cold-pool}).
 
-```{r cold-pool, fig.cap="Seasonal cold pool indices: mean temperature within the cold pool, cold pool persistence, and spatial extent.",  code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_MAB.Rmd-cold_pool.R"), fig.width=10, fig.asp=.35}
+```{r cold-pool, fig.cap="Seasonal cold pool indices: mean temperature within the cold pool, cold pool persistence, and spatial extent.",  code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_MAB.Rmd-cold_pool.R"), fig.width=10, fig.asp=.3}
 
 ```
 
 #### Ocean Acidification
 Ocean acidification (OA) has caused measured declines in global ocean pH. On the Northeast Shelf, summer bottom pH (2007-2021) varied spatially and temporally, ranging from 7.69-8.07 (Fig. \ref{fig:ne-oa}, left panel). The lowest pH values were recorded in the Gulf of Maine. In summer 2021, water column pH ranged from 7.72-8.18 (Fig. \ref{fig:ne-oa}, right panel) in the Gulf of Maine. The highest values occurred at the surface and decreased with depth, reaching minimum values in the deeper waters (below 200 m) of Jordan and Wilkinson Basins. 
 
-```{r ne-oa, out.width = '80%', fig.cap = "Left: Summer bottom pH collated from all quality-controlled vessel- and glider-based measurements from 2007-2021. Right: Glider-based pH profiles collected during summer 2021 in the Gulf of Maine."}
+```{r ne-oa, out.width = '90%', fig.cap = "Left: Summer bottom pH collated from all quality-controlled vessel- and glider-based measurements from 2007-2021. Right: Glider-based pH profiles collected during summer 2021 in the Gulf of Maine."}
 
 knitr::include_graphics("images/Saba_Fig_SOE_NEFMC - Grace Saba.png")
 
@@ -467,20 +461,17 @@ knitr::include_graphics("images/Saba_Fig_SOE_NEFMC - Grace Saba.png")
 
 #### Phytoplankton
 
-Phytoplankton support the food web as the primary food source for zooplankton and filter feeders such as shellfish. Numerous environmental and oceanographic factors interact to drive the abundance, composition, spatial distribution, and productivity of phytoplankton. In 2021, phytoplankton biomass (measured as chlorophyll a concentration) was above average in winter, but below average during the typical spring bloom period in both Georges Bank and Gulf of Maine.  Summer concentrations were also low, but there was an anomalously high fall bloom \ref{fig:chl-weekly}.  Primary productivity (the rate of photosynthesis) was above average during the winter bloom and well above average on Georges Bank during the summer \ref{fig:pp-weekly}.
+Phytoplankton support the food web as the primary food source for zooplankton and filter feeders such as shellfish. Numerous environmental and oceanographic factors interact to drive the abundance, composition, spatial distribution, and productivity of phytoplankton. In 2021, phytoplankton biomass (measured as chlorophyll a concentration) was above average in winter, but below average during the typical spring bloom period in both Georges Bank and Gulf of Maine.  Summer concentrations were also low, but there was an anomalously high fall bloom (Fig. \ref{fig:chl-weekly}).  Primary productivity (the rate of photosynthesis) was above average during the winter bloom and well above average on Georges Bank during the summer (Fig. \ref{fig:pp-weekly}).
 
-```{r chl-weekly, fig.cap = "Weekly chlorophyll concentrations on Georges Bank and in the Gulf of Maine are shown by the colored line for 2021. The long-term mean is shown in black and shading indicates +/- 1 sample SD.", code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_NE.Rmd-chl-weekly.R"), fig.width = 5, fig.asp=.4}
+```{r chl-weekly, fig.cap = "Weekly chlorophyll concentrations on Georges Bank and in the Gulf of Maine are shown by the colored line for 2021. The long-term mean is shown in black and shading indicates +/- 1 sample SD.", code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_NE.Rmd-chl-weekly.R"), fig.width = 6, fig.asp=.4}
 ```
 
-```{r pp-weekly, fig.cap = "Weekly primary productivity on Georges Bank and in the Gulf of Maine are shown by the colored line for 2021. The long-term mean is shown in black and shading indicates +/- 1 sample SD.", code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_NE.Rmd-pp-weekly.R"), fig.width = 5, fig.asp=.4}
+```{r pp-weekly, fig.cap = "Weekly primary productivity on Georges Bank and in the Gulf of Maine are shown by the colored line for 2021. The long-term mean is shown in black and shading indicates +/- 1 sample SD.", code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_NE.Rmd-pp-weekly.R"), fig.width = 6, fig.asp=.4}
 ```
 
-The seasonal cycle of size distribution of phytoplankton shows that the spring and fall bloom periods are dominated by larger-celled microplankton, while smaller-celled nanoplankton dominate during the warmer summer months. The proportion of the smallest phytoplankton, picoplankton (0.2-2 microns), are relatively constant throughout the year. In 2021, microplankton proportions were above average during the winter and fall bloom periods, but below average for the summer months in both Georges Bank and the Gulf of Maine (Fig. \ref{fig:weekly-phyto-size-gb} & Fig. \ref{fig:weekly-phyto-size-gom}).
+The seasonal cycle of size distribution of phytoplankton shows that the spring and fall bloom periods are dominated by larger-celled microplankton, while smaller-celled nanoplankton dominate during the warmer summer months. The proportion of the smallest phytoplankton, picoplankton (0.2-2 microns), are relatively constant throughout the year. In 2021, microplankton proportions were above average during the winter and fall bloom periods, but below average for the summer months in both Georges Bank and the Gulf of Maine (Fig. \ref{fig:weekly-phyto-size}).
 
-```{r weekly-phyto-size-gb, fig.cap="The annual climatology (1998-2020) percent composition of the phytoplankton size classes on Georges Bank based on satellite observations in the shaded portions. The 2021 proportions for the microplankton (>20 microns, green) and nanoplankton (2-20 microns, orange) are shown in the bold lines.", code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_NE.Rmd-weekly-phyto-size-gb.R"), fig.asp=.6}
-```
-
-```{r weekly-phyto-size-gom, fig.cap="The annual climatology (1998-2020) percent composition of the phytoplankton size classes in the Gulf of Maine based on satellite observations in the shaded portions. The 2021 proportions for the microplankton (>20 microns, green) and nanoplankton (2-20 microns, orange) are shown in the bold lines.", code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_NE.Rmd-weekly-phyto-size-gom.R"), fig.asp=.6}
+```{r weekly-phyto-size, fig.cap="The annual climatology (1998-2020) percent composition of the phytoplankton size classes on Georges Bank and Gulf of Maine based on satellite observations in the shaded portions. The 2021 proportions for the microplankton (>20 microns, green) and nanoplankton (2-20 microns, orange) are shown in the bold lines.", code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_NE.Rmd-weekly-phyto-size-gb.R"), fig.width=6}
 ```
 
 #### Zooplankton
@@ -489,7 +480,7 @@ While zooplankton indicators could not be updated for this report due to 2020 su
 #### Forage Fish Energy Content
 Nutritional value (energy content) of juvenile and adult forage fish as prey is related to environmental conditions, fish growth, and reproductive cycles. Forage energy density measurements from NEFSC trawl surveys 2017-2021 are building toward a time series to evaluate trends (Fig. \ref{fig:energy-density}). Limited data from the spring 2020 survey, and complete spring 2021 survey  measurements were consistent with previous reports: the energy density of Atlantic herring was almost half the value (5.69 +/- 0.07 kJ/g wet weight) reported in earlier studies (10.6-9.4 kJ/ g wet weight). Silver hake, longfin squid (*Loligo* in figure) and shortfin squid (*Illex* in figure) were also lower than previous estimates [@steimle_energy_1985; @lawson_important_1998]. Energy density of alewife, butterfish, sand lance, and Atlantic mackerel varies seasonally, with seasonal estimates both higher and lower than estimates from previous decades.
 
-```{r energy-density, fig.cap="Forage fish energy density mean and standard deviation by season and year, compared with 1980s (solid line; Steimle and Terranove 1985) and 1990s (dashed line; Lawson et al. 1998) values.", code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_MAB.Rmd-energy-density.R"), fig.width = 7.5, fig.asp = 0.5}
+```{r energy-density, fig.cap="Forage fish energy density mean and standard deviation by season and year, compared with 1980s (solid line; Steimle and Terranove 1985) and 1990s (dashed line; Lawson et al. 1998) values.", code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_MAB.Rmd-energy-density.R"), fig.width = 7.5, fig.asp = 0.6}
 ```
 
 #### Fish Condition
@@ -508,10 +499,10 @@ knitr::include_graphics("images/GOM_Condition_allsex_2022_viridis.jpg")
 #### Fish Productivity
 We describe patterns of aggregate fish productivity on Georges Bank and the Gulf of Maine with the small fish per large fish anomaly indicator, derived from NEFSC bottom trawl survey data (Fig. \ref{fig:productivity-anomaly-gb} & Fig. \ref{fig:productivity-anomaly-gom}). The indicator shows great variability with both regions being below average for much of the past decade.
 
-```{r productivity-anomaly-gb, fig.cap = "Small fish per large fish biomass anomaly on Georges Bank. The summed anomaly across species is shown by the black line.", code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_NE.Rmd-productivity-anomaly-gb.R"), fig.width=5, fig.asp=.7}
+```{r productivity-anomaly-gb, fig.cap = "Small fish per large fish biomass anomaly on Georges Bank. The summed anomaly across species is shown by the black line.", code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_NE.Rmd-productivity-anomaly-gb.R"), fig.width=5, fig.asp=.6}
 ```
 
-```{r productivity-anomaly-gom, fig.cap = "Small fish per large fish biomass anomaly in the Gulf of Maine. The summed anomaly across species is shown by the black line.", code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_NE.Rmd-productivity-anomaly-gom.R"), fig.width=5, fig.asp=.7}
+```{r productivity-anomaly-gom, fig.cap = "Small fish per large fish biomass anomaly in the Gulf of Maine. The summed anomaly across species is shown by the black line.", code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_NE.Rmd-productivity-anomaly-gom.R"), fig.width=5, fig.asp=.6}
 ```
 
 ### Ecosystem Structure Indicators: distribution shifts, diversity, predators
@@ -530,10 +521,10 @@ New indicators for shark populations, combined with information on grey seals (s
 
 Stock status is mixed for Atlantic Highly Migratory Species (HMS) stocks (including sharks, swordfish, billfish, and tunas) occurring in the New England region. While there are several HMS species considered to be overfished or that have unknown stock status, the population status for some managed Atlantic sharks and tunas is at or above the biomass target (Fig. \ref{fig:hms-stock-status} ), suggesting the potential for robust predator populations among these managed species. 
 
+As noted in the [Protected Species section](#protected-species), gray seal populations are increasing. Harbor and gray seals occupying New England waters are generalist predators that consume more than 30 different prey species. An evaluation of hard  parts found in seal stomachs showed that harbor and gray seals predominantly exploit abundant demersal fish species (i.e. red, white, and silver hake). Other relatively abundant prey species found in hard-part remains include sand lance, yellowtail flounder, four-spotted flounder, Gulf-stream flounder, haddock, herring, redfish, and squids.
+
 ```{r hms-stock-status, fig.cap = "Summary of single species status for HMS stocks; key to species names at https://noaa-edab.github.io/tech-doc/atlantic-highly-migratory-species-stock-status.html.", code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_MAB.Rmd-hms-stock-status.R"), fig.width = 7, fig.asp = 0.5}
 ```
-
-As noted in the [Protected Species section](#protected-species), gray seal populations are increasing. Harbor and gray seals occupying New England waters are generalist predators that consume more than 30 different prey species. An evaluation of hard  parts found in seal stomachs showed that harbor and gray seals predominantly exploit abundant demersal fish species (i.e. red, white, and silver hake). Other relatively abundant prey species found in hard-part remains include sand lance, yellowtail flounder, four-spotted flounder, Gulf-stream flounder, haddock, herring, redfish, and squids.
 
 A recent stable isotope study utilizing gray seal scat samples obtained from Massachusetts habitats showed individual gray seals can specialize on particular prey. It also found that gray seals vary their diet seasonally, focusing on demersal inshore species prior to the spring molt, and offshore species such as sand lance after molting. DNA studies on gray seal diet in Gulf of Maine and Massachusetts waters found spiny dogfish and Jonah crab present in gray seal scat samples. Skate and crab remains were also found in gray seal stomach remains. In contrast to direct feeding, it is uncertain if the presence of skates and crabs is due to secondary consumption or scavenging.
 
@@ -585,12 +576,12 @@ While krill and large gelatinous zooplankton have increased over time, smaller z
 
 As of February 2022, 24 offshore wind development projects are proposed for construction over the next decade in the Northeast (timelines and project data are based on Tables E-2, E-4, and E-4-2 of South Fork Wind Farm Final Environmental Impact Statement). Offshore wind areas are anticipated to cover more than 1.7 million acres by 2030 in the Greater Atlantic region (Fig. \ref{fig:wind-proposed-dev}). Beyond 2030 values include acreage for the NY Wind Energy Areas (WEA) and Gulf of Maine Area of Interest for floating research array.
 
-```{r wind-proposed-dev, fig.cap='Proposed wind development on the northeast shelf.', code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_MAB.Rmd-wind-proposed-dev.R")}
+```{r wind-proposed-dev, fig.cap='Proposed wind development on the northeast shelf.', code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_MAB.Rmd-wind-proposed-dev.R"), fig.width=5}
 ```
 
 Just over 2,500 foundations and more than 7,000 miles of inter-array and offshore export cables are proposed to date. The colored chart in Fig. \ref{fig:wind-dev-cumul} also presents the offshore wind development timeline in the Greater Atlantic region with the estimated year that foundations would be constructed (matches the color of the wind areas). These timelines and data estimates are expected to shift but represent the most recent information available as of February 2022. Based on current timelines, the areas affected would be spread out such that it is unlikely that any one particular area would experience full development at one time. In addition, this rapid build out will be more impactful to the Mid-Atlantic than to New England, recognizing that the lease areas in RI and MA are part of the Mid-Atlantic for the purposes of this report. Offshore floating wind is also expected to be developed in the Gulf of Maine. Although no commercial wind areas have been proposed, the state of Maine submitted an application to BOEM to lease 9,696 acres (15 square miles) for the first floating offshore wind research site in federal waters of the GOM. This area is shown at the top of Figure \ref{fig:wind-dev-cumul}, with the original Area of Interest (AOI) and the final lease site already submitted to BOEM. Additionally, BOEM announced that commercial lease area designations for the Gulf of Maine are expected in 2023, with lease sales in 2024. Lastly, for each state in the region, Figure \ref{fig:wind-dev-cumul} shows the states’ current energy goals (GW and year as of January 2022). It is expected that ME, NH and the MA outstanding energy goals not met within the MA/RI WEA will come from GOM development.   
 
-```{r wind-dev-cumul, fig.cap = "All Northeast Project areas by year construction ends (each project has 2 year construction period).  The question mark in the Gulf of Maine refers to the yet to be determined Gulf of Maine winds areas.", out.width='90%'}
+```{r wind-dev-cumul, fig.cap = "All Northeast Project areas by year construction ends (each project has 2 year construction period).  The question mark in the Gulf of Maine refers to the yet to be determined Gulf of Maine winds areas.", out.width='80%'}
 #knitr::include_url("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/docs/images/All_2021128_needsgraph-01.jpg")
 knitr::include_graphics("images/offshore_wind_timeline.png")
 ```
@@ -663,12 +654,17 @@ kable(dat, col.names = column_names, "latex", booktabs = TRUE,
 
 Equity and environmental justice are priority concerns with offshore wind development and fisheries impacts in the Northeast. Fig. \ref{fig:wea-port-rev} links historic port revenue (2008-2019) from within all wind lease areas as a proportion of the port’s total revenue based on vessel trip reports as described in the revenue and landings of species in the wind indicator above. The range (minimum and maximum) of total percent revenue from within wind energy areas is presented in the graph and ports are sorted with the highest revenue from within wind areas to least. 
 
-```{r wea-port-rev, fig.cap="Percent of port revenue from Wind Energy Areas (WEA) in descending order from most to least port revenue from WEA. EJ = Environmental Justice.", code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-wea-port-rev.R"), fig.width=6.5, fig.asp=.85, fig.align='left'}
+```{r wea-port-rev, fig.cap="Percent of port revenue from Wind Energy Areas (WEA) in descending order from most to least port revenue from WEA. EJ = Environmental Justice.", code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-wea-port-rev.R"), fig.width=6.5, fig.asp=.75, fig.align='left'}
 ```
 
 For example, Westport, MA had a minimum of 10% and maximum of 29% overlap of wind energy revenue to the total port revenue between 2008-2019. Those communities that score Med-High or higher in at least one of the vulnerability indicators that address environmental justice concerns (i.e., Poverty, Population Composition, Personal Disruption; see  indicator definitions) are noted with a triangle. Gentrification pressure is also highlighted here, with those communities that score Med-High or higher in one or more gentrification pressure indicators (i.e., Housing Disruption, Retiree Migration, Urban Sprawl) represented with a circle (Fig. \ref{fig:wea-port-rev}). BOEM reports that cumulative offshore wind development (if all proposed projects are developed) could have moderate impacts on low-income members of environmental justice communities who work in the commercial fishing and for-hire fishing industry due to disruptions to fish populations, restrictions on navigation and increased vessel traffic as well as existing vulnerabilities of low-income workers to economic impacts [@boem_vineyard_2020]. 
 
 Top  fishing communities high in environmental justice concerns (i.e., New Bedford, MA, New London, CT) should be considered in decision making to reduce the social and economic impacts and aid in the resilience and adaptive capacity of underserved communities. Environmental justice concerns also highlights communities where we need to provide further resources to reach underserved and underrepresented groups and create opportunities for and directly involve these groups in the decision-making process. 
+
+```{r whales-wind, out.width="60%", fig.cap="Northern Right Whale persistent hotspots and Wind Energy Areas."}
+knitr::include_graphics("images/NARW_hotpsot_persistence_2_1_2022_TPW.png")
+```
+
 
 ### Implications
 Current plans for rapid buildout of offshore wind in a patchwork of areas spreads the impacts differentially throughout the region (Fig. \ref{fig:wind-dev-cumul}).
@@ -677,13 +673,10 @@ Up to 12% of total average revenue for major New England commercial species in l
 
 Planned development overlaps mother and calf migration corridors and a significant foraging habitat that is used throughout the year (Fig \ref{fig:whales-wind}).  Turbine presence and extraction of energy from the system could alter local oceanography [@christiansen_wind_2022] and may affect right whale prey availability. Proposed wind development areas also bring increased vessel strike risk from construction and operation vessels. In addition, there are a number of potential impacts to whales from pile driving and operational noise such as displacement, increased levels of communication masking, and elevated stress hormones.  
 
-```{r whales-wind, out.width="60%", fig.cap="Northern Right Whale persistent hotspots and Wind Energy Areas."}
-knitr::include_graphics("images/NARW_hotpsot_persistence_2_1_2022_TPW.png")
-```
-
 Scientific data collection surveys for ocean and ecosystem conditions, fish, and protected species will be altered, potentially increasing uncertainty for management decision making.
 
 The increase of offshore wind development can have both positive (e.g., employment opportunities) and negative (e.g., space-use conflicts) effects. Continued increase in coastal development and gentrification pressure has resulted in loss of fishing infrastructure space within ports. Understanding these existing pressures can allow for avoiding and mitigating negative impacts to our shore support industry and communities dependent on fishing. Some of the communities with the highest revenue overlap with offshore wind that are also vulnerable to gentrification pressure are Point Judith, RI, New Bedford, MA and Newport, RI. 
+
 
 # Contributors
 
