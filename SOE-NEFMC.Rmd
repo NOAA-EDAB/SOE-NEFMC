@@ -3,18 +3,20 @@ title:
 csl: plos.csl
 fontsize: 10pt
 output:
-  pdf_document:
+  bookdown::word_document2:
+    toc: false
+  bookdown::html_document2: 
+    df_print: paged
+  bookdown::pdf_document2:
     includes:
       in_header: latex/header1.tex
     keep_tex: yes
-  html_document:
-    df_print: paged
-  word_document: default
 link-citations: yes
 geometry: left=2cm, right=2cm, top=2cm, bottom=3cm, footskip = .5cm
 subparagraph: yes
 bibliography: SOE.bib
 urlcolor: blue
+always_allow_html: true
 ---
 
 ```{r setup, include=FALSE}
@@ -90,19 +92,29 @@ mng_obj <- data.frame("Objective Categories" = c("Seafood Production",
                                "Relative biomass of feeding guilds, Zooplankton",
                                "Estuarine and offshore habitat conditions"))
 
-knitr::kable(mng_obj, linesep = "",
-      col.names = c("Objective Categories","Indicators reported here"),
-      caption = "Example ecosystem-scale objectives for the New England Region",
-      #align = 'c',
-      booktabs = T) %>%
- # kable_styling(latex_options = "hold_position", "scale_down") %>%
- # column_spec(c(2), width = c("25em")) %>%
-  row_spec(0, bold = TRUE) %>%
- # group_rows("Provisioning/Cultural", 1,4) %>%
- # group_rows("Supporting/Regulating", 5,9)
-  pack_rows("Provisioning/Cultural Services", 1,6) %>%
-  pack_rows("Supporting/Regulating Services", 7,10)
+# knitr::kable(mng_obj, linesep = "",
+#       col.names = c("Objective Categories","Indicators reported here"),
+#       caption = "Example ecosystem-scale objectives for the New England Region",
+#       #align = 'c',
+#       booktabs = T) %>%
+#  # kable_styling(latex_options = "hold_position", "scale_down") %>%
+#  # column_spec(c(2), width = c("25em")) %>%
+#   row_spec(0, bold = TRUE) %>%
+#  # group_rows("Provisioning/Cultural", 1,4) %>%
+#  # group_rows("Supporting/Regulating", 5,9)
+#   pack_rows("Provisioning/Cultural Services", 1,6) %>%
+#   pack_rows("Supporting/Regulating Services", 7,10)
 
+mng_obj$service <- c(rep("Provisioning and Cultural Services", 6), 
+                     rep("Supporting and Regulating Services", 4))
+
+flextable::as_grouped_data(mng_obj, groups = "service") %>% 
+  flextable::as_flextable(hide_grouplabel=TRUE) %>% 
+  flextable::align(i = ~ !is.na(service), align = "left") %>% 
+  flextable::set_header_labels(Objective.Cateories = "Objective Categories",
+                               Indicators.reported = "Indicators reported") %>%
+  flextable::set_caption("Example ecosystem-scale fishery management objectives for the New England region") %>%
+  flextable::autofit()
 
 ```
  
@@ -366,7 +378,7 @@ Ocean temperatures continue to warm at both the surface (Fig. \ref{fig:seasonal-
 ```{r seasonal-sst-anom-gridded, fig.cap="New England (EPUs outlined in grey) seasonal sea surface temperature (SST) time series overlaid onto 2021 seasonal spatial anomalies. Seasons are defined as: Jan-Mar for winter, Apr-Jun for spring, Jul-Sep for summer, and Oct-Dec for fall.", code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_NE.Rmd-seasonal-sst-anomaly-gridded.R"), fig.width = 7, fig.asp = .8}
 ```
 
-```{r bottom-temp, fig.cap="Annual Georges Bank and Gulf of Maine bottom temperature anomalies. (black = observations, red = reanalysis)", code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_NE.Rmd-bottom-temp.R"), fig.width=6}
+```{r bottom-temp, fig.cap="Annual Georges Bank and Gulf of Maine bottom temperature anomalies. (black = observations, red = reanalysis)", code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_NE.Rmd-seasonal-bt-anom.R"), fig.width=6}
 ```
 
 #### Marine heatwaves
@@ -471,7 +483,7 @@ Phytoplankton support the food web as the primary food source for zooplankton an
 
 The seasonal cycle of size distribution of phytoplankton shows that the spring and fall bloom periods are dominated by larger-celled microplankton, while smaller-celled nanoplankton dominate during the warmer summer months. The proportion of the smallest phytoplankton, picoplankton (0.2-2 microns), are relatively constant throughout the year. In 2021, microplankton proportions were above average during the winter and fall bloom periods, but below average for the summer months in both Georges Bank and the Gulf of Maine (Fig. \ref{fig:weekly-phyto-size}).
 
-```{r weekly-phyto-size, fig.cap="The annual climatology (1998-2020) percent composition of the phytoplankton size classes on Georges Bank and Gulf of Maine based on satellite observations in the shaded portions. The 2021 proportions for the microplankton (>20 microns, green) and nanoplankton (2-20 microns, orange) are shown in the bold lines.", code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_NE.Rmd-weekly-phyto-size-gb.R"), fig.width=6}
+```{r weekly-phyto-size, fig.cap="The annual climatology (1998-2020) percent composition of the phytoplankton size classes on Georges Bank and Gulf of Maine based on satellite observations in the shaded portions. The 2021 proportions for the microplankton (>20 microns, green) and nanoplankton (2-20 microns, orange) are shown in the bold lines.", code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_NE.Rmd-weekly-phyto-size.R"), fig.width=6}
 ```
 
 #### Zooplankton
@@ -597,21 +609,32 @@ The scallop fishery could be the most affected fishery, with a maximum of 12\% o
 #fig.cap="Percent Landings and Revenue from wind energy areas. Data from GARFO VTR.",
 #, out.width="90%", code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_MAB.Rmd-wea-landings-rev.R")
 
-dt<- ecodata::wea_landings_rev %>% 
-  dplyr::select("GARFO and ASMFC Managed Species", "perc_landings_max"  ,"perc_landings_min",
-                "perc_revenue_max","perc_revenue_min" ) %>%
-  dplyr::filter(`GARFO and ASMFC Managed Species` %in% 
-                  c('Atlantic sea scallops', 'Atlantic herring', 'Monkfish', 
-                    'Silver hake', 'Skate wings')) %>%
+# dt<- ecodata::wea_landings_rev %>% 
+#   dplyr::select("GARFO and ASMFC Managed Species", "perc_landings_max"  ,"perc_landings_min",
+#                 "perc_revenue_max","perc_revenue_min" ) %>%
+#   dplyr::filter(`GARFO and ASMFC Managed Species` %in% 
+#                   c('Atlantic sea scallops', 'Atlantic herring', 'Monkfish', 
+#                     'Silver hake', 'Skate wings')) %>%
+#   dplyr::rename("Maximum Percent Total Annual Regional Species Landings"="perc_landings_max",
+#     "Maximum Percent Total Annual Regional Species Revenue"="perc_revenue_max",
+#     "Minimum Percent Total Annual Regional Species Landings"="perc_landings_min",
+#     "Minimum Percent Total Annual Regional Species Revenue"="perc_revenue_min",) 
+# kable(dt,"latex", booktabs = TRUE,
+#       caption = "Top ten species Landings and Revenue from Wind Energy Areas.") %>% 
+#   kable_classic(full_width = F, html_font = "Cambria") %>%
+#   column_spec(2:5, width = "10em") %>%
+#   kable_styling(latex_options = "scale_down")
+
+dt<- ecodata::wea_landings_rev[1:20,] %>% 
+  dplyr::select("NEFMC, MAFMC, and ASMFC Managed Species", "perc_landings_max",
+                "perc_revenue_max" ) %>%
   dplyr::rename("Maximum Percent Total Annual Regional Species Landings"="perc_landings_max",
-    "Maximum Percent Total Annual Regional Species Revenue"="perc_revenue_max",
-    "Minimum Percent Total Annual Regional Species Landings"="perc_landings_min",
-    "Minimum Percent Total Annual Regional Species Revenue"="perc_revenue_min",) 
-kable(dt,"latex", booktabs = TRUE,
-      caption = "Top ten species Landings and Revenue from Wind Energy Areas.") %>% 
-  kable_classic(full_width = F, html_font = "Cambria") %>%
-  column_spec(2:5, width = "10em") %>%
-  kable_styling(latex_options = "scale_down")
+    "Maximum Percent Total Annual Regional Species Revenue"="perc_revenue_max")
+
+flextable::flextable(dt) %>%
+  flextable::set_caption("Top 20 species Landings and Revenue from Wind Energy Areas.") %>%
+  flextable::width(width = c(3,2,2))
+
 
 ```
 
@@ -644,11 +667,16 @@ dat<- data.frame(XSurvey= c("Fall BTS", "Spring BTS", "EcoMon", "Scallop",
 column_names <- c("Survey","1.Evaluate designs & Impacts","2.Design New Methods","3.Calibrate New/Existing Surveys","4.Bridge Solutions","5.Conduct New Surveys","6.Comms & Data")
 #DT::datatable(dat, colnames = column_names)
 
-kable(dat, col.names = column_names, "latex", booktabs = TRUE,
-      caption = "Survey mitigation planning.") %>% 
-  kable_classic(full_width = F, html_font = "Cambria") %>%
-  column_spec(2:7, width = "10em") %>%
-  kable_styling(latex_options = "scale_down")
+# kable(dat, col.names = column_names, "latex", booktabs = TRUE,
+#       caption = "Survey mitigation planning.") %>% 
+#   kable_classic(full_width = F, html_font = "Cambria") %>%
+#   column_spec(2:7, width = "10em") %>%
+#   kable_styling(latex_options = "scale_down")
+
+names(dat) <- column_names
+
+flextable::flextable(dat) %>%
+  flextable::set_caption("Survey mitigation planning.")
 
 ```
 
@@ -783,17 +811,23 @@ df<-df[c(1,3,2,4,5)] %>%
 mutate_all(tolower)
 
 
-knitr::kable(df, booktabs = TRUE, caption = 'Feeding guilds and management bodies.', 
- col.names = c("Guild", "MAFMC", "Joint", "NEFMC", "State or Other")) %>%
-kable_styling(font_size=10, latex_options=c("repeat_header", "scale_down", "hold_position")) %>%
-row_spec(0,bold=TRUE) %>%
-column_spec(1, width="2cm") %>%
-column_spec(2, width="4cm") %>%
-column_spec(3, width="2cm") %>%
-column_spec(4, width="5cm") %>%
-column_spec(5, width="6cm") %>%
-#column_spec(3, width="7.5cm") #%>%
-collapse_rows(columns = 1, latex_hline = "major", valign = "middle")
+# knitr::kable(df, booktabs = TRUE, caption = 'Feeding guilds and management bodies.', 
+#  col.names = c("Guild", "MAFMC", "Joint", "NEFMC", "State or Other")) %>%
+# kable_styling(font_size=10, latex_options=c("repeat_header", "scale_down", "hold_position")) %>%
+# row_spec(0,bold=TRUE) %>%
+# column_spec(1, width="2cm") %>%
+# column_spec(2, width="4cm") %>%
+# column_spec(3, width="2cm") %>%
+# column_spec(4, width="5cm") %>%
+# column_spec(5, width="6cm") %>%
+# #column_spec(3, width="7.5cm") #%>%
+# collapse_rows(columns = 1, latex_hline = "major", valign = "middle")
+
+flextable::flextable(df) %>%
+  flextable::set_caption('Feeding guilds and management bodies.') %>%
+  #flextable::autofit()
+  flextable::fontsize(i = NULL, j = NULL, size = 10, part = "body") %>%
+  flextable::width(width = c(1,2,1,2.5,3))
 
 ```
 
