@@ -3,14 +3,16 @@ title:
 csl: plos.csl
 fontsize: 10pt
 output:
-  bookdown::word_document2:
-    toc: false
-  bookdown::html_document2: 
-    df_print: paged
   bookdown::pdf_document2:
     includes:
       in_header: latex/header1.tex
     keep_tex: yes
+    toc: false
+    number_sections: false
+  bookdown::word_document2:
+    toc: false
+  bookdown::html_document2: 
+    df_print: paged
 link-citations: yes
 geometry: left=2cm, right=2cm, top=2cm, bottom=3cm, footskip = .5cm
 subparagraph: yes
@@ -42,7 +44,14 @@ library(tidyverse)
 library(tidyr)
 library(ecodata)
 library(here)
-library(kableExtra)
+library(flextable)
+
+set_flextable_defaults(
+  font.size = 9,
+  padding.bottom = 0,  
+  padding.top = 1, 
+  line_spacing = 1,
+  font.family = "Palatino")
 
 ```
 
@@ -139,9 +148,9 @@ Overall, recreational harvest (harvested fish presumed to be eaten) have also de
 
 ```
 
-Recreational shark landings of pelagic and prohibited sharks have decreased over the last couple of years (Fig \ref{fig:rec_hms}). This is likely influenced by regulatory changes implemented in 2018 intended to rebuild shortfin mako stocks. In 2021 the International Commission for the Conservation of Atlantic Tunas (ICCAT) finalized recommendations for a two-year retention ban for shortfin mako (ICCAT Rec.21-09), which will also affect total overall landings of pelagic sharks in coming years.
+Recreational shark landings of pelagic and prohibited sharks have decreased over the last couple of years (Fig \ref{fig:rec-hms}). This is likely influenced by regulatory changes implemented in 2018 intended to rebuild shortfin mako stocks. In 2021 the International Commission for the Conservation of Atlantic Tunas (ICCAT) finalized recommendations for a two-year retention ban for shortfin mako (ICCAT Rec.21-09), which will also affect total overall landings of pelagic sharks in coming years.
 
-```{r rec_hms, fig.cap="Recreational shark landings from Marine Recreational Information Program.", code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-rec_hms.R"), fig.width=6, fig.asp=.4}
+```{r rec-hms, fig.cap = "Recreational shark landings from Marine Recreational Information Program.", code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-rec_hms.R"), fig.width=6, fig.asp=.4}
 
 ```
 
@@ -201,7 +210,7 @@ Total commercial revenues increased in 2021 for both the GB and GOM regions (Fig
 ```{r comm-revenue, fig.cap = "Revenue through 2021 for the New England region (black) and revenue from NEFMC managed species (red).", code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-comdat-comm-revenue.R"), fig.width = 7.5, fig.asp = 0.3}
 ```
 
-```{r bennet, fig.cap = "Revenue change from the long-term mean in 2015 dollars (black), price, and volume for commercial landings from Georges Bank (GB: top panels) and the Gulf of Maine (GOM: bottom panels)", code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chucnk-scripts/human_dimensions_NE.Rmd-bennet.R"), fig.width = 7.5, fig.asp = 0.3}
+```{r bennet, fig.cap = "Revenue change from the long-term mean in 2015 dollars (black), price, and volume for commercial landings from Georges Bank (GB: top panels) and the Gulf of Maine (GOM: bottom panels)", code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-bennet.R"), fig.width = 7.5, fig.asp = 0.3}
 ```
 
 ### Implications 
@@ -464,12 +473,12 @@ Changes in ocean temperature and circulation alter habitat features such as the 
 ```
 
 #### Ocean Acidification
-Ocean acidification (OA) has caused measured declines in global ocean pH, and is projected to continue declining by up to 0.30 pH units over the course of the 21st century if high carbon dioxide emissions continue **(IPCC 2019)**. OA also changes the availability of minerals required by organisms to form calcified structures such as shells and other structures. Calcifying conditions in seawater can be determined by measuring aragonite saturation state (ΩArag), the tendency of a common type of calcium carbonate, aragonite, to form or dissolve.  When ΩArag is less than 1, shells and other calcium carbonate structures begin to dissolve. Typical surface ocean ΩArag is 2-4, but extremes can be <1 or >5. As the ocean absorbs carbon dioxide, both pH and ΩArag decrease, and can cause organisms to respond with reduced survival, calcification rates, growth, and reproduction, as well as impaired development, and/or changes in energy allocation (reviewed in Kroeker et al. 2013, Saba et al. 2019). However, sensitivity levels vary, and some organisms exhibit negative responses to calcification and other processes when ΩArag is as low as 3.
+Ocean acidification (OA) has caused measured declines in global ocean pH, and is projected to continue declining by up to 0.30 pH units over the course of the 21st century if high carbon dioxide emissions continue **(IPCC 2019)**. OA also changes the availability of minerals required by organisms to form calcified structures such as shells and other structures. Calcifying conditions in seawater can be determined by measuring aragonite saturation state ($\Omega_{Arag}$), the tendency of a common type of calcium carbonate, aragonite, to form or dissolve.  When $\Omega_{Arag}$ is less than 1, shells and other calcium carbonate structures begin to dissolve. Typical surface ocean $\Omega_{Arag}$ is 2-4, but extremes can be <1 or >5. As the ocean absorbs carbon dioxide, both pH and $\Omega_{Arag}$ decrease, and can cause organisms to respond with reduced survival, calcification rates, growth, and reproduction, as well as impaired development, and/or changes in energy allocation (reviewed in Kroeker et al. 2013, Saba et al. 2019). However, sensitivity levels vary, and some organisms exhibit negative responses to calcification and other processes when $\Omega_{Arag}$ is as low as 3.
 
-Summer-time (2007-present) bottom aragonite saturation state (ΩArag) on the U.S. Northeast Shelf exhibited spatial and temporal variability, ranging from 0.64 to 2.49 (Fig 3.11, left panel). Spatially, the lowest bottom ΩArag has occurred in the Gulf of Maine, western Long Island Sound, nearshore to mid-shelf waters of the Mid-Atlantic Bight off the coast of New Jersey, and in waters > 1000 meters. ΩArag was at or below the sensitivity levels for both Atlantic cod (Gadus morhua) and American lobster (Homarus americanus) within their habitat depth ranges in western Gulf of Maine and off the coast of eastern Maine (Fig. 3.11, right panels). These areas include Stellwagen Bank, slope waters south of Penobscot and Blue Hill Bays, and Wilkinson Basin and additionally, for Atlantic cod, slope waters south of Maquoit Bay and in waters of Jeffreys Ledge and Jordan Basin. The sensitivity levels of bottom ΩArag for Atlantic cod occurred in at least one of these areas during July 2007, August 2012, June 2013, June 2015, June and August 2016, June 2017, June and July 2018, August 2019, and July 2021, and for American lobster during June 2013, June 2016, June and August 2019, and July and August 2021.
+Summer-time (2007-present) bottom aragonite saturation state ($\Omega_{Arag}$) on the U.S. Northeast Shelf exhibited spatial and temporal variability, ranging from 0.64 to 2.49 (**Fig 3.11, left panel**). Spatially, the lowest bottom $\Omega_{Arag}$ has occurred in the Gulf of Maine, western Long Island Sound, nearshore to mid-shelf waters of the Mid-Atlantic Bight off the coast of New Jersey, and in waters > 1000 meters. $\Omega_{Arag}$ was at or below the sensitivity levels for both Atlantic cod (*Gadus morhua*) and American lobster (*Homarus americanus*) within their habitat depth ranges in western Gulf of Maine and off the coast of eastern Maine (**Fig. 3.11, right panels**). These areas include Stellwagen Bank, slope waters south of Penobscot and Blue Hill Bays, and Wilkinson Basin and additionally, for Atlantic cod, slope waters south of Maquoit Bay and in waters of Jeffreys Ledge and Jordan Basin. The sensitivity levels of bottom $\Omega_{Arag}$ for Atlantic cod occurred in at least one of these areas during July 2007, August 2012, June 2013, June 2015, June and August 2016, June 2017, June and July 2018, August 2019, and July 2021, and for American lobster during June 2013, June 2016, June and August 2019, and July and August 2021.
 
 
-```{r ne-oa, out.width = '90%', fig.cap = "Left panel: Bottom aragonite saturation state (ΩArag; summer only: June-August) on the U.S. Northeast Shelf based on quality-controlled vessel- and glider-based datasets from 2007-present. Right panel: Locations where summer bottom ΩArag were at or below the laboratory-derived sensitivity level for Atlantic cod (top panel) and American lobster (bottom). The Atlantic cod sensitivity value of ΩArag ≤ 1.31 is based on decreased larval survival observed at this level in Stiasny et al. (2016). The American lobster sensitivity value of ΩArag ≤ 1.09 is based on decreased stage V and VI juvenile survival observed at this level in Noisette et al. (2021). Gray circles indicate locations where carbonate chemistry samples were collected, but bottom ΩArag values were higher than sensitivity values determined for that species."}
+```{r ne-oa, out.width = '90%', fig.cap = "Left panel: Bottom aragonite saturation state ($\\Omega_{Arag}$; summer only: June-August) on the U.S. Northeast Shelf based on quality-controlled vessel- and glider-based datasets from 2007-present. Right panel: Locations where summer bottom $\\Omega_{Arag}$ were at or below the laboratory-derived sensitivity level for Atlantic cod (top panel) and American lobster (bottom). Gray circles indicate locations where carbonate chemistry samples were collected, but bottom $\\Omega_{Arag}$ values were higher than sensitivity values determined for that species."}
 
 knitr::include_graphics("images/Saba_Fig_SOE_NEFMC - Grace Saba.png")
 
