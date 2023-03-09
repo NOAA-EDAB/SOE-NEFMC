@@ -417,12 +417,12 @@ The increase in surface and bottom water temperature observed in the Northeast U
 
 In 2022, GB experienced one surface MHW that began on October 26^th^, peaked on November 7^th^ and lasted 28 days (Fig. \ref{fig:heatwave-year-gb}).  This surface MHW ranked 17^th^ on record in terms of maximum intensity and 5^th^ on record in terms of cumulative intensity.
 
-```{r heatwave-year-gb, fig.cap="Marine heatwave events (red shading above black line) on Georges Bank occuring in 2022.", code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_NE.Rmd-heatwave-year-detrended_gb.R"), fig.asp=.6}
+```{r heatwave-year-gb, fig.cap="Marine heatwave events (red shading above black line) on Georges Bank occuring in 2022.", code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_NE.Rmd-heatwave-year-detrended_gb.R"), fig.asp=.65}
 ```
 
 The GOM experienced four surface MHWs in 2022 that began on August 4^th^ and 25^th^, September 9^th^, and October 31^th^ (Fig \ref{fig:heatwave-year-gom}).  The strongest event in terms of maximum intensity began on August 4^th^ and peaked on August 7^th^ lasting six days.  This surface MHW ranked 27^th^ on record.  The five most intense surface MHW events on record in the GOM occurred over the last 12 years.  No bottom MHWs were detected for either GB or GOM in 2022.
 
-```{r heatwave-year-gom, fig.cap="Marine heatwave events (red shading above black line) in the Gulf of Maine occuring in 2022.", code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_NE.Rmd-heatwave-year-detrended_gom.R"), fig.asp=.6}
+```{r heatwave-year-gom, fig.cap="Marine heatwave events (red shading above black line) in the Gulf of Maine occuring in 2022.", code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_NE.Rmd-heatwave-year-detrended_gom.R"), fig.asp=.65}
 ```
 
 #### Ocean currents and features
@@ -492,7 +492,7 @@ Zooplankton community diversity varies with changes in dominance of taxa (Fig. \
 
 Decadal periodicity in the abundance of dominant copepods in the GOM and on GB has been previously reported, and these patterns continued to evolve into 2021. The abundance of *C. typicus* has been above average since 2012 in the GOM and on GB, and appears to be negatively correlated with *C. finmarchicus* abundance on GB (Fig. \ref{fig:zoo-abund}). *C. finmarchicus* has been below average in abundance since 2012 on GB following a period of high abundance between 2000-2010. *C. finmarchicus* also had high abundance in the GOM between 2000-2010, which corresponded to a period of recovery for right whales (Fig. \ref{fig:narw-abundance}). The abundance of *Pseudocalanus spp.*, an important prey item for cod larvae and other ichthyoplankton, has been below average on GB since 2000 and was below average in the GOM from 2000-2015, and most recently in 2021 he GOM larval fish diversity declined due to high abundance of hake (red, white, and silver) larvae.
 
-```{r zoo-abund, fig.cap="Abundance Annomalies of three dominante zooplankton (*Calanus finmarchicus, Calanus typicus,* and *Pseudocalanus spp.*) on Georges Bank (GB) and the Gulf of Maine (GOM).", code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_NE.Rmd-zoo-abundance-anom.R"), fig.width=6}
+```{r zoo-abund, fig.cap="Abundance Annomalies of three dominante zooplankton (\\textit{Calanus finmarchicus}, \\textit{Calanus typicus}, and \\textit{Pseudocalanus spp}.) on Georges Bank (GB) and the Gulf of Maine (GOM).", code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_NE.Rmd-zoo-abundance-anom.R"), fig.width=6}
 
 ```
 
@@ -505,7 +505,7 @@ Nutritional value (energy content) of juvenile and adult forage fish as prey is 
 #### Forage Fish Biomass Index
 The amount of forage fish available in the ecosystem combined with the energy content of the forage species determines the amount of energy potentially available to predators in the ecosystem. Changes in the forage base could pose a risk to managed and protected species production. A new spatially-explicit forage index estimated the combined biomass of 20 forage species using stomach contents information from 22 predatory fish species collected on bottom trawl surveys (Fig. \ref{fig:foragebio}). This new indicator shows an overall higher forage fish biomass in fall relative to spring. There is a long-term decreasing trend in the fall for GB and an increasing trend in the spring on GOM.  Changes in the distribution of forage biomass also affects predator distribution. Spatial subsets of this index were included in the bluefish research track stock assessment to investigate forage-driven changes in bluefish availability to recreational fisheries and surveys.  
 
-```{r foragebio, fig.cap = "Forage fish index based on spring and fall survey predator diets.", code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_NE.Rmd-forage-index.R")}
+```{r foragebio, fig.cap = "Forage fish index based on spring and fall survey predator diets.", code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_NE.Rmd-forage-index.R"), fig.width=6, fig.asp = 0.5}
 ```
 
 #### Fish Condition
@@ -536,7 +536,11 @@ We describe patterns of aggregate fish productivity on GB and the GOM with the s
 ```{r productivity-anomaly-gom, fig.cap = "Small fish per large fish biomass anomaly in the Gulf of Maine. The summed anomaly across species is shown by the black line.", code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_NE.Rmd-productivity-anomaly-gom.R"), fig.width=5, fig.asp=.6}
 ```
 
-**Add tern information**
+#### Common Tern productivity
+2020 was a challenging year for terns raising chicks (Fig. \ref{fig:seabird-ne-productivity}).  While diet composition was similar to the long term average, the quantity of food readily available was apparently less than normal, particularly around the time of chick hatching.  This may have been confounded by cold, wet weather when chicks would normally be close to fledging in mid-to-late July. Anecdotal observations showed that feeding rates were low at both those times.
+
+```{r seabird-ne-productivity, fig.cap = "Productivity of Common terns in the Gulf of Maine.", code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_NE.Rmd-seabird-ne-productivity.R"), fig.width=5, fig.asp=.4}
+```
 
 ### Ecosystem Structure Indicators: distribution shifts, diversity, predators
 
@@ -551,10 +555,10 @@ Indicators for shark populations, combined with information on gray seals (see [
 
 Stock status is mixed for Atlantic Highly Migratory Species (HMS) stocks (including sharks, swordfish, billfish, and tunas) occurring in the New England region. While there are several HMS species considered to be overfished or that have unknown stock status, the population status for some managed Atlantic sharks and tunas is at or above the biomass target (Fig. \ref{fig:hms-stock-status} ), suggesting the potential for robust predator populations among these managed species. 
 
-As noted in the [Protected Species section](#protected-species), gray seal populations are increasing. Harbor and gray seals occupying New England waters are generalist predators that consume more than 30 different prey species. An evaluation of hard  parts found in seal stomachs showed that harbor and gray seals predominantly exploit abundant demersal fish species (i.e. red, white, and silver hake). Other relatively abundant prey species found in hard-part remains include sand lance, yellowtail flounder, four-spotted flounder, Gulfstream flounder, haddock, herring, redfish, and squids.
-
-```{r hms-stock-status, fig.cap = "Summary of single species status for HMS stocks; key to species names at https://noaa-edab.github.io/tech-doc/atlantic-highly-migratory-species-stock-status.html.", code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_MAB.Rmd-hms-stock-status.R"), fig.width = 7, fig.asp = 0.5}
+```{r hms-stock-status, fig.cap = "Summary of single species status for HMS stocks; key to species names at https://noaa-edab.github.io/tech-doc/atlantic-highly-migratory-species-stock-status.html.", code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_MAB.Rmd-hms-stock-status.R"), fig.width = 6, fig.asp = 0.5}
 ```
+
+As noted in the [Protected Species section](#protected-species), gray seal populations are increasing. Harbor and gray seals occupying New England waters are generalist predators that consume more than 30 different prey species. An evaluation of hard  parts found in seal stomachs showed that harbor and gray seals predominantly exploit abundant demersal fish species (i.e. red, white, and silver hake). Other relatively abundant prey species found in hard-part remains include sand lance, yellowtail flounder, four-spotted flounder, Gulfstream flounder, haddock, herring, redfish, and squids.
 
 A stable isotope study utilizing gray seal scat samples obtained from Massachusetts habitats showed individual gray seals can specialize on particular prey [@hernandez_seasonal_2019]. It also found that gray seals vary their diet seasonally, focusing on demersal inshore species prior to the spring molt, and offshore species such as sand lance after molting. DNA studies on gray seal diet in GOM and Massachusetts state waters found spiny dogfish and Jonah crab present in gray seal scat samples [@ono_detecting_2019; @mccosker_metabarcoding_2020], with sandlance and menhaden dominant off Monomoy, MA [@flanders_utilizing_2020]. Skate and crab remains were also found in gray seal stomach remains. In contrast to direct feeding, it is uncertain if the presence of skates and crabs is due to secondary consumption or scavenging.
 
@@ -611,9 +615,7 @@ Climate and associated changes in the physical environment affect ecosystem prod
 
 While krill and large gelatinous zooplankton have increased over time, smaller zooplankton periodically shift in abundance between the larger, more nutritious *Calanus finmarchicus* and smaller bodied copepods with no apparent overall trend. The nutritional content of forage fish changes seasonally in response to ecosystem conditions, with apparent declines in energy density for Atlantic herring and *Illex* squid relative to the 1980s, but similar energy density for other forage species. Overall forage fish biomass has fluctuated in both New England regions over time.  Some of these factors are now being linked to the relative condition of managed fishes.
 
-**Come up with a productivity paragraph**
-**This one from Mid report**
-The apparent decline in productivity across multiple managed species in the MAB, along with mixed fish conditions in 2022, also suggest changing ecosystem productivity at multiple levels. During the 1990s high relative abundance of smaller bodied copepods and a lower relative abundance of *Calanus finmarchicus* was associated with regime shifts to higher fish recruitment [@perretti_regime_2017]. The unprecedented climate signals along with the trends toward lower productivity across multiple managed species indicate a need to continually evaluate whether management reference points remain appropriate, and to evaluate if ecosystem regime shifts have occurred or reorganization is in progress.
+The apparent decline in productivity across multiple managed species in New England, along with mixed fish conditions in 2022, also suggest changing ecosystem productivity at multiple levels. During the 1990s high relative abundance of smaller bodied copepods and a lower relative abundance of *Calanus finmarchicus* was associated with regime shifts to higher fish recruitment [@perretti_regime_2017]. The unprecedented climate signals along with the trends toward lower productivity across multiple managed species indicate a need to continually evaluate whether management reference points remain appropriate, and to evaluate if ecosystem regime shifts have occurred or reorganization is in progress.
 
 ## Other Ocean Uses: Offshore Wind
 
@@ -624,17 +626,19 @@ As of January 2023, 31 offshore wind development projects are proposed for const
 ```{r wind-proposed-dev, fig.cap='Proposed wind development on the northeast shelf.', code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_MAB.Rmd-wind-proposed-dev.R"), fig.width=5}
 ```
 
-Just over 3,400 foundations and more than 9,000 miles of inter-array and offshore export cables are proposed to date. The colored chart in Fig. \ref{fig:wind-dev-cumul} also presents the offshore wind development timeline in the Greater Atlantic region with the estimated year that foundations would be constructed (matches the color of the wind areas). These timelines and data estimates are expected to shift but represent the most recent information available as of January 2023. Based on current timelines, the areas affected would be spread out such that it is unlikely that any one particular area would experience full development at one time. Offshore floating wind is expected to be developed in the GOM. Although no commercial wind lease areas have been proposed, BOEM has identified a draft Call Area, which could be refined into future lease areas.  BOEM is also reviewing the state of Maine's application to lease 9,700 acres (15 square miles) for the first floating offshore wind research site in federal waters of the GOM, which could have up to 12 turbines. This area is shown at the top of Figure \ref{fig:wind-dev-cumul}. Additionally, BOEM announced that commercial lease area designations for the GOM are expected in quarter four of 2023, with lease sales in 2024. It is anticipated that all states will be able to reach their 2030 offshore wind goals with existing lease areas. Leasing for offshore floating wind in the Gulf of Maine will seek to meet the Biden Administration’s proposed goal of 15GW of floating offshore wind by 2035 in the US.  In a letter to BOEM submitted for the Gulf of Maine Request for Information, American Clean Power Association recommended that BOEM set a goal of leasing enough acres in its current Gulf of Maine leasing process to generate at least 10 GW of offshore wind (ACP Docket No. BOEM-2022-0040, regulations.gov).
+Just over 3,400 foundations and more than 9,000 miles of inter-array and offshore export cables are proposed to date. The colored chart in Fig. \ref{fig:wind-dev-cumul2} also presents the offshore wind development timeline in the Greater Atlantic region with the estimated year that foundations would be constructed (matches the color of the wind areas). These timelines and data estimates are expected to shift but represent the most recent information available as of January 2023. Based on current timelines, the areas affected would be spread out such that it is unlikely that any one particular area would experience full development at one time. 
 
-NEFSC has partnered with the Responsible Ocean Development Alliance (RODA) to conduct and integrated ecosystem assessment of the interactions between offshore wind, fisheries, and the environment.  This work is being done based on the impending designation of lease areas in the GOM and will focus on that region.  Initial scoping is underway.  The expectations are to have a report similar to the State of the Ecosystem that is dedicated to that project and be able to provide data to be included within the environmental impact statements for any projects in the GOM.
-
-```{r wind-dev-cumul, fig.cap = "All Northeast Project areas by year construction ends (each project has 2 year construction period).", out.width='90%'}
+```{r wind-dev-cumul2, fig.cap = "All Northeast Project areas by year construction ends (each project has 2 year construction period).", out.width='90%'}
 #knitr::include_url("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/docs/images/All_2021128_needsgraph-01.jpg")
 #knitr::include_graphics("images/offshore_wind_timeline.png")
 
 magick::image_read("https://github.com/NOAA-EDAB/ecodata/raw/master/docs/images/Cumulative_Timeline_Full_Region_SoE2023_v2-01.png")
 
 ```
+
+Offshore floating wind is expected to be developed in the GOM. Although no commercial wind lease areas have been proposed, BOEM has identified a draft Call Area, which could be refined into future lease areas.  BOEM is also reviewing the state of Maine's application to lease 9,700 acres (15 square miles) for the first floating offshore wind research site in federal waters of the GOM, which could have up to 12 turbines. This area is shown at the top of Figure \ref{fig:wind-dev-cumul}. Additionally, BOEM announced that commercial lease area designations for the GOM are expected in quarter four of 2023, with lease sales in 2024. It is anticipated that all states will be able to reach their 2030 offshore wind goals with existing lease areas. Leasing for offshore floating wind in the Gulf of Maine will seek to meet the Biden Administration’s proposed goal of 15GW of floating offshore wind by 2035 in the US.  In a letter to BOEM submitted for the Gulf of Maine Request for Information, American Clean Power Association recommended that BOEM set a goal of leasing enough acres in its current Gulf of Maine leasing process to generate at least 10 GW of offshore wind (ACP Docket No. BOEM-2022-0040, regulations.gov).
+
+NEFSC has partnered with the Responsible Ocean Development Alliance (RODA) to conduct and integrated ecosystem assessment of the interactions between offshore wind, fisheries, and the environment.  This work is being done based on the impending designation of lease areas in the GOM and will focus on that region.  Initial scoping is underway.  The expectations are to have a report similar to the State of the Ecosystem that is dedicated to that project and be able to provide data to be included within the environmental impact statements for any projects in the GOM.
 
 Based on federal vessel logbook data, commercial fishery revenue from trips in the current offshore wind lease areas and the Central Atlantic Primary and Secondary Call Areas represented 1-12\% of the total annual revenue for fisheries managed by the NEFMC.  Fishing revenue affected by offshore wind lease areas varied by year from 2008-2021 for the most affected NEFMC-managed fisheries, but has largely declined over time. Maximum annual fishing revenue affected by wind lease areas peaked at nearly \$39 million for the scallop fishery, \$1.5 million for monkfish, \$800,000 for skates, \$528,000 for silver hake, and \$460,000 for Atlantic herring (Fig. \ref{fig:wea-spp-rev}). Groundfish landings generally occurred outside of existing lease areas, except for yellowtail flounder and winter flounder, with up to \$450,000 and \$244,000 in annual revenue affected, respectively. Wind leases in the Gulf of Maine would increase the number and scale of fisheries affected.
 
@@ -671,7 +675,7 @@ dt<- ecodata::wea_landings_rev[1:20,] %>%
 
 flextable::flextable(dt) %>%
   flextable::set_caption("Top 20 species Landings and Revenue from Wind Energy Areas. * Landings and revenue for these species are likely underestimated due to limited coverage of these fisheries in historic reporting requirements for vessels issued federal permits by the NMFS Greater Atlantic Regional Fisheries Office. However, such limitations also suggest an inaccurately higher proportion of such landings and revenues in existing lease areas. ** Clearnose skates were reported separately from skates, which is presumed to include all skates managed under the Northeast skate complex. *** Based on comparison with other data sources, the high values for Illex squid are likely overestimates affected by the methods used to model logbook data to estimate spatial overlap of fishign operations with wind energy areas.") %>%
-  flextable::width(width = c(3,2,2))
+  flextable::width(width = c(2,2,2))
 
 
 ```
@@ -684,6 +688,8 @@ Equity and environmental justice (EJ) are priority concerns with offshore wind d
 ```
 
 For example, Westport, MA had a minimum of 10% and maximum of 29% overlap of wind energy revenue to the total port revenue between 2008-2021. Those communities that score Med-High or higher in at least one of the vulnerability indicators that address environmental justice concerns (i.e., Poverty, Population Composition, Personal Disruption; see  indicator definitions) are noted with a triangle. Gentrification pressure is also highlighted here, with those communities that score Med-High or higher in one or more gentrification pressure indicators (i.e., Housing Disruption, Retiree Migration, Urban Sprawl) represented with a circle (Fig. \ref{fig:wea-port-rev}). BOEM reports that cumulative offshore wind development (if all proposed projects are developed) could have moderate impacts on low-income members of environmental justice communities who work in the commercial fishing and for-hire fishing industry due to disruptions to fish populations, restrictions on navigation and increased vessel traffic as well as existing vulnerabilities of low-income workers to economic impacts [@boem_vineyard_2020]. 
+
+Top  fishing communities high in environmental justice concerns (i.e., New Bedford, MA, New London, CT) should be considered in decision making to reduce the social and economic impacts and aid in the resilience and adaptive capacity of underserved communities. Environmental justice concerns also highlight communities where we need to provide further resources to reach underserved and underrepresented groups and create opportunities for and directly involve these groups in the decision-making process.
 
 ```{r wind-rev-MAB-NEFMC, fig.cap="Percent of Mid-Atlantic port revenue with majority NEFMC landings from Wind Energy Areas (WEA) in descending order from most to least port fisheries revenue from WEA. EJ = Environmental Justice.", fig.width=6.5, fig.asp=.4, fig.align='left'}
 df.symbol <- ecodata::wind_port %>% filter(EPU == "MAB", 
@@ -747,15 +753,8 @@ p2<-ggplot2::ggplot()+
 p2
 ```
 
-Top  fishing communities high in environmental justice concerns (i.e., New Bedford, MA, New London, CT) should be considered in decision making to reduce the social and economic impacts and aid in the resilience and adaptive capacity of underserved communities. Environmental justice concerns also highlight communities where we need to provide further resources to reach underserved and underrepresented groups and create opportunities for and directly involve these groups in the decision-making process. 
-
-```{r whales-wind, out.width="60%", fig.cap="Northern Right Whale persistent hotspots and Wind Energy Areas."}
-knitr::include_graphics("images/NARW_hotpsot_persistence_2_1_2022_TPW.png")
-```
-
-
 ### Implications
-Current plans for rapid buildout of offshore wind in a patchwork of areas spreads the impacts differentially throughout the region (Fig. \ref{fig:wind-dev-cumul}).
+Current plans for rapid buildout of offshore wind in a patchwork of areas spreads the impacts differentially throughout the region (Fig. \ref{fig:wind-dev-cumul2}).
 
 Up to 12% of total average revenue for major New England commercial species in lease areas could be forgone or reduced and associated effort displaced if all sites are developed. Displaced fishing effort can alter historic fishing areas, timing, and methods, which can in turn change habitat, species (managed and protected), and fleet interactions. Several factors, including fishery regulations, fishery availability, and user conflicts affect where, when, and how fishing effort may be displaced, along with impacts to and responses of affected fish species.
 
@@ -765,7 +764,11 @@ Scientific data collection surveys for ocean and ecosystem conditions, fish, and
 
 The increase of offshore wind development can have both positive (e.g., employment opportunities) and negative (e.g., space-use conflicts) effects. Continued increase in coastal development and gentrification pressure has resulted in loss of fishing infrastructure space within ports. Understanding these existing pressures can allow for avoiding and mitigating negative impacts to our shore support industry and communities dependent on fishing. Some of the communities with the highest fisheries revenue overlap with offshore wind development areas that are also vulnerable to gentrification pressure are Point Judith, RI, New Bedford, MA and Newport, RI. 
 
+```{r whales-wind, out.width="60%", fig.cap="Northern Right Whale persistent hotspots and Wind Energy Areas."}
+knitr::include_graphics("images/NARW_hotpsot_persistence_2_1_2022_TPW.png")
+```
 
+\newpage{}
 # Contributors
 
 **Editors** (NOAA NMFS Northeast Fisheries Science Center, NEFSC): Sean Lucey, Sarah Gaichas, Kimberly Bastille, Geret DePiper, Kimberly Hyde, Scott Large, Chris Orphanides, Laurel Smith. 
@@ -839,7 +842,7 @@ epu_labels <- data.frame(EPU = c("Mid-Atlantic\n Bight",
 epumap <- ggplot() +
 geom_sf(data = coast, size = map.lwd) +
 geom_sf(data = epu_sf, fill = "transparent", size = map.lwd) +
-coord_sf(crs = crs, xlim = xlims, ylim = ylims) +
+coord_sf(xlim = xlims, ylim = ylims) + #crs = crs,  +
 geom_text(data = epu_labels, aes(x = longitude,
                         y = latitude,
                         label = EPU),
@@ -860,15 +863,15 @@ Fish and invertebrates are aggregated into similar feeding guild categories (Tab
 
 # new table with all species listed by management entity
 df <- ecodata::species_groupings %>%
-dplyr::select(SOE.20, COMNAME, Fed.Managed) %>%
-filter(SOE.20 != "Other") %>%
-distinct() %>%
-group_by(SOE.20, Fed.Managed) %>%
-summarize_all(funs(paste(na.omit(.), collapse = ", "))) %>%
-spread(Fed.Managed, COMNAME) %>%
-arrange(factor(SOE.20, levels = c("Apex Predator", "Piscivore", "Planktivore", "Benthivore", "Benthos")))
+  dplyr::select(SOE.20, COMNAME, Fed.Managed) %>%
+  filter(SOE.20 != "Other") %>%
+  distinct() %>%
+  group_by(SOE.20, Fed.Managed) %>%
+  summarize_all(funs(paste(na.omit(.), collapse = ", "))) %>%
+  spread(Fed.Managed, COMNAME) %>%
+  arrange(factor(SOE.20, levels = c("Apex Predator", "Piscivore", "Planktivore", "Benthivore", "Benthos")))
 df<-df[c(1,3,2,4,5)] %>%
-mutate_all(tolower)
+  mutate_all(tolower)
 
 
 # knitr::kable(df, booktabs = TRUE, caption = 'Feeding guilds and management bodies.', 
@@ -887,7 +890,13 @@ flextable::flextable(df) %>%
   flextable::set_caption('Feeding guilds and management bodies.') %>%
   #flextable::autofit()
   flextable::fontsize(i = NULL, j = NULL, size = 10, part = "body") %>%
-  flextable::width(width = c(1,2,1,2.5,3))
+  flextable::fontsize(size=8, part = "all") %>%
+  flextable::set_header_labels(SOE.20 = "Guild",
+                               MAFMC = "MAFMC",
+                               JOINT = "Joint",
+                               NEFMC = "NEFMC",
+                               "<NA>" = "State or Other") %>%
+  flextable::width(width = c(1,1,1,1,3))
 
 ```
 
