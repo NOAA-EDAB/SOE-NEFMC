@@ -515,7 +515,10 @@ Large scale climate related changes in the ecosystem can lead to changes in impo
 
 As of January 2023, 31 offshore wind development projects are proposed for construction over the next decade in the Northeast (timelines and project data are based on Ocean Wind 1 Offshore Wind Farm Draft Environmental Impact Statement. Volume II: Appendix F.). Offshore wind areas are anticipated to cover more than 2.3 million acres by 2030 in the Greater Atlantic region (Fig. \ref{fig:wind-proposed-dev}). Beyond 2030 values include acreage for potential future lease and research areas in the Central Atlantic and GOM.
 
-```{r wind-proposed-dev, fig.cap='Proposed wind development on the northeast shelf.', code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_MAB.Rmd-wind-proposed-dev.R"), fig.width=5}
+```{r wind-proposed-dev, fig.cap='Proposed wind development on the northeast shelf.',  fig.width=5}
+#code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_MAB.Rmd-wind-proposed-dev.R"),
+
+ecodata::plot_wind_dev_speed()
 ```
 
 Just over 3,400 foundations and more than 9,000 miles of inter-array and offshore export cables are proposed to date. The colored chart in Fig. \ref{fig:wind-dev-cumul2} also presents the offshore wind development timeline in the Greater Atlantic region with the estimated year that foundations would be constructed (matches the color of the wind areas). These timelines and data estimates are expected to shift but represent the most recent information available as of January 2023. Based on current timelines, the areas affected would be spread out such that it is unlikely that any one particular area would experience full development at one time. 
@@ -524,7 +527,9 @@ Just over 3,400 foundations and more than 9,000 miles of inter-array and offshor
 #knitr::include_url("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/docs/images/All_2021128_needsgraph-01.jpg")
 #knitr::include_graphics("images/offshore_wind_timeline.png")
 
-magick::image_read("https://github.com/NOAA-EDAB/ecodata/raw/master/docs/images/Cumulative_Timeline_Full_Region_SoE2023_v2-01.png")
+#magick::image_read("https://github.com/NOAA-EDAB/ecodata/raw/master/workshop/images/Cumulative_Timeline_FullRegion_SoE2024_v2_2024.png")
+
+magick::image_read("https://github.com/NOAA-EDAB/ecodata/raw/dev/workshop/images/Cumulative_Timeline_FullRegion_SoE2024_v2_2024.png")
 
 ```
 
@@ -534,7 +539,10 @@ NEFSC has partnered with the Responsible Ocean Development Alliance (RODA) to co
 
 Based on federal vessel logbook data, commercial fishery revenue from trips in the current offshore wind lease areas and the Central Atlantic Primary and Secondary Call Areas represent 1-12\% of the total annual revenue for fisheries managed by the NEFMC.  Fishing revenue affected by offshore wind lease areas varied by year from 2008-2021 for the most affected NEFMC-managed fisheries, but largely declines over time. Maximum annual fishing revenue affected by wind lease areas peaked at nearly \$39 million for the sea scallop fishery, \$1.5 million for monkfish, \$800,000 for skates, \$528,000 for silver hake, and \$460,000 for Atlantic herring (Fig. \ref{fig:wea-spp-rev}). Groundfish landings generally occurred outside of existing lease areas, except for yellowtail flounder and winter flounder, with up to \$450,000 and \$244,000 in annual revenue affected, respectively. Wind leases in the Gulf of Maine would increase the number and scale of fisheries affected.
 
-```{r wea-spp-rev, fig.cap="Fishery revenues from NEFMC managed species in the Wind energy lease areas.", code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-wea-spp-rev.R"), fig.width = 6, fig.asp = .6}
+```{r wea-spp-rev, fig.cap="Fishery revenues from NEFMC managed species in the Wind energy lease areas.", fig.width = 6, fig.asp = .6}
+#, code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-wea-spp-rev.R")
+
+ecodata::plot_wind_revenue(report = "NewEngland", varName = "value", plottype = "facets")
 ```
 
 The sea scallop fishery could be the most affected fishery, with a maximum of 12\% of annual fishery revenue occurring within potential wind lease areas during this period. The skate fishery, monkfish, and silver hake could also be substantially affected, with a maximum of 10\%, 7\%, and 6\% of annual revenues affected, respectively (see Table \ref{tab:wea-landings-rev}).  Impacts in the GOM will be assessed after those lease areas are announced.
@@ -576,7 +584,10 @@ Proposed wind development areas interact with the region’s federal scientific 
 
 Equity and environmental justice (EJ) are priority concerns with offshore wind development and fisheries impacts in the Northeast. Fig. \ref{fig:wea-port-rev} links historic port revenue (2008-2021) from within all wind lease areas as a proportion of a port’s total fisheries revenue based on vessel trip reports as described in the revenue and landings of species in the wind indicator above. The range (minimum and maximum) of total percent fisheries revenue from within wind energy areas is presented in the graph and ports are sorted from greatest to least fisheries revenue from within wind areas. 
 
-```{r wea-port-rev, fig.cap="Percent of port fisheries revenue from Wind Energy Areas (WEA) in descending order from most to least port fisheries revenue from WEA. EJ = Environmental Justice.", code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-wea-port-rev.R"), fig.width=6.5, fig.asp=.75, fig.align='left'}
+```{r wea-port-rev, fig.cap="Percent of port fisheries revenue from Wind Energy Areas (WEA) in descending order from most to least port fisheries revenue from WEA. EJ = Environmental Justice.",  fig.width=6.5, fig.asp=.75, fig.align='left'}
+#code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-wea-port-rev.R"),
+
+ecodata::plot_wind_port(report = "NewEngland")
 ```
 
 For example, Westport, MA had a minimum of 10% and maximum of 29% overlap of wind energy revenue to the total port revenue between 2008-2021. Those communities that score Med-High or higher in at least one of the vulnerability indicators that address environmental justice concerns (i.e., Poverty, Population Composition, Personal Disruption; see  indicator definitions) are noted with a triangle. Gentrification pressure is also highlighted here, with those communities that score Med-High or higher in one or more gentrification pressure indicators (i.e., Housing Disruption, Retiree Migration, Urban Sprawl) represented with a circle (Fig. \ref{fig:wea-port-rev}). BOEM reports that cumulative offshore wind development (if all proposed projects are developed) could have moderate impacts on low-income members of environmental justice communities who work in the commercial fishing and for-hire fishing industry due to disruptions to fish populations, restrictions on navigation and increased vessel traffic as well as existing vulnerabilities of low-income workers to economic impacts [@boem_vineyard_2020]. 
@@ -657,7 +668,9 @@ Scientific data collection surveys for ocean and ecosystem conditions, fish, and
 The increase of offshore wind development can have both positive (e.g., employment opportunities) and negative (e.g., space-use conflicts) effects. Continued increase in coastal development and gentrification pressure has resulted in loss of fishing infrastructure space within ports. Understanding these existing pressures can allow for avoiding and mitigating negative impacts to our shore support industry and communities dependent on fishing. Some of the communities with the highest fisheries revenue overlap with offshore wind development areas that are also vulnerable to gentrification pressure are Point Judith, RI, New Bedford, MA and Newport, RI. 
 
 ```{r whales-wind, out.width="60%", fig.cap="Northern Right Whale persistent hotspots and Wind Energy Areas."}
-knitr::include_graphics("images/NARW_hotpsot_persistence_2_1_2022_TPW.png")
+# NEW FILE 
+magick::image_read("https://github.com/NOAA-EDAB/ecodata/raw/dev/workshop/images/SOE_2023_right_whales_hatteras_frame_v3_2024.jpg")
+
 ```
 
 \newpage{}
