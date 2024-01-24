@@ -504,9 +504,275 @@ A climate vulnerability assessment is currently underway for Atlantic and Gulf o
 
 # Risks to meeting fishery management objectives
 
-## Climate and Ecosystem Productivity
+## Climate and Ecosystem Change
 
-Large scale climate related changes in the ecosystem can lead to changes in important habitats and ecological interactions, potentially resulting in regime shifts and ecosystem reorganization.
+Regulations and measures designed to meet fishery management objectives are often based on historical information about stocks: their distribution in space and time, and their overall productivity. Large scale climate related changes in the ecosystem can lead to changes in important habitats and ecological interactions, altering distributions and productivity. With large enough ecosystem changes, management measures may be less effective, and management objectives may not be met. 
+
+This year, we have restructured this section to focus on three categories of management decisions and the risk posed to them by climate and ecosystem change: spatial management, seasonal management, and quota setting or rebuilding depleted stocks. In each section, we highlight observed changes in distribution, timing, and productivity of fish and protected species. Then, we review possible drivers for these observed changes, in order to determine how management might be adjusted to account for the observed changes. Finally, we provide an overview of notable climate and ecosystem observations from 2023.  
+
+### Risks to Spatial Management
+
+Shifting species distributions alter both species interactions and fishery interactions. In particular, shifting species distributions can alter expected management outcomes from spatial allocations and bycatch measures based on historical fish and protected species distributions. Species availability to surveys can change as distributions shift within survey footprints.
+
+#### Observations: Fish and protected species distribution shifts
+As noted in the [Landings Implications section above](#implications), trends for a suite of 48 commercially or ecologically important fish species along the entire Northeast Shelf continue to show movement towards the northeast and generally into deeper water (Fig. \ref{fig:species-dist}). Habitat model-based species richness suggests shifts of both cooler and warmer water species to the northeast [*link to catalog page*]. Similar patterns have been found for marine mammals, with multiple species shifting northeast between 2010 and 2017 in most seasons (Fig. \ref{fig:protectedspp-dist-shifts}, @chavez-rosales_detection_2022).
+
+```{r protectedspp-dist-shifts, fig.cap="Direction and magnitude of core habitat shifts, represented by the length of the line of the seasonal weighted centroid for species with more than 70 km difference between 2010 and 2017 (tip of arrow).", fig.width=7, fig.asp=0.8}
+#, code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_MAB.Rmd-protectedspp-dist-shifts.R")
+
+ecodata::plot_HMS_species_distribution() + ggplot2::ggtitle("Whale and Dolphin Distribution Shifts")
+```
+
+
+#### Drivers: 
+
+Increasing temperature, changing oceanography, and the decreasing size of the seasonal cold pool can alter the spatial distribution of suitable habitat for managed species, as well as availability and distribution of their prey. 
+
+Ocean temperatures continue to warm at both the surface (Fig. \ref{fig:seasonal-oisst-anom}) and bottom (Fig. \ref{fig:bottom-temp}) throughout Georges Bank and the Gulf of Maine in all seasons.
+
+```{r seasonal-oisst-anom, fig.cap="GB and GOM seasonal sea surface temperature (SST) time series . Seasons are defined as: Jan-Mar for winter, Apr-Jun for spring, Jul-Sep for summer, and Oct-Dec for fall.", fig.width = 6, fig.asp = .6}
+#overlaid onto 2021 seasonal spatial anomalies, code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_MAB.Rmd-seasonal-sst-anom-gridded.R")
+
+#ecodata::plot_seasonal_sst_anomaly_gridded()
+ecodata::plot_seasonal_oisst_anom(report = "NewEngland")
+
+```
+
+```{r bottom-temp, fig.cap="MAB seasonal bottom temperature (BT) anomaly time series. Seasons are defined as: Jan-Mar for winter, Apr-Jun for spring, Jul-Sep for summer, and Oct-Dec for fall.", fig.width = 6, fig.asp = .6}
+#The final 2 years of each time series (open circles) are modeled estimates subject to change.", code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_MAB.Rmd-bottom-temp-hi-res-ts.R")
+
+ecodata::plot_bottom_temp_comp(report = "NewEngland")
+```
+
+Variability of the Gulf Stream is one of the major drivers of changes in the oceanographic conditions of the Northeast U.S. continental shelf. During the last decade, the Gulf Stream has become less stable and shifted northward (Fig. \ref{fig:GSI}).  A more northern Gulf Stream position is associated with warmer ocean temperature on the northeast shelf [@zhang_role_2007], a higher proportion of Warm Slope Water in the Northeast Channel, and increased sea surface height along the U.S. east coast [@goddard_extreme_2015]. 
+
+```{r GSI, fig.cap = "Index representing changes in the location of the Gulf Stream north wall. Positive values represent a more northerly Gulf Stream position."}
+#, code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_MAB.Rmd-gsi.R")
+
+ecodata::plot_gsi()
+```
+
+Since 2008, the Gulf Stream has moved closer to the Grand Banks, reducing the supply of cold, fresh, and oxygen-rich Labrador Current waters to the Northwest Atlantic Shelf [@goncalves_neto_changes_2021]. Nearly every year since 2010, warm slope water made up more than 75% of the annual slope water proportions entering the Gulf of Maine.  In 2017 and 2019, almost no cooler Labrador Slope water entered the Gulf of Maine through the Northeast Channel (Fig. \ref{fig:wsw-prop}).  The changing proportions of source water affect the temperature, salinity, and nutrient inputs to the Gulf of Maine ecosystem.  In 2021, warm slope water continued to dominate (86.1%) inputs to the Gulf of Maine. 
+
+```{r wsw-prop, fig.cap = "Proportion of Warm Slope Water (WSW) and Labrador slope water (LSLW) entering the GOM through the Northeast Channel.", fig.width=5.5, fig.asp=.4}
+#code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_NE.Rmd-slopewater.R"), 
+
+ecodata::plot_slopewater(report = "NewEngland")
+```
+
+Changes in the distribution of forage biomass affects predator distribution. Spatial subsets of the forage fish index were included in the bluefish research track stock assessment to investigate forage-driven changes in bluefish availability to recreational fisheries and surveys.
+
+### Risks to Seasonal Management
+
+Changes in seasonal life-cycle events may not align with fishing seasons or area opening/closing, potentially reducing effectiveness of management measures. Temporal changes in species/fishery overlap can alter bycatch, and availability to surveys can change. 
+
+#### Observations: Timing shifts
+
+Seasonal timing of spawning has changed for several managed fish species. Migration timing of some tunas and large whales has changed.
+
+GENERATE A FIGURE
+
+#### Drivers: 
+
+Later transition to fall conditions, shorter duration of seasonal cold pool, changing timing of fall phytoplankton blooms, seasonal community shifts in zooplankton, and changes in timing of food availability contribute to changes in species timing. 
+
+In addition to increasing seasonal temperatures, ocean summer conditions now last longer within each year. In both GB and GOM, the transition date from cool winter conditions to warm stratified summer conditions is getting earlier. The transition back to well mixed cool temperatures is also getting later in the year, thus increasing the total number of days when the surface temperatures are in the warm summer conditions (Fig. \ref{fig:transition}).
+
+```{r transition, fig.cap="Ocean summer length in the MAB: the annual total number of days between the spring thermal transition date and the fall thermal transition date.  The transition dates are defined as the day of the year when surface temperatures changeover from cool to warm conditions in the spring and back to cool conditions in the fall."}
+#, code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_MAB.Rmd-sumlength.R")
+
+ecodata::plot_trans_dates(report = "NewEngland")
+```
+
+Cold pool timing has changed in the Mid-Atlantic, with the feature persisting for a shorter portion of the year since the mid-2000s (Fig. \ref{fig:cold-pool-time}).  *IMPACTS TO NEW ENGLAND SPAWNERS?*
+
+```{r cold-pool-time, fig.cap="Seasonal cold pool indices: mean temperature within the cold pool, cold pool persistence, and spatial extent.", fig.asp=.5, results='hide'}
+#, fig.width = 5,  code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_MAB.Rmd-cold_pool.R")
+
+ecodata::plot_cold_pool(varName = "persistence")
+
+```
+
+### Risks to Quota Setting/Rebuilding
+
+Environmentally driven changes in growth, reproduction, and natural mortality can complicate short-term stock projections. Stock reference points may not reflect prevailing environmental conditions.
+
+#### Observations: Fish productivity and condition shifts
+We describe patterns of aggregate fish productivity in the Mid-Atlantic with the small fish per large fish anomaly indicator, derived from NEFSC bottom trawl survey data (Fig. \ref{fig:productivity-anomaly}). The indicator shows that productivity has been declining in this region since the early 2000s.  A similar analysis based on stock assessment model outputs (recruitment per spawning stock biomass anomaly) for stocks primarily inhabiting the Mid-Atlantic region also shows a decline in productivity. 
+
+```{r productivity-anomaly, fig.cap = "Fish productivity measures. Left: Small fish per large fish survey biomass anomaly in the Mid-Atlantic Bight. Right: assessment recruitment per spawning stock biomass anomaly for stocks mainly in the Mid-Atlantic. The summed anomaly across species is shown by the black line, drawn across all years with the same number of stocks analyzed.", fig.width=8, fig.asp=1}
+#out.width='49%', fig.show='hold',
+a <- ecodata::plot_productivity_anomaly(report = "NewEngland", EPU = "GOM") + 
+  ggplot2::theme(legend.position = "bottom",
+                      legend.title = ggplot2::element_blank())
+
+b <- ecodata::plot_productivity_anomaly(report = "NewEngland", varName = "assessment")+ 
+  ggplot2::theme(legend.position = "bottom",
+                      legend.title = ggplot2::element_blank())
+
+a + b
+
+```
+
+The health and well being of individual fish can determine population productivity. Heavier and fatter fish at a given length have higher relative condition (the ratio of observed weight to predicted weight based on length [@le_cren_length-weight_1951]) which is expected to improve growth, reproductive output, and survival. A pattern of generally good condition was observed across many species prior to 2000, followed by a period of generally poor condition from 2001-2010 (concurrent with declines in productivity, Fig. \ref{fig:productivity-anomaly}), , with a mix of good and poor condition 2011-2019, and improved condition for many species in 2021 and 2022 (Fig. \ref{fig:ne-cf}). Preliminary results of synthetic analyses show that changes in temperature, zooplankton, fishing pressure, and population size influence the condition of different fish species.
+
+```{r ne-cf, fig.cap = "Condition factor for fish species in New England based on fall NEFSC bottom trawl survey data. No survey was conducted in 2020.", fig.width=8, fig.asp=1}
+
+gb <- ecodata::plot_condition(report = "NewEngland", EPU = "GB")
+gom <- ecodata::plot_condition(report = "NewEngland", EPU = "GOM")
+
+gb / gom
+```
+
+#### Drivers: 
+
+Fish productivity and condition are affected by increasing metabolic demands from increasing temperature, combined with changes in the availability and quality of prey. Episodic extreme temperatures, ocean acidification, and low oxygen events represent multiple stressors that can affect growth rates and cause mortality.
+
+*Need to place this* Common tern productivity has also declined in the Gulf of Maine. 2021 and 2023 were challenging years for terns raising chicks (Fig. \ref{fig:seabird-ne-productivity}).  
+
+```{r seabird-ne-productivity, fig.cap = "Productivity of Common terns in the Gulf of Maine.",  fig.width=5, fig.asp=.4}
+#code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_NE.Rmd-seabird-ne-productivity.R"),
+
+ecodata::plot_seabird_ne(varName = "productivity") + ggplot2::coord_cartesian(xlim=c(1992,2022))
+```
+
+want the salmon here? another system productivity symptom?
+```{r}
+ecodata::plot_gom_salmon()
+```
+
+##### Forage quality and abundance
+The amount of forage fish available in the ecosystem combined with the energy content of the forage species determines the amount of energy potentially available to predators in the ecosystem. Changes in the forage base can drive to managed and protected species production. 
+
+Nutritional value (energy content) of juvenile and adult forage fish as prey is related to environmental conditions, fish growth, and reproductive cycles. Forage energy density measurements from NEFSC trawl surveys 2017-2022 are building toward a time series to evaluate trends (Fig. \ref{fig:energy-density}). Data from the fall 2021 and spring 2022 survey measurements were consistent with previous reports: the energy density of Atlantic herring increased to over 7 kJ/g wet weight, but was still well below that observed in the 1980s and 1990s (10.6-9.4 kJ/ g wet weight). Silver hake, longfin squid (*Loligo* in figure) and shortfin squid (*Illex* in figure) remain lower than previous estimates [@steimle_energy_1985; @lawson_important_1998]. Energy density of alewife, butterfish, sand lance, and Atlantic mackerel varies seasonally, with seasonal estimates both higher and lower than estimates from previous decades.  
+```{r energy-density, fig.cap="Forage fish energy density mean and standard deviation by season and year, compared with 1980s (solid line; Steimle and Terranove 1985) and 1990s (dashed line; Lawson et al. 1998) values.",  fig.width = 7.5, fig.asp = 0.5}
+#code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_MAB.Rmd-energy-density.R"),
+
+ecodata::plot_energy_density()
+```
+
+A spatially-explicit forage index estimated the combined biomass of 20 forage species using stomach contents information from 22 predatory fish species collected on bottom trawl surveys. The resulting indices show an increasing long term trend in fall the Gulf of Maine, and overall higher forage fish in fall relative to spring (Fig. \ref{fig:foragebio}), with highest forage biomass during fall in the mid-1980s.   
+```{r foragebio, fig.cap = "Forage fish index based on spring and fall survey predator diets.", fig.width = 7, fig.asp=.6}
+#, code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_MAB.Rmd-forage-index.R")
+
+ecodata::plot_forage_index(report = "NewEngland")
+```
+
+*This is where we would put in overall zooplankton production as well as comments on zoop energy content. Talk about Cal fin availability in New England*
+Decadal periodicity in the abundance of dominant copepods in the GOM and on GB has been previously reported, and these patterns continued to evolve into 2021. The abundance of *C. typicus* has been above average since 2012 in the GOM and on GB, and appears to be negatively correlated with *C. finmarchicus* abundance on GB (Fig. \ref{fig:zoo-abund}). *C. finmarchicus* has been below average in abundance since 2012 on GB following a period of high abundance between 2000-2010. *C. finmarchicus* also had high abundance in the GOM between 2000-2010, which corresponded to a period of recovery for right whales (Fig. \ref{fig:narw-abundance}). The abundance of *Pseudocalanus spp.*, an important prey item for cod larvae and other ichthyoplankton, has been below average on GB since 2000 and was below average in the GOM from 2000-2015, and most recently in 2021 the GOM larval fish diversity declined due to high abundance of hake (red, white, and silver) larvae.
+
+```{r zoo-abund, fig.cap="Abundance Annomalies of three dominante zooplankton (\\textit{Calanus finmarchicus}, \\textit{Calanus typicus}, and \\textit{Pseudocalanus spp}.) on Georges Bank (GB) and the Gulf of Maine (GOM).", fig.width=6}
+#, code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_NE.Rmd-zoo-abundance-anom.R")
+
+ecodata::plot_zoo_abundance_anom(report = "NewEngland")
+
+```
+
+Phytoplankton support the food web as the primary food source for zooplankton and filter feeders such as shellfish. Numerous environmental and oceanographic factors interact to drive the abundance, composition, spatial distribution, and productivity of phytoplankton.
+
+While changes in fish productivity could result from changing primary productivity, total primary production in New England has no clear trend. 
+
+```{r pptot, fig.width=7}
+gb <- ecodata::plot_annual_chl_pp(report = "NewEngland", varName = "pp", plottype = "total", EPU = "GB") + ggplot2::ggtitle("Georges Bank total PP")
+
+gom <- ecodata::plot_annual_chl_pp(report = "NewEngland", varName = "pp", plottype = "total", EPU = "GOM") + ggplot2::ggtitle("Gulf of Maine total PP")
+
+gb + gom
+```
+
+Temperature increases at both the surface (Fig. \ref{fig:seasonal-oisst_anom}) and bottom (Fig. \ref{fig:bottom-temp}) can exceed thermal tolerance limits for some fish. For example, 2012 had among the warmest surface and bottom temperatures in New England. A large proportion of the region had bottom temperatures above the thermal tolerance for groundfish... with some days exceeding the mortality limit (Fig. \ref{fig:therm-hab-persist-2012}).
+
+```{r therm-hab-persist-2012, fig.width=8, fig.asp=1}
+year = 2012
+ecodata::plot_thermal_habitat_persistence(year=year) + ggplot2::ggtitle(paste(year))
+```
+
+
+
+Ocean acidification (OA) has caused measured declines in global ocean pH, and is projected to continue declining if high carbon dioxide emissions continue [@intergovernmental_panel_on_climate_change_ipcc_technical_2022]. OA also changes the availability of minerals required by organisms to form calcified structures such as shells. Calcifying conditions in seawater can be determined by measuring aragonite saturation state ($\Omega_{Arag}$), the tendency of a common type of calcium carbonate, aragonite, to form or dissolve. When $\Omega_{Arag}$ is less than 1, shells and other calcium carbonate structures begin to dissolve. Typical surface ocean $\Omega_{Arag}$ is 2-4, but extremes can be <1 or >5 [@jiang_climatological_2015]. As the ocean absorbs carbon dioxide, both pH and $\Omega_{Arag}$ decrease and can cause organisms to respond with reduced survival, calcification rates, growth, and reproduction, as well as impaired development, and/or changes in energy allocation [@kroeker_impacts_2013 @saba_recommended_2019]. However, sensitivity levels vary, and some organisms exhibit negative responses to calcification and other processes when $\Omega_{Arag}$ is as low as 3.
+
+*OLD TEXT REWRITE FOR NEW FIGURES*
+Summer-time (2007-present) $\Omega_{Arag}$ on the U.S. Northeast Shelf varies in space and time, ranging from 0.64 to 2.49 (Fig. \ref{fig:mab-oa}, left panel). Spatially, the lowest bottom $\Omega_{Arag}$ has occurred in the Gulf of Maine, western Long Island Sound, nearshore to mid-shelf waters of the Mid-Atlantic Bight off the coast of New Jersey, and in waters > 1000 meters. $\Omega_{Arag}$ was at or below the sensitivity levels for both Atlantic sea scallop [@cameron_effects_2022] and longfin squid [@zakroff_dose-dependence_2019; @zakroff_antagonistic_2020] in Long Island Sound and the nearshore and mid-shelf regions of the New Jersey shelf (Fig. \ref{fig:mab-oa}, right panels). The sensitivity levels of bottom $\Omega_{Arag}$ occurred during August 2016, July 2018, and August 2019 for both species, and additionally in August 2021 for the Atlantic sea scallop.
+
+```{r mab-oa, out.width = '100%', fig.cap = "Bottom summer-time (June-August) pH (left panel) and aragonite saturation state (right panel) on the U.S. Northeast Shelf from 2007-2023 plotted from available quality-controlled vessel- and glider-based datasets."}
+
+
+#knitr::include_graphics("https://github.com/NOAA-EDAB/ecodata/raw/master/docs/images/Saba_Fig_SOE_MAFMC-GraceSaba.jpg")
+
+magick::image_read("https://github.com/NOAA-EDAB/ecodata/raw/dev/workshop/images/Figure4-GraceSaba_2024.png")
+
+#magick::image_read("https://github.com/NOAA-EDAB/ecodata/raw/master/docs/images/Saba_Fig_SOE_MAFMC - Grace Saba.jpg")
+
+```
+
+```{r oa-spp, out.width = '100%', fig.cap ="Locations where bottom aragonite saturation state ($\\Omega_{Arag}$; summer only: June-August) were at or below the laboratory-derived sensitivity level for Atlantic sea scallop (top panels) and longfin squid (bottom panels) for the time periods 2007-2022 (left panels) and 2007-2023 (right panels). Gray circles indicate locations where carbonate chemistry samples were collected, but bottom $\\Omega_{Arag}$ values were higher than sensitivity values determined for that species."}
+
+magick::image_read("https://github.com/NOAA-EDAB/ecodata/raw/dev/workshop/images/Figure5-GraceSaba_2024.png")
+```
+
+Low oxygen events
+
+
+
+### Current status: 2023 overview
+
+Multiple anomalous conditions and extreme events were observed in 2023 that could have brief local effects and/or widespread long-term ecosystem, fishery and management implications. Reported observations should be noted and taken into consideration for future analyses and assessments.
+
+Globally, 2023 was the warmest year on record with record high global sea surface temperatures. North Atlantic surface temperatures were also the highest on record, however temperatures in the Northeast U.S. shelf ecosystem were more variable, near record highs in winter and near average in other seasons. Chesapeake Bay rarely exceeded temperature thresholds.
+
+Bottom temperatures likely thresholds of X and Y degrees for N days in 2023, especially along the Mid-Atlantic coast. *which species care?*
+
+```{r therm-hab-persist-2023, fig.width=8, fig.asp=1}
+year = 2023
+ecodata::plot_thermal_habitat_persistence(year=year) + ggplot2::ggtitle(paste(year))
+```
+
+The 2020-2022 La Niña conditions ended in late winter and shifted to strong El Niño conditions in late spring 2023.  The current El Niño is expected to gradually weaken and transition to neutral conditions in spring 2024.  During El Niño winters, there is a noted increased frequency of East Coast storms. *add potential implications for fisheries*
+
+Fall tropical and coastal storms caused several flash flood events, above average coastal water levels, strong winds and high rainfall totals throughout the Northeast. *add potential implications for fisheries*
+
+Gulf Stream instability resulted in variability throughout the year. In the fall, the Gulf Stream was in a northward position along the Mid-Atlantic shelf break for an extended period of time. This severely constricted the Slope Sea waters that are normally between the Gulf Stream and continental shelf break. Warm salty surface Gulf Stream waters with strong currents were observed on the continental shelf in the southern MAB in October. *add potential implications for fisheries*
+
+The number of warm core rings (18) was well below the current regime (2000-2022) average of 31. One large early season ring was observed along the Northeast Shelf Break in spring, which generated an anomalously large shelf streamer that pulled continental shelf water into the Slope Sea.  *add potential implications for fisheries*
+
+High abundances of large baleen whale species (North Atlantic rRight wWhales and , humpback whales, minke, (others)) were observed feeding near a warm core rings that wereas adjacent to the continental shelf break in spring.
+Summer bottom temperatures in the Gulf of Maine were the warmest on record (since 1993) and the second largest bottom marine heatwave occurred from FebruaryMarch to August, peaked in May, and likely continued into the fall (pending data update). 
+
+Record high (since 1998) chlorophyll concentrations were up to ten times greater than average during a wide-spread, long-duration phytoplankton bloom in the Gulf of Maine that extended onto Georges Bank and the northern Mid-Atlantic Bight (Fig. \ref{fig:chl-current-year}). 
+
+*add potential implications for fisheries: such as:*
+
+A large phytoplankton bloom could represent either an influx of energy into the system, boosting productivity of zooplankton or higher trophic levels, or a settling of unconsumed dead phytoplankton cells to the bottom, where low oxygen could result due to increased bacterial activity consuming the settled material, or both.
+
+NEITHER HAPPENED
+
+It wasn't the typical bloom species.
+
+This species wasn't consumed so we don't expect it to boost fish productivity
+
+This species didn't sink to the bottom so we didn't get low oxygen
+
+
+```{r chl-current-year, fig.cap="", fig.width=8}
+
+a <- ecodata::plot_chl_pp(report = "MidAtlantic") + ggplot2::ggtitle("Mid Atlantic 2023")
+
+b <- ecodata::plot_chl_pp(report = "NewEngland") + ggplot2::ggtitle("New England 2023")
+
+a + b + patchwork::plot_layout(widths = c(2.6, 5.2))
+
+```
+
+
+Documented die off of scallops in the Mid-Atlantic Elephant trunk regions between the 2022 and 2023 surveys. 
+A fish and shellfish mortality event was observed in coastal New Jersey linked to hypoxia (low dissolved oxygen) and ocean acidification.
+
+In Chesapeake Bay, hypoxia conditions were the lowest on record (since 1995), creating more suitable habitat for adult and juvenile striped bass.
+
+
+### Implications
+
+*SUMMARIZE IMPLICATIONS OF THE WHOLE SECTION*
 
 
 ## Other Ocean Uses: Offshore Wind
