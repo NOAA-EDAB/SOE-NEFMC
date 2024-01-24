@@ -126,7 +126,10 @@ In this section, we examine indicators related to broad, ecosystem-level fishery
 
 This year, we present updated indicators for total commercial landings (all species, all uses, fleets from all nations),  US seafood landings (species for human consumption landed by US fleets), and Council-managed US seafood landings (New England Fishery Management Council (NEFMC) and jointly managed species landed by US fleets for human consumption).  Total commercial landings (black) within New England show no long-term trends (Fig. \ref{fig:total-landings}).  We treat the last three years of total landings as preliminary, given that the Canadian landings within each EPU have yet to be updated by NAFO. The long term downward trends in commercial seafood landings for the Gulf of Maine remains, although over the last decade landings appears to be relatively stable.
 
-```{r total-landings, fig.cap = "Total commercial landings (black), total U.S. seafood landings (blue), and New England managed U.S. seafood landings (red) for Georges Bank and the Gulf of Maine.  Open circles represent years that are lacking NAFO (foreign) data. mt = metric tons", code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-comdat-total-landings.R"), fig.width = 7.5, fig.asp = 0.4}
+```{r total-landings, fig.cap = "Total commercial landings (black), total U.S. seafood landings (blue), and New England managed U.S. seafood landings (red) for Georges Bank and the Gulf of Maine.  Open circles represent years that are lacking NAFO (foreign) data. mt = metric tons", fig.width = 7.5, fig.asp = 0.4}
+#, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-comdat-total-landings.R")
+
+ecodata::plot_comdat(report = "NewEngland", varName = "landings")
 ```
 
 Overall, recreational harvest (harvested fish presumed to be eaten) have also declined in New England (Fig. \ref{fig:rec-landings}).  Recreational harvest in 2020 was the lowest since estimates began.
