@@ -213,7 +213,10 @@ ecodata::plot_aggregate_biomass(report = "NewEngland", EPU = "GB") + ggplot2::gg
 ecodata::plot_aggregate_biomass(report = "NewEngland", EPU = "GOM") + ggplot2::ggtitle("Gulf of Maine")
 ```
 
-```{r mass-biomass, fig.cap = "Spring (left) and fall (right) surveyed biomass from the state of Massachusetts inshore survey. The shaded area around each annual mean represents 2 standard deviations from the mean.", code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_NE.Rmd-ma-inshore-survey.R"), fig.width=8, fig.asp = 0.75}
+```{r mass-biomass, fig.cap = "Spring (left) and fall (right) surveyed biomass from the state of Massachusetts inshore survey. The shaded area around each annual mean represents 2 standard deviations from the mean.", fig.width=8, fig.asp = 0.75}
+#, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_NE.Rmd-ma-inshore-survey.R")
+
+ecodata::plot_mass_inshore_survey(report = "NewEngland")
 ```
 
 #### Effect on Seafood Production
@@ -229,7 +232,13 @@ Other environmental changes require monitoring as they may become important driv
   - Some ecosystem composition and production changes have been observed (see [Stability section](#stability)).
   - Some fishing communities are affected by environmental justice vulnerabilities (see [Environmental Justice and Social Vulnerability section](#social-vulnerability)).
     
-```{r species-dist, fig.cap = "Aggregate species distribution metrics for species in the Northeast Large Marine Ecosystem.", code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_MAB.Rmd-species-dist.R"), fig.asp=0.8}
+```{r species-dist, fig.cap = "Aggregate species distribution metrics for species in the Northeast Large Marine Ecosystem.", fig.asp=0.9}
+#, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_MAB.Rmd-species-dist.R")
+
+a <- ecodata::plot_species_dist(varName = "along") + ggplot2::coord_cartesian(expand = FALSE)
+b <- ecodata::plot_species_dist(varName = "depth") + ggplot2::coord_cartesian(expand = FALSE) 
+
+a/b
 ```
 
 ## Commercial Profits 
@@ -238,14 +247,39 @@ Other environmental changes require monitoring as they may become important driv
 
 Commercial revenue in the region has been mostly positive with total commercial revenues from all species increasing in 2021 and above the long-term mean for both the GB and GOM regions (Fig. \ref{fig:comm-revenue}.  Although revenue from NEFMC managed species shows a long-term downward trend in the GOM. GB continues to exhibit a cyclical nature with regards to revenue. This is largely driven by rotational management of Atlantic sea scallops.
 
-```{r comm-revenue, fig.cap = "Revenue through 2021 for the New England region: total (black) and from NEFMC managed species (red).", code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-comdat-comm-revenue.R"), fig.width = 7.5, fig.asp = 0.3}
+```{r comm-revenue, fig.cap = "Revenue through 2022 for the New England region: total (black) and from NEFMC managed species (red).", fig.width = 7.5}
+#, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-comdat-comm-revenue.R")
+
+ecodata::plot_comdat(report="NewEngland", varName="revenue") 
 ```
 
 Revenue earned by harvesting resources is a function of both the quantity landed of each species and the prices paid for landings. Beyond monitoring yearly changes in revenue, it is even more valuable to determine what drives these changes: harvest levels, the mix of species landed, price changes, or a combination of these. The Bennet Indicator decomposes revenue change into two parts, one driven by changing quantities (volumes), and a second driven by changing prices.
 
 The gains in total revenue were due to both increasing quantities landed (volume) and prices (Fig. \ref{fig:bennet}).  In the GB region, with the exception of 2016, revenues have been positive since 2015, and this trend has generally been due to both increasing volumes and prices.  Breaking down the revenue trend further for GB show that both the volume and price trend have been largely driven by Benthos category (Fig. \ref{fig:bennet}).  In the GOM region, increased volumes for the "Other" and Benthivore categories drove the increase in volume.  In 2021, prices for Benthivores and Benthos in the GOM caused an overall increase in prices, reversing the 2015-2020 negative trend in prices (Fig. \ref{fig:bennet}).
 
-```{r bennet, fig.cap = "Revenue change from the long-term mean in 2015 dollars (black), price, and volume for commercial landings from Georges Bank (GB: top panels) and the Gulf of Maine (GOM: bottom panels)", code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-bennet-all.R"), fig.width = 7.5, fig.asp = 0.4}
+```{r bennet, fig.cap = "Revenue change from the 1982 baseline in 2023 dollars (black), price, and volume for commercial landings from Georges Bank (GB: left) and the Gulf of Maine (GOM: right)", fig.width = 7.5, fig.asp = 0.4}
+#, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-bennet-all.R")
+
+gb <- ecodata::plot_bennet(report = "NewEngland", varName = "total", EPU = "GB") +
+  ggplot2::ggtitle("GB revenue components") +
+  ggplot2::theme(legend.position = "bottom",
+                      legend.title = ggplot2::element_blank())
+gom <- ecodata::plot_bennet(report = "NewEngland", varName = "total", EPU = "GOM") +
+  ggplot2::ggtitle("GOM revenue components") +
+  ggplot2::theme(legend.position = "bottom",
+                      legend.title = ggplot2::element_blank())
+
+gb + gom
+
+```
+
+```{r bennet-all, fig.cap = "Revenue change from the long-term mean in 2023 dollars (black), price, and volume for commercial landings from Georges Bank (GB: top panels) and the Gulf of Maine (GOM: bottom panels)", fig.width = 7.5, fig.asp = 0.9}
+#, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-bennet-all.R")
+
+gb <- ecodata::plot_bennet(report = "NewEngland", varName = "guild", EPU = "GB")
+gom <- ecodata::plot_bennet(report = "NewEngland", varName = "guild", EPU = "GOM")
+
+gb / gom
 ```
 
 ### Implications 
@@ -258,10 +292,16 @@ The continued dependence on lobster in the GOM and sea scallops on GB is affecte
 
 Recreational effort (angler trips) increased during 1980-2010, but has since declined to just below the long-term average (Fig. \ref{fig:rec-op}). Recreational fleets are defined as private vessels, shore-based fishing, or party-charter vessels.  Recreational fleet diversity, or the relative importance of each fleet type, has remained relatively stable over the latter half of the time series (Fig. \ref{fig:rec-div}). 
         
-```{r rec-op, fig.cap = paste0("Recreational effort in ",region,"."), code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-recdat-effort.R")}
+```{r rec-op, fig.cap = paste0("Recreational effort in New England.")}
+#, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-recdat-effort.R")
+
+ecodata::plot_recdat(report = "NewEngland", varName = "effort")
 ```
         
-```{r rec-div, fig.cap = paste0("Recreational fleet effort diversity in ",region,"."), code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-recdat-diversity.R")}
+```{r rec-div, fig.cap = paste0("Recreational fleet effort diversity in New England.")}
+#, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-recdat-diversity.R")
+
+ecodata::plot_recdat(report = "NewEngland", varName = "effortdiversity")
 ```
         
 ### Implications
@@ -278,25 +318,44 @@ While there are many potential metrics of stability, we use diversity indices to
 
 Diversity estimates have been developed for species landed by commercial vessels with New England permits, and fleets landing managed species. Over the course of the last two years, there has been a steep decline in the effective number of species being landed in the commercial fleet, to a low since records began (Fig. \ref{fig:permit-div}). At the same time, commercial fishery fleet count is at or near the time series low (Fig. \ref{fig:commercial-div}).  Here a fleet is defined as the combination of gear type (Scallop Dredge, Clam Dredge, Other Dredge, Gillnet, Hand Gear, Longline, Bottom Trawl, Midwater Trawl, Pot, or Purse Seine) and vessel length category (Less than 30 ft, 30 to 50 ft, 50 to 75 feet, 75 ft and above).  
 
-```{r permit-div, fig.cap = paste0("Species revenue diversity in ",region,"."), code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-commercial-div-species-div.R")}
+```{r permit-div, fig.cap = paste0("Species revenue diversity in New England.")}
+#, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-commercial-div-species-div.R")
+
+ecodata::plot_commercial_div(report = "NewEngland", varName = "Permit revenue species diversity")
 ```
 
-```{r commercial-div, fig.cap = paste0("Commercial fleet count and diversity in ",region,"."), code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-commercial-div.R"), fig.asp=0.8}
+```{r commercial-div, fig.cap = paste0("Commercial fleet count and diversity in New England."), fig.asp=0.8}
+#, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-commercial-div.R")
+
+a <- ecodata::plot_commercial_div(report = "NewEngland", varName = "Fleet count")
+b <- ecodata::plot_commercial_div(report = "NewEngland", varName = "Fleet diversity in revenue")
+
+a/b
+
 ```
 
 As noted [above](#recreational-opportunities), recreational fleet effort diversity is stable. However, recreational species catch diversity has been above the time series average since 2008 with a long-term positive trend (Fig. \ref{fig:rec-species-div}).  Of note is that, although the positive trend was not significant in the 2021 report, a long-term trend has been reported in the past, indicating the ephemeral nature of the significance of the long-term trend.
 
-```{r rec-species-div,  fig.cap = paste0("Diversity of recreational catch in ",region,"."), code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-recdat-div-catch.R")}
+```{r rec-species-div,  fig.cap = paste0("Diversity of recreational catch in New England.")}
+#, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-recdat-div-catch.R")
+
+ecodata::plot_recdat(report = "NewEngland", varName = "catchdiversity")
 ```
 
 #### Ecological Diversity
 
 Ecological diversity indices show mixed trends. Zooplankton diversity is increasing on GB, while no trend is evident in the GOM (Fig. \ref{fig:zoo-diversity-gb}). It is worth noting however that the 2021 index for the GOM is the highest observed.  Larval fish diversity indicators show high interannal variability around the mean with the 2021 values near the mean for GB and near the lowest value for GOM.  Adult fish diversity shows an increasing trend in the GOM and no trend on GB.  This metric is measured as the expected number of species in a standard number of individuals sampled from the NEFSC bottom trawl survey. There is no vessel correction for this metric, so indices collected aboard the research vessel Albatross IV (up to 2008) and the research vessel Henry B. Bigelow (2009 - Present) are calculated separately (Fig. \ref{fig:exp-n}).
 
-```{r zoo-diversity-gb, fig.cap = "Zooplankton diversity on Georges Bank and in the Gulf of Maine, based on Shannon diversity index. 2020 surveys were incomplete due to COVID-19.", code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_NE.Rmd-zoo-diversity.R"), fig.width = 6, fig.asp = 0.3}
+```{r zoo-diversity-gb, fig.cap = "Zooplankton diversity on Georges Bank and in the Gulf of Maine, based on Shannon diversity index. 2020 surveys were incomplete due to COVID-19.", fig.width = 6, fig.asp = 0.3}
+#, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_NE.Rmd-zoo-diversity.R")
+
+ecodata::plot_zoo_diversity(report = "NewEngland")
 ```
 
-```{r exp-n, fig.cap = "Adult fish diversity for Georges Bank and in the Gulf of Maine, based on expected number of species. Results from survey vessels Albatross and Bigelow are reported separately due to catchability differences.", code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_NE.Rmd-exp-n.R"), fig.width=8, fig.asp=.3}
+```{r exp-n, fig.cap = "Adult fish diversity for Georges Bank and in the Gulf of Maine, based on expected number of species. Results from survey vessels Albatross and Bigelow are reported separately due to catchability differences.", fig.width=8}
+#, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_NE.Rmd-exp-n.R")
+
+ecodata::plot_exp_n(report = "NewEngland", varName = "fall")
 ```
 
 ### Implications
@@ -313,7 +372,10 @@ As a whole, the examined diversity indicators suggest changes in commercial and 
 
 Social vulnerability measures social factors that shape a community’s ability to adapt to change. A subset of these can be used to assess potential environmental justice issues. Environmental Justice is defined in Executive Order 12898 as federal actions intended to address disproportionately high and adverse human health and environmental effects of federal actions on minority and low-income populations. Three of the existing NOAA Fisheries Community Social Vulnerability Indicators (CSVIs), the Poverty Index, Population Composition Index, and Personal Disruption Index, can be used for mandated Environmental Justice analysis^[https://www.fisheries.noaa.gov/national/socioeconomics/social-indicators-coastal-communities].
 
-```{r commercial-engagement, fig.cap= "Commercial engagement, reliance, and environmental justice vulnerability for the top commercially engaged and reliant fishing communities in New England.  Communities ranked medium-high or above for one or more of the environmental justice indicators are highlighted in orange. *Community scored high (1.00 and above) for both commercial engagement and reliance indicators.", code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-commercial-engagement.R"), fig.width = 7, fig.asp = 0.55}
+```{r commercial-engagement, fig.cap= "Commercial engagement, reliance, and environmental justice vulnerability for the top commercially engaged and reliant fishing communities in New England.  Communities ranked medium-high or above for one or more of the environmental justice indicators are highlighted in orange. *Community scored high (1.00 and above) for both commercial engagement and reliance indicators.", fig.width = 7, fig.asp = 0.55, results='hide'}
+#, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-commercial-engagement.R")
+
+ecodata::plot_engagement(report = "NewEngland", varName = "Commercial")
 ```
 
 Commercial fishery engagement measures the number of permits and dealers, and pounds and value landed in a community, while reliance expresses these numbers based on the level of fishing activity relative to the total population of a community. Recreational fishery engagement measures shore-based, private vessel, and for-hire fishing effort while reliance expresses these numbers based on fishing effort relative to the population of a community.
@@ -327,7 +389,7 @@ Fig. \ref{fig:commercial-EJ} shows the detailed scores of the three environmenta
 ```{r commercial-EJ, fig.cap="Environmental justice indicators (Poverty Index, population composition index, and personal disruption index) for top commercial fishing communities in New England. *Community scored high (1.00 and above) for both commercial engagement and reliance indicators.", out.width='75%'}
 
 #get rid of the gray excel outline using R package magick
-ComEJ <- magick::image_read("https://github.com/NOAA-EDAB/ecodata/raw/master/docs/images/EJ_Commercial_NE_2023.PNG")
+ComEJ <- magick::image_read("https://github.com/NOAA-EDAB/ecodata/raw/master/workshop/images/EJ_Commercial_NE_2024.PNG")
 
 #ComEJ <- magick::image_read("images/EJ_Commercial_NE.png") 
 
@@ -346,7 +408,11 @@ No communities in New England scored high for both recreational engagement and r
 
 Fig. \ref{fig:recreational-EJ} orders communities clockwise in a descending order of recreational engagement scores from high to low, with the most highly engaged community, Narragansett/Point Judith, RI, listed on the top. Narragansett/Point Judith, like all of these top recreational communities ranked low for environmental justice vulnerability. In fact, the scores below 0 for all three environmental justice indicators implies a lower than average level of vulnerability, based on recreational engagement and reliance,  among the communities included in the analysis. 
 
-```{r recreational-engagement, fig.cap= "Recreational engagement and reliance, and environmental justice vulnerability, for the top recreationally engaged and reliant fishing communities in New England. None of these communities ranked medium-high or above for one or more of the environmental justice indicators.", code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-recreational-engagement.R"), fig.width = 7, fig.asp = 0.5}
+```{r recreational-engagement, fig.cap= "Recreational engagement and reliance, and environmental justice vulnerability, for the top recreationally engaged and reliant fishing communities in New England. None of these communities ranked medium-high or above for one or more of the environmental justice indicators.", fig.width = 7, fig.asp = 0.5, results='hide'}
+#, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-recreational-engagement.R")
+
+ecodata::plot_engagement(report = "NewEngland", varName = "Recreational")
+
 ```
 
 ```{r recreational-EJ, fig.cap="Environmental justice indicators (Poverty Index, population composition index, and personal disruption index) for top recreational fishing communities in New England. *Community scored high (1.00 and above) for both commercial engagement and reliance indicators.", out.width='75%'}
@@ -354,7 +420,7 @@ Fig. \ref{fig:recreational-EJ} orders communities clockwise in a descending orde
 
 
 #get rid of the gray excel outline using R package magick
-RecEJ <- magick::image_read("https://github.com/NOAA-EDAB/ecodata/raw/master/docs/images/EJ_Recreational_NE_2023.PNG") 
+RecEJ <- magick::image_read("https://github.com/NOAA-EDAB/ecodata/raw/master/workshop/images/EJ_Recreational_NE_2024.PNG") 
 
 # from https://stackoverflow.com/questions/64597525/r-magick-square-crop-and-circular-mask
 # get height, width and crop longer side to match shorter side
@@ -380,19 +446,28 @@ Protected species include marine mammals protected under the Marine Mammal Prote
 
 Average indices for both harbor porpoise (Fig. \ref{fig:harborporpoise}) and gray seal bycatch (Fig. \ref{fig:grayseal}) are below current PBR thresholds, meeting management objectives. However, the 2019 bycatch estimate for gray seals was the highest in the time series.
 
-```{r harborporpoise, fig.cap="Harbor porpoise average bycatch estimate for Mid-Atlantic and New England gillnet fisheries (blue) and the potential biological removal (red).", code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_MAB.Rmd-harborporpoise.R"), fig.width=5}
+```{r harborporpoise, fig.cap="Harbor porpoise average bycatch estimate for Mid-Atlantic and New England gillnet fisheries (blue) and the potential biological removal (red).", fig.width=5}
 #fig.width=6}
+#, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_MAB.Rmd-harborporpoise.R")
+
+ecodata::plot_harborporpoise()
 ```
 
-```{r grayseal, fig.cap="Gray Seal average bycatch estimate for gillnet fisheries (blue) and and the potential biological removal (red).", code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_MAB.Rmd-grayseal.R"), fig.width=5}
+```{r grayseal, fig.cap="Gray Seal average bycatch estimate for gillnet fisheries (blue) and and the potential biological removal (red).", fig.width=5}
 #fig.width=6}
+#, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_MAB.Rmd-grayseal.R")
+
+ecodata::plot_grayseal()
 ```
 
 The annual estimate for gray seal bycatch has declined since 2019, in part driven by declining gillnet landings. In addition, estimates since 2019 have greater uncertainty stemming from low observer coverage since 2019. The rolling mean confidence interval remains just below the removal threshold.
 
 The North Atlantic right whale population was on a recovery trajectory until 2010, but has since declined (Fig. \ref{fig:narw-abundance}). Reduced survival rates of adult females and diverging abundance trends between sexes have also been observed. It is estimated that there are fewer than 70 adult females remaining in the population. 
 
-```{r narw-abundance, fig.cap = "Estimated North Atlanic right whale abundance on the Northeast Shelf.", code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_MAB.Rmd-narw-abundance.R"), fig.width=5}
+```{r narw-abundance, fig.cap = "Estimated North Atlanic right whale abundance on the Northeast Shelf.", fig.width=5}
+#, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_MAB.Rmd-narw-abundance.R")
+
+ecodata::plot_narw(varName = "adult")
 ```
 
 North Atlantic right whale calf counts have generally declined after 2009 to the point of having zero new calves observed in 2018 (Fig. \ref{fig:NARW-calf-abundance}). However, since 2019, we have seen more calf births each year with 20 births in 2022. 
@@ -401,7 +476,10 @@ This year, the Unusual Mortality Event (UME) for North Atlantic right whales con
 
 A UME continued from previous years for humpback whales (2016-present); suspected causes include human interactions. A UME for both gray and harbor seals on the Maine coast was declared in June 2022 due to a high number of mortalities thought to be caused by highly pathogenic avian influenza virus. A UME for minke whales that began in 2017 remains open, but is pending closure as of January 2023^[https://www.fisheries.noaa.gov/national/marine-life-distress/active-and-closed-unusual-mortality-events].
 
-```{r NARW-calf-abundance, fig.cap = "Number of North Atlantic right whale calf births, 1990 - 2021.", code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_MAB.Rmd-NARW-calf-abundance.R"), fig.width=5}
+```{r NARW-calf-abundance, fig.cap = "Number of North Atlantic right whale calf births, 1990 - 2021.", fig.width=5}
+#, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_MAB.Rmd-NARW-calf-abundance.R")
+
+ecodata::plot_narw(varName = "calf")
 ```
 
 ### Implications
@@ -410,7 +488,10 @@ Bycatch management measures have been implemented to maintain bycatch below PBR 
 
 The number of gray seals in U.S. waters has risen dramatically in the last three  decades. Based on a survey conducted in 2016, the size of the gray seal population in the U.S. during the breeding season was approximately 27,000 animals, while in Canada the population was estimated to be roughly 425,000. The population in Canada is increasing at roughly 4% per year, and contributing to rates of increase in the U.S., where the number of pupping sites has increased from one in 1988 to nine in 2019. Mean rates of increase in the number of pups born at various times since 1988 at four of the more data-rich pupping sites (Muskeget, Monomoy, Seal, and Green Islands) ranged from no change on Green Island to high rates of increase on the other three islands, with a maximum increase of 26.3% (95\%CI: 21.6 - 31.4\%; @wood_rates_2020 Fig. \ref{fig:seals}). These high rates of increase provide further support for the hypothesis that seals from Canada are continually supplementing the breeding population in U.S. waters.  
 
-```{r seals, fig.cap = "Estimated mean rates of increase in the number of gray seal pups born at four United States pupping colonies at various times from 1988 to 2021. Recreated from Wood et al. 2022 (Figure 5).", code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_NE.Rmd-seal-pups.R"), fig.width = 5, fig.asp = .5}
+```{r seals, fig.cap = "Estimated mean rates of increase in the number of gray seal pups born at four United States pupping colonies at various times from 1988 to 2021. Recreated from Wood et al. 2022 (Figure 5).", fig.width = 5, fig.asp = .5}
+#, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_NE.Rmd-seal-pups.R")
+
+ecodata::plot_seal_pups(report = "NewEngland")
 ```
 
 Strong evidence exists to suggest that interactions between right whales and both the fixed gear fisheries in the U.S. and Canada and vessel strikes in the U.S. are contributing substantially to the decline of the species [@hayes_north_2018]. Further, right whale distribution has changed since 2010. New research suggests that recent climate driven changes in ocean circulation have resulted in right whale distribution changes driven by increased warm water influx through the Northeast Channel, which has reduced the primary right whale prey (*Calanus finmarchicus*) in the central and eastern portions of the Gulf of Maine [@hayes_north_2018; @record_rapid_2019; @sorochan_north_2019]. Additional potential stressors include offshore wind development, which overlaps with important habitat areas used year-round by right whales, including mother and calf migration corridors and foraging habitat [@quintana-rizzo_narw_wind_2021; @schick_whale_2009]. This area is also a primary right whale winter foraging habitat. Additional information can be found in the [offshore wind section](#other-ocean-uses:-offshore-wind).
