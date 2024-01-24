@@ -134,25 +134,37 @@ ecodata::plot_comdat(report = "NewEngland", varName = "landings")
 
 Overall, recreational harvest (harvested fish presumed to be eaten) have also declined in New England (Fig. \ref{fig:rec-landings}).  Recreational harvest in 2020 was the lowest since estimates began.
 
-```{r rec-landings, fig.cap = paste0("Total recreational seafood harvest (millions of pounds) in the ",region," region."), code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-recdat-landings.R")}
+```{r rec-landings, fig.cap = paste0("Total recreational seafood harvest (millions of pounds) in the ",region," region.")}
+#, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-recdat-landings.R")
+
+ecodata::plot_recdat(report = "NewEngland", varName = "landings")
 
 ```
 
 Commercial landings by guild include all species and all uses, and are reported as total for the guild and the NEFMC managed species within the guild. As reported in previous years, downward trends persist for a number of guilds in both regions.  A significant upward trend is now present for all benthivores in the GOM which can be attributed to American lobster (Fig. \ref{fig:comm-landings}).
 
-```{r, comm-landings, fig.cap = paste0("Total commercial landings (black) and ",council_abbr," managed U.S seafood landings (red) by feeding guild for the Gulf of Maine."), code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-comdat-commercial-landings-gom.R"), fig.asp=1.4}
+```{r, comm-landings, fig.cap = paste0("Total commercial landings (black) and NEFMC managed U.S seafood landings (red) by feeding guild for the Gulf of Maine."), fig.width=8, fig.asp=1}
+#, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-comdat-commercial-landings-gom.R")
+
+ecodata::plot_comdat(report = "NewEngland", plottype = "guild")
+
 ```
 
 Recreational shark landings of pelagic and prohibited sharks have decreased over the last couple of years (Fig \ref{fig:rec-hms}). This is likely influenced by regulatory changes implemented in 2018 intended to rebuild shortfin mako stocks. In 2021 the International Commission for the Conservation of Atlantic Tunas (ICCAT) finalized recommendations for a two-year retention ban for shortfin mako (ICCAT Rec.21-09), which will also affect total overall landings of pelagic sharks in coming years.
 
-```{r rec-hms, fig.cap = "Recreational shark landings from Marine Recreational Information Program.", code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-rec_hms.R"), fig.width=6, fig.asp=.4}
+```{r rec-hms, fig.cap = "Recreational shark landings from Large Pelagics Survey.", fig.width=5}
+#, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-rec_hms.R")
+
+ecodata::plot_rec_hms(shadedRegion = c(2014,2023), report="NewEngland") 
 
 ```
 
 Aquaculture production is not yet included in total seafood landings, but we are working toward that in future reports. Available aquaculture production of oysters for a subset of New England states was showing an increase in annual production per acre leased until a sharp decline in 2020 caused by the COVID-19 disruptions (Fig. \ref{fig:aquaculture}).  The data in 2021 show a rebound to levels prior to 2020.
 
-```{r aquaculture, fig.cap="Total oyster production per acre leased for New England states.", code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-aquaculture-pa.R")}
+```{r aquaculture, fig.cap="Total oyster production per acre leased for New England states."}
+#, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-aquaculture-pa.R")
 
+ecodata::plot_aquaculture(report = "NewEngland")
 ```
 
 ### Implications
@@ -163,17 +175,42 @@ Declining commercial seafood and recreational landings are driven by many intera
 
 Single species management objectives (1) maintaining biomass above minimum thresholds and 2) maintaining fishing mortality below overfishing limits) are not being met for some NEFMC managed species.  Nine stocks are currently estimated to be below $B_{MSY}$, while status relative to $B_{MSY}$ could not be assessed for 13 additional stocks (Fig. \ref{fig:stock-status}). Therefore, stock status and associated management constraints are likely contributing to decreased landings. To better address the role of management in future reports, we could examine how the total allowable catch (TAC) and the percentage of the TAC taken for each species has changed through time.  Note that the status of spiny dogfish is based on research track assessments and are thus waiting for a management track update to determine stock status.
 
-```{r stock-status, fig.cap = "Summary of single species status for NEFMC and jointly federally managed stocks (goosefish and spiny dogfish).  The dotted vertical line at one is the target biomass reference point of B\\textsubscript{MSY}.  The dashed lines are the management thresholds of B\\textsubscript{MSY} (vertical) or F\\textsubscript{MSY} (horizontal).  Text color denotes which quadrant of the plot the stocks are in with orange text below F\\textsubscript{MSY} and B\\textsubscript{MSY}, green above F\\textsubscript{MSY} and below B\\textsubscript{MSY}, and blue above both F\\textsubscript{MSY} and B\\textsubscript{MSY}.", code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-stock-status.R"), fig.width = 7.5, fig.asp = 0.5}
+```{r stock-status, fig.cap = "Summary of single species status for NEFMC and jointly federally managed stocks (goosefish and spiny dogfish).  The dotted vertical line at one is the target biomass reference point of B\\textsubscript{MSY}.  The dashed lines are the management thresholds of B\\textsubscript{MSY} (vertical) or F\\textsubscript{MSY} (horizontal).  Text color denotes which quadrant of the plot the stocks are in with orange text below F\\textsubscript{MSY} and B\\textsubscript{MSY}, green above F\\textsubscript{MSY} and below B\\textsubscript{MSY}, and blue above both F\\textsubscript{MSY} and B\\textsubscript{MSY}.", fig.width = 7.5, fig.asp = 0.8}
+#, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-stock-status.R")
+
+a <- ecodata::plot_stock_status(report = "NewEngland")
+
+nrow <- as.integer(dim(a$unknown)[1])
+halfnrow <- as.integer(nrow/2)
+
+
+
+a$p + ggplot2::coord_cartesian(xlim=c(0,3), ylim=c(0,2)) +
+  ggplot2::annotation_custom(gridExtra::tableGrob(a$unknown[1:halfnrow, ],
+                             theme = gridExtra::ttheme_default(base_size = 4), 
+                             rows=NULL), 
+                             xmin=0.5, xmax=1.5, ymin=1.4, ymax=1.9) +
+ggplot2::annotation_custom(gridExtra::tableGrob(a$unknown[(halfnrow+1):nrow, ],
+                             theme = gridExtra::ttheme_default(base_size = 4), 
+                             rows=NULL), 
+                             xmin=1.9, xmax=2.9, ymin=1.4, ymax=1.9)
 ```
 
 #### System Biomass
 
 Aggregate biomass trends derived from scientific resource surveys have been relatively stable in both regions (Fig. \ref{fig:nefsc-biomass-gb} & Fig. \ref{fig:nefsc-biomass-gom}). The benthivores group spiked during the last decade, due to a large haddock recruitment, but appears to be returning to average levels. There are also increasing trends in piscivores, planktivores, and benthos in at least one season in both regions. The New Hampshire/Maine state survey does not show these trends while the Massachusetts state survey shows the increasing trend in benthivores and planktivores but a decrease in piscivores in the spring and benthos in the fall (Fig. \ref{fig:mass-biomass}). While managed species comprise varying proportions of aggregate biomass, trends in landings are not mirroring shifts in the overall trophic structure of survey-sampled fish and invertebrates. Therefore, major shifts in feeding guilds or ecosystem trophic structure are unlikely to be driving the decline in landings.
 
-```{r nefsc-biomass-gb, fig.cap = "Spring (left) and fall (right) surveyed biomass on Georges Bank. The shaded area around each annual mean represents 2 standard deviations from the mean.", code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_NE.Rmd-aggregate-biomass-gb.R"), fig.width=8, fig.asp = 0.75}
+```{r nefsc-biomass-gb, fig.cap = "Spring (left) and fall (right) surveyed biomass on Georges Bank. The shaded area around each annual mean represents 2 standard deviations from the mean.", fig.width=8, fig.asp = 0.85, results='hide'}
+#, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_NE.Rmd-aggregate-biomass-gb.R")
+
+ecodata::plot_aggregate_biomass(report = "NewEngland", EPU = "GB") + ggplot2::ggtitle("Georges Bank")
+
 ```
 
-```{r nefsc-biomass-gom, fig.cap = "Spring (left) and fall (right) surveyed biomass in the Gulf of Maine. The shaded area around each annual mean represents 2 standard deviations from the mean.", code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_NE.Rmd-aggregate-biomass-gom.R"), fig.width=8, fig.asp = 0.75}
+```{r nefsc-biomass-gom, fig.cap = "Spring (left) and fall (right) surveyed biomass in the Gulf of Maine. The shaded area around each annual mean represents 2 standard deviations from the mean.",  fig.width=8, fig.asp = 0.75}
+#code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_NE.Rmd-aggregate-biomass-gom.R"),
+
+ecodata::plot_aggregate_biomass(report = "NewEngland", EPU = "GOM") + ggplot2::ggtitle("Gulf of Maine")
 ```
 
 ```{r mass-biomass, fig.cap = "Spring (left) and fall (right) surveyed biomass from the state of Massachusetts inshore survey. The shaded area around each annual mean represents 2 standard deviations from the mean.", code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_NE.Rmd-ma-inshore-survey.R"), fig.width=8, fig.asp = 0.75}
