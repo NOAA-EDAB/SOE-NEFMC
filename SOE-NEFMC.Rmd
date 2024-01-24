@@ -3,14 +3,14 @@ title:
 csl: plos.csl
 fontsize: 10pt
 output:
+  bookdown::word_document2:
+    toc: false
   bookdown::pdf_document2:
     includes:
       in_header: latex/header1.tex
     keep_tex: yes
     toc: false
     number_sections: false
-  bookdown::word_document2:
-    toc: false
   bookdown::html_document2: 
     df_print: paged
 link-citations: yes
@@ -134,7 +134,7 @@ ecodata::plot_comdat(report = "NewEngland", varName = "landings")
 
 Overall, recreational harvest (harvested fish presumed to be eaten) have also declined in New England (Fig. \ref{fig:rec-landings}).  Recreational harvest in 2020 was the lowest since estimates began.
 
-```{r rec-landings, fig.cap = paste0("Total recreational seafood harvest (millions of pounds) in the ",region," region.")}
+```{r rec-landings, fig.cap = paste0("Total recreational seafood harvest (millions of pounds) in the New England region.")}
 #, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-recdat-landings.R")
 
 ecodata::plot_recdat(report = "NewEngland", varName = "landings")
@@ -967,19 +967,22 @@ x.shade.max <- max(x)
 x.shade.min <- x.shade.max - 9 
 hline = mean(y)
 
+setup <- ecodata::plot_setup(shadedRegion = c(2014,2023), report = "MidAtlantic")
+
+
 #Plot series with trend 
 psample <- ggplot2::ggplot(data = data,aes(x = x, y = y)) +
   #Highlight last ten years
-  annotate("rect", fill = shade.fill, alpha = shade.alpha,
+  annotate("rect", fill = setup$shade.fill, alpha = setup$shade.alpha,
       xmin = x.shade.min , xmax = x.shade.max,
       ymin = -Inf, ymax = Inf) +
-  geom_point(size = pcex) +
+  geom_point(size = setup$pcex) +
   scale_color_manual(aesthetics = "color")+
   guides(color = FALSE) +
   geom_hline(aes(yintercept = hline),
-             size = hline.size,
-             alpha = hline.alpha,
-             linetype = hline.lty)+
+             size = setup$hline.size,
+             alpha = setup$hline.alpha,
+             linetype = setup$hline.lty)+
   geom_line() +
   geom_gls(aes(x = x, y = y)) +
   scale_y_continuous(labels = function(l){trans = l / 1000})+
@@ -1011,8 +1014,8 @@ epu_labels <- data.frame(EPU = c("Mid-Atlantic\n Bight",
 
 #Map of NE LME
 epumap <- ggplot() +
-geom_sf(data = coast, size = map.lwd) +
-geom_sf(data = epu_sf, fill = "transparent", size = map.lwd) +
+geom_sf(data = coast, size = setup$map.lwd) +
+geom_sf(data = epu_sf, fill = "transparent", size = setup$map.lwd) +
 coord_sf(xlim = xlims, ylim = ylims) + #crs = crs,  +
 geom_text(data = epu_labels, aes(x = longitude,
                         y = latitude,
