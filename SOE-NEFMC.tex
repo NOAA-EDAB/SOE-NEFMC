@@ -7,16 +7,19 @@
   10pt,
 ]{article}
 \usepackage{amsmath,amssymb}
-\usepackage{lmodern}
 \usepackage{iftex}
 \ifPDFTeX
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
   \usepackage{textcomp} % provide euro and other symbols
 \else % if luatex or xetex
-  \usepackage{unicode-math}
+  \usepackage{unicode-math} % this also loads fontspec
   \defaultfontfeatures{Scale=MatchLowercase}
   \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
 \fi
 % Use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
@@ -136,11 +139,11 @@
 
 \fancyheadinit{%
    \ifthenelse{\value{page}=5}%
-      {\fancyhead[R]{\includegraphics[width=40pt]{images/NOAA_logo.png} \\ \textsf{\emph{April 7, 2023}}}
-       \fancyhead[L]{\textsf{\LARGE State of the Ecosystem 2023: New England}}
+      {\fancyhead[R]{\includegraphics[width=40pt]{images/NOAA_logo.png} \\ \textsf{\emph{February 9, 2023}}}
+       \fancyhead[L]{\textsf{\LARGE DRAFT State of the Ecosystem 2024: New England}}
       }%
       {\fancyhead[R]{}
-       \fancyhead[L]{\textsf{\emph{State of the Ecosystem 2023: New England}}}
+       \fancyhead[L]{\textsf{\emph{DRAFT State of the Ecosystem 2024: New England}}}
       }
 }
 
@@ -156,31 +159,23 @@
 % Change section labels to san serif
 \usepackage{sectsty}
 \allsectionsfont{\normalfont\sffamily\bfseries}
-\usepackage{booktabs}
-\usepackage{longtable}
-\usepackage{array}
 \usepackage{multirow}
-\usepackage{wrapfig}
-\usepackage{float}
-\usepackage{colortbl}
-\usepackage{pdflscape}
-\usepackage{tabu}
-\usepackage{threeparttable}
-\usepackage{threeparttablex}
-\usepackage[normalem]{ulem}
-\usepackage{makecell}
-\usepackage{xcolor}
 \usepackage{multicol}
+\usepackage{colortbl}
 \usepackage{hhline}
 \newlength\Oldarrayrulewidth
 \newlength\Oldtabcolsep
+\usepackage{longtable}
+\usepackage{array}
 \usepackage{hyperref}
+\usepackage{float}
+\usepackage{wrapfig}
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
 \IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
-\urlstyle{same} % disable monospaced font for URLs
+\urlstyle{same}
 \hypersetup{
   colorlinks=true,
   linkcolor={Maroon},
@@ -210,7 +205,7 @@ This report is for the New England Fishery Management Council (NEFMC). The purpo
 
 The two main sections contain subsections for each management objective or potential risk. Within each subsection, we first review indicator trends, and the status of the most recent data year relative to a threshold (if available) or relative to the long-term average. Second, we synthesize results of other indicators and information to outline potential implications for management (i.e., connecting indicator(s) status to management and why an indicator(s) is important). For example, if there are multiple drivers related to an indicator trend, which drivers may be more or less supported by current information, and which, if any, can be affected by management action(s)? Similarly, which risk indicators warrant continued monitoring to evaluate whether regime shifts or ecosystem reorganization are likely? We emphasize that these implications are intended to represent testable hypotheses at present, rather than ``answers,'' because the science behind these indicators and syntheses continues to develop.
 
-A glossary of terms\footnote{\url{https://noaa-edab.github.io/tech-doc/glossary.html}}, detailed technical methods documentation\footnote{\url{https://NOAA-EDAB.github.io/tech-doc}} and indicator data\footnote{\url{https://github.com/NOAA-EDAB/ecodata}} are available online. The details of standard figure formatting (Fig. \ref{fig:docformat}a), categorization of fish and invertebrate species into feeding groups (Table \ref{tab:species-groupings}), and definitions of ecological production units (EPUs, including Georges Bank, GB, and the Gulf of Maine, GOM; Fig. \ref{fig:docformat}b) are provided at the end of the document.
+A glossary of terms\footnote{\url{https://noaa-edab.github.io/tech-doc/glossary.html}}, detailed technical methods documentation\footnote{\url{https://NOAA-EDAB.github.io/tech-doc}} and indicator data\footnote{\url{https://github.com/NOAA-EDAB/ecodata}}, and detailed indicator descriptions\footnote{\url{https://noaa-edab.github.io/catalog/index.html}} are available online. The details of standard figure formatting (Fig. \ref{fig:docformat}a), categorization of fish and invertebrate species into feeding groups (Table \ref{tab:species-groupings}), and definitions of ecological production units (EPUs, including Georges Bank, GB, and the Gulf of Maine, GOM; Fig. \ref{fig:docformat}b) are provided at the end of the document.
 
 \global\setlength{\Oldarrayrulewidth}{\arrayrulewidth}
 
@@ -228,83 +223,89 @@ A glossary of terms\footnote{\url{https://noaa-edab.github.io/tech-doc/glossary.
 
 \caption{Example\ ecosystem-scale\ fishery\ management\ objectives\ for\ the\ New\ England\ region}\label{tab:management-objectives}\\
 
-\ascline{2pt}{666666}{1-2}
+\ascline{1.5pt}{666666}{1-2}
 
-\multicolumn{1}{>{\raggedright}p{\dimexpr 1.42in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Objective\ categories}}} & \multicolumn{1}{>{\raggedright}p{\dimexpr 4.09in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Indicators\ reported}}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 1.42in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Objective\ categories}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 4.09in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Indicators\ reported}}} \\
 
-\ascline{2pt}{666666}{1-2}\endhead
+\ascline{1.5pt}{666666}{1-2}\endfirsthead \caption[]{Example\ ecosystem-scale\ fishery\ management\ objectives\ for\ the\ New\ England\ region}\label{tab:management-objectives}\\
 
+\ascline{1.5pt}{666666}{1-2}
 
+\multicolumn{1}{>{\raggedright}m{\dimexpr 1.42in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Objective\ categories}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 4.09in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Indicators\ reported}}} \\
 
-\multicolumn{2}{>{\raggedright}p{\dimexpr 5.51in+2\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{\textbf{Provisioning\ and\ Cultural\ Services}}}} \\
-
-
-
-
-
-\multicolumn{1}{>{\raggedright}p{\dimexpr 1.42in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Seafood\ Production}}} & \multicolumn{1}{>{\raggedright}p{\dimexpr 4.09in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Landings;\ commercial\ total\ and\ by\ feeding\ guild;\ recreational\ harvest}}} \\
+\ascline{1.5pt}{666666}{1-2}\endhead
 
 
 
-
-
-\multicolumn{1}{>{\raggedright}p{\dimexpr 1.42in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Profits}}} & \multicolumn{1}{>{\raggedright}p{\dimexpr 4.09in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Revenue\ decomposed\ to\ price\ and\ volume}}} \\
+\multicolumn{2}{>{\raggedright}m{\dimexpr 5.51in+2\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{\textbf{Provisioning\ and\ Cultural\ Services}}}} \\
 
 
 
 
 
-\multicolumn{1}{>{\raggedright}p{\dimexpr 1.42in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Recreation}}} & \multicolumn{1}{>{\raggedright}p{\dimexpr 4.09in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Days\ fished;\ recreational\ fleet\ diversity}}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 1.42in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Seafood\ Production}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 4.09in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Landings;\ commercial\ total\ and\ by\ feeding\ guild;\ recreational\ harvest}}} \\
 
 
 
 
 
-\multicolumn{1}{>{\raggedright}p{\dimexpr 1.42in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Stability}}} & \multicolumn{1}{>{\raggedright}p{\dimexpr 4.09in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Diversity\ indices\ (fishery\ and\ ecosystem)}}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 1.42in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Profits}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 4.09in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Revenue\ decomposed\ to\ price\ and\ volume}}} \\
 
 
 
 
 
-\multicolumn{1}{>{\raggedright}p{\dimexpr 1.42in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Social\ \&\ Cultural}}} & \multicolumn{1}{>{\raggedright}p{\dimexpr 4.09in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Community\ engagement/reliance\ status}}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 1.42in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Recreation}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 4.09in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Days\ fished;\ recreational\ fleet\ diversity}}} \\
 
 
 
 
 
-\multicolumn{1}{>{\raggedright}p{\dimexpr 1.42in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Protected\ Species}}} & \multicolumn{1}{>{\raggedright}p{\dimexpr 4.09in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Bycatch;\ population\ (adult\ and\ juvenile)\ numbers,\ mortalities}}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 1.42in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Stability}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 4.09in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Diversity\ indices\ (fishery\ and\ ecosystem)}}} \\
 
 
 
 
 
-\multicolumn{2}{>{\raggedright}p{\dimexpr 5.51in+2\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{\textbf{Supporting\ and\ Regulating\ Services}}}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 1.42in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Social\ \&\ Cultural}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 4.09in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Community\ engagement/reliance\ status}}} \\
 
 
 
 
 
-\multicolumn{1}{>{\raggedright}p{\dimexpr 1.42in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Biomass}}} & \multicolumn{1}{>{\raggedright}p{\dimexpr 4.09in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Biomass\ or\ abundance\ by\ feeding\ guild\ from\ surveys}}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 1.42in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Protected\ Species}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 4.09in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Bycatch;\ population\ (adult\ and\ juvenile)\ numbers,\ mortalities}}} \\
 
 
 
 
 
-\multicolumn{1}{>{\raggedright}p{\dimexpr 1.42in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Productivity}}} & \multicolumn{1}{>{\raggedright}p{\dimexpr 4.09in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Condition\ and\ recruitment\ of\ managed\ species,\ Primary\ productivity}}} \\
+\multicolumn{2}{>{\raggedright}m{\dimexpr 5.51in+2\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{\textbf{Supporting\ and\ Regulating\ Services}}}} \\
 
 
 
 
 
-\multicolumn{1}{>{\raggedright}p{\dimexpr 1.42in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Trophic\ structure}}} & \multicolumn{1}{>{\raggedright}p{\dimexpr 4.09in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Relative\ biomass\ of\ feeding\ guilds,\ Zooplankton}}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 1.42in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Biomass}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 4.09in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Biomass\ or\ abundance\ by\ feeding\ guild\ from\ surveys}}} \\
 
 
 
 
 
-\multicolumn{1}{>{\raggedright}p{\dimexpr 1.42in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Habitat}}} & \multicolumn{1}{>{\raggedright}p{\dimexpr 4.09in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Estuarine\ and\ offshore\ habitat\ conditions}}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 1.42in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Productivity}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 4.09in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Condition\ and\ recruitment\ of\ managed\ species,\ Primary\ productivity}}} \\
 
-\ascline{2pt}{666666}{1-2}
+
+
+
+
+\multicolumn{1}{>{\raggedright}m{\dimexpr 1.42in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Trophic\ structure}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 4.09in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Relative\ biomass\ of\ feeding\ guilds,\ Zooplankton}}} \\
+
+
+
+
+
+\multicolumn{1}{>{\raggedright}m{\dimexpr 1.42in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Habitat}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 4.09in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Estuarine\ and\ offshore\ habitat\ conditions}}} \\
+
+\ascline{1.5pt}{666666}{1-2}
 
 
 
@@ -323,7 +324,7 @@ A glossary of terms\footnote{\url{https://noaa-edab.github.io/tech-doc/glossary.
 \hypertarget{performance-relative-to-fishery-management-objectives}{%
 \section{Performance relative to fishery management objectives}\label{performance-relative-to-fishery-management-objectives}}
 
-In this section, we examine indicators related to broad, ecosystem-level fishery management objectives. These objectives are derived from National legislation as the NEFMC has not formally adopted any ecosystem-level objectives for management. We also provide hypotheses on the implications of these trends---\emph{why} we are seeing them, what's driving them, and potential or observed regime shifts or changes in ecosystem structure. Identifying multiple drivers, regime shifts, and potential changes to ecosystem structure, as well as identifying the most vulnerable resources, can help managers determine whether we can do anything differently to meet objectives and how to prioritize for upcoming issues/risks.
+In this section, we examine indicators related to broad, ecosystem-level fishery management objectives. We also provide hypotheses on the implications of these trends---\emph{why} we are seeing them, what's driving them, and potential or observed regime shifts or changes in ecosystem structure. Identifying multiple drivers, regime shifts, and potential changes to ecosystem structure, as well as identifying the most vulnerable resources, can help managers determine whether anything differently needs to be done to meet objectives and how to prioritize upcoming issues/risks.
 
 \hypertarget{seafood-production}{%
 \subsection{Seafood Production}\label{seafood-production}}
@@ -331,7 +332,7 @@ In this section, we examine indicators related to broad, ecosystem-level fishery
 \hypertarget{indicator-landings-commercial-and-recreational}{%
 \subsubsection{Indicator: Landings; commercial and recreational}\label{indicator-landings-commercial-and-recreational}}
 
-This year, we present updated indicators for total commercial landings (all species, all uses, fleets from all nations), US seafood landings (species for human consumption landed by US fleets), and Council-managed US seafood landings (New England Fishery Management Council (NEFMC) and jointly managed species landed by US fleets for human consumption). Total commercial landings (black) within New England show no long-term trends (Fig. \ref{fig:total-landings}). We treat the last three years of total landings as preliminary, given that the Canadian landings within each EPU have yet to be updated by NAFO. The long term downward trends in commercial seafood landings for the Gulf of Maine remains, although over the last decade landings appears to be relatively stable.
+This year, we present updated \href{https://noaa-edab.github.io/catalog/commercial-landings-and-revenue.html}{indicators} for total commercial landings, U.S. seafood landings, and Council-managed U.S. seafood landings . Total commercial landings (black) within New England show no long-term trends (Fig. \ref{fig:total-landings}). We treat the last three years of total landings as preliminary, given that the Canadian landings within each EPU have yet to be updated by NAFO. There exist long term downward trends in commercial seafood landings for the Gulf of Maine, but over the last decade landings appear to be relatively stable. In addition, NEFMC managed seafood production on Georges Bank now presents a long term decreasing trend.
 
 \begin{figure}
 
@@ -339,21 +340,10 @@ This year, we present updated indicators for total commercial landings (all spec
 
 }
 
-\caption{Total commercial landings (black), total U.S. seafood landings (blue), and New England managed U.S. seafood landings (red) for Georges Bank and the Gulf of Maine.  Open circles represent years that are lacking NAFO (foreign) data. mt = metric tons}\label{fig:total-landings}
+\caption{Total commercial landings (black), total U.S. seafood landings (blue), and New England managed U.S. seafood landings (red) for Georges Bank and the Gulf of Maine. Open circles represent years that are lacking NAFO (foreign) data. mt = metric tons}\label{fig:total-landings}
 \end{figure}
 
-Overall, recreational harvest (harvested fish presumed to be eaten) have also declined in New England (Fig. \ref{fig:rec-landings}). Recreational harvest in 2020 was the lowest since estimates began.
-
-\begin{figure}
-
-{\centering \includegraphics{SOE-NEFMC_files/figure-latex/rec-landings-1} 
-
-}
-
-\caption{Total recreational seafood harvest (millions of pounds) in the New England region.}\label{fig:rec-landings}
-\end{figure}
-
-Commercial landings by guild include all species and all uses, and are reported as total for the guild and the NEFMC managed species within the guild. As reported in previous years, downward trends persist for a number of guilds in both regions. A significant upward trend is now present for all benthivores in the GOM which can be attributed to American lobster (Fig. \ref{fig:comm-landings}).
+Commercial landings by guild include all species and all uses, and are reported as total for the guild and the NEFMC managed species within the \href{https://noaa-edab.github.io/catalog/feeding-guilds-by-management-bodies.html}{guild}. As reported in previous years, downward trends persist for a number of guilds in both regions. A significant upward trend is present for benthivores (GOM), attributable to an increase in American lobster, and benthos (GB), attributable to clams and scallops (Fig. \ref{fig:comm-landings}). Landings of planktivores on Georges Bank are presenting mixed trends between total and managed species, both categories are near historic lows.
 
 \begin{figure}
 
@@ -364,7 +354,16 @@ Commercial landings by guild include all species and all uses, and are reported 
 \caption{Total commercial landings (black) and NEFMC managed U.S seafood landings (red) by feeding guild for the Gulf of Maine.}\label{fig:comm-landings}
 \end{figure}
 
-Recreational shark landings of pelagic and prohibited sharks have decreased over the last couple of years (Fig \ref{fig:rec-hms}). This is likely influenced by regulatory changes implemented in 2018 intended to rebuild shortfin mako stocks. In 2021 the International Commission for the Conservation of Atlantic Tunas (ICCAT) finalized recommendations for a two-year retention ban for shortfin mako (ICCAT Rec.21-09), which will also affect total overall landings of pelagic sharks in coming years.
+Overall, \href{https://noaa-edab.github.io/catalog/recreational-fishing-indicators.html}{recreational harvest} (retained fish presumed to be eaten) have also declined in New England (Fig. ). Although, harvest has rebounded somewhat from the historical low level in 2020. Recreational \href{https://noaa-edab.github.io/catalog/highly-migratory-species-landings.html}{shark landings} of pelagic and prohibited sharks have declined since 2018 (Fig \ref{fig:rec-landings}), likely influenced by regulatory changes implemented in 2018 intended to rebuild shortfin mako stocks.
+
+\begin{figure}
+
+{\centering \includegraphics{SOE-NEFMC_files/figure-latex/rec-landings-1} 
+
+}
+
+\caption{Total recreational seafood harvest (millions of pounds) in the New England region.}\label{fig:rec-landings}
+\end{figure}
 
 \begin{figure}
 
@@ -372,24 +371,15 @@ Recreational shark landings of pelagic and prohibited sharks have decreased over
 
 }
 
-\caption{Recreational shark landings from Marine Recreational Information Program.}\label{fig:rec-hms}
+\caption{Recreational shark landings from Large Pelagics Survey.}\label{fig:rec-hms}
 \end{figure}
 
-Aquaculture production is not yet included in total seafood landings, but we are working toward that in future reports. Available aquaculture production of oysters for a subset of New England states was showing an increase in annual production per acre leased until a sharp decline in 2020 caused by the COVID-19 disruptions (Fig. \ref{fig:aquaculture}). The data in 2021 show a rebound to levels prior to 2020.
-
-\begin{figure}
-
-{\centering \includegraphics{SOE-NEFMC_files/figure-latex/aquaculture-1} 
-
-}
-
-\caption{Total oyster production per acre leased for New England states.}\label{fig:aquaculture}
-\end{figure}
+\href{https://noaa-edab.github.io/catalog/aquaculture-production.html}{Aquaculture production} is not yet included in total seafood landings.
 
 \hypertarget{implications}{%
 \subsubsection{Implications}\label{implications}}
 
-Declining commercial seafood and recreational landings are driven by many interacting factors, including combinations of ecological and stock production, management actions, market conditions (including COVID-19 disruptions), and environmental changes. While we cannot evaluate all possible drivers at present, here we evaluate the extent to which stock status and changes in system biomass play a role.
+Declining commercial seafood and recreational landings are driven by many interacting factors, including combinations of ecological and stock production, management actions, market conditions, and environmental changes. While we cannot evaluate all possible drivers at present, here we evaluate the extent to which stock status and changes in system biomass play a role.
 
 \hypertarget{stock-status}{%
 \paragraph{Stock Status}\label{stock-status}}
@@ -427,6 +417,12 @@ Aggregate biomass trends derived from scientific resource surveys have been rela
 
 \caption{Spring (left) and fall (right) surveyed biomass in the Gulf of Maine. The shaded area around each annual mean represents 2 standard deviations from the mean.}\label{fig:nefsc-biomass-gom}
 \end{figure}
+
+\begin{verbatim}
+## TableGrob (1 x 1) "arrange": 1 grobs
+##   z     cells    name            grob
+## 1 1 (1-1,1-1) arrange gtable[arrange]
+\end{verbatim}
 
 \begin{figure}
 
@@ -481,7 +477,7 @@ Commercial revenue in the region has been mostly positive with total commercial 
 
 }
 
-\caption{Revenue through 2021 for the New England region: total (black) and from NEFMC managed species (red).}\label{fig:comm-revenue}
+\caption{Revenue through 2022 for the New England region: total (black) and from NEFMC managed species (red).}\label{fig:comm-revenue}
 \end{figure}
 
 Revenue earned by harvesting resources is a function of both the quantity landed of each species and the prices paid for landings. Beyond monitoring yearly changes in revenue, it is even more valuable to determine what drives these changes: harvest levels, the mix of species landed, price changes, or a combination of these. The Bennet Indicator decomposes revenue change into two parts, one driven by changing quantities (volumes), and a second driven by changing prices.
@@ -494,7 +490,16 @@ The gains in total revenue were due to both increasing quantities landed (volume
 
 }
 
-\caption{Revenue change from the long-term mean in 2015 dollars (black), price, and volume for commercial landings from Georges Bank (GB: top panels) and the Gulf of Maine (GOM: bottom panels)}\label{fig:bennet}
+\caption{Revenue change from the 1982 baseline in 2023 dollars (black), price, and volume for commercial landings from Georges Bank (GB: left) and the Gulf of Maine (GOM: right)}\label{fig:bennet}
+\end{figure}
+
+\begin{figure}
+
+{\centering \includegraphics{SOE-NEFMC_files/figure-latex/bennet-all-1} 
+
+}
+
+\caption{Revenue change from the long-term mean in 2023 dollars (black), price, and volume for commercial landings from Georges Bank (GB: top panels) and the Gulf of Maine (GOM: bottom panels)}\label{fig:bennet-all}
 \end{figure}
 
 \hypertarget{implications-1}{%
@@ -742,7 +747,7 @@ The number of gray seals in U.S. waters has risen dramatically in the last three
 \caption{Estimated mean rates of increase in the number of gray seal pups born at four United States pupping colonies at various times from 1988 to 2021. Recreated from Wood et al. 2022 (Figure 5).}\label{fig:seals}
 \end{figure}
 
-Strong evidence exists to suggest that interactions between right whales and both the fixed gear fisheries in the U.S. and Canada and vessel strikes in the U.S. are contributing substantially to the decline of the species {[}\protect\hyperlink{ref-hayes_north_2018}{5}{]}. Further, right whale distribution has changed since 2010. New research suggests that recent climate driven changes in ocean circulation have resulted in right whale distribution changes driven by increased warm water influx through the Northeast Channel, which has reduced the primary right whale prey (\emph{Calanus finmarchicus}) in the central and eastern portions of the Gulf of Maine {[}\protect\hyperlink{ref-hayes_north_2018}{5}--\protect\hyperlink{ref-sorochan_north_2019}{7}{]}. Additional potential stressors include offshore wind development, which overlaps with important habitat areas used year-round by right whales, including mother and calf migration corridors and foraging habitat {[}\protect\hyperlink{ref-quintana-rizzo_narw_wind_2021}{8},\protect\hyperlink{ref-schick_whale_2009}{9}{]}. This area is also a primary right whale winter foraging habitat. Additional information can be found in the \protect\hyperlink{other-ocean-uses:-offshore-wind}{offshore wind section}.
+Strong evidence exists to suggest that interactions between right whales and both the fixed gear fisheries in the U.S. and Canada and vessel strikes in the U.S. are contributing substantially to the decline of the species {[}\protect\hyperlink{ref-hayes_north_2018}{5}{]}. Further, right whale distribution has changed since 2010. New research suggests that recent climate driven changes in ocean circulation have resulted in right whale distribution changes driven by increased warm water influx through the Northeast Channel, which has reduced the primary right whale prey (\emph{Calanus finmarchicus}) in the central and eastern portions of the Gulf of Maine {[}\protect\hyperlink{ref-hayes_north_2018}{5}--\protect\hyperlink{ref-sorochan_north_2019}{7}{]}. Additional potential stressors include offshore wind development, which overlaps with important habitat areas used year-round by right whales, including mother and calf migration corridors and foraging habitat. This area is also a primary right whale winter foraging habitat. Additional information can be found in the \protect\hyperlink{other-ocean-uses:-offshore-wind}{offshore wind section}.
 
 The UMEs are under investigation and are likely the result of multiple drivers. For all large whale UMEs, human interaction appears to have contributed to increased mortalities, although investigations are not complete. An investigation into the cause of the seal UME so far suggests avian flu virus as a potential cause.
 
@@ -753,26 +758,46 @@ A climate vulnerability assessment is currently underway for Atlantic and Gulf o
 \hypertarget{risks-to-meeting-fishery-management-objectives}{%
 \section{Risks to meeting fishery management objectives}\label{risks-to-meeting-fishery-management-objectives}}
 
-\hypertarget{climate-and-ecosystem-productivity}{%
-\subsection{Climate and Ecosystem Productivity}\label{climate-and-ecosystem-productivity}}
+\hypertarget{climate-and-ecosystem-change}{%
+\subsection{Climate and Ecosystem Change}\label{climate-and-ecosystem-change}}
 
-Large scale climate related changes in the ecosystem can lead to changes in important habitats and ecological interactions, potentially resulting in regime shifts and ecosystem reorganization.
+Regulations and measures designed to meet fishery management objectives are often based on historical information about stocks: their distribution in space and time, and their overall productivity. Large scale climate related changes in the ecosystem can lead to changes in important habitats and ecological interactions, altering distributions and productivity. With large enough ecosystem changes, management measures may be less effective, and management objectives may not be met.
 
-\hypertarget{climate-change-indicators-ocean-temperatures-extreme-events-currents-acidification}{%
-\subsubsection{Climate Change Indicators: ocean temperatures, extreme events, currents, acidification}\label{climate-change-indicators-ocean-temperatures-extreme-events-currents-acidification}}
+This year, we have restructured this section to focus on three categories of management decisions and the risk posed to them by climate and ecosystem change: spatial management, seasonal management, and quota setting or rebuilding depleted stocks. In each section, we highlight observed changes in distribution, timing, and productivity of fish and protected species. Then, we review possible drivers for these observed changes, in order to determine how management might be adjusted to account for the observed changes. Finally, we provide an overview of notable climate and ecosystem observations from 2023.
 
-\hypertarget{ocean-temperature-and-salinity}{%
-\paragraph{Ocean temperature and salinity}\label{ocean-temperature-and-salinity}}
+\hypertarget{risks-to-spatial-management}{%
+\subsubsection{Risks to Spatial Management}\label{risks-to-spatial-management}}
 
-The ocean continues to warm, altering habitat conditions experienced by a wide range of species. 2022 was among the warmest years on record in the North Atlantic {[}\protect\hyperlink{ref-cheng_another_2023}{10}{]} and ocean temperatures continue to warm at both the surface (Fig. \ref{fig:seasonal-sst-anom-gridded}) and bottom (Fig. \ref{fig:bottom-temp}) throughout New England. Seasonal sea surface temperatures in 2022 were above average throughout the year, with some seasons rivaling or exceeding the record warm temperatures observed in 2012.
+Shifting species distributions alter both species interactions and fishery interactions. In particular, shifting species distributions can alter expected management outcomes from spatial allocations and bycatch measures based on historical fish and protected species distributions. Species availability to surveys can change as distributions shift within survey footprints.
+
+\hypertarget{observations-fish-and-protected-species-distribution-shifts}{%
+\paragraph{Observations: Fish and protected species distribution shifts}\label{observations-fish-and-protected-species-distribution-shifts}}
+
+As noted in the \protect\hyperlink{implications}{Landings Implications section above}, trends for a suite of 48 commercially or ecologically important fish species along the entire Northeast Shelf continue to show movement towards the northeast and generally into deeper water (Fig. \ref{fig:species-dist}). Habitat model-based species richness suggests shifts of both cooler and warmer water species to the northeast {[}\emph{link to catalog page}{]}. Similar patterns have been found for marine mammals, with multiple species shifting northeast between 2010 and 2017 in most seasons (Fig. \ref{fig:protectedspp-dist-shifts}, {[}\protect\hyperlink{ref-chavez-rosales_detection_2022}{8}{]}).
 
 \begin{figure}
 
-{\centering \includegraphics{SOE-NEFMC_files/figure-latex/seasonal-sst-anom-gridded-1} 
+{\centering \includegraphics{SOE-NEFMC_files/figure-latex/protectedspp-dist-shifts-1} 
 
 }
 
-\caption{New England (EPUs outlined in grey) 2022 seasonal sea surface temperature (SST) anomalies. The anomalies are the difference between the 2022 seasonal means and the long-term (1991-2020) seasonal means.  Seasons are defined as: Jan-Mar for winter, Apr-Jun for spring, Jul-Sep for summer, and Oct-Dec for fall.}\label{fig:seasonal-sst-anom-gridded}
+\caption{Direction and magnitude of core habitat shifts, represented by the length of the line of the seasonal weighted centroid for species with more than 70 km difference between 2010 and 2017 (tip of arrow).}\label{fig:protectedspp-dist-shifts}
+\end{figure}
+
+\hypertarget{drivers}{%
+\paragraph{Drivers:}\label{drivers}}
+
+Increasing temperature, changing oceanography, and the decreasing size of the seasonal cold pool can alter the spatial distribution of suitable habitat for managed species, as well as availability and distribution of their prey.
+
+Ocean temperatures continue to warm at both the surface (Fig. \ref{fig:seasonal-oisst-anom}) and bottom (Fig. \ref{fig:bottom-temp}) throughout Georges Bank and the Gulf of Maine in all seasons.
+
+\begin{figure}
+
+{\centering \includegraphics{SOE-NEFMC_files/figure-latex/seasonal-oisst-anom-1} 
+
+}
+
+\caption{GB and GOM seasonal sea surface temperature (SST) time series . Seasons are defined as: Jan-Mar for winter, Apr-Jun for spring, Jul-Sep for summer, and Oct-Dec for fall.}\label{fig:seasonal-oisst-anom}
 \end{figure}
 
 \begin{figure}
@@ -781,51 +806,10 @@ The ocean continues to warm, altering habitat conditions experienced by a wide r
 
 }
 
-\caption{Annual Georges Bank and Gulf of Maine seasonal bottom temperature anomalies. Data are obtained from GLORYS, a global ocean reanalysis product that provides high resolution data on ocean physics and incorporates real-time observations.  Data from the last two years (open circles) are from a near-real-time model (PSY) and are considered preliminary.}\label{fig:bottom-temp}
+\caption{MAB seasonal bottom temperature (BT) anomaly time series. Seasons are defined as: Jan-Mar for winter, Apr-Jun for spring, Jul-Sep for summer, and Oct-Dec for fall.}\label{fig:bottom-temp}
 \end{figure}
 
-In addition to increasing seasonal temperatures, ocean summer conditions now last longer within each year. In both GB and GOM, the transition date from cool winter conditions to warm stratified summer conditions is getting earlier. The transition back to well mixed cool temperatures is also getting later in the year, thus increasing the total number of days when the surface temperatures are in the warm summer conditions (Fig. \ref{fig:transition}).
-
-\begin{figure}
-
-{\centering \includegraphics{SOE-NEFMC_files/figure-latex/transition-1} 
-
-}
-
-\caption{Ocean summer length in New England: the annual total number of days between the spring thermal transition date and the fall thermal transition date.  The transition dates are defined as the day of the year when surface temperatures changeover from cool to warm conditions in the spring and back to cool conditions in the fall. The left is Georges Bank (GB) and the right is Gulf of Maine (GOM).}\label{fig:transition}
-\end{figure}
-
-\hypertarget{extreme-temperature-events}{%
-\paragraph{Extreme temperature events}\label{extreme-temperature-events}}
-
-The increase in surface and bottom water temperature observed in the Northeast US can cause long term incremental stress on marine organisms, especially those relying on cooler water habitats for some or all life stages. In addition to changes in long-term average conditions, short-term extreme temperature events can produce acute stress on marine organisms, especially when the baseline temperature is increasing. To identify these extreme events separately from the baseline warming, we have changed our methods to detect marine heatwaves (MHWs, {[}\protect\hyperlink{ref-hobday_hierarchical_2016}{11}--\protect\hyperlink{ref-jacox_global_2022}{13}{]}) to remove the global warming signal. Therefore, these indicators are different than in previous reports, but MHWs identified now are truly extreme departures from an already warming ecosystem. A combination of long-term ocean warming and MHWs should be used to assess total heat stress on marine organisms.
-
-In 2022, GB experienced one surface MHW that began on October 26\textsuperscript{th}, peaked on November 7\textsuperscript{th} and lasted 28 days (Fig. \ref{fig:heatwave-year-gb}). This surface MHW ranked 17\textsuperscript{th} on record in terms of maximum intensity and 5\textsuperscript{th} on record in terms of cumulative intensity.
-
-\begin{figure}
-
-{\centering \includegraphics{SOE-NEFMC_files/figure-latex/heatwave-year-gb-1} 
-
-}
-
-\caption{Marine heatwave events (red shading above black line) on Georges Bank occuring in 2022.}\label{fig:heatwave-year-gb}
-\end{figure}
-
-The GOM experienced four surface MHWs in 2022 that began on August 4\textsuperscript{th} and 25\textsuperscript{th}, September 9\textsuperscript{th}, and October 31\textsuperscript{th} (Fig \ref{fig:heatwave-year-gom}). The strongest event in terms of maximum intensity began on August 4\textsuperscript{th} and peaked on August 7\textsuperscript{th} lasting six days. This surface MHW ranked 27\textsuperscript{th} on record. The five most intense surface MHW events on record in the GOM occurred over the last 12 years. No bottom MHWs were detected for either GB or GOM in 2022.
-
-\begin{figure}
-
-{\centering \includegraphics{SOE-NEFMC_files/figure-latex/heatwave-year-gom-1} 
-
-}
-
-\caption{Marine heatwave events (red shading above black line) in the Gulf of Maine occuring in 2022.}\label{fig:heatwave-year-gom}
-\end{figure}
-
-\hypertarget{ocean-currents-and-features}{%
-\paragraph{Ocean currents and features}\label{ocean-currents-and-features}}
-
-Variability of the Gulf Stream is one of the major drivers of changes in the oceanographic conditions of the Slope Sea and subsequently the Northeast U.S. continental shelf {[}\protect\hyperlink{ref-gangopadhyay_census_2020}{14}{]}. Changes in the Gulf Stream and Slope Sea can affect large-scale climate phenomena as well as local ecosystems and coastal communities. During the last decade, the Gulf Stream has become less stable and shifted northward {[}\protect\hyperlink{ref-andres_recent_2016}{15},\protect\hyperlink{ref-caesar_observed_2018}{16}{]} (Fig. \ref{fig:GSI}). A more northern Gulf Stream position is associated with warmer ocean temperature on the northeast shelf {[}\protect\hyperlink{ref-zhang_role_2007}{17}{]}, a higher proportion of Warm Slope Water in the Northeast Channel, and increased sea surface height along the U.S. east coast {[}\protect\hyperlink{ref-goddard_extreme_2015}{18}{]}.
+Variability of the Gulf Stream is one of the major drivers of changes in the oceanographic conditions of the Northeast U.S. continental shelf. During the last decade, the Gulf Stream has become less stable and shifted northward (Fig. \ref{fig:GSI}). A more northern Gulf Stream position is associated with warmer ocean temperature on the northeast shelf {[}\protect\hyperlink{ref-zhang_role_2007}{9}{]}, a higher proportion of Warm Slope Water in the Northeast Channel, and increased sea surface height along the U.S. east coast {[}\protect\hyperlink{ref-goddard_extreme_2015}{10}{]}.
 
 \begin{figure}
 
@@ -836,7 +820,7 @@ Variability of the Gulf Stream is one of the major drivers of changes in the oce
 \caption{Index representing changes in the location of the Gulf Stream north wall. Positive values represent a more northerly Gulf Stream position.}\label{fig:GSI}
 \end{figure}
 
-Since 2008, the Gulf Stream has moved closer to the Grand Banks, reducing the supply of cold, fresh, and oxygen-rich Labrador Current waters to the Northwest Atlantic Shelf {[}\protect\hyperlink{ref-goncalves_neto_changes_2021}{19}{]}. Nearly every year since 2010, warm slope water made up more than 75\% of the annual slope water proportions entering the Gulf of Maine. In 2017 and 2019, almost no cooler Labrador Slope water entered the Gulf of Maine through the Northeast Channel (Fig. \ref{fig:wsw-prop}). The changing proportions of source water affect the temperature, salinity, and nutrient inputs to the Gulf of Maine ecosystem. In 2021, warm slope water continued to dominate (86.1\%) inputs to the Gulf of Maine.
+Since 2008, the Gulf Stream has moved closer to the Grand Banks, reducing the supply of cold, fresh, and oxygen-rich Labrador Current waters to the Northwest Atlantic Shelf {[}\protect\hyperlink{ref-goncalves_neto_changes_2021}{11}{]}. Nearly every year since 2010, warm slope water made up more than 75\% of the annual slope water proportions entering the Gulf of Maine. In 2017 and 2019, almost no cooler Labrador Slope water entered the Gulf of Maine through the Northeast Channel (Fig. \ref{fig:wsw-prop}). The changing proportions of source water affect the temperature, salinity, and nutrient inputs to the Gulf of Maine ecosystem. In 2021, warm slope water continued to dominate (86.1\%) inputs to the Gulf of Maine.
 
 \begin{figure}
 
@@ -847,97 +831,125 @@ Since 2008, the Gulf Stream has moved closer to the Grand Banks, reducing the su
 \caption{Proportion of Warm Slope Water (WSW) and Labrador slope water (LSLW) entering the GOM through the Northeast Channel.}\label{fig:wsw-prop}
 \end{figure}
 
-The increased instability of the Gulf Stream position and warming of the Slope Sea may also be connected to the regime shift increase in the number of warm core rings formed annually in the Northwest Atlantic {[}\protect\hyperlink{ref-gangopadhyay_census_2020}{14},\protect\hyperlink{ref-gangopadhyay_observed_2019}{20}{]} (Fig. \ref{fig:wcr}). When warm core rings and eddies interact with the continental slope they can transport warm, salty water to the continental shelf {[}\protect\hyperlink{ref-chen_mesoscale_2022}{21}{]}, which can alter the habitat and disrupt seasonal movement of fish {[}\protect\hyperlink{ref-gawarkiewicz_changing_2018}{22}{]}. The transport of offshore water onto the shelf is happening more frequently {[}\protect\hyperlink{ref-gawarkiewicz_changing_2018}{22},\protect\hyperlink{ref-gawarkiewicz_increasing_nodate}{23}{]} and can contribute to extreme temperatures (i.e.~marine heatwaves) along the continental shelf {[}\protect\hyperlink{ref-chen_mesoscale_2022}{21},\protect\hyperlink{ref-gawarkiewicz_characteristics_2019}{24}{]} as well as the movement of shelf-break species inshore {[}\protect\hyperlink{ref-gawarkiewicz_changing_2018}{22},\protect\hyperlink{ref-potter_horizontal_2011}{25},\protect\hyperlink{ref-worm_predator_2003}{26}{]}.
+Changes in the distribution of forage biomass affects predator distribution. Spatial subsets of the forage fish index were included in the bluefish research track stock assessment to investigate forage-driven changes in bluefish availability to recreational fisheries and surveys.
 
-2022 had the same number of warm core rings (21) as 2021, but most of the 2022 rings formed east of 60 W and fewer were observed near the shelf break region. Warm core rings near GB likely contributed to the marine heatwave and anomalously warm fall surface temperatures.
+\hypertarget{risks-to-seasonal-management}{%
+\subsubsection{Risks to Seasonal Management}\label{risks-to-seasonal-management}}
 
-\begin{figure}
+Changes in seasonal life-cycle events may not align with fishing seasons or area opening/closing, potentially reducing effectiveness of management measures. Temporal changes in species/fishery overlap can alter bycatch, and availability to surveys can change.
 
-{\centering \includegraphics{SOE-NEFMC_files/figure-latex/wcr-1} 
+\hypertarget{observations-timing-shifts}{%
+\paragraph{Observations: Timing shifts}\label{observations-timing-shifts}}
 
-}
+Seasonal timing of spawning has changed for several managed fish species. Migration timing of some tunas and large whales has changed.
 
-\caption{Warm core ring formation on the Northeast U.S. Shelf: Annual number of rings.  A significant regime shift is denoted by the split red line as noted in Gangopadhyay et al. 2019.}\label{fig:wcr}
-\end{figure}
+GENERATE A FIGURE
 
-Changes in ocean temperature and circulation alter habitat features such as the seasonal cold pool, a 20--60 m thick band of cold, relatively uniform near-bottom water that persists from spring to fall over the mid and outer shelf of the Mid-Atlantic Bight and southern flank of GB {[}\protect\hyperlink{ref-lentz_seasonal_2017}{27},\protect\hyperlink{ref-chen_seasonal_2018}{28}{]}. It is a reservoir of nutrients that feeds phytoplankton productivity, is essential fish spawning and nursery habitat, and affects fish distribution and behavior {[}\protect\hyperlink{ref-lentz_seasonal_2017}{27},\protect\hyperlink{ref-miles_offshore_2021}{29}{]}. The average temperature of the cold pool is getting warmer over time {[}\protect\hyperlink{ref-miller_state-space_2016}{30},\protect\hyperlink{ref-du_pontavice_incorporating_nodate}{31}{]}, the area is getting smaller {[}\protect\hyperlink{ref-friedland_middle_2022}{32}{]}, and the duration is getting shorter (Fig. \ref{fig:cold-pool}).
+\hypertarget{drivers-1}{%
+\paragraph{Drivers:}\label{drivers-1}}
 
-\begin{figure}
+Later transition to fall conditions, shorter duration of seasonal cold pool, changing timing of fall phytoplankton blooms, seasonal community shifts in zooplankton, and changes in timing of food availability contribute to changes in species timing.
 
-{\centering \includegraphics{SOE-NEFMC_files/figure-latex/cold-pool-1} 
-
-}
-
-\caption{Seasonal cold pool indices: mean temperature within the cold pool, cold pool persistence, and spatial extent.}\label{fig:cold-pool}
-\end{figure}
-
-\hypertarget{ocean-acidification}{%
-\paragraph{Ocean Acidification}\label{ocean-acidification}}
-
-Ocean acidification (OA) has caused measured declines in global ocean pH, and is projected to continue declining if high carbon dioxide emissions continue {[}\protect\hyperlink{ref-intergovernmental_panel_on_climate_change_ipcc_technical_2022}{33}{]}. OA also changes the availability of minerals required by organisms to form calcified structures such as shells and other structures. Calcifying conditions in seawater can be determined by measuring aragonite saturation state (\(\Omega_{Arag}\)), the tendency of a common type of calcium carbonate, aragonite, to form or dissolve. When \(\Omega_{Arag}\) is less than 1, shells and other calcium carbonate structures begin to dissolve. Typical surface ocean \(\Omega_{Arag}\) is 2-4, but extremes can be \textless1 or \textgreater5 {[}\protect\hyperlink{ref-jiang_climatological_2015}{34}{]}. As the ocean absorbs carbon dioxide, both pH and \(\Omega_{Arag}\) decrease and can cause organisms to respond with reduced survival, calcification rates, growth, and reproduction, as well as impaired development, and/or changes in energy allocation {[}\protect\hyperlink{ref-saba_recommended_2019}{36}{]}. However, sensitivity levels vary, and some organisms exhibit negative responses to calcification and other processes when \(\Omega_{Arag}\) is as low as 3.
-
-Summer-time (2007-present) \(\Omega_{Arag}\) on the U.S. Northeast Shelf varies in space and time, ranging from 0.64 to 2.49 (Fig. \ref{fig:ne-oa}, left panel). Spatially, the lowest bottom \(\Omega_{Arag}\) has occurred in the Gulf of Maine, western Long Island Sound, nearshore to mid-shelf waters of the Mid-Atlantic Bight off the coast of New Jersey, and in waters \textgreater{} 1000 meters. \(\Omega_{Arag}\) was at or below the sensitivity levels for both Atlantic cod and American lobster within their habitat depth ranges in western Gulf of Maine and off the coast of eastern Maine (Fig. \ref{fig:ne-oa}, right panels). These areas include Stellwagen Bank, slope waters south of Penobscot and Blue Hill Bays, and Wilkinson Basin and additionally, for Atlantic cod, slope waters south of Maquoit Bay and in waters of Jeffreys Ledge and Jordan Basin. The sensitivity levels of bottom \(\Omega_{Arag}\) for Atlantic cod occurred in at least one of these areas during July 2007, August 2012, June 2013, June 2015, June and August 2016, June 2017, June and July 2018, August 2019, and July 2021, and for American lobster during June 2013, June 2016, June and August 2019, and July and August 2021.
+In addition to increasing seasonal temperatures, ocean summer conditions now last longer within each year. In both GB and GOM, the transition date from cool winter conditions to warm stratified summer conditions is getting earlier. The transition back to well mixed cool temperatures is also getting later in the year, thus increasing the total number of days when the surface temperatures are in the warm summer conditions (Fig. \ref{fig:transition}).
 
 \begin{figure}
 
-{\centering \includegraphics[width=0.8\linewidth]{SOE-NEFMC_files/figure-latex/ne-oa-1} 
+{\centering \includegraphics{SOE-NEFMC_files/figure-latex/transition-1} 
 
 }
 
-\caption{Left panel: Bottom aragonite saturation state ($\Omega_{Arag}$; summer only: June-August) on the U.S. Northeast Shelf based on quality-controlled vessel- and glider-based datasets from 2007-present. Right panel: Locations where summer bottom $\Omega_{Arag}$ were at or below the laboratory-derived sensitivity level for Atlantic cod (top panel) and American lobster (bottom). Gray circles indicate locations where carbonate chemistry samples were collected, but bottom $\Omega_{Arag}$ values were higher than sensitivity values determined for that species.}\label{fig:ne-oa}
+\caption{Ocean summer length in the MAB: the annual total number of days between the spring thermal transition date and the fall thermal transition date.  The transition dates are defined as the day of the year when surface temperatures changeover from cool to warm conditions in the spring and back to cool conditions in the fall.}\label{fig:transition}
 \end{figure}
 
-\hypertarget{ecosystem-productivity-indicators-phytoplankton-zooplankton-forage-fish-fish-condition}{%
-\subsubsection{Ecosystem Productivity Indicators: phytoplankton, zooplankton, forage fish, fish condition}\label{ecosystem-productivity-indicators-phytoplankton-zooplankton-forage-fish-fish-condition}}
-
-\hypertarget{phytoplankton}{%
-\paragraph{Phytoplankton}\label{phytoplankton}}
-
-Phytoplankton support the food web as the primary food source for zooplankton and filter feeders such as shellfish. Numerous environmental and oceanographic factors interact to drive the abundance, composition, spatial distribution, and productivity of phytoplankton. In 2022, phytoplankton biomass (measured as chlorophyll a concentration) was above average in winter, but below average during the typical spring bloom period on GB. Summer concentrations were variable but there was an anomalously high fall bloom throughout the region (Fig. \ref{fig:chl-weekly}). Primary productivity (the rate of photosynthesis) was above average during the winter bloom and well above average from the late summer into winter in the Gulf of Maine (Fig. \ref{fig:pp-weekly}).
-
-The seasonal cycle of size distribution of phytoplankton shows that the spring and fall bloom periods are dominated by larger-celled microplankton, while smaller-celled nanoplankton dominate during the warmer summer months. The proportion of the smallest phytoplankton, picoplankton (0.2-2 microns), is relatively constant throughout the year. In 2022, microplankton proportions in GB were above average during the winter, below average during the typical spring bloom period, and peaked again in late fall. In the GOM, microplankton proportions were average or above average in all seasons, particularly in winter and fall (Fig. \ref{fig:weekly-phyto-size}).
+Cold pool timing has changed in the Mid-Atlantic, with the feature persisting for a shorter portion of the year since the mid-2000s (Fig. \ref{fig:cold-pool-time}). \emph{IMPACTS TO NEW ENGLAND SPAWNERS?}
 
 \begin{figure}
 
-{\centering \includegraphics{SOE-NEFMC_files/figure-latex/chl-weekly-1} 
+{\centering \includegraphics{SOE-NEFMC_files/figure-latex/cold-pool-time-1} 
 
 }
 
-\caption{Weekly chlorophyll concentrations on Georges Bank (GB) and in the Gulf of Maine (GOM) are shown by the colored line for 2022. The long-term mean is shown in black and shading indicates +/- 1 sample SD.}\label{fig:chl-weekly}
+\caption{Seasonal cold pool indices: mean temperature within the cold pool, cold pool persistence, and spatial extent.}\label{fig:cold-pool-time}
 \end{figure}
+
+\hypertarget{risks-to-quota-settingrebuilding}{%
+\subsubsection{Risks to Quota Setting/Rebuilding}\label{risks-to-quota-settingrebuilding}}
+
+Environmentally driven changes in growth, reproduction, and natural mortality can complicate short-term stock projections. Stock reference points may not reflect prevailing environmental conditions.
+
+\hypertarget{observations-fish-productivity-and-condition-shifts}{%
+\paragraph{Observations: Fish productivity and condition shifts}\label{observations-fish-productivity-and-condition-shifts}}
+
+We describe patterns of aggregate fish productivity in the Mid-Atlantic with the small fish per large fish anomaly indicator, derived from NEFSC bottom trawl survey data (Fig. \ref{fig:productivity-anomaly}). The indicator shows that productivity has been declining in this region since the early 2000s. A similar analysis based on stock assessment model outputs (recruitment per spawning stock biomass anomaly) for stocks primarily inhabiting the Mid-Atlantic region also shows a decline in productivity.
 
 \begin{figure}
 
-{\centering \includegraphics{SOE-NEFMC_files/figure-latex/pp-weekly-1} 
+{\centering \includegraphics{SOE-NEFMC_files/figure-latex/productivity-anomaly-1} 
 
 }
 
-\caption{Weekly primary productivity on Georges Bank (GB) and in the Gulf of Maine (GOM) are shown by the colored line for 2022. The long-term mean is shown in black and shading indicates +/- 1 sample SD.}\label{fig:pp-weekly}
+\caption{Fish productivity measures. Left: Small fish per large fish survey biomass anomaly in the Mid-Atlantic Bight. Right: assessment recruitment per spawning stock biomass anomaly for stocks mainly in the Mid-Atlantic. The summed anomaly across species is shown by the black line, drawn across all years with the same number of stocks analyzed.}\label{fig:productivity-anomaly}
 \end{figure}
+
+The health and well being of individual fish can determine population productivity. Heavier and fatter fish at a given length have higher relative condition (the ratio of observed weight to predicted weight based on length {[}\protect\hyperlink{ref-le_cren_length-weight_1951}{12}{]}) which is expected to improve growth, reproductive output, and survival. A pattern of generally good condition was observed across many species prior to 2000, followed by a period of generally poor condition from 2001-2010 (concurrent with declines in productivity, Fig. \ref{fig:productivity-anomaly}), , with a mix of good and poor condition 2011-2019, and improved condition for many species in 2021 and 2022 (Fig. \ref{fig:ne-cf}). Preliminary results of synthetic analyses show that changes in temperature, zooplankton, fishing pressure, and population size influence the condition of different fish species.
 
 \begin{figure}
 
-{\centering \includegraphics{SOE-NEFMC_files/figure-latex/weekly-phyto-size-1} 
+{\centering \includegraphics{SOE-NEFMC_files/figure-latex/ne-cf-1} 
 
 }
 
-\caption{The annual climatology (1998-2022) percent composition of the phytoplankton size classes on Georges Bank and Gulf of Maine based on satellite observations in the shaded portions. The 2022 proportions for the microplankton (>20 microns, green) and nanoplankton (2-20 microns, orange) are shown in the bold lines.}\label{fig:weekly-phyto-size}
+\caption{Condition factor for fish species in New England based on fall NEFSC bottom trawl survey data. No survey was conducted in 2020.}\label{fig:ne-cf}
 \end{figure}
 
-\hypertarget{zooplankton}{%
-\paragraph{Zooplankton}\label{zooplankton}}
+\hypertarget{drivers-2}{%
+\paragraph{Drivers:}\label{drivers-2}}
 
-Zooplankton community diversity varies with changes in dominance of taxa (Fig. \ref{fig:zoo-diversity}). While still showing an overall increasing trend, the GB zooplankton community declined in diversity in 2021 due to the increase in abundance of the copepod \emph{Centropages typicus} and salps. The GOM zooplankton community is usually dominated by \emph{Calanus finmarchicus}, however their abundance decreased in 2021. This decrease plus an increase in abundance of other copepods (\emph{C. typicus, Metridia lucens, Oithona spp.}), siphonophores, and pteropods resulted in high zooplankton diversity index in 2021.
+Fish productivity and condition are affected by increasing metabolic demands from increasing temperature, combined with changes in the availability and quality of prey. Episodic extreme temperatures, ocean acidification, and low oxygen events represent multiple stressors that can affect growth rates and cause mortality.
+
+\emph{Need to place this} Common tern productivity has also declined in the Gulf of Maine. 2021 and 2023 were challenging years for terns raising chicks (Fig. \ref{fig:seabird-ne-productivity}).
 
 \begin{figure}
 
-{\centering \includegraphics{SOE-NEFMC_files/figure-latex/zoo-diversity-1} 
+{\centering \includegraphics{SOE-NEFMC_files/figure-latex/seabird-ne-productivity-1} 
 
 }
 
-\caption{Zooplankton community diversity for Georges Bank (GB) and the Gulf of Maine (GOM).}\label{fig:zoo-diversity}
+\caption{Productivity of Common terns in the Gulf of Maine.}\label{fig:seabird-ne-productivity}
 \end{figure}
 
+want the salmon here? another system productivity symptom?
+
+\begin{center}\includegraphics{SOE-NEFMC_files/figure-latex/unnamed-chunk-2-1} \end{center}
+
+\hypertarget{forage-quality-and-abundance}{%
+\subparagraph{Forage quality and abundance}\label{forage-quality-and-abundance}}
+
+The amount of forage fish available in the ecosystem combined with the energy content of the forage species determines the amount of energy potentially available to predators in the ecosystem. Changes in the forage base can drive to managed and protected species production.
+
+Nutritional value (energy content) of juvenile and adult forage fish as prey is related to environmental conditions, fish growth, and reproductive cycles. Forage energy density measurements from NEFSC trawl surveys 2017-2022 are building toward a time series to evaluate trends (Fig. \ref{fig:energy-density}). Data from the fall 2021 and spring 2022 survey measurements were consistent with previous reports: the energy density of Atlantic herring increased to over 7 kJ/g wet weight, but was still well below that observed in the 1980s and 1990s (10.6-9.4 kJ/ g wet weight). Silver hake, longfin squid (\emph{Loligo} in figure) and shortfin squid (\emph{Illex} in figure) remain lower than previous estimates {[}\protect\hyperlink{ref-steimle_energy_1985}{13},\protect\hyperlink{ref-lawson_important_1998}{14}{]}. Energy density of alewife, butterfish, sand lance, and Atlantic mackerel varies seasonally, with seasonal estimates both higher and lower than estimates from previous decades.\\
+
+\begin{figure}
+
+{\centering \includegraphics{SOE-NEFMC_files/figure-latex/energy-density-1} 
+
+}
+
+\caption{Forage fish energy density mean and standard deviation by season and year, compared with 1980s (solid line; Steimle and Terranove 1985) and 1990s (dashed line; Lawson et al. 1998) values.}\label{fig:energy-density}
+\end{figure}
+
+A spatially-explicit forage index estimated the combined biomass of 20 forage species using stomach contents information from 22 predatory fish species collected on bottom trawl surveys. The resulting indices show an increasing long term trend in fall the Gulf of Maine, and overall higher forage fish in fall relative to spring (Fig. \ref{fig:foragebio}), with highest forage biomass during fall in the mid-1980s.\\
+
+\begin{figure}
+
+{\centering \includegraphics{SOE-NEFMC_files/figure-latex/foragebio-1} 
+
+}
+
+\caption{Forage fish index based on spring and fall survey predator diets.}\label{fig:foragebio}
+\end{figure}
+
+\emph{This is where we would put in overall zooplankton production as well as comments on zoop energy content. Talk about Cal fin availability in New England}
 Decadal periodicity in the abundance of dominant copepods in the GOM and on GB has been previously reported, and these patterns continued to evolve into 2021. The abundance of \emph{C. typicus} has been above average since 2012 in the GOM and on GB, and appears to be negatively correlated with \emph{C. finmarchicus} abundance on GB (Fig. \ref{fig:zoo-abund}). \emph{C. finmarchicus} has been below average in abundance since 2012 on GB following a period of high abundance between 2000-2010. \emph{C. finmarchicus} also had high abundance in the GOM between 2000-2010, which corresponded to a period of recovery for right whales (Fig. \ref{fig:narw-abundance}). The abundance of \emph{Pseudocalanus spp.}, an important prey item for cod larvae and other ichthyoplankton, has been below average on GB since 2000 and was below average in the GOM from 2000-2015, and most recently in 2021 the GOM larval fish diversity declined due to high abundance of hake (red, white, and silver) larvae.
 
 \begin{figure}
@@ -949,212 +961,94 @@ Decadal periodicity in the abundance of dominant copepods in the GOM and on GB h
 \caption{Abundance Annomalies of three dominante zooplankton (\textit{Calanus finmarchicus}, \textit{Calanus typicus}, and \textit{Pseudocalanus spp}.) on Georges Bank (GB) and the Gulf of Maine (GOM).}\label{fig:zoo-abund}
 \end{figure}
 
-\hypertarget{forage-fish-energy-content}{%
-\paragraph{Forage Fish Energy Content}\label{forage-fish-energy-content}}
+Phytoplankton support the food web as the primary food source for zooplankton and filter feeders such as shellfish. Numerous environmental and oceanographic factors interact to drive the abundance, composition, spatial distribution, and productivity of phytoplankton.
 
-Nutritional value (energy content) of juvenile and adult forage fish as prey is related to environmental conditions, fish growth, and reproductive cycles. Forage energy density measurements from NEFSC trawl surveys 2017-2022 are building toward a time series to evaluate trends (Fig. \ref{fig:energy-density}). Data from the fall 2021 and spring 2022 survey measurements were consistent with previous reports: the energy density of Atlantic herring increased to over 7 kJ/g wet weight, but was still well below that observed in the 1980s and 1990s (10.6-9.4 kJ/g wet weight). Silver hake, longfin squid (\emph{Loligo} in figure) and shortfin squid (\emph{Illex} in figure) remain lower than previous estimates {[}\protect\hyperlink{ref-steimle_energy_1985}{37},\protect\hyperlink{ref-lawson_important_1998}{38}{]}. Energy density of alewife, butterfish, sand lance, and Atlantic mackerel varies seasonally, with seasonal estimates both higher and lower than estimates from previous decades.
+While changes in fish productivity could result from changing primary productivity, total primary production in New England has no clear trend.
 
-\begin{figure}
+\begin{center}\includegraphics{SOE-NEFMC_files/figure-latex/pptot-1} \end{center}
 
-{\centering \includegraphics{SOE-NEFMC_files/figure-latex/energy-density-1} 
+Temperature increases at both the surface (Fig. \ref{fig:seasonal-oisst_anom}) and bottom (Fig. \ref{fig:bottom-temp}) can exceed thermal tolerance limits for some fish. For example, 2012 had among the warmest surface and bottom temperatures in New England. A large proportion of the region had bottom temperatures above the thermal tolerance for groundfish\ldots{} with some days exceeding the mortality limit (Fig. \ref{fig:therm-hab-persist-2012}).
 
-}
+\begin{center}\includegraphics{SOE-NEFMC_files/figure-latex/therm-hab-persist-2012-1} \end{center}
 
-\caption{Forage fish energy density mean and standard deviation by season and year, compared with 1980s (solid line; Steimle and Terranove 1985) and 1990s (dashed line; Lawson et al. 1998) values.}\label{fig:energy-density}
-\end{figure}
+Ocean acidification (OA) has caused measured declines in global ocean pH, and is projected to continue declining if high carbon dioxide emissions continue {[}\protect\hyperlink{ref-intergovernmental_panel_on_climate_change_ipcc_technical_2022}{15}{]}. OA also changes the availability of minerals required by organisms to form calcified structures such as shells. Calcifying conditions in seawater can be determined by measuring aragonite saturation state (\(\Omega_{Arag}\)), the tendency of a common type of calcium carbonate, aragonite, to form or dissolve. When \(\Omega_{Arag}\) is less than 1, shells and other calcium carbonate structures begin to dissolve. Typical surface ocean \(\Omega_{Arag}\) is 2-4, but extremes can be \textless1 or \textgreater5 {[}\protect\hyperlink{ref-jiang_climatological_2015}{16}{]}. As the ocean absorbs carbon dioxide, both pH and \(\Omega_{Arag}\) decrease and can cause organisms to respond with reduced survival, calcification rates, growth, and reproduction, as well as impaired development, and/or changes in energy allocation {[}\protect\hyperlink{ref-saba_recommended_2019}{18}{]}. However, sensitivity levels vary, and some organisms exhibit negative responses to calcification and other processes when \(\Omega_{Arag}\) is as low as 3.
 
-\hypertarget{forage-fish-biomass-index}{%
-\paragraph{Forage Fish Biomass Index}\label{forage-fish-biomass-index}}
-
-The amount of forage fish available in the ecosystem combined with the energy content of the forage species determines the amount of energy potentially available to predators in the ecosystem. Changes in the forage base could pose a risk to managed and protected species production. A new spatially-explicit forage index estimated the combined biomass of 20 forage species using stomach contents information from 22 predatory fish species collected on bottom trawl surveys (Fig. \ref{fig:foragebio}). This new indicator shows an overall higher forage fish biomass in fall relative to spring. There is a long-term decreasing trend in the fall for GB and an increasing trend in the spring on GOM. Changes in the distribution of forage biomass also affects predator distribution. Spatial subsets of this index were included in the bluefish research track stock assessment to investigate forage-driven changes in bluefish availability to recreational fisheries and surveys.
+\emph{OLD TEXT REWRITE FOR NEW FIGURES}
+Summer-time (2007-present) \(\Omega_{Arag}\) on the U.S. Northeast Shelf varies in space and time, ranging from 0.64 to 2.49 (Fig. \ref{fig:mab-oa}, left panel). Spatially, the lowest bottom \(\Omega_{Arag}\) has occurred in the Gulf of Maine, western Long Island Sound, nearshore to mid-shelf waters of the Mid-Atlantic Bight off the coast of New Jersey, and in waters \textgreater{} 1000 meters. \(\Omega_{Arag}\) was at or below the sensitivity levels for both Atlantic sea scallop {[}\protect\hyperlink{ref-cameron_effects_2022}{19}{]} and longfin squid {[}\protect\hyperlink{ref-zakroff_dose-dependence_2019}{20},\protect\hyperlink{ref-zakroff_antagonistic_2020}{21}{]} in Long Island Sound and the nearshore and mid-shelf regions of the New Jersey shelf (Fig. \ref{fig:mab-oa}, right panels). The sensitivity levels of bottom \(\Omega_{Arag}\) occurred during August 2016, July 2018, and August 2019 for both species, and additionally in August 2021 for the Atlantic sea scallop.
 
 \begin{figure}
 
-{\centering \includegraphics{SOE-NEFMC_files/figure-latex/foragebio-1} 
+{\centering \includegraphics[width=1\linewidth]{SOE-NEFMC_files/figure-latex/mab-oa-1} 
 
 }
 
-\caption{Forage fish index based on spring and fall survey predator diets.}\label{fig:foragebio}
-\end{figure}
-
-\hypertarget{fish-condition}{%
-\paragraph{Fish Condition}\label{fish-condition}}
-
-The health and well being of individual fish can be related to body shape condition indices (i.e., weight at a given length) such as relative condition index, which is the ratio of observed weight to predicted weight based on length {[}\protect\hyperlink{ref-le_cren_length-weight_1951}{39}{]}. Heavier and fatter fish at a given length have higher relative condition which is expected to improve growth, reproductive output, and survival. A pattern of generally good condition was observed across many species prior to 2000, followed by a period of generally poor condition from 2001-2010, with a mix of good and poor condition 2011-2019, and improved condition for many species in 2021 and 2022 (Fig. \ref{fig:gb-cf} \& Fig. \ref{fig:gom-cf}). Preliminary results of synthetic analyses show that changes in temperature, zooplankton, fishing pressure, and population size influence the condition of different fish species.
-
-\begin{figure}
-
-{\centering \includegraphics[width=1\linewidth]{SOE-NEFMC_files/figure-latex/gb-cf-1} 
-
-}
-
-\caption{Condition factor for fish species on Georges Bank based on fall NEFSC bottom trawl survey data. No survey was conducted in 2020.}\label{fig:gb-cf}
+\caption{Bottom summer-time (June-August) pH (left panel) and aragonite saturation state (right panel) on the U.S. Northeast Shelf from 2007-2023 plotted from available quality-controlled vessel- and glider-based datasets.}\label{fig:mab-oa}
 \end{figure}
 
 \begin{figure}
 
-{\centering \includegraphics[width=1\linewidth]{SOE-NEFMC_files/figure-latex/gom-cf-1} 
+{\centering \includegraphics[width=1\linewidth]{SOE-NEFMC_files/figure-latex/oa-spp-1} 
 
 }
 
-\caption{Condition factor for fish species in the Gulf of Maine based on fall NEFSC bottom trawl survey data. No survey was conducted in 2020.}\label{fig:gom-cf}
+\caption{Locations where bottom aragonite saturation state ($\Omega_{Arag}$; summer only: June-August) were at or below the laboratory-derived sensitivity level for Atlantic sea scallop (top panels) and longfin squid (bottom panels) for the time periods 2007-2022 (left panels) and 2007-2023 (right panels). Gray circles indicate locations where carbonate chemistry samples were collected, but bottom $\Omega_{Arag}$ values were higher than sensitivity values determined for that species.}\label{fig:oa-spp}
 \end{figure}
 
-\hypertarget{fish-productivity}{%
-\paragraph{Fish Productivity}\label{fish-productivity}}
+Low oxygen events
 
-We describe patterns of aggregate fish productivity on GB and the GOM with the small fish per large fish anomaly indicator, derived from NEFSC bottom trawl survey data (Fig. \ref{fig:productivity-anomaly-gb} \& Fig. \ref{fig:productivity-anomaly-gom}). The indicator shows great variability with both regions being below average for much of the past decade.
+\hypertarget{current-status-2023-overview}{%
+\subsubsection{Current status: 2023 overview}\label{current-status-2023-overview}}
+
+Multiple anomalous conditions and extreme events were observed in 2023 that could have brief local effects and/or widespread long-term ecosystem, fishery and management implications. Reported observations should be noted and taken into consideration for future analyses and assessments.
+
+Globally, 2023 was the warmest year on record with record high global sea surface temperatures. North Atlantic surface temperatures were also the highest on record, however temperatures in the Northeast U.S. shelf ecosystem were more variable, near record highs in winter and near average in other seasons. Chesapeake Bay rarely exceeded temperature thresholds.
+
+Bottom temperatures likely thresholds of X and Y degrees for N days in 2023, especially along the Mid-Atlantic coast. \emph{which species care?}
+
+\begin{center}\includegraphics{SOE-NEFMC_files/figure-latex/therm-hab-persist-2023-1} \end{center}
+
+The 2020-2022 La Niña conditions ended in late winter and shifted to strong El Niño conditions in late spring 2023. The current El Niño is expected to gradually weaken and transition to neutral conditions in spring 2024. During El Niño winters, there is a noted increased frequency of East Coast storms. \emph{add potential implications for fisheries}
+
+Fall tropical and coastal storms caused several flash flood events, above average coastal water levels, strong winds and high rainfall totals throughout the Northeast. \emph{add potential implications for fisheries}
+
+Gulf Stream instability resulted in variability throughout the year. In the fall, the Gulf Stream was in a northward position along the Mid-Atlantic shelf break for an extended period of time. This severely constricted the Slope Sea waters that are normally between the Gulf Stream and continental shelf break. Warm salty surface Gulf Stream waters with strong currents were observed on the continental shelf in the southern MAB in October. \emph{add potential implications for fisheries}
+
+The number of warm core rings (18) was well below the current regime (2000-2022) average of 31. One large early season ring was observed along the Northeast Shelf Break in spring, which generated an anomalously large shelf streamer that pulled continental shelf water into the Slope Sea. \emph{add potential implications for fisheries}
+
+High abundances of large baleen whale species (North Atlantic rRight wWhales and , humpback whales, minke, (others)) were observed feeding near a warm core rings that wereas adjacent to the continental shelf break in spring.
+Summer bottom temperatures in the Gulf of Maine were the warmest on record (since 1993) and the second largest bottom marine heatwave occurred from FebruaryMarch to August, peaked in May, and likely continued into the fall (pending data update).
+
+Record high (since 1998) chlorophyll concentrations were up to ten times greater than average during a wide-spread, long-duration phytoplankton bloom in the Gulf of Maine that extended onto Georges Bank and the northern Mid-Atlantic Bight (Fig. \ref{fig:chl-current-year}).
+
+\emph{add potential implications for fisheries: such as:}
+
+A large phytoplankton bloom could represent either an influx of energy into the system, boosting productivity of zooplankton or higher trophic levels, or a settling of unconsumed dead phytoplankton cells to the bottom, where low oxygen could result due to increased bacterial activity consuming the settled material, or both.
+
+NEITHER HAPPENED
+
+It wasn't the typical bloom species.
+
+This species wasn't consumed so we don't expect it to boost fish productivity
+
+This species didn't sink to the bottom so we didn't get low oxygen
 
 \begin{figure}
 
-{\centering \includegraphics{SOE-NEFMC_files/figure-latex/productivity-anomaly-gb-1} 
+{\centering \includegraphics{SOE-NEFMC_files/figure-latex/chl-current-year-1} 
 
 }
 
-\caption{Small fish per large fish biomass anomaly on Georges Bank. The summed anomaly across species is shown by the black line.}\label{fig:productivity-anomaly-gb}
 \end{figure}
 
-\begin{figure}
+Documented die off of scallops in the Mid-Atlantic Elephant trunk regions between the 2022 and 2023 surveys.
+A fish and shellfish mortality event was observed in coastal New Jersey linked to hypoxia (low dissolved oxygen) and ocean acidification.
 
-{\centering \includegraphics{SOE-NEFMC_files/figure-latex/productivity-anomaly-gom-1} 
-
-}
-
-\caption{Small fish per large fish biomass anomaly in the Gulf of Maine. The summed anomaly across species is shown by the black line.}\label{fig:productivity-anomaly-gom}
-\end{figure}
-
-\hypertarget{common-tern-productivity}{%
-\paragraph{Common Tern productivity}\label{common-tern-productivity}}
-
-2020 was a challenging year for terns raising chicks (Fig. \ref{fig:seabird-ne-productivity}). While diet composition was similar to the long term average, the quantity of food readily available was apparently less than normal, particularly around the time of chick hatching. This may have been confounded by cold, wet weather when chicks would normally be close to fledging in mid-to-late July. Anecdotal observations showed that feeding rates were low at both those times.
-
-\begin{figure}
-
-{\centering \includegraphics{SOE-NEFMC_files/figure-latex/seabird-ne-productivity-1} 
-
-}
-
-\caption{Productivity of Common terns in the Gulf of Maine.}\label{fig:seabird-ne-productivity}
-\end{figure}
-
-\hypertarget{ecosystem-structure-indicators-distribution-shifts-diversity-predators}{%
-\subsubsection{Ecosystem Structure Indicators: distribution shifts, diversity, predators}\label{ecosystem-structure-indicators-distribution-shifts-diversity-predators}}
-
-As noted in the \protect\hyperlink{landings}{Landings Implications section above}, stocks are shifting their spatial distributions throughout the region. In aggregate, fish stocks are moving northeast along the shelf and into deeper waters.
-
-Long-term trends show that zooplankton diversity is increasing on GB, while adult fish diversity is increasing in the GOM which also saw the highest zooplankton diversity index in 2022. The rest of the diversity indices are stable over time with current values near the long term average (see \protect\hyperlink{diversity}{Diversity Indicators section, above}).
-
-Indicators for shark populations, combined with information on gray seals (see \protect\hyperlink{protected-species}{Protected Species Implications section, above}), suggests predator populations in New England are either stable (sharks, Fig. \ref{fig:hms-cpue-sharks}) or increasing (gray seals, Fig. \ref{fig:seals}). Stable predator populations suggest stable predation pressure on managed species, but increasing predator populations may reflect increasing predation pressure.
-
-\begin{figure}
-
-{\centering \includegraphics{SOE-NEFMC_files/figure-latex/hms-cpue-sharks-1} 
-
-}
-
-\caption{Estimated number of sharks per unit effort from Highly Migratory Species Pelagic Observer Program data.}\label{fig:hms-cpue-sharks}
-\end{figure}
-
-Stock status is mixed for Atlantic Highly Migratory Species (HMS) stocks (including sharks, swordfish, billfish, and tunas) occurring in the New England region. While there are several HMS species considered to be overfished or that have unknown stock status, the population status for some managed Atlantic sharks and tunas is at or above the biomass target (Fig. \ref{fig:hms-stock-status} ), suggesting the potential for robust predator populations among these managed species.
-
-\begin{figure}
-
-{\centering \includegraphics{SOE-NEFMC_files/figure-latex/hms-stock-status-1} 
-
-}
-
-\caption{Summary of single species status for HMS stocks; key to species names at https://noaa-edab.github.io/tech-doc/atlantic-highly-migratory-species-stock-status.html.}\label{fig:hms-stock-status}
-\end{figure}
-
-As noted in the \protect\hyperlink{protected-species}{Protected Species section}, gray seal populations are increasing. Harbor and gray seals occupying New England waters are generalist predators that consume more than 30 different prey species. An evaluation of hard parts found in seal stomachs showed that harbor and gray seals predominantly exploit abundant demersal fish species (i.e.~red, white, and silver hake). Other relatively abundant prey species found in hard-part remains include sand lance, yellowtail flounder, four-spotted flounder, Gulfstream flounder, haddock, herring, redfish, and squids.
-
-A stable isotope study utilizing gray seal scat samples obtained from Massachusetts habitats showed individual gray seals can specialize on particular prey {[}\protect\hyperlink{ref-hernandez_seasonal_2019}{40}{]}. It also found that gray seals vary their diet seasonally, focusing on demersal inshore species prior to the spring molt, and offshore species such as sand lance after molting. DNA studies on gray seal diet in GOM and Massachusetts state waters found spiny dogfish and Jonah crab present in gray seal scat samples {[}\protect\hyperlink{ref-ono_detecting_2019}{41},\protect\hyperlink{ref-mccosker_metabarcoding_2020}{42}{]}, with sandlance and menhaden dominant off Monomoy, MA {[}\protect\hyperlink{ref-flanders_utilizing_2020}{43}{]}. Skate and crab remains were also found in gray seal stomach remains. In contrast to direct feeding, it is uncertain if the presence of skates and crabs is due to secondary consumption or scavenging.
-
-\hypertarget{habitat-risk-indicators-habitat-assessments-harmful-algal-blooms-fishing-gear-impacts}{%
-\subsubsection{Habitat Risk Indicators: habitat assessments, harmful algal blooms, fishing gear impacts}\label{habitat-risk-indicators-habitat-assessments-harmful-algal-blooms-fishing-gear-impacts}}
-
-\hypertarget{habitat-assessments}{%
-\paragraph{Habitat Assessments}\label{habitat-assessments}}
-
-The Northeast Regional Marine Fish Habitat Assessment (NRHA) is a collaborative effort to describe and characterize estuarine, coastal, and offshore fish habitat distribution, abundance, and quality in the Northeast. This includes mapping inshore and offshore habitat types used by focal fish species, summarizing impacts of habitat climate vulnerability on these species, modeling predicted future species distributions, and developing a publicly accessible decision support tool to visualize these results. This is a three-year project led by the New England and Mid-Atlantic Fishery Management Councils in collaboration with many partners including NOAA Fisheries\footnote{\url{https://www.mafmc.org/nrha}}.
-
-\hypertarget{new-habitat-model-based-richness-estimates}{%
-\paragraph{New habitat model-based richness estimates}\label{new-habitat-model-based-richness-estimates}}
-
-Species richness was derived from the NRHA habitat models for 55 common species sampled by the 2000-2019 spring and fall NEFSC bottom trawl surveys. The joint species distribution model controls for differences in capture efficiency across survey vessels, revealing patterns of declining richness in the Mid-Atlantic Bight and increasing richness in more northerly regions (i.e., the GOM; Fig. \ref{fig:habitat-richness}). These patterns reflect the decreasing probability of occurrence of cooler-water species in the south (Atlantic cod, American plaice, pollock, thorny skate) and the growing prevalence of warm-water species in the north (weakfish, spotted hake, and black sea bass), likely as a result of rising water temperatures.
-
-\begin{figure}
-
-{\centering \includegraphics{SOE-NEFMC_files/figure-latex/habitat-richness-1} 
-
-}
-
-\caption{Habitat model-based species richness for 55 common species sampled by NEFSC bottom trawl surveys.}\label{fig:habitat-richness}
-\end{figure}
-
-\hypertarget{harmful-algal-blooms}{%
-\paragraph{Harmful Algal Blooms}\label{harmful-algal-blooms}}
-
-Water quality as a component of habitat is of concern to managed species. Harmful Algal Blooms can degrade water quality. One example is \emph{Alexandrium} blooms, which can result in Paralytic Shellfish Poisoning. \emph{Alexandrium} cyst distribution and abundance are surveyed annually in the Gulf of Maine. After strong bloom events in 2005 and 2009, the time series suggests lower overall cyst abundance through 2021. However, bloom events and shellfishery closures do occur annually on a small scale and economic impacts can be substantial to inshore shellfisheries (mussels, clams, and quahogs). More information on Harmful Algal Blooms are available in the Synthetic Indicator Catalog\footnote{\url{https://noaa-edab.github.io/catalog/harmful-algal-blooms-alexandrium.html}}.
-
-\hypertarget{fishing-gear-impacts}{%
-\paragraph{Fishing Gear Impacts}\label{fishing-gear-impacts}}
-
-Estimates of the impacts of fishing gear on habitat are available through the habitat section of the Northeast Ocean Data Portal\footnote{\url{https://www.northeastoceandata.org/data-explorer/}}. The data portal hosts selected outputs from the Northeast Fishing Effects Model which combines seafloor data (sediment type, energy regime) with fishing effort data to generate percent habitat disturbance estimates in space and time. More detailed information can be found in the Synthetic Indicator Catalog\footnote{\url{https://noaa-edab.github.io/catalog/northeast-fishing-effects-model.html}}.
+In Chesapeake Bay, hypoxia conditions were the lowest on record (since 1995), creating more suitable habitat for adult and juvenile striped bass.
 
 \hypertarget{implications-6}{%
 \subsubsection{Implications}\label{implications-6}}
 
-\hypertarget{links-between-climate-change-and-managed-species}{%
-\paragraph{Links between climate change and managed species}\label{links-between-climate-change-and-managed-species}}
-
-Estuarine, nearshore, and offshore habitats support many life stages of state and federally-managed species that are highly vulnerable to climate change. Overall, multiple drivers interact differently for each species producing a range of population impacts.
-
-In addition to distribution shifts, climate change may shrink or fragment available habitat for species such as cusk {[}\protect\hyperlink{ref-hare_cusk_2012}{44}{]}. Projections of climate change scenarios appear to increase the vulnerability of cod to habitat loss on GB and particularly to the south, while warmer water temperatures in the GOM may decrease survival of early life stages of cod {[}\protect\hyperlink{ref-fogarty_cod_2007}{45}{]}. Both productivity and abundance decline for winter flounder with increasing water temperatures, potentially inhibiting the rebuilding of the stock despite reduced fishing pressure {[}\protect\hyperlink{ref-bell_rebuilding_2014}{46}{]}.
-
-\hypertarget{marine-heatwave-impacts}{%
-\paragraph{Marine heatwave impacts}\label{marine-heatwave-impacts}}
-
-The adjustment to the marine heatwave methodology shows that extreme temperature events happen intermittently in many years, but have not been increasing over time in New England. While temperature variability in isolation has not changed, considering the overall increase in ocean temperature at both the surface and the bottom in the region, extreme events cause additional stress to organisms. While marine heatwaves lasting over days may disturb the marine environment, long lasting events such as the warming in 2012 (Fig. \ref{fig:heatwave}) can have significant impacts on the ecosystem {[}\protect\hyperlink{ref-gawarkiewicz_characteristics_2019}{24}{]}. The 2012 heatwave affected the GOM lobster fishery most notably, but other species also shifted their geographic distributions and seasonal cycles {[}\protect\hyperlink{ref-mills_fisheries_2013}{47}{]}. During the 2017 event, warm water fish typically found in the Gulf Stream were caught in shallow waters near Block Island, RI {[}\protect\hyperlink{ref-gawarkiewicz_characteristics_2019}{24}{]}. Ocean temperatures in 2022 rivaled or exceeded the record temperatures in 2012 in some seasons, but the impacts to fisheries have yet to be determined.
-
-\begin{figure}
-
-{\centering \includegraphics{SOE-NEFMC_files/figure-latex/heatwave-1} 
-
-}
-
-\caption{Marine heatwave maximum intesity (left) and total days each year (right) in the Gulf of Maine.}\label{fig:heatwave}
-\end{figure}
-
-\hypertarget{cold-pool-impacts}{%
-\paragraph{Cold pool impacts}\label{cold-pool-impacts}}
-
-Changes in the cold pool habitat can affect species distribution, recruitment, and migration timing for many federally managed species. Southern New England-Mid Atlantic yellowtail flounder recruitment and settlement are related to the strength of the cold pool {[}\protect\hyperlink{ref-miller_state-space_2016}{30}{]}. The settlement of pre-recruits during the cold pool event represents a bottleneck in yellowtail life history, during which a local and temporary increase in bottom temperature negatively impacts the survival of the settlers. Including the effect of cold pool variations on yellowtail recruitment reduced retrospective patterns and improved the skill of short-term forecasts in a stock assessment model {[}\protect\hyperlink{ref-miller_state-space_2016}{30},\protect\hyperlink{ref-du_pontavice_incorporating_nodate}{31}{]}. The cold pool also provides habitat for the ocean quahog {[}\protect\hyperlink{ref-friedland_middle_2022}{32},\protect\hyperlink{ref-powell_ocean_2020}{48}{]}. Growth rates of ocean quahogs in the MAB (southern portion of their range) have increased over the last 200 years whereas little to no change has been documented in the northern portion of their range in southern New England, likely a response to a warming and shrinking cold pool {[}\protect\hyperlink{ref-pace_two-hundred_2018}{49}{]}.
-
-\hypertarget{distribution-shift-impacts}{%
-\paragraph{Distribution shift impacts}\label{distribution-shift-impacts}}
-
-Trends for a suite of 48 commercially or ecologically important fish species along the entire Northeast Shelf continue to show movement towards the northeast and generally into deeper water (Fig. \ref{fig:species-dist}). Habitat model-based species richness suggests shifts of both cooler and warmer water species to the northeast (Fig. \ref{fig:habitat-richness}). Similar patterns have been found for marine mammals, with multiple species shifting northeast between 2010 and 2017 in most seasons (Fig. \ref{fig:protectedspp-dist-shifts}, {[}\protect\hyperlink{ref-chavez-rosales_detection_2022}{50}{]}).
-
-\begin{figure}
-
-{\centering \includegraphics{SOE-NEFMC_files/figure-latex/protectedspp-dist-shifts-1} 
-
-}
-
-\caption{Direction and magnitude of core habitat shifts, represented by the length of the line of the seasonal weighted centroid for species with more than 70 km difference between 2010 and 2017 (tip of arrow).}\label{fig:protectedspp-dist-shifts}
-\end{figure}
-
-Shifting species distributions alter both species interactions and fishery interactions. In particular, shifting species distributions can alter expected management outcomes from spatial allocations and affect the efficacy of bycatch measures based on historical fish and protected species distributions.
-
-\hypertarget{ecosystem-productivity-change-impacts}{%
-\paragraph{Ecosystem productivity change impacts}\label{ecosystem-productivity-change-impacts}}
-
-Climate and associated changes in the physical environment affect ecosystem productivity, with warming waters increasing the rate of photosynthesis at the base of the food web. Warm temperatures can increase the rate of primary production; however they also increase stratification, which limits the flux of deep water nutrients to the surface. Thus most of the increases in summer production is often from smaller phytoplankton and may not translate into increased fish biomass.
-
-While krill and large gelatinous zooplankton have increased over time, smaller zooplankton periodically shift in abundance between the larger, more nutritious \emph{Calanus finmarchicus} and smaller bodied copepods with no apparent overall trend. The nutritional content of forage fish changes seasonally in response to ecosystem conditions, with apparent declines in energy density for Atlantic herring and \emph{Illex} squid relative to the 1980s, but similar energy density for other forage species. Overall forage fish biomass has fluctuated in both New England regions over time. Some of these factors are now being linked to the relative condition of managed fishes.
-
-The apparent decline in productivity across multiple managed species in New England, along with mixed fish conditions in 2022, also suggest changing ecosystem productivity at multiple levels. During the 1990s, high relative abundance of smaller bodied copepods and a lower relative abundance of \emph{Calanus finmarchicus} was associated with regime shifts to higher fish recruitment {[}\protect\hyperlink{ref-perretti_regime_2017}{51}{]}. The unprecedented climate signals along with the trends toward lower productivity across multiple managed species indicate a need to continually evaluate whether management reference points remain appropriate, and to evaluate if ecosystem regime shifts have occurred or reorganization is in progress.
+\emph{SUMMARIZE IMPLICATIONS OF THE WHOLE SECTION}
 
 \hypertarget{other-ocean-uses-offshore-wind}{%
 \subsection{Other Ocean Uses: Offshore Wind}\label{other-ocean-uses-offshore-wind}}
@@ -1217,131 +1111,137 @@ The sea scallop fishery could be the most affected fishery, with a maximum of 12
 
 \caption{Top\ 20\ species\ Landings\ and\ Revenue\ from\ Wind\ Energy\ Areas.\ *\ Landings\ and\ revenue\ for\ these\ species\ are\ likely\ underestimated\ due\ to\ limited\ coverage\ of\ these\ fisheries\ in\ historic\ reporting\ requirements\ for\ vessels\ issued\ federal\ permits\ by\ the\ NMFS\ Greater\ Atlantic\ Regional\ Fisheries\ Office.\ However,\ such\ limitations\ also\ suggest\ an\ inaccurately\ higher\ proportion\ of\ such\ landings\ and\ revenues\ in\ existing\ lease\ areas.\ **\ Clearnose\ skates\ were\ reported\ separately\ from\ skates,\ which\ is\ presumed\ to\ include\ all\ skates\ managed\ under\ the\ Northeast\ skate\ complex.\ ***\ Based\ on\ comparison\ with\ other\ data\ sources,\ the\ high\ values\ for\ Illex\ squid\ are\ likely\ overestimates\ affected\ by\ the\ methods\ used\ to\ model\ logbook\ data\ to\ estimate\ spatial\ overlap\ of\ fishing\ operations\ with\ wind\ energy\ areas.}\label{tab:wea-landings-rev}\\
 
-\ascline{2pt}{666666}{1-3}
+\ascline{1.5pt}{666666}{1-3}
 
-\multicolumn{1}{>{\raggedright}p{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{NEFMC,\ MAFMC,\ and\ ASMFC\ Managed\ Species}}} & \multicolumn{1}{>{\raggedleft}p{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Maximum\ Percent\ Total\ Annual\ Regional\ Species\ Landings}}} & \multicolumn{1}{>{\raggedleft}p{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Maximum\ Percent\ Total\ Annual\ Regional\ Species\ Revenue}}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{NEFMC,\ MAFMC,\ and\ ASMFC\ Managed\ Species}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Maximum\ Percent\ Total\ Annual\ Regional\ Species\ Landings}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Maximum\ Percent\ Total\ Annual\ Regional\ Species\ Revenue}}} \\
 
-\ascline{2pt}{666666}{1-3}\endhead
+\ascline{1.5pt}{666666}{1-3}\endfirsthead \caption[]{Top\ 20\ species\ Landings\ and\ Revenue\ from\ Wind\ Energy\ Areas.\ *\ Landings\ and\ revenue\ for\ these\ species\ are\ likely\ underestimated\ due\ to\ limited\ coverage\ of\ these\ fisheries\ in\ historic\ reporting\ requirements\ for\ vessels\ issued\ federal\ permits\ by\ the\ NMFS\ Greater\ Atlantic\ Regional\ Fisheries\ Office.\ However,\ such\ limitations\ also\ suggest\ an\ inaccurately\ higher\ proportion\ of\ such\ landings\ and\ revenues\ in\ existing\ lease\ areas.\ **\ Clearnose\ skates\ were\ reported\ separately\ from\ skates,\ which\ is\ presumed\ to\ include\ all\ skates\ managed\ under\ the\ Northeast\ skate\ complex.\ ***\ Based\ on\ comparison\ with\ other\ data\ sources,\ the\ high\ values\ for\ Illex\ squid\ are\ likely\ overestimates\ affected\ by\ the\ methods\ used\ to\ model\ logbook\ data\ to\ estimate\ spatial\ overlap\ of\ fishing\ operations\ with\ wind\ energy\ areas.}\label{tab:wea-landings-rev}\\
 
+\ascline{1.5pt}{666666}{1-3}
 
+\multicolumn{1}{>{\raggedright}m{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{NEFMC,\ MAFMC,\ and\ ASMFC\ Managed\ Species}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Maximum\ Percent\ Total\ Annual\ Regional\ Species\ Landings}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Maximum\ Percent\ Total\ Annual\ Regional\ Species\ Revenue}}} \\
 
-\multicolumn{1}{>{\raggedright}p{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Black\ drum*}}} & \multicolumn{1}{>{\raggedleft}p{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{36}}} & \multicolumn{1}{>{\raggedleft}p{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{34}}} \\
+\ascline{1.5pt}{666666}{1-3}\endhead
 
 
 
+\multicolumn{1}{>{\raggedright}m{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Redfish}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{53}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{54}}} \\
 
 
-\multicolumn{1}{>{\raggedright}p{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Ocean\ pout}}} & \multicolumn{1}{>{\raggedleft}p{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{20}}} & \multicolumn{1}{>{\raggedleft}p{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{31}}} \\
 
 
 
+\multicolumn{1}{>{\raggedright}m{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Skates*}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{40}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{51}}} \\
 
 
-\multicolumn{1}{>{\raggedright}p{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{American\ eel*}}} & \multicolumn{1}{>{\raggedleft}p{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{15}}} & \multicolumn{1}{>{\raggedleft}p{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{29}}} \\
 
 
 
+\multicolumn{1}{>{\raggedright}m{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Pollock}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{43}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{40}}} \\
 
 
-\multicolumn{1}{>{\raggedright}p{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Clearnose\ skate**}}} & \multicolumn{1}{>{\raggedleft}p{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{19}}} & \multicolumn{1}{>{\raggedleft}p{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{20}}} \\
 
 
 
+\multicolumn{1}{>{\raggedright}m{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{White\ hake}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{34}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{34}}} \\
 
 
-\multicolumn{1}{>{\raggedright}p{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Atlantic\ menhaden*}}} & \multicolumn{1}{>{\raggedleft}p{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{25}}} & \multicolumn{1}{>{\raggedleft}p{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{19}}} \\
 
 
 
+\multicolumn{1}{>{\raggedright}m{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{American\ plaice}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{26}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{28}}} \\
 
 
-\multicolumn{1}{>{\raggedright}p{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Atlantic\ chub\ mackerel*}}} & \multicolumn{1}{>{\raggedleft}p{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{16}}} & \multicolumn{1}{>{\raggedleft}p{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{17}}} \\
 
 
 
+\multicolumn{1}{>{\raggedright}m{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Atlantic\ halibut}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{23}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{24}}} \\
 
 
-\multicolumn{1}{>{\raggedright}p{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Atlantic\ surfclam}}} & \multicolumn{1}{>{\raggedleft}p{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{17}}} & \multicolumn{1}{>{\raggedleft}p{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{16}}} \\
 
 
 
+\multicolumn{1}{>{\raggedright}m{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Haddock}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{24}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{23}}} \\
 
 
-\multicolumn{1}{>{\raggedright}p{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Black\ sea\ bass}}} & \multicolumn{1}{>{\raggedleft}p{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{15}}} & \multicolumn{1}{>{\raggedleft}p{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{15}}} \\
 
 
 
+\multicolumn{1}{>{\raggedright}m{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Witch\ flounder}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{25}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{23}}} \\
 
 
-\multicolumn{1}{>{\raggedright}p{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Yellowtail\ flounder}}} & \multicolumn{1}{>{\raggedleft}p{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{15}}} & \multicolumn{1}{>{\raggedleft}p{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{15}}} \\
 
 
 
+\multicolumn{1}{>{\raggedright}m{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Monkfish}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{20}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{20}}} \\
 
 
-\multicolumn{1}{>{\raggedright}p{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Illex\ squid***}}} & \multicolumn{1}{>{\raggedleft}p{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{14}}} & \multicolumn{1}{>{\raggedleft}p{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{14}}} \\
 
 
 
+\multicolumn{1}{>{\raggedright}m{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Atlantic\ surfclam}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{18}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{17}}} \\
 
 
-\multicolumn{1}{>{\raggedright}p{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Offshore\ hake}}} & \multicolumn{1}{>{\raggedleft}p{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{14}}} & \multicolumn{1}{>{\raggedleft}p{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{14}}} \\
 
 
 
+\multicolumn{1}{>{\raggedright}m{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Blueline\ tilefish}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{13}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{16}}} \\
 
 
-\multicolumn{1}{>{\raggedright}p{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Ocean\ quahog}}} & \multicolumn{1}{>{\raggedleft}p{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{13}}} & \multicolumn{1}{>{\raggedleft}p{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{13}}} \\
 
 
 
+\multicolumn{1}{>{\raggedright}m{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Yellowtail\ flounder}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{15}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{15}}} \\
 
 
-\multicolumn{1}{>{\raggedright}p{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Atlantic\ sea\ scallops}}} & \multicolumn{1}{>{\raggedleft}p{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{13}}} & \multicolumn{1}{>{\raggedleft}p{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{12}}} \\
 
 
 
+\multicolumn{1}{>{\raggedright}m{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Atlantic\ cod}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{15}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{15}}} \\
 
 
-\multicolumn{1}{>{\raggedright}p{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Blueline\ tilefish*}}} & \multicolumn{1}{>{\raggedleft}p{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{8}}} & \multicolumn{1}{>{\raggedleft}p{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{10}}} \\
 
 
 
+\multicolumn{1}{>{\raggedright}m{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Black\ sea\ bass}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{10}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{10}}} \\
 
 
-\multicolumn{1}{>{\raggedright}p{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Skates**}}} & \multicolumn{1}{>{\raggedleft}p{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{10}}} & \multicolumn{1}{>{\raggedleft}p{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{10}}} \\
 
 
 
+\multicolumn{1}{>{\raggedright}m{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Atlantic\ sea\ scallop}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{10}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{9}}} \\
 
 
-\multicolumn{1}{>{\raggedright}p{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Longfin\ squid}}} & \multicolumn{1}{>{\raggedleft}p{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{9}}} & \multicolumn{1}{>{\raggedleft}p{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{9}}} \\
 
 
 
+\multicolumn{1}{>{\raggedright}m{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Scup}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{8}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{9}}} \\
 
 
-\multicolumn{1}{>{\raggedright}p{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Scup}}} & \multicolumn{1}{>{\raggedleft}p{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{8}}} & \multicolumn{1}{>{\raggedleft}p{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{9}}} \\
 
 
 
+\multicolumn{1}{>{\raggedright}m{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Atlantic\ mackerel}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{8}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{8}}} \\
 
 
-\multicolumn{1}{>{\raggedright}p{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Atlantic\ mackerel}}} & \multicolumn{1}{>{\raggedleft}p{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{8}}} & \multicolumn{1}{>{\raggedleft}p{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{8}}} \\
 
 
 
+\multicolumn{1}{>{\raggedright}m{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Longfin\ squid}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{8}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{8}}} \\
 
 
-\multicolumn{1}{>{\raggedright}p{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Monkfish}}} & \multicolumn{1}{>{\raggedleft}p{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{9}}} & \multicolumn{1}{>{\raggedleft}p{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{7}}} \\
 
 
 
+\multicolumn{1}{>{\raggedright}m{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Red\ hake}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{11}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{8}}} \\
 
 
-\multicolumn{1}{>{\raggedright}p{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Red\ hake}}} & \multicolumn{1}{>{\raggedleft}p{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{11}}} & \multicolumn{1}{>{\raggedleft}p{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{7}}} \\
 
-\ascline{2pt}{666666}{1-3}
+
+
+\multicolumn{1}{>{\raggedright}m{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Silver\ hake}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{9}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{7}}} \\
+
+\ascline{1.5pt}{666666}{1-3}
 
 
 
@@ -1357,7 +1257,7 @@ The sea scallop fishery could be the most affected fishery, with a maximum of 12
 
 \renewcommand*{\arraystretch}{1}
 
-Proposed wind development areas interact with the region's federal scientific surveys. Scientific surveys are impacted by offshore wind in four ways: 1) Exclusion of NOAA Fisheries' sampling platforms from the wind development area due to operational and safety limitations; 2) Impacts on the random-stratified statistical design that is the basis for scientific assessments, advice, and analyses; 3) Alteration of benthic and pelagic habitats, and airspace in and around the wind energy development, requiring new designs and methods to sample new habitats; and, 4) Reduced sampling productivity through navigation impacts of wind energy infrastructure on aerial and vessel survey operations. Increased vessel transit between stations may decrease data collections that are already limited by annual days-at-sea day allocations. The total survey area overlap ranges from 1-14\% for all Greater Atlantic federal surveys. Individual survey strata have significant interaction with wind, including the sea scallop survey (up to 96\% of individual strata) and the bottom trawl survey (BTS, up to 60\% strata overlap). Additionally, up to 50\% of the southern New England North Atlantic right whale survey's area overlaps with proposed project areas. A region-wide survey mitigation program is underway {[}\protect\hyperlink{ref-northeast_fisheries_science_center_us_noaa_2022}{52}{]}.
+Proposed wind development areas interact with the region's federal scientific surveys. Scientific surveys are impacted by offshore wind in four ways: 1) Exclusion of NOAA Fisheries' sampling platforms from the wind development area due to operational and safety limitations; 2) Impacts on the random-stratified statistical design that is the basis for scientific assessments, advice, and analyses; 3) Alteration of benthic and pelagic habitats, and airspace in and around the wind energy development, requiring new designs and methods to sample new habitats; and, 4) Reduced sampling productivity through navigation impacts of wind energy infrastructure on aerial and vessel survey operations. Increased vessel transit between stations may decrease data collections that are already limited by annual days-at-sea day allocations. The total survey area overlap ranges from 1-14\% for all Greater Atlantic federal surveys. Individual survey strata have significant interaction with wind, including the sea scallop survey (up to 96\% of individual strata) and the bottom trawl survey (BTS, up to 60\% strata overlap). Additionally, up to 50\% of the southern New England North Atlantic right whale survey's area overlaps with proposed project areas. A region-wide survey mitigation program is underway {[}\protect\hyperlink{ref-northeast_fisheries_science_center_us_noaa_2022}{22}{]}.
 
 Equity and environmental justice (EJ) are priority concerns with offshore wind development and fisheries impacts in the Northeast. Fig. \ref{fig:wea-port-rev} links historic port revenue (2008-2021) from within all wind lease areas as a proportion of a port's total fisheries revenue based on vessel trip reports as described in the revenue and landings of species in the wind indicator above. The range (minimum and maximum) of total percent fisheries revenue from within wind energy areas is presented in the graph and ports are sorted from greatest to least fisheries revenue from within wind areas.
 
@@ -1368,7 +1268,7 @@ Equity and environmental justice (EJ) are priority concerns with offshore wind d
 \caption{Percent of port fisheries revenue from Wind Energy Areas (WEA) in descending order from most to least port fisheries revenue from WEA. EJ = Environmental Justice.}\label{fig:wea-port-rev}
 \end{figure}
 
-For example, Westport, MA had a minimum of 10\% and maximum of 29\% overlap of wind energy revenue to the total port revenue between 2008-2021. Those communities that score Med-High or higher in at least one of the vulnerability indicators that address environmental justice concerns (i.e., Poverty, Population Composition, Personal Disruption; see indicator definitions) are noted with a triangle. Gentrification pressure is also highlighted here, with those communities that score Med-High or higher in one or more gentrification pressure indicators (i.e., Housing Disruption, Retiree Migration, Urban Sprawl) represented with a circle (Fig. \ref{fig:wea-port-rev}). BOEM reports that cumulative offshore wind development (if all proposed projects are developed) could have moderate impacts on low-income members of environmental justice communities who work in the commercial fishing and for-hire fishing industry due to disruptions to fish populations, restrictions on navigation and increased vessel traffic as well as existing vulnerabilities of low-income workers to economic impacts {[}\protect\hyperlink{ref-boem_vineyard_2020}{53}{]}.
+For example, Westport, MA had a minimum of 10\% and maximum of 29\% overlap of wind energy revenue to the total port revenue between 2008-2021. Those communities that score Med-High or higher in at least one of the vulnerability indicators that address environmental justice concerns (i.e., Poverty, Population Composition, Personal Disruption; see indicator definitions) are noted with a triangle. Gentrification pressure is also highlighted here, with those communities that score Med-High or higher in one or more gentrification pressure indicators (i.e., Housing Disruption, Retiree Migration, Urban Sprawl) represented with a circle (Fig. \ref{fig:wea-port-rev}). BOEM reports that cumulative offshore wind development (if all proposed projects are developed) could have moderate impacts on low-income members of environmental justice communities who work in the commercial fishing and for-hire fishing industry due to disruptions to fish populations, restrictions on navigation and increased vessel traffic as well as existing vulnerabilities of low-income workers to economic impacts {[}\protect\hyperlink{ref-boem_vineyard_2020}{23}{]}.
 
 Top fishing communities high in environmental justice concerns (i.e., New Bedford, MA, New London, CT) should be considered in decision making to reduce the social and economic impacts and aid in the resilience and adaptive capacity of underserved communities. Environmental justice concerns also highlight communities where we need to provide further resources to reach underserved and underrepresented groups and create opportunities for, and directly involve, these groups in the decision-making process.
 
@@ -1386,7 +1286,7 @@ Current plans for rapid buildout of offshore wind in a patchwork of areas spread
 
 Up to 12\% of total average revenue for major New England commercial species in lease areas could be forgone, or reduced, and associated effort displaced if all sites are developed. Displaced fishing effort can alter historic fishing areas, timing, and methods, which can in turn change habitat, species (managed and protected), and fleet interactions. Several factors, including fishery regulations, fishery availability, and user conflicts affect where, when, and how fishing effort may be displaced, along with impacts to and responses of affected fish species.
 
-Planned development overlaps NARW mother and calf migration corridors and a significant foraging habitat that is used throughout the year (Fig \ref{fig:whales-wind}). Turbine presence and extraction of energy from the system could alter local oceanography {[}\protect\hyperlink{ref-christiansen_wind_2022}{54}{]} and may affect right whale prey availability. For example, persistent foraging hotspots of right whales and seabirds overlap on Nantucket Shoals, where unique hydrography aggregates enhanced prey densities {[}\protect\hyperlink{ref-white_ducks_2020}{55},\protect\hyperlink{ref-sorochan_narw_forage_2021}{56}{]}. Wind leases (OCS-A 0521 and OCS-A 0522) currently intersect these hotspots on the southwestern corner of Nantucket Shoals and a prominent tidal front associated with invertebrate prey swarms important to seabirds and possibly right whales. Proposed wind development areas also bring increased vessel strike risk from construction and operation vessels. In addition, there are a number of potential impacts to whales from pile driving and operational noise such as displacement, increased levels of communication masking, and elevated stress hormones.
+Planned development overlaps NARW mother and calf migration corridors and a significant foraging habitat that is used throughout the year (Fig \ref{fig:whales-wind}). Turbine presence and extraction of energy from the system could alter local oceanography and may affect right whale prey availability. For example, persistent foraging hotspots of right whales and seabirds overlap on Nantucket Shoals, where unique hydrography aggregates enhanced prey densities. Wind leases (OCS-A 0521 and OCS-A 0522) currently intersect these hotspots on the southwestern corner of Nantucket Shoals and a prominent tidal front associated with invertebrate prey swarms important to seabirds and possibly right whales. Proposed wind development areas also bring increased vessel strike risk from construction and operation vessels. In addition, there are a number of potential impacts to whales from pile driving and operational noise such as displacement, increased levels of communication masking, and elevated stress hormones.
 
 Scientific data collection surveys for ocean and ecosystem conditions, fish, and protected species will be altered, potentially increasing uncertainty for management decision making.
 
@@ -1394,7 +1294,7 @@ The increase of offshore wind development can have both positive (e.g., employme
 
 \begin{figure}
 
-{\centering \includegraphics[width=0.6\linewidth]{images/NARW_hotpsot_persistence_2_1_2022_TPW} 
+{\centering \includegraphics[width=0.6\linewidth]{SOE-NEFMC_files/figure-latex/whales-wind-1} 
 
 }
 
@@ -1444,41 +1344,47 @@ Fish and invertebrates are aggregated into similar feeding guild categories (Tab
 
 \caption{Feeding\ guilds\ and\ management\ bodies.}\label{tab:species-groupings}\\
 
-\ascline{2pt}{666666}{1-5}
+\ascline{1.5pt}{666666}{1-5}
 
-\multicolumn{1}{>{\raggedright}p{\dimexpr 1in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{8}\selectfont{Guild}}} & \multicolumn{1}{>{\raggedright}p{\dimexpr 1in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{8}\selectfont{MAFMC}}} & \multicolumn{1}{>{\raggedright}p{\dimexpr 1in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{8}\selectfont{Joint}}} & \multicolumn{1}{>{\raggedright}p{\dimexpr 1in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{8}\selectfont{NEFMC}}} & \multicolumn{1}{>{\raggedright}p{\dimexpr 3in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{8}\selectfont{State\ or\ Other}}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 1in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{8}\selectfont{Guild}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{8}\selectfont{MAFMC}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{8}\selectfont{Joint}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{8}\selectfont{NEFMC}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 3in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{8}\selectfont{State\ or\ Other}}} \\
 
-\ascline{2pt}{666666}{1-5}\endhead
+\ascline{1.5pt}{666666}{1-5}\endfirsthead \caption[]{Feeding\ guilds\ and\ management\ bodies.}\label{tab:species-groupings}\\
 
+\ascline{1.5pt}{666666}{1-5}
 
+\multicolumn{1}{>{\raggedright}m{\dimexpr 1in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{8}\selectfont{Guild}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{8}\selectfont{MAFMC}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{8}\selectfont{Joint}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{8}\selectfont{NEFMC}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 3in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{8}\selectfont{State\ or\ Other}}} \\
 
-\multicolumn{1}{>{\raggedright}p{\dimexpr 1in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{8}\selectfont{Apex\ Predator}}} & \multicolumn{1}{>{\raggedright}p{\dimexpr 1in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{8}\selectfont{}}} & \multicolumn{1}{>{\raggedright}p{\dimexpr 1in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{8}\selectfont{}}} & \multicolumn{1}{>{\raggedright}p{\dimexpr 1in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{8}\selectfont{}}} & \multicolumn{1}{>{\raggedright}p{\dimexpr 3in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{8}\selectfont{bluefin\ tuna,\ shark\ uncl,\ swordfish,\ yellowfin\ tuna}}} \\
-
-
-
-
-
-\multicolumn{1}{>{\raggedright}p{\dimexpr 1in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{8}\selectfont{Piscivore}}} & \multicolumn{1}{>{\raggedright}p{\dimexpr 1in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{8}\selectfont{bluefish,\ longfin\ squid,\ northern\ shortfin\ squid,\ summer\ flounder}}} & \multicolumn{1}{>{\raggedright}p{\dimexpr 1in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{8}\selectfont{goosefish,\ spiny\ dogfish}}} & \multicolumn{1}{>{\raggedright}p{\dimexpr 1in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{8}\selectfont{acadian\ redfish,\ atlantic\ cod,\ atlantic\ halibut,\ clearnose\ skate,\ little\ skate,\ offshore\ hake,\ pollock,\ red\ hake,\ silver\ hake,\ smooth\ skate,\ thorny\ skate,\ white\ hake,\ winter\ skate}}} & \multicolumn{1}{>{\raggedright}p{\dimexpr 3in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{8}\selectfont{fourspot\ flounder,\ john\ dory,\ sea\ raven,\ striped\ bass,\ weakfish,\ windowpane}}} \\
+\ascline{1.5pt}{666666}{1-5}\endhead
 
 
 
-
-
-\multicolumn{1}{>{\raggedright}p{\dimexpr 1in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{8}\selectfont{Planktivore}}} & \multicolumn{1}{>{\raggedright}p{\dimexpr 1in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{8}\selectfont{atlantic\ mackerel,\ butterfish}}} & \multicolumn{1}{>{\raggedright}p{\dimexpr 1in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{8}\selectfont{}}} & \multicolumn{1}{>{\raggedright}p{\dimexpr 1in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{8}\selectfont{atlantic\ herring}}} & \multicolumn{1}{>{\raggedright}p{\dimexpr 3in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{8}\selectfont{alewife,\ american\ shad,\ blackbelly\ rosefish,\ blueback\ herring,\ cusk,\ longhorn\ sculpin,\ lumpfish,\ menhaden,\ northern\ sand\ lance,\ northern\ searobin,\ sculpin\ uncl}}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 1in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{8}\selectfont{Apex\ Predator}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{8}\selectfont{}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{8}\selectfont{}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{8}\selectfont{}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 3in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{8}\selectfont{shark\ uncl,\ swordfish,\ yellowfin\ tuna,\ bluefin\ tuna}}} \\
 
 
 
 
 
-\multicolumn{1}{>{\raggedright}p{\dimexpr 1in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{8}\selectfont{Benthivore}}} & \multicolumn{1}{>{\raggedright}p{\dimexpr 1in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{8}\selectfont{black\ sea\ bass,\ scup,\ tilefish}}} & \multicolumn{1}{>{\raggedright}p{\dimexpr 1in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{8}\selectfont{}}} & \multicolumn{1}{>{\raggedright}p{\dimexpr 1in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{8}\selectfont{american\ plaice,\ barndoor\ skate,\ crab,red\ deepsea,\ haddock,\ ocean\ pout,\ rosette\ skate,\ winter\ flounder,\ witch\ flounder,\ yellowtail\ flounder}}} & \multicolumn{1}{>{\raggedright}p{\dimexpr 3in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{8}\selectfont{american\ lobster,\ atlantic\ wolffish,\ blue\ crab,\ cancer\ crab\ uncl,\ chain\ dogfish,\ cunner,\ jonah\ crab,\ lady\ crab,\ smooth\ dogfish,\ spider\ crab\ uncl,\ squid\ cuttlefish\ and\ octopod\ uncl,\ striped\ searobin,\ tautog}}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 1in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{8}\selectfont{Piscivore}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{8}\selectfont{summer\ flounder,\ bluefish,\ northern\ shortfin\ squid,\ longfin\ squid}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{8}\selectfont{spiny\ dogfish,\ goosefish}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{8}\selectfont{winter\ skate,\ clearnose\ skate,\ thorny\ skate,\ offshore\ hake,\ silver\ hake,\ atlantic\ cod,\ pollock,\ white\ hake,\ red\ hake,\ atlantic\ halibut,\ acadian\ redfish}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 3in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{8}\selectfont{sea\ lamprey,\ sandbar\ shark,\ atlantic\ angel\ shark,\ atlantic\ torpedo,\ conger\ eel,\ spotted\ hake,\ cusk,\ fourspot\ flounder,\ windowpane,\ john\ dory,\ atlantic\ cutlassfish,\ blue\ runner,\ striped\ bass,\ weakfish,\ sea\ raven,\ northern\ stargazer,\ banded\ rudderfish,\ atlantic\ sharpnose\ shark,\ inshore\ lizardfish,\ atlantic\ brief\ squid,\ northern\ sennet,\ king\ mackerel,\ spanish\ mackerel}}} \\
 
 
 
 
 
-\multicolumn{1}{>{\raggedright}p{\dimexpr 1in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{8}\selectfont{Benthos}}} & \multicolumn{1}{>{\raggedright}p{\dimexpr 1in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{8}\selectfont{atlantic\ surfclam,\ ocean\ quahog}}} & \multicolumn{1}{>{\raggedright}p{\dimexpr 1in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{8}\selectfont{}}} & \multicolumn{1}{>{\raggedright}p{\dimexpr 1in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{8}\selectfont{sea\ scallop}}} & \multicolumn{1}{>{\raggedright}p{\dimexpr 3in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{8}\selectfont{blue\ mussel,\ channeled\ whelk,\ sea\ cucumber,\ sea\ urchin\ and\ sand\ dollar\ uncl,\ sea\ urchins,\ snails(conchs)}}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 1in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{8}\selectfont{Planktivore}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{8}\selectfont{atlantic\ mackerel,\ butterfish}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{8}\selectfont{}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{8}\selectfont{atlantic\ herring}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 3in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{8}\selectfont{harvestfishes,\ smelts,\ round\ herring,\ alewife,\ blueback\ herring,\ american\ shad,\ menhaden,\ bay\ anchovy,\ striped\ anchovy,\ rainbow\ smelt,\ atlantic\ argentine,\ slender\ snipe\ eel,\ atlantic\ silverside,\ northern\ pipefish,\ chub\ mackerel,\ atlantic\ moonfish,\ lookdown,\ blackbelly\ rosefish,\ lumpfish,\ northern\ sand\ lance,\ atlantic\ saury,\ mackerel\ scad,\ bigeye\ scad,\ round\ scad,\ rough\ scad,\ silver\ rag,\ weitzmans\ pearlsides,\ atlantic\ soft\ pout,\ sevenspine\ bay\ shrimp,\ pink\ glass\ shrimp,\ polar\ lebbeid,\ friendly\ blade\ shrimp,\ bristled\ longbeak,\ aesop\ shrimp,\ norwegian\ shrimp,\ northern\ shrimp,\ brown\ rock\ shrimp,\ atlantic\ thread\ herring,\ spanish\ sardine,\ atlantic\ bumper,\ harvestfish,\ striated\ argentine,\ silver\ anchovy}}} \\
 
-\ascline{2pt}{666666}{1-5}
+
+
+
+
+\multicolumn{1}{>{\raggedright}m{\dimexpr 1in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{8}\selectfont{Benthivore}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{8}\selectfont{black\ sea\ bass,\ scup,\ tilefish}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{8}\selectfont{}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{8}\selectfont{barndoor\ skate,\ rosette\ skate,\ little\ skate,\ smooth\ skate,\ haddock,\ american\ plaice,\ yellowtail\ flounder,\ winter\ flounder,\ witch\ flounder,\ ocean\ pout,\ crab,red\ deepsea}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 3in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{8}\selectfont{crab,unc,\ hagfish,\ porgy,red,\ sea\ bass,nk,\ atlantic\ hagfish,\ roughtail\ stingray,\ smooth\ dogfish,\ chain\ dogfish,\ bluntnose\ stingray,\ bullnose\ ray,\ southern\ stingray,\ longfin\ hake,\ fourbeard\ rockling,\ marlin-spike,\ gulf\ stream\ flounder,\ longspine\ snipefish,\ blackmouth\ bass,\ threespine\ stickleback,\ smallmouth\ flounder,\ hogchoker,\ bigeye,\ atlantic\ croaker,\ pigfish,\ northern\ kingfish,\ silver\ perch,\ spot,\ deepbody\ boarfish,\ sculpin\ uncl,\ moustache\ sculpin,\ longhorn\ sculpin,\ alligatorfish,\ grubby,\ atlantic\ seasnail,\ northern\ searobin,\ striped\ searobin,\ armored\ searobin,\ cunner,\ tautog,\ snakeblenny,\ daubed\ shanny,\ radiated\ shanny,\ red\ goatfish,\ striped\ cusk-eel,\ wolf\ eelpout,\ wrymouth,\ atlantic\ wolffish,\ fawn\ cusk-eel,\ northern\ puffer,\ striped\ burrfish,\ planehead\ filefish,\ gray\ triggerfish,\ shortnose\ greeneye,\ beardfish,\ cownose\ ray,\ american\ lobster,\ cancer\ crab\ uncl,\ jonah\ crab,\ atlantic\ rock\ crab,\ blue\ crab,\ spider\ crab\ uncl,\ horseshoe\ crab,\ coarsehand\ lady\ crab,\ lady\ crab,\ northern\ stone\ crab,\ snow\ crab,\ spiny\ butterfly\ ray,\ smooth\ butterfly\ ray,\ snakefish,\ atlantic\ midshipman,\ bank\ cusk-eel,\ red\ cornetfish,\ squid\ cuttlefish\ and\ octopod\ uncl,\ spoonarm\ octopus,\ bank\ sea\ bass,\ rock\ sea\ bass,\ sand\ perch,\ cobia,\ crevalle\ jack,\ vermilion\ snapper,\ tomtate,\ jolthead\ porgy,\ saucereye\ porgy,\ whitebone\ porgy,\ knobbed\ porgy,\ sheepshead\ porgy,\ littlehead\ porgy,\ silver\ porgy,\ pinfish,\ red\ porgy,\ porgy\ and\ pinfish\ uncl,\ banded\ drum,\ southern\ kingfish,\ atlantic\ spadefish,\ leopard\ searobin,\ dusky\ flounder,\ triggerfish\ filefish\ uncl,\ blackcheek\ tonguefish,\ orange\ filefish,\ queen\ triggerfish,\ ocean\ triggerfish}}} \\
+
+
+
+
+
+\multicolumn{1}{>{\raggedright}m{\dimexpr 1in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{8}\selectfont{Benthos}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{8}\selectfont{atlantic\ surfclam,\ ocean\ quahog}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{8}\selectfont{}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{8}\selectfont{sea\ scallop}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 3in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{8}{8}\selectfont{sea\ cucumber,\ sea\ urchins,\ snails(conchs),\ sea\ urchin\ and\ sand\ dollar\ uncl,\ channeled\ whelk,\ blue\ mussel}}} \\
+
+\ascline{1.5pt}{666666}{1-5}
 
 
 
@@ -1504,7 +1410,7 @@ Fish and invertebrates are aggregated into similar feeding guild categories (Tab
 \begin{CSLReferences}{0}{0}
 \leavevmode\vadjust pre{\hypertarget{ref-gaichas_implementing_2018}{}}%
 \CSLLeftMargin{1. }%
-\CSLRightInline{Gaichas SK, DePiper GS, Seagraves RJ, Muffley BW, Sabo M, Colburn LL, et al. Implementing {Ecosystem} {Approaches} to {Fishery} {Management}: {Risk} {Assessment} in the {US} {Mid}-{Atlantic}. Frontiers in Marine Science. 2018;5. doi:\href{https://doi.org/10.3389/fmars.2018.00442}{10.3389/fmars.2018.00442}}
+\CSLRightInline{Gaichas SK, DePiper GS, Seagraves RJ, Muffley BW, Sabo M, Colburn LL, et al. Implementing ecosystem approaches to fishery management: Risk assessment in the {US} mid-atlantic. Front Mar Sci. 2018;5. doi:\href{https://doi.org/10.3389/fmars.2018.00442}{10.3389/fmars.2018.00442}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-friedland_changes_2020}{}}%
 \CSLLeftMargin{2. }%
@@ -1512,219 +1418,87 @@ Fish and invertebrates are aggregated into similar feeding guild categories (Tab
 
 \leavevmode\vadjust pre{\hypertarget{ref-pace_cryptic_2021}{}}%
 \CSLLeftMargin{3. }%
-\CSLRightInline{Pace RM, Williams R, Kraus SD, Knowlton AR, Pettis HM. Cryptic mortality of {North} {Atlantic} right whales. Conservation Science and Practice. 2021;n/a: e346. doi:\url{https://doi.org/10.1111/csp2.346}}
+\CSLRightInline{Pace RM, Williams R, Kraus SD, Knowlton AR, Pettis HM. Cryptic mortality of north atlantic right whales. Conservation Science and Practice. 2021;n/a: e346. doi:\url{https://doi.org/10.1111/csp2.346}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-wood_rates_2020}{}}%
 \CSLLeftMargin{4. }%
-\CSLRightInline{Wood SA, Murray KT, Josephson E, Gilbert J. Rates of increase in gray seal ({Halichoerus} grypus atlantica) pupping at recolonized sites in the {United} {States}, 1988--2019. Swanson B, editor. Journal of Mammalogy. 2020;101: 121--128. doi:\href{https://doi.org/10.1093/jmammal/gyz184}{10.1093/jmammal/gyz184}}
+\CSLRightInline{Wood SA, Murray KT, Josephson E, Gilbert J. Rates of increase in gray seal (halichoerus grypus atlantica) pupping at recolonized sites in the united states, 1988--2019. Swanson B, editor. Journal of Mammalogy. 2020;101: 121--128. doi:\href{https://doi.org/10.1093/jmammal/gyz184}{10.1093/jmammal/gyz184}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-hayes_north_2018}{}}%
 \CSLLeftMargin{5. }%
-\CSLRightInline{Hayes S, Gardner S, Garrison LP, Henry A, Leandro L. North {Atlantic} {Right} {Whales}-{Evaluating} {Their} {Recovery} {Challenges} in 2018. {NOAA} {Tech} {Memo} {NMFS} {NEFSC} 247. 2018. }
+\CSLRightInline{Hayes S, Gardner S, Garrison LP, Henry A, Leandro L. North atlantic right whales-evaluating their recovery challenges in 2018. {NOAA} tech memo {NMFS} {NEFSC} 247. 2018. }
 
 \leavevmode\vadjust pre{\hypertarget{ref-record_rapid_2019}{}}%
 \CSLLeftMargin{6. }%
-\CSLRightInline{Record N, Runge J, Pendleton D, Balch W, Davies K, Pershing A, et al. Rapid {Climate}-{Driven} {Circulation} {Changes} {Threaten} {Conservation} of {Endangered} {North} {Atlantic} {Right} {Whales}. Oceanography. 2019;32. doi:\href{https://doi.org/10.5670/oceanog.2019.201}{10.5670/oceanog.2019.201}}
+\CSLRightInline{Record N, Runge J, Pendleton D, Balch W, Davies K, Pershing A, et al. Rapid climate-driven circulation changes threaten conservation of endangered north atlantic right whales. Oceanog. 2019;32. doi:\href{https://doi.org/10.5670/oceanog.2019.201}{10.5670/oceanog.2019.201}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-sorochan_north_2019}{}}%
 \CSLLeftMargin{7. }%
-\CSLRightInline{Sorochan KA, Plourde S, Morse R, Pepin P, Runge J, Thompson C, et al. North {Atlantic} right whale ({Eubalaena} glacialis) and its food: ({II}) interannual variations in biomass of {Calanus} spp. On western {North} {Atlantic} shelves. Journal of Plankton Research. 2019;41: 687--708. doi:\href{https://doi.org/10.1093/plankt/fbz044}{10.1093/plankt/fbz044}}
+\CSLRightInline{Sorochan KA, Plourde S, Morse R, Pepin P, Runge J, Thompson C, et al. North atlantic right whale (eubalaena glacialis) and its food: ({II}) interannual variations in biomass of calanus spp. On western north atlantic shelves. Journal of Plankton Research. 2019;41: 687--708. doi:\href{https://doi.org/10.1093/plankt/fbz044}{10.1093/plankt/fbz044}}
 
-\leavevmode\vadjust pre{\hypertarget{ref-quintana-rizzo_narw_wind_2021}{}}%
+\leavevmode\vadjust pre{\hypertarget{ref-chavez-rosales_detection_2022}{}}%
 \CSLLeftMargin{8. }%
-\CSLRightInline{Quintana-Rizzo E, Leiter S, Cole T, Hagbloom M, Knowlton A, Nagelkirk P, et al. Residency, demographics, and movement patterns of north atlantic right whales eubalaena glacialis in an offshore wind energy development area in southern new england, USA. Endangered Species Research. 2021;45: 251--268. doi:\href{https://doi.org/10.3354/esr01137}{10.3354/esr01137}}
-
-\leavevmode\vadjust pre{\hypertarget{ref-schick_whale_2009}{}}%
-\CSLLeftMargin{9. }%
-\CSLRightInline{Schick RS, Halpin PN, Read AJ, Slay CK, Kraus SD, Mate BR, et al. Striking the right balance in right whale conservation. Canadian Journal of Fisheries and Aquatic Sciences. 2009;66: 1399--1403. doi:\href{https://doi.org/10.1139/F09-115}{10.1139/F09-115}}
-
-\leavevmode\vadjust pre{\hypertarget{ref-cheng_another_2023}{}}%
-\CSLLeftMargin{10. }%
-\CSLRightInline{Cheng L, Abraham J, Trenberth KE, Fasullo J, Boyer T, Mann ME, et al. Another {Year} of {Record} {Heat} for the {Oceans}. Advances in Atmospheric Sciences. 2023; doi:\href{https://doi.org/10.1007/s00376-023-2385-2}{10.1007/s00376-023-2385-2}}
-
-\leavevmode\vadjust pre{\hypertarget{ref-hobday_hierarchical_2016}{}}%
-\CSLLeftMargin{11. }%
-\CSLRightInline{Hobday AJ, Alexander LV, Perkins SE, Smale DA, Straub SC, Oliver ECJ, et al. A hierarchical approach to defining marine heatwaves. Progress in Oceanography. 2016;141: 227--238. doi:\href{https://doi.org/10.1016/j.pocean.2015.12.014}{10.1016/j.pocean.2015.12.014}}
-
-\leavevmode\vadjust pre{\hypertarget{ref-jacox_thermal_2020}{}}%
-\CSLLeftMargin{12. }%
-\CSLRightInline{Jacox MG, Alexander MA, Bograd SJ, Scott JD. Thermal displacement by marine heatwaves. Nature. 2020;584: 82--86. doi:\href{https://doi.org/10.1038/s41586-020-2534-z}{10.1038/s41586-020-2534-z}}
-
-\leavevmode\vadjust pre{\hypertarget{ref-jacox_global_2022}{}}%
-\CSLLeftMargin{13. }%
-\CSLRightInline{Jacox MG, Alexander MA, Amaya D, Becker E, Bograd SJ, Brodie S, et al. Global seasonal forecasts of marine heatwaves. Nature. 2022;604: 486--490. doi:\href{https://doi.org/10.1038/s41586-022-04573-9}{10.1038/s41586-022-04573-9}}
-
-\leavevmode\vadjust pre{\hypertarget{ref-gangopadhyay_census_2020}{}}%
-\CSLLeftMargin{14. }%
-\CSLRightInline{Gangopadhyay A, Gawarkiewicz G, Silva ENS, Silver AM, Monim M, Clark J. A {Census} of the {Warm}-{Core} {Rings} of the {Gulf} {Stream}: 1980--2017. Journal of Geophysical Research: Oceans. 2020;125: e2019JC016033. doi:\href{https://doi.org/10.1029/2019JC016033}{10.1029/2019JC016033}}
-
-\leavevmode\vadjust pre{\hypertarget{ref-andres_recent_2016}{}}%
-\CSLLeftMargin{15. }%
-\CSLRightInline{Andres M. On the recent destabilization of the {Gulf} {Stream} path downstream of {Cape} {Hatteras}. Geophysical Research Letters. 2016;43: 9836--9842. doi:\href{https://doi.org/10.1002/2016GL069966}{10.1002/2016GL069966}}
-
-\leavevmode\vadjust pre{\hypertarget{ref-caesar_observed_2018}{}}%
-\CSLLeftMargin{16. }%
-\CSLRightInline{Caesar L, Rahmstorf S, Robinson A, Feulner G, Saba V. Observed fingerprint of a weakening {Atlantic} {Ocean} overturning circulation. Nature. 2018;556: 191--196. doi:\href{https://doi.org/10.1038/s41586-018-0006-5}{10.1038/s41586-018-0006-5}}
+\CSLRightInline{Chavez-Rosales S, Josephson E, Palka D, Garrison L. Detection of habitat shifts of cetacean species: A comparison between 2010 and 2017 habitat suitability conditions in the northwest atlantic ocean. Frontiers in Marine Science. 2022;9. Available: \url{https://www.frontiersin.org/articles/10.3389/fmars.2022.877580}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-zhang_role_2007}{}}%
-\CSLLeftMargin{17. }%
-\CSLRightInline{Zhang R, Vallis GK. The {Role} of {Bottom} {Vortex} {Stretching} on the {Path} of the {North} {Atlantic} {Western} {Boundary} {Current} and on the {Northern} {Recirculation} {Gyre}. Journal of Physical Oceanography. 2007;37: 2053--2080. doi:\href{https://doi.org/10.1175/JPO3102.1}{10.1175/JPO3102.1}}
+\CSLLeftMargin{9. }%
+\CSLRightInline{Zhang R, Vallis GK. The role of bottom vortex stretching on the path of the north atlantic western boundary current and on the northern recirculation gyre. J Phys Oceanogr. 2007;37: 2053--2080. doi:\href{https://doi.org/10.1175/JPO3102.1}{10.1175/JPO3102.1}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-goddard_extreme_2015}{}}%
-\CSLLeftMargin{18. }%
-\CSLRightInline{Goddard PB, Yin J, Griffies SM, Zhang S. An extreme event of sea-level rise along the {Northeast} coast of {North} {America} in 2009--2010. Nature Communications. 2015;6. doi:\href{https://doi.org/10.1038/ncomms7346}{10.1038/ncomms7346}}
+\CSLLeftMargin{10. }%
+\CSLRightInline{Goddard PB, Yin J, Griffies SM, Zhang S. An extreme event of sea-level rise along the northeast coast of north america in 2009--2010. Nature Communications. 2015;6. doi:\href{https://doi.org/10.1038/ncomms7346}{10.1038/ncomms7346}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-goncalves_neto_changes_2021}{}}%
-\CSLLeftMargin{19. }%
-\CSLRightInline{Gonçalves Neto A, Langan JA, Palter JB. Changes in the {Gulf} {Stream} preceded rapid warming of the {Northwest} {Atlantic} {Shelf}. Communications Earth \& Environment. 2021;2: 1--10. doi:\href{https://doi.org/10.1038/s43247-021-00143-5}{10.1038/s43247-021-00143-5}}
+\CSLLeftMargin{11. }%
+\CSLRightInline{Gonçalves Neto A, Langan JA, Palter JB. Changes in the gulf stream preceded rapid warming of the northwest atlantic shelf. Commun Earth Environ. 2021;2: 1--10. doi:\href{https://doi.org/10.1038/s43247-021-00143-5}{10.1038/s43247-021-00143-5}}
 
-\leavevmode\vadjust pre{\hypertarget{ref-gangopadhyay_observed_2019}{}}%
-\CSLLeftMargin{20. }%
-\CSLRightInline{Gangopadhyay A, Gawarkiewicz G, Silva ENS, Monim M, Clark J. An {Observed} {Regime} {Shift} in the {Formation} of {Warm} {Core} {Rings} from the {Gulf} {Stream}. Scientific Reports. 2019;9: 1--9. doi:\href{https://doi.org/10.1038/s41598-019-48661-9}{10.1038/s41598-019-48661-9}}
+\leavevmode\vadjust pre{\hypertarget{ref-le_cren_length-weight_1951}{}}%
+\CSLLeftMargin{12. }%
+\CSLRightInline{Le Cren ED. The length-weight relationship and seasonal cycle in gonad weight and condition in the perch (perca fluviatilis). Journal of Animal Ecology. 1951;20: 201--219. doi:\href{https://doi.org/10.2307/1540}{10.2307/1540}}
 
-\leavevmode\vadjust pre{\hypertarget{ref-chen_mesoscale_2022}{}}%
-\CSLLeftMargin{21. }%
-\CSLRightInline{Chen K, Gawarkiewicz G, Yang J. Mesoscale and {Submesoscale} {Shelf}-{Ocean} {Exchanges} {Initialize} an {Advective} {Marine} {Heatwave}. Journal of Geophysical Research: Oceans. 2022;127: e2021JC017927. doi:\url{https://doi.org/10.1029/2021JC017927}}
+\leavevmode\vadjust pre{\hypertarget{ref-steimle_energy_1985}{}}%
+\CSLLeftMargin{13. }%
+\CSLRightInline{Steimle F, Terranova R. Energy equivalents of marine organisms from the continental shelf of the temperate northwest atlantic. Journal of Northwest Atlantic Fishery Science. 1985;6. doi:\href{https://doi.org/10.2960/J.v6.a11}{10.2960/J.v6.a11}}
 
-\leavevmode\vadjust pre{\hypertarget{ref-gawarkiewicz_changing_2018}{}}%
-\CSLLeftMargin{22. }%
-\CSLRightInline{Gawarkiewicz G, Todd R, Zhang W, Partida J, Gangopadhyay A, Monim M-U-H, et al. The {Changing} {Nature} of {Shelf}-{Break} {Exchange} {Revealed} by the {OOI} {Pioneer} {Array}. Oceanography. 2018;31: 60--70. doi:\href{https://doi.org/10.5670/oceanog.2018.110}{10.5670/oceanog.2018.110}}
-
-\leavevmode\vadjust pre{\hypertarget{ref-gawarkiewicz_increasing_nodate}{}}%
-\CSLLeftMargin{23. }%
-\CSLRightInline{Gawarkiewicz G, Fratantoni P, Bahr F, Ellertson A. Increasing {Frequency} of {Mid}-depth {Salinity} {Maximum} {Intrusions} in the {Middle} {Atlantic} {Bight}. Journal of Geophysical Research: Oceans. "In Review"; }
-
-\leavevmode\vadjust pre{\hypertarget{ref-gawarkiewicz_characteristics_2019}{}}%
-\CSLLeftMargin{24. }%
-\CSLRightInline{Gawarkiewicz G, Chen K, Forsyth J, Bahr F, Mercer AM, Ellertson A, et al. Characteristics of an {Advective} {Marine} {Heatwave} in the {Middle} {Atlantic} {Bight} in {Early} 2017. Frontiers in Marine Science. 2019;6. Available: \url{https://www.frontiersin.org/article/10.3389/fmars.2019.00712}}
-
-\leavevmode\vadjust pre{\hypertarget{ref-potter_horizontal_2011}{}}%
-\CSLLeftMargin{25. }%
-\CSLRightInline{Potter IF, Galuardi B, Howell WH. Horizontal movement of ocean sunfish, {Mola} mola, in the northwest {Atlantic}. Marine Biology. 2011;158: 531--540. doi:\href{https://doi.org/10.1007/s00227-010-1578-2}{10.1007/s00227-010-1578-2}}
-
-\leavevmode\vadjust pre{\hypertarget{ref-worm_predator_2003}{}}%
-\CSLLeftMargin{26. }%
-\CSLRightInline{Worm B, Lotze HK, Myers RA. Predator diversity hotspots in the blue ocean. Proceedings of the National Academy of Sciences. 2003;100: 9884--9888. doi:\href{https://doi.org/10.1073/pnas.1333941100}{10.1073/pnas.1333941100}}
-
-\leavevmode\vadjust pre{\hypertarget{ref-lentz_seasonal_2017}{}}%
-\CSLLeftMargin{27. }%
-\CSLRightInline{Lentz SJ. Seasonal warming of the {Middle} {Atlantic} {Bight} {Cold} {Pool}. Journal of Geophysical Research: Oceans. 2017;122: 941--954. doi:\href{https://doi.org/10.1002/2016JC012201}{10.1002/2016JC012201}}
-
-\leavevmode\vadjust pre{\hypertarget{ref-chen_seasonal_2018}{}}%
-\CSLLeftMargin{28. }%
-\CSLRightInline{Chen Z, Curchitser E, Chant R, Kang D. Seasonal {Variability} of the {Cold} {Pool} {Over} the {Mid}-{Atlantic} {Bight} {Continental} {Shelf}. Journal of Geophysical Research: Oceans. 2018;123: 8203--8226. doi:\href{https://doi.org/10.1029/2018JC014148}{10.1029/2018JC014148}}
-
-\leavevmode\vadjust pre{\hypertarget{ref-miles_offshore_2021}{}}%
-\CSLLeftMargin{29. }%
-\CSLRightInline{Miles T, Murphy S, Kohut J, Borsetti S, Munroe D. Offshore {Wind} {Energy} and the {Mid}-{Atlantic} {Cold} {Pool}: {A} {Review} of {Potential} {Interactions}. Marine Technology Society Journal. 2021;55: 72--87. doi:\href{https://doi.org/10.4031/MTSJ.55.4.8}{10.4031/MTSJ.55.4.8}}
-
-\leavevmode\vadjust pre{\hypertarget{ref-miller_state-space_2016}{}}%
-\CSLLeftMargin{30. }%
-\CSLRightInline{Miller TJ, Hare JA, Alade LA. A state-space approach to incorporating environmental effects on recruitment in an age-structured assessment model with an application to southern {New} {England} yellowtail flounder. Canadian Journal of Fisheries and Aquatic Sciences. 2016;73: 1261--1270. doi:\href{https://doi.org/10.1139/cjfas-2015-0339}{10.1139/cjfas-2015-0339}}
-
-\leavevmode\vadjust pre{\hypertarget{ref-du_pontavice_incorporating_nodate}{}}%
-\CSLLeftMargin{31. }%
-\CSLRightInline{Pontavice H du, Miller TJ, Stock BC, Chen Z, Saba VS. Incorporating environmental effects from ocean models improves a marine fish stock assessment. ICES Journal of Marine Science. "In Review"; }
-
-\leavevmode\vadjust pre{\hypertarget{ref-friedland_middle_2022}{}}%
-\CSLLeftMargin{32. }%
-\CSLRightInline{Friedland KD, Miles T, Goode AG, Powell EN, Brady DC. The {Middle} {Atlantic} {Bight} {Cold} {Pool} is warming and shrinking: {Indices} from in situ autumn seafloor temperatures. Fisheries Oceanography. 2022;31: 217--223. doi:\href{https://doi.org/10.1111/fog.12573}{10.1111/fog.12573}}
+\leavevmode\vadjust pre{\hypertarget{ref-lawson_important_1998}{}}%
+\CSLLeftMargin{14. }%
+\CSLRightInline{Lawson JW, Magalhães AM, Miller EH. Important prey species of marine vertebrate predators in the northwest atlantic: Proximate composition and energy density. Marine Ecology Progress Series. 1998;164: 13--20. Available: \url{https://www.jstor.org/stable/24825521}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-intergovernmental_panel_on_climate_change_ipcc_technical_2022}{}}%
-\CSLLeftMargin{33. }%
-\CSLRightInline{Intergovernmental Panel on Climate Change (IPCC), editor. Technical {Summary}. The {Ocean} and {Cryosphere} in a {Changing} {Climate}: {Special} {Report} of the {Intergovernmental} {Panel} on {Climate} {Change}. Cambridge: Cambridge University Press; 2022. pp. 39--70. doi:\href{https://doi.org/10.1017/9781009157964.002}{10.1017/9781009157964.002}}
+\CSLLeftMargin{15. }%
+\CSLRightInline{Intergovernmental Panel on Climate Change (IPCC), editor. Technical summary. The ocean and cryosphere in a changing climate: Special report of the intergovernmental panel on climate change. Cambridge: Cambridge University Press; 2022. pp. 39--70. doi:\href{https://doi.org/10.1017/9781009157964.002}{10.1017/9781009157964.002}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-jiang_climatological_2015}{}}%
-\CSLLeftMargin{34. }%
+\CSLLeftMargin{16. }%
 \CSLRightInline{Jiang L-Q, Feely RA, Carter BR, Greeley DJ, Gledhill DK, Arzayus KM. Climatological distribution of aragonite saturation state in the global oceans. Global Biogeochemical Cycles. 2015;29: 1656--1673. doi:\href{https://doi.org/10.1002/2015GB005198}{10.1002/2015GB005198}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-kroeker_impacts_2013}{}}%
-\CSLLeftMargin{35. }%
+\CSLLeftMargin{17. }%
 \CSLRightInline{Kroeker KJ, Kordas RL, Crim R, Hendriks IE, Ramajo L, Singh GS, et al. Impacts of ocean acidification on marine organisms: Quantifying sensitivities and interaction with warming. Global Change Biology. 2013;19: 1884--1896. doi:\href{https://doi.org/10.1111/gcb.12179}{10.1111/gcb.12179}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-saba_recommended_2019}{}}%
-\CSLLeftMargin{36. }%
-\CSLRightInline{Saba GK, Goldsmith KA, Cooley SR, Grosse D, Meseck SL, Miller AW, et al. Recommended priorities for research on ecological impacts of ocean and coastal acidification in the {U}.{S}. {Mid}-{Atlantic}. Estuarine, Coastal and Shelf Science. 2019;225: 106188. doi:\href{https://doi.org/10.1016/j.ecss.2019.04.022}{10.1016/j.ecss.2019.04.022}}
+\CSLLeftMargin{18. }%
+\CSLRightInline{Saba GK, Goldsmith KA, Cooley SR, Grosse D, Meseck SL, Miller AW, et al. Recommended priorities for research on ecological impacts of ocean and coastal acidification in the u.s. Mid-atlantic. Estuarine, Coastal and Shelf Science. 2019;225: 106188. doi:\href{https://doi.org/10.1016/j.ecss.2019.04.022}{10.1016/j.ecss.2019.04.022}}
 
-\leavevmode\vadjust pre{\hypertarget{ref-steimle_energy_1985}{}}%
-\CSLLeftMargin{37. }%
-\CSLRightInline{Steimle F, Terranova R. Energy {Equivalents} of {Marine} {Organisms} from the {Continental} {Shelf} of the {Temperate} {Northwest} {Atlantic}. Journal of Northwest Atlantic Fishery Science. 1985;6. doi:\href{https://doi.org/10.2960/J.v6.a11}{10.2960/J.v6.a11}}
+\leavevmode\vadjust pre{\hypertarget{ref-cameron_effects_2022}{}}%
+\CSLLeftMargin{19. }%
+\CSLRightInline{Cameron LP, Grabowski JH, Ries JB. Effects of elevated {pCO}2 and temperature on the calcification rate, survival, extrapallial fluid chemistry, and respiration of the atlantic sea scallop placopecten magellanicus. Limnology and Oceanography. 2022;67: 1670--1686. doi:\href{https://doi.org/10.1002/lno.12153}{10.1002/lno.12153}}
 
-\leavevmode\vadjust pre{\hypertarget{ref-lawson_important_1998}{}}%
-\CSLLeftMargin{38. }%
-\CSLRightInline{Lawson JW, Magalhães AM, Miller EH. Important prey species of marine vertebrate predators in the northwest {Atlantic}: Proximate composition and energy density. Marine Ecology Progress Series. 1998;164: 13--20. Available: \url{https://www.jstor.org/stable/24825521}}
+\leavevmode\vadjust pre{\hypertarget{ref-zakroff_dose-dependence_2019}{}}%
+\CSLLeftMargin{20. }%
+\CSLRightInline{Zakroff C, Mooney TA, Berumen ML. Dose-dependence and small-scale variability in responses to ocean acidification during squid, doryteuthis pealeii, development. Mar Biol. 2019;166: 62. doi:\href{https://doi.org/10.1007/s00227-019-3510-8}{10.1007/s00227-019-3510-8}}
 
-\leavevmode\vadjust pre{\hypertarget{ref-le_cren_length-weight_1951}{}}%
-\CSLLeftMargin{39. }%
-\CSLRightInline{Le Cren ED. The {Length}-{Weight} {Relationship} and {Seasonal} {Cycle} in {Gonad} {Weight} and {Condition} in the {Perch} ({Perca} fluviatilis). Journal of Animal Ecology. 1951;20: 201--219. doi:\href{https://doi.org/10.2307/1540}{10.2307/1540}}
-
-\leavevmode\vadjust pre{\hypertarget{ref-hernandez_seasonal_2019}{}}%
-\CSLLeftMargin{40. }%
-\CSLRightInline{Hernandez KM, Bogomolni AL, Moxley JH, Waring GT, DiGiovanni RA, Hammill MO, et al. Seasonal variability and individual consistency in gray seal ({Halichoerus} grypus) isotopic niches. Canadian Journal of Zoology. 2019;97: 1071--1077. doi:\href{https://doi.org/10.1139/cjz-2019-0032}{10.1139/cjz-2019-0032}}
-
-\leavevmode\vadjust pre{\hypertarget{ref-ono_detecting_2019}{}}%
-\CSLLeftMargin{41. }%
-\CSLRightInline{Ono KA, Steinbeiser CM, Coco AB, Sheehan MJ, Beck AJ, Dufault MN, et al. Detecting spiny dogfish in grey seal diets. Conservation Genetics Resources. 2019;11: 481--485. doi:\href{https://doi.org/10.1007/s12686-018-1044-x}{10.1007/s12686-018-1044-x}}
-
-\leavevmode\vadjust pre{\hypertarget{ref-mccosker_metabarcoding_2020}{}}%
-\CSLLeftMargin{42. }%
-\CSLRightInline{McCosker C, Flanders K, Ono K, Dufault M, Mellone D, Olson Z. Metabarcoding {Fecal} {DNA} {Reveals} {Extent} of {Halichoerus} grypus ({Gray} {Seal}) {Foraging} on {Invertebrates} and {Incidence} of {Parasite} {Exposure}. Northeastern Naturalist. 2020;27: 681--700. doi:\href{https://doi.org/10.1656/045.027.0409}{10.1656/045.027.0409}}
-
-\leavevmode\vadjust pre{\hypertarget{ref-flanders_utilizing_2020}{}}%
-\CSLLeftMargin{43. }%
-\CSLRightInline{Flanders KR, Olson ZH, Ono KA. Utilizing next-generation sequencing to identify prey {DNA} in western {North} {Atlantic} grey seal {Halichoerus} grypus diet. Marine Ecology Progress Series. 2020;655: 227--240. doi:\href{https://doi.org/10.3354/meps13520}{10.3354/meps13520}}
-
-\leavevmode\vadjust pre{\hypertarget{ref-hare_cusk_2012}{}}%
-\CSLLeftMargin{44. }%
-\CSLRightInline{Hare JA, Manderson JP, Nye JA, Alexander MA, Auster PJ, Borggaard DL, et al. {Cusk (Brosme brosme) and climate change: assessing the threat to a candidate marine fish species under the US Endangered Species Act}. ICES Journal of Marine Science. 2012;69: 1753--1768. doi:\href{https://doi.org/10.1093/icesjms/fss160}{10.1093/icesjms/fss160}}
-
-\leavevmode\vadjust pre{\hypertarget{ref-fogarty_cod_2007}{}}%
-\CSLLeftMargin{45. }%
-\CSLRightInline{Fogarty M, Incze L, Hayhoe K, Mountain D, Manning J. {Potential climate change impacts on Atlantic cod (Gadus morhua) off the northeastern USA}. Mitigation and Adaptation Strategies for Global Change. 2008;13: 453--466. Available: \url{https://EconPapers.repec.org/RePEc:spr:masfgc:v:13:y:2008:i:5:p:453-466}}
-
-\leavevmode\vadjust pre{\hypertarget{ref-bell_rebuilding_2014}{}}%
-\CSLLeftMargin{46. }%
-\CSLRightInline{Bell RJ, Hare JA, Manderson JP, Richardson DE. {Externally driven changes in the abundance of summer and winter flounder}. ICES Journal of Marine Science. 2014;71: 2416--2428. doi:\href{https://doi.org/10.1093/icesjms/fsu069}{10.1093/icesjms/fsu069}}
-
-\leavevmode\vadjust pre{\hypertarget{ref-mills_fisheries_2013}{}}%
-\CSLLeftMargin{47. }%
-\CSLRightInline{Mills K, Pershing A, Brown C, Chen Y, Chiang F-S, Holland D, et al. Fisheries {Management} in a {Changing} {Climate}: {Lessons} {From} the 2012 {Ocean} {Heat} {Wave} in the {Northwest} {Atlantic}. Oceanography. 2013;26. doi:\href{https://doi.org/10.5670/oceanog.2013.27}{10.5670/oceanog.2013.27}}
-
-\leavevmode\vadjust pre{\hypertarget{ref-powell_ocean_2020}{}}%
-\CSLLeftMargin{48. }%
-\CSLRightInline{Powell EN, Ewing AM, Kuykendall KM. Ocean quahogs ({Arctica} islandica) and {Atlantic} surfclams ({Spisula} solidissima) on the {Mid}-{Atlantic} {Bight} continental shelf and {Georges} {Bank}: {The} death assemblage as a recorder of climate change and the reorganization of the continental shelf benthos. Palaeogeography, Palaeoclimatology, Palaeoecology. 2020;537: 109205. doi:\href{https://doi.org/10.1016/j.palaeo.2019.05.027}{10.1016/j.palaeo.2019.05.027}}
-
-\leavevmode\vadjust pre{\hypertarget{ref-pace_two-hundred_2018}{}}%
-\CSLLeftMargin{49. }%
-\CSLRightInline{Pace SM, Powell EN, Mann R. Two-hundred year record of increasing growth rates for ocean quahogs ({Arctica} islandica) from the northwestern {Atlantic} {Ocean}. Journal of Experimental Marine Biology and Ecology. 2018;503: 8--22. doi:\href{https://doi.org/10.1016/j.jembe.2018.01.010}{10.1016/j.jembe.2018.01.010}}
-
-\leavevmode\vadjust pre{\hypertarget{ref-chavez-rosales_detection_2022}{}}%
-\CSLLeftMargin{50. }%
-\CSLRightInline{Chavez-Rosales S, Josephson E, Palka D, Garrison L. Detection of {Habitat} {Shifts} of {Cetacean} {Species}: {A} {Comparison} {Between} 2010 and 2017 {Habitat} {Suitability} {Conditions} in the {Northwest} {Atlantic} {Ocean}. Frontiers in Marine Science. 2022;9. Available: \url{https://www.frontiersin.org/articles/10.3389/fmars.2022.877580}}
-
-\leavevmode\vadjust pre{\hypertarget{ref-perretti_regime_2017}{}}%
-\CSLLeftMargin{51. }%
-\CSLRightInline{Perretti C, Fogarty M, Friedland K, Hare J, Lucey S, McBride R, et al. Regime shifts in fish recruitment on the {Northeast} {US} {Continental} {Shelf}. Marine Ecology Progress Series. 2017;574: 1--11. doi:\href{https://doi.org/10.3354/meps12183}{10.3354/meps12183}}
+\leavevmode\vadjust pre{\hypertarget{ref-zakroff_antagonistic_2020}{}}%
+\CSLLeftMargin{21. }%
+\CSLRightInline{Zakroff CJ, Mooney TA. Antagonistic interactions and clutch-dependent sensitivity induce variable responses to ocean acidification and warming in squid (doryteuthis pealeii) embryos and paralarvae. Frontiers in Physiology. 2020;11. Available: \url{https://www.frontiersin.org/articles/10.3389/fphys.2020.00501}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-northeast_fisheries_science_center_us_noaa_2022}{}}%
-\CSLLeftMargin{52. }%
-\CSLRightInline{Hare JA, Blythe BJ, Ford KH, Godfrey-McKee S, Hooker BR, Jensen BM, et al. {NOAA} {Fisheries} and {BOEM} {Federal} {Survey} {Mitigation} {Implementation} {Strategy} - {Northeast} {U}.{S}. {Region}. Northeast Fisheries Science Center (U.S.), editor. 2022; doi:\href{https://doi.org/10.25923/jqse-x746}{10.25923/jqse-x746}}
+\CSLLeftMargin{22. }%
+\CSLRightInline{Hare JA, Blythe BJ, Ford KH, Godfrey-McKee S, Hooker BR, Jensen BM, et al. {NOAA} fisheries and {BOEM} federal survey mitigation implementation strategy - northeast u.s. region. Northeast Fisheries Science Center (U.S.), editor. 2022; doi:\href{https://doi.org/10.25923/jqse-x746}{10.25923/jqse-x746}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-boem_vineyard_2020}{}}%
-\CSLLeftMargin{53. }%
-\CSLRightInline{BOEM. Vineyard {Wind} 1 {Offshore} {Wind} {Energy} {Project} {Supplement} to the {Draft} {Environmental} {Impact} {Statement}. {OCS} {EIS}/{EA}, {BOEM} 2020-025 {[}Internet{]}. 2020. Available: \url{https://www.boem.gov/sites/default/files/documents/renewable-energy/Vineyard-Wind-1-Supplement-to-EIS.pdf}}
-
-\leavevmode\vadjust pre{\hypertarget{ref-christiansen_wind_2022}{}}%
-\CSLLeftMargin{54. }%
-\CSLRightInline{Christiansen N, Daewel U, Djath B, Schrum C. Emergence of large-scale hydrodynamic structures due to atmospheric offshore wind farm wakes. Frontiers in Marine Science. 2022;9. doi:\href{https://doi.org/10.3389/fmars.2022.818501}{10.3389/fmars.2022.818501}}
-
-\leavevmode\vadjust pre{\hypertarget{ref-white_ducks_2020}{}}%
-\CSLLeftMargin{55. }%
-\CSLRightInline{White TP, Veit RR. Spatial ecology of long-tailed ducks and white-winged scoters wintering on nantucket shoals. Ecosphere. 2020;11: e03002. doi:\url{https://doi.org/10.1002/ecs2.3002}}
-
-\leavevmode\vadjust pre{\hypertarget{ref-sorochan_narw_forage_2021}{}}%
-\CSLLeftMargin{56. }%
-\CSLRightInline{Sorochan KA, Plourde S, Baumgartner MF, Johnson CL. {Availability, supply, and aggregation of prey (Calanus spp.) in foraging areas of the North Atlantic right whale (Eubalaena glacialis)}. ICES Journal of Marine Science. 2021;78: 3498--3520. doi:\href{https://doi.org/10.1093/icesjms/fsab200}{10.1093/icesjms/fsab200}}
+\CSLLeftMargin{23. }%
+\CSLRightInline{BOEM. Vineyard wind 1 offshore wind energy project supplement to the draft environmental impact statement. {OCS} {EIS}/{EA}, {BOEM} 2020-025 {[}Internet{]}. 2020. Available: \url{https://www.boem.gov/sites/default/files/documents/renewable-energy/Vineyard-Wind-1-Supplement-to-EIS.pdf}}
 
 \end{CSLReferences}
 
