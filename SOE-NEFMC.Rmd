@@ -338,8 +338,6 @@ As a whole, the examined diversity indicators suggest changes in commercial and 
 
 [Social vulnerability](https://noaa-edab.github.io/catalog/engagement-reliance-and-environmental-justice-in-top-fishing-communities.html) measures social factors that shape a community’s ability to adapt to change. A subset of these can be used to assess potential environmental justice issues. We report the top ten communities most engaged in, and/or reliant upon, commercial and recreational fisheries and the degree to which these communities may be vulnerable to environmental justice issues (i.e., Poverty, Population Composition, and Personal Disruption) based on 2021 data. The engagement and reliance indices demonstrate the importance of commercial and recreational fishing to a given community relative to other coastal communities in a region. Similarly, the environmental justice indices characterize different facets and levels of social vulnerability in a given community relative to other coastal communities in a region. 
 
-*This section still to be updated, ports may change*
-
 In New England Dennis and Bourne, MA scored high for both recreational engagement and reliance, whereas no communities did previously(Fig.\ref{fig:recreational-engagement}). Seabrook and Newington, NH; Sandwich and Yarmouth, MA; Groton and Clinton, CT have decreased in their recreational engagement/reliance and are no longer listed as top ten recreational communities, replaced by Barnstable Town, Plymouth, Falmouth and Chatham, MA; Sronington, CT; Tiverton and New Shoreham, RI. There are no communities ranked medium-high or above for environmental justice indicators (Fig. \ref{recreational-EJ}). Communities that ranked medium for one or more of the environmental justice indicators are highlighted in purple, including Falmouth and Dennis, MA. 
 
 Fig. \ref{fig:recreational-EJ} orders communities clockwise in a descending order of recreational engagement scores from high to low, with the most highly engaged community, Narragansett/Point Judith, RI, listed on the top. Narragansett/Point Judith, like all of these top recreational communities ranked low for environmental justice vulnerability. In fact, the scores below 0 for all three environmental justice indicators implies a lower than average level of vulnerability, based on recreational engagement and reliance,  among the communities included in the analysis.
@@ -625,14 +623,16 @@ ecodata::plot_zoo_abundance_anom(report = "NewEngland")
 ##### Environmental Drivers
 
 Fish production can also be directly related to the prevailing environmental conditions by altering metabolic (growth) and reproductive processes. Many species possess thermal tolerances and can experience stressful or lethal conditions if temperatures exceed certain levels. Extreme temperature at both the [surface](https://noaa-edab.github.io/catalog/sea-surface-temperature-anomaly.html) (Fig. \ref{fig:longterm-sst}) and [bottom](https://noaa-edab.github.io/catalog/bottom-temperature---seasonal-anomaly.html) can exceed [thermal tolerance](https://noaa-edab.github.io/catalog/thermal-habitat-persistence.html) limits for some fish. For example, 2012 had among the warmest surface and bottom temperatures in New England. A large proportion of the Georges Bank and Mid-Atlantic regions had bottom temperatures above the 15℃ thermal tolerance for most groundfish, with some days exceeding the 24℃ potential mortality limit (Fig. \ref{fig:therm-hab-persist-2012}). The second strongest [bottom marine heatwave](https://noaa-edab.github.io/catalog/marine-heatwaves---bottom.html) since 1982 was observed in the GOM, although it did not exceed this 15℃ threshold. Most of GB and the inshore GOM have exceeded this 15℃ threshold since 2012.
-```{r therm-hab-persist-2012}
-year = 2012
-p =ecodata::plot_thermal_habitat_persistence(year=year) + ggplot2::ggtitle(paste(year))
-ggplot2::ggsave(here::here('images','thermal_habitat_2012.png'),p,width = 8,height = 8, units = 'in',dpi = 300)
+```{r therm-hab-persist-2012, fig.cap="The number of days in 2012 where bottom temperature exceeds 15℃ (left) and 24℃ (right) based on the GLORYS 1/12 degree grid.",fig.width = 8, fig.asp = 0.4}
+# year = 2012
+# ecodata::plot_thermal_habitat_persistence(year=year) + ggplot2::ggtitle(paste(year))+
+# ggplot2::ggsave(here::here('images','thermal_habitat_2012.png'),width = 8,height = 8, units = 'in',dpi = 300)
+# 
+# p2 = magick::image_read(here::here('images','thermal_habitat_2012.png')) %>%
+#   magick::image_trim()%>%
+#   magick::image_write(here::here('images','thermal_habitat_2012_cropped.png'))
 
-p2 = magick::image_read(here::here('images','thermal_habitat_2012.png'))
-p2 = magick::image_trim(p2)
-p2
+magick::image_read(here::here('images','thermal_habitat_2012_cropped.png'))
 ```
 [Ocean acidification](https://noaa-edab.github.io/catalog/ocean-acidification-and-other-stressors.html) (OA) risks vary among species and include reduced survival, growth, reproduction and productivity, where high OA risk indicates potential negative effects to species. High OA risk was observed for Atlantic sea scallop and longfin squid in Long Island Sound and the nearshore and mid-shelf regions of the New Jersey shelf (Fig. , right panel) during summer 2016, 2018, 2019, and 2023.
 ```{r oa-2023, fig.cap= "Locations where bottom aragonite saturation state ($\\Omega_{Arag}$; summer only: June-August) were at or below the laboratory-derived sensitivity level for Atlantic sea scallop (left panel) and longfin squid (right panel) for the time periods 2007-2022 (dark cyan) and 2023 only (magenta). Gray circles indicate locations where bottom $\\Omega_{Arag}$ values were above the species specific sensitivity values."}
@@ -807,6 +807,7 @@ The increase of offshore wind development can have both positive (e.g., employme
 magick::image_read("https://github.com/NOAA-EDAB/ecodata/raw/dev/workshop/images/SOE_2023_right_whales_hatteras_frame_v3_2024.jpg")
 
 ```
+\newpage
 ## Current state: 2023 Observations
 
 Multiple [anomalous conditions](https://noaa-edab.github.io/catalog/observation-synthesis.html) and extreme events were observed in 2023 that could have brief local effects and/or widespread long-term ecosystem, fishery and management implications. This section intends to provide a record of these observations, the implications they may have for other ecosystem processes, and a reflection on how they fit into our understanding of the ecosystem. Many of these observations are being actively studied but should be noted and considered in future analyses and management decisions. 
@@ -816,12 +817,12 @@ Globally, 2023 was the warmest year on record with record high sea surface tempe
 ### Regional/Coastal Phenomena
 
 There was a documented [die-off of scallops](https://noaa-edab.github.io/catalog/observation-synthesis.html) in the Mid-Atlantic Elephant Trunk regions between the 2022 and 2023 surveys. In 2022, Elephant Trunk experienced [stressful temperatures](https://noaa-edab.github.io/catalog/thermal-habitat-persistence.html) for scallops (17 - 19 ℃) for an average of 30 days, (Fig. \ref{fig:scallop-thermal-2022}) but ongoing research is being conducted to identify contributing factors. A  fish and shellfish mortality event was observed in coastal New Jersey linked to [hypoxia and ocean acidification](https://noaa-edab.github.io/catalog/ocean-acidification-and-other-stressors.html) (Fig. \ref{fig:hypoxia-2023}).
-```{r scallop-thermal-2022, out.width="60%", fig.cap="The number of days where bottom temperature was between 17 and 19 ℃ in each GLORYS grid cell for 2022. The gray lines show the sea scallop estimation areas, with the Elephant Trunk region highlighted in black lines."}
+```{r scallop-thermal-2022, out.width="60%", fig.cap="The number of days where bottom temperature was between 17 and 19 ℃ in each GLORYS grid cell for 2022. The gray lines show the sea scallop estimation areas, with the Elephant Trunk region highlighted in black lines.",fig.height = 4}
 # NEW FILE 
 magick::image_read("https://github.com/NOAA-EDAB/ecodata/blob/dev/workshop/images/bottom_temp_threshold_17_19_Elephant_Trunk.png?raw=true")
 
 ```
-```{r hypoxia-2023, out.width="60%", fig.cap="Mission tracks of three gliders (left) deployed off the coast of New Jersey in August and September of 2023. Locations of hypoxic levels of dissolved oxygen (magenta; < 3 mg/liter) and low aragonite saturation state (cyan; < 1) measured along the glider mission tracks and locations of reported fish, lobster, and/or crab mortalities (red X)."}
+```{r hypoxia-2023, out.width="60%", fig.cap="Mission tracks of three gliders (left) deployed off the coast of New Jersey in August and September of 2023. Locations of hypoxic levels of dissolved oxygen (magenta; < 3 mg/liter) and low aragonite saturation state (cyan; < 1) measured along the glider mission tracks and locations of reported fish, lobster, and/or crab mortalities (red X).",fig.height = 5}
 # NEW FILE 
 magick::image_read("https://github.com/NOAA-EDAB/ecodata/blob/dev/workshop/images/Figure2-GraceSaba_2024.png?raw=true")
 
@@ -850,7 +851,6 @@ While the total number of [warm core rings](https://noaa-edab.github.io/catalog/
 
 Multiple fall 2023 tropical and coastal storms caused several flash flood events, above average coastal water levels, strong winds and high rainfall totals throughout the Northeast. These storms may be related to the shift from 2020-2022 La Niña conditions to strong El Niño conditions in late spring 2023. El Niño winters are associated with more frequent East Coast storms, which can result in increased risk of coastal flooding,  increased freshwater runoff into the coastal ocean, and delayed spring transition from a well mixed water column to stratified. In estuaries, increased freshwater flow decreases salinity, reduces the amount of suitable habitat for juvenile marine fish, and is related to increased hypoxia (low oxygen). However, precipitation is not uniform throughout the Northeast U.S., and [Chesapeake Bay 2023 conditions](https://noaa-edab.github.io/catalog/chesapeake-bay-salinity.html) did not align with El Niño expectations.  The current El Niño is expected to weaken by spring 2024. 
 
-\newpage{}
 # Contributors
 
 **Editors** (NOAA NMFS Northeast Fisheries Science Center, NEFSC): Joseph Caracappa, Sarah Gaichas, Brandon Beltz, Geret DePiper, Kimberly Hyde, Scott Large, Laurel Smith.
@@ -981,6 +981,3 @@ flextable::flextable(df) %>%
   flextable::width(width = c(1,1,1,1,3))
 
 ```
-\newpage 
-
-# References
