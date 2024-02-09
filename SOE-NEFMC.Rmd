@@ -247,11 +247,7 @@ gom <- ecodata::plot_bennet(report = "NewEngland", varName = "total", EPU = "GOM
 gb + gom
 
 ```
-### Implications 
-
-The continued dependence on lobster in the GOM and sea scallops on GB is affected by multiple drivers including resource availability and market conditions. As both species are sensitive to ocean warming and acidification, it is important to monitor these and other climate drivers.
-
-```{r bennet-all, fig.cap = "Revenue change from the long-term mean in 2022 dollars (black), price, and volume for commercial landings from Georges Bank (GB: top panels) and the Gulf of Maine (GOM: bottom panels)", fig.width = 6, fig.asp = 0.8}
+```{r bennet-all, fig.cap = "Revenue change from the long-term mean in 2022 dollars (black), price, and volume for commercial landings from Georges Bank (GB: top panels) and the Gulf of Maine (GOM: bottom panels)", fig.width = 8, fig.asp = 0.65}
 #, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-bennet-all.R")
 
 gb <- ecodata::plot_bennet(report = "NewEngland", varName = "guild", EPU = "GB")
@@ -259,6 +255,9 @@ gom <- ecodata::plot_bennet(report = "NewEngland", varName = "guild", EPU = "GOM
 
 gb / gom
 ```
+### Implications 
+
+The continued dependence on lobster in the GOM and sea scallops on GB is affected by multiple drivers including resource availability and market conditions. As both species are sensitive to ocean warming and acidification, it is important to monitor these and other climate drivers.
 
 ## Recreational Opportunities 
         
@@ -341,13 +340,15 @@ As a whole, the examined diversity indicators suggest changes in commercial and 
 
 *This section still to be updated, ports may change*
 
-Two commercial fishing communities (Stonington and Beals, ME) scored high for both engagement and reliance based on 2021 data (Fig. \ref{fig:commercial-engagement}). New Bedford and Boston, MA and Swans Island, ME ranked medium-high or above for one or more of the environmental justice indicators in 2021. Swan’s Island has considerable unemployment concerns, but does not have the same demographic and age structure concerns as Boston or New Bedford. Port Clyde-Tenants Harbor and Stonington, ME ranked medium for one or more of the environmental justice indicators (Fig. \ref{fig:commercial-EJ}). Decreased commercial fishing engagement/reliance led to Winter Harbor, ME no longer being listed as a top ten commercial fishing community.
-```{r commercial-engagement, fig.cap= "Commercial engagement, reliance, and environmental justice vulnerability for the top commercially engaged and reliant fishing communities in New England. Communities ranked medium-high or above for one or more of the environmental justice indicators are highlighted in bright orange. Communities ranked medium for one or more of the environmental justice indicators are highlighted in purple. *Community scored high (1.00 and above) for both commercial engagement and reliance indicators.", fig.width = 7, fig.asp = 0.55, results='hide'}
+In New England Dennis and Bourne, MA scored high for both recreational engagement and reliance, whereas no communities did previously(Fig.\ref{fig:recreational-engagement}). Seabrook and Newington, NH; Sandwich and Yarmouth, MA; Groton and Clinton, CT have decreased in their recreational engagement/reliance and are no longer listed as top ten recreational communities, replaced by Barnstable Town, Plymouth, Falmouth and Chatham, MA; Sronington, CT; Tiverton and New Shoreham, RI. There are no communities ranked medium-high or above for environmental justice indicators (Fig. \ref{recreational-EJ}). Communities that ranked medium for one or more of the environmental justice indicators are highlighted in purple, including Falmouth and Dennis, MA. 
+
+Fig. \ref{fig:recreational-EJ} orders communities clockwise in a descending order of recreational engagement scores from high to low, with the most highly engaged community, Narragansett/Point Judith, RI, listed on the top. Narragansett/Point Judith, like all of these top recreational communities ranked low for environmental justice vulnerability. In fact, the scores below 0 for all three environmental justice indicators implies a lower than average level of vulnerability, based on recreational engagement and reliance,  among the communities included in the analysis.
+```{r commercial-engagement, fig.cap= "Commercial engagement, reliance, and environmental justice vulnerability for the top commercially engaged and reliant fishing communities in New England. Communities in orange are ranked medium-high or above for one or more of the environmental justice indicators Communities in purple are ranked medium for one or more of the environmental justice indicators. *Community scored high (1.00 and above) for both commercial engagement and reliance indicators.", fig.width = 6.5, fig.asp = 0.5, results='hide'}
 #, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-commercial-engagement.R")
 
 ecodata::plot_engagement(report = "NewEngland", varName = "Commercial")
 ```
-```{r commercial-EJ, fig.cap="Environmental justice indicators (Poverty Index, population composition index, and personal disruption index) for top commercial fishing communities in New England. *Community scored high (1.00 and above) for both commercial engagement and reliance indicators.", out.width='75%'}
+```{r commercial-EJ, fig.cap="Environmental justice indicators (Poverty Index, population composition index, and personal disruption index) for top commercial fishing communities in New England. *Community scored high (1.00 and above) for both commercial engagement and reliance indicators.", out.width='70%'}
 
 #get rid of the gray excel outline using R package magick
 ComEJ <- magick::image_read("https://github.com/NOAA-EDAB/ecodata/raw/master/workshop/images/EJ_Commercial_NE_2024.PNG")
@@ -364,9 +365,6 @@ cropComEJ <- ComEJ %>%
 
 cropComEJ
 ```
-In New England Dennis and Bourne, MA scored high for both recreational engagement and reliance, whereas no communities did previously(Fig.\ref{fig:recreational-engagement}). Seabrook and Newington, NH; Sandwich and Yarmouth, MA; Groton and Clinton, CT have decreased in their recreational engagement/reliance and are no longer listed as top ten recreational communities, replaced by Barnstable Town, Plymouth, Falmouth and Chatham, MA; Sronington, CT; Tiverton and New Shoreham, RI. There are no communities ranked medium-high or above for environmental justice indicators (Fig. \ref{recreational-EJ}). Communities that ranked medium for one or more of the environmental justice indicators are highlighted in purple, including Falmouth and Dennis, MA. 
-
-Fig. \ref{fig:recreational-EJ} orders communities clockwise in a descending order of recreational engagement scores from high to low, with the most highly engaged community, Narragansett/Point Judith, RI, listed on the top. Narragansett/Point Judith, like all of these top recreational communities ranked low for environmental justice vulnerability. In fact, the scores below 0 for all three environmental justice indicators implies a lower than average level of vulnerability, based on recreational engagement and reliance,  among the communities included in the analysis.
 ```{r recreational-engagement, fig.cap= "Recreational engagement and reliance, and environmental justice vulnerability, for the top recreationally engaged and reliant fishing communities in New England. None of these communities ranked medium-high or above for one or more of the environmental justice indicators. Communities ranked medium for one or more of the environmental justice indicators are highlighted in purple. *Community scored high (1.00 and above) for both recreational engagement and reliance indicators.", fig.width = 7, fig.asp = 0.5, results='hide'}
 #, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-recreational-engagement.R")
 
@@ -467,19 +465,18 @@ As noted in the landings Implications section above, the center of distribution 
 
 ecodata::plot_HMS_species_distribution() + ggplot2::ggtitle("Whale and Dolphin Distribution Shifts")
 ```
-```{r species-dist, fig.cap = "Aggregate species distribution metrics for species in the Northeast Large Marine Ecosystem.", fig.asp=0.9}
+#### Drivers
+
+Mobile populations are shifting distributions to maintain suitable temperature and prey fields, possibly expanding if new suitable habitat exists. Changes in managed species distribution is related, in part, to the [distribution of forage biomass](https://noaa-edab.github.io/catalog/forage-fish-index.html). Since 1982, the fall center of gravity of forage fish (20 species combined) has moved to the north and east. Spring forage fish center of gravity has been more variable over time.
+```{r species-dist, fig.cap = "Aggregate species distribution metrics for species in the Northeast Large Marine Ecosystem.",fig.width = 8, fig.asp=0.3}
 #, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_MAB.Rmd-species-dist.R")
 
 a <- ecodata::plot_species_dist(varName = "along") + ggplot2::coord_cartesian(expand = FALSE)
 b <- ecodata::plot_species_dist(varName = "depth") + ggplot2::coord_cartesian(expand = FALSE) 
 
-a/b
+a+b
 ```
-#### Drivers
-
-Mobile populations are shifting distributions to maintain suitable temperature and prey fields, possibly expanding if new suitable habitat exists. Changes in managed species distribution is related, in part, to the [distribution of forage biomass](https://noaa-edab.github.io/catalog/forage-fish-index.html). Since 1982, the fall center of gravity of forage fish (20 species combined) has moved to the north and east. Spring forage fish center of gravity has been more variable over time.
-
-```{r forage-cog, fig.cap = "Eastward (left) and northward (right) shifts in the center of gravity for 20 forage fish species on the Northeast U.S. Shelf.", fig.width = 8, fig.asp = .6}
+```{r forage-cog, fig.cap = "Eastward (left) and northward (right) shifts in the center of gravity for 20 forage fish species on the Northeast U.S. Shelf.", fig.width = 8, fig.asp = .3}
 
 ecodata::plot_forage_index(report = "NewEngland", varName = 'cog')
 
@@ -527,7 +524,7 @@ Understanding whether seasonal patterns are changing for stocks requires regular
 The drivers of timing shifts in managed stocks are generally coupled to shifts in environmental or biological conditions, since these can result in changes in habitat quality or food availability within the year. Changes in the timing of fall phytoplankton blooms and seasonal shifts in zooplankton communities are thought to be critical indicators of changes in seasonal food availability to stocks. 
 
 Along with the overall warming trends in New England, ocean summer conditions have been lasting longer, as shown by the later [transition](https://noaa-edab.github.io/catalog/transition-dates.html) from warm stratified summer conditions to well mixed cool fall conditions (Fig. \ref{fig:transition}). Changes in the broad seasonal cycles of their environment can lead to changes in species biological processes (migrations, spawning, etc.) that are triggered by seasonal events. Additionally, prolonged fall temperatures have been linked to the increased number of cold-stunned Kemp’s ridley sea turtles found in Cape Cod Bay.
-```{r transition, fig.cap="Ocean summer length: the annual total number of days between the spring thermal transition date and the fall thermal transition date. The transition dates are defined as the day of the year when surface temperatures change from cool to warm conditions in the spring and back to cool conditions in the fall."}
+```{r transition, fig.cap="Ocean summer length: the annual total number of days between the spring thermal transition date and the fall thermal transition date. The transition dates are defined as the day of the year when surface temperatures change from cool to warm conditions in the spring and back to cool conditions in the fall.",fig.width = 8, fig.asp = 0.3}
 #, code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_MAB.Rmd-sumlength.R")
 
 ecodata::plot_trans_dates(report = "NewEngland", varName = 'length')
@@ -550,16 +547,16 @@ The efficacy of short-term stock projections and rebuilding plans rely on an acc
 #### Indicators: Fish productivity and condition shifts
 
 Indicators of [fish productivity](https://noaa-edab.github.io/catalog/fish-productivity-indicators.html) are derived from observations (surveys) or models (stock assessments). With the exception of two years (2006 and 2013), fish productivity has been below the long-term average in the Gulf of Maine since the early 2000s, as described by the small-fish-per-large-fish anomaly indicator (derived from NEFSC bottom trawl survey)(Fig. \ref{fig:productivity-anomaly}). This decline in fish productivity is also shown by a similar analysis based on stock assessment model outputs (recruitment per spawning stock biomass anomaly). Other signs of changing productivity in New England are the declines in [common tern chicks](https://noaa-edab.github.io/catalog/seabird-diet-and-productivity---new-england.html) per nest (Fig. \ref{fig:seabird-ne-productivity}) and declining return rates for [Atlantic salmon](https://noaa-edab.github.io/catalog/gulf-of-maine-atlantic-salmon.html)(Fig. \ref{fig:salmon}).
-```{r productivity-anomaly, fig.cap = "Fish productivity measures. Left: Small fish per large fish survey biomass anomaly in the Gulf of Maine. Right: assessment recruitment per spawning stock biomass anomaly for stocks managed by the New England Fishery Management Council region. The summed anomaly across species is shown by the black line, drawn across all years with the same number of stocks analyzed.", fig.width=8, fig.asp=1}
+```{r productivity-anomaly, fig.cap = "Fish productivity measures. Left: Small fish per large fish survey biomass anomaly in the Gulf of Maine. Right: assessment recruitment per spawning stock biomass anomaly for stocks managed by the New England Fishery Management Council region. The summed anomaly across species is shown by the black line, drawn across all years with the same number of stocks analyzed.", fig.width=8, fig.asp=0.7}
 #out.width='49%', fig.show='hold',
 a <- ecodata::plot_productivity_anomaly(report = "NewEngland", EPU = "GOM") + 
-  ggplot2::guides(fill = ggplot2::guide_legend(ncol =2))+
+  ggplot2::guides(fill = ggplot2::guide_legend(ncol =3))+
   ggplot2::theme(legend.position = "bottom",
                       legend.title = ggplot2::element_blank(),
                  plot.title =element_text(size = 11))
 
 b <- ecodata::plot_productivity_anomaly(report = "NewEngland", varName = "assessment")+ 
-  ggplot2::guides(fill = ggplot2::guide_legend(ncol =2))+
+  ggplot2::guides(fill = ggplot2::guide_legend(ncol =3))+
   ggplot2::theme(legend.position = "bottom",
                       legend.title = ggplot2::element_blank(),
                  plot.title =element_text(size = 11))
@@ -598,11 +595,7 @@ The [energy content](https://noaa-edab.github.io/catalog/forage-fish-energy-dens
 ecodata::plot_energy_density()
 ```
 Changes in the overall abundance of forage fish can influence managed species productivity as it relates to changes in food availability. New England [fall forage biomass]( https://noaa-edab.github.io/catalog/forage-fish-index.html) is stable with long-term increases in the spring GOM(Fig. \ref{fig:foragebio}). Forage biomass was highest during fall in the 1980s.
-```{r foragebio, fig.cap = "Forage fish index in GB (left) and GOM (right) for spring (blue) and fall (red) surveys. Index values are relative to the maximum observation within a region across surveys.", fig.width = 8, fig.asp=.6}
-#, code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_MAB.Rmd-forage-index.R")
 
-ecodata::plot_forage_index(report = "NewEngland")
-```
 ##### Biological Drivers: Lower trophic levels
 
 Phytoplankton are the foundation of the food web and are the primary food source for zooplankton and filter feeders such as shellfish. Numerous environmental and oceanographic factors interact to drive the abundance, composition, spatial distribution, and productivity of phytoplankton. While changes in fish productivity (including forage) could result from changing primary productivity, total primary production in New England has no long-term trend, despite anomalous conditions in the GOM in 2023 (Fig. \ref{fig:primaray-production}).
@@ -612,7 +605,13 @@ Since 2010, the abundance of the lipid-rich older stages of  [*Calanus finmarchi
 1. *Calanus* reproductive output is tied to phytoplankton availability in late winter/early spring.
 2. Gulf of Maine source waters drive *Calanus* supply (high *Calanus* in Scotian Shelf/ LSW and less in WSW)
 3. Predation is likely higher with warmer temperatures
-```{r zooplankton-season, fig.cap="Seasonal indices of dry mass of mesozooplankton captured with a 200µm ring net towed from the bottom to surface at a deep time series station  in Wilkinson Basin between 2005-2022 (Runge et al. 2023). "}
+
+```{r foragebio, fig.cap = "Forage fish index in GB (left) and GOM (right) for spring (blue) and fall (red) surveys. Index values are relative to the maximum observation within a region across surveys.", fig.width = 8, fig.asp=.4}
+#, code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_MAB.Rmd-forage-index.R")
+
+ecodata::plot_forage_index(report = "NewEngland")
+```
+```{r zooplankton-season, fig.cap="Seasonal indices of dry mass of mesozooplankton captured with a 200µm ring net towed from the bottom to surface at a deep time series station  in Wilkinson Basin between 2005-2022 (Runge et al. 2023)."}
 
 magick::image_read("https://github.com/NOAA-EDAB/ecodata/blob/dev/workshop/images/WBTS_Mesozooplankton_BIomass_2005-2022_Runge_Dullaert-Jeffrey_Runge_2024.jpg?raw=true")
 
@@ -626,9 +625,14 @@ ecodata::plot_zoo_abundance_anom(report = "NewEngland")
 ##### Environmental Drivers
 
 Fish production can also be directly related to the prevailing environmental conditions by altering metabolic (growth) and reproductive processes. Many species possess thermal tolerances and can experience stressful or lethal conditions if temperatures exceed certain levels. Extreme temperature at both the [surface](https://noaa-edab.github.io/catalog/sea-surface-temperature-anomaly.html) (Fig. \ref{fig:longterm-sst}) and [bottom](https://noaa-edab.github.io/catalog/bottom-temperature---seasonal-anomaly.html) can exceed [thermal tolerance](https://noaa-edab.github.io/catalog/thermal-habitat-persistence.html) limits for some fish. For example, 2012 had among the warmest surface and bottom temperatures in New England. A large proportion of the Georges Bank and Mid-Atlantic regions had bottom temperatures above the 15℃ thermal tolerance for most groundfish, with some days exceeding the 24℃ potential mortality limit (Fig. \ref{fig:therm-hab-persist-2012}). The second strongest [bottom marine heatwave](https://noaa-edab.github.io/catalog/marine-heatwaves---bottom.html) since 1982 was observed in the GOM, although it did not exceed this 15℃ threshold. Most of GB and the inshore GOM have exceeded this 15℃ threshold since 2012.
-```{r therm-hab-persist-2012, fig.width=8, fig.asp=1}
+```{r therm-hab-persist-2012}
 year = 2012
-ecodata::plot_thermal_habitat_persistence(year=year) + ggplot2::ggtitle(paste(year))
+p =ecodata::plot_thermal_habitat_persistence(year=year) + ggplot2::ggtitle(paste(year))
+ggplot2::ggsave(here::here('images','thermal_habitat_2012.png'),p,width = 8,height = 8, units = 'in',dpi = 300)
+
+p2 = magick::image_read(here::here('images','thermal_habitat_2012.png'))
+p2 = magick::image_trim(p2)
+p2
 ```
 [Ocean acidification](https://noaa-edab.github.io/catalog/ocean-acidification-and-other-stressors.html) (OA) risks vary among species and include reduced survival, growth, reproduction and productivity, where high OA risk indicates potential negative effects to species. High OA risk was observed for Atlantic sea scallop and longfin squid in Long Island Sound and the nearshore and mid-shelf regions of the New Jersey shelf (Fig. , right panel) during summer 2016, 2018, 2019, and 2023.
 ```{r oa-2023, fig.cap= "Locations where bottom aragonite saturation state ($\\Omega_{Arag}$; summer only: June-August) were at or below the laboratory-derived sensitivity level for Atlantic sea scallop (left panel) and longfin squid (right panel) for the time periods 2007-2022 (dark cyan) and 2023 only (magenta). Gray circles indicate locations where bottom $\\Omega_{Arag}$ values were above the species specific sensitivity values."}
@@ -668,6 +672,7 @@ Just over 3,300 foundations and more than 12,000 miles of inter-array and offsho
 magick::image_read("https://github.com/NOAA-EDAB/ecodata/raw/dev/workshop/images/Cumulative_Timeline_FullRegion_SoE2024_v2_2024.png")
 
 ```
+\newpage
 Offshore floating wind is expected to be developed in the GOM. Although no commercial wind lease areas have been proposed, BOEM released a draft Wind Energy Area (Fig. \ref{fig:wind-dev-cumul2}) on October 19, 2023, which could be refined into future lease areas. BOEM announced that the final wind energy area and proposed commercial lease area designations for the GOM are expected in quarter one of 2024, with lease sales before 2025. BOEM is also reviewing the state of Maine’s application to lease 9,700 acres (15 square miles) for the first floating offshore wind research site in federal waters of the GOM, which could have up to 12 turbines. Leasing for offshore floating wind in the Gulf of Maine will seek to meet the Biden Administration’s proposed goal of 15GW of floating offshore wind by 2035 in the U.S. 
 
 NEFSC has partnered with the Responsible Ocean Development Alliance (RODA) and the University of Rhode Island to conduct an Integrated Ecosystem Assessment (IEA) of the interactions between offshore wind, fisheries, and the environment in the Gulf of Maine. The IEA report will be similar to the State of the Ecosystem, but fully dedicated to impacts of offshore wind. Data from the IEA will be suitable for inclusion in the environmental impact statements for any projects in the GOM.
