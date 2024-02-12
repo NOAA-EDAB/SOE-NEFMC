@@ -830,7 +830,7 @@ magick::image_read("https://github.com/NOAA-EDAB/ecodata/blob/dev/workshop/image
 Summer [bottom temperatures](https://noaa-edab.github.io/catalog/bottom-temperature---seasonal-anomaly.html) in the Gulf of Maine were the warmest on record (since 1959) resulting in the second largest [bottom marine heatwave](https://noaa-edab.github.io/catalog/marine-heatwaves---bottom.html). The heatwave started in February, peaked in May and likely continued beyond August (pending data update). 2023 [bottom temperature](https://noaa-edab.github.io/catalog/thermal-habitat-persistence.html) exceeded the 15oC threshold for up to 59 days along the shelf break. 
 
 A wide-spread, long-duration [phytoplankton bloom](https://noaa-edab.github.io/catalog/observation-synthesis.html) of the dinoflagellate Tripos muelleri was observed in the GOM and generated [chlorophyll concentrations](https://noaa-edab.github.io/catalog/chlorophyll-and-primary-production.html) up to ten times greater than average (a record high since 1998) from March to August (Fig. \ref{fig:gom-bloom-2023}). The bloom severely reduced water clarity, impacting harpoon fishing and likely affecting visual predators. Despite Tripos being a similar size to typical large phytoplankton (diatoms), this extra production was not grazed nor did it sink to the bottom. The specific drivers of the bloom and implications to the food web are still under investigation. 
-```{r gom-bloom-2023, out.width="60%", fig.cap="Map of Chlorophyll anomaly ratio in 2023 during a large bloom event."}
+```{r gom-bloom-2023, out.width="60%", fig.cap="June 2023 chlorophyll anomaly shown as the ratio of the June 2023 average compared to climatological (1998-2023) June average. The black line depicts the 100 m isobath."}
 # NEW FILE 
 magick::image_read("https://github.com/NOAA-EDAB/ecodata/blob/dev/workshop/images/2023-GOMbloom-internalreview.png?raw=true")
 
@@ -842,7 +842,7 @@ Higher-than-average [salinity](https://noaa-edab.github.io/catalog/chesapeake-ba
 ### Shelf-wide Phenomena
 
 The [Gulf Stream](https://noaa-edab.github.io/catalog/gulf-stream-index.html) was highly variable in 2023, with northward shifts intermittently throughout the year and a more notable prolonged shift north along the continental shelf break in the southern Mid-Atlantic in the fall [Fig .\ref{fig:gulf-stream-2023}]. This shift severely constricted the Slope Sea (the waters between the Gulf Stream and continental shelf), inhibited warm core ring formation and interactions, resulted in unusually warm and salty surface waters, and strong northeastward currents in the southern Mid-Atlantic. Intermittent warm waters like this can be threats to temperature sensitive species, especially species at the southern end of their range or are not mobile (e.g. scallops), while also providing suitable habitat for more southern species. 
-```{r gulf-stream-2023, out.width="60%", fig.cap="Map of sea surface temeprature (color scale) in October, 2023. The dark blue line shows the long-term mean Gulf Steam position."}
+```{r gulf-stream-2023, out.width="60%", fig.cap="October 8-14, 2023 sea surface temperature average derived from the Advanced Clear Sky Processor for Ocean (ACSPO) SST data. The black line depicts the 100 m isobath and the blue line is the mean path of the Gulf Stream."}
 # NEW FILE 
 magick::image_read("https://github.com/NOAA-EDAB/ecodata/blob/dev/workshop/images/2023-GS-October-internalreview.png?raw=true")
 
