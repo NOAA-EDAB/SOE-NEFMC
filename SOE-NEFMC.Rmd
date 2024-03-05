@@ -173,7 +173,8 @@ Single species [management objectives](https://noaa-edab.github.io/catalog/stock
 ```{r stock-status, fig.cap = "Summary of single species status for NEFMC and jointly federally managed stocks (goosefish and spiny dogfish).  The dotted vertical line at one is the target biomass reference point of B.  The dashed lines are the management thresholds of B (vertical) or F (horizontal). Colors denote stocks with B/B\\textsubscript{MSY} < 0.5 or F/F\\textsubscript{MSY} (orange), stocks 0.5<B/B\\textsubscript{MSY}<1 (blue), and stocks B/B\\textsubscript{MSY}>1 (green).CCGOM = Cape Cod Gulf of Maine, GOM = Gulf of Maine, GB = Georges Bank, SNEMA = Southern New England Mid Atlantic", fig.width = 7.5, fig.asp = 0.8}
 #, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-stock-status.R")
 
-ecodata::plot_stock_status(report = "NewEngland")
+p <- ecodata::plot_stock_status(report = "NewEngland")
+p$p
 
 # nrow <- as.integer(dim(a$unknown)[1])
 # halfnrow <- as.integer(nrow/2)
