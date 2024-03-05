@@ -14,6 +14,7 @@ output:
   bookdown::html_document2: 
     df_print: paged
 link-citations: yes
+#latex_engine: xelatex
 geometry: left=2cm, right=2cm, top=2cm, bottom=3cm, footskip = .5cm
 subparagraph: yes
 bibliography: SOE.bib
@@ -64,15 +65,15 @@ options(tinytex.verbose = TRUE)
 # Introduction
 
 ## About This Report
-
-This report is for the New England Fishery Management Council (NEFMC). The purpose of this report is to synthesize ecosystem information to allow the NEFMC to better meet fishery management objectives. The major messages of the report are summarized on pages 1, 2, and 3, and synthesis themes are illustrated on page 4. Information in this report is organized into two sections; [performance measured against ecosystem-level management objectives](#performance-relative-to-fishery-management-objectives) (Table \ref{tab:management-objectives}), and potential [risks to meeting fishery management objectives](#risks-to-meeting-fishery-management-objectives) ([climate change](#climate-and-ecosystem-productivity) and [other ocean uses](#other-ocean-uses-offshore-wind)).  
+This report is for the New England Fishery Management Council (MAFMC). The purpose of this report is to synthesize ecosystem information to allow the NEFMC to better meet fishery management objectives, and to update the MAFMC’s Ecosystem Approach to Fishery Management (EAFM) risk assessment. The major messages of the report are synthesized on pages 1-3, with highlights of 2023 ecosystem events on page 4. The information in this report is organized into two main sections; [performance measured against ecosystem-level management objectives](#performance-relative-to-fishery-management-objectives) (Table \ref{tab:management-objectives}), and potential [risks to meeting fishery management objectives](#risks-to-meeting-fishery-management-objectives) ([climate change](#climate-and-ecosystem-productivity) and [other ocean uses](#other-ocean-uses-offshore-wind)). A final new section introduced this year highlights [notable 2023 ecosystem observations](#2023-highlights).
 
 ## Report structure
 
-The two main sections contain subsections for each management objective or potential risk. Within each subsection, we first review indicator trends, and the status of the most recent data year relative to a threshold (if available) or relative to the long-term average. Second, we synthesize results of other indicators and information to outline potential implications for management (i.e., connecting indicator(s) status to management and why an indicator(s) is important). For example, if there are multiple drivers related to an indicator trend, which drivers may be more or less supported by current information, and which, if any, can be affected by management action(s)? Similarly, which risk indicators warrant continued monitoring to evaluate whether regime shifts or ecosystem reorganization are likely? We emphasize that these implications are intended to represent testable hypotheses at present, rather than “answers,” because the science behind these indicators and syntheses continues to develop.  
+We recommend new readers first review the details of standard figure formatting (Fig. \ref{fig:docformat}a), categorization of fish and invertebrate species into feeding guilds (Table \ref{tab:species-groupings}), and definitions of ecological production units (EPUs, including the Mid-Atlantic Bight, MAB; Fig. \ref{fig:docformat}b) provided at the end of the document. 
 
-A glossary of terms^[https://noaa-edab.github.io/tech-doc/glossary.html], detailed technical methods documentation^[https://NOAA-EDAB.github.io/tech-doc] and indicator data^[https://github.com/NOAA-EDAB/ecodata], and  detailed indicator descriptions^[https://noaa-edab.github.io/catalog/index.html] are available online. The details of standard figure formatting (Fig. \ref{fig:docformat}a), categorization of fish and invertebrate species into feeding groups (Table \ref{tab:species-groupings}), and definitions of ecological production units (EPUs, including Georges Bank, GB, and the Gulf of Maine, GOM; Fig. \ref{fig:docformat}b) are provided at the end of the document. 
+The two main sections contain subsections for each management objective or potential risk. Within each subsection, we first review indicator trends, and the status of the most recent data year relative to a threshold (if available) or relative to the long-term average. Second, we synthesize results of other indicators and information to outline potential implications for management (i.e., connecting indicator(s) status to management and why an indicator(s) is important). For example, if there are multiple drivers related to an indicator trend, we examine which drivers may be more or less supported by current information, and which,if any, are affected by management action(s)? Similarly, we examine which risk indicators warrant continued monitoring to evaluate whether regime shifts or ecosystem reorganization are likely? We emphasize that these implications are intended to represent testable hypotheses at present, rather than “answers,” because the science behind these indicators and syntheses continues to develop.  
 
+A glossary of terms^[https://noaa-edab.github.io/tech-doc/glossary.html], detailed technical methods documentation^[https://NOAA-EDAB.github.io/tech-doc] and indicator data^[https://github.com/NOAA-EDAB/ecodata], and  detailed indicator descriptions^[https://noaa-edab.github.io/catalog/index.html] are available online.
 ```{r management-objectives, ft.arraystretch = 1}
 
 mng_obj <- data.frame("Objective Categories" = c("Seafood Production",
@@ -121,42 +122,42 @@ flextable::as_grouped_data(mng_obj, groups = "service") %>%
  
 # Performance relative to fishery management objectives
 
-In this section, we examine indicators related to broad, ecosystem-level fishery management objectives. We also provide hypotheses on the implications of these trends—*why* we are seeing them, what’s driving them, and potential or observed regime shifts or changes in ecosystem structure. Identifying multiple drivers, regime shifts, and potential changes to ecosystem structure, as well as identifying the most vulnerable resources, can help managers determine whether anything differently needs to be done to meet objectives and how to prioritize upcoming issues/risks.
+In this section, we examine indicators related to broad, ecosystem-level fishery management objectives. We also provide hypotheses on the implications of these trends—why we are seeing them, what’s driving them, and potential or observed regime shifts or changes in ecosystem structure. Identifying multiple drivers, regime shifts, and potential changes to ecosystem structure, as well as identifying the most vulnerable resources, can help managers determine whether anything different needs to be done to meet objectives and how to prioritize upcoming issues/risks.
 
 ## Seafood Production 
 
 ### Indicator: Landings; commercial and recreational
 
-This year, we present updated [indicators](https://noaa-edab.github.io/catalog/commercial-landings-and-revenue.html) for total commercial landings, U.S. seafood landings, and Council-managed U.S. seafood landings . Total commercial landings (black) within New England show no long-term trends (Fig. \ref{fig:total-landings}). We treat the last three years of total landings as preliminary, given that the Canadian landings within each EPU have yet to be updated by NAFO. There exist long term downward trends in commercial seafood landings for the Gulf of Maine, but over the last decade landings appear to be relatively stable. In addition, NEFMC managed seafood production on Georges Bank now presents a long term decreasing trend.
-
-```{r total-landings, fig.cap = "Total commercial landings (black), total U.S. seafood landings (blue), and New England managed U.S. seafood landings (red) for Georges Bank and the Gulf of Maine. Open circles represent years that are lacking NAFO (foreign) data. mt = metric tons", fig.width = 7.5, fig.asp = 0.4}
+This year, we present updated indicators for total [commercial landings](https://noaa-edab.github.io/catalog/commercial-landings-and-revenue.html), U.S. seafood landings, and Council-managed U.S. seafood landings . Total commercial landings within New England show no long-term trends (Fig. \ref{fig:total-landings}). We treat the last three years of total landings as preliminary, given that the Canadian landings within each EPU have yet to be updated by NAFO. There exist long-term declines in commercial seafood landings for the Gulf of Maine, but over the last decade landings appear to be relatively stable. In addition, NEFMC managed seafood production on Georges Bank now presents a long-term declining trend.
+```{r total-landings, fig.cap = "Total commercial landings (black), total U.S. seafood landings (blue), and New England managed U.S. seafood landings (red) for Georges Bank (GB) and the Gulf of Maine (GOM). Open circles represent years that are lacking NAFO (foreign) data.", fig.width = 7.5, fig.asp = 0.4}
 #, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-comdat-total-landings.R")
 
-ecodata::plot_comdat(report = "NewEngland", varName = "landings")
+ecodata::plot_comdat(report = "NewEngland", varName = "landings")+
+  ylab(expression("Landings (10"^3*" metric tons)"))
 ```
-
-
 Commercial landings by guild include all species and all uses, and are reported as total for the guild and the NEFMC managed species within the [guild](https://noaa-edab.github.io/catalog/feeding-guilds-by-management-bodies.html). As reported in previous years, downward trends persist for a number of guilds in both regions. A significant upward trend is present for benthivores (GOM), attributable to an increase in American lobster, and benthos (GB), attributable to clams and scallops (Fig. \ref{fig:comm-landings}). Landings of planktivores on Georges Bank are presenting mixed trends between total and managed species, both categories are near historic lows. 
-
-```{r, comm-landings, fig.cap = paste0("Total commercial landings (black) and NEFMC managed U.S seafood landings (red) by feeding guild for the Gulf of Maine."), fig.width=8, fig.asp=1}
+```{r, comm-landings, fig.cap = "Total commercial landings (black) and NEFMC managed U.S seafood landings (red) by feeding guild for the Gulf of Maine (GOM, right) and Georges Bank (GB, left).", fig.width=8, fig.asp=1}
 #, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-comdat-commercial-landings-gom.R")
 
 ecodata::plot_comdat(report = "NewEngland", plottype = "guild")
 
 ```
-Overall, [recreational harvest](https://noaa-edab.github.io/catalog/recreational-fishing-indicators.html) (retained fish presumed to be eaten) have also declined in New England (Fig. ). Although, harvest has rebounded somewhat from the historical low level in 2020. Recreational [shark landings](https://noaa-edab.github.io/catalog/highly-migratory-species-landings.html) of pelagic and prohibited sharks have declined since 2018 (Fig  \ref{fig:rec-landings}), likely influenced by regulatory changes implemented in 2018 intended to rebuild shortfin mako stocks.
-
+Overall, [recreational harvest](https://noaa-edab.github.io/catalog/recreational-fishing-indicators.html) (retained fish presumed to be eaten) have also declined in New England (Fig. \ref{fig:rec-landings}). Although, harvest has rebounded somewhat from the historical low level in 2020. Recreational [shark landings](https://noaa-edab.github.io/catalog/rec_hms.html) of pelagic and prohibited sharks have declined since 2018 (Fig  \ref{fig:rec-hms}), likely influenced by regulatory changes implemented in 2018 intended to rebuild shortfin mako stocks.
 ```{r rec-landings, fig.cap = paste0("Total recreational seafood harvest (millions of pounds) in the New England region.")}
 #, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-recdat-landings.R")
 
 ecodata::plot_recdat(report = "NewEngland", varName = "landings")
 
 ```
-
 ```{r rec-hms, fig.cap = "Recreational shark landings from Large Pelagics Survey.", fig.width=5}
 #, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-rec_hms.R")
 
-ecodata::plot_rec_hms(shadedRegion = c(2014,2023), report="NewEngland") 
+ecodata::plot_rec_hms(shadedRegion = c(2014,2023), report="NewEngland")+
+    ggplot2::scale_color_discrete(        
+    limits = c("LargeCoastal", "Pelagic", "Prohibited", "SmallCoastal"),         
+    labels = c("Large Coastal", "Pelagic", "Prohibited", "Small Coastal")
+    ) 
+#  scale_color_manual(values = c('#F8766D','#7CAE00','#00BFC4','#C77CFF'),labels = c('Large Coastal','Pelagic','Prohibited','Small Coastal'))
 
 ```
 
@@ -168,34 +169,46 @@ Declining commercial seafood and recreational landings are driven by many intera
 
 #### Stock Status
 
-Single species management objectives (1) maintaining biomass above minimum thresholds and 2) maintaining fishing mortality below overfishing limits) are not being met for some NEFMC managed species.  Nine stocks are currently estimated to be below $B_{MSY}$, while status relative to $B_{MSY}$ could not be assessed for 13 additional stocks (Fig. \ref{fig:stock-status}). Therefore, stock status and associated management constraints are likely contributing to decreased landings. To better address the role of management in future reports, we could examine how the total allowable catch (TAC) and the percentage of the TAC taken for each species has changed through time.  Note that the status of spiny dogfish is based on research track assessments and are thus waiting for a management track update to determine stock status.
-
-```{r stock-status, fig.cap = "Summary of single species status for NEFMC and jointly federally managed stocks (goosefish and spiny dogfish).  The dotted vertical line at one is the target biomass reference point of B\\textsubscript{MSY}.  The dashed lines are the management thresholds of B\\textsubscript{MSY} (vertical) or F\\textsubscript{MSY} (horizontal).  Text color denotes which quadrant of the plot the stocks are in with orange text below F\\textsubscript{MSY} and B\\textsubscript{MSY}, green above F\\textsubscript{MSY} and below B\\textsubscript{MSY}, and blue above both F\\textsubscript{MSY} and B\\textsubscript{MSY}.", fig.width = 7.5, fig.asp = 0.8}
+Single species [management objectives](https://noaa-edab.github.io/catalog/stock-status.html) (1. maintaining biomass above minimum thresholds and 2. maintaining fishing mortality below overfishing limits) are not being met for some NEFMC managed species. Thirteen stocks are currently estimated to be below B~MSY~, while status relative to B~MSY~ could not be assessed for 13 additional stocks (Table \ref{fig:stock-status-table}). Therefore, stock status and associated management constraints are likely contributing to decreased landings. To better address the role of management in future reports, we could examine how the total allowable catch (TAC) and the percentage of the TAC taken for each species has changed through time. 
+```{r stock-status, fig.cap = "Summary of single species status for NEFMC and jointly federally managed stocks (goosefish and spiny dogfish).  The dotted vertical line at one is the target biomass reference point of B.  The dashed lines are the management thresholds of B (vertical) or F (horizontal). Colors denote stocks with B/B\\textsubscript{MSY} < 0.5 or F/F\\textsubscript{MSY} (orange), stocks 0.5<B/B\\textsubscript{MSY}<1 (blue), and stocks B/B\\textsubscript{MSY}>1 (green).CCGOM = Cape Cod Gulf of Maine, GOM = Gulf of Maine, GB = Georges Bank, SNEMA = Southern New England Mid Atlantic", fig.width = 7.5, fig.asp = 0.8}
 #, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-stock-status.R")
 
-a <- ecodata::plot_stock_status(report = "NewEngland")
+ecodata::plot_stock_status(report = "NewEngland")
 
-nrow <- as.integer(dim(a$unknown)[1])
-halfnrow <- as.integer(nrow/2)
-
-
-
-a$p + ggplot2::coord_cartesian(xlim=c(0,3), ylim=c(0,2)) +
-  ggplot2::annotation_custom(gridExtra::tableGrob(a$unknown[1:halfnrow, ],
-                             theme = gridExtra::ttheme_default(base_size = 4), 
-                             rows=NULL), 
-                             xmin=0.5, xmax=1.5, ymin=1.4, ymax=1.9) +
-ggplot2::annotation_custom(gridExtra::tableGrob(a$unknown[(halfnrow+1):nrow, ],
-                             theme = gridExtra::ttheme_default(base_size = 4), 
-                             rows=NULL), 
-                             xmin=1.9, xmax=2.9, ymin=1.4, ymax=1.9)
+# nrow <- as.integer(dim(a$unknown)[1])
+# halfnrow <- as.integer(nrow/2)
+# 
+# 
+# 
+# a$p + ggplot2::coord_cartesian(xlim=c(0,3), ylim=c(0,2)) +
+#   ggplot2::annotation_custom(gridExtra::tableGrob(a$unknown[1:halfnrow, ],
+#                              theme = gridExtra::ttheme_default(base_size = 4), 
+#                              rows=NULL), 
+#                              xmin=1, xmax=1.9, ymin=1.4, ymax=1.9) +
+# ggplot2::annotation_custom(gridExtra::tableGrob(a$unknown[(halfnrow+1):nrow, ],
+#                              theme = gridExtra::ttheme_default(base_size = 4), 
+#                              rows=NULL), 
+#                              xmin=2, xmax=3, ymin=1.4, ymax=1.9)+
+#   theme(legend.position = 'bottom')
 ```
+```{r stock-status-table}
 
+a <- ecodata::plot_stock_status(report = "NewEngland")$unknown %>%
+  mutate(F.Fmsy = round(F.Fmsy,2),
+         B.Bmsy = round(B.Bmsy,2))
+a$F.Fmsy[which(is.na(a$F.Fmsy))] = '-'
+a$B.Bmsy[which(is.na(a$B.Bmsy))] = '-'
+
+flextable::flextable(a) %>%
+    flextable::set_header_labels(F.Fmsy = "F/Fmsy",
+                               B.Bmsy = "B/Bmsy") %>%
+  flextable::set_caption("Unknown or partially known stock status for MAFMC and jointly managed species.") %>%
+  flextable::autofit()
+```
 #### System Biomass
 
-Aggregate biomass trends derived from scientific resource surveys have been relatively stable in both regions (Fig. \ref{fig:nefsc-biomass-gb} & Fig. \ref{fig:nefsc-biomass-gom}). The benthivores group spiked during the last decade, due to a large haddock recruitment, but appears to be returning to average levels. There are also increasing trends in piscivores, planktivores, and benthos in at least one season in both regions. The New Hampshire/Maine state survey does not show these trends while the Massachusetts state survey shows the increasing trend in benthivores and planktivores but a decrease in piscivores in the spring and benthos in the fall (Fig. \ref{fig:mass-biomass}). While managed species comprise varying proportions of aggregate biomass, trends in landings are not mirroring shifts in the overall trophic structure of survey-sampled fish and invertebrates. Therefore, major shifts in feeding guilds or ecosystem trophic structure are unlikely to be driving the decline in landings.
-
-```{r nefsc-biomass-gb, fig.cap = "Spring (left) and fall (right) surveyed biomass on Georges Bank. The shaded area around each annual mean represents 2 standard deviations from the mean.", fig.width=8, fig.asp = 0.85, results='hide'}
+[Aggregate biomass](https://noaa-edab.github.io/catalog/aggregate-survey-biomass.html) trends derived from scientific resource surveys have been stable to increasing in both regions (Fig. \ref{fig:nefsc-biomass-gb} & Fig. \ref{fig:nefsc-biomass-gom}). The benthivores group spiked during the last decade, due to a large haddock recruitment, but appears to be returning to average levels. Planktivore biomass on GB conitues to rise with the highest fall biomass observed since 1968. There are also increasing trends in piscivores, and planktivores in at least one season in both regions, and benthos on Georges Bank in both seasons. The New Hampshire/Maine state survey does not show these trends while the Massachusetts state survey shows the increasing trend in benthivores in the spring and planktivores in the fall but a decrease in piscivores in the spring and benthos in both seasons (Fig. \ref{fig:mass-biomass}). While managed species comprise varying proportions of aggregate biomass, trends in landings are not mirroring shifts in the overall trophic structure of survey-sampled fish and invertebrates. Therefore, major shifts in feeding guilds or ecosystem trophic structure are unlikely to be driving the decline in landings.
+```{r nefsc-biomass-gb, fig.cap = "Spring (left) and fall (right) surveyed biomass on Georges Bank. The shaded area around each annual mean represents 2 standard deviations from the mean.", fig.width=8, fig.asp = 0.7, results='hide'}
 #, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_NE.Rmd-aggregate-biomass-gb.R")
 
 ecodata::plot_aggregate_biomass(report = "NewEngland", EPU = "GB")
@@ -203,187 +216,168 @@ ecodata::plot_aggregate_biomass(report = "NewEngland", EPU = "GB")
 
 ```
 
-```{r nefsc-biomass-gom, fig.cap = "Spring (left) and fall (right) surveyed biomass in the Gulf of Maine. The shaded area around each annual mean represents 2 standard deviations from the mean.",  fig.width=8, fig.asp = 0.75}
+```{r nefsc-biomass-gom, fig.cap = "Spring (left) and fall (right) surveyed biomass in the Gulf of Maine. The shaded area around each annual mean represents 2 standard deviations from the mean.",  fig.width=8, fig.asp = 0.75, results = 'hide'}
 #code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_NE.Rmd-aggregate-biomass-gom.R"),
 
 ecodata::plot_aggregate_biomass(report = "NewEngland", EPU = "GOM")
 #ggplot2::ggtitle("Gulf of Maine")
 ```
+#### Effect on Seafood Production
 
-```{r mass-biomass, fig.cap = "Spring (left) and fall (right) surveyed biomass from the state of Massachusetts inshore survey. The shaded area around each annual mean represents 2 standard deviations from the mean.", fig.width=8, fig.asp = 0.75}
+With the poor or unknown stock status of many managed species, the decline in commercial seafood landings in the Gulf of Maine most likely reflects lower catch quotas implemented to rebuild overfished stocks, as well as market dynamics.
+
+The decline in recreational seafood harvest stems from multiple drivers. Some of the decline, such as for recreational shark landings, continues to be driven by tightening regulations. However, changes in demographics and preferences for recreational activities likely play a role in non-HMS (Highly Migratory Species) declines in recreational harvest, with current harvests well below the time series average.
+```{r mass-biomass, fig.cap = "Spring (left) and fall (right) surveyed biomass from the state of Massachusetts inshore survey. The shaded area around each annual mean represents 2 standard deviations from the mean.", fig.width=8, fig.asp = 0.75, results = 'hide'}
 #, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_NE.Rmd-ma-inshore-survey.R")
 
 ecodata::plot_mass_inshore_survey(report = "NewEngland")
 ```
-
-#### Effect on Seafood Production
-
-With the poor or unknown stock status of many managed species, the decline in commercial seafood landings in the Gulf of Maine most likely reflects lower catch quotas implemented to rebuild overfished stocks, as well as market dynamics.  
-
-The decline in recreational seafood harvest stems from multiple drivers. Some of the decline, such as for recreational shark landings,  continues to be driven by tightening regulations. However, changes in demographics and preferences over recreational activities likely play a role in non-HMS (Highly Migratory Species) declines in recreational harvest, with current harvests near the lowest in the time series.  
-
 Other environmental changes require monitoring as they may become important drivers of future landings:
   
-  - Climate is trending into uncharted territory. Globally, 2022 was among the warmest years on record^[https://www.climate.gov/news-features/understanding-climate/climate-change-global-temperature] (see [Climate Risks section](#climate-and-ecosystem-productivity)).
-  - Stocks are shifting distribution, moving towards the northeast and into deeper waters throughout the Northeast US Large Marine Ecosystem (Fig. \ref{fig:species-dist}).
-  - Some ecosystem composition and production changes have been observed (see [Stability section](#stability)).
+  - Climate is trending into uncharted territory. Globally, 2023 wasthe warmest year on record^[https://noaa-edab.github.io/catalog/observation-synthesis.html] (see [Climate Risks section](#climate-and-ecosystem-productivity)).
+  - Stocks are shifting their distribution, moving towards the northeast and into deeper waters throughout the Northeast US Large Marine Ecosystem (Fig. \ref{fig:species-dist}).
+  - Ecosystem composition and production changes have been observed (see [Stability section](#stability)).
   - Some fishing communities are affected by environmental justice vulnerabilities (see [Environmental Justice and Social Vulnerability section](#social-vulnerability)).
-    
-```{r species-dist, fig.cap = "Aggregate species distribution metrics for species in the Northeast Large Marine Ecosystem.", fig.asp=0.9}
-#, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_MAB.Rmd-species-dist.R")
-
-a <- ecodata::plot_species_dist(varName = "along") + ggplot2::coord_cartesian(expand = FALSE)
-b <- ecodata::plot_species_dist(varName = "depth") + ggplot2::coord_cartesian(expand = FALSE) 
-
-a/b
-```
-
+  
+\newpage
 ## Commercial Profits 
         
 ### Indicators: revenue (a proxy for profits)  
 
-Commercial revenue in the region has been mostly positive with total commercial revenues from all species increasing in 2021 and above the long-term mean for both the GB and GOM regions (Fig. \ref{fig:comm-revenue}.  Although revenue from NEFMC managed species shows a long-term downward trend in the GOM. GB continues to exhibit a cyclical nature with regards to revenue. This is largely driven by rotational management of Atlantic sea scallops.
-
+[Commercial revenue](https://noaa-edab.github.io/catalog/commercial-landings-and-revenue.html) in the region has been mostly positive with total commercial revenues from all species above the long-term mean for both the GB and GOM regions in 2022 (Fig. \ref{fig:comm-revenue}). However, revenue from NEFMC managed species shows a long-term decline in the GOM. GB continues to exhibit a cyclical nature with regards to revenue, largely driven by rotational management of Atlantic sea scallops.
 ```{r comm-revenue, fig.cap = "Revenue through 2022 for the New England region: total (black) and from NEFMC managed species (red).", fig.width = 7.5}
 #, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-comdat-comm-revenue.R")
 
 ecodata::plot_comdat(report="NewEngland", varName="revenue") 
 ```
+Revenue earned by harvesting resources is a function of both the quantity landed of each species and the prices paid for landings. Beyond monitoring yearly changes in revenue, it is even more valuable to determine what drives these changes: harvest levels, the mix of species landed, price changes, or a combination of these. The [Bennet Indicator](https://noaa-edab.github.io/catalog/bennet-indicator.html) decomposes revenue change into two parts, one driven by changing quantities (volumes), and a second driven by changing prices. All changes are in relation to a base year (1982).
 
-Revenue earned by harvesting resources is a function of both the quantity landed of each species and the prices paid for landings. Beyond monitoring yearly changes in revenue, it is even more valuable to determine what drives these changes: harvest levels, the mix of species landed, price changes, or a combination of these. The Bennet Indicator decomposes revenue change into two parts, one driven by changing quantities (volumes), and a second driven by changing prices.
-
-The gains in total revenue were due to both increasing quantities landed (volume) and prices (Fig. \ref{fig:bennet}).  In the GB region, with the exception of 2016, revenues have been positive since 2015, and this trend has generally been due to both increasing volumes and prices.  Breaking down the revenue trend further for GB show that both the volume and price trend have been largely driven by Benthos category (Fig. \ref{fig:bennet}).  In the GOM region, increased volumes for the "Other" and Benthivore categories drove the increase in volume.  In 2021, prices for Benthivores and Benthos in the GOM caused an overall increase in prices, reversing the 2015-2020 negative trend in prices (Fig. \ref{fig:bennet}).
-
-```{r bennet, fig.cap = "Revenue change from the 1982 baseline in 2023 dollars (black), price, and volume for commercial landings from Georges Bank (GB: left) and the Gulf of Maine (GOM: right)", fig.width = 7.5, fig.asp = 0.4}
+In the GB region, revenues have been consistently lower than the 1982 baseline throughout the time series. The changes in total revenue in GB was primarily driven by volumes prior to 2010, and then by prices (Fig.\ref{fig:bennet}). In the GOM, revenues have been above the 1982 baseline in all but four years, largely due to changing prices in most years.  Breaking down the revenue by guild, for GB, both the volume and price trend have been largely driven by benthos (quahogs and surfclams). In the GOM region, increased prices for benthivores drove the year-over-year increases in overall prices. Benthivores also had a large influence on the overall volume indicator in the GOM.
+```{r bennet, fig.cap = "Revenue change from the 1982 baseline in 2022 dollars (black), price, and volume for commercial landings from Georges Bank (GB: left) and the Gulf of Maine (GOM: right)", fig.width = 7.5, fig.asp = 0.3}
 #, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-bennet-all.R")
 
 gb <- ecodata::plot_bennet(report = "NewEngland", varName = "total", EPU = "GB") +
   ggplot2::ggtitle("GB revenue components") +
   ggplot2::theme(legend.position = "bottom",
-                      legend.title = ggplot2::element_blank())
+                      legend.title = ggplot2::element_blank())+
+  ggplot2::ylab("Million USD (2022)")
 gom <- ecodata::plot_bennet(report = "NewEngland", varName = "total", EPU = "GOM") +
   ggplot2::ggtitle("GOM revenue components") +
   ggplot2::theme(legend.position = "bottom",
-                      legend.title = ggplot2::element_blank())
+                      legend.title = ggplot2::element_blank())+
+                      ggplot2::ylab("Million USD (2022)")
 
 gb + gom
 
 ```
-
-```{r bennet-all, fig.cap = "Revenue change from the long-term mean in 2023 dollars (black), price, and volume for commercial landings from Georges Bank (GB: top panels) and the Gulf of Maine (GOM: bottom panels)", fig.width = 7.5, fig.asp = 0.9}
+```{r bennet-all, fig.cap = "Revenue change from the long-term mean in 2022 dollars (black), price, and volume for commercial landings from Georges Bank (GB: top panels) and the Gulf of Maine (GOM: bottom panels)", fig.width = 8, fig.asp = 0.65}
 #, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-bennet-all.R")
 
-gb <- ecodata::plot_bennet(report = "NewEngland", varName = "guild", EPU = "GB")
-gom <- ecodata::plot_bennet(report = "NewEngland", varName = "guild", EPU = "GOM")
+gb <- ecodata::plot_bennet(report = "NewEngland", varName = "guild", EPU = "GB")+
+  ggplot2::ylab("Million USD (2022)")
+gom <- ecodata::plot_bennet(report = "NewEngland", varName = "guild", EPU = "GOM")+
+  ggplot2::ylab("Million USD (2022)")
 
 gb / gom
 ```
-
 ### Implications 
 
-The continued dependence on lobster in the GOM and sea scallops on GB is affected by multiple drivers including resource availability and market conditions.  As both species are sensitive to ocean warming and acidification, it is important to monitor these and other climate drivers.
+The continued dependence on lobster in the GOM and sea scallops on GB is affected by multiple drivers including resource availability and market conditions. As both species are sensitive to ocean warming and acidification, it is important to monitor these and other climate drivers.
 
 ## Recreational Opportunities 
         
 ### Indicators: Angler trips, fleet diversity  
 
-Recreational effort (angler trips) increased during 1980-2010, but has since declined to just below the long-term average (Fig. \ref{fig:rec-op}). Recreational fleets are defined as private vessels, shore-based fishing, or party-charter vessels.  Recreational fleet diversity, or the relative importance of each fleet type, has remained relatively stable over the latter half of the time series (Fig. \ref{fig:rec-div}). 
-        
+[Recreational effort](https://noaa-edab.github.io/catalog/recreational-fishing-indicators.html) (angler trips) increased during 1982-2010, but has since declined to the long-term average (Fig. \ref{fig:rec-op}). Recreational fleets are defined as private vessels, shore-based fishing, or party-charter vessels. Recreational fleet diversity, or the relative importance of each fleet type, has remained relatively stable over the latter half of the time series (Fig.  \ref{fig:rec-div}).
 ```{r rec-op, fig.cap = paste0("Recreational effort in New England.")}
 #, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-recdat-effort.R")
 
 ecodata::plot_recdat(report = "NewEngland", varName = "effort")
 ```
-        
 ```{r rec-div, fig.cap = paste0("Recreational fleet effort diversity in New England.")}
 #, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-recdat-diversity.R")
 
-ecodata::plot_recdat(report = "NewEngland", varName = "effortdiversity")
+ecodata::plot_recdat(report = "NewEngland", varName = "effortdiversity")+
+  ggplot2::ylab('Effective Shannon Index')
 ```
-        
 ### Implications
 
 The absence of a long term trend in recreational angler trips and fleet effort diversity suggests relative stability in the overall number of recreational opportunities in the region.
         
 ## Stability 
 
-### Indicators: fishery fleet and catch diversity, ecological component diversity
+### Indicators: fishery fleet and catch diversity, ecological component diversity, total primary production
 
-While there are many potential metrics of stability, we use diversity indices to evaluate overall stability in fisheries and ecosystems. In general, diversity that remains constant over time suggests a similar capacity to respond to change over time. A significant change in diversity over time does not necessarily indicate a problem or an improvement, but does indicate a need for further investigation. We examine commercial fleet and species catch diversity, and recreational species catch diversity (with fleet effort diversity discussed above), along with diversity in zooplankton, and larval and adult fishes.
+While there are many potential metrics of stability, we use diversity indices to evaluate overall stability in fisheries and ecosystems. In general, diversity that remains constant over time suggests a similar capacity to respond to change over time. A significant change in diversity over time does not necessarily indicate a problem or an improvement, but does indicate a need for further investigation. We examine diversity in commercial fleet and species catch, and recreational species catch (with fleet effort diversity discussed above), zooplankton, and adult fishes.
 
-#### Fishery Diversity
+#### Fishery Stability
 
-Diversity estimates have been developed for species landed by commercial vessels with New England permits, and fleets landing managed species. Over the course of the last two years, there has been a steep decline in the effective number of species being landed in the commercial fleet, to a low since records began (Fig. \ref{fig:permit-div}). At the same time, commercial fishery fleet count is at or near the time series low (Fig. \ref{fig:commercial-div}).  Here a fleet is defined as the combination of gear type (Scallop Dredge, Clam Dredge, Other Dredge, Gillnet, Hand Gear, Longline, Bottom Trawl, Midwater Trawl, Pot, or Purse Seine) and vessel length category (Less than 30 ft, 30 to 50 ft, 50 to 75 feet, 75 ft and above).  
-
+[Diversity](https://noaa-edab.github.io/catalog/commercial-catch-and-fleet-diversity.html) estimates have been developed for species landed by commercial vessels with New England permits and fleets landing managed species. Although the effective number of species being landed in the commercial fleet rebounded slightly from the historical low of 2021, the diversity in catch is still well below the series average (Fig.  \ref{fig:permit-div}). Commercial fishery fleet count is also below the time series average.
 ```{r permit-div, fig.cap = paste0("Species revenue diversity in New England.")}
 #, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-commercial-div-species-div.R")
 
-ecodata::plot_commercial_div(report = "NewEngland", varName = "Permit revenue species diversity")
+ecodata::plot_commercial_div(report = "NewEngland", varName = "Permit revenue species diversity")+
+  ggplot2::ylab('Effective Shannon Index')
 ```
-
-```{r commercial-div, fig.cap = paste0("Commercial fleet count and diversity in New England."), fig.asp=0.8}
-#, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-commercial-div.R")
-
-a <- ecodata::plot_commercial_div(report = "NewEngland", varName = "Fleet count")
-b <- ecodata::plot_commercial_div(report = "NewEngland", varName = "Fleet diversity in revenue")
-
-a/b
-
-```
-
-As noted [above](#recreational-opportunities), recreational fleet effort diversity is stable. However, recreational species catch diversity has been above the time series average since 2008 with a long-term positive trend (Fig. \ref{fig:rec-species-div}).  Of note is that, although the positive trend was not significant in the 2021 report, a long-term trend has been reported in the past, indicating the ephemeral nature of the significance of the long-term trend.
-
+As noted above, [recreational fleet effort diversity](https://noaa-edab.github.io/catalog/recreational-fishing-indicators.html) is stable. However, recreational species catch diversity has been above the time series average since 2008 with a long-term positive trend (Fig.  \ref{fig:rec-species-div}).
 ```{r rec-species-div,  fig.cap = paste0("Diversity of recreational catch in New England.")}
 #, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-recdat-div-catch.R")
 
 ecodata::plot_recdat(report = "NewEngland", varName = "catchdiversity")
 ```
 
-#### Ecological Diversity
+#### Ecological Stability
 
-Ecological diversity indices show mixed trends. Zooplankton diversity is increasing on GB, while no trend is evident in the GOM (Fig. \ref{fig:zoo-diversity-gb}). It is worth noting however that the 2021 index for the GOM is the highest observed.  Larval fish diversity indicators show high interannal variability around the mean with the 2021 values near the mean for GB and near the lowest value for GOM.  Adult fish diversity shows an increasing trend in the GOM and no trend on GB.  This metric is measured as the expected number of species in a standard number of individuals sampled from the NEFSC bottom trawl survey. There is no vessel correction for this metric, so indices collected aboard the research vessel Albatross IV (up to 2008) and the research vessel Henry B. Bigelow (2009 - Present) are calculated separately (Fig. \ref{fig:exp-n}).
+Total [primary production](https://noaa-edab.github.io/catalog/phytoplankton-chlorophyll-size-class-and-primary-production.html) (PP) is a measure of the total energy input into a system per year. 2023 saw record high PP in the GOM, which may indicate a change in system-wide processes.
+```{r primaray-production, fig.cap ="Total areal annual primary production by ecological production unit. The dashed line represents the long-term (1998-2023) annual mean.",fig.width = 8,fig.asp = 0.3}
+a = ecodata::plot_annual_chl_pp(report = "NewEngland", varName = "pp", plottype = "total",EPU = "GB")+
+  ggplot2::ggtitle('Georges Bank total PP')
+b = ecodata::plot_annual_chl_pp(report = "NewEngland", varName = "pp", plottype = "total",EPU = "GOM")+
+  ggplot2::ggtitle('Gulf of Maine total PP')
 
+a+b
+
+```
+Ecological diversity indices show mixed trends. [Zooplankton diversity](https://noaa-edab.github.io/catalog/zooplankton-diversity.html) is increasing on GB, while no trend is evident in the GOM (Fig. \ref{fig:zoo-diversity-gb}). However, it is worth noting that the 2021 index for the GOM is the highest observed. [Adult fish diversity](https://noaa-edab.github.io/catalog/expected-number-of-species.html) shows an increasing trend in the GOM and no trend on GB (Fig. \ref{fig:exp-n}. This metric is measured as the expected number of species in a standard number of individuals sampled from the NEFSC bottom trawl survey.
 ```{r zoo-diversity-gb, fig.cap = "Zooplankton diversity on Georges Bank and in the Gulf of Maine, based on Shannon diversity index. 2020 surveys were incomplete due to COVID-19.", fig.width = 6, fig.asp = 0.3}
 #, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_NE.Rmd-zoo-diversity.R")
 
-ecodata::plot_zoo_diversity(report = "NewEngland")
+ecodata::plot_zoo_diversity(report = "NewEngland")+
+  ylab('Zooplankton Diversity \n(Shannon Index)')
 ```
-
 ```{r exp-n, fig.cap = "Adult fish diversity for Georges Bank and in the Gulf of Maine, based on expected number of species. Results from survey vessels Albatross and Bigelow are reported separately due to catchability differences.", fig.width=8}
 #, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_NE.Rmd-exp-n.R")
 
 ecodata::plot_exp_n(report = "NewEngland", varName = "fall")
 ```
-
 ### Implications
 
-Fleet diversity indices can be used to evaluate stability objectives as well as risks to fishery resilience and to maintaining equity in access to fishery resources [@gaichas_implementing_2018]. The relatively low diversity estimates for the commercial fishery are likely driven by the continued reliance on a few species, sea scallops and lobster.  This trend could diminish the capacity to respond to future fishing opportunities. Meanwhile, the increase in recreational species catch diversity is due to  recent increases in ASMFC and MAFMC managed species within the region as well as decreased limits on more traditional regional species.
+Fleet diversity indices can be used to evaluate stability objectives as well as risks to fishery resilience and to maintain equity in access to fishery resources. The relatively low diversity estimates for the commercial fishery are likely driven by the continued reliance on a few species, such as sea scallops and lobster. This trend could diminish the capacity to respond to future fishing opportunities. Meanwhile, the increase in recreational species catch diversity is due to recent increases in Atlantic States Fisheries Management Council (ASFMC) and MAFMC managed species within the region, offsetting decreased limits on more traditional regional species.
 
-Ecological diversity indices can provide insight into ecosystem structure. Changes in ecological diversity over time may indicate altered ecosystem structure with implications for fishery productivity and management [@friedland_changes_2020]. Increasing zooplankton diversity in GB is attributed to an overall increase in zooplankton abundance and the declining dominance of the calanoid copepod *Centropages typicus*. Stable adult fish diversity on GB suggests the same overall number and evenness over time, but does not rule out species substitutions (e.g., warm-water species replacing cold-water ones). Increasing adult diversity in the GOM suggests an increase in warm-water species and should be closely monitored.  
+Ecological diversity indices can provide insight into ecosystem structure. Changes in ecological diversity over time may indicate altered ecosystem structure with implications for fishery productivity and management. Increasing zooplankton diversity in GB is attributed to an overall increase in zooplankton abundance and the declining dominance of the calanoid copepod *Centropages typicus*. Stable adult fish diversity on GB suggests the same overall number and evenness over time, but does not rule out species substitutions (e.g., warm-water species replacing cold-water ones). Increasing adult diversity in the GOM suggests an increase in warm-water species and should be closely monitored.
 
-As a whole, the examined diversity indicators suggest changes in commercial and recreational fisheries, likely driven by changes in the mix of species landed.  However, there seems to be overall stability in ecosystem components. Increasing diversity in the recreational catch, GB zooplankton, and GOM adult fish accompanied by lows in commercial fleet diversity metrics, suggests warning signs of a potential regime shift or ecosystem restructuring and warrants continued monitoring to determine if managed species are affected.
+As a whole, the examined diversity indicators suggest changes in commercial and recreational fisheries, likely driven by changes in the mix of species landed. However, there seems to be overall stability in ecosystem components. Increasing diversity in the recreational catch, GB zooplankton, and GOM adult fish accompanied by lows in commercial fleet diversity metrics, suggests warning signs of a potential regime shift or ecosystem restructuring and warrants continued monitoring to determine if managed species are affected.
+
 
 ## Environmental Justice and Social Vulnerability 
 
+***A data error was found immediately prior to submission of internal review. Therefore this section is subject to change and will be updated as soon as possible.***
+
 ### Indicators: Environmental Justice and Social Vulnerability in commercial and recreational fishing communities
 
-Social vulnerability measures social factors that shape a community’s ability to adapt to change. A subset of these can be used to assess potential environmental justice issues. Environmental Justice is defined in Executive Order 12898 as federal actions intended to address disproportionately high and adverse human health and environmental effects of federal actions on minority and low-income populations. Three of the existing NOAA Fisheries Community Social Vulnerability Indicators (CSVIs), the Poverty Index, Population Composition Index, and Personal Disruption Index, can be used for mandated Environmental Justice analysis^[https://www.fisheries.noaa.gov/national/socioeconomics/social-indicators-coastal-communities].
+[Social vulnerability](https://noaa-edab.github.io/catalog/engagement-reliance-and-environmental-justice-in-top-fishing-communities.html) measures social factors that shape a community’s ability to adapt to change. A subset of these can be used to assess potential environmental justice issues. We report the top ten communities most engaged in, and/or reliant upon, commercial and recreational fisheries and the degree to which these communities may be vulnerable to environmental justice issues (i.e., Poverty, Population Composition, and Personal Disruption) based on 2021 data. The engagement and reliance indices demonstrate the importance of commercial and recreational fishing to a given community relative to other coastal communities in a region. Similarly, the environmental justice indices characterize different facets and levels of social vulnerability in a given community relative to other coastal communities in a region. 
 
-```{r commercial-engagement, fig.cap= "Commercial engagement, reliance, and environmental justice vulnerability for the top commercially engaged and reliant fishing communities in New England.  Communities ranked medium-high or above for one or more of the environmental justice indicators are highlighted in orange. *Community scored high (1.00 and above) for both commercial engagement and reliance indicators.", fig.width = 7, fig.asp = 0.55, results='hide'}
+In New England, Dennis and Bourne, MA scored high for both recreational engagement and reliance, whereas no communities did previously(Fig.\ref{fig:recreational-engagement}). Seabrook and Newington, NH; Sandwich and Yarmouth, MA; Groton and Clinton, CT have decreased in their recreational engagement/reliance and are no longer listed as top ten recreational communities, replaced by Barnstable Town, Plymouth, Falmouth, and Chatham, MA; Sronington, CT; Tiverton and New Shoreham, RI. There are no communities ranked medium-high or above for environmental justice indicators (Fig. \ref{fig:recreational-EJ}). Communities that ranked medium for one or more of the environmental justice indicators including Falmouth and Dennis, MA. 
+
+Fig. \ref{fig:recreational-EJ} orders communities clockwise in a descending order of recreational engagement scores from high to low, with the most highly engaged community, Narragansett/Point Judith, RI, listed on the top. Narragansett/Point Judith, like all of these top recreational communities ranked low for environmental justice vulnerability. In fact, the scores below 0 for all three environmental justice indicators implies a lower than average level of vulnerability, based on recreational engagement and reliance,  among the communities included in the analysis.
+```{r commercial-engagement, fig.cap= "Commercial engagement, reliance, and environmental justice vulnerability for the top commercially engaged and reliant fishing communities in New England. Communities in orange are ranked medium-high or above for one or more of the environmental justice indicators. Communities in purple are ranked medium for one or more of the environmental justice indicators. *Community scored high (1.00 and above) for both commercial engagement and reliance indicators.", fig.width = 6.5, fig.asp = 0.6, results='hide'}
 #, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-commercial-engagement.R")
 
 ecodata::plot_engagement(report = "NewEngland", varName = "Commercial")
+ ggplot2::guides(color = FALSE)
+  scale_color_manual(labels = c(1,2,3))
 ```
-
-Commercial fishery engagement measures the number of permits and dealers, and pounds and value landed in a community, while reliance expresses these numbers based on the level of fishing activity relative to the total population of a community. Recreational fishery engagement measures shore-based, private vessel, and for-hire fishing effort while reliance expresses these numbers based on fishing effort relative to the population of a community.
-
-Starting 2021 we began reporting the top ten most engaged, and top ten most reliant commercial and recreational fishing communities and their associated social vulnerability. We have again examined the top ten fishing communities for both sectors, and focus on examining the environmental justice vulnerability in these communities.
-
-Communities plotted in the upper right section of Fig.\ref{fig:commercial-engagement} scored high for both commercial engagement and reliance, including Stonington, Vinalhaven, and Beals, ME. Communities that ranked medium-high or above for one or more of the environmental justice indicators are highlighted in orange: Stonington, ME; New Bedford and Boston, MA.
-
-Fig. \ref{fig:commercial-EJ} shows the detailed scores of the three environmental justice indicators for the same communities plotted in Fig.\ref{fig:commercial-engagement}. Communities are plotted clockwise in a descending order of commercial engagement scores from high to low, with the most highly engaged community, New Bedford, MA, listed on the top. Among the communities ranked medium-high or above for environmental justice vulnerability, Boston scored high for the population compostion index and medium-high for the poverty index.  New Bedford, MA scored medium-high for all of the three environmental justice indicators.  Stonington, ME scored medium-high for the poverty index.  Due to missing data, the poverty index score is not available for Cranberry Isle, ME, although that community scored high for the poverty index in last years report.
-
-```{r commercial-EJ, fig.cap="Environmental justice indicators (Poverty Index, population composition index, and personal disruption index) for top commercial fishing communities in New England. *Community scored high (1.00 and above) for both commercial engagement and reliance indicators.", out.width='75%'}
+```{r commercial-EJ, fig.cap="Environmental justice indicators (Poverty Index, population composition index, and personal disruption index) for top commercial fishing communities in New England. *Community scored high (1.00 and above) for both commercial engagement and reliance indicators.", out.width='70%'}
 
 #get rid of the gray excel outline using R package magick
 ComEJ <- magick::image_read("https://github.com/NOAA-EDAB/ecodata/raw/master/workshop/images/EJ_Commercial_NE_2024.PNG")
@@ -400,18 +394,12 @@ cropComEJ <- ComEJ %>%
 
 cropComEJ
 ```
-
-No communities in New England scored high for both recreational engagement and reliance (Fig.\ref{fig:recreational-engagement}).  All of the top recreational communities scored lower than medium-high for all of the three environmental justice indicators, meaning that environmental justice may not be a major concern in these communities at this time, based on this particular analysis.
-
-Fig. \ref{fig:recreational-EJ} orders communities clockwise in a descending order of recreational engagement scores from high to low, with the most highly engaged community, Narragansett/Point Judith, RI, listed on the top. Narragansett/Point Judith, like all of these top recreational communities ranked low for environmental justice vulnerability. In fact, the scores below 0 for all three environmental justice indicators implies a lower than average level of vulnerability, based on recreational engagement and reliance,  among the communities included in the analysis. 
-
-```{r recreational-engagement, fig.cap= "Recreational engagement and reliance, and environmental justice vulnerability, for the top recreationally engaged and reliant fishing communities in New England. None of these communities ranked medium-high or above for one or more of the environmental justice indicators.", fig.width = 7, fig.asp = 0.5, results='hide'}
+```{r recreational-engagement, fig.cap= "Recreational engagement and reliance, and environmental justice vulnerability, for the top recreationally engaged and reliant fishing communities in New England. None of these communities ranked medium-high or above for one or more of the environmental justice indicators. Communities ranked medium for one or more of the environmental justice indicators are highlighted in purple. *Community scored high (1.00 and above) for both recreational engagement and reliance indicators.", fig.width = 7, fig.asp = 0.6, results='hide'}
 #, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-recreational-engagement.R")
 
 ecodata::plot_engagement(report = "NewEngland", varName = "Recreational")
 
 ```
-
 ```{r recreational-EJ, fig.cap="Environmental justice indicators (Poverty Index, population composition index, and personal disruption index) for top recreational fishing communities in New England. *Community scored high (1.00 and above) for both commercial engagement and reliance indicators.", out.width='75%'}
 #knitr::include_graphics("images/EJ_Recreational_MAB.png")
 
@@ -429,73 +417,63 @@ cropRecEJ <- RecEJ %>%
 
 cropRecEJ
 ```
-
-Both commercial and recreational fishing are important activities in Narragansett/Point Judith, RI; Gloucester, MA; and Newington, NH, meaning these communities may be impacted simultaneously by commercial and recreational regulatory changes. These three communities currently score low for all of the three environmental justice indicators, indicating that environmental justice may not be a major concern in these communities at the moment based on the indicators analyzed.
+Both commercial and recreational fishing are important activities in Narragansett/Point Judith, RI; Gloucester and Chatham, MA, meaning these communities may be impacted simultaneously by commercial and recreational regulatory changes. These three communities currently score low for all of the three environmental justice indicators, indicating that environmental justice may not be a major concern in these communities at the moment based on the indicators analyzed.
 
 ### Implications
-These plots provide a snapshot of the presence of environmental justice issues in the most highly engaged and most highly reliant commercial and recreational fishing communities in New England. These communities may be vulnerable to changes in fishing patterns due to regulations and/or climate change. When any of these communities are also experiencing social vulnerability including environmental justice issues, they may have lower ability to successfully respond to change.
+These indicators provide a snapshot of the presence of environmental justice issues in the most highly engaged and most highly reliant commercial and recreational fishing communities in New England. These communities may be especially vulnerable to changes in fishing patterns due to regulations and/or climate change. A range of environmental justice concerns are found throughout New England fishing communities. However, index scores for these concerns are higher overall in the top commercial communities relative to the top recreational communities. Some changes occurred among the top recreational fishing communities between 2020 and 2021 due to shifts in recreational fishing activities, while the top commercial communities remained  stable. A few of these top fishing communities, mostly commercial fishing communities, demonstrated medium to high  environmental justice vulnerability, indicating that they may be at a disadvantage responding to change.
 
 ## Protected Species
 
-Protected species include marine mammals protected under the Marine Mammal Protection Act, endangered and threatened species protected under the Endangered Species Act, and migratory birds protected under the Migratory Bird Treaty Act. In the Northeast U.S., endangered/threatened species include Atlantic salmon, Atlantic and shortnose sturgeon, all sea turtle species, and five baleen whales. Fishery management objectives for protected species generally focus on reducing threats and on habitat conservation/restoration. Here we report on the status of these actions as well as indicating the potential for future interactions driven by observed and predicted ecosystem changes in the Northeast U.S. Protected species objectives include managing bycatch to remain below potential biological removal (PBR) thresholds, recovering endangered populations, and monitoring unusual mortality events (UMEs). 
+Fishery management objectives for protected species generally focus on reducing threats and on habitat conservation/restoration. Protected species include marine mammals protected under the Marine Mammal Protection Act, endangered and threatened species protected under the Endangered Species Act, and migratory birds protected under the Migratory Bird Treaty Act. In the Northeast U.S., endangered/threatened species include Atlantic salmon, Atlantic and shortnose sturgeon, all sea turtle species, and five baleen whales. Protected species objectives include managing bycatch to remain below potential biological removal (PBR) thresholds, recovering endangered populations, and monitoring unusual mortality events (UMEs). Here we report on performance relative to these objectives with available indicator data, as well as indicating the potential for future interactions driven by observed and predicted 
 
 ### Indicators: bycatch, population (adult and juvenile) numbers, mortalities
 
-Average indices for both harbor porpoise (Fig. \ref{fig:harborporpoise}) and gray seal bycatch (Fig. \ref{fig:grayseal}) are below current PBR thresholds, meeting management objectives. However, the 2019 bycatch estimate for gray seals was the highest in the time series.
-
+Average indices for both [harbor porpoise](https://noaa-edab.github.io/catalog/harbor-porpoise-bycatch.html) (Fig. \ref{fig:harborporpoise}) and [gray seal](https://noaa-edab.github.io/catalog/gray-seal-bycatch.html) bycatch (Fig. \ref{fig:grayseal}) are below current PBR thresholds, meeting management objectives.
 ```{r harborporpoise, fig.cap="Harbor porpoise average bycatch estimate for Mid-Atlantic and New England gillnet fisheries (blue) and the potential biological removal (red).", fig.width=5}
 #fig.width=6}
 #, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_MAB.Rmd-harborporpoise.R")
 
 ecodata::plot_harborporpoise()
 ```
-
-```{r grayseal, fig.cap="Gray Seal average bycatch estimate for gillnet fisheries (blue) and and the potential biological removal (red).", fig.width=5}
+```{r grayseal, fig.cap="Gray Seal average bycatch estimate for gillnet fisheries (blue) and the potential biological removal (red).", fig.width=5}
 #fig.width=6}
 #, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_MAB.Rmd-grayseal.R")
 
 ecodata::plot_grayseal()
 ```
+The annual estimate for gray seal bycatch has declined since 2019, in part driven by declining gillnet landings. In addition, estimates since 2019 have greater uncertainty stemming from low observer coverage since 2019. The rolling mean confidence interval remains just below the PBR value.
 
-The annual estimate for gray seal bycatch has declined since 2019, in part driven by declining gillnet landings. In addition, estimates since 2019 have greater uncertainty stemming from low observer coverage since 2019. The rolling mean confidence interval remains just below the removal threshold.
-
-The North Atlantic right whale population was on a recovery trajectory until 2010, but has since declined (Fig. \ref{fig:narw-abundance}). Reduced survival rates of adult females and diverging abundance trends between sexes have also been observed. It is estimated that there are fewer than 70 adult females remaining in the population. 
-
+The [North Atlantic right whale population](https://noaa-edab.github.io/catalog/right-whale-abundance.html) was on a recovery trajectory until 2010, but has since declined (Fig. \ref{fig:narw-abundance}). The sharp decline observed from 2015-2020 appears to have slowed, although the right whale population continues to experience annual mortalities above recovery thresholds. Reduced survival rates of adult females lead to diverging abundance trends between sexes. It is estimated that there are fewer than 70 adult females remaining in the population.
 ```{r narw-abundance, fig.cap = "Estimated North Atlanic right whale abundance on the Northeast Shelf.", fig.width=5}
 #, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_MAB.Rmd-narw-abundance.R")
 
-ecodata::plot_narw(varName = "adult")
+ecodata::plot_narw(varName = "adult")+
+  ggtitle('North Atlantic Right Whale abundance')
 ```
+North Atlantic right whale [calf counts](https://noaa-edab.github.io/catalog/right-whale-abundance.html) have generally declined after 2009 to the point of having zero new calves observed in 2018 (Fig. \ref{fig:NARW-calf-abundance}). However, since 2019, we have seen more calf births each year with 15 births in 2022.
 
-North Atlantic right whale calf counts have generally declined after 2009 to the point of having zero new calves observed in 2018 (Fig. \ref{fig:NARW-calf-abundance}). However, since 2019, we have seen more calf births each year with 20 births in 2022. 
+This year, the Unusual Mortality Event (UME) for North Atlantic right whales continued. Since 2017, the total UME right whale mortalities includes 36 dead stranded whales, 15 in the U.S. and 21 in Canada. When alive but seriously injured whales (35) and sublethal injuries or ill whales (51) are taken into account, 122 individual whales are included in the UME. Recent research suggests that many mortalities go unobserved and the true number of mortalities are about three times the count of the observed mortalities. The primary cause of death is “human interaction” from entanglements or vessel strikes.
 
-This year, the Unusual Mortality Event (UME) for North Atlantic right whales continued. Since 2017, the total UME right whale mortalities includes 35 dead stranded whales, 14 in the US and 21 in Canada. When alive but seriously injured whales (22) and sublethal injuries or ill whales (37) are taken into account, 94 individual whales are included in the UME. Recent research suggests that many mortalities go unobserved and the true number of mortalities are about three times the count of the observed mortalities [@pace_cryptic_2021]. The primary cause of death is “human interaction” from entanglements or vessel strikes^[https://www.fisheries.noaa.gov/national/marine-life-distress/2017-2022-north-atlantic-right-whale-unusual-mortality-event]. 
-
-A UME continued from previous years for humpback whales (2016-present); suspected causes include human interactions. A UME for both gray and harbor seals on the Maine coast was declared in June 2022 due to a high number of mortalities thought to be caused by highly pathogenic avian influenza virus. A UME for minke whales that began in 2017 remains open, but is pending closure as of January 2023^[https://www.fisheries.noaa.gov/national/marine-life-distress/active-and-closed-unusual-mortality-events].
-
+A UME continued from previous years for humpback whales (2016-present); suspected causes include human interactions. A UME for both gray and harbor seals on the Maine coast was declared in June 2022 due to a high number of mortalities thought to be caused by highly pathogenic avian influenza virus. A UME for minke whales that began in 2017 remains open, but is pending closure as of January 2024.
 ```{r NARW-calf-abundance, fig.cap = "Number of North Atlantic right whale calf births, 1990 - 2021.", fig.width=5}
 #, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_MAB.Rmd-NARW-calf-abundance.R")
 
-ecodata::plot_narw(varName = "calf")
+ecodata::plot_narw(varName = "calf")+
+  ggtitle('North Atlantic Right Whale calf abundance')
 ```
-
 ### Implications
 
-Bycatch management measures have been implemented to maintain bycatch below PBR thresholds. The downward trend in harbor porpoise bycatch can also be due to a decrease in  harbor porpoise abundance in US waters, reducing their overlap with fisheries, and a decrease in gillnet effort. The increasing trend in gray seal bycatch may be related to an increase in the gray seal population (U.S. pup counts).
-
-The number of gray seals in U.S. waters has risen dramatically in the last three  decades. Based on a survey conducted in 2016, the size of the gray seal population in the U.S. during the breeding season was approximately 27,000 animals, while in Canada the population was estimated to be roughly 425,000. The population in Canada is increasing at roughly 4% per year, and contributing to rates of increase in the U.S., where the number of pupping sites has increased from one in 1988 to nine in 2019. Mean rates of increase in the number of pups born at various times since 1988 at four of the more data-rich pupping sites (Muskeget, Monomoy, Seal, and Green Islands) ranged from no change on Green Island to high rates of increase on the other three islands, with a maximum increase of 26.3% (95\%CI: 21.6 - 31.4\%; @wood_rates_2020 Fig. \ref{fig:seals}). These high rates of increase provide further support for the hypothesis that seals from Canada are continually supplementing the breeding population in U.S. waters.  
-
-```{r seals, fig.cap = "Estimated mean rates of increase in the number of gray seal pups born at four United States pupping colonies at various times from 1988 to 2021. Recreated from Wood et al. 2022 (Figure 5).", fig.width = 5, fig.asp = .5}
+Bycatch management measures have been implemented to maintain bycatch below PBR thresholds. The downward trend in harbor porpoise bycatch can also be due to a decrease in harbor porpoise abundance in U.S. waters, reducing their overlap with fisheries, and a decrease in gillnet effort. The increasing trend in gray seal bycatch may be related to an increase in the gray seal population ([U.S. pup counts](https://noaa-edab.github.io/catalog/gray-seal-pups.html)), supported by the dramatic rise over the last three decades in observed numbers of gray seal pups born at U.S. breeding sites plus an increase in adult seals at the breeding sites (Fig. \ref{fig:seals}), some of which are supplemented by Canadian adults.
+```{r seals, fig.cap = "Estimated number of gray seal pups born at four United States pupping colonies at various times from 1988 to 2021. Recreated from Wood et al. 2022 (Figure 5).", fig.width = 5, fig.asp = .5}
 #, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_NE.Rmd-seal-pups.R")
 
 ecodata::plot_seal_pups(report = "NewEngland")
 ```
+Strong evidence exists to suggest that interactions between right whales and both the fixed gear fisheries in the U.S. and Canada and vessel strikes in the U.S. are contributing substantially to the decline of the species. Further, right whale distribution has changed since 2010. [New research](https://noaa-edab.github.io/catalog/right-whale-abundance.html) suggests that recent climate driven changes in ocean circulation have resulted in right whale distribution changes driven by increased warm water influx through the Northeast Channel, which has reduced the primary right whale prey (*Calanus finmarchicus*) in the central and eastern portions of the Gulf of Maine. Additional potential stressors include offshore wind development, which overlaps with important habitat areas used year-round by right whales, including mother and calf migration corridors and foraging habitat. This area is also a primary right whale winter foraging habitat. Additional information can be found in the  [offshore wind risks section](#other-ocean-uses:-offshore-wind).
 
-Strong evidence exists to suggest that interactions between right whales and both the fixed gear fisheries in the U.S. and Canada and vessel strikes in the U.S. are contributing substantially to the decline of the species [@hayes_north_2018]. Further, right whale distribution has changed since 2010. New research suggests that recent climate driven changes in ocean circulation have resulted in right whale distribution changes driven by increased warm water influx through the Northeast Channel, which has reduced the primary right whale prey (*Calanus finmarchicus*) in the central and eastern portions of the Gulf of Maine [@hayes_north_2018; @record_rapid_2019; @sorochan_north_2019]. Additional potential stressors include offshore wind development, which overlaps with important habitat areas used year-round by right whales, including mother and calf migration corridors and foraging habitat. This area is also a primary right whale winter foraging habitat. Additional information can be found in the [offshore wind section](#other-ocean-uses:-offshore-wind).
+A UME continued from previous years for humpback whales (2016-present) and Atlantic minke whales (2018-present); suspected causes include human interactions. A UME for Northeast pinnipeds that began in 2018 for infectious disease is pending closure as of February 2024.
 
-The UMEs are under investigation and are likely the result of multiple drivers. For all large whale UMEs, human interaction appears to have contributed to increased mortalities, although investigations are not complete. An investigation into the cause of the seal UME so far suggests avian flu virus as a potential cause. 
-
-A climate vulnerability assessment is currently underway for Atlantic and Gulf of Mexico marine mammal populations and will be reported in future versions of this report.
+A climate vulnerability assessment is published  for Atlantic and Gulf of Mexico marine mammal populations.
 
 \newpage
 
@@ -503,293 +481,230 @@ A climate vulnerability assessment is currently underway for Atlantic and Gulf o
 
 ## Climate and Ecosystem Change
 
-Regulations and measures designed to meet fishery management objectives are often based on historical information about stocks: their distribution in space and time, and their overall productivity. Large scale climate related changes in the ecosystem can lead to changes in important habitats and ecological interactions, altering distributions and productivity. With large enough ecosystem changes, management measures may be less effective, and management objectives may not be met. 
+Regulations and measures designed to meet fishery management objectives are often based on historical information about stocks, their distribution in space and time, and their overall productivity. Large scale climate related changes in the ecosystem can lead to changes in important habitats and ecological interactions, altering distributions and productivity. With large enough ecosystem changes, management measures may be less effective and management objectives may not be met.
 
-This year, we have restructured this section to focus on three categories of management decisions and the risk posed to them by climate and ecosystem change: spatial management, seasonal management, and quota setting or rebuilding depleted stocks. In each section, we highlight observed changes in distribution, timing, and productivity of fish and protected species. Then, we review possible drivers for these observed changes, in order to determine how management might be adjusted to account for the observed changes. Finally, we provide an overview of notable climate and ecosystem observations from 2023.  
+This year, we restructured this section to focus on three categories of management decisions and the risk posed to them by climate and ecosystem change: spatial management, seasonal management, and quota setting or rebuilding depleted stocks. In each section, we describe potential risks to the management category, highlight indicators of observed changes that contribute to those risks, and review possible biological and environmental drivers and the ways they may explain the observed indicators. 
 
 ### Risks to Spatial Management
 
-Shifting species distributions alter both species interactions and fishery interactions. In particular, shifting species distributions can alter expected management outcomes from spatial allocations and bycatch measures based on historical fish and protected species distributions. Species availability to surveys can change as distributions shift within survey footprints.
+Shifting species distributions (changes in spatial extent or center of gravity) alter both species interactions and fishery interactions. In particular, shifting species distributions can affect expected management outcomes from spatial allocations and bycatch measures based on historical fish and protected species distributions. Additionally, species availability to surveys can change as distributions shift within survey footprints.
 
-#### Observations: Fish and protected species distribution shifts
-As noted in the [Landings Implications section above](#implications), trends for a suite of 48 commercially or ecologically important fish species along the entire Northeast Shelf continue to show movement towards the northeast and generally into deeper water (Fig. \ref{fig:species-dist}). Habitat model-based species richness suggests shifts of both cooler and warmer water species to the northeast [*link to catalog page*]. Similar patterns have been found for marine mammals, with multiple species shifting northeast between 2010 and 2017 in most seasons (Fig. \ref{fig:protectedspp-dist-shifts}, @chavez-rosales_detection_2022).
+#### Indicator: Fish and protected species distribution shifts
 
+As noted in the [landings implications section](#implications) above, the [center of distribution](https://noaa-edab.github.io/catalog/species-distribution-indicators.html) for a suite of 48 commercially or ecologically important fish species along the entire Northeast Shelf continues to show movement towards the northeast and generally into deeper water (Fig.\ref{fig:fig:species-dist} ). [Habitat model-based species richness](https://noaa-edab.github.io/catalog/species-richness.html) suggests shifts of both cooler and warmer water species to the northeast. Similar patterns have been found for [marine mammals](https://noaa-edab.github.io/catalog/cetacean-distribution-shifts.html), with multiple species shifting northeast between 2010 and 2017 in most seasons (Fig. \ref{protectedspp-dist-shifts} ).
 ```{r protectedspp-dist-shifts, fig.cap="Direction and magnitude of core habitat shifts, represented by the length of the line of the seasonal weighted centroid for species with more than 70 km difference between 2010 and 2017 (tip of arrow).", fig.width=7, fig.asp=0.8}
 #, code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_MAB.Rmd-protectedspp-dist-shifts.R")
 
 ecodata::plot_HMS_species_distribution() + ggplot2::ggtitle("Whale and Dolphin Distribution Shifts")
 ```
+#### Drivers
 
+Mobile populations are shifting distributions to maintain suitable temperature and prey fields, possibly expanding if new suitable habitat exists. Changes in managed species distribution is related, in part, to the [distribution of forage biomass](https://noaa-edab.github.io/catalog/forage-fish-index.html). Since 1982, the fall center of gravity of forage fish (20 species combined) has moved to the north and east. Spring forage fish center of gravity has been more variable over time.
+```{r species-dist, fig.cap = "Aggregate species distribution metrics for species in the Northeast Large Marine Ecosystem.",fig.width = 8, fig.asp=0.3}
+#, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_MAB.Rmd-species-dist.R")
 
-#### Drivers: 
+a <- ecodata::plot_species_dist(varName = "along") + ggplot2::coord_cartesian(expand = FALSE)
+b <- ecodata::plot_species_dist(varName = "depth") + ggplot2::coord_cartesian(expand = FALSE) 
 
-Increasing temperature, changing oceanography, and the decreasing size of the seasonal cold pool can alter the spatial distribution of suitable habitat for managed species, as well as availability and distribution of their prey. 
+a+b
+```
+```{r forage-cog, fig.cap = "Eastward (left) and northward (right) shifts in the center of gravity for 20 forage fish species on the Northeast U.S. Shelf.", fig.width = 8, fig.asp = .3}
 
-Ocean temperatures continue to warm at both the surface (Fig. \ref{fig:seasonal-oisst-anom}) and bottom (Fig. \ref{fig:bottom-temp}) throughout Georges Bank and the Gulf of Maine in all seasons.
+ecodata::plot_forage_index(report = "NewEngland", varName = 'cog')
 
-```{r seasonal-oisst-anom, fig.cap="GB and GOM seasonal sea surface temperature (SST) time series . Seasons are defined as: Jan-Mar for winter, Apr-Jun for spring, Jul-Sep for summer, and Oct-Dec for fall.", fig.width = 6, fig.asp = .6}
+```
+Ocean temperatures influence the distribution, seasonal timing of migrations and spawning, as well as the productivity of managed species (see sections below). New England has experienced a continued warming trend for both the [surface](https://noaa-edab.github.io/catalog/sea-surface-temperature-anomaly.html) (Fig.\ref{fig:longterm-sst}) and in all seasons.
+```{r longterm-sst, fig.cap="Mean sea surface temperature across the entire Mid-Atlantic shelf.", fig.width = 9, fig.asp = .3}
 #overlaid onto 2021 seasonal spatial anomalies, code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_MAB.Rmd-seasonal-sst-anom-gridded.R")
 
 #ecodata::plot_seasonal_sst_anomaly_gridded()
-ecodata::plot_seasonal_oisst_anom(report = "NewEngland",EPU = 'GOM')
+#ecodata::plot_seasonal_oisst_anom(report = "NewEngland",EPU = 'GOM')
+ecodata::plot_long_term_sst()
 
 ```
-
-```{r bottom-temp, fig.cap="MAB seasonal bottom temperature (BT) anomaly time series. Seasons are defined as: Jan-Mar for winter, Apr-Jun for spring, Jul-Sep for summer, and Oct-Dec for fall.", fig.width = 6, fig.asp = .6}
-#The final 2 years of each time series (open circles) are modeled estimates subject to change.", code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_MAB.Rmd-bottom-temp-hi-res-ts.R")
-
-ecodata::plot_bottom_temp_comp(report = "NewEngland",EPU = 'GB')
-```
-
-Variability of the Gulf Stream is one of the major drivers of changes in the oceanographic conditions of the Northeast U.S. continental shelf. During the last decade, the Gulf Stream has become less stable and shifted northward (Fig. \ref{fig:GSI}).  A more northern Gulf Stream position is associated with warmer ocean temperature on the northeast shelf [@zhang_role_2007], a higher proportion of Warm Slope Water in the Northeast Channel, and increased sea surface height along the U.S. east coast [@goddard_extreme_2015]. 
-
-```{r GSI, fig.cap = "Index representing changes in the location of the Gulf Stream north wall. Positive values represent a more northerly Gulf Stream position."}
+Species' suitable habitat can expand or contract when changes in temperature and major oceanographic conditions alter distinct water mass habitats. The variability of the Gulf Stream is a major driver of the predominant oceanographic conditions of the Northeast U.S. continental shelf. As the [Gulf Stream](https://noaa-edab.github.io/catalog/gulf-stream-index.html) has become less stable and shifted northward in the last decade (Fig.  \ref{fig:GSI}), warmer ocean temperatures have been observed on the northeast shelf and a higher proportion of [Warm Slope Water](https://noaa-edab.github.io/catalog/slopewater-proportions.html) has been present in the Gulf of Maine Northeast Channel. Since 2008, the Gulf Stream has moved closer to the Grand Banks, reducing the supply of cold, fresh, and oxygen-rich Labrador Current waters to the Northwest Atlantic Shelf. Nearly every year since 2010, warm slope water made up more than 50% of the annual slope water proportions entering the Gulf of Maine. In 2017 almost no cooler Labrador Slope water entered the Gulf of Maine through the Northeast Channel. The changing proportions of source water affect the temperature, salinity, and nutrient inputs to the Gulf of Maine ecosystem. In 2022, warm slope water was a majority (59.7%) of inputs to the Gulf of Maine.
+```{r GSI, fig.cap = "Index representing changes in the location of the Gulf Stream north wall. Positive values represent a more northerly Gulf Stream position.", fig.width = 9, fig.asp = .3}
 #, code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_MAB.Rmd-gsi.R")
 
 ecodata::plot_gsi()
 ```
+#### Future Considerations
 
-Since 2008, the Gulf Stream has moved closer to the Grand Banks, reducing the supply of cold, fresh, and oxygen-rich Labrador Current waters to the Northwest Atlantic Shelf [@goncalves_neto_changes_2021]. Nearly every year since 2010, warm slope water made up more than 75% of the annual slope water proportions entering the Gulf of Maine.  In 2017 and 2019, almost no cooler Labrador Slope water entered the Gulf of Maine through the Northeast Channel (Fig. \ref{fig:wsw-prop}).  The changing proportions of source water affect the temperature, salinity, and nutrient inputs to the Gulf of Maine ecosystem.  In 2021, warm slope water continued to dominate (86.1%) inputs to the Gulf of Maine. 
+Distribution shifts caused by changes in thermal habitat are likely to continue as long as long-term temperature trends persist. Near-term oceanographic forecasts are currently in development and may inform how future warming impacts species distributions.
 
-```{r wsw-prop, fig.cap = "Proportion of Warm Slope Water (WSW) and Labrador slope water (LSLW) entering the GOM through the Northeast Channel.", fig.width=5.5, fig.asp=.4}
-#code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_NE.Rmd-slopewater.R"), 
+Distribution patterns associated with climate-driven changes in oceanographic circulation patterns are unlikely to be reversed to historical ranges in the short term. Increased oceanographic variability needs to be captured by regional ocean models and linked to species distribution processes to better understand potential future distributions. Species with high mobility or short life spans react differently from immobile or long-lived species. 
 
-ecodata::plot_slopewater(report = "NewEngland")
-```
-
-Changes in the distribution of forage biomass affects predator distribution. Spatial subsets of the forage fish index were included in the bluefish research track stock assessment to investigate forage-driven changes in bluefish availability to recreational fisheries and surveys.
+Adapting management to changing stock distributions and dynamic ocean processes will require continued monitoring of populations in space and evaluating management measures against a range of possible future spatial distributions. 
 
 ### Risks to Seasonal Management
 
-Changes in seasonal life-cycle events may not align with fishing seasons or area opening/closing, potentially reducing effectiveness of management measures. Temporal changes in species/fishery overlap can alter bycatch, and availability to surveys can change. 
+The effectiveness of seasonal management actions (fishing seasons or area opening/closing) depends on a proper alignment with the seasonal life cycle events, also known as phenology, of fish stocks (e.g., migration timing and spawning). Changes in the timing of these biological cycles can reduce the effectiveness of management measures if not accounted for. The timing of seasonal patterns can also change the availability of species to surveys and interactions between fisheries and non-target species thus influencing the amount of bycatch. 
 
-#### Observations: Timing shifts
+#### Indicators: Timing shifts
 
-Seasonal timing of spawning has changed for several managed fish species. Migration timing of some tunas and large whales has changed.
+[Spawning timing](https://noaa-edab.github.io/catalog/spawning-timing.html) is shifting earlier for multiple stocks, including haddock and yellowtail flounder (Fig. \ref{fig:spawn-timing}). Spawning of both haddock stocks is occurring earlier, as indicated by more resting (post-spawning) stage fish in the 2010s as compared to earlier in the time series. The northern (Cape Cod/GOM) stock shows earlier active spawning in recent years with a decline in pre-spawning resting females. Yellowtail flounder spawning is related to bottom temperature, week of year, and decade sampled for each of the three stocks. 
+```{r spawn-timing, fig.cap = "Percent resting stage (non-spawning) fish from two haddock and three yellowtail flounder stocks: CC = Cape Cod Gulf of Maine, GOM = Gulf of Maine, GB = Georges Bank, SNE = Southern New England.", fig.width = 8, fig.asp = 0.6 }
 
-GENERATE A FIGURE
+ecodata::plot_spawn_timing()
+```
+[Migration timing](https://noaa-edab.github.io/catalog/timing-shifts-risks-to-seasonal-management.html) of some tuna and large whale migrations has changed. For example, tuna were caught in recreational fisheries 50 days earlier in the year in 2019 compared to 2002. In Cape Cod Bay, peak spring habitat use by right and humpback whales has shifted 18-19 days later over time. 
 
-#### Drivers: 
+Understanding whether seasonal patterns are changing for stocks requires regular observations during seasonal life history events.  Despite the importance of understanding seasonal patterns,  we have few indicators that directly assess timing shifts of species. We plan on incorporating more indicators of phenology in future reports.
 
-Later transition to fall conditions, shorter duration of seasonal cold pool, changing timing of fall phytoplankton blooms, seasonal community shifts in zooplankton, and changes in timing of food availability contribute to changes in species timing. 
+#### Drivers 
 
-In addition to increasing seasonal temperatures, ocean summer conditions now last longer within each year. In both GB and GOM, the transition date from cool winter conditions to warm stratified summer conditions is getting earlier. The transition back to well mixed cool temperatures is also getting later in the year, thus increasing the total number of days when the surface temperatures are in the warm summer conditions (Fig. \ref{fig:transition}).
+The drivers of timing shifts in managed stocks are generally coupled to shifts in environmental or biological conditions, since these can result in changes in habitat quality or food availability within the year. Changes in the timing of fall phytoplankton blooms and seasonal shifts in zooplankton communities are thought to be critical indicators of changes in seasonal food availability to stocks. 
 
-```{r transition, fig.cap="Ocean summer length in the MAB: the annual total number of days between the spring thermal transition date and the fall thermal transition date.  The transition dates are defined as the day of the year when surface temperatures changeover from cool to warm conditions in the spring and back to cool conditions in the fall."}
+Along with the overall warming trends in New England, ocean summer conditions have been lasting longer, as shown by the later [transition](https://noaa-edab.github.io/catalog/transition-dates.html) from warm stratified summer conditions to well mixed cool fall conditions (Fig. \ref{fig:transition}).These transition dates are defined as the day of the year when surface temperatures change from cool to warm conditions in the spring and back to cool conditions in the fall. Changes in the broad seasonal cycles of their environment can lead to changes in species biological processes (migrations, spawning, etc.) that are triggered by seasonal events. Additionally, prolonged fall temperatures have been linked to the increased number of cold-stunned Kemp’s ridley sea turtles found in Cape Cod Bay.
+```{r transition, fig.cap="Ocean summer length: the annual total number of days between the spring thermal transition date and the fall thermal transition date.",fig.width = 8, fig.asp = 0.3}
 #, code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_MAB.Rmd-sumlength.R")
 
-ecodata::plot_trans_dates(report = "NewEngland")
+ecodata::plot_trans_dates(report = "NewEngland", varName = 'length')+
+  ggtitle('New England: Number of days between spring and fall transition dates')
 ```
-
-Cold pool timing has changed in the Mid-Atlantic, with the feature persisting for a shorter portion of the year since the mid-2000s (Fig. \ref{fig:cold-pool-time}).  *IMPACTS TO NEW ENGLAND SPAWNERS?*
-
-```{r cold-pool-time, fig.cap="Seasonal cold pool indices: mean temperature within the cold pool, cold pool persistence, and spatial extent.", fig.asp=.5, results='hide'}
+The [cold pool](https://noaa-edab.github.io/catalog/cold-pool-index.html) is a seasonal feature within the mid-Atlantic bight (MAB) that creates seasonally suitable habitat for many species, including some managed by the NEFMC. Since the mid-2000s, the cold pool has persisted for a shorter portion of the year (Fig. \ref{fig:cold-pool-time}). A change in the timing of the cold pool may impact the recruitment of species that realy on it for seasonal cues. Southern New England-Mid Atlantic yellowtail flounder recruitment and settlement are related to the strength of the cold pool (a factor of extent and persistence). The dependency of pre-recruit settlers within the cold pool represents a bottleneck in yellowtail life history, during which a local and temporary increase in bottom temperature negatively impacts the survival of the settlers. Including the effect of cold pool variations on yellowtail recruitment reproduced retrospective patterns and improved the skill of short-term forecasts in a stock assessment model.
+```{r cold-pool-time, fig.cap="Cold pool persistence index based on bias-corrected ROMS-NWA (open circles) and GLORYS (closed circles).", fig.asp=.5, results='hide'}
 #, fig.width = 5,  code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_MAB.Rmd-cold_pool.R")
 
 ecodata::plot_cold_pool(varName = "persistence")
 
 ```
+#### Future Considerations
+
+For stocks reliant on environmental processes to dictate the timing of their behavior (e.g., phytoplankton bloom timing, thermal transition, or the duration of the cold pool), it is possible that some effects will be  episodic and have interannual variability, while other effects on timing can change on scales of years to decades. However, other species rely on the general seasonal succession of environmental drivers (e.g., the timing of the fall turnover) to cue biological processes, which rely on long-term trends unlikely to reverse in coming years. Such timing shifts in migration or spawning for those species are expected to continue. Management actions that rely on effective alignment of fisheries availability and biological processes should continue to evaluate whether prior assumptions on seasonal timings still hold, and new indicators should be developed to monitor timing shifts for stocks.
 
 ### Risks to Quota Setting/Rebuilding
 
-Environmentally driven changes in growth, reproduction, and natural mortality can complicate short-term stock projections. Stock reference points may not reflect prevailing environmental conditions.
+The efficacy of short-term stock projections and rebuilding plans relies on an accurate understanding of processes affecting stock growth, reproduction, and natural mortality. These biological processes are often driven by underlying environmental change. When observed environmental change occurs, there is a risk that established stock-level biological reference points may no longer reflect the current population. 
 
-#### Observations: Fish productivity and condition shifts
-We describe patterns of aggregate fish productivity in the Mid-Atlantic with the small fish per large fish anomaly indicator, derived from NEFSC bottom trawl survey data (Fig. \ref{fig:productivity-anomaly}). The indicator shows that productivity has been declining in this region since the early 2000s.  A similar analysis based on stock assessment model outputs (recruitment per spawning stock biomass anomaly) for stocks primarily inhabiting the Mid-Atlantic region also shows a decline in productivity. 
+#### Indicators: Fish productivity and condition shifts
 
-```{r productivity-anomaly, fig.cap = "Fish productivity measures. Left: Small fish per large fish survey biomass anomaly in the Mid-Atlantic Bight. Right: assessment recruitment per spawning stock biomass anomaly for stocks mainly in the Mid-Atlantic. The summed anomaly across species is shown by the black line, drawn across all years with the same number of stocks analyzed.", fig.width=8, fig.asp=1}
+Indicators of [fish productivity](https://noaa-edab.github.io/catalog/fish-productivity-indicators.html) are derived from observations (surveys) or models (stock assessments). With the exception of two years (2006 and 2013), fish productivity has been below the long-term average in the Gulf of Maine since the early 2000s, as described by the small-fish-per-large-fish anomaly indicator (derived from NEFSC bottom trawl survey)(Fig. \ref{fig:productivity-anomaly}). This decline in fish productivity is also shown by a similar analysis based on stock assessment model outputs (recruitment per spawning stock biomass anomaly). Other signs of changing productivity in New England are the declines in [common tern chicks](https://noaa-edab.github.io/catalog/seabird-diet-and-productivity---new-england.html) per nest (Fig. \ref{fig:seabird-ne-productivity}) and declining return rates for [Atlantic salmon](https://noaa-edab.github.io/catalog/gulf-of-maine-atlantic-salmon.html)(Fig. \ref{fig:salmon}).
+```{r productivity-anomaly, fig.cap = "Fish productivity measures. Top: Small-fish-per-large-fish survey biomass anomaly in the Gulf of Maine. Bottom: assessment recruitment per spawning stock biomass anomaly for stocks managed by the New England Fishery Management Council region. The summed anomaly across species is shown by the black line, drawn across all years with the same number of stocks analyzed.", fig.width=9, fig.asp=1}
 #out.width='49%', fig.show='hold',
 a <- ecodata::plot_productivity_anomaly(report = "NewEngland", EPU = "GOM") + 
-  ggplot2::guides(fill = ggplot2::guide_legend(ncol =2))+
+  ggplot2::guides(fill = ggplot2::guide_legend(nrow =2))+
   ggplot2::theme(legend.position = "bottom",
                       legend.title = ggplot2::element_blank(),
-                 plot.title =element_text(size = 11))
+                 plot.title =element_text(size = 11))+
+  ylab('Small-fish-per-large-fish biomass (anomaly)')
 
 b <- ecodata::plot_productivity_anomaly(report = "NewEngland", varName = "assessment")+ 
-  ggplot2::guides(fill = ggplot2::guide_legend(ncol =2))+
+  ggplot2::guides(fill = ggplot2::guide_legend(nrow =2))+
   ggplot2::theme(legend.position = "bottom",
                       legend.title = ggplot2::element_blank(),
                  plot.title =element_text(size = 11))
 
-a + b
+a /b
 
 ```
+```{r seabird-ne-productivity, fig.cap = "Productivity of Common terns in the Gulf of Maine.",  fig.width=5, fig.asp=.4}
+#code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_NE.Rmd-seabird-ne-productivity.R"),
 
-The health and well being of individual fish can determine population productivity. Heavier and fatter fish at a given length have higher relative condition (the ratio of observed weight to predicted weight based on length [@le_cren_length-weight_1951]) which is expected to improve growth, reproductive output, and survival. A pattern of generally good condition was observed across many species prior to 2000, followed by a period of generally poor condition from 2001-2010 (concurrent with declines in productivity, Fig. \ref{fig:productivity-anomaly}), , with a mix of good and poor condition 2011-2019, and improved condition for many species in 2021 and 2022 (Fig. \ref{fig:ne-cf}). Preliminary results of synthetic analyses show that changes in temperature, zooplankton, fishing pressure, and population size influence the condition of different fish species.
-
-```{r ne-cf, fig.cap = "Condition factor for fish species in New England based on fall NEFSC bottom trawl survey data. No survey was conducted in 2020.", fig.width=8, fig.asp=1}
+ecodata::plot_seabird_ne(varName = "productivity") + ggplot2::coord_cartesian(xlim=c(1992,2022))
+```
+```{r salmon, fig.cap = "Return rate proportions and abundance of Atlantic salmon.",fig.width = 8,fig.asp = 0.3}
+ecodata::plot_gom_salmon()+
+  ylab('returning proportion')
+```
+The health of individual fish (i.e., fish condition) can contribute to population productivity through improved growth, reproduction, and survival. [Fish condition](https://noaa-edab.github.io/catalog/relative-condition.html) in the Gulf of Maine and Georges Bank regions were generally good prior to 2000, poor from 2001-2010 (concurrent with declines in fish productivity, Fig. \ref{fig:productivity-anomaly}), and a mix of good and poor since 2011. In 2023, fish condition was mixed, with generally improving condition on Georges Bank, but the highest number of species in poor condition in the Gulf of Maine since 2010 (Fig. \ref{fig:ne-cf}).
+```{r ne-cf, fig.cap = "Condition factor for fish species in New England based on fall NEFSC bottom trawl survey data. No survey was conducted in 2020.", fig.width=9, fig.asp=1.2}
 
 gb <- ecodata::plot_condition(report = "NewEngland", EPU = "GB")
 gom <- ecodata::plot_condition(report = "NewEngland", EPU = "GOM")
 
 gb / gom
 ```
+#### Drivers 
 
-#### Drivers: 
+Fish productivity and condition are affected by increasing metabolic demands from increasing temperature, combined with changes in the availability and quality of prey. Long-term environmental trends and episodic extreme temperatures, ocean acidification, and low oxygen events represent multiple stressors that can affect growth rates, reproductive success and recruitment, and cause mortality.
 
-Fish productivity and condition are affected by increasing metabolic demands from increasing temperature, combined with changes in the availability and quality of prey. Episodic extreme temperatures, ocean acidification, and low oxygen events represent multiple stressors that can affect growth rates and cause mortality.
+##### Biological Drivers: Forage quality and abundance
 
-*Need to place this* Common tern productivity has also declined in the Gulf of Maine. 2021 and 2023 were challenging years for terns raising chicks (Fig. \ref{fig:seabird-ne-productivity}).  
+Fish productivity is dependent on the energy potentially available to them based on the nutritional value (energy content) and abundance of prey. Changes in the forage fish base can drive managed and protected species production and condition.
 
-```{r seabird-ne-productivity, fig.cap = "Productivity of Common terns in the Gulf of Maine.",  fig.width=5, fig.asp=.4}
-#code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_NE.Rmd-seabird-ne-productivity.R"),
-
-ecodata::plot_seabird_ne(varName = "productivity") + ggplot2::coord_cartesian(xlim=c(1992,2022))
-```
-
-want the salmon here? another system productivity symptom?
-```{r}
-ecodata::plot_gom_salmon()
-```
-
-##### Forage quality and abundance
-The amount of forage fish available in the ecosystem combined with the energy content of the forage species determines the amount of energy potentially available to predators in the ecosystem. Changes in the forage base can drive to managed and protected species production. 
-
-Nutritional value (energy content) of juvenile and adult forage fish as prey is related to environmental conditions, fish growth, and reproductive cycles. Forage energy density measurements from NEFSC trawl surveys 2017-2022 are building toward a time series to evaluate trends (Fig. \ref{fig:energy-density}). Data from the fall 2021 and spring 2022 survey measurements were consistent with previous reports: the energy density of Atlantic herring increased to over 7 kJ/g wet weight, but was still well below that observed in the 1980s and 1990s (10.6-9.4 kJ/ g wet weight). Silver hake, longfin squid (*Loligo* in figure) and shortfin squid (*Illex* in figure) remain lower than previous estimates [@steimle_energy_1985; @lawson_important_1998]. Energy density of alewife, butterfish, sand lance, and Atlantic mackerel varies seasonally, with seasonal estimates both higher and lower than estimates from previous decades.  
+The [energy content](https://noaa-edab.github.io/catalog/forage-fish-energy-density.html) of juvenile and adult forage fish as prey is related to forage fish growth and reproductive cycles, as well as environmental conditions. The energy content of Atlantic herring from the NEFSC trawl surveys has increased but is still well below observations in the 1980s and 1990s (Fig. \ref{fig:energy-density}). Silver hake, longfin squid (Loligo in figure), and shortfin squid (Illex in figure) remain lower than previous estimates.
 ```{r energy-density, fig.cap="Forage fish energy density mean and standard deviation by season and year, compared with 1980s (solid line; Steimle and Terranove 1985) and 1990s (dashed line; Lawson et al. 1998) values.",  fig.width = 7.5, fig.asp = 0.5}
 #code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_MAB.Rmd-energy-density.R"),
 
 ecodata::plot_energy_density()
 ```
+Changes in the overall abundance of forage fish can influence managed species productivity as it relates to changes in food availability. New England [fall forage biomass]( https://noaa-edab.github.io/catalog/forage-fish-index.html) is stable with long-term increases in the spring GOM(Fig. \ref{fig:foragebio}). Forage biomass was highest during fall in the 1980s.
 
-A spatially-explicit forage index estimated the combined biomass of 20 forage species using stomach contents information from 22 predatory fish species collected on bottom trawl surveys. The resulting indices show an increasing long term trend in fall the Gulf of Maine, and overall higher forage fish in fall relative to spring (Fig. \ref{fig:foragebio}), with highest forage biomass during fall in the mid-1980s.   
-```{r foragebio, fig.cap = "Forage fish index based on spring and fall survey predator diets.", fig.width = 7, fig.asp=.6}
+##### Biological Drivers: Lower trophic levels
+
+Phytoplankton are the foundation of the food web and are the primary food source for zooplankton and filter feeders such as shellfish. Numerous environmental and oceanographic factors interact to drive the abundance, composition, spatial distribution, and productivity of phytoplankton. While changes in fish productivity (including forage) could result from changing primary productivity, total primary production in New England has no long-term trend, despite anomalous conditions in the GOM in 2023 (Fig. \ref{fig:primaray-production}).
+
+Zooplankton communities in the Mid-Atlantic have increasing trends for smaller bodied copepods and gelatinous
+species (Cnidaria; Fig. Fig \ref{fig:zoo-abund}). Smaller bodied copepods and gelatinous species are less energy-rich than Eupausiids
+(krill) or the larger-bodied copepod *Calanus finmarchicus*. A changing mix of zooplankton prey can impact forage
+fish energy content and abundance, as well as the prey field of filter feeding whales.
+
+Since 2010, the abundance of the lipid-rich older stages of  [*Calanus finmarchicus*](https://noaa-edab.github.io/catalog/mesozooplankton-biomass-at-wilkson-basin.html) in the GOM has declined. Observations from a fixed time series station in Wilkinson Basin  indicate that [*Calanus* abundance](https://noaa-edab.github.io/catalog/seasonal-variation-of-calanus-finmarchicus.html) in late summer-winter between 2020-2022 has declined to 30-40% of its population level in 2005-2008 (Fig. \ref{fig:zooplankton-season}), although spring abundances are still the same as 15-20 years ago. The seasonal differences in abundance change reflect differences in influence of primary seasonal drivers:
+
+1. *Calanus* reproductive output is tied to phytoplankton availability in late winter/early spring.
+2. Gulf of Maine source waters drive *Calanus* supply (high *Calanus* in Scotian Shelf/Labrodor shelf water (LSW) and less in warm slope water (WSW))
+3. Predation is likely higher with warmer temperatures
+
+```{r foragebio, fig.cap = "Forage fish index in GB (left) and GOM (right) for spring (blue) and fall (red) surveys. Index values are relative to the maximum observation within a region across surveys.", fig.width = 8, fig.asp=.4}
 #, code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_MAB.Rmd-forage-index.R")
 
 ecodata::plot_forage_index(report = "NewEngland")
 ```
+```{r zooplankton-season, fig.cap="Dry mass of mesozooplankton captured with a 200µm ring net towed from the bottom to surface at a deep time series station  in Wilkinson Basin between 2005-2022 (Runge et al. 2023)."}
 
-*This is where we would put in overall zooplankton production as well as comments on zoop energy content. Talk about Cal fin availability in New England*
-Decadal periodicity in the abundance of dominant copepods in the GOM and on GB has been previously reported, and these patterns continued to evolve into 2021. The abundance of *C. typicus* has been above average since 2012 in the GOM and on GB, and appears to be negatively correlated with *C. finmarchicus* abundance on GB (Fig. \ref{fig:zoo-abund}). *C. finmarchicus* has been below average in abundance since 2012 on GB following a period of high abundance between 2000-2010. *C. finmarchicus* also had high abundance in the GOM between 2000-2010, which corresponded to a period of recovery for right whales (Fig. \ref{fig:narw-abundance}). The abundance of *Pseudocalanus spp.*, an important prey item for cod larvae and other ichthyoplankton, has been below average on GB since 2000 and was below average in the GOM from 2000-2015, and most recently in 2021 the GOM larval fish diversity declined due to high abundance of hake (red, white, and silver) larvae.
+magick::image_read("https://github.com/NOAA-EDAB/ecodata/blob/dev/workshop/images/WBTS_Mesozooplankton_BIomass_2005-2022_Runge_Dullaert-Jeffrey_Runge_2024.jpg?raw=true")
 
-```{r zoo-abund, fig.cap="Abundance Annomalies of three dominante zooplankton (\\textit{Calanus finmarchicus}, \\textit{Calanus typicus}, and \\textit{Pseudocalanus spp}.) on Georges Bank (GB) and the Gulf of Maine (GOM).", fig.width=6}
+```
+```{r zoo-abund, fig.cap="Georges Bank (GB) and Gulf of Maine (GOM) abundance anomalies three dominante zooplankton (\\textit{Calanus finmarchicus}, \\textit{Calanus typicus}, and \\textit{Pseudocalanus spp}.).", fig.width=6}
 #, code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_NE.Rmd-zoo-abundance-anom.R")
 
 ecodata::plot_zoo_abundance_anom(report = "NewEngland")
 
 ```
+##### Environmental Drivers
 
-Phytoplankton support the food web as the primary food source for zooplankton and filter feeders such as shellfish. Numerous environmental and oceanographic factors interact to drive the abundance, composition, spatial distribution, and productivity of phytoplankton.
+Fish production can also be directly related to the prevailing environmental conditions by altering metabolic (growth) and reproductive processes. Many species possess thermal tolerances and can experience stressful or lethal conditions if temperatures exceed certain levels. Extreme temperature at both the [surface](https://noaa-edab.github.io/catalog/sea-surface-temperature-anomaly.html) (Fig. \ref{fig:longterm-sst}) and [bottom](https://noaa-edab.github.io/catalog/bottom-temperature---seasonal-anomaly.html) can exceed [thermal tolerance](https://noaa-edab.github.io/catalog/thermal-habitat-persistence.html) limits for some fish. For example, 2012 had among the warmest surface and bottom temperatures in New England. A large proportion of the Georges Bank and Mid-Atlantic regions had bottom temperatures above the 15℃ thermal tolerance for most groundfish, with some days exceeding the 24℃ potential mortality limit (Fig. \ref{fig:therm-hab-persist-2012}). The second strongest [bottom marine heatwave](https://noaa-edab.github.io/catalog/marine-heatwaves---bottom.html) since 1982 was observed in the GOM, although it did not exceed this 15℃ threshold. Although parts of GB and the inshore GOM exceed this 15℃ threshold ,  heatwaves are an EPU-wide metric and include areas where bottom temperature is typically far below this threshold.
+```{r therm-hab-persist-2012, fig.cap="The number of days in 2012 where bottom temperature exceeds 15℃ (left) and 24℃ (right) based on the GLORYS 1/12 degree grid.",fig.width = 8, fig.asp = 0.4}
+# year = 2012
+# ecodata::plot_thermal_habitat_persistence(year=year) + ggplot2::ggtitle(paste(year))+
+# ggplot2::ggsave(here::here('images','thermal_habitat_2012.png'),width = 8,height = 8, units = 'in',dpi = 300)
+# 
+# p2 = magick::image_read(here::here('images','thermal_habitat_2012.png')) %>%
+#   magick::image_trim()%>%
+#   magick::image_write(here::here('images','thermal_habitat_2012_cropped.png'))
 
-While changes in fish productivity could result from changing primary productivity, total primary production in New England has no clear trend. 
-
-```{r pptot, fig.width=7}
-gb <- ecodata::plot_annual_chl_pp(report = "NewEngland", varName = "pp", plottype = "total", EPU = "GB") + ggplot2::ggtitle("Georges Bank total PP")
-
-gom <- ecodata::plot_annual_chl_pp(report = "NewEngland", varName = "pp", plottype = "total", EPU = "GOM") + ggplot2::ggtitle("Gulf of Maine total PP")
-
-gb + gom
+magick::image_read(here::here('images','thermal_habitat_2012_cropped.png'))
 ```
+[Ocean acidification](https://noaa-edab.github.io/catalog/ocean-acidification-and-other-stressors.html) (OA) risks vary among species and include reduced survival, growth, reproduction, and productivity, where high OA risk indicates potential negative effects to species. High OA risk was observed for Atlantic sea scallop and longfin squid in Long Island Sound and the nearshore and mid-shelf regions of the New Jersey shelf (Fig. \ref{fig:oa-2023}, right panel) during summer 2016, 2018, 2019, and 2023.
+```{r oa-2023, fig.cap= "Locations where bottom aragonite saturation state ($\\Omega_{Arag}$; summer only: June-August) were at or below the laboratory-derived sensitivity level for Atlantic sea scallop (left panel) and longfin squid (right panel) for the time periods 2007-2022 (dark cyan) and 2023 only (magenta). Gray circles indicate locations where bottom $\\Omega_{Arag}$ values were above the species specific sensitivity values."}
 
-Temperature increases at both the surface (Fig. \ref{fig:seasonal-oisst_anom}) and bottom (Fig. \ref{fig:bottom-temp}) can exceed thermal tolerance limits for some fish. For example, 2012 had among the warmest surface and bottom temperatures in New England. A large proportion of the region had bottom temperatures above the thermal tolerance for groundfish... with some days exceeding the mortality limit (Fig. \ref{fig:therm-hab-persist-2012}).
-
-```{r therm-hab-persist-2012, fig.width=8, fig.asp=1}
-year = 2012
-ecodata::plot_thermal_habitat_persistence(year=year) + ggplot2::ggtitle(paste(year))
-```
-
-
-
-Ocean acidification (OA) has caused measured declines in global ocean pH, and is projected to continue declining if high carbon dioxide emissions continue [@intergovernmental_panel_on_climate_change_ipcc_technical_2022]. OA also changes the availability of minerals required by organisms to form calcified structures such as shells. Calcifying conditions in seawater can be determined by measuring aragonite saturation state ($\Omega_{Arag}$), the tendency of a common type of calcium carbonate, aragonite, to form or dissolve. When $\Omega_{Arag}$ is less than 1, shells and other calcium carbonate structures begin to dissolve. Typical surface ocean $\Omega_{Arag}$ is 2-4, but extremes can be <1 or >5 [@jiang_climatological_2015]. As the ocean absorbs carbon dioxide, both pH and $\Omega_{Arag}$ decrease and can cause organisms to respond with reduced survival, calcification rates, growth, and reproduction, as well as impaired development, and/or changes in energy allocation [@kroeker_impacts_2013 @saba_recommended_2019]. However, sensitivity levels vary, and some organisms exhibit negative responses to calcification and other processes when $\Omega_{Arag}$ is as low as 3.
-
-*OLD TEXT REWRITE FOR NEW FIGURES*
-Summer-time (2007-present) $\Omega_{Arag}$ on the U.S. Northeast Shelf varies in space and time, ranging from 0.64 to 2.49 (Fig. \ref{fig:mab-oa}, left panel). Spatially, the lowest bottom $\Omega_{Arag}$ has occurred in the Gulf of Maine, western Long Island Sound, nearshore to mid-shelf waters of the Mid-Atlantic Bight off the coast of New Jersey, and in waters > 1000 meters. $\Omega_{Arag}$ was at or below the sensitivity levels for both Atlantic sea scallop [@cameron_effects_2022] and longfin squid [@zakroff_dose-dependence_2019; @zakroff_antagonistic_2020] in Long Island Sound and the nearshore and mid-shelf regions of the New Jersey shelf (Fig. \ref{fig:mab-oa}, right panels). The sensitivity levels of bottom $\Omega_{Arag}$ occurred during August 2016, July 2018, and August 2019 for both species, and additionally in August 2021 for the Atlantic sea scallop.
-
-```{r mab-oa, out.width = '100%', fig.cap = "Bottom summer-time (June-August) pH (left panel) and aragonite saturation state (right panel) on the U.S. Northeast Shelf from 2007-2023 plotted from available quality-controlled vessel- and glider-based datasets."}
-
-
-#knitr::include_graphics("https://github.com/NOAA-EDAB/ecodata/raw/master/docs/images/Saba_Fig_SOE_MAFMC-GraceSaba.jpg")
-
-magick::image_read("https://github.com/NOAA-EDAB/ecodata/raw/dev/workshop/images/Figure4-GraceSaba_2024.png")
-
-#magick::image_read("https://github.com/NOAA-EDAB/ecodata/raw/master/docs/images/Saba_Fig_SOE_MAFMC - Grace Saba.jpg")
+magick::image_read("https://github.com/NOAA-EDAB/ecodata/raw/dev/workshop/images/Figure6_GraceSaba_2024.png")
 
 ```
+Biological and oceanographic processes can affect the amount of oxygen present in the water column. During low oxygen (hypoxic) events, species' growth is negatively affected and very low oxygen can result in mortality. The duration and extent of hypoxic events is being monitored, but long-term shelf-wide observations are not yet available. However, [hypoxic events](https://noaa-edab.github.io/catalog/observation-synthesis.html) were detected off the coast of New Jersey in 2023 and were potentially responsible for fish, lobster, and crab [mortalities](https://sebsnjaesnews.rutgers.edu/2023/12/rutgers-scientists-observe-unusual-ocean-conditions-possibly-linked-to-mortality-in-marine-life-off-new-jersey/).
 
-```{r oa-spp, out.width = '100%', fig.cap ="Locations where bottom aragonite saturation state ($\\Omega_{Arag}$; summer only: June-August) were at or below the laboratory-derived sensitivity level for Atlantic sea scallop (top panels) and longfin squid (bottom panels) for the time periods 2007-2022 (left panels) and 2007-2023 (right panels). Gray circles indicate locations where carbonate chemistry samples were collected, but bottom $\\Omega_{Arag}$ values were higher than sensitivity values determined for that species."}
+##### Drivers: Predation
 
-magick::image_read("https://github.com/NOAA-EDAB/ecodata/raw/dev/workshop/images/Figure5-GraceSaba_2024.png")
-```
+The abundance and distribution of predators can affect both the productivity and mortality rates on managed stocks. Predators can consume managed species or compete for the same resources resulting in increased natural mortality or declining productivity, respectively. The northeast shift in [highly migratory species](https://noaa-edab.github.io/catalog/cetacean-distribution-shifts.html) (fig. \ref{fig:protectedspp-dist-shifts}) indicates a change in the overlap between predators and prey. Since we also observe distribution shifts in both managed and forage species, the effect of changing predator distributions alone is difficult to quantify. 
 
-Low oxygen events
+The increase in the [gray seal population](https://noaa-edab.github.io/catalog/gray-seal-bycatch.html) suggests predator populations are  increasing in the GOM and GB regions. [Stock status](https://noaa-edab.github.io/catalog/highly-migratory-species-stock-status.html) is mixed for Atlantic Highly Migratory Species (HMS) stocks (including sharks, swordfish, billfish, and tunas) occurring throughout the Northeast U.S shelf. While there are several HMS species considered to be overfished or that have unknown stock status, the population status for some managed Atlantic sharks and tunas is at or above the biomass target, suggesting the potential for robust predator populations among these managed species. Stable predator populations suggest stable predation pressure on managed species, but increasing predator populations may reflect increasing predation pressure.
 
+#### Future Considerations
 
-
-### Current status: 2023 overview
-
-Multiple anomalous conditions and extreme events were observed in 2023 that could have brief local effects and/or widespread long-term ecosystem, fishery and management implications. Reported observations should be noted and taken into consideration for future analyses and assessments.
-
-Globally, 2023 was the warmest year on record with record high global sea surface temperatures. North Atlantic surface temperatures were also the highest on record, however temperatures in the Northeast U.S. shelf ecosystem were more variable, near record highs in winter and near average in other seasons. Chesapeake Bay rarely exceeded temperature thresholds.
-
-Bottom temperatures likely thresholds of X and Y degrees for N days in 2023, especially along the Mid-Atlantic coast. *which species care?*
-
-```{r therm-hab-persist-2023, fig.width=8, fig.asp=1}
-year = 2023
-ecodata::plot_thermal_habitat_persistence(year=year) + ggplot2::ggtitle(paste(year))
-```
-
-The 2020-2022 La Niña conditions ended in late winter and shifted to strong El Niño conditions in late spring 2023.  The current El Niño is expected to gradually weaken and transition to neutral conditions in spring 2024.  During El Niño winters, there is a noted increased frequency of East Coast storms. *add potential implications for fisheries*
-
-Fall tropical and coastal storms caused several flash flood events, above average coastal water levels, strong winds and high rainfall totals throughout the Northeast. *add potential implications for fisheries*
-
-Gulf Stream instability resulted in variability throughout the year. In the fall, the Gulf Stream was in a northward position along the Mid-Atlantic shelf break for an extended period of time. This severely constricted the Slope Sea waters that are normally between the Gulf Stream and continental shelf break. Warm salty surface Gulf Stream waters with strong currents were observed on the continental shelf in the southern MAB in October. *add potential implications for fisheries*
-
-The number of warm core rings (18) was well below the current regime (2000-2022) average of 31. One large early season ring was observed along the Northeast Shelf Break in spring, which generated an anomalously large shelf streamer that pulled continental shelf water into the Slope Sea.  *add potential implications for fisheries*
-
-High abundances of large baleen whale species (North Atlantic rRight wWhales and , humpback whales, minke, (others)) were observed feeding near a warm core rings that wereas adjacent to the continental shelf break in spring.
-Summer bottom temperatures in the Gulf of Maine were the warmest on record (since 1993) and the second largest bottom marine heatwave occurred from FebruaryMarch to August, peaked in May, and likely continued into the fall (pending data update). 
-
-Record high (since 1998) chlorophyll concentrations were up to ten times greater than average during a wide-spread, long-duration phytoplankton bloom in the Gulf of Maine that extended onto Georges Bank and the northern Mid-Atlantic Bight (Fig. \ref{fig:chl-current-year}). 
-
-*add potential implications for fisheries: such as:*
-
-A large phytoplankton bloom could represent either an influx of energy into the system, boosting productivity of zooplankton or higher trophic levels, or a settling of unconsumed dead phytoplankton cells to the bottom, where low oxygen could result due to increased bacterial activity consuming the settled material, or both.
-
-NEITHER HAPPENED
-
-It wasn't the typical bloom species.
-
-This species wasn't consumed so we don't expect it to boost fish productivity
-
-This species didn't sink to the bottom so we didn't get low oxygen
-
-
-```{r chl-current-year, fig.cap="", fig.width=8}
-
-a <- ecodata::plot_chl_pp(report = "MidAtlantic") + ggplot2::ggtitle("Mid Atlantic 2023")
-
-b <- ecodata::plot_chl_pp(report = "NewEngland") + ggplot2::ggtitle("New England 2023")
-
-a + b + patchwork::plot_layout(widths = c(2.6, 5.2))
-
-```
-
-
-Documented die off of scallops in the Mid-Atlantic Elephant trunk regions between the 2022 and 2023 surveys. 
-A fish and shellfish mortality event was observed in coastal New Jersey linked to hypoxia (low dissolved oxygen) and ocean acidification.
-
-In Chesapeake Bay, hypoxia conditions were the lowest on record (since 1995), creating more suitable habitat for adult and juvenile striped bass.
-
-
-### Implications
-
-*SUMMARIZE IMPLICATIONS OF THE WHOLE SECTION*
-
+The processes that control fish productivity and mortality are dynamic, complex, and the result of the interactions between multiple system drivers. There is a real risk that short-term predictions in assessments and rebuilding plans that assume unchanging underlying conditions will not be as effective, given the observed ecological and environmental process changes documented throughout the report. Assumptions for species’ growth, reproduction, and natural mortality should continue to be evaluated for individual species. With observations of system-wide productivity shifts of multiple managed stocks, more research is needed to determine whether regime shifts or ecosystem reorganization are occurring, and how this should be incorporated into management
 
 ## Other Ocean Uses: Offshore Wind
 
 ### Indicators: development timeline, revenue in lease areas, coastal community vulnerability
 
-As of January 2023, 31 offshore wind development projects are proposed for construction over the next decade in the Northeast (timelines and project data are based on Ocean Wind 1 Offshore Wind Farm Draft Environmental Impact Statement. Volume II: Appendix F.). Offshore wind areas are anticipated to cover more than 2.3 million acres by 2030 in the Greater Atlantic region (Fig. \ref{fig:wind-proposed-dev}). Beyond 2030 values include acreage for potential future lease and research areas in the Central Atlantic and GOM.
-
+As of January 2024, 30 offshore [wind development](https://noaa-edab.github.io/catalog/speed-and-scale-of-offshore-wind-development-in-the-northeast.html) projects are proposed for construction over the next decade in the Northeast (timelines and project data for 2024 are based on the [Ocean Wind 1 Offshore Wind Farm Final Environmental Impact Statement. Volume II: Appendix F](https://www.boem.gov/sites/default/files/documents/renewable-energy/state-activities/Ocean_Wind1_FEIS_App_F_Planned%20Activities%20Scenario.pdf)). Offshore wind areas are anticipated to cover more than 2.3 million acres by 2030 in the Greater Atlantic region (Fig. \ref{fig:wind-proposed-dev}). It is anticipated that all states will be able to reach their 2030 offshore wind goals with existing lease areas. 
 ```{r wind-proposed-dev, fig.cap='Proposed wind development on the northeast shelf.',  fig.width=5}
 #code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_MAB.Rmd-wind-proposed-dev.R"),
 
 ecodata::plot_wind_dev_speed()
 ```
-
-Just over 3,400 foundations and more than 9,000 miles of inter-array and offshore export cables are proposed to date. The colored chart in Fig. \ref{fig:wind-dev-cumul2} also presents the offshore wind development timeline in the Greater Atlantic region with the estimated year that foundations would be constructed (matches the color of the wind areas). These timelines and data estimates are expected to shift but represent the most recent information available as of January 2023. Based on current timelines, the areas affected would be spread out such that it is unlikely that any one particular area would experience full development at one time. 
-
+Just over 3,300 foundations and more than 12,000 miles of inter-array and offshore export cables are proposed to date. Since first reporting timeline indicators in 2021, construction years by 2030 have become increasingly uncertain with a wide range of estimated construction years being reported for some projects as reflected in the “Estimated Construction Schedule” column of Fig. \ref{fig:wind-dev-cumul2} below. The areas affected would be spread out such that it is unlikely that any one particular area would experience full development at one time. Construction of two projects in Southern New England (South Fork Wind and Vineyard Wind 1) during 2023 has affected fisheries managed by the New England Fishery Management Council, while construction activities began for Revolution Wind in early 2024. It is likely that construction will begin on other projects in Southern New England and possibly the New York Bight during 2024 that will further affect regional fisheries.
 ```{r wind-dev-cumul2, fig.cap = "All Northeast Project areas by year construction ends (each project has 2 year construction period).", out.width='90%'}
 #knitr::include_url("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/docs/images/All_2021128_needsgraph-01.jpg")
 #knitr::include_graphics("images/offshore_wind_timeline.png")
@@ -799,21 +714,17 @@ Just over 3,400 foundations and more than 9,000 miles of inter-array and offshor
 magick::image_read("https://github.com/NOAA-EDAB/ecodata/raw/dev/workshop/images/Cumulative_Timeline_FullRegion_SoE2024_v2_2024.png")
 
 ```
+\newpage
+Offshore floating wind is expected to be developed in the GOM. Although no commercial wind lease areas have been proposed, the Bureau of Ocean Energy Management (BOEM) released a draft Wind Energy Area (Fig. \ref{fig:wind-dev-cumul2}) on October 19, 2023, which could be refined into future lease areas. BOEM announced that the final wind energy area and proposed commercial lease area designations for the GOM are expected in quarter one of 2024, with lease sales before 2025. BOEM is also reviewing the state of Maine’s application to lease 9,700 acres (15 square miles) for the first floating offshore wind research site in federal waters of the GOM, which could have up to 12 turbines. Leasing for offshore floating wind in the Gulf of Maine will seek to meet the Biden Administration’s proposed goal of 15GW of floating offshore wind by 2035 in the U.S. 
 
-Offshore floating wind is expected to be developed in the GOM. Although no commercial wind lease areas have been proposed, BOEM has identified a draft Call Area, which could be refined into future lease areas.  BOEM is also reviewing the state of Maine's application to lease 9,700 acres (15 square miles) for the first floating offshore wind research site in federal waters of the GOM, which could have up to 12 turbines. This area is shown at the top of Figure \ref{fig:wind-dev-cumul2}. Additionally, BOEM announced that commercial lease area designations for the GOM are expected in quarter four of 2023, with lease sales in 2024. It is anticipated that all states will be able to reach their 2030 offshore wind goals with existing lease areas. Leasing for offshore floating wind in the Gulf of Maine will seek to meet the Biden Administration’s proposed goal of 15GW of floating offshore wind by 2035 in the US.  In a letter to BOEM submitted for the Gulf of Maine Request for Information, American Clean Power Association recommended that BOEM set a goal of leasing enough acres in its current Gulf of Maine leasing process to generate at least 10 GW of offshore wind (ACP Docket No. BOEM-2022-0040, regulations.gov).
+NEFSC has partnered with the Responsible Ocean Development Alliance (RODA) and the University of Rhode Island to conduct an Integrated Ecosystem Assessment (IEA) of the interactions between offshore wind, fisheries, and the environment in the Gulf of Maine. The IEA report will be similar to the State of the Ecosystem, but fully dedicated to impacts of offshore wind. Data from the IEA will be suitable for inclusion in the environmental impact statements for any projects in the GOM.
 
-NEFSC has partnered with the Responsible Ocean Development Alliance (RODA) to conduct and integrated ecosystem assessment of the interactions between offshore wind, fisheries, and the environment.  This work is being done based on the impending designation of lease areas in the GOM and will focus on this region.  Initial scoping is underway.  The expectations are to have a report similar to the State of the Ecosystem that is dedicated to this project and be able to provide data for inclusion in the environmental impact statements for any projects in the GOM.
-
-Based on federal vessel logbook data, commercial fishery revenue from trips in the current offshore wind lease areas and the Central Atlantic Primary and Secondary Call Areas represent 1-12\% of the total annual revenue for fisheries managed by the NEFMC.  Fishing revenue affected by offshore wind lease areas varied by year from 2008-2021 for the most affected NEFMC-managed fisheries, but largely declines over time. Maximum annual fishing revenue affected by wind lease areas peaked at nearly \$39 million for the sea scallop fishery, \$1.5 million for monkfish, \$800,000 for skates, \$528,000 for silver hake, and \$460,000 for Atlantic herring (Fig. \ref{fig:wea-spp-rev}). Groundfish landings generally occurred outside of existing lease areas, except for yellowtail flounder and winter flounder, with up to \$450,000 and \$244,000 in annual revenue affected, respectively. Wind leases in the Gulf of Maine would increase the number and scale of fisheries affected.
-
+Based on federal vessel logbook data, [commercial fishery revenue](https://noaa-edab.github.io/catalog/fishery-impacts-from-offshore-wind-development.html) from trips in the current offshore wind lease areas, the Central Atlantic Final Lease Areas, and the GOM Draft Wind Energy Area (excluding potential secondary areas), represent 3-54% of the total annual revenue for fisheries managed by the NEFMC from 2008-2022 (Table \ref{tab:wea-landings-rev}). Fishing revenue affected by offshore wind lease areas varies over time, but has largely declined over time. Maximum annual revenue for the fisheries with the most overlap with wind lease areas peaked at over \$51 million for the sea scallop fishery, \$4.2 million for monkfish, \$2.2 million for skates, \$724,000 for silver hake, and just over \$1 million for Atlantic herring (Fig. \ref{fig:wea-spp-rev}). The scallop fishery is mainly affected by lease areas in the Mid-Atlantic, as most of the Northern Area scallop fishery is outside of the GOM Draft Wind Energy Area. However, substantially more groundfish landings overlap with the GOM Draft Wind Energy Area, with up to $15.1 million in annual groundfish revenue caught within potential lease areas. Individual groundfish species are more affected than others, with over 28-53% of annual revenues for redfish (53%), pollock (40%), white hake (34%) and American plaice (28%) overlapping with the GOM Draft Wind Energy Area (Table \ref{tab:wea-landings-rev}). This potential overlap will decrease once BOEM designates final lease areas for the GOM, which will be substantially smaller than the Draft Wind Energy Area. Future fishery resource overlap with wind leases, especially scallops, may change due to species distribution shifts attributable to climate change and recruitment and larval dispersion pattern changes caused by hydrodynamic flow disruptions from turbine foundations, which could also affect fishery landings/revenue.
 ```{r wea-spp-rev, fig.cap="Fishery revenues from NEFMC managed species in the Wind energy lease areas.", fig.width = 6, fig.asp = .6}
 #, code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-wea-spp-rev.R")
 
 ecodata::plot_wind_revenue(report = "NewEngland", varName = "value", plottype = "facets")
 ```
-
-The sea scallop fishery could be the most affected fishery, with a maximum of 12\% of annual fishery revenue occurring within potential wind lease areas during this period. The skate fishery, monkfish, and silver hake could also be substantially affected, with a maximum of 10\%, 7\%, and 6\% of annual revenues affected, respectively (see Table \ref{tab:wea-landings-rev}).  Impacts in the GOM will be assessed after those lease areas are announced.
-
 ```{r wea-landings-rev, ft.arraystretch = 1}
 #fig.cap="Percent Landings and Revenue from wind energy areas. Data from GARFO VTR.",
 #, out.width="90%", code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_MAB.Rmd-wea-landings-rev.R")
@@ -841,26 +752,20 @@ dt<- ecodata::wea_landings_rev[1:20,] %>%
     "Maximum Percent Total Annual Regional Species Revenue"="perc_revenue_max")
 
 flextable::flextable(dt) %>%
-  flextable::set_caption("Top 20 species Landings and Revenue from Wind Energy Areas. * Landings and revenue for these species are likely underestimated due to limited coverage of these fisheries in historic reporting requirements for vessels issued federal permits by the NMFS Greater Atlantic Regional Fisheries Office. However, such limitations also suggest an inaccurately higher proportion of such landings and revenues in existing lease areas. ** Clearnose skates were reported separately from skates, which is presumed to include all skates managed under the Northeast skate complex. *** Based on comparison with other data sources, the high values for Illex squid are likely overestimates affected by the methods used to model logbook data to estimate spatial overlap of fishing operations with wind energy areas.") %>%
+  flextable::set_caption("Top 20 species Landings and Revenue from Wind Energy Areas. *A very small amount (<500 lb) was reported landed annually in potential offshore wind energy lease areas.") %>%
   flextable::width(width = c(2,2,2))
 
 
 ```
-
-Proposed wind development areas interact with the region’s federal scientific surveys. Scientific surveys are impacted by offshore wind in four ways: 1) Exclusion of NOAA Fisheries’ sampling platforms from the wind development area due to operational and safety limitations; 2) Impacts on the random-stratified statistical design that is the basis for scientific assessments, advice, and analyses; 3) Alteration of benthic and pelagic habitats, and airspace in and around the wind energy development, requiring new designs and methods to sample new habitats; and, 4) Reduced sampling productivity through navigation impacts of wind energy infrastructure on aerial and vessel survey operations. Increased vessel transit between stations may decrease data collections that are already limited by annual days-at-sea day allocations. The total survey area overlap ranges from 1-14\% for all Greater Atlantic federal surveys. Individual survey strata have significant interaction with wind, including the sea scallop survey (up to 96\% of individual strata) and the bottom trawl survey  (BTS, up to 60\% strata overlap). Additionally, up to 50\% of the southern New England North Atlantic right whale survey’s area overlaps with proposed project areas. A region-wide survey mitigation program is underway [@northeast_fisheries_science_center_us_noaa_2022].
-
-Equity and environmental justice (EJ) are priority concerns with offshore wind development and fisheries impacts in the Northeast. Fig. \ref{fig:wea-port-rev} links historic port revenue (2008-2021) from within all wind lease areas as a proportion of a port’s total fisheries revenue based on vessel trip reports as described in the revenue and landings of species in the wind indicator above. The range (minimum and maximum) of total percent fisheries revenue from within wind energy areas is presented in the graph and ports are sorted from greatest to least fisheries revenue from within wind areas. 
-
+Equity and environmental justice (EJ) are priority concerns with offshore wind development and fisheries impacts in the Northeast, and the impacts of offshore wind development are expected to differentially [impact specific coastal communities](https://noaa-edab.github.io/catalog/community-port-landings-and-revenue-from-wind-energy-areas-weas.html). Additionally, impacts of offshore wind development may unevenly affect individual operators, with some permit holders deriving a much higher proportion of revenue from wind areas than the port-based mean.
 ```{r wea-port-rev, fig.cap="Percent of port fisheries revenue from Wind Energy Areas (WEA) in descending order from most to least port fisheries revenue from WEA. EJ = Environmental Justice.",  fig.width=6.5, fig.asp=.75, fig.align='left'}
 #code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-wea-port-rev.R"),
 
 ecodata::plot_wind_port(report = "NewEngland")
 ```
+For example, Little Compton, RI had a minimum of 17% and maximum of 32% overlap of wind energy revenue to the total port revenue between 2008-2022 (Fig. \ref{fig:wea-port-rev}). BOEM reports that cumulative offshore wind development (if all proposed projects are developed) could have moderate impacts on low-income members of vulnerable communities who work in the commercial fishing and for-hire fishing industry due to disruptions to fish populations, restrictions on navigation, and increased vessel traffic as well as existing vulnerabilities of low-income workers to economic impacts.
 
-For example, Westport, MA had a minimum of 10% and maximum of 29% overlap of wind energy revenue to the total port revenue between 2008-2021. Those communities that score Med-High or higher in at least one of the vulnerability indicators that address environmental justice concerns (i.e., Poverty, Population Composition, Personal Disruption; see  indicator definitions) are noted with a triangle. Gentrification pressure is also highlighted here, with those communities that score Med-High or higher in one or more gentrification pressure indicators (i.e., Housing Disruption, Retiree Migration, Urban Sprawl) represented with a circle (Fig. \ref{fig:wea-port-rev}). BOEM reports that cumulative offshore wind development (if all proposed projects are developed) could have moderate impacts on low-income members of environmental justice communities who work in the commercial fishing and for-hire fishing industry due to disruptions to fish populations, restrictions on navigation and increased vessel traffic as well as existing vulnerabilities of low-income workers to economic impacts [@boem_vineyard_2020]. 
-
-Top  fishing communities high in environmental justice concerns (i.e., New Bedford, MA, New London, CT) should be considered in decision making to reduce the social and economic impacts and aid in the resilience and adaptive capacity of underserved communities. Environmental justice concerns also highlight communities where we need to provide further resources to reach underserved and underrepresented groups and create opportunities for, and directly involve, these groups in the decision-making process.
-
+Top fishing communities with high [environmental justice concerns](https://noaa-edab.github.io/catalog/engagement-reliance-and-environmental-justice-in-top-fishing-communities.html) such as  New Bedford, MA and New London, CT should be considered in decision making to reduce the social and economic impacts and aid in the resilience and adaptive capacity of underserved communities. These two ports are also undergoing significant changes to support offshore wind development port infrastructure needs. Environmental justice concerns also highlight communities where further resources are needed to reach underserved and underrepresented groups and create opportunities for, and directly involve, these groups in the decision-making process.
 ```{r wind-rev-MAB-NEFMC, fig.cap="Percent of Mid-Atlantic port revenue with majority NEFMC landings from Wind Energy Areas (WEA) in descending order from most to least port fisheries revenue from WEA. EJ = Environmental Justice.", fig.width=6.5, fig.asp=.4, fig.align='left'}
 df.symbol <- ecodata::wind_port %>% filter(EPU == "MAB", 
                                            !Var %in% c("WEA_MAX", "TOT_MAX", 
@@ -922,37 +827,88 @@ p2<-ggplot2::ggplot()+
 
 p2
 ```
-
 ### Implications
 Current plans for rapid buildout of offshore wind in a patchwork of areas spreads the impacts differentially throughout the region (Fig. \ref{fig:wind-dev-cumul2}).
 
 Up to 12% of total average revenue for major New England commercial species in lease areas could be forgone, or reduced, and associated effort displaced if all sites are developed. Displaced fishing effort can alter historic fishing areas, timing, and methods, which can in turn change habitat, species (managed and protected), and fleet interactions. Several factors, including fishery regulations, fishery availability, and user conflicts affect where, when, and how fishing effort may be displaced, along with impacts to and responses of affected fish species.
 
-Planned development overlaps NARW mother and calf migration corridors and a significant foraging habitat that is used throughout the year (Fig \ref{fig:whales-wind}).  Turbine presence and extraction of energy from the system could alter local oceanography and may affect right whale prey availability. For example, persistent foraging hotspots of right whales and seabirds overlap on Nantucket Shoals, where unique hydrography aggregates enhanced prey densities. Wind leases (OCS-A 0521 and OCS-A 0522) currently intersect these hotspots on the southwestern corner of Nantucket Shoals and a prominent tidal front associated with invertebrate prey swarms important to seabirds and possibly right whales. Proposed wind development areas also bring increased vessel strike risk from construction and operation vessels. In addition, there are a number of potential impacts to whales from pile driving and operational noise such as displacement, increased levels of communication masking, and elevated stress hormones.  
+Planned development [overlaps NARW](https://noaa-edab.github.io/catalog/right-whale-abundance.html) mother and calf migration corridors and a significant foraging habitat that is used throughout the year in addition to one of the only known winter foraging areas (Fig. \ref{fig:whales-wind}). Turbine presence and extraction of energy from the system could alter local oceanography and may affect right whale prey availability. For example, persistent foraging hotspots of right whales and seabirds overlap on Nantucket Shoals, where unique hydrography aggregates enhanced prey densities. Wind leases (OCS-A 0521 and OCS-A 0522) currently intersect these hotspots on the southwestern corner of Nantucket Shoals and a prominent tidal front associated with invertebrate prey swarms important to seabirds and possibly right whales. Proposed wind development areas also bring increased vessel strike risk from construction and operation vessels. In addition, there are a number of potential impacts to whales from pile driving and operational noise such as displacement, increased levels of communication masking, and elevated stress hormones.
 
-Scientific data collection surveys for ocean and ecosystem conditions, fish, and protected species will be altered, potentially increasing uncertainty for management decision making.
+Proposed wind development areas interact with the region’s federal scientific surveys. Scientific surveys are impacted by offshore wind in four ways:
 
-The increase of offshore wind development can have both positive (e.g., employment opportunities) and negative (e.g., space-use conflicts) effects. Continued increase in coastal development and gentrification pressure has resulted in loss of fishing infrastructure space within ports. Understanding these existing pressures can allow for avoiding and mitigating negative impacts to our shore support industry and communities dependent on fishing. Some of the communities with the highest fisheries revenue overlap with offshore wind development areas that are also vulnerable to gentrification pressure are Point Judith, RI, New Bedford, MA and Newport, RI. 
+1. Exclusion of NOAA Fisheries’ sampling platforms from the wind development area due to operational and safety limitations
+2. Impacts on the random-stratified statistical design that is the basis for scientific assessments, advice, and analyses;
+3. Alteration of benthic and pelagic habitats, and airspace in and around the wind energy development, requiring new designs and methods to sample new habitats
+4. Reduced sampling productivity through navigation impacts of wind energy infrastructure on aerial and vessel survey operations
 
-```{r whales-wind, out.width="60%", fig.cap="Northern Right Whale persistent hotspots and Wind Energy Areas."}
+Increased vessel transit between stations may decrease data collections that are already limited by annual days-at-sea day allocations. The total survey area overlap ranges from 1-70% for all Greater Atlantic federal surveys. The Gulf of Maine Cooperative Research Bottom Longline Survey (41%) and the Shrimp Survey (70%) have the largest percent overlap with the draft Gulf of Maine Wind Energy Areas. The remaining surveys range from 1-16% overlap.  Individual survey strata have significant interaction with wind energy development, including the sea scallop survey (up to 96% of individual strata) and the bottom trawl survey (BTS, up to 60% strata overlap). Additionally, up to 50% of the southern New England North Atlantic right whale survey’s area overlaps with proposed project areas and  a region-wide survey mitigation program is underway 
+
+The increase of offshore wind development can have both positive (e.g., employment opportunities) and negative (e.g., space-use conflicts) sociocultural effects. Continued increase in coastal development and gentrification pressure has resulted in loss of fishing infrastructure space within ports. Understanding these existing pressures can help avoid and mitigate negative impacts to our shore support industry and communities dependent on fishing. Some of the communities with the highest fisheries revenue overlap with offshore wind development areas that are also vulnerable to gentrification pressure are Point Judith and Newport, RI; New Bedford, MA; and Port Clyde and Portland, ME.
+```{r whales-wind, out.width="60%", fig.cap="Northern Right Whale persistent hotspots and Wind Energy Areas. Areas outlined in black show active or proposed wind energy leases."}
 # NEW FILE 
 magick::image_read("https://github.com/NOAA-EDAB/ecodata/raw/dev/workshop/images/SOE_2023_right_whales_hatteras_frame_v3_2024.jpg")
 
 ```
+\newpage
+## Current state: 2023 Observations
 
-\newpage{}
+Multiple [anomalous conditions](https://noaa-edab.github.io/catalog/observation-synthesis.html) and extreme events were observed in 2023 that could have brief local effects and/or widespread long-term ecosystem, fishery, and management implications. This section intends to provide a record of these observations, the implications they may have for other ecosystem processes, and a reflection on how they fit into our understanding of the ecosystem. Many of these observations are being actively studied but should be noted and considered in future analyses and management decisions. 
+
+Globally, 2023 was the warmest year on record with record high sea surface temperatures in the North Atlantic. In contrast, Northeast U.S. shelf surface temperatures were more variable, with near record highs in winter and near average conditions in other seasons. 
+
+### Regional/Coastal Phenomena
+
+There was a documented [die-off of scallops](https://noaa-edab.github.io/catalog/observation-synthesis.html) in the Mid-Atlantic Elephant Trunk regions between the 2022 and 2023 surveys. In 2022, Elephant Trunk experienced [stressful temperatures](https://noaa-edab.github.io/catalog/thermal-habitat-persistence.html) for scallops (17 - 19 ℃) for an average of 30 days, (Fig. \ref{fig:scallop-thermal-2022}) but ongoing research is being conducted to identify contributing factors. A  fish and shellfish mortality event was observed in coastal New Jersey linked to [hypoxia and ocean acidification](https://noaa-edab.github.io/catalog/ocean-acidification-and-other-stressors.html) (Fig. \ref{fig:hypoxia-2023}).
+```{r scallop-thermal-2022, out.width="60%", fig.cap="The number of days in 2022 where bottom temperature was between 17 and 19 ℃  (sressful thermal temperatures for sea scallops)in each GLORYS grid cell. The gray lines show the sea scallop estimation areas, with the Elephant Trunk region highlighted in black lines.",fig.height = 4}
+# NEW FILE 
+# magick::image_read("https://github.com/NOAA-EDAB/ecodata/blob/dev/workshop/images/bottom_temp_threshold_17_19_Elephant_Trunk.png?raw=true")
+knitr::include_graphics(here::here('images','bottom_temp_threshold_17_19_Elephant_Trunk.png'))
+
+```
+
+```{r hypoxia-2023, out.width="100%", fig.cap="Left: Mission tracks of three gliders deployed off the coast of New Jersey in August and September of 2023. Right: Locations of hypoxic levels of dissolved oxygen (magenta; < 3 mg/liter) and low aragonite saturation state (cyan; < 1) measured along the glider mission tracks and locations of reported fish, lobster, and/or crab mortalities (red X).",fig.height = 5}
+# NEW FILE 
+# a =magick::image_read("https://github.com/NOAA-EDAB/ecodata/blob/dev/workshop/images/Figure2-GraceSaba_2024.png?raw=true")
+# magick::image_scale(a,'5000x2500!')
+knitr::include_graphics(here::here('images','Figure6_GraceSaba_2024.png'))
+
+```
+Summer [bottom temperatures](https://noaa-edab.github.io/catalog/bottom-temperature---seasonal-anomaly.html) in the Gulf of Maine were the warmest on record (since 1959) resulting in the second largest [bottom marine heatwave](https://noaa-edab.github.io/catalog/marine-heatwaves---bottom.html). The heatwave started in February, peaked in May and likely continued beyond August (pending data update). 2023 [bottom temperature](https://noaa-edab.github.io/catalog/thermal-habitat-persistence.html) exceeded the 15℃ hreshold for up to 59 days along the shelf break. 
+
+A wide-spread, long-duration [phytoplankton bloom](https://noaa-edab.github.io/catalog/observation-synthesis.html) of the dinoflagellate *Tripos muelleri* was observed in the GOM and generated [chlorophyll concentrations](https://noaa-edab.github.io/catalog/chlorophyll-and-primary-production.html) up to ten times greater than average (a record high since 1998) from March to August (Fig. \ref{fig:gom-bloom-2023}). The bloom severely reduced water clarity, impacting harpoon fishing and likely affecting visual predators. Despite *Tripos* being a similar size to typical large phytoplankton (diatoms), this extra production was not grazed nor did it sink to the bottom. The specific drivers of the bloom and implications to the food web are still under investigation. 
+```{r gom-bloom-2023, out.width="60%", fig.cap="The chlorophyll anomaly for June 2023. Chlorophyll concentrations in the Gulf of Maine were 5-10 times greater than the long-term June average."}
+# NEW FILE 
+magick::image_read("https://github.com/NOAA-EDAB/ecodata/blob/dev/workshop/images/2023-GOMbloom-internalreview.png?raw=true")
+
+```
+The Chesapeake Bay experienced the least amount of [hypoxia conditions](https://noaa-edab.github.io/catalog/chesapeake-bay-2023-synthesis.html) on record (since 1995), creating more suitable habitat for multiple fin fish and benthic species. Cooler [Chesapeake Bay water temperatures](https://noaa-edab.github.io/catalog/chesapeake-bay-seasonal-sea-surface-temperature-anomaly.html) paired with less hypoxia in the summer suggest conditions that season were favorable for striped bass. Cooler summer temperatures also support juvenile summer flounder growth.  However, warmer winter and spring water temperatures in the Chesapeake Bay, along with other environmental factors (such as low flow), may have played a role in low production of juvenile striped bass in 2023.
+
+Higher-than-average [salinity](https://noaa-edab.github.io/catalog/chesapeake-bay-salinity.html) across the Bay was likely driven by low precipitation and increased the area of available habitat for species such as croaker, spot, menhaden, and red drum, while restricting habitat area for invasive blue catfish.
+
+### Shelf-wide Phenomena
+
+The [Gulf Stream](https://noaa-edab.github.io/catalog/gulf-stream-index.html) was highly variable in 2023, with northward shifts intermittently throughout the year and a more notable prolonged shift north along the continental shelf break in the southern Mid-Atlantic in the fall (Fig .\ref{fig:gulf-stream-2023}). This shift severely constricted the Slope Sea (the waters between the Gulf Stream and continental shelf), inhibited warm core ring formation and interactions, resulted in unusually warm and salty surface waters, and strong northeastward currents in the southern Mid-Atlantic. Intermittent warm waters like this can be threats to temperature-sensitive species, especially species at the southern end of their range or that are not mobile (e.g. scallops), while also providing suitable habitat for more southern species. 
+```{r gulf-stream-2023, out.width="60%", fig.cap="Weekly mean sea surface temperature (October 8-10, 2023) with the long-term mean Gulf Stream position. Red lines represent the 26\u00B0C) (78.8\u00B0F temperature contour."}
+# NEW FILE 
+# magick::image_read("https://github.com/NOAA-EDAB/ecodata/blob/dev/workshop/images/2023-GS-October-internalreview.png?raw=true")
+knitr::include_graphics(here::here('images','MAP-SST-Gulf-Stream.png'))
+
+```
+While the total number of [warm core rings](https://noaa-edab.github.io/catalog/warm-core-rings.html) in 2023 (18) was below the decadal average (31), there were a few notable events. A large early season ring pulled continental shelf water into the Slope Sea. Events like these can create biological hotspots, aggregating multiple species in small areas, increasing bycatch risks, and marine mammal shipstrike risks. In spring 2023, concentrations of [North Atlantic right whales](https://noaa-edab.github.io/catalog/persistent-annual-hotspots.html?q=hotspo#persistent-annual-hotspots), humpback whales, basking sharks, and other large baleen whales were observed feeding near the edge of warm core rings near the shelf break. 
+
+Multiple fall 2023 tropical and coastal storms caused several flash flood events, above-average coastal water levels, strong winds, and high rainfall totals throughout the Northeast. These storms may be related to the shift from 2020-2022 La Niña conditions to strong El Niño conditions in late spring 2023. El Niño winters are associated with more frequent East Coast storms, which can result in increased risk of coastal flooding,  increased freshwater runoff into the coastal ocean, and delayed spring transition from a well mixed water column to stratified. In estuaries, increased freshwater flow decreases salinity, reduces the amount of suitable habitat for juvenile marine fish, and is related to increased hypoxia (low oxygen). However, precipitation is not uniform throughout the Northeast U.S., and [Chesapeake Bay 2023 conditions](https://noaa-edab.github.io/catalog/chesapeake-bay-salinity.html) did not align with El Niño expectations.  The current El Niño is expected to weaken by spring 2024. 
+
 # Contributors
 
-**Editors** (NOAA NMFS Northeast Fisheries Science Center, NEFSC): Sean Lucey, Sarah Gaichas, Kimberly Bastille, Geret DePiper, Kimberly Hyde, Scott Large, Chris Orphanides, Laurel Smith. 
+**Editors** (NOAA NMFS Northeast Fisheries Science Center, NEFSC): Joseph Caracappa, Sarah Gaichas, Andrew Beet, Brandon Beltz, Geret DePiper, Kimberly Hyde, Scott Large, Sean Lucey, Laurel Smith.
 
-**Contributors** (NEFSC unless otherwise noted): Aaron Beaver (Anchor QEA), Andy Beet, Ruth Boettcher (Virginia Department of Game and Inland Fisheries), Mandy Bromilow (NOAA Chesapeake Bay Office), Joseph Caracappa, Zhuomin Chen (Woods Hole Oceanographic Institution), Doug Christel (GARFO), Patricia Clay, Lisa Colburn, Jennifer Cudney (NMFS Atlantic HMS Management Division), Tobey Curtis (NMFS Atlantic HMS Management Division), Geret DePiper, Dan Dorfman (NOAA-NOS-NCCOS), Hubert du Pontavice, Emily Farr (NMFS Office of Habitat Conservation), Michael Fogarty, Paula Fratantoni, Kevin Friedland, Marjy Friedrichs (VIMS), Sarah Gaichas, Ben Galuardi (GARFO), Avijit Gangopadhyay (School for Marine Science and Technology, University of Massachusetts Dartmouth), James Gartland (Virginia Institute of Marine Science), Glen Gawarkiewicz (Woods Hole Oceanographic Institution), Sean Hardison, Kimberly Hyde, John Kocik, Steve Kress (National Audubon Society’s Seabird Restoration Program), Young-Oh Kwon (Woods Hole Oceanographic Institution), Andrew Lipsky, Sean Lucey, Don Lyons (National Audubon Society’s Seabird Restoration Program), Chris Melrose, Shannon Meseck, Ryan Morse, Brandon Muffley (MAFMC), Kimberly Murray, Chris Orphanides, Richard Pace, Tom Parham (Maryland DNR), CJ Pellerin (NOAA Chesapeake Bay Office), Charles Perretti, Grace Roskar (NMFS Office of Habitat Conservation), Grace Saba (Rutgers), Vincent Saba, Sarah Salois, Chris Schillaci (GARFO), Dave Secor (CBL), Angela Silva, Adrienne Silver (UMass/SMAST), Emily Slesinger (Rutgers University), Laurel Smith, Talya tenBrink (GARFO), Bruce Vogt (NOAA Chesapeake Bay Office), Ron Vogel (University of Maryland Cooperative Institute of Satellite Earth System Studies and NOAA/NESDIS Center for Satellite Applications and Research), John Walden, Harvey Walsh, Changhua Weng, Mark Wuenschel.  
+**Contributors** (NEFSC unless otherwise noted): Kimberly Bastille, Aaron Beaver (Anchor QEA), Andy Beet, Ruth Boettcher (Virginia Department of Game and Inland Fisheries), Brandon Beltz, Mandy Bromilow (NOAA Chesapeake Bay Office), Joseph Caracappa, Baoshan Chen (Stony Brook Univeristy), Zhuomin Chen (University of Connecticut), Doug Christel (GARFO), Patricia Clay, Lisa Colburn, Jennifer Cudney (NMFS Atlantic HMS Management Division), Tobey Curtis (NMFS Atlantic HMS Management Division), Geret DePiper, Dan Dorfman (NOAA-NOS-NCCOS), Hubert du Pontavice, Emily Farr (NMFS Office of Habitat Conservation), Michael Fogarty, Paula Fratantoni, Kevin Friedland, Marjy Friedrichs (VIMS), Sarah Gaichas, Ben Galuardi (GARFO), Avijit Gangopadhyay (School for Marine Science and Technology, University of Massachusetts Dartmouth), James Gartland (Virginia Institute of Marine Science), Lori Garzio (Rutgers University), Glen Gawarkiewicz (Woods Hole Oceanographic Institution), Sean Hardison, Dvora Hart, Kimberly Hyde, John Kocik, Steve Kress (National Audubon Society’s Seabird Restoration Program), Young-Oh Kwon (Woods Hole Oceanographic Institution), Andrew Lipsky, Sean Lucey, Don Lyons (National Audubon Society’s Seabird Restoration Program), Chris Melrose, Shannon Meseck, Ryan Morse, Ray Mroch (SEFSC), Brandon Muffley (MAFMC), David Moe Nelson (NCCOS), Kimberly Murray, Janet Nye (University of North Carolina at Chapel Hill), Chris Orphanides, Richard Pace, Debi Palka, Tom Parham (Maryland DNR), CJ Pellerin (NOAA Chesapeake Bay Office), Charles Perretti, Grace Roskar (NMFS Office of Habitat Conservation), Jeffrey Runge (University of Maine), Grace Saba (Rutgers), Vincent Saba, Sarah Salois, Chris Schillaci (GARFO), Amy Schueller (SEFSC), Teresa Schwemmer (Stony Brook University), Dave Secor (CBL), Angela Silva, Adrienne Silver (UMass/SMAST), Emily Slesinger (Rutgers University), Laurel Smith, Talya tenBrink (GARFO), Abigail Tyrell, Bruce Vogt (NOAA Chesapeake Bay Office), Ron Vogel (University of Maryland Cooperative Institute of Satellite Earth System Studies and NOAA/NESDIS Center for Satellite Applications and Research), John Walden, Harvey Walsh, Changhua Weng, Timothy White (Environmental Studies Program, BOEM), Dave Wilcox (VIMS), Mark Wuenschel, Qian Zhang (University of Maryland).
 
 \newpage 
 
 # Document Orientation
 
 The figure format is illustrated in Fig \ref{fig:docformat}a. Trend lines are shown when the slope is significantly different from 0 at the p < 0.05 level. An orange line signifies an overall positive trend, and purple signifies a negative trend. To minimize bias introduced by small sample size, no trend is fit for < 30 year time series. Dashed lines represent mean values of time series unless the indicator is an anomaly, in which case the dashed line is equal to 0. Shaded regions indicate the past ten years. If there are no new data for 2020, the shaded region will still cover this time period. The spatial scale of indicators is either coastwide, New England states (Connecticut, Rhode Island, Massachusetts, New Hampshire, and Maine), or at one of the two Ecosystem Production Units (EPUs, Fig. \ref{fig:docformat}b) levels in the region, Georges Bank (GB) or Gulf of Maine (GOM).
-
 ```{r docformat, fig.cap = "Document orientation. a. Key to figures. b.The Northeast Large Marine Ecosystem.",  fig.width = 8, fig.height = 2.5}
 #fig.subcap= c('Key to figures.', 'The Northeast Large Marine Ecosystem.'), out.width = '.49\\linewidth', fig.show="hold" 
 # FIgure orientation subfigure
@@ -1031,9 +987,7 @@ labs(tag = "b")
 psample + plot_spacer() + epumap + plot_layout(ncol = 3, widths=c(3,.5,4.5))
 
 ```
-
-Fish and invertebrates are aggregated into similar feeding guild categories (Table \ref{tab:species-groupings}) to evaluate ecosystem level trends in predators and prey. 
-
+Fish and invertebrates are aggregated into similar [feeding guild categories](https://noaa-edab.github.io/catalog/feeding-guilds-by-management-bodies.html) (Table  \ref{tab:species-groupings}) to evaluate ecosystem level trends in predators and prey.
 ```{r species-groupings, warning=F}
 
 # new table with all species listed by management entity
@@ -1074,7 +1028,3 @@ flextable::flextable(df) %>%
   flextable::width(width = c(1,1,1,1,3))
 
 ```
-
-\newpage 
-
-# References
