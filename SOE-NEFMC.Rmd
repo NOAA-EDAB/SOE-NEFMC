@@ -172,7 +172,9 @@ Single species [management objectives](https://noaa-edab.github.io/catalog/stock
 ```{r stock-status, fig.cap = "Summary of single species status for NEFMC and jointly federally managed stocks (goosefish and spiny dogfish).  The dotted vertical line at one is the target biomass reference point of B.  The dashed lines are the management thresholds of B (vertical) or F (horizontal). Colors denote stocks with B/B\\textsubscript{MSY} < 0.5 or F/F\\textsubscript{MSY} (orange), stocks 0.5<B/B\\textsubscript{MSY}<1 (blue), and stocks B/B\\textsubscript{MSY}>1 (green).CCGOM = Cape Cod Gulf of Maine, GOM = Gulf of Maine, GB = Georges Bank, SNEMA = Southern New England Mid Atlantic", fig.width = 7.5, fig.asp = 0.8}
 #, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-stock-status.R")
 
-ecodata::plot_stock_status(report = "NewEngland")
+a <- ecodata::plot_stock_status(report = "NewEngland")
+
+a$p
 
 # nrow <- as.integer(dim(a$unknown)[1])
 # halfnrow <- as.integer(nrow/2)
@@ -190,18 +192,14 @@ ecodata::plot_stock_status(report = "NewEngland")
 #                              xmin=2, xmax=3, ymin=1.4, ymax=1.9)+
 #   theme(legend.position = 'bottom')
 ```
+
 ```{r stock-status-table}
 
-a <- ecodata::plot_stock_status(report = "NewEngland")$unknown %>%
-  mutate(F.Fmsy = round(F.Fmsy,2),
-         B.Bmsy = round(B.Bmsy,2))
-a$F.Fmsy[which(is.na(a$F.Fmsy))] = '-'
-a$B.Bmsy[which(is.na(a$B.Bmsy))] = '-'
-
-flextable::flextable(a) %>%
+flextable::flextable(a$unknown) %>%
     flextable::set_header_labels(F.Fmsy = "F/Fmsy",
                                B.Bmsy = "B/Bmsy") %>%
-  flextable::set_caption("Unknown or partially known stock status for MAFMC and jointly managed species.") %>%
+  flextable::colformat_num(na_str = "-") |>
+  flextable::set_caption("Unknown or partially known stock status for NEFMC and jointly managed species.") %>%
   flextable::autofit()
 ```
 #### System Biomass
@@ -887,7 +885,7 @@ Higher-than-average [salinity](https://noaa-edab.github.io/catalog/chesapeake-ba
 ### Shelf-wide Phenomena
 
 The [Gulf Stream](https://noaa-edab.github.io/catalog/gulf-stream-index.html) was highly variable in 2023, with northward shifts intermittently throughout the year and a more notable prolonged shift north along the continental shelf break in the southern Mid-Atlantic in the fall (Fig .\ref{fig:gulf-stream-2023}). This shift severely constricted the Slope Sea (the waters between the Gulf Stream and continental shelf), inhibited warm core ring formation and interactions, resulted in unusually warm and salty surface waters, and strong northeastward currents in the southern Mid-Atlantic. Intermittent warm waters like this can be threats to temperature-sensitive species, especially species at the southern end of their range or that are not mobile (e.g. scallops), while also providing suitable habitat for more southern species. 
-```{r gulf-stream-2023, out.width="60%", fig.cap="Weekly mean sea surface temperature (October 8-10, 2023) with the long-term mean Gulf Stream position. Red lines represent the 26℃) (78.8℉)temperature contour."}
+```{r gulf-stream-2023, out.width="60%", fig.cap="Weekly mean sea surface temperature (October 8-10, 2023) with the long-term mean Gulf Stream position. Red lines represent the 26℃) (78.8F) temperature contour."}
 # NEW FILE 
 # magick::image_read("https://github.com/NOAA-EDAB/ecodata/blob/dev/workshop/images/2023-GS-October-internalreview.png?raw=true")
 knitr::include_graphics(here::here('images','MAP-SST-Gulf-Stream.png'))
