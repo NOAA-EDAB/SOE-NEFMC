@@ -378,7 +378,7 @@ As a whole, the examined diversity indicators suggest changes in commercial and 
 
 Two commercial fishing communities (Stonington and Beals, ME) scored high for both engagement and reliance based on 2021 data (Fig. \ref{fig:commercial-engagement}). New Bedford and Boston, MA and Swans Island, ME ranked medium-high or above for one or more of the environmental justice indicators in 2021 (Fig. \ref{fig:commercial-EJ}). Swan’s Island has considerable unemployment concerns, but does not have the same demographic and age structure concerns as Boston or New Bedford. Port Clyde-Tenants Harbor and Stonington, ME ranked medium for one or more of the environmental justice indicators. Decreased commercial fishing engagement/reliance led to Winter Harbor, ME no longer being listed as a top ten commercial fishing community. 
 
-In New England, Dennis and Bourne, MA scored high for both recreational engagement and reliance, whereas no communities did previously(Fig.\ref{fig:recreational-engagement}). Seabrook and Newington, NH; Sandwich and Yarmouth, MA; Groton and Clinton, CT have decreased in their recreational engagement/reliance and are no longer listed as top ten recreational communities, replaced by Barnstable Town, Plymouth, Falmouth, and Chatham, MA; Sronington, CT; Tiverton and New Shoreham, RI. There are no communities ranked medium-high or above for environmental justice indicators (Fig. \ref{fig:recreational-EJ}). Communities that ranked medium for one or more of the environmental justice indicators including Falmouth and Dennis, MA. 
+In New England, Dennis and Bourne, MA scored high for both recreational engagement and reliance, whereas no communities did previously (Fig. \ref{fig:recreational-engagement}). Seabrook and Newington, NH; Sandwich and Yarmouth, MA; Groton and Clinton, CT have decreased in their recreational engagement/reliance and are no longer listed as top ten recreational communities, replaced by Barnstable Town, Plymouth, Falmouth, and Chatham, MA; Sronington, CT; Tiverton and New Shoreham, RI. There are no communities ranked medium-high or above for environmental justice indicators (Fig. \ref{fig:recreational-EJ}). Communities that ranked medium for one or more of the environmental justice indicators including Falmouth and Dennis, MA. 
 
 Narragansett/Point Judith, like all of these top recreational communities ranked low for environmental justice vulnerability. In fact, the scores below 0 for all three environmental justice indicators implies a lower than average level of vulnerability, based on recreational engagement and reliance,  among the communities included in the analysis.
 ```{r commercial-engagement, fig.cap= "Commercial engagement, reliance, and environmental justice vulnerability for the top commercially engaged and reliant fishing communities in New England. Communities in orange are ranked medium-high or above for one or more of the environmental justice indicators. Communities in purple are ranked medium for one or more of the environmental justice indicators. *Community scored high (1.00 and above) for both commercial engagement and reliance indicators.", fig.width = 7.5, fig.asp = 0.5, results='hide'}
@@ -437,7 +437,7 @@ These indicators provide a snapshot of the presence of environmental justice iss
 
 ## Protected Species
 
-Fishery management objectives for protected species generally focus on reducing threats and on habitat conservation/restoration. Protected species include marine mammals protected under the Marine Mammal Protection Act, endangered and threatened species protected under the Endangered Species Act, and migratory birds protected under the Migratory Bird Treaty Act. In the Northeast U.S., endangered/threatened species include Atlantic salmon, Atlantic and shortnose sturgeon, all sea turtle species, and five baleen whales. Protected species objectives include managing bycatch to remain below potential biological removal (PBR) thresholds, recovering endangered populations, and monitoring unusual mortality events (UMEs). Here we report on performance relative to these objectives with available indicator data, as well as indicating the potential for future interactions driven by observed and predicted 
+Fishery management objectives for protected species generally focus on reducing threats and on habitat conservation/restoration. Protected species include marine mammals protected under the Marine Mammal Protection Act, endangered and threatened species protected under the Endangered Species Act, and migratory birds protected under the Migratory Bird Treaty Act. In the Northeast U.S., endangered/threatened species include Atlantic salmon, Atlantic and shortnose sturgeon, all sea turtle species, and five baleen whales. Protected species objectives include managing bycatch to remain below potential biological removal (PBR) thresholds, recovering endangered populations, and monitoring unusual mortality events (UMEs). Here we report on performance relative to these objectives with available indicator data, as well as indicating the potential for future interactions driven by observed and predicted ecosystem changes in the Northeast U.S. 
 
 ### Indicators: bycatch, population (adult and juvenile) numbers, mortalities
 
@@ -503,7 +503,7 @@ Shifting species distributions (changes in spatial extent or center of gravity) 
 
 #### Indicator: Fish and protected species distribution shifts
 
-As noted in the [landings implications section](#implications) above, the [center of distribution](https://noaa-edab.github.io/catalog/species_dist.html) for a suite of 48 commercially or ecologically important fish species along the entire Northeast Shelf continues to show movement towards the northeast and generally into deeper water (Fig.\ref{fig:species-dist} ). [Habitat model-based species richness](https://noaa-edab.github.io/catalog/habitat_diversity.html) suggests shifts of both cooler and warmer water species to the northeast. Similar patterns have been found for [marine mammals](https://noaa-edab.github.io/catalog/HMS_species_distribution.html), with multiple species shifting northeast between 2010 and 2017 in most seasons (Fig. \ref{fig:protectedspp-dist-shifts} ).
+As noted in the [landings implications section](#implications) above, the [center of distribution](https://noaa-edab.github.io/catalog/species_dist.html) for a suite of 48 commercially or ecologically important fish species along the entire Northeast Shelf continues to show movement towards the northeast and generally into deeper water (Fig. \ref{fig:species-dist} ). [Habitat model-based species richness](https://noaa-edab.github.io/catalog/habitat_diversity.html) suggests shifts of both cooler and warmer water species to the northeast. Similar patterns have been found for [marine mammals](https://noaa-edab.github.io/catalog/HMS_species_distribution.html), with multiple species shifting northeast between 2010 and 2017 in most seasons (Fig. \ref{fig:protectedspp-dist-shifts} ).
 ```{r protectedspp-dist-shifts, fig.cap="Direction and magnitude of core habitat shifts, represented by the length of the line of the seasonal weighted centroid for species with more than 70 km difference between 2010 and 2017 (tip of arrow).", fig.width=7, fig.asp=0.8}
 #, code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_MAB.Rmd-protectedspp-dist-shifts.R")
 
@@ -677,7 +677,7 @@ Since 2010, the abundance of the lipid-rich older stages of  [*Calanus finmarchi
 
 ecodata::plot_forage_index(report = "NewEngland")
 ```
-```{r zoo-abund, fig.cap="Georges Bank (GB) and Gulf of Maine (GOM) abundance anomalies three dominante zooplankton (\\textit{Calanus finmarchicus}, \\textit{Calanus typicus}, and \\textit{Pseudocalanus spp}.).", fig.width=7.5,fig.asp = 0.5}
+```{r zoo-abund, fig.cap="Georges Bank (GB) and Gulf of Maine (GOM) abundance anomalies three dominant zooplankton (\\textit{Calanus finmarchicus}, \\textit{Calanus typicus}, and \\textit{Pseudocalanus spp}.).", fig.width=7.5,fig.asp = 0.5}
 #, code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_NE.Rmd-zoo-abundance-anom.R")
 
 ecodata::plot_zoo_abundance_anom(report = "NewEngland")
@@ -691,7 +691,9 @@ magick::image_read("https://github.com/NOAA-EDAB/ecodata/blob/dev/workshop/image
 
 ##### Environmental Drivers
 
-Fish production can also be directly related to the prevailing environmental conditions by altering metabolic (growth) and reproductive processes. Many species possess thermal tolerances and can experience stressful or lethal conditions if temperatures exceed certain levels. Extreme temperature at both the [surface](https://noaa-edab.github.io/catalog/seasonal_oisst_anom.html) (Fig. \ref{fig:longterm-sst}) and [bottom](https://noaa-edab.github.io/catalog/bottom_temp_comp.html) can exceed [thermal tolerance](https://noaa-edab.github.io/catalog/thermal_habitat_persistence.html) limits for some fish. For example, 2012 had among the warmest surface and bottom temperatures in New England. A large proportion of the Georges Bank and Mid-Atlantic regions had bottom temperatures above the 15℃ thermal tolerance for most groundfish, with some days exceeding the 24℃ potential mortality limit (Fig. \ref{fig:therm-hab-persist-2012}). The second strongest [bottom marine heatwave](https://noaa-edab.github.io/catalog/heatwave_year.html) since 1982 was observed in the GOM, although it did not exceed this 15℃ threshold. Although parts of GB and the inshore GOM exceed this 15℃ threshold ,  heatwaves are an EPU-wide metric and include areas where bottom temperature is typically far below this threshold.
+Fish production can also be directly related to the prevailing environmental conditions by altering metabolic (growth) and reproductive processes. Many species possess thermal tolerances and can experience stressful or lethal conditions if temperatures exceed certain levels. Extreme temperature at both the [surface](https://noaa-edab.github.io/catalog/seasonal_oisst_anom.html) (Fig. \ref{fig:longterm-sst}) and [bottom](https://noaa-edab.github.io/catalog/bottom_temp_comp.html) can exceed [thermal tolerance](https://noaa-edab.github.io/catalog/thermal_habitat_persistence.html) limits for some fish. For example, 2012 had among the warmest surface and bottom temperatures in New England. A large proportion of the Georges Bank and Mid-Atlantic regions had bottom temperatures above the 15℃ thermal tolerance for most groundfish, with some days exceeding the 24℃ potential mortality limit (Fig. \ref{fig:therm-hab-persist-2012}). 
+
+In 2023, the second strongest [bottom marine heatwave](https://noaa-edab.github.io/catalog/heatwave_year.html) since 1982 was observed in the GOM, although it did not exceed this 15℃ threshold. Although parts of GB and the inshore GOM exceed this 15℃ threshold, heatwaves are an EPU-wide metric and include areas where bottom temperature is typically far below this threshold.
 ```{r therm-hab-persist-2012, fig.cap="The number of days in 2012 where bottom temperature exceeds 15℃ (left) and 24℃ (right) based on the GLORYS 1/12 degree grid.",out.width = '90%'}
 # year = 2012
 # ecodata::plot_thermal_habitat_persistence(year=year) + ggplot2::ggtitle(paste(year))+
@@ -705,7 +707,7 @@ Fish production can also be directly related to the prevailing environmental con
 knitr::include_graphics(here::here('images','thermal_habitat_2012_cropped.png'))
 ```
 [Ocean acidification](https://noaa-edab.github.io/catalog/ocean_acidification.html) (OA) risks vary among species and include reduced survival, growth, reproduction, and productivity, where high OA risk indicates potential negative effects to species. High OA risk was observed for Atlantic sea scallop and longfin squid in Long Island Sound and the nearshore and mid-shelf regions of the New Jersey shelf (Fig. \ref{fig:oa-2023}, right panel) during summer 2016, 2018, 2019, and 2023.
-```{r oa-2023, fig.cap= "Locations where bottom aragonite saturation state ($\\Omega_{Arag}$; summer only: June-August) were at or below the laboratory-derived sensitivity level for Atlantic sea scallop (left panel) and longfin squid (right panel) for the time periods 2007-2022 (dark cyan) and 2023 only (magenta). Gray circles indicate locations where bottom $\\Omega_{Arag}$ values were above the species specific sensitivity values."}
+```{r oa-2023, out.width="100%", fig.cap= "Locations where bottom aragonite saturation state ($\\Omega_{Arag}$; summer only: June-August) were at or below the laboratory-derived sensitivity level for Atlantic sea scallop (left panel) and longfin squid (right panel) for the time periods 2007-2022 (dark cyan) and 2023 only (magenta). Gray circles indicate locations where bottom $\\Omega_{Arag}$ values were above the species specific sensitivity values."}
 
 magick::image_read("https://github.com/NOAA-EDAB/ecodata/raw/dev/workshop/images/Figure6_GraceSaba_2024.png")
 
@@ -775,15 +777,27 @@ ecodata::plot_wind_revenue(report = "NewEngland", varName = "value", plottype = 
 #   column_spec(2:5, width = "10em") %>%
 #   kable_styling(latex_options = "scale_down")
 
-dt<- ecodata::wea_landings_rev[1:20,] %>% 
+# dt<- ecodata::wea_landings_rev[1:20,] %>% 
+#   dplyr::select("NEFMC, MAFMC, and ASMFC Managed Species", "perc_landings_max",
+#                 "perc_revenue_max" ) %>%
+#   dplyr::rename("Maximum Percent Total Annual Regional Species Landings"="perc_landings_max",
+#     "Maximum Percent Total Annual Regional Species Revenue"="perc_revenue_max")
+# 
+# flextable::flextable(dt) %>%
+#   flextable::set_caption("Top 20 species Landings and Revenue from Wind Energy Areas. *A very small amount (<500 lb) was reported landed annually in potential offshore wind energy lease areas.") %>%
+#   flextable::width(width = c(2,2,2))
+
+dt<- ecodata::wea_landings_rev |> 
+  dplyr::filter(Council %in% c("NEFMC", "MAFMC/NEFMC")) |>
   dplyr::select("NEFMC, MAFMC, and ASMFC Managed Species", "perc_landings_max",
                 "perc_revenue_max" ) %>%
   dplyr::rename("Maximum Percent Total Annual Regional Species Landings"="perc_landings_max",
     "Maximum Percent Total Annual Regional Species Revenue"="perc_revenue_max")
 
 flextable::flextable(dt) %>%
-  flextable::set_caption("Top 20 species Landings and Revenue from Wind Energy Areas. *A very small amount (<500 lb) was reported landed annually in potential offshore wind energy lease areas.") %>%
+  flextable::set_caption("New England managed species Landings and Revenue from Wind Energy Areas. *Skates includes barndoor, winter, clearnose, smooth, little, and general skates reported in logbooks.") %>%
   flextable::width(width = c(2,2,2))
+
 
 
 ```
@@ -895,11 +909,12 @@ knitr::include_graphics(here::here('images','bottom_temp_threshold_17_19_Elephan
 
 ```
 
-```{r hypoxia-2023, out.width="100%", fig.cap="Left: Mission tracks of three gliders deployed off the coast of New Jersey in August and September of 2023. Right: Locations of hypoxic levels of dissolved oxygen (magenta; < 3 mg/liter) and low aragonite saturation state (cyan; < 1) measured along the glider mission tracks and locations of reported fish, lobster, and/or crab mortalities (red X).",fig.height = 5}
+```{r hypoxia-2023, out.width="90%", fig.cap="Left: Mission tracks of three gliders deployed off the coast of New Jersey in August and September of 2023. Right: Locations of hypoxic levels of dissolved oxygen (magenta; < 3 mg/liter) and low aragonite saturation state (cyan; < 1) measured along the glider mission tracks and locations of reported fish, lobster, and/or crab mortalities (red X).",fig.height = 5}
 # NEW FILE 
 # a =magick::image_read("https://github.com/NOAA-EDAB/ecodata/blob/dev/workshop/images/Figure2-GraceSaba_2024.png?raw=true")
 # magick::image_scale(a,'5000x2500!')
-knitr::include_graphics(here::here('images','Figure6_GraceSaba_2024.png'))
+#knitr::include_graphics(here::here('images','Figure6_GraceSaba_2024.png'))
+magick::image_read("https://github.com/NOAA-EDAB/ecodata/raw/dev/workshop/images/Figure2-GraceSaba_2024.png")
 
 ```
 Summer [bottom temperatures](https://noaa-edab.github.io/catalog/bottom_temp_comp.html) in the Gulf of Maine were the warmest on record (since 1959) resulting in the second largest [bottom marine heatwave](https://noaa-edab.github.io/catalog/heatwave_year.html). The heatwave started in February, peaked in May and likely continued beyond August (pending data update). 2023 [bottom temperature](https://noaa-edab.github.io/catalog/thermal_habitat_persistence.html) exceeded the 15℃ hreshold for up to 59 days along the shelf break. 
