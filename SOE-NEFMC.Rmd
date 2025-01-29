@@ -3,14 +3,14 @@ title:
 csl: plos.csl
 fontsize: 10pt
 output:
+  bookdown::word_document2:
+    toc: false
   bookdown::pdf_document2:
     includes:
       in_header: latex/header1.tex
     keep_tex: yes
     toc: false
     number_sections: false
-  bookdown::word_document2:
-    toc: false
   bookdown::html_document2: 
     df_print: paged
 link-citations: yes
@@ -64,11 +64,11 @@ set_flextable_defaults(
 # Introduction
 
 ## About This Report
-This report is for the New England Fishery Management Council (MAFMC). The purpose of this report is to synthesize ecosystem information to allow the NEFMC to better meet fishery management objectives, and to update the MAFMC’s Ecosystem Approach to Fishery Management (EAFM) risk assessment. The major messages of the report are synthesized on pages 1-3, with highlights of 2023 ecosystem events on page 4. The information in this report is organized into two main sections; [performance measured against ecosystem-level management objectives](#performance-relative-to-fishery-management-objectives) (Table \ref{tab:management-objectives}), and potential [risks to meeting fishery management objectives](#risks-to-meeting-fishery-management-objectives) ([climate change](#climate-and-ecosystem-change) and [other ocean uses](#other-ocean-uses-offshore-wind)). A final new section introduced this year highlights [notable 2023 ecosystem observations](#highlights).
+This report is for the New England Fishery Management Council (NEFMC). The purpose of this report is to synthesize ecosystem information to allow the NEFMC to better meet fishery management objectives. The major messages of the report are synthesized on pages 1-3, with highlights of 2024 ecosystem events on page 4. The information in this report is organized into two main sections; [performance measured against ecosystem-level management objectives](#performance-relative-to-fishery-management-objectives) (Table \ref{tab:management-objectives}), and potential [risks to meeting fishery management objectives](#risks-to-meeting-fishery-management-objectives) ([climate change](#climate-and-ecosystem-change) and [other ocean uses](#other-ocean-uses-offshore-wind)). A final new section introduced this year highlights [notable 2024 ecosystem observations](#highlights).
 
 ## Report structure
 
-We recommend new readers first review the details of standard figure formatting (Fig. \ref{fig:docformat}a), categorization of fish and invertebrate species into feeding guilds (Table \ref{tab:species-groupings}), and definitions of ecological production units (EPUs, including the Mid-Atlantic Bight, MAB; Fig. \ref{fig:docformat}b) provided at the end of the document. 
+We recommend new readers first review the details of standard figure formatting (Fig. \ref{fig:docformat}a), categorization of fish and invertebrate species into feeding guilds (Table \ref{tab:species-groupings}), and definitions of ecological production units (EPUs, including the Gulf of Maine (GOM) and Georges Bank (GB); Fig. \ref{fig:docformat}b) provided at the end of the document. 
 
 The two main sections contain subsections for each management objective or potential risk. Within each subsection, we first review indicator trends, and the status of the most recent data year relative to a threshold (if available) or relative to the long-term average. Second, we synthesize results of other indicators and information to outline potential implications for management (i.e., connecting indicator(s) status to management and why an indicator(s) is important). For example, if there are multiple drivers related to an indicator trend, we examine which drivers may be more or less supported by current information, and which,if any, are affected by management action(s)? Similarly, we examine which risk indicators warrant continued monitoring to evaluate whether regime shifts or ecosystem reorganization are likely? We emphasize that these implications are intended to represent testable hypotheses at present, rather than “answers,” because the science behind these indicators and syntheses continues to develop.  
 
@@ -127,25 +127,25 @@ In this section, we examine indicators related to broad, ecosystem-level fishery
 
 ### Indicator: Landings; commercial and recreational
 
-This year, we present updated indicators for total [commercial landings](https://noaa-edab.github.io/catalog/comdat.html), U.S. seafood landings, and Council-managed U.S. seafood landings . Total commercial landings within New England show no long-term trends (Fig. \ref{fig:total-landings}). We treat the last three years of total landings as preliminary, given that the Canadian landings within each EPU have yet to be updated by NAFO. There exist long-term declines in commercial seafood landings for the Gulf of Maine, but over the last decade landings appear to be relatively stable. In addition, NEFMC managed seafood production on Georges Bank now presents a long-term declining trend.
-```{r total-landings, fig.cap = "Total commercial landings (black), total U.S. seafood landings (blue), and New England managed U.S. seafood landings (red) for Georges Bank (GB) and the Gulf of Maine (GOM). Open circles represent years that are lacking NAFO (foreign) data.", fig.width = 7.5, fig.asp = 0.4}
+This year, we present updated indicators for total [commercial landings](https://noaa-edab.github.io/catalog/comdat.html), U.S. seafood landings, and Council-managed U.S. seafood landings. Total commercial landings within New England show no long-term trend on GB, and a long term decline in the GOM (Fig. \ref{fig:total-landings}). There exist long-term declines in commercial seafood landings and NEFMC managed seafood landings for both the GOM and GB, but over the last decade GOM landings appear to be relatively stable. 
+```{r total-landings, fig.cap = "Total commercial landings (black), total U.S. seafood landings (blue), and New England managed U.S. seafood landings (red) for Georges Bank (GB) and the Gulf of Maine (GOM).", fig.width = 7.5, fig.asp = 0.4}
 #, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-comdat-total-landings.R")
 
-ecodata::plot_comdat(report = "NewEngland", varName = "landings")+
+ecodata::plot_comdat(report = "NewEngland", varName = "landings", n=10)+
   ylab(expression("Landings (10"^3*" metric tons)"))
 ```
-Commercial landings by guild include all species and all uses, and are reported as total for the guild and the NEFMC managed species within the [guild](https://noaa-edab.github.io/catalog/aggregate_biomass.html). As reported in previous years, downward trends persist for a number of guilds in both regions. A significant upward trend is present for benthivores (GOM), attributable to an increase in American lobster, and benthos (GB), attributable to clams and scallops (Fig. \ref{fig:comm-landings}). Landings of planktivores on Georges Bank are presenting mixed trends between total and managed species, both categories are near historic lows. 
+Commercial landings by guild include all species and all uses, and are reported as total for the guild and the NEFMC managed species within the [guild](https://noaa-edab.github.io/catalog/aggregate_biomass.html). As reported in previous years, downward trends persist for a number of guilds in both regions. Current high total landings for benthivores (GOM) are attributable to American lobster, and a significant long term increase in benthos landings (GB) is attributable to clams and scallops (Fig. \ref{fig:comm-landings}). Current landings of planktivores are near historic lows. 
 ```{r, comm-landings, fig.cap = "Total commercial landings (black) and NEFMC managed U.S seafood landings (red) by feeding guild for the Gulf of Maine (GOM, right) and Georges Bank (GB, left).", fig.width=8, fig.asp=1}
 #, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-comdat-commercial-landings-gom.R")
 
-ecodata::plot_comdat(report = "NewEngland", plottype = "guild")
+ecodata::plot_comdat(report = "NewEngland", plottype = "guild", n=10)
 
 ```
-Overall, [recreational harvest](https://noaa-edab.github.io/catalog/recdat.html) (retained fish presumed to be eaten) have also declined in New England (Fig. \ref{fig:rec-landings}). Although, harvest has rebounded somewhat from the historical low level in 2020. Recreational [shark landings](https://noaa-edab.github.io/catalog/rec_hms.html) of pelagic and prohibited sharks have declined since 2018 (Fig  \ref{fig:rec-hms}), likely influenced by regulatory changes implemented in 2018 intended to rebuild shortfin mako stocks.
+Overall, [recreational harvest](https://noaa-edab.github.io/catalog/recdat.html) (retained fish presumed to be eaten) has also declined in New England (Fig. \ref{fig:rec-landings}). However, harvest has rebounded somewhat from the historical low level in 2020. Recreational [shark landings](https://noaa-edab.github.io/catalog/rec_hms.html) of pelagic and prohibited sharks have declined since 2018 (Fig  \ref{fig:rec-hms}), likely influenced by regulatory changes implemented in 2018 intended to rebuild shortfin mako stocks.
 ```{r rec-landings, fig.cap = paste0("Total recreational seafood harvest (millions of pounds) in the New England region."),fig.width = 8,fig.asp = 0.4}
 #, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-recdat-landings.R")
 
-ecodata::plot_recdat(report = "NewEngland", varName = "landings")
+ecodata::plot_recdat(report = "NewEngland", varName = "landings", n=10)
 
 ```
 ```{r rec-hms, fig.cap = "Recreational shark landings from Large Pelagics Survey.", fig.width=8,fig.asp = 0.4}
@@ -192,9 +192,10 @@ a$p+
 #                              xmin=2, xmax=3, ymin=1.4, ymax=1.9)+
 #   theme(legend.position = 'bottom')
 ```
+
 #### System Biomass
 
-[Aggregate biomass](https://noaa-edab.github.io/catalog/aggregate_biomass.html) trends derived from scientific resource surveys have been stable to increasing in both regions (Fig. \ref{fig:nefsc-biomass-gb} & Fig. \ref{fig:nefsc-biomass-gom}). The benthivores group spiked during the last decade, due to a large haddock recruitment, but appears to be returning to average levels. Planktivore biomass on GB conitues to rise with the highest fall biomass observed since 1968. There are also increasing trends in piscivores, and planktivores in at least one season in both regions, and benthos on Georges Bank in both seasons. The New Hampshire/Maine state survey does not show these trends while the Massachusetts state survey shows the increasing trend in benthivores in the spring and planktivores in the fall but a decrease in piscivores in the spring and benthos in both seasons (Fig. \ref{fig:mass-biomass}). While managed species comprise varying proportions of aggregate biomass, trends in landings are not mirroring shifts in the overall trophic structure of survey-sampled fish and invertebrates. Therefore, major shifts in feeding guilds or ecosystem trophic structure are unlikely to be driving the decline in landings.
+[Aggregate biomass](https://noaa-edab.github.io/catalog/aggregate_biomass.html) trends derived from scientific resource surveys have been stable to increasing in both regions (Fig. \ref{fig:nefsc-biomass-gb} & Fig. \ref{fig:nefsc-biomass-gom}). The benthivores group spiked during the last decade, due to a large haddock recruitment, but appears to be returning to average levels. Planktivore biomass on GB continues to rise with the highest fall biomass observed since 1968. There are also increasing trends in piscivores, and planktivores in at least one season in both regions, and benthos on Georges Bank in both seasons. The New Hampshire/Maine state survey time series is too short to estimate trends, while the Massachusetts state survey shows the increasing trend in benthivores in the spring and planktivores in the fall but a decrease in piscivores in the spring and benthos in both seasons (Fig. \ref{fig:mass-biomass}). While managed species comprise varying proportions of aggregate biomass, trends in landings are not mirroring shifts in the overall trophic structure of survey-sampled fish and invertebrates. Therefore, major shifts in feeding guilds or ecosystem trophic structure are unlikely to be driving the decline in landings.
 ```{r stock-status-table, ft.arraystretch = 1}
 
 a <- ecodata::plot_stock_status(report = "NewEngland")
@@ -221,7 +222,7 @@ flextable::flextable(a$unknown) |>
 ```{r nefsc-biomass-gb, fig.cap = "Spring (left) and fall (right) surveyed biomass on Georges Bank. The shaded area around each annual mean represents 2 standard deviations from the mean.", fig.width=8, fig.asp = 0.7, results='hide'}
 #, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_NE.Rmd-aggregate-biomass-gb.R")
 
-ecodata::plot_aggregate_biomass(report = "NewEngland", EPU = "GB")+
+ecodata::plot_aggregate_biomass(report = "NewEngland", EPU = "GB", n=10)+
   theme(panel.spacing = unit(0,'lines'))
 #ggplot2::ggtitle("Georges Bank")
 
@@ -230,9 +231,10 @@ ecodata::plot_aggregate_biomass(report = "NewEngland", EPU = "GB")+
 ```{r nefsc-biomass-gom, fig.cap = "Spring (left) and fall (right) surveyed biomass in the Gulf of Maine. The shaded area around each annual mean represents 2 standard deviations from the mean.",  fig.width=8, fig.asp = 0.75, results = 'hide'}
 #code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_NE.Rmd-aggregate-biomass-gom.R"),
 
-ecodata::plot_aggregate_biomass(report = "NewEngland", EPU = "GOM")
+ecodata::plot_aggregate_biomass(report = "NewEngland", EPU = "GOM", n=10)
 #ggplot2::ggtitle("Gulf of Maine")
 ```
+
 #### Effect on Seafood Production
 
 With the poor or unknown stock status of many managed species, the decline in commercial seafood landings in the Gulf of Maine most likely reflects lower catch quotas implemented to rebuild overfished stocks, as well as market dynamics.
@@ -241,7 +243,7 @@ The decline in recreational seafood harvest stems from multiple drivers. Some of
 ```{r mass-biomass, fig.cap = "Spring (left) and fall (right) surveyed biomass from the state of Massachusetts inshore survey. The shaded area around each annual mean represents 2 standard deviations from the mean.", fig.width=8, fig.asp = 0.75, results = 'hide'}
 #, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_NE.Rmd-ma-inshore-survey.R")
 
-ecodata::plot_mass_inshore_survey(report = "NewEngland")
+ecodata::plot_mass_inshore_survey(report = "NewEngland", n=10)
 ```
 Other environmental changes require monitoring as they may become important drivers of future landings:
   
@@ -259,9 +261,9 @@ Other environmental changes require monitoring as they may become important driv
 ```{r comm-revenue, fig.cap = "Revenue through 2022 for the New England region: total (black) and from NEFMC managed species (red).", fig.width = 7.5}
 #, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-comdat-comm-revenue.R")
 
-ecodata::plot_comdat(report="NewEngland", varName="revenue") 
+ecodata::plot_comdat(report="NewEngland", varName="revenue", N=10) 
 ```
-Revenue earned by harvesting resources is a function of both the quantity landed of each species and the prices paid for landings. Beyond monitoring yearly changes in revenue, it is even more valuable to determine what drives these changes: harvest levels, the mix of species landed, price changes, or a combination of these. The [Bennet Indicator](https://noaa-edab.github.io/catalog/bennet.html) decomposes revenue change into two parts, one driven by changing quantities (volumes), and a second driven by changing prices. All changes are in relation to a base year (1982).
+Revenue earned by harvesting resources is a function of both the quantity landed of each species and the prices paid for landings. Beyond monitoring yearly changes in revenue, it is even more valuable to determine what drives these changes: harvest levels, the mix of species landed, price changes, or a combination of these. The [Bennet Indicator](https://noaa-edab.github.io/catalog/bennet.html) decomposes revenue change into two parts, one driven by changing quantities (volumes), and a second driven by changing prices. All changes are in relation to a base year (1982). We note that 2022 Atlantic herring revenue data were incomplete for this report, and will be revised in future reports. 
 
 In the GB region, revenues have been consistently lower than the 1982 baseline throughout the time series. The changes in total revenue in GB was primarily driven by volumes prior to 2010, and then by prices (Fig.\ref{fig:bennet}). In the GOM, revenues have been above the 1982 baseline in all but four years, largely due to changing prices in most years.  Breaking down the revenue by guild (Fig. \ref{fig:bennet-all}), for GB, both the volume and price trend have been largely driven by benthos (quahogs and surfclams). In the GOM region, increased prices for benthivores drove the year-over-year increases in overall prices. Benthivores also had a large influence on the overall volume indicator in the GOM.
 ```{r bennet, fig.cap = "Revenue change from the 1982 baseline in 2022 dollars (black), price, and volume for commercial landings from Georges Bank (GB: left) and the Gulf of Maine (GOM: right)", fig.width = 9, fig.asp = 0.4}
@@ -271,12 +273,12 @@ gb <- ecodata::plot_bennet(report = "NewEngland", varName = "total", EPU = "GB")
   ggplot2::ggtitle("GB revenue components") +
   ggplot2::theme(legend.position = "bottom",
                       legend.title = ggplot2::element_blank())+
-  ggplot2::ylab("Million USD (2022)")
+  ggplot2::ylab("Million USD (2023)")
 gom <- ecodata::plot_bennet(report = "NewEngland", varName = "total", EPU = "GOM") +
   ggplot2::ggtitle("GOM revenue components") +
   ggplot2::theme(legend.position = "bottom",
                       legend.title = ggplot2::element_blank())+
-                      ggplot2::ylab("Million USD (2022)")
+                      ggplot2::ylab("Million USD (2023)")
 
 gb + gom + plot_layout(guides = 'collect') & theme(legend.position = 'bottom')
 
@@ -285,12 +287,13 @@ gb + gom + plot_layout(guides = 'collect') & theme(legend.position = 'bottom')
 #, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-bennet-all.R")
 
 gb <- ecodata::plot_bennet(report = "NewEngland", varName = "guild", EPU = "GB")+
-  ggplot2::ylab("Million USD (2022)")
+  ggplot2::ylab("Million USD (2023)")
 gom <- ecodata::plot_bennet(report = "NewEngland", varName = "guild", EPU = "GOM")+
-  ggplot2::ylab("Million USD (2022)")
+  ggplot2::ylab("Million USD (2023)")
 
 gb / gom + plot_layout(guides = 'collect') & theme(legend.position = 'bottom')
 ```
+
 ### Implications 
 
 The continued dependence on lobster in the GOM and sea scallops on GB is affected by multiple drivers including resource availability and market conditions. As both species are sensitive to ocean warming and acidification, it is important to monitor these and other climate drivers.
@@ -303,14 +306,15 @@ The continued dependence on lobster in the GOM and sea scallops on GB is affecte
 ```{r rec-op, fig.cap = paste0("Recreational effort in New England."),fig.width = 7.5,fig.asp = 0.3}
 #, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-recdat-effort.R")
 
-ecodata::plot_recdat(report = "NewEngland", varName = "effort")
+ecodata::plot_recdat(report = "NewEngland", varName = "effort", n=10)
 ```
 ```{r rec-div, fig.cap = paste0("Recreational fleet effort diversity in New England."),fig.width = 7.5,fig.asp = 0.3}
 #, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-recdat-diversity.R")
 
-ecodata::plot_recdat(report = "NewEngland", varName = "effortdiversity")+
+ecodata::plot_recdat(report = "NewEngland", varName = "effortdiversity", n=10)+
   ggplot2::ylab('Effective Shannon Index')
 ```
+
 ### Implications
 
 The absence of a long term trend in recreational angler trips and fleet effort diversity suggests relative stability in the overall number of recreational opportunities in the region.
@@ -327,14 +331,14 @@ While there are many potential metrics of stability, we use diversity indices to
 ```{r permit-div, fig.cap = paste0("Species revenue diversity in New England."),fig.width = 7.5,fig.asp = 0.3}
 #, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-commercial-div-species-div.R")
 
-ecodata::plot_commercial_div(report = "NewEngland", varName = "Permit revenue species diversity")+
+ecodata::plot_commercial_div(report = "NewEngland", varName = "Permit revenue species diversity", n=10)+
   ggplot2::ylab('Effective Shannon Index')
 ```
 As noted above, [recreational fleet effort diversity](https://noaa-edab.github.io/catalog/recdat.html) is stable. However, recreational species catch diversity has been above the time series average since 2008 with a long-term positive trend (Fig.  \ref{fig:rec-species-div}).
 ```{r rec-species-div,  fig.cap = paste0("Diversity of recreational catch in New England."),fig.width = 7.5,fig.asp = 0.3}
 #, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-recdat-div-catch.R")
 
-ecodata::plot_recdat(report = "NewEngland", varName = "catchdiversity")
+ecodata::plot_recdat(report = "NewEngland", varName = "catchdiversity", n=10)
 ```
 
 #### Ecological Stability
@@ -353,14 +357,15 @@ Ecological diversity indices show mixed trends. [Zooplankton diversity](https://
 ```{r zoo-diversity-gb, fig.cap = "Zooplankton diversity on Georges Bank and in the Gulf of Maine, based on Shannon diversity index. 2020 surveys were incomplete due to COVID-19.", fig.width = 7.5, fig.asp = 0.3}
 #, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_NE.Rmd-zoo-diversity.R")
 
-ecodata::plot_zoo_diversity(report = "NewEngland")+
+ecodata::plot_zoo_diversity(report = "NewEngland", n=10)+
   ylab('Zooplankton Diversity \n(Shannon Index)')
 ```
 ```{r exp-n, fig.cap = "Adult fish diversity for Georges Bank and in the Gulf of Maine, based on expected number of species. Results from survey vessels Albatross and Bigelow are reported separately due to catchability differences.",fig.width = 7.5,fig.asp = 0.3}
 #, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_NE.Rmd-exp-n.R")
 
-ecodata::plot_exp_n(report = "NewEngland", varName = "fall")
+ecodata::plot_exp_n(report = "NewEngland", varName = "fall", n=10)
 ```
+
 ### Implications
 
 Fleet diversity indices can be used to evaluate stability objectives as well as risks to fishery resilience and to maintain equity in access to fishery resources. The relatively low diversity estimates for the commercial fishery are likely driven by the continued reliance on a few species, such as sea scallops and lobster. This trend could diminish the capacity to respond to future fishing opportunities. Meanwhile, the increase in recreational species catch diversity is due to recent increases in Atlantic States Fisheries Management Council (ASFMC) and MAFMC managed species within the region, offsetting decreased limits on more traditional regional species.
@@ -370,74 +375,535 @@ Ecological diversity indices can provide insight into ecosystem structure. Chang
 As a whole, the examined diversity indicators suggest changes in commercial and recreational fisheries, likely driven by changes in the mix of species landed. However, there seems to be overall stability in ecosystem components. Increasing diversity in the recreational catch, GB zooplankton, and GOM adult fish accompanied by lows in commercial fleet diversity metrics, suggests warning signs of a potential regime shift or ecosystem restructuring and warrants continued monitoring to determine if managed species are affected.
 
 
-## Environmental Justice and Social Vulnerability{#social-vulnerability}
+## Community Social and Climate Vulnerability{#social-vulnerability}
 
-### Indicators: Environmental Justice and Social Vulnerability in commercial and recreational fishing communities
+### Indicators: Fishing Engagement and Community Social Vulnerability
 
 [Social vulnerability](https://noaa-edab.github.io/catalog/engagement.html) measures social factors that shape a community’s ability to adapt to change. A subset of these can be used to assess potential environmental justice issues. We report the top ten communities most engaged in, and/or reliant upon, commercial and recreational fisheries and the degree to which these communities may be vulnerable to environmental justice issues (i.e., Poverty, Population Composition, and Personal Disruption) based on 2021 data. The engagement and reliance indices demonstrate the importance of commercial and recreational fishing to a given community relative to other coastal communities in a region. Similarly, the environmental justice indices characterize different facets and levels of social vulnerability in a given community relative to other coastal communities in a region. 
 
 Two commercial fishing communities (Stonington and Beals, ME) scored high for both engagement and reliance based on 2021 data (Fig. \ref{fig:commercial-engagement}). New Bedford and Boston, MA and Swans Island, ME ranked medium-high or above for one or more of the environmental justice indicators in 2021 (Fig. \ref{fig:commercial-EJ}). Swan’s Island has considerable unemployment concerns, but does not have the same demographic and age structure concerns as Boston or New Bedford. Port Clyde-Tenants Harbor and Stonington, ME ranked medium for one or more of the environmental justice indicators. Decreased commercial fishing engagement/reliance led to Winter Harbor, ME no longer being listed as a top ten commercial fishing community. 
 
-In New England, Dennis and Bourne, MA scored high for both recreational engagement and reliance, whereas no communities did previously(Fig.\ref{fig:recreational-engagement}). Seabrook and Newington, NH; Sandwich and Yarmouth, MA; Groton and Clinton, CT have decreased in their recreational engagement/reliance and are no longer listed as top ten recreational communities, replaced by Barnstable Town, Plymouth, Falmouth, and Chatham, MA; Sronington, CT; Tiverton and New Shoreham, RI. There are no communities ranked medium-high or above for environmental justice indicators (Fig. \ref{fig:recreational-EJ}). Communities that ranked medium for one or more of the environmental justice indicators including Falmouth and Dennis, MA. 
+In New England, Dennis and Bourne, MA scored high for both recreational engagement and reliance, whereas no communities did previously (Fig. \ref{fig:recreational-engagement}). Seabrook and Newington, NH; Sandwich and Yarmouth, MA; Groton and Clinton, CT have decreased in their recreational engagement/reliance and are no longer listed as top ten recreational communities, replaced by Barnstable Town, Plymouth, Falmouth, and Chatham, MA; Sronington, CT; Tiverton and New Shoreham, RI. There are no communities ranked medium-high or above for environmental justice indicators (Fig. \ref{fig:recreational-EJ}). Communities that ranked medium for one or more of the environmental justice indicators including Falmouth and Dennis, MA. 
 
 Narragansett/Point Judith, like all of these top recreational communities ranked low for environmental justice vulnerability. In fact, the scores below 0 for all three environmental justice indicators implies a lower than average level of vulnerability, based on recreational engagement and reliance,  among the communities included in the analysis.
 ```{r commercial-engagement, fig.cap= "Commercial engagement, reliance, and environmental justice vulnerability for the top commercially engaged and reliant fishing communities in New England. Communities in orange are ranked medium-high or above for one or more of the environmental justice indicators. Communities in purple are ranked medium for one or more of the environmental justice indicators. *Community scored high (1.00 and above) for both commercial engagement and reliance indicators.", fig.width = 7.5, fig.asp = 0.5, results='hide'}
 #, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-commercial-engagement.R")
 
-ecodata::plot_engagement(report = "NewEngland", varName = "Commercial")
- ggplot2::guides(color = FALSE)
-  scale_color_manual(labels = c(1,2,3))
+# ecodata::plot_engagement(report = "NewEngland", varName = "Commercial")
+#  ggplot2::guides(color = FALSE)
+#   scale_color_manual(labels = c(1,2,3))
+
+dat <- read.csv(here::here("data-raw/fishdata_2022_CSVI_1-23-2025.csv"))
+
+dat$GEO_NAME <- replace(dat$GEO_NAME,
+        dat$GEO_NAME=="Port Clyde-Tenants Harbor/Saint George/Spruce Head, ME",
+        "Port Clyde-Tenants Harbor, ME")
+
+
+dat$GEO_NAME <- replace(dat$GEO_NAME,
+                        dat$GEO_NAME=="Sandwich/East Sandwich/Forestdale, MA",
+                        "Sandwich, MA")
+
+
+dat$GEO_NAME <- replace(dat$GEO_NAME,
+                        dat$GEO_NAME=="Reedville/District 5 (Northumberland County), VA",
+                        "Reedville, VA*")
+
+##reorder ranks
+dat$ComEng_ct <- 
+  factor(dat$ComEng_ct, levels=c("high", "med high", "med", "low"))
+dat$ComRel_ct <- 
+  factor(dat$ComRel_ct, levels=c("high", "med high", "med", "low"))
+dat$RecEng_ct <- 
+  factor(dat$RecEng_ct, levels=c("high", "med high", "med", "low"))
+dat$RecRel_ct <- 
+  factor(dat$RecRel_ct, levels=c("high", "med high", "med", "low"))
+dat$poverty_rank <- 
+  factor(dat$poverty_rank, levels=c("high", "med high", "med", "low"))
+dat$pop_composition_rank <- 
+  factor(dat$pop_composition_rank, levels=c("high", "med high", "med", "low"))
+dat$personal_disruption_rank <- 
+  factor(dat$personal_disruption_rank, levels=c("high", "med high", "med", "low"))
+
+#make data numeric
+dat$ComEng <- as.numeric(dat$ComEng)
+dat$ComRel <- as.numeric(dat$ComRel)
+dat$RecEng <- as.numeric(dat$RecEng)
+dat$RecRel <- as.numeric(dat$RecRel)
+
+#remove NA
+dat_com_e<-dat[!is.na(dat$ComEng),]
+dat_com_r<-dat[!is.na(dat$ComRel),]
+dat_rec_e<-dat[!is.na(dat$RecEng),]
+dat_rec_r<-dat[!is.na(dat$RecRel),]
+
+#remove low scores
+dat_com_e_nolow<-dat_com_e[!(dat_com_e$ComEng_ct=='low'),]
+dat_com_r_nolow<-dat_com_r[!(dat_com_r$ComRel_ct=='low'),]
+dat_rec_e_nolow<-dat_rec_e[!(dat_rec_e$RecEng_ct=='low'),]
+dat_rec_r_nolow<-dat_rec_r[!(dat_rec_r$RecRel_ct=='low'),]
+
+#subset New England
+dat_com_e_NE <- dat_com_e[(dat_com_e$STATEABBR=='ME' | 
+                             dat_com_e$STATEABBR=='MA'| 
+                             dat_com_e$STATEABBR=='RI'| 
+                             dat_com_e$STATEABBR=='CT'| 
+                             dat_com_e$STATEABBR=='NH'), ]
+
+dat_com_e_nolow_NE <- dat_com_e_nolow[(dat_com_e_nolow$STATEABBR=='ME' | 
+                                         dat_com_e_nolow$STATEABBR=='MA'| 
+                                         dat_com_e_nolow$STATEABBR=='RI'| 
+                                         dat_com_e_nolow$STATEABBR=='CT'| 
+                                         dat_com_e_nolow$STATEABBR=='NH'), ]
+
+dat_com_r_NE <- dat_com_r[(dat_com_r$STATEABBR=='ME' | 
+                             dat_com_r$STATEABBR=='MA'| 
+                             dat_com_r$STATEABBR=='RI'| 
+                             dat_com_r$STATEABBR=='CT'| 
+                             dat_com_r$STATEABBR=='NH'), ]
+
+dat_com_r_nolow_NE <- dat_com_r_nolow[(dat_com_r_nolow$STATEABBR=='ME' | 
+                                         dat_com_r_nolow$STATEABBR=='MA'| 
+                                         dat_com_r_nolow$STATEABBR=='RI'| 
+                                         dat_com_r_nolow$STATEABBR=='CT'| 
+                                         dat_com_r_nolow$STATEABBR=='NH'), ]
+
+
+dat_rec_e_NE <- dat_rec_e[(dat_rec_e$STATEABBR=='ME' | 
+                             dat_rec_e$STATEABBR=='MA'| 
+                             dat_rec_e$STATEABBR=='RI'| 
+                             dat_rec_e$STATEABBR=='CT'| 
+                             dat_rec_e$STATEABBR=='NH'), ]
+
+dat_rec_e_nolow_NE <- dat_rec_e_nolow[(dat_rec_e_nolow$STATEABBR=='ME' | 
+                                         dat_rec_e_nolow$STATEABBR=='MA'| 
+                                         dat_rec_e_nolow$STATEABBR=='RI'| 
+                                         dat_rec_e_nolow$STATEABBR=='CT'| 
+                                         dat_rec_e_nolow$STATEABBR=='NH'), ]
+
+dat_rec_r_NE <- dat_rec_r[(dat_rec_r$STATEABBR=='ME' | 
+                             dat_rec_r$STATEABBR=='MA'| 
+                             dat_rec_r$STATEABBR=='RI'| 
+                             dat_rec_r$STATEABBR=='CT'| 
+                             dat_rec_r$STATEABBR=='NH'), ]
+
+dat_rec_r_nolow_NE <- dat_rec_r_nolow[(dat_rec_r_nolow$STATEABBR=='ME' | 
+                                         dat_rec_r_nolow$STATEABBR=='MA'| 
+                                         dat_rec_r_nolow$STATEABBR=='RI'| 
+                                         dat_rec_r_nolow$STATEABBR=='CT'| 
+                                         dat_rec_r_nolow$STATEABBR=='NH'), ]
+
+####New England Commercial Engagement####
+
+NE_com_plot <- ggplot(dat_com_e_NE, aes(x=ComEng, y=ComRel)) + 
+  geom_point(shape=1, 
+             size=1.4, stroke=0.9, alpha=0.6, 
+             aes(color=ComEng_ct))+
+  scale_color_manual(values = c("high" = "navy",
+                                "med high"="slateblue3",
+                                "med"="skyblue",
+                                "low"="gray")) +
+  theme_bw()+
+  ylim(-5,34)+
+  theme(text = element_text(size=10),
+        plot.title = element_text(size=9, vjust=-7.5, hjust=0.01),
+        panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(),
+        legend.position = "bottom")+
+  ylab(expression(paste("Population Relative Commercial Engagement Index", italic(" (factor score)"))))+
+  xlab(expression(paste("Commercial Engagement Index", italic(" (factor score)"))))+
+  guides(color=guide_legend(title="Engagement Score Rank"))+
+  ggrepel::geom_label_repel(aes(label = ifelse(ComEng>3.1,as.character(GEO_NAME),ifelse(ComRel>3.8,as.character(GEO_NAME),''))),
+                   size=2,
+                   force=2.5,
+                   box.padding   = 0.5, 
+                   point.padding = 0,
+                   segment.color = 'grey50',
+                   min.segment.length = 0.01,
+                   max.overlaps=Inf,
+                   label.size = NA,
+                   fill = alpha(c("white"),0.1))+
+  ggtitle("engagement index")
+
+
+NE_com_poverty <- ggplot(dat_com_e_NE %>% filter(poverty_rank == "high"|
+                                                   poverty_rank == "med high"|
+                                                   poverty_rank =="med"), 
+                         aes(x=ComEng, y=ComRel)) + 
+  geom_point(shape=1, 
+             size=1.4, stroke=0.9, alpha=0.6, 
+             aes(color=poverty_rank, ))+
+  scale_color_manual(values = c("high" = "firebrick4",
+                                "med high"="darkorange1",
+                                "med"="goldenrod1",
+                                "low"="skyblue2")) +
+  theme_bw()+
+  ylim(-5,32)+
+  xlim(-2,34)+
+  theme(text = element_text(size=9),
+        plot.title = element_text(size=8, vjust=-5, hjust=0.01),
+        panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(),
+        axis.title = element_blank(),
+        axis.text = element_blank(),
+        legend.position="none")+
+  ggrepel::geom_label_repel(aes(label = ifelse(ComEng>3.1,as.character(GEO_NAME),ifelse(ComRel>3.8,as.character(GEO_NAME),''))),
+                   size=1.6,
+                   force=2.5,
+                   box.padding   = 0.4, 
+                   point.padding = 0,
+                   segment.color = 'grey50',
+                   min.segment.length = 0.01,
+                   max.overlaps=Inf,
+                   label.size = NA,
+                   fill = alpha(c("white"),0.1))+
+  ggtitle("poverty index")
+
+NE_com_pers <- ggplot(dat_com_e_NE %>% filter(personal_disruption_rank == "high"|personal_disruption_rank == "med high"|personal_disruption_rank =="med"), aes(x=ComEng, y=ComRel)) + 
+  geom_point(shape=1, 
+             size=1.4, stroke=0.9, alpha=0.6, 
+             aes(color=personal_disruption_rank, ))+
+  scale_color_manual(values = c("high" = "firebrick4",
+                                "med high"="darkorange1",
+                                "med"="goldenrod1",
+                                "low"="skyblue2")) +
+  theme_bw()+
+  ylim(-5,32)+
+  xlim(-2,34)+
+  theme(text = element_text(size=9),
+        plot.title = element_text(size=8, vjust=-7.5, hjust=0.01),
+        panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(),
+        axis.title = element_blank(),
+        axis.text = element_blank(),
+        legend.position="none")+
+  ggrepel::geom_label_repel(aes(label = ifelse(ComEng>3.1,as.character(GEO_NAME),ifelse(ComRel>3.8,as.character(GEO_NAME),''))),
+                   size=1.6,
+                   force=4,
+                   box.padding   = 0.4, 
+                   point.padding = 0,
+                   segment.color = 'grey50',
+                   min.segment.length = 0.01,
+                   max.overlaps=Inf,
+                   label.size = NA,
+                   fill = alpha(c("white"),0.1))+
+  ggtitle("personal disruption index")
+
+NE_com_pop <- ggplot(dat_com_e_NE %>% filter(pop_composition_rank == "high"| 
+                                               pop_composition_rank == "med high"|
+                                               pop_composition_rank =="med"), 
+                     aes(x=ComEng, y=ComRel)) + 
+  geom_point(shape=1, 
+             size=1.4, stroke=0.9, alpha=0.6, 
+             aes(color=pop_composition_rank, ))+
+  scale_color_manual(values = c("high" = "firebrick4",
+                                "med high"="darkorange1",
+                                "med"="goldenrod1",
+                                "low"="skyblue2")) +
+  theme_bw()+
+  ylim(-5,32)+
+  xlim(-2,34)+
+  theme(text = element_text(size=9),
+        plot.title = element_text(size=8, vjust=-7.5, hjust=0.01),
+        panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(),
+        axis.title = element_blank(),
+        axis.text = element_blank(),
+        legend.position="right")+
+  guides(color=guide_legend(title="Vulnerability\nIndicator\nScore Rank"))+
+  ggrepel::geom_label_repel(aes(label = ifelse(ComEng>3.1,as.character(GEO_NAME),ifelse(ComRel>3.8,as.character(GEO_NAME),''))),
+                   size=1.6,
+                   force=2.5,
+                   box.padding   = 0.4, 
+                   point.padding = 0,
+                   segment.color = 'grey50',
+                   min.segment.length = 0.01,
+                   max.overlaps=Inf,
+                   label.size = NA,
+                   fill = alpha(c("white"),0.1))+
+  ggtitle("population composition index")
+
+
+
+
+
+#put them together
+#tiff("NE_com_1-23-25.tiff", units="in", width=8, height=5, res=300)
+
+NE_com_plot + (NE_com_poverty / NE_com_pers / NE_com_pop) +
+  plot_layout(ncol=2, widths = c(5,2))
+
+
+#dev.off()
+
+
+
+  
 ```
 ```{r commercial-EJ, fig.cap="Environmental justice indicators (Poverty Index, population composition index, and personal disruption index) for top commercial fishing communities in New England. *Community scored high (1.00 and above) for both commercial engagement and reliance indicators.", out.width='70%'}
 
-#get rid of the gray excel outline using R package magick
-ComEJ <- magick::image_read("https://github.com/NOAA-EDAB/ecodata/raw/master/workshop/images/EJ_Commercial_NE_2024.PNG")
-
-#ComEJ <- magick::image_read("images/EJ_Commercial_NE.png") 
-
-# from https://stackoverflow.com/questions/64597525/r-magick-square-crop-and-circular-mask
-# get height, width and crop longer side to match shorter side
-ii <- magick::image_info(ComEJ)
-
-cropComEJ <- ComEJ %>%
-  #magick::image_crop(cropComEJ, "820x580+5+5")
-  magick::image_crop(paste0(ii$width-10,"x",ii$height-10, "+5+5"))
-
-cropComEJ
+# #get rid of the gray excel outline using R package magick
+# ComEJ <- magick::image_read("https://github.com/NOAA-EDAB/ecodata/raw/master/workshop/images/EJ_Commercial_NE_2024.PNG")
+# 
+# #ComEJ <- magick::image_read("images/EJ_Commercial_NE.png") 
+# 
+# # from https://stackoverflow.com/questions/64597525/r-magick-square-crop-and-circular-mask
+# # get height, width and crop longer side to match shorter side
+# ii <- magick::image_info(ComEJ)
+# 
+# cropComEJ <- ComEJ %>%
+#   #magick::image_crop(cropComEJ, "820x580+5+5")
+#   magick::image_crop(paste0(ii$width-10,"x",ii$height-10, "+5+5"))
+# 
+# cropComEJ
 ```
 ```{r recreational-engagement, fig.cap= "Recreational engagement and reliance, and environmental justice vulnerability, for the top recreationally engaged and reliant fishing communities in New England. None of these communities ranked medium-high or above for one or more of the environmental justice indicators. Communities ranked medium for one or more of the environmental justice indicators are highlighted in purple. *Community scored high (1.00 and above) for both recreational engagement and reliance indicators.", fig.width = 7.5, fig.asp = 0.5, results='hide'}
 #, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-recreational-engagement.R")
 
-ecodata::plot_engagement(report = "NewEngland", varName = "Recreational")
+#ecodata::plot_engagement(report = "NewEngland", varName = "Recreational")
+
+####New England Recreational Engagement####
+
+NE_rec_plot <- ggplot(dat_rec_e_NE, aes(x=RecEng, y=RecRel)) + 
+  geom_point(shape=1, 
+             size=1.4, stroke=0.9, alpha=0.6, 
+             aes(color=RecEng_ct))+
+  scale_color_manual(values = c("high" = "navy",
+                                "med high"="slateblue3",
+                                "med"="skyblue",
+                                "low"="gray")) +
+  theme_bw()+
+  ylim(-0.9,4)+
+  xlim(-0.5,6)+
+  theme(text = element_text(size=10),
+        plot.title = element_text(size=9, vjust=-7.5, hjust=0.01),
+        panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(),
+        legend.position = "bottom")+
+  ylab(expression(paste("Population Relative Recreational Engagement Index", italic(" (factor score)"))))+
+  xlab(expression(paste("Recreational Engagement Index", italic(" (factor score)"))))+
+  guides(color=guide_legend(title="Engagement Score Rank"))+
+  ggrepel::geom_label_repel(aes(label = ifelse(RecEng>2.4,as.character(GEO_NAME),ifelse(RecRel>1,as.character(GEO_NAME),''))),
+                   size=2,
+                   box.padding   = 0.4, 
+                   point.padding = 0,
+                   segment.color = 'grey50',
+                   min.segment.length = 0.01,
+                   max.overlaps=Inf,
+                   label.size = NA,
+                   fill = alpha(c("white"),0.1))+
+  ggtitle("engagement index")
+
+
+NE_rec_poverty <- ggplot(dat_rec_e_NE %>% filter(poverty_rank == "high"|
+                                                   poverty_rank == "med high"|
+                                                   poverty_rank =="med"), aes(x=RecEng, y=RecRel)) + 
+  geom_point(shape=1, 
+             size=1.4, stroke=0.9, alpha=0.6, 
+             aes(color=poverty_rank, ))+
+  scale_color_manual(values = c("high" = "firebrick4",
+                                "med high"="darkorange1",
+                                "med"="goldenrod1",
+                                "low"="skyblue2")) +
+  theme_bw()+
+  ylim(-0.9,4)+
+  xlim(-0.5,6)+
+  theme(text = element_text(size=9),
+        plot.title = element_text(size=8, vjust=-5, hjust=0.01),
+        panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(),
+        axis.title = element_blank(),
+        axis.text = element_blank(),
+        legend.position="none")+
+  ggrepel::geom_label_repel(aes(label = ifelse(RecEng>2.4,as.character(GEO_NAME),ifelse(RecRel>1,as.character(GEO_NAME),''))),
+                   size=1.6,
+                   force=2.5,
+                   box.padding   = 0.4, 
+                   point.padding = 0,
+                   segment.color = 'grey50',
+                   min.segment.length = 0.01,
+                   max.overlaps=Inf,
+                   label.size = NA,
+                   fill = alpha(c("white"),0.1))+
+  ggtitle("poverty index")
+
+NE_rec_pers <- ggplot(dat_rec_e_NE %>% filter(personal_disruption_rank == "high"|
+                                                personal_disruption_rank == "med high"|
+                                                personal_disruption_rank =="med"), 
+                      aes(x=RecEng, y=RecRel)) + 
+  geom_point(shape=1, 
+             size=1.4, stroke=0.9, alpha=0.6, 
+             aes(color=personal_disruption_rank, ))+
+  scale_color_manual(values = c("high" = "firebrick4",
+                                "med high"="darkorange1",
+                                "med"="goldenrod1",
+                                "low"="skyblue2")) +
+  theme_bw()+
+  ylim(-0.9,4)+
+  xlim(-0.5,6)+
+  theme(text = element_text(size=9),
+        plot.title = element_text(size=8, vjust=-7.5, hjust=0.01),
+        panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(),
+        axis.title = element_blank(),
+        axis.text = element_blank(),
+        legend.position="none")+
+  ggrepel::geom_label_repel(aes(label = ifelse(RecEng>2.4,as.character(GEO_NAME),ifelse(RecRel>1,as.character(GEO_NAME),''))),
+                   size=1.6,
+                   force=2.5,
+                   box.padding   = 0.4, 
+                   point.padding = 0,
+                   segment.color = 'grey50',
+                   min.segment.length = 0.01,
+                   max.overlaps=Inf,
+                   label.size = NA,
+                   fill = alpha(c("white"),0.1))+
+  ggtitle("personal disruption index")
+
+NE_rec_pop <- ggplot(dat_rec_e_NE %>% filter(pop_composition_rank == "high"| 
+                                               pop_composition_rank == "med high"|
+                                               pop_composition_rank =="med"), 
+                     aes(x=RecEng, y=RecRel)) + 
+  geom_point(shape=1, 
+             size=1.4, stroke=0.9, alpha=0.6, 
+             aes(color=pop_composition_rank, ))+
+  scale_color_manual(values = c("high" = "firebrick4",
+                                "med high"="darkorange1",
+                                "med"="goldenrod1",
+                                "low"="skyblue2")) +
+  theme_bw()+
+  ylim(-0.9,4)+
+  xlim(-0.5,6)+
+  theme(text = element_text(size=9),
+        plot.title = element_text(size=8, vjust=-7.5, hjust=0.01),
+        panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(),
+        axis.title = element_blank(),
+        axis.text = element_blank(),
+        legend.position="right")+
+  guides(color=guide_legend(title="Vulnerability\nIndicator\nScore Rank"))+
+  ggrepel::geom_label_repel(aes(label = ifelse(RecEng>2.4,as.character(GEO_NAME),ifelse(RecRel>1,as.character(GEO_NAME),''))),
+                   size=1.6,
+                   force=2.5,
+                   box.padding   = 0.4, 
+                   point.padding = 0,
+                   segment.color = 'grey50',
+                   min.segment.length = 0.01,
+                   max.overlaps=Inf,
+                   label.size = NA,
+                   fill = alpha(c("white"),0.1))+
+  ggtitle("population composition index")
+
+
+
+
+
+#put them together
+#tiff("NE_rec_1-23-25.tiff", units="in", width=8, height=5, res=300)
+
+NE_rec_plot + (NE_rec_poverty / NE_rec_pers / NE_rec_pop) +
+  plot_layout(ncol=2, widths = c(5,2))
+
+#dev.off()
+
 
 ```
 ```{r recreational-EJ, fig.cap="Environmental justice indicators (Poverty Index, population composition index, and personal disruption index) for top recreational fishing communities in New England. *Community scored high (1.00 and above) for both commercial engagement and reliance indicators.", out.width='75%'}
-#knitr::include_graphics("images/EJ_Recreational_MAB.png")
-
-
-#get rid of the gray excel outline using R package magick
-RecEJ <- magick::image_read("https://github.com/NOAA-EDAB/ecodata/raw/master/workshop/images/EJ_Recreational_NE_2024.PNG") 
-
-# from https://stackoverflow.com/questions/64597525/r-magick-square-crop-and-circular-mask
-# get height, width and crop longer side to match shorter side
-ii <- magick::image_info(RecEJ)
-
-cropRecEJ <- RecEJ %>%
-  #magick::image_crop(cropComEJ, "820x580+5+5")
-  magick::image_crop(paste0(ii$width-10,"x",ii$height-10, "+5+5"))
-
-cropRecEJ
+# #knitr::include_graphics("images/EJ_Recreational_MAB.png")
+# 
+# 
+# #get rid of the gray excel outline using R package magick
+# RecEJ <- magick::image_read("https://github.com/NOAA-EDAB/ecodata/raw/master/workshop/images/EJ_Recreational_NE_2024.PNG") 
+# 
+# # from https://stackoverflow.com/questions/64597525/r-magick-square-crop-and-circular-mask
+# # get height, width and crop longer side to match shorter side
+# ii <- magick::image_info(RecEJ)
+# 
+# cropRecEJ <- RecEJ %>%
+#   #magick::image_crop(cropComEJ, "820x580+5+5")
+#   magick::image_crop(paste0(ii$width-10,"x",ii$height-10, "+5+5"))
+# 
+# cropRecEJ
 ```
 \newpage
 
 Both commercial and recreational fishing are important activities in Narragansett/Point Judith, RI; Gloucester and Chatham, MA, meaning these communities may be impacted simultaneously by commercial and recreational regulatory changes. These three communities currently score low for all of the three environmental justice indicators, indicating that environmental justice may not be a major concern in these communities at the moment based on the indicators analyzed.
+
+
+### Indicators: Community Climate Vulnerability in the Mid-Atlantic
+
+Coastal fishing communities worldwide have or are likely to experience social, economic, and cultural impacts from climate change, both negative (e.g., loss of infrastructure, fish stock decline) and positive (e.g., increased abundance of valuable species). Changes in marine fisheries as a consequence of climate change will require adaptation by coastal fishing communities and fisheries managers alike. The Community Climate Change Vulnerability Indicators were developed to help examine trends in climate change vulnerability in U.S. coastal fishing communities in the Northeast Region using indicators developed to understand fishing community level risk to climate change as based on species dependency.
+
+```{r commvulex, fig.width = 7.5, fig.asp=.5, fig.cap="Proportion of New England communities at each revenue climate vulnerability level over time."}
+
+#CCCVI <- readxl::read_excel("CCCVI-NE/NE_CCCVI_00_22.xlsx", sheet = "NE_CCCVI_Final00_22")
+
+
+
+# CCCVImid <- ecodata::community_climate_vulnerability |> 
+#   dplyr::filter(State %in% c("MD", "NJ", "VA","NY", "NC", "DE")) 
+# 
+# CCCVImid[CCCVImid == 0] <- NA
+
+vulquants <- data.frame(ymin = c(1,1.6,2.6,3.6),
+                        ymax = c(1.5,2.5,3.5,4),
+                        category = c("Low",
+                                     "Moderate",
+                                     "High",
+                                     "Very High"))
+
+risk = c("darkgreen", "yellow3", "orange", "red")
+names(risk) <- c("Low","Moderate","High","Very High")
+
+
+props <- ecodata::community_climate_vulnerability |>
+  dplyr::filter(!is.na(Value), #remove communities with no ranking in a given year
+                Var %in% "vulnSum") |> # hardcoded for total vulnerability
+  #dplyr::select(Time, Port, State, Var) |>
+  dplyr::group_by(Time, EPU) |>
+  dplyr::mutate(commn = n(),
+                vulCat = dplyr::case_when(Value <= 1.5 ~ "Low",
+                                          Value > 3.5 ~ "Very High",
+                                          Value > 1.5 & Value <= 2.5 ~ "Moderate",
+                                          Value > 2.5 & Value <= 3.5 ~ "High")) |>
+  dplyr::group_by(Time, EPU, vulCat) |>
+  dplyr::mutate(catn = n(),
+                propcat = catn/commn)
+
+propsonly <- props |>
+  dplyr::select(Time, vulCat, propcat) |>
+  dplyr::distinct() |>
+  dplyr::filter(EPU == "NE")
+
+ggplot2::ggplot() + #, group=PORT_NAME
+  #ggplot2::geom_line(aes(group = PORT_NAME), alpha = 0.05) +
+  # ggplot2::geom_rect(data = vulquants,
+  #                    aes(ymin = ymin, ymax = ymax, fill = category, xmin = -Inf, xmax = Inf),
+  #                    alpha = .3) +
+  ggplot2::scale_fill_manual(values=risk) +
+  ggplot2::geom_point(data = propsonly, ggplot2::aes(x=Time, y=propcat, color=vulCat)) +
+  ggplot2::geom_line(data = propsonly, ggplot2::aes(x=Time, y=propcat, color=vulCat)) +
+  ggplot2::scale_color_manual(values=risk, 
+                              breaks=c('Low', 'Moderate', 'High', 'Very High'),
+                              name="Climate Vulnerability") +
+  ggplot2::facet_wrap(~EPU) +
+  ecodata::geom_lm(n=22) + #this doesnt work yet
+  #ggplot2::ylim(1,4) +
+  ggplot2::theme_bw() + 
+  #ggplot2::ggtitle("Mid-Atlantic") +
+  #ggplot2::theme(legend.position = "blank")
+  ggplot2::ylab("Proportion communities")
+
+```
+
+
 
 ### Implications
 These indicators provide a snapshot of the presence of environmental justice issues in the most highly engaged and most highly reliant commercial and recreational fishing communities in New England. These communities may be especially vulnerable to changes in fishing patterns due to regulations and/or climate change. A range of environmental justice concerns are found throughout New England fishing communities. However, index scores for these concerns are higher overall in the top commercial communities relative to the top recreational communities. Some changes occurred among the top recreational fishing communities between 2020 and 2021 due to shifts in recreational fishing activities, while the top commercial communities remained  stable. A few of these top fishing communities, mostly commercial fishing communities, demonstrated medium to high  environmental justice vulnerability, indicating that they may be at a disadvantage responding to change.
 
 ## Protected Species
 
-Fishery management objectives for protected species generally focus on reducing threats and on habitat conservation/restoration. Protected species include marine mammals protected under the Marine Mammal Protection Act, endangered and threatened species protected under the Endangered Species Act, and migratory birds protected under the Migratory Bird Treaty Act. In the Northeast U.S., endangered/threatened species include Atlantic salmon, Atlantic and shortnose sturgeon, all sea turtle species, and five baleen whales. Protected species objectives include managing bycatch to remain below potential biological removal (PBR) thresholds, recovering endangered populations, and monitoring unusual mortality events (UMEs). Here we report on performance relative to these objectives with available indicator data, as well as indicating the potential for future interactions driven by observed and predicted 
+Fishery management objectives for protected species generally focus on reducing threats and on habitat conservation/restoration. Protected species include marine mammals protected under the Marine Mammal Protection Act, endangered and threatened species protected under the Endangered Species Act, and migratory birds protected under the Migratory Bird Treaty Act. In the Northeast U.S., endangered/threatened species include Atlantic salmon, Atlantic and shortnose sturgeon, all sea turtle species, and five baleen whales. Protected species objectives include managing bycatch to remain below potential biological removal (PBR) thresholds, recovering endangered populations, and monitoring unusual mortality events (UMEs). Here we report on performance relative to these objectives with available indicator data, as well as indicating the potential for future interactions driven by observed and predicted ecosystem changes in the Northeast U.S. 
 
 ### Indicators: bycatch, population (adult and juvenile) numbers, mortalities
 
@@ -460,7 +926,7 @@ The [North Atlantic right whale population](https://noaa-edab.github.io/catalog/
 ```{r narw-abundance, fig.cap = "Estimated North Atlanic right whale abundance on the Northeast Shelf.",fig.width = 7.5, fig.asp = 0.3}
 #, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_MAB.Rmd-narw-abundance.R")
 
-ecodata::plot_narw(varName = "adult")+
+ecodata::plot_narw(varName = "adult", n=10)+
   ggtitle('North Atlantic Right Whale abundance')
 ```
 North Atlantic right whale [calf counts](https://noaa-edab.github.io/catalog/narw.html) have generally declined after 2009 to the point of having zero new calves observed in 2018 (Fig. \ref{fig:NARW-calf-abundance}). However, since 2019, we have seen more calf births each year with 15 births in 2022.
@@ -471,9 +937,10 @@ A UME continued from previous years for humpback whales (2016-present); suspecte
 ```{r NARW-calf-abundance, fig.cap = "Number of North Atlantic right whale calf births, 1990 - 2021.",fig.width = 7.5, fig.asp = 0.3}
 #, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_MAB.Rmd-NARW-calf-abundance.R")
 
-ecodata::plot_narw(varName = "calf")+
+ecodata::plot_narw(varName = "calf", n=10)+
   ggtitle('North Atlantic Right Whale calf abundance')
 ```
+
 ### Implications
 
 Bycatch management measures have been implemented to maintain bycatch below PBR thresholds. The downward trend in harbor porpoise bycatch can also be due to a decrease in harbor porpoise abundance in U.S. waters, reducing their overlap with fisheries, and a decrease in gillnet effort. The increasing trend in gray seal bycatch may be related to an increase in the gray seal population ([U.S. pup counts](https://noaa-edab.github.io/catalog/seal_pups.html)), supported by the dramatic rise over the last three decades in observed numbers of gray seal pups born at U.S. breeding sites plus an increase in adult seals at the breeding sites (Fig. \ref{fig:seals}), some of which are supplemented by Canadian adults.
@@ -503,44 +970,60 @@ Shifting species distributions (changes in spatial extent or center of gravity) 
 
 #### Indicator: Fish and protected species distribution shifts
 
-As noted in the [landings implications section](#implications) above, the [center of distribution](https://noaa-edab.github.io/catalog/species_dist.html) for a suite of 48 commercially or ecologically important fish species along the entire Northeast Shelf continues to show movement towards the northeast and generally into deeper water (Fig.\ref{fig:species-dist} ). [Habitat model-based species richness](https://noaa-edab.github.io/catalog/habitat_diversity.html) suggests shifts of both cooler and warmer water species to the northeast. Similar patterns have been found for [marine mammals](https://noaa-edab.github.io/catalog/HMS_species_distribution.html), with multiple species shifting northeast between 2010 and 2017 in most seasons (Fig. \ref{fig:protectedspp-dist-shifts} ).
+As noted in the [landings implications section](#implications) above, the [center of distribution](https://noaa-edab.github.io/catalog/species_dist.html) for a suite of 48 commercially or ecologically important fish species along the entire Northeast Shelf continues to show movement towards the northeast and generally into deeper water (Fig. \ref{fig:species-dist} ). [Habitat model-based species richness](https://noaa-edab.github.io/catalog/habitat_diversity.html) suggests shifts of both cooler and warmer water species to the northeast. Similar patterns have been found for [marine mammals](https://noaa-edab.github.io/catalog/HMS_species_distribution.html), with multiple species shifting northeast between 2010 and 2017 in most seasons (Fig. \ref{fig:protectedspp-dist-shifts} ).
 ```{r protectedspp-dist-shifts, fig.cap="Direction and magnitude of core habitat shifts, represented by the length of the line of the seasonal weighted centroid for species with more than 70 km difference between 2010 and 2017 (tip of arrow).", fig.width=7, fig.asp=0.8}
 #, code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_MAB.Rmd-protectedspp-dist-shifts.R")
 
-ecodata::plot_HMS_species_distribution() + ggplot2::ggtitle("Whale and Dolphin Distribution Shifts")
+ecodata::plot_cetacean_dist() + ggplot2::ggtitle("Whale and Dolphin Distribution Shifts")
 ```
+
 #### Drivers
 
 Mobile populations are shifting distributions to maintain suitable temperature and prey fields, possibly expanding if new suitable habitat exists. Changes in managed species distribution is related, in part, to the [distribution of forage biomass](https://noaa-edab.github.io/catalog/forage_index.html). Since 1982, the fall center of gravity of forage fish (20 species combined) has moved to the north and east. Spring forage fish center of gravity has been more variable over time.
 ```{r species-dist, fig.cap = "Aggregate species distribution metrics for species in the Northeast Large Marine Ecosystem.",fig.width = 7.5, fig.asp=0.3}
 #, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_MAB.Rmd-species-dist.R")
 
-a <- ecodata::plot_species_dist(varName = "along") + ggplot2::coord_cartesian(expand = FALSE)
-b <- ecodata::plot_species_dist(varName = "depth") + ggplot2::coord_cartesian(expand = FALSE) 
+a <- ecodata::plot_species_dist(varName = "along", n=10) + ggplot2::coord_cartesian(xlim = c(1969,2023))
+b <- ecodata::plot_species_dist(varName = "depth", n=10) + ggplot2::coord_cartesian(xlim = c(1969,2023)) 
 
 a+b
 ```
 ```{r forage-cog, fig.cap = "Eastward (left) and northward (right) shifts in the center of gravity for 20 forage fish species on the Northeast U.S. Shelf.", fig.width = 7.5, fig.asp = .3}
 
-ecodata::plot_forage_index(report = "NewEngland", varName = 'cog')+
+ecodata::plot_forage_index(report = "NewEngland", varName = 'cog', n=10)+
   theme(legend.position = 'bottom')
 
 ```
+ADD COG FOR BENTHOS AND ZOOPLANKTON?
+
+In contrast, macrobenthos center of gravity has shifted westward. Macrobenthos are small bottom-dwelling invertebrates including polychaete worms, small crustaceans, bivalves (non-commercial), gastropods, nemerteans, tunicates, cnidarians, brittle stars, sea cucumbers, and sand dollars. Large copepods have a similar pattern to macrobenthos (link to catalog).
+```{r macrobenthosshifts, fig.alt="Eastward (left) and northward (right) shifts in the center of gravity for macrobenthos species on the Northeast U.S. Shelf", fig.width = 8,fig.asp = .3}
+#, fig.asp = .3
+ecodata::plot_benthos_index(plottype = "cog", varName = "Macrobenthos", n=10)+ ggplot2::coord_cartesian(xlim = c(1982, 2022))
+```
+
+While small Copepods center of gravity from ECOMON shows generally similar shifts to forage fish, [link to catalog dont need to show this].
+```{r Smcopeshifts, fig.alt="Eastward (left) and northward (right) shifts in the center of gravity for small copepod species on the Northeast U.S. Shelf", fig.width = 8,fig.asp = .3}
+#, fig.asp = .3
+ecodata::plot_zooplankton_index(plottype = "cog", varName = "Smallcopeall", n=10)+ ggplot2::coord_cartesian(xlim = c(1982, 2022))
+```
+
 Ocean temperatures influence the distribution, seasonal timing of migrations and spawning, as well as the productivity of managed species (see sections below). New England has experienced a continued warming trend for both the [surface](https://noaa-edab.github.io/catalog/seasonal_oisst_anom.html) (Fig.\ref{fig:longterm-sst}) and in all seasons.
 ```{r longterm-sst, fig.cap="Mean sea surface temperature across the entire Mid-Atlantic shelf.", fig.width = 7.5, fig.asp = .3}
 #overlaid onto 2021 seasonal spatial anomalies, code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_MAB.Rmd-seasonal-sst-anom-gridded.R")
 
 #ecodata::plot_seasonal_sst_anomaly_gridded()
 #ecodata::plot_seasonal_oisst_anom(report = "NewEngland",EPU = 'GOM')
-ecodata::plot_long_term_sst()
+ecodata::plot_long_term_sst(n=10)
 
 ```
 Species' suitable habitat can expand or contract when changes in temperature and major oceanographic conditions alter distinct water mass habitats. The variability of the Gulf Stream is a major driver of the predominant oceanographic conditions of the Northeast U.S. continental shelf. As the [Gulf Stream](https://noaa-edab.github.io/catalog/gsi.html) has become less stable and shifted northward in the last decade (Fig.  \ref{fig:GSI}), warmer ocean temperatures have been observed on the northeast shelf and a higher proportion of [Warm Slope Water](https://noaa-edab.github.io/catalog/slopewater.html) has been present in the Gulf of Maine Northeast Channel. Since 2008, the Gulf Stream has moved closer to the Grand Banks, reducing the supply of cold, fresh, and oxygen-rich Labrador Current waters to the Northwest Atlantic Shelf. Nearly every year since 2010, warm slope water made up more than 50% of the annual slope water proportions entering the Gulf of Maine. In 2017 almost no cooler Labrador Slope water entered the Gulf of Maine through the Northeast Channel. The changing proportions of source water affect the temperature, salinity, and nutrient inputs to the Gulf of Maine ecosystem. In 2022, warm slope water was a majority (59.7%) of inputs to the Gulf of Maine.
-```{r GSI, fig.cap = "Index representing changes in the location of the Gulf Stream north wall. Positive values represent a more northerly Gulf Stream position.", fig.width = 7.5, fig.asp = .3}
+```{r GSI, fig.cap = "Index representing changes in the location of the western Gulf Stream north wall. Positive values represent a more northerly Gulf Stream position.", fig.width = 7.5, fig.asp = .3}
 #, code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_MAB.Rmd-gsi.R")
 
-ecodata::plot_gsi()
+ecodata::plot_gsi(varName = "westgsi", n=10)
 ```
+
 #### Future Considerations
 
 Distribution shifts caused by changes in thermal habitat are likely to continue as long as long-term temperature trends persist. Near-term oceanographic forecasts are currently in development and may inform how future warming impacts species distributions.
@@ -558,7 +1041,7 @@ The effectiveness of seasonal management actions (fishing seasons or area openin
 [Spawning timing](https://noaa-edab.github.io/catalog/spawn_timing.html) is shifting earlier for multiple stocks, including haddock and yellowtail flounder (Fig. \ref{fig:spawn-timing}). Spawning of both haddock stocks is occurring earlier, as indicated by more resting (post-spawning) stage fish in the 2010s as compared to earlier in the time series. The northern (Cape Cod/GOM) stock shows earlier active spawning in recent years with a decline in pre-spawning resting females. Yellowtail flounder spawning is related to bottom temperature, week of year, and decade sampled for each of the three stocks. 
 ```{r spawn-timing, fig.cap = "Percent resting stage (non-spawning) fish from two haddock and three yellowtail flounder stocks: CC = Cape Cod Gulf of Maine, GOM = Gulf of Maine, GB = Georges Bank, SNE = Southern New England.", fig.width = 7.5, fig.asp = 0.3 }
 
-ecodata::plot_spawn_timing()
+ecodata::plot_spawn_timing(n=10) + ggplot2::ggtitle("Spring Resting Maturity Stage")
 ```
 [Migration timing](https://noaa-edab.github.io/catalog/timing_shifts.html) of some tuna and large whale migrations has changed. For example, tuna were caught in recreational fisheries 50 days earlier in the year in 2019 compared to 2002. In Cape Cod Bay, peak spring habitat use by right and humpback whales has shifted 18-19 days later over time. 
 
@@ -572,16 +1055,17 @@ Along with the overall warming trends in New England, ocean summer conditions ha
 ```{r transition, fig.cap="Ocean summer length: the annual total number of days between the spring thermal transition date and the fall thermal transition date.",fig.width = 7.5, fig.asp = 0.3}
 #, code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_MAB.Rmd-sumlength.R")
 
-ecodata::plot_trans_dates(report = "NewEngland", varName = 'length')+
+ecodata::plot_trans_dates(report = "NewEngland", varName = 'length', n=10)+
   ggtitle('New England: Number of days between spring and fall transition dates')
 ```
 The [cold pool](https://noaa-edab.github.io/catalog/cold_pool.html) is a seasonal feature within the mid-Atlantic bight (MAB) that creates seasonally suitable habitat for many species, including some managed by the NEFMC. Since the mid-2000s, the cold pool has persisted for a shorter portion of the year (Fig. \ref{fig:cold-pool-time}). A change in the timing of the cold pool may impact the recruitment of species that realy on it for seasonal cues. Southern New England-Mid Atlantic yellowtail flounder recruitment and settlement are related to the strength of the cold pool (a factor of extent and persistence). The dependency of pre-recruit settlers within the cold pool represents a bottleneck in yellowtail life history, during which a local and temporary increase in bottom temperature negatively impacts the survival of the settlers. Including the effect of cold pool variations on yellowtail recruitment reproduced retrospective patterns and improved the skill of short-term forecasts in a stock assessment model.
 ```{r cold-pool-time, fig.cap="Cold pool persistence index based on bias-corrected ROMS-NWA (open circles) and GLORYS (closed circles).", fig.width = 7.5, fig.asp=.3, results='hide'}
 #, fig.width = 5,  code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_MAB.Rmd-cold_pool.R")
 
-ecodata::plot_cold_pool(varName = "persistence")
+ecodata::plot_cold_pool(varName = "persistence", n=10)
 
 ```
+
 #### Future Considerations
 
 For stocks reliant on environmental processes to dictate the timing of their behavior (e.g., phytoplankton bloom timing, thermal transition, or the duration of the cold pool), it is possible that some effects will be  episodic and have interannual variability, while other effects on timing can change on scales of years to decades. However, other species rely on the general seasonal succession of environmental drivers (e.g., the timing of the fall turnover) to cue biological processes, which rely on long-term trends unlikely to reverse in coming years. Such timing shifts in migration or spawning for those species are expected to continue. Management actions that rely on effective alignment of fisheries availability and biological processes should continue to evaluate whether prior assumptions on seasonal timings still hold, and new indicators should be developed to monitor timing shifts for stocks.
@@ -616,10 +1100,10 @@ a /b
 ```{r seabird-ne-productivity, fig.cap = "Productivity of Common terns in the Gulf of Maine.",  fig.width=7.5, fig.asp=.3}
 #code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_NE.Rmd-seabird-ne-productivity.R"),
 
-ecodata::plot_seabird_ne(varName = "productivity") + ggplot2::coord_cartesian(xlim=c(1992,2022))
+ecodata::plot_seabird_ne(varName = "productivity", n=10) + ggplot2::coord_cartesian(xlim=c(1992,2023))
 ```
 ```{r salmon, fig.cap = "Return rate proportions and abundance of Atlantic salmon.",fig.width = 7.5,fig.asp = 0.3}
-ecodata::plot_gom_salmon()+
+ecodata::plot_gom_salmon(n=10)+
   ylab('returning proportion')
 ```
 The health of individual fish (i.e., fish condition) can contribute to population productivity through improved growth, reproduction, and survival. [Fish condition](https://noaa-edab.github.io/catalog/condition.html) in the Gulf of Maine and Georges Bank regions were generally good prior to 2000, poor from 2001-2010 (concurrent with declines in fish productivity, Fig. \ref{fig:productivity-anomaly}), and a mix of good and poor since 2011. In 2023, fish condition was mixed, with generally improving condition on Georges Bank, but the highest number of species in poor condition in the Gulf of Maine since 2010 (Fig. \ref{fig:ne-cf}).
@@ -641,6 +1125,7 @@ gb / gom + plot_layout(guides = 'collect')  & theme(legend.position = 'bottom',
                                                     axis.text.y = element_text(size = 12),
                                                     plot.title = element_text(size = 12))
 ```
+
 #### Drivers 
 
 Fish productivity and condition are affected by increasing metabolic demands from increasing temperature, combined with changes in the availability and quality of prey. Long-term environmental trends and episodic extreme temperatures, ocean acidification, and low oxygen events represent multiple stressors that can affect growth rates, reproductive success and recruitment, and cause mortality.
@@ -656,6 +1141,21 @@ The [energy content](https://noaa-edab.github.io/catalog/energy_density.html) of
 ecodata::plot_energy_density()
 ```
 Changes in the overall abundance of forage fish can influence managed species productivity as it relates to changes in food availability. New England [fall forage biomass](https://noaa-edab.github.io/catalog/forage_index.html) is stable with long-term increases in the spring GOM(Fig. \ref{fig:foragebio}). Forage biomass was highest during fall in the 1980s.
+
+ADD BENTHOS FORAGE HERE?
+
+Benthic invertebrates are extremely important forage for some managed species (flatfish, juvenile cod,...) Macrobenthos indices show long term declines in spring. In contrast, Megabenthos indices show long term increases in spring in the MAB.
+
+
+```{r benthos, fig.alt="Changes in benthos abundance in New England for megabenthos (top) and macrobenthos (bottom).", fig.width=7.5, fig.asp=.9}
+
+c <- ecodata::plot_benthos_index(report = "NewEngland", varName = "Megabenthos", n=10) +  ggplot2::theme(legend.position = "bottom")
+d <- ecodata::plot_benthos_index(report = "NewEngland", varName = "Macrobenthos", n=10) +  ggplot2::theme(legend.position = "none")
+
+
+c/d
+
+```
 
 ##### Biological Drivers: Lower trophic levels
 
@@ -675,24 +1175,36 @@ Since 2010, the abundance of the lipid-rich older stages of  [*Calanus finmarchi
 ```{r foragebio, fig.cap = "Forage fish index in GB (left) and GOM (right) for spring (blue) and fall (red) surveys. Index values are relative to the maximum observation within a region across surveys.", fig.width = 7.5, fig.asp=.3}
 #, code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/macrofauna_MAB.Rmd-forage-index.R")
 
-ecodata::plot_forage_index(report = "NewEngland")
+ecodata::plot_forage_index(report = "NewEngland", n=10)
 ```
-```{r zoo-abund, fig.cap="Georges Bank (GB) and Gulf of Maine (GOM) abundance anomalies three dominante zooplankton (\\textit{Calanus finmarchicus}, \\textit{Calanus typicus}, and \\textit{Pseudocalanus spp}.).", fig.width=7.5,fig.asp = 0.5}
+```{r zoo-abund, fig.cap="Georges Bank (GB) and Gulf of Maine (GOM) abundance anomalies three dominant zooplankton (\\textit{Calanus finmarchicus}, \\textit{Calanus typicus}, and \\textit{Pseudocalanus spp}.).", fig.width=7.5,fig.asp = 0.5}
 #, code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_NE.Rmd-zoo-abundance-anom.R")
 
-ecodata::plot_zoo_abundance_anom(report = "NewEngland")
+#ecodata::plot_zoo_abundance_anom(report = "NewEngland")
+
+a <- ecodata::plot_zooplankton_index(report = "NewEngland", varName = "Lgcopeall", n=10) +  ggplot2::theme(legend.position = "none")
+b <- ecodata::plot_zooplankton_index(report = "NewEngland", varName = "Smallcopeall", n=10) +  ggplot2::theme(legend.position = "none")
+#c <- ecodata::plot_zooplankton_index(report = "NewEngland", varName = "Euph", n=10) +  ggplot2::theme(legend.position = "none")
+
+a/b
+#/c
 
 ```
 ```{r zooplankton-season, fig.cap="Dry mass of mesozooplankton captured with a 200µm ring net towed from the bottom to surface at a deep time series station  in Wilkinson Basin between 2005-2022 (Runge et al. 2023)."}
 
-magick::image_read("https://github.com/NOAA-EDAB/ecodata/blob/dev/workshop/images/WBTS_Mesozooplankton_BIomass_2005-2022_Runge_Dullaert-Jeffrey_Runge_2024.jpg?raw=true")
+#magick::image_read("https://github.com/NOAA-EDAB/ecodata/blob/dev/workshop/images/WBTS_Mesozooplankton_BIomass_2005-2022_Runge_Dullaert-Jeffrey_Runge_2024.jpg?raw=true")
+
+knitr::include_graphics("https://github.com/NOAA-EDAB/ecodata/blob/dev/data-raw/workshop/images/RUNGE_Fig1_SeasonalandmultiannualabundanceofCalanusfinmarchicus-JeffreyRunge_2025.png?raw=true")
 
 ```
 
 ##### Environmental Drivers
 
-Fish production can also be directly related to the prevailing environmental conditions by altering metabolic (growth) and reproductive processes. Many species possess thermal tolerances and can experience stressful or lethal conditions if temperatures exceed certain levels. Extreme temperature at both the [surface](https://noaa-edab.github.io/catalog/seasonal_oisst_anom.html) (Fig. \ref{fig:longterm-sst}) and [bottom](https://noaa-edab.github.io/catalog/bottom_temp_comp.html) can exceed [thermal tolerance](https://noaa-edab.github.io/catalog/thermal_habitat_persistence.html) limits for some fish. For example, 2012 had among the warmest surface and bottom temperatures in New England. A large proportion of the Georges Bank and Mid-Atlantic regions had bottom temperatures above the 15℃ thermal tolerance for most groundfish, with some days exceeding the 24℃ potential mortality limit (Fig. \ref{fig:therm-hab-persist-2012}). The second strongest [bottom marine heatwave](https://noaa-edab.github.io/catalog/heatwave_year.html) since 1982 was observed in the GOM, although it did not exceed this 15℃ threshold. Although parts of GB and the inshore GOM exceed this 15℃ threshold ,  heatwaves are an EPU-wide metric and include areas where bottom temperature is typically far below this threshold.
-```{r therm-hab-persist-2012, fig.cap="The number of days in 2012 where bottom temperature exceeds 15℃ (left) and 24℃ (right) based on the GLORYS 1/12 degree grid.",out.width = '90%'}
+Fish production can also be directly related to the prevailing environmental conditions by altering metabolic (growth) and reproductive processes. Many species possess thermal tolerances and can experience stressful or lethal conditions if temperatures exceed certain levels. Extreme temperature at both the [surface](https://noaa-edab.github.io/catalog/seasonal_oisst_anom.html) (Fig. \ref{fig:longterm-sst}) and [bottom](https://noaa-edab.github.io/catalog/bottom_temp_comp.html) can exceed [thermal tolerance](https://noaa-edab.github.io/catalog/thermal_habitat_persistence.html) limits for some fish. For example, 2012 had among the warmest surface and bottom temperatures in New England. A large proportion of the Georges Bank and Mid-Atlantic regions had bottom temperatures above the 15℃ thermal tolerance for most groundfish, with some days exceeding the 24℃ potential mortality limit (Fig. \ref{fig:therm-hab-persist-2012}). 
+
+In 2023, the second strongest [bottom marine heatwave](https://noaa-edab.github.io/catalog/heatwave_year.html) since 1982 was observed in the GOM, although it did not exceed this 15℃ threshold. Although parts of GB and the inshore GOM exceed this 15℃ threshold, heatwaves are an EPU-wide metric and include areas where bottom temperature is typically far below this threshold.
+```{r therm-hab-persist-2012, fig.cap="The number of days in 2024 where bottom temperature exceeds 15℃ (left) and 24℃ (right) based on the GLORYS 1/12 degree grid.", fig.width=10, fig.asp=1}
+#,out.width = '90%'
 # year = 2012
 # ecodata::plot_thermal_habitat_persistence(year=year) + ggplot2::ggtitle(paste(year))+
 # ggplot2::ggsave(here::here('images','thermal_habitat_2012.png'),width = 8,height = 8, units = 'in',dpi = 300)
@@ -702,12 +1214,19 @@ Fish production can also be directly related to the prevailing environmental con
 #   magick::image_write(here::here('images','thermal_habitat_2012_cropped.png'))
 
 # magick::image_read(here::here('images','thermal_habitat_2012_cropped.png'))
-knitr::include_graphics(here::here('images','thermal_habitat_2012_cropped.png'))
-```
-[Ocean acidification](https://noaa-edab.github.io/catalog/ocean_acidification.html) (OA) risks vary among species and include reduced survival, growth, reproduction, and productivity, where high OA risk indicates potential negative effects to species. High OA risk was observed for Atlantic sea scallop and longfin squid in Long Island Sound and the nearshore and mid-shelf regions of the New Jersey shelf (Fig. \ref{fig:oa-2023}, right panel) during summer 2016, 2018, 2019, and 2023.
-```{r oa-2023, fig.cap= "Locations where bottom aragonite saturation state ($\\Omega_{Arag}$; summer only: June-August) were at or below the laboratory-derived sensitivity level for Atlantic sea scallop (left panel) and longfin squid (right panel) for the time periods 2007-2022 (dark cyan) and 2023 only (magenta). Gray circles indicate locations where bottom $\\Omega_{Arag}$ values were above the species specific sensitivity values."}
+#knitr::include_graphics(here::here('images','thermal_habitat_2012_cropped.png'))
 
-magick::image_read("https://github.com/NOAA-EDAB/ecodata/raw/dev/workshop/images/Figure6_GraceSaba_2024.png")
+ecodata::plot_thermal_habitat_gridded()
+```
+
+REPLACE WITH NEW FIGS NEED WRITEUP POSTED
+LOWEST ARAGONITE SATURATION OBSERVED SINCE MEASUREMENTS STARTED IN 2007
+[Ocean acidification](https://noaa-edab.github.io/catalog/ocean_acidification.html) (OA) risks vary among species and include reduced survival, growth, reproduction, and productivity, where high OA risk indicates potential negative effects to species. High OA risk was observed for Atlantic sea scallop and longfin squid in Long Island Sound and the nearshore and mid-shelf regions of the New Jersey shelf (Fig. \ref{fig:oa-2023}, right panel) during summer 2016, 2018, 2019, and 2023.
+```{r oa-2023, out.width="100%", fig.cap= "Locations where bottom aragonite saturation state ($\\Omega_{Arag}$; summer only: June-August) were at or below the laboratory-derived sensitivity level for Atlantic sea scallop (left panel) and longfin squid (right panel) for the time periods 2007-2022 (dark cyan) and 2023 only (magenta). Gray circles indicate locations where bottom $\\Omega_{Arag}$ values were above the species specific sensitivity values."}
+
+#magick::image_read("https://github.com/NOAA-EDAB/ecodata/raw/dev/workshop/images/Figure6_GraceSaba_2024.png")
+
+knitr::include_graphics("https://github.com/NOAA-EDAB/ecodata/blob/dev/data-raw/workshop/images/SeasonalBottomAragoniteScallop-GraceSaba_2025.png?raw=true")
 
 ```
 Biological and oceanographic processes can affect the amount of oxygen present in the water column. During low oxygen (hypoxic) events, species' growth is negatively affected and very low oxygen can result in mortality. The duration and extent of hypoxic events is being monitored, but long-term shelf-wide observations are not yet available. However, [hypoxic events](https://noaa-edab.github.io/catalog/observation_synthesis.html) were detected off the coast of New Jersey in 2023 and were potentially responsible for fish, lobster, and crab [mortalities](https://sebsnjaesnews.rutgers.edu/2023/12/rutgers-scientists-observe-unusual-ocean-conditions-possibly-linked-to-mortality-in-marine-life-off-new-jersey/).
@@ -746,7 +1265,9 @@ Based on federal vessel logbook data, [commercial fishery revenue](https://noaa-
 
 #magick::image_read("https://github.com/NOAA-EDAB/ecodata/raw/master/workshop/images/Cumulative_Timeline_FullRegion_SoE2024_v2_2024.png")
 
-magick::image_read("https://github.com/NOAA-EDAB/ecodata/raw/dev/workshop/images/Cumulative_Timeline_FullRegion_SoE2024_v2_2024.png")
+#magick::image_read("https://github.com/NOAA-EDAB/ecodata/raw/dev/workshop/images/Cumulative_Timeline_FullRegion_SoE2024_v2_2024.png")
+
+knitr::include_graphics("https://github.com/NOAA-EDAB/ecodata/raw/dev/data-raw/workshop/images/SoE2025_TimelineandFootprint_Sept2024-AngelaSilva_2025.pdf")
 
 ```
 
@@ -775,19 +1296,31 @@ ecodata::plot_wind_revenue(report = "NewEngland", varName = "value", plottype = 
 #   column_spec(2:5, width = "10em") %>%
 #   kable_styling(latex_options = "scale_down")
 
-dt<- ecodata::wea_landings_rev[1:20,] %>% 
+# dt<- ecodata::wea_landings_rev[1:20,] %>% 
+#   dplyr::select("NEFMC, MAFMC, and ASMFC Managed Species", "perc_landings_max",
+#                 "perc_revenue_max" ) %>%
+#   dplyr::rename("Maximum Percent Total Annual Regional Species Landings"="perc_landings_max",
+#     "Maximum Percent Total Annual Regional Species Revenue"="perc_revenue_max")
+# 
+# flextable::flextable(dt) %>%
+#   flextable::set_caption("Top 20 species Landings and Revenue from Wind Energy Areas. *A very small amount (<500 lb) was reported landed annually in potential offshore wind energy lease areas.") %>%
+#   flextable::width(width = c(2,2,2))
+
+dt<- ecodata::wea_landings_rev |> 
+  dplyr::filter(Council %in% c("NEFMC", "MAFMC/NEFMC")) |>
   dplyr::select("NEFMC, MAFMC, and ASMFC Managed Species", "perc_landings_max",
                 "perc_revenue_max" ) %>%
   dplyr::rename("Maximum Percent Total Annual Regional Species Landings"="perc_landings_max",
     "Maximum Percent Total Annual Regional Species Revenue"="perc_revenue_max")
 
 flextable::flextable(dt) %>%
-  flextable::set_caption("Top 20 species Landings and Revenue from Wind Energy Areas. *A very small amount (<500 lb) was reported landed annually in potential offshore wind energy lease areas.") %>%
+  flextable::set_caption("New England managed species Landings and Revenue from Wind Energy Areas. *Skates includes barndoor, winter, clearnose, smooth, little, and general skates reported in logbooks.") %>%
   flextable::width(width = c(2,2,2))
 
 
+
 ```
-Equity and environmental justice (EJ) are priority concerns with offshore wind development and fisheries impacts in the Northeast, and the impacts of offshore wind development are expected to differentially [impact specific coastal communities](https://noaa-edab.github.io/catalog/wind_port.html). Additionally, impacts of offshore wind development may unevenly affect individual operators, with some permit holders deriving a much higher proportion of revenue from wind areas than the port-based mean.
+Social vulnerabilities of communities are priority concerns with offshore wind development and fisheries impacts in the Northeast, and the impacts of offshore wind development are expected to differentially [impact specific coastal communities](https://noaa-edab.github.io/catalog/wind_port.html). Additionally, impacts of offshore wind development may unevenly affect individual operators, with some permit holders deriving a much higher proportion of revenue from wind areas than the port-based mean.
 ```{r wea-port-rev, fig.cap="Percent of port fisheries revenue from Wind Energy Areas (WEA) in descending order from most to least port fisheries revenue from WEA. EJ = Environmental Justice.",  fig.width=6.5, fig.asp=.75, fig.align='left'}
 #code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-wea-port-rev.R"),
 
@@ -796,65 +1329,83 @@ ecodata::plot_wind_port(report = "NewEngland")
 For example, Little Compton, RI had a minimum of 17% and maximum of 32% overlap of wind energy revenue to the total port revenue between 2008-2022 (Fig. \ref{fig:wea-port-rev}). BOEM reports that cumulative offshore wind development (if all proposed projects are developed) could have moderate impacts on low-income members of vulnerable communities who work in the commercial fishing and for-hire fishing industry due to disruptions to fish populations, restrictions on navigation, and increased vessel traffic as well as existing vulnerabilities of low-income workers to economic impacts.
 
 Top fishing communities with high [environmental justice concerns](https://noaa-edab.github.io/catalog/engagement.html) such as  New Bedford, MA and New London, CT should be considered in decision making to reduce the social and economic impacts and aid in the resilience and adaptive capacity of underserved communities. These two ports are also undergoing significant changes to support offshore wind development port infrastructure needs. Environmental justice concerns also highlight communities where further resources are needed to reach underserved and underrepresented groups and create opportunities for, and directly involve, these groups in the decision-making process.
+
+
+THIS NEEDS AN UPDATE WE DON'T KNOW WHICH COMMUNITIES TO INCLUDE HERE
 ```{r wind-rev-MAB-NEFMC, fig.cap="Percent of Mid-Atlantic port revenue with majority NEFMC landings from Wind Energy Areas (WEA) in descending order from most to least port fisheries revenue from WEA. EJ = Environmental Justice.", fig.width=6.5, fig.asp=.4, fig.align='left'}
-df.symbol <- ecodata::wind_port %>% filter(EPU == "MAB", 
-                                           !Var %in% c("WEA_MAX", "TOT_MAX", 
-                                                     "perc_MIN", "perc_MAX")) %>% 
-   pivot_wider( names_from = Var, values_from = Value) %>%
-  dplyr::mutate(City = paste0(City,State)) %>% 
-  dplyr::filter(City %in% c('Barnegat Light NJ',
-                            'Cape May NJ',
-                            'Newport News VA',
-                            'Point Pleasant NJ',
-                            'Point Lookout NY',
-                            'Wildwood NJ'
-                            )) %>%
-  dplyr::select(City, EJ, Gentrification) %>% 
-  pivot_longer(cols = c(EJ, Gentrification), names_to = "Variable") %>% 
-  filter(!value == "NA") %>% 
-  dplyr::mutate(symbol = recode(Variable, EJ = -7, Gent = -3), 
-                Variable = recode(Variable,"EJ"= "Mid-High to High EJ Concerns" , 
-                                  "Gent" ="Mid-High to High Gentrificaiton Concerns"))
+  fix <- ecodata::wind_port |>
+     dplyr::filter(EPU %in% "MAB") |>
+     dplyr::mutate(City = paste0(City, ",", State)) |>
+     dplyr::filter(City %in% c("BELMAR, NJ",
+                            "CAPE MAY, NJ",
+                            "HAMPTON, VA",
+                            "ISLIP, NY",
+                            "NEWPORT NEWS, VA",
+                            "POINT LOOKOUT, NY",
+                            "WARETOWN, NJ",
+                            "WILDWOOD, NJ"))
 
-# Percentage plot
+   fix <- tidyr::pivot_wider(fix,names_from = Var, values_from = Value) |>
+     dplyr::mutate(ordering = MaxVal,
+                   #City = paste0(City, ",", State),
+                   perc_dif =  c(perc_MAX - perc_MIN),
+                   TOT_MAX = c(100 - perc_dif - perc_MIN))
+   fix <- tidyr::pivot_longer(fix,cols = c(perc_MIN,  perc_dif, TOT_MAX), names_to="Var", values_to = "Value") |>
+     dplyr::arrange(ordering) |>
+     dplyr::mutate(City = factor(City, levels = unique(City))) |>
+     dplyr::filter(!Var %in% c("EJ","Gentrification","MaxVal")) |>
+     dplyr::mutate(Var = dplyr::recode(Var,"perc_MIN"= "WEA Revenue" ,
+                                "perc_dif" ="WEA Revenue Range",
+                                "TOT_MAX" = "Non-WEA Revenue"),
+                   Var = factor(Var, levels = c("Non-WEA Revenue",
+                                                "WEA Revenue Range",
+                                                "WEA Revenue")))
 
-df.all.perc<- ecodata::wind_port %>% filter(EPU == "MAB") %>%
-  pivot_wider( names_from = Var, values_from = Value) %>%
-  dplyr::mutate(ordering = MaxVal,  
-                City = paste0(City, State), 
-                TOT_MAX = c(100 - perc_MIN - perc_MAX)) %>% 
-  pivot_longer(cols = c(perc_MIN,  perc_MAX, TOT_MAX), names_to="Var", values_to = "Value") %>% 
-  dplyr::arrange(desc(ordering)) %>%
-  dplyr::filter(City %in% c('Barnegat Light NJ',
-                            'Cape May NJ',
-                            'Newport News VA',
-                            'Point Pleasant NJ',
-                            'Point Lookout NY',
-                            'Wildwood NJ'
-                            )) %>%
-  dplyr::mutate(City = factor(City, levels = unique(City))) %>% 
-  dplyr::filter(!Var %in% c("WEA_MAX", "EJ", "Gent")) %>% 
-  dplyr::mutate(Var = recode(Var,"perc_MIN"= "WEA Revenue" , 
-                             "perc_MAX" ="WEA Revenue Range", 
-                             "TOT_MAX" = "Non-WEA Revenue"), 
-                Var = factor(Var, levels = c("Non-WEA Revenue", 
-                                             "WEA Revenue Range", 
-                                             "WEA Revenue")))
-p2<-ggplot2::ggplot()+
-  ggplot2::geom_bar(data = df.all.perc, aes(fill = Var, y = reorder(City, ordering), x = Value), stat="identity" )+
-  scale_fill_brewer()+
-  ggplot2::theme(legend.position = "bottom", 
-                 legend.title = element_blank(), 
-                 legend.box="vertical", legend.margin=margin())+
-  ggplot2::geom_point(data = df.symbol, aes(x = symbol,y = City, shape = Variable)) +
-  scale_shape_manual(values = c(17, 16)) +
-  ggplot2::ggtitle("Port Revenue from WEA, majority NEFMC species")+
-  ggplot2::xlab(expression("Port Revenue (%)"))+
-  ggplot2::ylab(element_blank())+
-  ecodata::theme_ts()
+   # add EJ port symbols
+   df.symbol <- ecodata::wind_port |>
+     dplyr::filter(EPU %in% "MAB",
+                   !Var %in% c("MaxVal", "TOT_MAX",
+                               "perc_MIN", "perc_MAX")) |>
+     tidyr::pivot_wider( names_from = Var, values_from = Value) |>
+     dplyr::mutate(City = paste0(City,",",State)) |>
+     dplyr::filter(City %in% c("BELMAR, NJ",
+                            "CAPE MAY, NJ",
+                            "HAMPTON, VA",
+                            "ISLIP, NY",
+                            "NEWPORT NEWS, VA",
+                            "POINT LOOKOUT, NY",
+                            "WARETOWN, NJ",
+                            "WILDWOOD, NJ")) |>
+     dplyr::select(City, EJ, Gentrification) |>
+     tidyr::pivot_longer(cols = c(EJ, Gentrification), names_to = "Variable") |>
+     dplyr::filter(!value == "NA") |>
+     dplyr::mutate(symbol = dplyr::recode(Variable, EJ = -7, Gentrification = -3),
+                   Variable = dplyr::recode(Variable,"EJ"= "Mid-High to High EJ Concerns" ,
+                                     "Gentrification" ="Mid-High to High Gentrification Concerns"))
 
-p2
+
+  # code for generating plot object p
+  # ensure that setup list objects are called as setup$...
+  # e.g. fill = setup$shade.fill, alpha = setup$shade.alpha,
+  # xmin = setup$x.shade.min , xmax = setup$x.shade.max
+  #
+  p <- fix |>
+    ggplot2::ggplot()+
+    ggplot2::geom_bar(ggplot2::aes(x = Value,y = City, fill=Var),stat="identity")+
+    ggplot2::scale_fill_brewer()+
+    ggplot2::theme(legend.position = "bottom",
+                   legend.title = ggplot2::element_blank(),
+                   legend.box="vertical", legend.margin=ggplot2::margin())+
+    ggplot2::geom_point(data = df.symbol, ggplot2::aes(x = symbol,y = City, shape = Variable)) +
+    ggplot2::scale_shape_manual(values = c(17, 16)) +
+    #ggplot2::ggtitle(paste0(report,": Port Revenue from Wind Energy Area"))+
+    ggplot2::xlab(expression("Port Revenue (%)"))+
+    ggplot2::ylab(ggplot2::element_blank())+
+    ecodata::theme_ts()
+  
+  p
 ```
+
 ### Implications
 Current plans for rapid buildout of offshore wind in a patchwork of areas spreads the impacts differentially throughout the region (Fig. \ref{fig:wind-dev-cumul2}).
 
@@ -874,12 +1425,13 @@ Increased vessel transit between stations may decrease data collections that are
 The increase of offshore wind development can have both positive (e.g., employment opportunities) and negative (e.g., space-use conflicts) sociocultural effects. Continued increase in coastal development and gentrification pressure has resulted in loss of fishing infrastructure space within ports. Understanding these existing pressures can help avoid and mitigate negative impacts to our shore support industry and communities dependent on fishing. Some of the communities with the highest fisheries revenue overlap with offshore wind development areas that are also vulnerable to gentrification pressure are Point Judith and Newport, RI; New Bedford, MA; and Port Clyde and Portland, ME.
 ```{r whales-wind, out.width="60%", fig.cap="Northern Right Whale persistent hotspots and Wind Energy Areas. Areas outlined in black show active or proposed wind energy leases."}
 # NEW FILE 
-magick::image_read("https://github.com/NOAA-EDAB/ecodata/raw/dev/workshop/images/SOE_2023_right_whales_hatteras_frame_v3_2024.jpg")
+magick::image_read("https://github.com/NOAA-EDAB/ecodata/raw/dev/data-raw/workshop/images/NARW_hotspots_final_2024.jpg")
+
 
 ```
 \newpage
 
-### 2023 Highlights{#highlights}
+### 2024 Highlights{#highlights}
 
 Multiple [anomalous conditions](https://noaa-edab.github.io/catalog/observation_synthesis.html) and extreme events were observed in 2023 that could have brief local effects and/or widespread long-term ecosystem, fishery, and management implications. This section intends to provide a record of these observations, the implications they may have for other ecosystem processes, and a reflection on how they fit into our understanding of the ecosystem. Many of these observations are being actively studied but should be noted and considered in future analyses and management decisions. 
 
@@ -895,11 +1447,12 @@ knitr::include_graphics(here::here('images','bottom_temp_threshold_17_19_Elephan
 
 ```
 
-```{r hypoxia-2023, out.width="100%", fig.cap="Left: Mission tracks of three gliders deployed off the coast of New Jersey in August and September of 2023. Right: Locations of hypoxic levels of dissolved oxygen (magenta; < 3 mg/liter) and low aragonite saturation state (cyan; < 1) measured along the glider mission tracks and locations of reported fish, lobster, and/or crab mortalities (red X).",fig.height = 5}
+```{r hypoxia-2023, out.width="90%", fig.cap="Left: Mission tracks of three gliders deployed off the coast of New Jersey in August and September of 2023. Right: Locations of hypoxic levels of dissolved oxygen (magenta; < 3 mg/liter) and low aragonite saturation state (cyan; < 1) measured along the glider mission tracks and locations of reported fish, lobster, and/or crab mortalities (red X).",fig.height = 5}
 # NEW FILE 
 # a =magick::image_read("https://github.com/NOAA-EDAB/ecodata/blob/dev/workshop/images/Figure2-GraceSaba_2024.png?raw=true")
 # magick::image_scale(a,'5000x2500!')
-knitr::include_graphics(here::here('images','Figure6_GraceSaba_2024.png'))
+#knitr::include_graphics(here::here('images','Figure6_GraceSaba_2024.png'))
+magick::image_read("https://github.com/NOAA-EDAB/ecodata/raw/dev/data-raw/workshop/images/Figure2-GraceSaba_2024.png")
 
 ```
 Summer [bottom temperatures](https://noaa-edab.github.io/catalog/bottom_temp_comp.html) in the Gulf of Maine were the warmest on record (since 1959) resulting in the second largest [bottom marine heatwave](https://noaa-edab.github.io/catalog/heatwave_year.html). The heatwave started in February, peaked in May and likely continued beyond August (pending data update). 2023 [bottom temperature](https://noaa-edab.github.io/catalog/thermal_habitat_persistence.html) exceeded the 15℃ hreshold for up to 59 days along the shelf break. 
@@ -912,7 +1465,7 @@ Higher-than-average [salinity](https://noaa-edab.github.io/catalog/ch_bay_sal.ht
 
 ```{r gom-bloom-2023, out.width="50%", fig.cap="The chlorophyll anomaly for June 2023. Chlorophyll concentrations in the Gulf of Maine were 5-10 times greater than the long-term June average."}
 # NEW FILE 
-magick::image_read("https://github.com/NOAA-EDAB/ecodata/blob/dev/workshop/images/2023-GOMbloom-internalreview.png?raw=true")
+magick::image_read("https://github.com/NOAA-EDAB/ecodata/blob/dev/data-raw/workshop/images/2023-GOMbloom-internalreview.png?raw=true")
 
 ```
 
