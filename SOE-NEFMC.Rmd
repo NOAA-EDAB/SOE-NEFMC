@@ -211,7 +211,7 @@ ecodata::plot_recdat(report = "NewEngland", varName = "landings", n=10)
 
 ```
 
-```{r rec-hms, fig.cap = "Recreational shark landings from Large Pelagics Survey.", fig.width=8,fig.asp = 0.4}
+```{r rec-hms, fig.cap = "Recreational shark landings from Marine Recreational Information Program (left) and Large Pelagics Survey (right)", fig.width=8,fig.asp = 0.4}
 #, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-rec_hms.R")
 
 a <- ecodata::plot_rec_hms(report="NewEngland", n=100)+
