@@ -210,15 +210,20 @@ Overall, [recreational harvest](https://noaa-edab.github.io/catalog/recdat.html)
 ecodata::plot_recdat(report = "NewEngland", varName = "landings", n=10)
 
 ```
+
 ```{r rec-hms, fig.cap = "Recreational shark landings from Large Pelagics Survey.", fig.width=8,fig.asp = 0.4}
 #, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-rec_hms.R")
 
-ecodata::plot_rec_hms(shadedRegion = c(2014,2023), report="NewEngland")+
+a <- ecodata::plot_rec_hms(report="NewEngland", n=100)+
     ggplot2::scale_color_discrete(        
-    limits = c("LargeCoastal", "Pelagic", "Prohibited", "SmallCoastal"),         
-    labels = c("Large Coastal", "Pelagic", "Prohibited", "Small Coastal")
+    limits = c("LargeCoastal", "Prohibited", "SmallCoastal"),         
+    labels = c("Large Coastal", "Prohibited", "Small Coastal")
     ) 
 #  scale_color_manual(values = c('#F8766D','#7CAE00','#00BFC4','#C77CFF'),labels = c('Large Coastal','Pelagic','Prohibited','Small Coastal'))
+
+b <- ecodata::plot_lps_sharks(report="NewEngland", n=100)
+
+a+b
 
 ```
 
