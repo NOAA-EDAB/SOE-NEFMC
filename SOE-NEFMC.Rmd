@@ -844,11 +844,13 @@ a/b/c
 
 
 ```
-```{r zooplankton-season, fig.cap="Abundance (no $m^-2$) of *C. finmarchicus C3-C6 estimated from 200-μm mesh vertical ring net tows. Individual data with fitted lines showing GAM predictions and 95% confidence intevals (shaded ares) when significant. A) WBTS station annual cycle climatology (January,2005- March, 2024). Data from 2005-2010: circles; 2011-2021:triangles; 2022-2024:squares) WBTS station seasonal abundance time series for B) spring, C) summer, D) fall, E)winter. Vertical lines denote season boudnaries. If the seasonal abundance time series is significant, GAM predictions are calculated with day of year set to 1, 100, 200, and 300 for winter, spring, summer, and fall, respectively."}
+```{r zooplankton-season, fig.cap="Abundance (no $m^-2$) of *C. finmarchicus C3-C6 estimated from 200$\\mu$ vertical ring net tows. Individual data with fitted lines showing GAM predictions and 95% confidence intevals (shaded ares) when significant. A) WBTS station annual cycle climatology (January,2005- March, 2024). Data from 2005-2010: circles; 2011-2021:triangles; 2022-2024:squares) WBTS station seasonal abundance time series for B) spring, C) summer, D) fall, E)winter. Vertical lines denote season boudnaries. If the seasonal abundance time series is significant, GAM predictions are calculated with day of year set to 1, 100, 200, and 300 for winter, spring, summer, and fall, respectively."}
 
 #magick::image_read("https://github.com/NOAA-EDAB/ecodata/blob/dev/workshop/images/WBTS_Mesozooplankton_BIomass_2005-2022_Runge_Dullaert-Jeffrey_Runge_2024.jpg?raw=true")
 
-magick::image_read("https://github.com/NOAA-EDAB/ecodata/blob/dev/data-raw/workshop/images/RUNGE_Fig1_SeasonalandmultiannualabundanceofCalanusfinmarchicus-JeffreyRunge_2025.png?raw=true")
+magick::image_read("https://github.com/NOAA-EDAB/ecodata/blob/dev/data-raw/workshop/images/RUNGE_Fig1_SeasonalandmultiannualabundanceofCalanusfinmarchicus-JeffreyRunge_2025.png?raw=true")|>
+  magick::image_crop("2000x2000+0+1900")
+
 
 ```
 
@@ -1100,7 +1102,9 @@ Late 2023 and early 2024 observations indicate movement of cooler and fresher wa
 
 ```{r slopesea, fig.cap="February 2024 sea surface temperature difference compared to the February 2000-2020 long-term mean from the NOAA Advanced Clear-Sky Processor for Ocean (ACSPO) Super-collated SST."}
 
-magick::image_read("https://github.com/NOAA-EDAB/ecodata/raw/dev/data-raw/workshop/images/Feb2024-SST-ANOM_KHyde_2025.png")
+magick::image_read("https://github.com/NOAA-EDAB/ecodata/raw/dev/data-raw/workshop/images/Feb2024-SST-ANOM_KHyde_2025.png")|>
+  magick::image_resize("1650x2500")
+
 
 ```
 
@@ -1122,7 +1126,8 @@ During the summer months there were multiple prolonged upwelling events that bro
 
 ```{r cocobloom, fig.cap="An OLCI Sentinel 3A true color image with enhanced contrast captured on July 2, 2024. Coccolithophores shed their coccolith plates during the later stages of the bloom cycle, which results in the milky turquoise water color (Image credit: NOAA STAR, OCView and Ocean Color Science Team)."}
 
-magick::image_read("https://github.com/NOAA-EDAB/ecodata/raw/dev/data-raw/workshop/images/20240702_Long_Island_algae_bloom_KHyde_2025.png")
+magick::image_read("https://github.com/NOAA-EDAB/ecodata/raw/dev/data-raw/workshop/images/20240702_Long_Island_algae_bloom_KHyde_2025.png")|>
+  magick::image_resize("1650x2500")
 
 ```
 
@@ -1131,7 +1136,7 @@ Summer bottom [ocean acidification (OA)](https://noaa-edab.github.io/catalog/oce
 ```{r GOMoa, fig.cap="GOM OA"}
 
 magick::image_read_pdf("https://github.com/NOAA-EDAB/ecodata/raw/dev/data-raw/workshop/images/Hunt_WBD_2024_pCO2_OMa_Weekly_Climatology-ChrisH_2025.pdf") |>
-  magick::image_crop("2250x1650+0+1650")
+  magick::image_crop("1650x1100+400+1650")
 
 ```
 
