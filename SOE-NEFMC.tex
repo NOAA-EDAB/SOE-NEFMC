@@ -116,7 +116,7 @@
 
 \fancyheadinit{%
    \ifthenelse{\value{page}=5}%
-      {\fancyhead[R]{\includegraphics[width=40pt]{images/NOAA_logo.png} \\ \textsf{\emph{January 27, 2025}}}
+      {\fancyhead[R]{\includegraphics[width=40pt]{images/NOAA_logo.png} \\ \textsf{\emph{February 14, 2025}}}
        \fancyhead[L]{\textsf{\LARGE DRAFT State of the Ecosystem 2025: New England}}
       }%
       {\fancyhead[R]{}
@@ -150,7 +150,7 @@
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
-\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\usepackage{bookmark}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \urlstyle{same}
 \hypersetup{
@@ -169,16 +169,13 @@
 \setcounter{page}{5}
 \thispagestyle{fancy}
 
-\hypertarget{introduction}{%
-\section{Introduction}\label{introduction}}
+\section{Introduction}\label{introduction}
 
-\hypertarget{about-this-report}{%
-\subsection{About This Report}\label{about-this-report}}
+\subsection{About This Report}\label{about-this-report}
 
-This report is for the New England Fishery Management Council (NEFMC). The purpose of this report is to synthesize ecosystem information to allow the NEFMC to better meet fishery management objectives. The major messages of the report are synthesized on pages 1-3, with highlights of 2024 ecosystem events on page 4. The information in this report is organized into two main sections; \protect\hyperlink{performance-relative-to-fishery-management-objectives}{performance measured against ecosystem-level management objectives} (Table \ref{tab:management-objectives}), and potential \protect\hyperlink{risks-to-meeting-fishery-management-objectives}{risks to meeting fishery management objectives} (\protect\hyperlink{climate-and-ecosystem-change}{climate change} and \protect\hyperlink{other-ocean-uses-offshore-wind}{other ocean uses}). A final new section introduced as last year's highlights \protect\hyperlink{highlights}{notable 2024 ecosystem observations}.
+This report is for the New England Fishery Management Council (NEFMC). The purpose of this report is to synthesize ecosystem information to allow the NEFMC to better meet fishery management objectives. The major messages of the report are synthesized on pages 1-3, with highlights of 2024 ecosystem events on page 4. The information in this report is organized into two main sections; \hyperref[performance-relative-to-fishery-management-objectives]{performance measured against ecosystem-level management objectives} (Table \ref{tab:management-objectives}), and potential \hyperref[risks-to-meeting-fishery-management-objectives]{risks to meeting fishery management objectives} (\hyperref[climate-and-ecosystem-change]{climate change} and \hyperref[other-ocean-uses-offshore-wind]{other ocean uses}). A final new section introduced as last year's highlights \hyperref[highlights]{notable 2024 ecosystem observations}.
 
-\hypertarget{report-structure}{%
-\subsection{Report structure}\label{report-structure}}
+\subsection{Report structure}\label{report-structure}
 
 A glossary of terms\footnote{\url{https://noaa-edab.github.io/tech-doc/glossary.html}}, detailed technical methods documentation\footnote{\url{https://NOAA-EDAB.github.io/tech-doc}} and indicator data\footnote{\url{https://github.com/NOAA-EDAB/ecodata}}, and detailed indicator descriptions\footnote{\url{https://noaa-edab.github.io/catalog/index.html}} are available online. We recommend new readers first review the details of standard figure formatting (Fig. \ref{fig:docformat}a), categorization of fish and invertebrate species into feeding guilds (Table \ref{tab:species-groupings}), and definitions of ecological production units (EPUs, including the Gulf of Maine (GOM) and Georges Bank (GB); Fig. \ref{fig:docformat}b) provided at the end of the document.
 
@@ -188,7 +185,7 @@ The two main sections contain subsections for each management objective or poten
 
 \global\setlength{\Oldtabcolsep}{\tabcolsep}
 
-\setlength{\tabcolsep}{0pt}
+\setlength{\tabcolsep}{2pt}
 
 \renewcommand*{\arraystretch}{1}
 
@@ -196,79 +193,79 @@ The two main sections contain subsections for each management objective or poten
 
 \providecommand{\ascline}[3]{\noalign{\global\arrayrulewidth #1}\arrayrulecolor[HTML]{#2}\cline{#3}}
 
-\begin{longtable}[c]{|p{1.77in}|p{4.09in}}
+\begin{longtable}[c]{|p{1.79in}|p{4.13in}}
 
 \caption{Ecosystem-scale\ fishery\ management\ objectives\ in\ the\ Mid-Atlantic\ Bight}\label{tab:management-objectives}\\
 
 \ascline{1.5pt}{666666}{1-2}
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 1.77in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Objective\ categories}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 4.09in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Indicators\ reported}}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 1.79in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Objective\ categories}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 4.13in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Indicators\ reported}}} \\
 
 \ascline{1.5pt}{666666}{1-2}\endfirsthead \caption[]{Ecosystem-scale\ fishery\ management\ objectives\ in\ the\ Mid-Atlantic\ Bight}\label{tab:management-objectives}\\
 
 \ascline{1.5pt}{666666}{1-2}
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 1.77in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Objective\ categories}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 4.09in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Indicators\ reported}}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 1.79in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Objective\ categories}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 4.13in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Indicators\ reported}}} \\
 
 \ascline{1.5pt}{666666}{1-2}\endhead
 
 
 
-\multicolumn{2}{>{\raggedright}m{\dimexpr 5.86in+2\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{\textbf{Objectives:\ Provisioning\ and\ Cultural\ Services}}}} \\
+\multicolumn{2}{>{\raggedright}m{\dimexpr 5.92in+2\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{\textbf{Objectives:\ Provisioning\ and\ Cultural\ Services}}}} \\
 
 
 
 
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 1.77in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Seafood\ Production}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 4.09in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Landings;\ commercial\ total\ and\ by\ feeding\ guild;\ recreational\ harvest}}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 1.79in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Seafood\ Production}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 4.13in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Landings;\ commercial\ total\ and\ by\ feeding\ guild;\ recreational\ harvest}}} \\
 
 
 
 
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 1.77in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Commercial\ Profits}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 4.09in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Revenue\ decomposed\ to\ price\ and\ volume}}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 1.79in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Commercial\ Profits}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 4.13in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Revenue\ decomposed\ to\ price\ and\ volume}}} \\
 
 
 
 
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 1.77in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Recreational\ Opportunities}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 4.09in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Angler\ trips;\ recreational\ fleet\ diversity}}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 1.79in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Recreational\ Opportunities}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 4.13in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Angler\ trips;\ recreational\ fleet\ diversity}}} \\
 
 
 
 
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 1.77in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Stability}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 4.09in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Diversity\ indices\ (fishery\ and\ ecosystem)}}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 1.79in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Stability}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 4.13in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Diversity\ indices\ (fishery\ and\ ecosystem)}}} \\
 
 
 
 
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 1.77in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Social\ \&\ Cultural}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 4.09in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Community\ fishing\ engagement\ and\ social\ vulnerability\ status}}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 1.79in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Social\ \&\ Cultural}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 4.13in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Community\ fishing\ engagement\ and\ social\ vulnerability\ status}}} \\
 
 
 
 
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 1.77in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Protected\ Species}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 4.09in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Bycatch;\ population\ (adult\ and\ juvenile)\ numbers;\ mortalities}}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 1.79in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Protected\ Species}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 4.13in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Bycatch;\ population\ (adult\ and\ juvenile)\ numbers;\ mortalities}}} \\
 
 
 
 
 
-\multicolumn{2}{>{\raggedright}m{\dimexpr 5.86in+2\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{\textbf{Potential\ Drivers:\ Supporting\ and\ Regulating\ Services}}}} \\
+\multicolumn{2}{>{\raggedright}m{\dimexpr 5.92in+2\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{\textbf{Potential\ Drivers:\ Supporting\ and\ Regulating\ Services}}}} \\
 
 
 
 
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 1.77in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Management}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 4.09in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Stock\ status;\ catch\ compared\ with\ catch\ limits}}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 1.79in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Management}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 4.13in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Stock\ status;\ catch\ compared\ with\ catch\ limits}}} \\
 
 
 
 
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 1.77in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Biomass}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 4.09in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Biomass\ or\ abundance\ by\ feeding\ guild\ from\ surveys}}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 1.79in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Biomass}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 4.13in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Biomass\ or\ abundance\ by\ feeding\ guild\ from\ surveys}}} \\
 
 \ascline{1.5pt}{666666}{1-2}
 
@@ -290,7 +287,7 @@ The two main sections contain subsections for each management objective or poten
 
 \global\setlength{\Oldtabcolsep}{\tabcolsep}
 
-\setlength{\tabcolsep}{0pt}
+\setlength{\tabcolsep}{2pt}
 
 \renewcommand*{\arraystretch}{1}
 
@@ -298,19 +295,19 @@ The two main sections contain subsections for each management objective or poten
 
 \providecommand{\ascline}[3]{\noalign{\global\arrayrulewidth #1}\arrayrulecolor[HTML]{#2}\cline{#3}}
 
-\begin{longtable}[c]{|p{1.00in}|p{2.20in}|p{2.80in}}
+\begin{longtable}[c]{|p{0.99in}|p{2.20in}|p{2.81in}}
 
 \caption{Risks\ to\ meeting\ fishery\ management\ objectives\ in\ the\ Mid-Atlantic\ Bight}\label{tab:management-risks}\\
 
 \ascline{1.5pt}{666666}{1-3}
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 1in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Risk\ categories}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 2.2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Observation\ indicators\ reported}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 2.8in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Potential\ driver\ indicators\ reported}}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 0.99in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Risk\ categories}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 2.2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Observation\ indicators\ reported}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 2.81in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Potential\ driver\ indicators\ reported}}} \\
 
 \ascline{1.5pt}{666666}{1-3}\endfirsthead \caption[]{Risks\ to\ meeting\ fishery\ management\ objectives\ in\ the\ Mid-Atlantic\ Bight}\label{tab:management-risks}\\
 
 \ascline{1.5pt}{666666}{1-3}
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 1in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Risk\ categories}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 2.2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Observation\ indicators\ reported}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 2.8in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Potential\ driver\ indicators\ reported}}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 0.99in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Risk\ categories}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 2.2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Observation\ indicators\ reported}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 2.81in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Potential\ driver\ indicators\ reported}}} \\
 
 \ascline{1.5pt}{666666}{1-3}\endhead
 
@@ -322,19 +319,19 @@ The two main sections contain subsections for each management objective or poten
 
 
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 1in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Risks\ to\ Managing\ Spatially}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 2.2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Managed\ species\ (fish\ and\ cetacean)\ distribution\ shifts}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 2.8in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Benthic\ and\ pelagic\ forage\ distribution;\ ocean\ temperature,\ changes\ in\ currents\ and\ cold\ pool}}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 0.99in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Risks\ to\ Managing\ Spatially}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 2.2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Managed\ species\ (fish\ and\ cetacean)\ distribution\ shifts}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 2.81in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Benthic\ and\ pelagic\ forage\ distribution;\ ocean\ temperature,\ changes\ in\ currents\ and\ cold\ pool}}} \\
 
 
 
 
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 1in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Risks\ to\ Managing\ Seasonally}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 2.2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Managed\ species\ spawning\ and\ migration\ timing\ changes}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 2.8in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Habitat\ timing:\ Length\ of\ ocean\ summer,\ cold\ pool\ seasonal\ persistence}}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 0.99in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Risks\ to\ Managing\ Seasonally}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 2.2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Managed\ species\ spawning\ and\ migration\ timing\ changes}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 2.81in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Habitat\ timing:\ Length\ of\ ocean\ summer,\ cold\ pool\ seasonal\ persistence}}} \\
 
 
 
 
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 1in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Risks\ to\ Setting\ Catch\ Limits}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 2.2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Managed\ species\ body\ condition\ and\ recruitment\ changes}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 2.8in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Benthic\ and\ pelagic\ forage\ quality\ \&\ abundance:\ ocean\ temperature\ \&\ acidification\ }}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 0.99in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Risks\ to\ Setting\ Catch\ Limits}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 2.2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Managed\ species\ body\ condition\ and\ recruitment\ changes}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 2.81in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Benthic\ and\ pelagic\ forage\ quality\ \&\ abundance:\ ocean\ temperature\ \&\ acidification\ }}} \\
 
 
 
@@ -346,7 +343,7 @@ The two main sections contain subsections for each management objective or poten
 
 
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 1in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Offshore\ Wind\ Risks}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 2.2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Fishery\ revenue\ and\ landings\ from\ wind\ lease\ areas\ by\ species\ and\ port}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 2.8in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Wind\ development\ speed;\ Protected\ species\ presence\ and\ \ hotspots}}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 0.99in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Offshore\ Wind\ Risks}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 2.2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Fishery\ revenue\ and\ landings\ from\ wind\ lease\ areas\ by\ species\ and\ port}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 2.81in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Wind\ development\ speed;\ Protected\ species\ presence\ and\ \ hotspots}}} \\
 
 \ascline{1.5pt}{666666}{1-3}
 
@@ -364,16 +361,13 @@ The two main sections contain subsections for each management objective or poten
 
 \renewcommand*{\arraystretch}{1}
 
-\hypertarget{performance-relative-to-fishery-management-objectives}{%
-\section{Performance relative to fishery management objectives}\label{performance-relative-to-fishery-management-objectives}}
+\section{Performance relative to fishery management objectives}\label{performance-relative-to-fishery-management-objectives}
 
 In this section, we examine indicators related to broad, ecosystem-level fishery management objectives. We also provide hypotheses on the implications of these trends---why we are seeing them, what's driving them, and potential or observed regime shifts or changes in ecosystem structure. Identifying multiple drivers, regime shifts, and potential changes to ecosystem structure, as well as identifying the most vulnerable resources, can help managers determine whether anything different needs to be done to meet objectives and how to prioritize upcoming issues/risks.
 
-\hypertarget{seafood-production}{%
-\subsection{Seafood Production}\label{seafood-production}}
+\subsection{Seafood Production}\label{seafood-production}
 
-\hypertarget{indicator-landings-commercial-and-recreational}{%
-\subsubsection{Indicator: Landings; commercial and recreational}\label{indicator-landings-commercial-and-recreational}}
+\subsubsection{Indicator: Landings; commercial and recreational}\label{indicator-landings-commercial-and-recreational}
 
 This year, we present updated indicators for total \href{https://noaa-edab.github.io/catalog/comdat.html}{commercial landings}, U.S. seafood landings (includes seafood, bait, and industrial landings), and Council-managed U.S. seafood landings through 2023. Total commercial landings within New England show no long-term trend on GB, and a long term decline in the GOM (Fig. \ref{fig:total-landings}). There exist long-term declines in commercial seafood landings and NEFMC managed seafood landings for both the GOM and GB, but over the last decade there is no trend in managed seafood landings in the GOM.
 
@@ -421,6 +415,10 @@ Overall, \href{https://noaa-edab.github.io/catalog/recdat.html}{recreational har
 \caption{Total recreational seafood harvest (millions of pounds) in the New England region.}\label{fig:rec-landings}
 \end{figure}
 
+\begin{verbatim}
+## Error in xt[indexOfMissingyt, ] : subscript out of bounds
+\end{verbatim}
+
 \begin{figure}
 
 {\centering \includegraphics{SOE-NEFMC_files/figure-latex/rec-hms-1} 
@@ -430,17 +428,11 @@ Overall, \href{https://noaa-edab.github.io/catalog/recdat.html}{recreational har
 \caption{Recreational shark landings from Marine Recreational Information Program (left) and Large Pelagics Survey (right)}\label{fig:rec-hms}
 \end{figure}
 
-\begin{verbatim}
-## Error in xt[indexOfMissingyt, ] : subscript out of bounds
-\end{verbatim}
-
-\hypertarget{implications}{%
-\subsubsection{Implications}\label{implications}}
+\subsubsection{Implications}\label{implications}
 
 Declining commercial seafood and recreational landings are driven by many interacting factors, including combinations of ecological and stock production, management actions, market conditions, and environmental changes. While we cannot evaluate all possible drivers at present, here we evaluate the extent to which stock status and changes in system biomass play a role.
 
-\hypertarget{stock-status}{%
-\paragraph{Stock Status}\label{stock-status}}
+\paragraph{Stock Status}\label{stock-status}
 
 Single species \href{https://noaa-edab.github.io/catalog/stock_status.html}{management objectives} (1. maintaining biomass above minimum thresholds and 2. maintaining fishing mortality below overfishing limits) are not being met for some NEFMC managed species. Thirteen stocks are currently estimated to be belowB\textsubscript{MSY}, while status relative to B\textsubscript{MSY} could not be assessed for 13 additional stocks (Table \ref{tab:stock-status-table}). Therefore, stock status and associated management constraints are likely contributing to decreased landings. To better address the role of management in future reports, we could examine how the total allowable catch (TAC) and the percentage of the TAC taken for each species has changed through time.
 
@@ -457,7 +449,7 @@ Single species \href{https://noaa-edab.github.io/catalog/stock_status.html}{mana
 
 \global\setlength{\Oldtabcolsep}{\tabcolsep}
 
-\setlength{\tabcolsep}{0pt}
+\setlength{\tabcolsep}{2pt}
 
 \renewcommand*{\arraystretch}{1}
 
@@ -465,139 +457,139 @@ Single species \href{https://noaa-edab.github.io/catalog/stock_status.html}{mana
 
 \providecommand{\ascline}[3]{\noalign{\global\arrayrulewidth #1}\arrayrulecolor[HTML]{#2}\cline{#3}}
 
-\begin{longtable}[c]{|p{3.43in}|p{0.70in}|p{0.72in}}
+\begin{longtable}[c]{|p{3.44in}|p{0.73in}|p{0.75in}}
 
 \caption{Unknown\ or\ partially\ known\ stock\ status\ for\ MAFMC\ and\ jointly\ managed\ species.}\label{tab:stock-status-table}\\
 
 \ascline{1.5pt}{666666}{1-3}
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.43in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Stock}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 0.7in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{F/Fmsy}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 0.72in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{B/Bmsy}}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 3.44in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Stock}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 0.73in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{F/Fmsy}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 0.75in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{B/Bmsy}}} \\
 
 \ascline{1.5pt}{666666}{1-3}\endfirsthead \caption[]{Unknown\ or\ partially\ known\ stock\ status\ for\ MAFMC\ and\ jointly\ managed\ species.}\label{tab:stock-status-table}\\
 
 \ascline{1.5pt}{666666}{1-3}
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.43in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Stock}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 0.7in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{F/Fmsy}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 0.72in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{B/Bmsy}}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 3.44in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Stock}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 0.73in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{F/Fmsy}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 0.75in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{B/Bmsy}}} \\
 
 \ascline{1.5pt}{666666}{1-3}\endhead
 
 
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.43in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Atlantic\ cod\ -\ Georges\ Bank}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 0.7in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{-}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 0.72in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{-}}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 3.44in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Atlantic\ cod\ -\ Georges\ Bank}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 0.73in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{-}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 0.75in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{-}}} \\
 
 
 
 
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.43in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Atlantic\ cod\ -\ Gulf\ of\ Maine}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 0.7in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{-}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 0.72in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{-}}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 3.44in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Atlantic\ cod\ -\ Gulf\ of\ Maine}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 0.73in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{-}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 0.75in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{-}}} \\
 
 
 
 
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.43in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Atlantic\ halibut\ -\ Northwestern\ Atlantic\ Coast}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 0.7in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{-}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 0.72in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{-}}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 3.44in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Atlantic\ halibut\ -\ Northwestern\ Atlantic\ Coast}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 0.73in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{-}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 0.75in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{-}}} \\
 
 
 
 
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.43in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Barndoor\ skate\ -\ Georges\ Bank\ /\ Southern\ New\ England}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 0.7in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{-}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 0.72in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{1.070}}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 3.44in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Barndoor\ skate\ -\ Georges\ Bank\ /\ Southern\ New\ England}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 0.73in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{-}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 0.75in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{1.070}}} \\
 
 
 
 
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.43in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Clearnose\ skate\ -\ Southern\ New\ England\ /\ Mid-Atlantic}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 0.7in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{-}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 0.72in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{0.802}}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 3.44in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Clearnose\ skate\ -\ Southern\ New\ England\ /\ Mid-Atlantic}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 0.73in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{-}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 0.75in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{0.802}}} \\
 
 
 
 
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.43in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Little\ skate\ -\ Georges\ Bank\ /\ Southern\ New\ England}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 0.7in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{-}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 0.72in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{0.580}}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 3.44in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Little\ skate\ -\ Georges\ Bank\ /\ Southern\ New\ England}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 0.73in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{-}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 0.75in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{0.580}}} \\
 
 
 
 
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.43in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Offshore\ hake\ -\ Northwestern\ Atlantic\ Coast}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 0.7in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{-}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 0.72in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{-}}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 3.44in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Offshore\ hake\ -\ Northwestern\ Atlantic\ Coast}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 0.73in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{-}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 0.75in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{-}}} \\
 
 
 
 
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.43in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Red\ deepsea\ crab\ -\ Northwestern\ Atlantic}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 0.7in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{-}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 0.72in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{-}}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 3.44in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Red\ deepsea\ crab\ -\ Northwestern\ Atlantic}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 0.73in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{-}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 0.75in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{-}}} \\
 
 
 
 
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.43in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Red\ hake\ -\ Gulf\ of\ Maine\ /\ Northern\ Georges\ Bank}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 0.7in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{-}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 0.72in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{-}}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 3.44in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Red\ hake\ -\ Gulf\ of\ Maine\ /\ Northern\ Georges\ Bank}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 0.73in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{-}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 0.75in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{-}}} \\
 
 
 
 
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.43in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Red\ hake\ -\ Southern\ Georges\ Bank\ /\ Mid-Atlantic}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 0.7in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{-}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 0.72in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{-}}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 3.44in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Red\ hake\ -\ Southern\ Georges\ Bank\ /\ Mid-Atlantic}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 0.73in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{-}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 0.75in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{-}}} \\
 
 
 
 
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.43in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Rosette\ skate\ -\ Southern\ New\ England\ /\ Mid-Atlantic}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 0.7in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{-}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 0.72in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{1.075}}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 3.44in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Rosette\ skate\ -\ Southern\ New\ England\ /\ Mid-Atlantic}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 0.73in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{-}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 0.75in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{1.075}}} \\
 
 
 
 
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.43in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Smooth\ skate\ -\ Gulf\ of\ Maine}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 0.7in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{-}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 0.72in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{0.696}}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 3.44in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Smooth\ skate\ -\ Gulf\ of\ Maine}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 0.73in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{-}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 0.75in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{0.696}}} \\
 
 
 
 
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.43in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Thorny\ skate\ -\ Gulf\ of\ Maine}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 0.7in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{-}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 0.72in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{0.035}}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 3.44in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Thorny\ skate\ -\ Gulf\ of\ Maine}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 0.73in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{-}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 0.75in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{0.035}}} \\
 
 
 
 
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.43in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Windowpane\ -\ Gulf\ of\ Maine\ /\ Georges\ Bank}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 0.7in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{-}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 0.72in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{-}}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 3.44in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Windowpane\ -\ Gulf\ of\ Maine\ /\ Georges\ Bank}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 0.73in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{-}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 0.75in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{-}}} \\
 
 
 
 
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.43in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Winter\ flounder\ -\ Gulf\ of\ Maine}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 0.7in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{-}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 0.72in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{-}}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 3.44in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Winter\ flounder\ -\ Gulf\ of\ Maine}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 0.73in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{-}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 0.75in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{-}}} \\
 
 
 
 
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.43in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Winter\ skate\ -\ Georges\ Bank\ /\ Southern\ New\ England}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 0.7in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{-}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 0.72in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{1.120}}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 3.44in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Winter\ skate\ -\ Georges\ Bank\ /\ Southern\ New\ England}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 0.73in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{-}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 0.75in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{1.120}}} \\
 
 
 
 
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.43in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Witch\ flounder\ -\ Northwestern\ Atlantic\ Coast}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 0.7in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{-}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 0.72in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{-}}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 3.44in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Witch\ flounder\ -\ Northwestern\ Atlantic\ Coast}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 0.73in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{-}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 0.75in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{-}}} \\
 
 
 
 
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.43in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Yellowtail\ flounder\ -\ Georges\ Bank}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 0.7in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{0.09}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 0.72in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{-}}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 3.44in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Yellowtail\ flounder\ -\ Georges\ Bank}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 0.73in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{0.09}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 0.75in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{-}}} \\
 
 
 
 
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.43in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Goosefish\ -\ Gulf\ of\ Maine\ /\ Northern\ Georges\ Bank}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 0.7in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{-}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 0.72in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{-}}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 3.44in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Goosefish\ -\ Gulf\ of\ Maine\ /\ Northern\ Georges\ Bank}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 0.73in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{-}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 0.75in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{-}}} \\
 
 
 
 
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.43in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Goosefish\ -\ Southern\ Georges\ Bank\ /\ Mid-Atlantic}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 0.7in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{-}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 0.72in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{-}}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 3.44in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Goosefish\ -\ Southern\ Georges\ Bank\ /\ Mid-Atlantic}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 0.73in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{-}}} & \multicolumn{1}{>{\raggedleft}m{\dimexpr 0.75in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{-}}} \\
 
 \ascline{1.5pt}{666666}{1-3}
 
@@ -615,8 +607,7 @@ Single species \href{https://noaa-edab.github.io/catalog/stock_status.html}{mana
 
 \renewcommand*{\arraystretch}{1}
 
-\hypertarget{system-biomass}{%
-\paragraph{System Biomass}\label{system-biomass}}
+\paragraph{System Biomass}\label{system-biomass}
 
 \href{https://noaa-edab.github.io/catalog/aggregate_biomass.html}{Aggregate biomass} trends derived from scientific resource surveys have been stable to increasing in both regions (Fig. \ref{fig:nefsc-biomass-gb} \& Fig. \ref{fig:nefsc-biomass-gom}).The benthivores group spiked during the last decade, due to a large haddock recruitment, but appears to be returning to average levels. Planktivore biomass on GB continues to rise with the highest fall biomass observed since 1968. There are mixed trends in piscivores on GB, and increasing trends for planktivores across both regions and seasons and benthos on GB in both seasons. The New Hampshire/Maine state survey time series is too short to estimate trends, while the Massachusetts state survey shows the increasing trend in planktivores in the fall but a decrease in piscivores in the spring and benthos in both seasons (Fig. \ref{fig:mass-biomass}). While managed species comprise varying proportions of aggregate biomass, trends in landings are not mirroring shifts in the overall trophic structure of survey-sampled fish and invertebrates. Therefore, major shifts in feeding guilds or ecosystem trophic structure are unlikely to be driving the decline in landings.
 
@@ -638,8 +629,7 @@ Single species \href{https://noaa-edab.github.io/catalog/stock_status.html}{mana
 \caption{Spring (left) and fall (right) surveyed biomass in the Gulf of Maine. The shaded area around each annual mean represents 2 standard deviations from the mean.}\label{fig:nefsc-biomass-gom}
 \end{figure}
 
-\hypertarget{effect-on-seafood-production}{%
-\paragraph{Effect on Seafood Production}\label{effect-on-seafood-production}}
+\paragraph{Effect on Seafood Production}\label{effect-on-seafood-production}
 
 With the poor or unknown stock status of many managed species, the decline in commercial seafood landings in the Gulf of Maine most likely reflects lower catch quotas implemented to rebuild overfished stocks, as well as market dynamics.
 
@@ -659,22 +649,20 @@ Other environmental changes require monitoring as they may become important driv
 \begin{itemize}
 \tightlist
 \item
-  Climate is trending into uncharted territory. Globally, 2024 was the warmest year on record\footnote{\url{https://noaa-edab.github.io/catalog/observation_synthesis.html}} (see \protect\hyperlink{highlights}{2024 Highlights section}).
+  Climate is trending into uncharted territory. Globally, 2024 was the warmest year on record\footnote{\url{https://noaa-edab.github.io/catalog/observation_synthesis.html}} (see \hyperref[highlights]{2024 Highlights section}).
 \item
-  Stocks are shifting their distribution, moving towards the northeast and into deeper waters throughout the Northeast US Large Marine Ecosystem (Fig. \ref{fig:species-dist}, \protect\hyperlink{climate-risks}{Climate Risks section}).
+  Stocks are shifting their distribution, moving towards the northeast and into deeper waters throughout the Northeast US Large Marine Ecosystem (Fig. \ref{fig:species-dist}, \hyperref[climate-risks]{Climate Risks section}).
 \item
-  Ecosystem composition and production changes have been observed (see \protect\hyperlink{stability}{Stability section}).
+  Ecosystem composition and production changes have been observed (see \hyperref[stability]{Stability section}).
 \item
-  Some fishing communities are affected by social vulnerabilities (see \protect\hyperlink{social-vulnerability}{Social Vulnerability section}).
+  Some fishing communities are affected by social vulnerabilities (see \hyperref[social-vulnerability]{Social Vulnerability section}).
 \end{itemize}
 
 \newpage
 
-\hypertarget{commercial-profits}{%
-\subsection{Commercial Profits}\label{commercial-profits}}
+\subsection{Commercial Profits}\label{commercial-profits}
 
-\hypertarget{indicators-revenue-a-proxy-for-profits}{%
-\subsubsection{Indicators: revenue (a proxy for profits)}\label{indicators-revenue-a-proxy-for-profits}}
+\subsubsection{Indicators: revenue (a proxy for profits)}\label{indicators-revenue-a-proxy-for-profits}
 
 Total \href{https://noaa-edab.github.io/catalog/comdat.html}{commercial revenues} from all species is below the long-term mean for both the GB and GOM regions in 2023 (Fig. \ref{fig:comm-revenue}). In addition, revenue from NEFMC managed species shows a long-term decline in the GOM. GB continues to exhibit a cyclical nature with regards to revenue, largely driven by rotational management of Atlantic sea
 
@@ -719,16 +707,13 @@ For New England, \href{https://noaa-edab.github.io/catalog/community_climate_vul
 \caption{Total climate vulnerability on New England revenue from 2000 to 2022. Horizontal colored bars show different climate risk levels.}\label{fig:comm-clim-rev}
 \end{figure}
 
-\hypertarget{implications-1}{%
-\subsubsection{Implications}\label{implications-1}}
+\subsubsection{Implications}\label{implications-1}
 
 The continued dependence on lobster in the GOM and sea scallops on GB is affected by multiple drivers including resource availability and market conditions. As both species are sensitive to ocean warming and acidification, it is important to monitor these and other climate drivers.
 
-\hypertarget{recreational-opportunities}{%
-\subsection{Recreational Opportunities}\label{recreational-opportunities}}
+\subsection{Recreational Opportunities}\label{recreational-opportunities}
 
-\hypertarget{indicators-angler-trips-fleet-diversity}{%
-\subsubsection{Indicators: Angler trips, fleet diversity}\label{indicators-angler-trips-fleet-diversity}}
+\subsubsection{Indicators: Angler trips, fleet diversity}\label{indicators-angler-trips-fleet-diversity}
 
 \href{https://noaa-edab.github.io/catalog/recdat.html}{Recreational effort} (angler trips) increased during 1982-2010, but has since declined to the long-term average (Fig. \ref{fig:rec-op}). Recreational fleets are defined as private vessels, shore-based fishing, or party-charter vessels. Recreational fleet diversity, or the relative importance of each fleet type, has remained relatively stable over the latter half of the time series (Fig. \ref{fig:rec-div}).
 
@@ -749,21 +734,17 @@ The continued dependence on lobster in the GOM and sea scallops on GB is affecte
 \caption{Recreational fleet effort diversity in New England.}\label{fig:rec-div}
 \end{figure}
 
-\hypertarget{implications-2}{%
-\subsubsection{Implications}\label{implications-2}}
+\subsubsection{Implications}\label{implications-2}
 
 The absence of a long term trend in recreational angler trips and fleet effort diversity suggests relative stability in the overall number of recreational opportunities in the region.
 
-\hypertarget{stability}{%
-\subsection{Stability}\label{stability}}
+\subsection{Stability}\label{stability}
 
-\hypertarget{indicators-fishery-fleet-and-catch-diversity-ecological-component-diversity-total-primary-production}{%
-\subsubsection{Indicators: fishery fleet and catch diversity, ecological component diversity, total primary production}\label{indicators-fishery-fleet-and-catch-diversity-ecological-component-diversity-total-primary-production}}
+\subsubsection{Indicators: fishery fleet and catch diversity, ecological component diversity, total primary production}\label{indicators-fishery-fleet-and-catch-diversity-ecological-component-diversity-total-primary-production}
 
 While there are many potential metrics of stability, we use diversity indices to evaluate overall stability in fisheries and ecosystems. In general, diversity that remains constant over time suggests a similar capacity to respond to change over time. A significant change in diversity over time does not necessarily indicate a problem or an improvement, but does indicate a need for further investigation. We examine diversity in commercial fleet and species catch, and recreational species catch (with fleet effort diversity discussed above), zooplankton, and adult fishes.
 
-\hypertarget{fishery-stability}{%
-\paragraph{Fishery Stability}\label{fishery-stability}}
+\paragraph{Fishery Stability}\label{fishery-stability}
 
 \href{https://noaa-edab.github.io/catalog/commercial_div.html}{Diversity} estimates have been developed for species landed by commercial vessels with New England permits and fleets landing managed species. Although the effective number of species being landed in the commercial fleet rebounded slightly from the historical low of 2021, the diversity in catch is still well below the series average (Fig. \ref{fig:permit-div}). Commercial fishery fleet count is also below the time series average.
 
@@ -787,8 +768,7 @@ As noted above, \href{https://noaa-edab.github.io/catalog/recdat.html}{recreatio
 \caption{Diversity of recreational catch in New England.}\label{fig:rec-species-div}
 \end{figure}
 
-\hypertarget{ecological-stability}{%
-\paragraph{Ecological Stability}\label{ecological-stability}}
+\paragraph{Ecological Stability}\label{ecological-stability}
 
 Ecological diversity indices show mixed trends. Total annual \href{https://noaa-edab.github.io/catalog/chl_pp.html}{primary production} (TPP) is a measure of the total amount of carbon (i.e.~energy) produced by phytoplankton per year. 2023 saw record high TPP in the GOM due to a highly unusual phytoplankton bloom, but it is currently unknown how much of that primary production was incorporated into the upper trophic levels. Preliminary 2024 values were near the long-term average.
 
@@ -831,8 +811,7 @@ Ecological diversity indices show mixed trends. Total annual \href{https://noaa-
 \caption{Fish community functional traits in the Mid Atlantic Bight based on Fall (red) and Spring (blue) survey data. Length at maturity for the full finfish community has increased in spring (orange line), but decreased in fall (purple lines)}\label{fig:traits-fecund}
 \end{figure}
 
-\hypertarget{implications-3}{%
-\subsubsection{Implications}\label{implications-3}}
+\subsubsection{Implications}\label{implications-3}
 
 Fleet diversity indices can be used to evaluate stability objectives as well as risks to fishery resilience and to maintain equity in access to fishery resources. The relatively low diversity estimates for the commercial fishery are likely driven by the continued reliance on a few species, such as sea scallops and lobster. This trend could diminish the capacity to respond to future fishing opportunities. Meanwhile, the increase in recreational species catch diversity is due to recent increases in Atlantic States Fisheries Management Council (ASFMC) and MAFMC managed species within the region, offsetting decreased limits on more traditional regional species.
 
@@ -840,15 +819,13 @@ Ecological diversity indices can provide insight into ecosystem structure. Chang
 
 As a whole, the examined diversity indicators suggest changes in commercial and recreational fisheries, likely driven by changes in the mix of species landed. However, there seems to be overall stability in ecosystem components. Increasing diversity in the recreational catch, GB zooplankton, and GOM adult fish accompanied by lows in commercial fleet diversity metrics, suggests warning signs of a potential regime shift or ecosystem restructuring and warrants continued monitoring to determine if managed species are affected.
 
-\hypertarget{social-vulnerability}{%
-\subsection{Community Social and Climate Vulnerability}\label{social-vulnerability}}
+\subsection{Community Social and Climate Vulnerability}\label{social-vulnerability}
 
 Providing for sustained participation of fishing communities, and avoiding adverse economic impacts to fishing communities are objectives of fishery management. We report the top communities most engaged in commercial and recreational fisheries and the degree to which these communities may be vulnerable to change based on their socioeconomic conditions using data for the most recent available year (2022).
 
 Coastal fishing communities worldwide have or are likely to experience social, economic, and cultural impacts from climate change, both negative (e.g., loss of infrastructure, fish stock decline) and positive (e.g., increased abundance of valuable species). Changes in marine fisheries as a consequence of climate change will require adaptation by coastal fishing communities and fisheries managers alike. The Community Climate Change Risk Indicators were developed to help examine trends in climate change vulnerability in U.S. coastal fishing communities in the Northeast Region using indicators developed to understand fishing community level risk to climate change as based on species dependency.
 
-\hypertarget{indicators-fishing-engagement-and-community-social-vulnerability}{%
-\subsubsection{Indicators: Fishing Engagement and Community Social Vulnerability}\label{indicators-fishing-engagement-and-community-social-vulnerability}}
+\subsubsection{Indicators: Fishing Engagement and Community Social Vulnerability}\label{indicators-fishing-engagement-and-community-social-vulnerability}
 
 The \href{https://noaa-edab.github.io/catalog/engagement.html}{engagement indices} demonstrate the importance of commercial and recreational fishing to a given community relative to other coastal communities in a region. Social vulnerability indicators measure social factors that shape a community's ability to adapt to change.
 
@@ -869,7 +846,7 @@ In 2022, New Bedford, MA stands out as having a particularly high engagement in 
 
 \global\setlength{\Oldtabcolsep}{\tabcolsep}
 
-\setlength{\tabcolsep}{0pt}
+\setlength{\tabcolsep}{2pt}
 
 \renewcommand*{\arraystretch}{1.5}
 
@@ -877,139 +854,139 @@ In 2022, New Bedford, MA stands out as having a particularly high engagement in 
 
 \providecommand{\ascline}[3]{\noalign{\global\arrayrulewidth #1}\arrayrulecolor[HTML]{#2}\cline{#3}}
 
-\begin{longtable}[c]{|p{3.15in}|p{1.38in}|p{1.61in}|p{0.80in}}
+\begin{longtable}[c]{|p{3.25in}|p{1.40in}|p{1.65in}|p{0.81in}}
 
 \caption{Socio-demographic\ indicator\ rankings\ (ranging\ from\ low\ =\ low\ vulnerability\ to\ high\ =\ high\ vulnerability)\ for\ New\ England\ communities\ most\ engaged\ in\ commercial\ fishing,\ 2022.\ Blank\ spaces\ indicate\ no\ data\ available.}\label{tab:comm-vuln}\\
 
 \ascline{1.5pt}{666666}{1-4}
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.15in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Community}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.38in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Personal\ Disruption}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.61in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Population\ Composition}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 0.8in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Poverty}}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 3.25in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Community}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.4in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Personal\ Disruption}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.65in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Population\ Composition}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 0.81in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Poverty}}} \\
 
 \ascline{1.5pt}{666666}{1-4}\endfirsthead \caption[]{Socio-demographic\ indicator\ rankings\ (ranging\ from\ low\ =\ low\ vulnerability\ to\ high\ =\ high\ vulnerability)\ for\ New\ England\ communities\ most\ engaged\ in\ commercial\ fishing,\ 2022.\ Blank\ spaces\ indicate\ no\ data\ available.}\label{tab:comm-vuln}\\
 
 \ascline{1.5pt}{666666}{1-4}
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.15in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Community}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.38in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Personal\ Disruption}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.61in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Population\ Composition}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 0.8in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Poverty}}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 3.25in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Community}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.4in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Personal\ Disruption}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.65in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Population\ Composition}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 0.81in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Poverty}}} \\
 
 \ascline{1.5pt}{666666}{1-4}\endhead
 
 
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.15in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{New\ Bedford,\ MA}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.38in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{med\ high}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.61in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{high}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 0.8in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{med\ high}}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 3.25in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{New\ Bedford,\ MA}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.4in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{med\ high}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.65in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{high}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 0.81in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{med\ high}}} \\
 
 
 
 
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.15in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Narragansett/Point\ Judith,\ RI}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.38in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.61in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 0.8in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 3.25in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Narragansett/Point\ Judith,\ RI}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.4in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.65in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 0.81in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} \\
 
 
 
 
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.15in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Gloucester,\ MA}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.38in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.61in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 0.8in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 3.25in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Gloucester,\ MA}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.4in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.65in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 0.81in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} \\
 
 
 
 
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.15in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Portland,\ ME}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.38in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.61in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 0.8in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 3.25in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Portland,\ ME}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.4in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.65in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 0.81in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} \\
 
 
 
 
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.15in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Boston,\ MA}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.38in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{med}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.61in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{high}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 0.8in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{med\ high}}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 3.25in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Boston,\ MA}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.4in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{med}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.65in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{high}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 0.81in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{med\ high}}} \\
 
 
 
 
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.15in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Port\ Clyde-Tenants\ Harbor,\ ME}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.38in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{med}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.61in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 0.8in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{med}}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 3.25in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Port\ Clyde-Tenants\ Harbor,\ ME}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.4in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{med}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.65in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 0.81in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{med}}} \\
 
 
 
 
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.15in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Harpswell/Bailey\ Island,\ ME}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.38in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.61in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 0.8in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 3.25in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Harpswell/Bailey\ Island,\ ME}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.4in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.65in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 0.81in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} \\
 
 
 
 
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.15in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Chatham,\ MA}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.38in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.61in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 0.8in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 3.25in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Chatham,\ MA}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.4in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.65in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 0.81in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} \\
 
 
 
 
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.15in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Stonington,\ ME}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.38in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.61in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 0.8in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 3.25in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Stonington,\ ME}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.4in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.65in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 0.81in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} \\
 
 
 
 
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.15in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Friendship,\ ME}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.38in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.61in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 0.8in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 3.25in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Friendship,\ ME}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.4in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.65in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 0.81in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} \\
 
 
 
 
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.15in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{South\ Kingstown/Kingston/Wakefield-Peacedale,\ RI}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.38in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.61in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 0.8in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 3.25in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{South\ Kingstown/Kingston/Wakefield-Peacedale,\ RI}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.4in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.65in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 0.81in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} \\
 
 
 
 
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.15in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Steuben,\ ME}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.38in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.61in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 0.8in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 3.25in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Steuben,\ ME}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.4in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.65in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 0.81in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} \\
 
 
 
 
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.15in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Vinalhaven,\ ME}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.38in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.61in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 0.8in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 3.25in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Vinalhaven,\ ME}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.4in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.65in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 0.81in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} \\
 
 
 
 
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.15in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Newington,\ NH}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.38in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.61in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 0.8in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 3.25in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Newington,\ NH}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.4in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.65in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 0.81in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} \\
 
 
 
 
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.15in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Beals,\ ME}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.38in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.61in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 0.8in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 3.25in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Beals,\ ME}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.4in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.65in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 0.81in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} \\
 
 
 
 
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.15in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Swans\ Island,\ ME}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.38in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{med}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.61in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 0.8in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 3.25in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Swans\ Island,\ ME}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.4in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{med}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.65in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 0.81in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} \\
 
 
 
 
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.15in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Winter\ Harbor,\ ME}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.38in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.61in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 0.8in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 3.25in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Winter\ Harbor,\ ME}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.4in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.65in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 0.81in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} \\
 
 
 
 
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.15in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Cranberry\ Isles,\ ME}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.38in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.61in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 0.8in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 3.25in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Cranberry\ Isles,\ ME}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.4in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.65in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 0.81in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} \\
 
 
 
 
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.15in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Frenchboro,\ ME}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.38in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.61in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 0.8in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{}}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 3.25in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Frenchboro,\ ME}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.4in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.65in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 0.81in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{}}} \\
 
 
 
 
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.15in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Matinicus\ Isle,\ ME}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.38in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.61in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 0.8in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 3.25in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Matinicus\ Isle,\ ME}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.4in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.65in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 0.81in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} \\
 
 \ascline{1.5pt}{666666}{1-4}
 
@@ -1042,7 +1019,7 @@ Narragansett/Point Judith, RI; Newington, NH; and Gloucester, MA ranked as top c
 
 \global\setlength{\Oldtabcolsep}{\tabcolsep}
 
-\setlength{\tabcolsep}{0pt}
+\setlength{\tabcolsep}{2pt}
 
 \renewcommand*{\arraystretch}{1.5}
 
@@ -1050,139 +1027,139 @@ Narragansett/Point Judith, RI; Newington, NH; and Gloucester, MA ranked as top c
 
 \providecommand{\ascline}[3]{\noalign{\global\arrayrulewidth #1}\arrayrulecolor[HTML]{#2}\cline{#3}}
 
-\begin{longtable}[c]{|p{3.15in}|p{1.38in}|p{1.61in}|p{0.80in}}
+\begin{longtable}[c]{|p{3.25in}|p{1.40in}|p{1.65in}|p{0.81in}}
 
 \caption{Socio-demographic\ indicator\ rankings\ (ranging\ from\ low\ =\ low\ vulnerability\ to\ high\ =\ high\ vulnerability)\ for\ New\ England\ most\ engaged\ in\ recreational\ fishing,\ 2022.\ Blank\ spaces\ indicate\ no\ data\ available.}\label{tab:rec-vuln}\\
 
 \ascline{1.5pt}{666666}{1-4}
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.15in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Community}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.38in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Personal\ Disruption}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.61in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Population\ Composition}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 0.8in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Poverty}}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 3.25in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Community}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.4in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Personal\ Disruption}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.65in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Population\ Composition}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 0.81in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Poverty}}} \\
 
 \ascline{1.5pt}{666666}{1-4}\endfirsthead \caption[]{Socio-demographic\ indicator\ rankings\ (ranging\ from\ low\ =\ low\ vulnerability\ to\ high\ =\ high\ vulnerability)\ for\ New\ England\ most\ engaged\ in\ recreational\ fishing,\ 2022.\ Blank\ spaces\ indicate\ no\ data\ available.}\label{tab:rec-vuln}\\
 
 \ascline{1.5pt}{666666}{1-4}
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.15in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Community}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.38in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Personal\ Disruption}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.61in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Population\ Composition}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 0.8in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Poverty}}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 3.25in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Community}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.4in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Personal\ Disruption}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.65in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Population\ Composition}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 0.81in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Poverty}}} \\
 
 \ascline{1.5pt}{666666}{1-4}\endhead
 
 
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.15in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{New\ Bedford,\ MA}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.38in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{med\ high}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.61in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{high}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 0.8in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{med\ high}}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 3.25in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{New\ Bedford,\ MA}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.4in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{med\ high}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.65in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{high}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 0.81in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{med\ high}}} \\
 
 
 
 
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.15in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Narragansett/Point\ Judith,\ RI}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.38in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.61in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 0.8in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 3.25in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Narragansett/Point\ Judith,\ RI}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.4in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.65in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 0.81in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} \\
 
 
 
 
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.15in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Gloucester,\ MA}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.38in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.61in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 0.8in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 3.25in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Gloucester,\ MA}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.4in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.65in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 0.81in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} \\
 
 
 
 
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.15in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Portland,\ ME}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.38in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.61in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 0.8in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 3.25in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Portland,\ ME}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.4in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.65in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 0.81in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} \\
 
 
 
 
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.15in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Boston,\ MA}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.38in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{med}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.61in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{high}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 0.8in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{med\ high}}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 3.25in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Boston,\ MA}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.4in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{med}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.65in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{high}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 0.81in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{med\ high}}} \\
 
 
 
 
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.15in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Port\ Clyde-Tenants\ Harbor,\ ME}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.38in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{med}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.61in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 0.8in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{med}}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 3.25in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Port\ Clyde-Tenants\ Harbor,\ ME}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.4in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{med}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.65in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 0.81in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{med}}} \\
 
 
 
 
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.15in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Harpswell/Bailey\ Island,\ ME}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.38in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.61in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 0.8in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 3.25in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Harpswell/Bailey\ Island,\ ME}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.4in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.65in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 0.81in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} \\
 
 
 
 
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.15in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Chatham,\ MA}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.38in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.61in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 0.8in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 3.25in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Chatham,\ MA}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.4in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.65in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 0.81in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} \\
 
 
 
 
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.15in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Stonington,\ ME}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.38in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.61in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 0.8in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 3.25in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Stonington,\ ME}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.4in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.65in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 0.81in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} \\
 
 
 
 
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.15in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Friendship,\ ME}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.38in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.61in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 0.8in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 3.25in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Friendship,\ ME}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.4in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.65in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 0.81in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} \\
 
 
 
 
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.15in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{South\ Kingstown/Kingston/Wakefield-Peacedale,\ RI}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.38in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.61in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 0.8in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 3.25in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{South\ Kingstown/Kingston/Wakefield-Peacedale,\ RI}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.4in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.65in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 0.81in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} \\
 
 
 
 
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.15in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Steuben,\ ME}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.38in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.61in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 0.8in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 3.25in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Steuben,\ ME}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.4in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.65in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 0.81in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} \\
 
 
 
 
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.15in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Vinalhaven,\ ME}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.38in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.61in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 0.8in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 3.25in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Vinalhaven,\ ME}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.4in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.65in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 0.81in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} \\
 
 
 
 
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.15in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Newington,\ NH}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.38in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.61in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 0.8in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 3.25in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Newington,\ NH}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.4in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.65in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 0.81in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} \\
 
 
 
 
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.15in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Beals,\ ME}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.38in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.61in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 0.8in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 3.25in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Beals,\ ME}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.4in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.65in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 0.81in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} \\
 
 
 
 
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.15in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Swans\ Island,\ ME}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.38in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{med}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.61in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 0.8in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 3.25in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Swans\ Island,\ ME}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.4in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{med}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.65in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 0.81in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} \\
 
 
 
 
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.15in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Winter\ Harbor,\ ME}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.38in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.61in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 0.8in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 3.25in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Winter\ Harbor,\ ME}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.4in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.65in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 0.81in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} \\
 
 
 
 
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.15in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Cranberry\ Isles,\ ME}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.38in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.61in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 0.8in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 3.25in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Cranberry\ Isles,\ ME}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.4in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.65in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 0.81in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} \\
 
 
 
 
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.15in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Frenchboro,\ ME}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.38in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.61in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 0.8in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{}}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 3.25in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Frenchboro,\ ME}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.4in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.65in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 0.81in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{}}} \\
 
 
 
 
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.15in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Matinicus\ Isle,\ ME}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.38in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.61in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 0.8in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} \\
+\multicolumn{1}{>{\raggedright}m{\dimexpr 3.25in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{Matinicus\ Isle,\ ME}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.4in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 1.65in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} & \multicolumn{1}{>{\raggedright}m{\dimexpr 0.81in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{9}{9}\selectfont{low}}} \\
 
 \ascline{1.5pt}{666666}{1-4}
 
@@ -1200,8 +1177,7 @@ Narragansett/Point Judith, RI; Newington, NH; and Gloucester, MA ranked as top c
 
 \renewcommand*{\arraystretch}{1}
 
-\hypertarget{indicators-community-climate-vulnerability-in-the-mid-atlantic}{%
-\subsubsection{Indicators: Community Climate Vulnerability in the Mid-Atlantic}\label{indicators-community-climate-vulnerability-in-the-mid-atlantic}}
+\subsubsection{Indicators: Community Climate Vulnerability in the Mid-Atlantic}\label{indicators-community-climate-vulnerability-in-the-mid-atlantic}
 
 The \href{https://noaa-edab.github.io/catalog/community_climate_vulnerability.html}{Community Climate Change Risk Indicators} are calculated by multiplying the percent contribution of species to the total value landed in a community by their respective Total Vulnerability scores (based on NOAA's Climate Vulnerability Assessment) for different sensitivity and exposure factors and then summing the resulting values by year. As a community (or region) shifts towards climate vulnerable species, its risk score increases. While there is not a long-term trend in total climate vulnerability across New England communities as a whole, the proportion of communities with moderate vulnerability is decreasing and shifting more towards high or very high vulnerability scores (Fig. ref\{fig:commvulprop\}). This suggests that some communities are shifting towards being more dependent on climate-vulnerable species, particularly shellfish.
 
@@ -1214,18 +1190,15 @@ The \href{https://noaa-edab.github.io/catalog/community_climate_vulnerability.ht
 \caption{Proportion of New England communities at each revenue climate vulnerability level over time.}\label{fig:commvulprop}
 \end{figure}
 
-\hypertarget{implications-4}{%
-\subsubsection{Implications}\label{implications-4}}
+\subsubsection{Implications}\label{implications-4}
 
 These indicators provide a snapshot of the presence of socio-demographic concerns in the most highly engaged commercial and recreational fishing communities in New England. These communities may be especially vulnerable to changes in fishing patterns due to regulations and/or ecosystem changes. Several of these top fishing communities, both commercial and recreational fishing communities, demonstrated medium to high socio-demographic vulnerability, indicating that they may be at a disadvantage responding to change.
 
-\hypertarget{protected-species}{%
-\subsection{Protected Species}\label{protected-species}}
+\subsection{Protected Species}\label{protected-species}
 
 Fishery management objectives for protected species generally focus on reducing threats and on habitat conservation/restoration. Protected species include marine mammals protected under the Marine Mammal Protection Act, endangered and threatened species protected under the Endangered Species Act, and migratory birds protected under the Migratory Bird Treaty Act. In the Northeast U.S., endangered/threatened species include Atlantic salmon, Atlantic and shortnose sturgeon, all sea turtle species, giant manta ray, oceanic whitetip shark, and five baleen whales. Protected species objectives include managing bycatch to remain below potential biological removal (PBR) thresholds, recovering endangered populations, and monitoring unusual mortality events (UMEs). Here we report on performance relative to these objectives with available indicator data, as well as indicating the potential for future interactions driven by observed and predicted ecosystem changes in the Northeast U.S.
 
-\hypertarget{indicators-bycatch-population-adult-and-juvenile-numbers-mortalities}{%
-\subsubsection{Indicators: bycatch, population (adult and juvenile) numbers, mortalities}\label{indicators-bycatch-population-adult-and-juvenile-numbers-mortalities}}
+\subsubsection{Indicators: bycatch, population (adult and juvenile) numbers, mortalities}\label{indicators-bycatch-population-adult-and-juvenile-numbers-mortalities}
 
 Average indices for both \href{https://noaa-edab.github.io/catalog/harborporpoise.html}{harbor porpoise} (Fig. \ref{fig:harborporpoise}) and \href{https://noaa-edab.github.io/catalog/grayseal.html}{gray seal} bycatch (Fig. \ref{fig:grayseal}) are below current PBR thresholds, meeting management objectives.
 
@@ -1274,8 +1247,7 @@ A UME continued from previous years for humpback whales (2016-present); suspecte
 \caption{Number of North Atlantic right whale calf births, 1990 - 2021.}\label{fig:NARW-calf-abundance}
 \end{figure}
 
-\hypertarget{implications-5}{%
-\subsubsection{Implications}\label{implications-5}}
+\subsubsection{Implications}\label{implications-5}
 
 Bycatch management measures have been implemented to maintain bycatch below PBR thresholds. The downward trend in harbor porpoise bycatch can also be due to a decrease in harbor porpoise abundance in U.S. waters, reducing their overlap with fisheries, and a decrease in gillnet effort. The increasing trend in gray seal bycatch may be related to an increase in the gray seal population (\href{https://noaa-edab.github.io/catalog/seal_pups.html}{U.S. pup counts}), supported by the dramatic rise over the last three decades in observed numbers of gray seal pups born at U.S. breeding sites plus an increase in adult seals at the breeding sites (Fig. \ref{fig:seals}), some of which are supplemented by Canadian adults.
 
@@ -1288,33 +1260,29 @@ Bycatch management measures have been implemented to maintain bycatch below PBR 
 \caption{Estimated number of gray seal pups born at four United States pupping colonies at various times from 1988 to 2021. Recreated from Wood et al. 2022 (Figure 5).}\label{fig:seals}
 \end{figure}
 
-Strong evidence exists to suggest that interactions between right whales and both the fixed gear fisheries in the U.S. and Canada and vessel strikes in the U.S. are contributing substantially to the decline of the species. Further, right whale distribution has changed since 2010. \href{https://noaa-edab.github.io/catalog/narw.html}{Recent research} suggests that recent climate driven changes in ocean circulation have resulted in right whale distribution changes driven by increased warm water influx through the Northeast Channel, which has reduced the primary right whale prey (\emph{Calanus finmarchicus}) in the central and eastern portions of the Gulf of Maine. Additional potential stressors include offshore wind development, which overlaps with \href{https://noaa-edab.github.io/catalog/cetacean_acoustic.html}{important habitat areas} used year-round by right whales, including mother and calf migration corridors and foraging habitat. This area is also a primary right whale winter foraging habitat. Additional information can be found in the \protect\hyperlink{wind-risks}{offshore wind risks section}.
+Strong evidence exists to suggest that interactions between right whales and both the fixed gear fisheries in the U.S. and Canada and vessel strikes in the U.S. are contributing substantially to the decline of the species. Further, right whale distribution has changed since 2010. \href{https://noaa-edab.github.io/catalog/narw.html}{Recent research} suggests that recent climate driven changes in ocean circulation have resulted in right whale distribution changes driven by increased warm water influx through the Northeast Channel, which has reduced the primary right whale prey (\emph{Calanus finmarchicus}) in the central and eastern portions of the Gulf of Maine. Additional potential stressors include offshore wind development, which overlaps with \href{https://noaa-edab.github.io/catalog/cetacean_acoustic.html}{important habitat areas} used year-round by right whales, including mother and calf migration corridors and foraging habitat. This area is also a primary right whale winter foraging habitat. Additional information can be found in the \hyperref[wind-risks]{offshore wind risks section}.
 
 A UME continued from previous years for humpback whales (2016-present) and Atlantic minke whales (2018-present); suspected causes include human interactions. A UME for Northeast pinnipeds that began in 2018 for infectious disease is pending closure as of February 2024.
 
 A climate vulnerability assessment is published for Atlantic and Gulf of Mexico marine mammal populations.
 
-\hypertarget{climate-risks}{%
-\section{Risks to meeting fishery management objectives}\label{climate-risks}}
+\section{Risks to meeting fishery management objectives}\label{climate-risks}
 
-\hypertarget{climate-and-ecosystem-change}{%
-\subsection{Climate and Ecosystem Change}\label{climate-and-ecosystem-change}}
+\subsection{Climate and Ecosystem Change}\label{climate-and-ecosystem-change}
 
 Regulations and measures designed to meet fishery management objectives are often based on historical information about stocks, their distribution in space and time, and their overall productivity. Large scale climate related changes in the ecosystem can lead to changes in important habitats and ecological interactions, altering distributions and productivity. With large enough ecosystem changes, management measures may be less effective and management objectives may not be met.
 
 This section focuses on three categories of management decisions and the risk posed to them by climate and ecosystem change: spatial management, seasonal management, and quota setting or rebuilding depleted stocks. In each section, we describe potential risks to the management category, highlight indicators of observed changes that contribute to those risks, and review possible biological and environmental drivers and the ways they may explain the observed indicators.
 
-\hypertarget{risks-to-managing-spatially}{%
-\subsubsection{Risks to Managing Spatially}\label{risks-to-managing-spatially}}
+\subsubsection{Risks to Managing Spatially}\label{risks-to-managing-spatially}
 
 Shifting species distributions (changes in spatial extent or center of gravity) alter both species interactions and fishery interactions. In particular, shifting species distributions can affect expected management outcomes from spatial allocations and bycatch measures based on historical fish and protected species distributions. Additionally, species availability to surveys can change as distributions shift within survey footprints, complicating the interpretation of survey trends.
 
 Coastwide indicators are reviewed in this section to evaluate spatial change throughout the Northeast US shelf. Indicators are identical between the Mid Atlantic and New England reports.
 
-\hypertarget{indicator-fish-and-protected-species-distribution-shifts}{%
-\paragraph{Indicator: Fish and protected species distribution shifts}\label{indicator-fish-and-protected-species-distribution-shifts}}
+\paragraph{Indicator: Fish and protected species distribution shifts}\label{indicator-fish-and-protected-species-distribution-shifts}
 
-As noted in the \protect\hyperlink{implications}{seafood production section} above, the \href{https://noaa-edab.github.io/catalog/species_dist.html}{center of distribution} for a suite of 48 commercially or ecologically important fish species along the entire Northeast Shelf continues to show movement towards the northeast and generally into deeper water (Fig. \ref{fig:species-dist} ). \href{https://noaa-edab.github.io/catalog/habitat_diversity.html}{Habitat model-based species richness} suggests shifts of both cooler and warmer water species to the northeast. Similar patterns have been found for \href{https://noaa-edab.github.io/catalog/HMS_species_distribution.html}{marine mammals}, with multiple species shifting northeast between 2010 and 2017 in most seasons (Fig. \ref{fig:protectedspp-dist-shifts} ).
+As noted in the \hyperref[implications]{seafood production section} above, the \href{https://noaa-edab.github.io/catalog/species_dist.html}{center of distribution} for a suite of 48 commercially or ecologically important fish species along the entire Northeast Shelf continues to show movement towards the northeast and generally into deeper water (Fig. \ref{fig:species-dist} ). \href{https://noaa-edab.github.io/catalog/habitat_diversity.html}{Habitat model-based species richness} suggests shifts of both cooler and warmer water species to the northeast. Similar patterns have been found for \href{https://noaa-edab.github.io/catalog/HMS_species_distribution.html}{marine mammals}, with multiple species shifting northeast between 2010 and 2017 in most seasons (Fig. \ref{fig:protectedspp-dist-shifts} ).
 
 \begin{figure}
 
@@ -1325,8 +1293,7 @@ As noted in the \protect\hyperlink{implications}{seafood production section} abo
 \caption{Direction and magnitude of core habitat shifts, represented by the length of the line of the seasonal weighted centroid for species with more than 70 km difference between 2010 and 2017 (tip of arrow).}\label{fig:protectedspp-dist-shifts}
 \end{figure}
 
-\hypertarget{drivers}{%
-\paragraph{Drivers}\label{drivers}}
+\paragraph{Drivers}\label{drivers}
 
 Mobile populations are shifting distributions to maintain suitable temperature and prey fields, possibly expanding if new suitable habitat exists. Changes in managed species distribution is related, in part, to the \href{https://noaa-edab.github.io/catalog/forage_index.html}{distribution of forage biomass}. Since 1982, the fall center of gravity of forage fish (20 species combined) has moved to the north and east. Spring forage fish center of gravity has been more variable over time.
 
@@ -1360,7 +1327,7 @@ Mobile populations are shifting distributions to maintain suitable temperature a
 
 In contrast, \href{https://noaa-edab.github.io/catalog/benthos_index.html}{macrobenthos center of gravity} has shifted westward (Fig. \ref{fig:macrobenthosshifts}). Macrobenthos are small bottom-dwelling invertebrates including polychaete worms, small crustaceans, bivalves (non-commercial), gastropods, nemerteans, tunicates, cnidarians, brittle stars, sea cucumbers, and sand dollars and are prey for many benthic species.
 
-\begin{center}\includegraphics{SOE-NEFMC_files/figure-latex/macrobenthosshifts-1} \end{center}
+\begin{center}\includegraphics[alt={Eastward (left) and northward (right) shifts in the center of gravity for macrobenthos species on the Northeast U.S. Shelf}]{SOE-NEFMC_files/figure-latex/macrobenthosshifts-1} \end{center}
 
 Ocean temperatures influence the distribution, seasonal timing of migrations and spawning, as well as the productivity of managed species (see sections below). New England has experienced a continued warming trend for \href{https://noaa-edab.github.io/catalog/seasonal_oisst_anom.html}{surface waters} (Fig.\ref{fig:longterm-sst}) in all seasons.
 
@@ -1375,7 +1342,7 @@ Ocean temperatures influence the distribution, seasonal timing of migrations and
 
 Species' suitable habitat can expand or contract when changes in temperature and major oceanographic conditions alter distinct water mass habitats. The variability of the Gulf Stream is a major driver of the predominant oceanographic conditions of the Northeast U.S. continental shelf. The \href{https://noaa-edab.github.io/catalog/gsi.html}{Gulf Stream}is a major driver of oceanographic conditions on the Northeast U.S. shelf and has been less stable over the last decade (Fig. \ref{fig:west-GSI}). A more northerly Gulf Stream is related to higher proportions of \href{https://noaa-edab.github.io/catalog/slopewater.html}{Warm Slope Water} entering the Gulf of Maine through the Northeast Channel. There is a long-term northward trend of the western portion of the Gulf Stream, but in 2024 the full extent of the Gulf Stream to the Grand Banks was south of the mean Gulf Stream position. When the Gulf Stream is closer to the Grand Banks, the supply of cold, fresh, and oxygen-rich Labrador waters is reduced.
 
-In 2024, however, the Gulf Stream was further south and Labrador Slope water accounted for more than 50\% of the source water entering the Gulf of Maine through the Northeast Channel. The increased influx of Labrador Slope and Scotian Shelf water resulted in colder and fresher conditions throughout the Northwest Atlantic (see \protect\hyperlink{highlights}{2024 Highlights section}).
+In 2024, however, the Gulf Stream was further south and Labrador Slope water accounted for more than 50\% of the source water entering the Gulf of Maine through the Northeast Channel. The increased influx of Labrador Slope and Scotian Shelf water resulted in colder and fresher conditions throughout the Northwest Atlantic (see \hyperref[highlights]{2024 Highlights section}).
 
 \begin{figure}
 
@@ -1386,21 +1353,18 @@ In 2024, however, the Gulf Stream was further south and Labrador Slope water acc
 \caption{Index representing changes in the location of the western Gulf Stream north wall. Positive values represent a more northerly Gulf Stream position.}\label{fig:west-GSI}
 \end{figure}
 
-\hypertarget{future-considerations}{%
-\paragraph{Future Considerations}\label{future-considerations}}
+\paragraph{Future Considerations}\label{future-considerations}
 
 Distribution shifts caused by changes in thermal habitat and ocean circulation are likely to continue as long as long-term trends persist. Episodic and short-term events (see observation highlights) may increase variability in the trends, however species distributions are unlikely to reverse to historical ranges in the short term. Increased mechanistic understanding of distribution drivers is needed to better understand future distribution shifts: species with high mobility or short lifespans react differently from immobile or long lived species.
 Long-term oceanographic projections forecast a temporary pause in warming over the next decade due to internal variability in circulation and a southward shift of the Gulf Stream. Near-term forecasts are being evaluated to determine how well they are able to predict episodic and anomalous events that are outside of the long-term patterns.
 
 Adapting management to changing stock distributions and dynamic ocean processes will require continued monitoring of populations in space and evaluating management measures against a range of possible future spatial distributions.
 
-\hypertarget{risks-to-managing-seasonally}{%
-\subsubsection{Risks to Managing Seasonally}\label{risks-to-managing-seasonally}}
+\subsubsection{Risks to Managing Seasonally}\label{risks-to-managing-seasonally}
 
 The effectiveness of seasonal management actions (fishing seasons or area opening/closing) depends on a proper alignment with the seasonal life cycle events, also known as phenology, of fish stocks (e.g., migration timing and spawning). Changes in the timing of these biological cycles can reduce the effectiveness of management measures if not accounted for. The timing of seasonal patterns can also change the availability of species to surveys and interactions between fisheries and non-target species thus influencing the amount of bycatch.
 
-\hypertarget{indicators-timing-shifts}{%
-\paragraph{Indicators: Timing shifts}\label{indicators-timing-shifts}}
+\paragraph{Indicators: Timing shifts}\label{indicators-timing-shifts}
 
 \href{https://noaa-edab.github.io/catalog/spawn_timing.html}{Spawning timing} is shifting earlier for multiple stocks, including haddock and yellowtail flounder (Fig. \ref{fig:spawn-timing}). Spawning of both haddock stocks is occurring earlier, as indicated by more resting (post-spawning) stage fish in the 2010s as compared to earlier in the time series. The northern (Cape Cod/GOM) yellowtail flounder stock shows earlier active spawning in recent years with a decline in pre-spawning resting females. Yellowtail flounder spawning is related to bottom temperature, week of year, and decade sampled for each of the three stocks.
 
@@ -1417,8 +1381,7 @@ The effectiveness of seasonal management actions (fishing seasons or area openin
 
 Understanding whether seasonal patterns are changing for stocks requires regular observations during seasonal life history events. For example, baseline work on \href{https://noaa-edab.github.io/catalog/cetacean_acoustic.html}{cetacean presence in Southern New England} shows different seasonal use patterns for whale and dolphin species. Despite the importance of understanding seasonal patterns, we have few indicators that directly assess timing shifts of species. We plan on incorporating more indicators of phenology in future reports.
 
-\hypertarget{drivers-1}{%
-\paragraph{Drivers}\label{drivers-1}}
+\paragraph{Drivers}\label{drivers-1}
 
 The drivers of timing shifts in managed stocks are generally coupled to shifts in environmental or biological conditions, since these can result in changes in habitat quality or food availability within the year. Changes in the timing of fall phytoplankton blooms and seasonal shifts in zooplankton communities are potential indicators of changes in seasonal food availability to stocks.
 
@@ -1454,18 +1417,15 @@ The seasonal timing of \href{https://noaa-edab.github.io/catalog/chl_pp.html}{ph
 
 \end{figure}
 
-\hypertarget{future-considerations-1}{%
-\paragraph{Future Considerations}\label{future-considerations-1}}
+\paragraph{Future Considerations}\label{future-considerations-1}
 
 For species reliant on environmental processes to dictate the timing of their behavior (e.g., phytoplankton bloom timing and magnitude, thermal transition, or the duration of the cold pool), it is possible that some effects will be episodic and have interannual variability, while other timing effects can change on scales of years to decades. Other species may rely on the general seasonal succession of environmental drivers (e.g., the timing of the fall turnover) to cue biological processes, and these types of long-term trends are unlikely to reverse in coming years. Such timing shifts in migration or spawning may continue. Management actions that rely on effective alignment of fisheries availability and biological processes should continue to evaluate whether prior assumptions on seasonal timings still hold, and new indicators should be developed to monitor timing shifts for stocks.
 
-\hypertarget{risks-to-setting-catch-limits}{%
-\subsubsection{Risks to Setting Catch Limits}\label{risks-to-setting-catch-limits}}
+\subsubsection{Risks to Setting Catch Limits}\label{risks-to-setting-catch-limits}
 
 The efficacy of short-term stock projections and rebuilding plans relies on accurate understanding of processes affecting stock growth, reproduction, and natural mortality. These biological processes are often driven by underlying environmental change. When observed environmental change occurs, there is a risk that established stock-level biological reference points may no longer reflect the current population.
 
-\hypertarget{indicators-fish-productivity-and-condition-shifts}{%
-\paragraph{Indicators: Fish productivity and condition shifts}\label{indicators-fish-productivity-and-condition-shifts}}
+\paragraph{Indicators: Fish productivity and condition shifts}\label{indicators-fish-productivity-and-condition-shifts}
 
 Indicators of \href{https://noaa-edab.github.io/catalog/productivity_anomaly.html}{fish productivity} are derived from observations (surveys) or models (stock assessments). With the exception of two years (2006 and 2013), fish productivity has been below the long-term average in the Gulf of Maine since the early 2000s, as described by the small-fish-per-large-fish anomaly indicator (derived from NEFSC bottom trawl survey)(Fig. \ref{fig:productivity-anomaly}). This decline in fish productivity is also shown by a similar analysis based on stock assessment model outputs (recruitment per spawning stock biomass anomaly). Other signs of changing productivity in New England are the declines in \href{https://noaa-edab.github.io/catalog/seabird_ne.html}{common tern chicks} per nest (Fig. \ref{fig:seabird-ne-productivity}) and continued low returns of hatchery \href{https://noaa-edab.github.io/catalog/gom_salmon.html}{Atlantic salmon}(Fig. \ref{fig:salmon}) despite short-term increases in adult salmon numbers.
 
@@ -1505,13 +1465,11 @@ The health of individual fish (i.e., fish condition) can contribute to populatio
 \caption{Condition factor for fish species in New England based on fall NEFSC bottom trawl survey data. No survey was conducted in 2020.}\label{fig:ne-cf}
 \end{figure}
 
-\hypertarget{drivers-2}{%
-\paragraph{Drivers}\label{drivers-2}}
+\paragraph{Drivers}\label{drivers-2}
 
 Fish productivity and condition are affected by increasing metabolic demands from increasing temperature, combined with changes in the availability and quality of prey. Long-term environmental trends and episodic extreme temperatures, ocean acidification, and low oxygen events represent multiple stressors that can affect growth rates, reproductive success and recruitment, and cause mortality.
 
-\hypertarget{biological-drivers-forage-quality-and-abundance}{%
-\subparagraph{Biological Drivers: Forage quality and abundance}\label{biological-drivers-forage-quality-and-abundance}}
+\subparagraph{Biological Drivers: Forage quality and abundance}\label{biological-drivers-forage-quality-and-abundance}
 
 The amount of forage fish available in the ecosystem combined with the energy content of the forage species determines the amount of energy potentially available to predators in the ecosystem. Changes in the forage fish base can drive managed and protected species production and condition.
 
@@ -1530,10 +1488,9 @@ Changes in the overall abundance of forage fish can influence managed species pr
 
 \href{https://noaa-edab.github.io/catalog/benthos_index.html}{Benthic invertebrates} are extremely important forage for some managed species (e.g.~flatfish, juvenile cod and haddock) Macrobenthos indices show long term declines in spring. In contrast, megabenthos indices show long-term increases during the fall in both GB and GOM (Fig. \ref{fig:benthos}).
 
-\begin{center}\includegraphics{SOE-NEFMC_files/figure-latex/benthos-1} \end{center}
+\begin{center}\includegraphics[alt={Changes in benthos abundance in New England for megabenthos (top) and macrobenthos (bottom).}]{SOE-NEFMC_files/figure-latex/benthos-1} \end{center}
 
-\hypertarget{biological-drivers-lower-trophic-levels}{%
-\subparagraph{Biological Drivers: Lower trophic levels}\label{biological-drivers-lower-trophic-levels}}
+\subparagraph{Biological Drivers: Lower trophic levels}\label{biological-drivers-lower-trophic-levels}
 
 Phytoplankton are the foundation of the marine food web and are the primary food source for zooplankton and filter feeders such as shellfish. Multiple environmental and oceanographic drivers affect the abundance, composition, spatial distribution, and productivity of phytoplankton. While changes in phytoplankton productivity could affect fish productivity (including forage), there is no clear long-term trend in New England total primary production (Fig. \ref{fig:primaray-production}).
 
@@ -1570,15 +1527,14 @@ Since 2010, the abundance of the lipid-rich older stages of \href{https://noaa-e
 \end{figure}
 \begin{figure}
 
-{\centering \includegraphics[width=24.42in]{SOE-NEFMC_files/figure-latex/zooplankton-season-1} 
+{\centering \includegraphics{SOE-NEFMC_files/figure-latex/zooplankton-season-1} 
 
 }
 
 \caption{Abundance (no $m^-2$) of *C. finmarchicus C3-C6 estimated from 200$\mu$ vertical ring net tows. Individual data with fitted lines.Data from 2005-2010: circles; 2011-2021:triangles; 2022-2024:squares) WBTS station seasonal abundance time series for B) spring, C) summer, D) fall, E)winter. Vertical lines denote season boudnaries. If the seasonal abundance time series is significant, GAM predictions are calculated with day of year set to 1, 100, 200, and 300 for winter, spring, summer, and fall, respectively.}\label{fig:zooplankton-season}
 \end{figure}
 
-\hypertarget{environmental-drivers}{%
-\subparagraph{Environmental Drivers}\label{environmental-drivers}}
+\subparagraph{Environmental Drivers}\label{environmental-drivers}
 
 Fish production can also be directly related to the prevailing environmental conditions by altering metabolic (growth) and reproductive processes. Many species possess thermal tolerances and can experience stressful or lethal conditions if temperatures exceed certain levels. Extreme temperature at both the \href{https://noaa-edab.github.io/catalog/seasonal_oisst_anom.html}{surface} (Fig. \ref{fig:longterm-sst}) and \href{https://noaa-edab.github.io/catalog/bottom_temp_comp.html}{bottom} can exceed \href{https://noaa-edab.github.io/catalog/thermal_habitat_persistence.html}{thermal tolerance} limits for some fish. For example, 2012 had among the warmest surface and bottom temperatures (GB) in New England. A large proportion of the Georges Bank and Mid-Atlantic regions had bottom temperatures above the 15℃ thermal tolerance for most groundfish, with some days in the Mid-Atlantic exceeding the 24℃ potential mortality limit (Fig. ).
 (Fig. \ref{fig:therm-hab-persist-2012}).
@@ -1594,7 +1550,7 @@ In 2024, only one \href{https://noaa-edab.github.io/catalog/heatwave_year.html}{
 \caption{The number of days in 2024 where bottom temperature exceeds 15℃ (left) and 24℃ (right) based on the GLORYS 1/12 degree grid.}\label{fig:therm-hab-persist-2012}
 \end{figure}
 
-\href{https://noaa-edab.github.io/catalog/ocean_acidification.html}{Ocean acidification} (OA) risks vary among species and include reduced survival, growth, reproduction, and productivity, where high OA risk indicates potential negative effects to species. OA risk can also be heightened during colder conditions due to increased CO2 absorption by the water or by transport of high CO2 water masses (see \protect\hyperlink{highlights}{highlights section}). Higher OA risk conditions were observed for Atlantic sea scallop and longfin squid in Long Island Sound and the nearshore and mid shelf regions of the New Jersey shelf during summers of 2016, 2018, 2019, 2023, and 2024 (Fig. \ref{fig:oa-2024} ). The OA indicator observed on the Mid-Atlantic coastal shelf during summer 2024 was the most extreme recorded when compared to all of the years sampled (since 2007).
+\href{https://noaa-edab.github.io/catalog/ocean_acidification.html}{Ocean acidification} (OA) risks vary among species and include reduced survival, growth, reproduction, and productivity, where high OA risk indicates potential negative effects to species. OA risk can also be heightened during colder conditions due to increased CO2 absorption by the water or by transport of high CO2 water masses (see \hyperref[highlights]{highlights section}). Higher OA risk conditions were observed for Atlantic sea scallop and longfin squid in Long Island Sound and the nearshore and mid shelf regions of the New Jersey shelf during summers of 2016, 2018, 2019, 2023, and 2024 (Fig. \ref{fig:oa-2024} ). The OA indicator observed on the Mid-Atlantic coastal shelf during summer 2024 was the most extreme recorded when compared to all of the years sampled (since 2007).
 
 \begin{figure}
 
@@ -1607,23 +1563,19 @@ In 2024, only one \href{https://noaa-edab.github.io/catalog/heatwave_year.html}{
 
 Biological and oceanographic processes can affect the amount of oxygen present in the water column. During low oxygen (hypoxic) events, species' growth is negatively affected and very low oxygen can result in mortality. The duration and extent of hypoxic events is being monitored, but long-term shelf-wide observations are not yet available. However, \href{https://noaa-edab.github.io/catalog/observation_synthesis.html}{hypoxic events} were detected off the coast of New Jersey in 2023 and were potentially responsible for fish, lobster, and crab \href{https://sebsnjaesnews.rutgers.edu/2023/12/rutgers-scientists-observe-unusual-ocean-conditions-possibly-linked-to-mortality-in-marine-life-off-new-jersey/}{mortalities}. No hypoxic events were observed on the NE shelf in 2024.
 
-\hypertarget{drivers-predation}{%
-\subparagraph{Drivers: Predation}\label{drivers-predation}}
+\subparagraph{Drivers: Predation}\label{drivers-predation}
 
 The abundance and distribution of predators can affect both the productivity and mortality rates on managed stocks. Predators can consume managed species or compete for the same resources resulting in increased natural mortality or declining productivity, respectively. The northeast shift in some \href{https://noaa-edab.github.io/catalog/HMS_species_distribution.html}{highly migratory species} (Fig. \ref{fig:protectedspp-dist-shifts}) indicates a change in the overlap between predators and prey. Since we also observe distribution shifts in both managed and forage species, the effect of changing predator distributions alone is difficult to quantify.
 
 \href{https://noaa-edab.github.io/catalog/grayseal.html}{Gray seals} are fish predators with increasing populations in New England, however they are broad generalist feeders that do not generally target commercially-sized managed species. \href{https://noaa-edab.github.io/catalog/hms_stock_status.html}{Stock status} is mixed for Atlantic Highly Migratory Species (HMS) stocks (including sharks, swordfish, billfish, and tunas) occurring throughout the Northeast U.S. shelf. While there are several HMS species considered to be overfished or that have unknown stock status, the population status for some managed Atlantic sharks and tunas is at or above the biomass target, suggesting the potential for robust (or rebuilt) predator populations among these managed species. Stable predator populations suggest stable predation pressure on managed species, but increasing predator populations may reflect increasing predation pressure.
 
-\hypertarget{future-considerations-2}{%
-\paragraph{Future Considerations}\label{future-considerations-2}}
+\paragraph{Future Considerations}\label{future-considerations-2}
 
 The processes that control fish productivity and mortality are dynamic, complex, and the result of the interactions between multiple system drivers. There is a real risk that short-term predictions in assessments and rebuilding plans that assume unchanging underlying conditions will not be as effective, given the observed ecological and environmental process changes documented throughout the report. Assumptions for species' growth, reproduction, and natural mortality should continue to be evaluated for individual species. With observations of system-wide productivity shifts of multiple managed stocks, more research is needed to determine whether regime shifts or ecosystem reorganization are occurring, and how this should be incorporated into management
 
-\hypertarget{wind-risks}{%
-\subsection{Other Ocean Uses: Offshore Wind}\label{wind-risks}}
+\subsection{Other Ocean Uses: Offshore Wind}\label{wind-risks}
 
-\hypertarget{indicators-development-timeline-revenue-in-lease-areas-coastal-community-vulnerability}{%
-\subsubsection{Indicators: development timeline, revenue in lease areas, coastal community vulnerability}\label{indicators-development-timeline-revenue-in-lease-areas-coastal-community-vulnerability}}
+\subsubsection{Indicators: development timeline, revenue in lease areas, coastal community vulnerability}\label{indicators-development-timeline-revenue-in-lease-areas-coastal-community-vulnerability}
 
 As of January 2025, 30 offshore \href{https://noaa-edab.github.io/catalog/wind_dev_speed.html}{wind development} projects are proposed for construction over the next decade in the Northeast (timelines and project data for 2024 are based on the \href{https://www.boem.gov/sites/default/files/documents/renewable-energy/state-activities/Ocean_Wind1_FEIS_App_F_Planned\%20Activities\%20Scenario.pdf}{Ocean Wind 1 Offshore Wind Farm Final Environmental Impact Statement. Volume II: Appendix F}). Offshore wind areas are anticipated to cover more than 2.3 million acres by 2030 in the Greater Atlantic region (Fig. \ref{fig:wind-proposed-dev}).
 
@@ -1666,7 +1618,7 @@ Based on federal vessel logbook data, \href{https://noaa-edab.github.io/catalog/
 
 \global\setlength{\Oldtabcolsep}{\tabcolsep}
 
-\setlength{\tabcolsep}{0pt}
+\setlength{\tabcolsep}{2pt}
 
 \renewcommand*{\arraystretch}{1}
 
@@ -1886,8 +1838,7 @@ Top fishing communities with high \href{https://noaa-edab.github.io/catalog/enga
 \caption{Percent of Mid-Atlantic port revenue with majority NEFMC landings from Wind Energy Areas (WEA) in descending order from most to least port fisheries revenue from WEA.}\label{fig:wind-rev-MAB-NEFMC}
 \end{figure}
 
-\hypertarget{implications-6}{%
-\subsubsection{Implications}\label{implications-6}}
+\subsubsection{Implications}\label{implications-6}
 
 Current plans for rapid buildout of offshore wind in a patchwork of areas spreads the impacts differentially throughout the region (Fig. \ref{fig:wind-dev-cumul2}).
 
@@ -1924,21 +1875,19 @@ The increase of offshore wind development can have both positive (e.g., employme
 \end{figure}
 \newpage
 
-\hypertarget{highlights}{%
-\subsubsection{2024 Highlights}\label{highlights}}
+\subsubsection{2024 Highlights}\label{highlights}
 
 This section intends to provide a record of noteworthy observations reported in 2024 across the Northeast U.S. region. The full ecosystem and fisheries impacts of many of these observations are still to be determined. They should, however, be noted and considered in future analyses and management decisions.
 
 2024 global sea surface and air temperatures exceeded 2023 as the warmest year on record, but colder than average temperatures were observed in the Northeast U.S. Oceanographic and ecological conditions in the Northwest Atlantic were markedly different in 2024 compared to recent years.
 
-\hypertarget{northwest-atlantic-phenomena}{%
-\paragraph{Northwest Atlantic Phenomena}\label{northwest-atlantic-phenomena}}
+\paragraph{Northwest Atlantic Phenomena}\label{northwest-atlantic-phenomena}
 
 Late 2023 and early 2024 observations indicate movement of cooler and fresher water into the Northwest Atlantic. Anomalously cold and low salinity conditions were recorded throughout the Northeast Shelf and were widespread across the Slope Sea. These cooler and fresher conditions are linked to the southward movement of the eastern portion of the \href{https://noaa-edab.github.io/catalog/gsi.html}{Gulf Stream} and an increased influx of Labrador Slope and Scotian Shelf water into the system.
 
 \begin{figure}
 
-{\centering \includegraphics[width=22.92in]{SOE-NEFMC_files/figure-latex/slopesea-1} 
+{\centering \includegraphics{SOE-NEFMC_files/figure-latex/slopesea-1} 
 
 }
 
@@ -1956,8 +1905,7 @@ Labrador Slope water accounted for more than 50\% of the \href{https://noaa-edab
 \caption{The proportion of Warm Slope Water (WSW) and Labrador Slope Water (LSW) enter the Gulf of Maine through the Northeast Channel. The orange and teal dashed lines represent the long-term proportion averages for the WSW and LSW respectively.}\label{fig:slopewater}
 \end{figure}
 
-\hypertarget{northeast-shelf-and-local-phenomena}{%
-\paragraph{Northeast Shelf and Local Phenomena}\label{northeast-shelf-and-local-phenomena}}
+\paragraph{Northeast Shelf and Local Phenomena}\label{northeast-shelf-and-local-phenomena}
 
 The influx of the northern waters is likely linked to multiple observations across the Northeast Shelf including the uncommon presence of Arctic Calanus zooplankton species in the Gulf of Maine, delayed migration of many species, and redistribution of some species. Several members of the fishing community noted delayed migration of species into typical fishing grounds. In particular, they attributed the delayed migration of longfin squid, black sea bass, and haddock to the cooler water temperatures. Many also reported redistribution of some species. Specifically, pollock, bluefin tuna, Atlantic mackerel, longfin squid, bluefish, and bonito were observed in surprising or unusual locations. Some species, such as Atlantic mackerel, were reported outside of typical fishing grounds and in higher abundance compared to recent years. Anglers also reported good catches of red drum in Chesapeake Bay and record high (since 1995) numbers were observed at Poplar Island survey location.
 
@@ -1978,7 +1926,7 @@ Summer bottom \href{https://noaa-edab.github.io/catalog/ocean_acidification.html
 
 \begin{figure}
 
-{\centering \includegraphics[width=22.92in]{SOE-NEFMC_files/figure-latex/GOMoa-1} 
+{\centering \includegraphics{SOE-NEFMC_files/figure-latex/GOMoa-1} 
 
 }
 
@@ -1987,15 +1935,13 @@ Summer bottom \href{https://noaa-edab.github.io/catalog/ocean_acidification.html
 
 In contrast to the documented die-off of scallops in the Mid-Atlantic Elephant Trunk region between the 2022 and 2023 surveys, in 2024 there was strong scallop recruitment in the southeastern portion of the Nantucket Lightship Area.
 
-\hypertarget{contributors}{%
-\section{Contributors}\label{contributors}}
+\section{Contributors}\label{contributors}
 
 \textbf{Editors} (NOAA NMFS Northeast Fisheries Science Center, NEFSC): Joseph Caracappa, Sarah Gaichas, Andrew Beet, Brandon Beltz, Geret DePiper, Kimberly Hyde, Scott Large, Sean Lucey, Laurel Smith.
 
 \newpage
 
-\hypertarget{document-orientation}{%
-\section{Document Orientation}\label{document-orientation}}
+\section{Document Orientation}\label{document-orientation}
 
 The figure format is illustrated in Fig \ref{fig:docformat}a. Trend lines are shown when the slope is significantly different from 0 at the p \textless{} 0.05 level. An orange line signifies an overall positive trend, and purple signifies a negative trend. To minimize bias introduced by small sample size, no trend is fit for \textless{} 30 year time series. Dashed lines represent mean values of time series unless the indicator is an anomaly, in which case the dashed line is equal to 0. Shaded regions indicate the past ten years. If there are no new data for 2020, the shaded region will still cover this time period. The spatial scale of indicators is either coastwide, New England states (Connecticut, Rhode Island, Massachusetts, New Hampshire, and Maine), or at one of the two Ecosystem Production Units (EPUs, Fig. \ref{fig:docformat}b) levels in the region, Georges Bank (GB) or Gulf of Maine (GOM).
 
@@ -2014,7 +1960,7 @@ Fish and invertebrates are aggregated into similar \href{https://noaa-edab.githu
 
 \global\setlength{\Oldtabcolsep}{\tabcolsep}
 
-\setlength{\tabcolsep}{0pt}
+\setlength{\tabcolsep}{2pt}
 
 \renewcommand*{\arraystretch}{1.5}
 
