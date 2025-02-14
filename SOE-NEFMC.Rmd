@@ -117,7 +117,7 @@ flextable::as_grouped_data(mng_obj, groups = "service") %>%
   flextable::bold(i = ~ !is.na(service), bold = TRUE) %>%
   flextable::set_header_labels(Objective.Categories = "Objective categories",
                                Indicators.reported = "Indicators reported") %>%
-  flextable::set_caption("Ecosystem-scale fishery management objectives in the Mid-Atlantic Bight") %>%
+  flextable::set_caption("Ecosystem-scale fishery management objectives in New England") %>%
   flextable::autofit() 
   
 
@@ -171,7 +171,7 @@ tab <- flextable::as_grouped_data(mng_obj, groups = "service") %>%
   flextable::set_header_labels(Risks = "Risk categories",
                                Observation.Indicators = "Observation indicators reported",
                                Potential.Driver.Indicators = "Potential driver indicators reported") %>%
-  flextable::set_caption("Risks to meeting fishery management objectives in the Mid-Atlantic Bight") #%>%
+  flextable::set_caption("Risks to meeting fishery management objectives in New England") #%>%
   #flextable::autofit() 
   
 FitFlextableToPage(tab)
