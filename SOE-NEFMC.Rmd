@@ -507,16 +507,18 @@ flextable::flextable(a$t) |>
 
 Narragansett/Point Judith, RI; Newington, NH; and Gloucester, MA ranked as top communities for both commercial and recreational indices (Fig. \ref{fig:rec-engagement}), suggesting that they may be impacted simultaneously (to a greater degree than others) by commercial and recreational regulatory changes. Of the top-ranked recreational communities, only Provincetown, MA and Falmouth, MA had medium or higher ranks for more than one socio-demographic indicator (Table. \ref{tab:rec-vuln}) examined here (poverty, personal disruption, population composition). This suggests that future changes to recreational fishing conditions may disproportionately impact Provincetown and Falmouth.
 
-```{r rec-engagement, fig.cap= "Recreational engagement and population relative engagement with labels for the top recreationally engaged fishing communities in  New England. ", fig.width = 7.5, fig.asp = 0.5, results='hide'}
+```{r rec-engagement, fig.cap= "Recreational engagement and population relative engagement with labels for the top recreationally engaged fishing communities in  New England. ", fig.width = 7.5, fig.asp = 0.7, results='hide'}
 #, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-commercial-engagement.R")
 
-a = ecodata::plot_engagement(report = 'NewEngland')
-a$p
+b = ecodata::plot_engagement(report = 'NewEngland',varName = 'Recreational')
+b$p
 
   
 ```
+\newpage
+
 ```{r rec-vuln}
-flextable::flextable(a$t) |>
+flextable::flextable(b$t) |>
   flextable::set_header_labels(personal_disruption_rank = "Personal Disruption",
                                pop_composition_rank = "Population Composition",
                                poverty_rank = "Poverty") |>
