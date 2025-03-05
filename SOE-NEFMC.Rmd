@@ -1130,7 +1130,7 @@ During the summer months there were multiple prolonged upwelling events that bro
 
 ```{r cocobloom, fig.cap="An OLCI Sentinel 3A true color image with enhanced contrast captured on July 2, 2024. Coccolithophores shed their coccolith plates during the later stages of the bloom cycle, which results in the milky turquoise water color (Image credit: NOAA STAR, OCView and Ocean Color Science Team).",out.width="65%"}
 
-magick::image_read("https://github.com/NOAA-EDAB/ecodata/raw/dev/data-raw/workshop/images/20240702_Long_Island_algae_bloom_KHyde_2025.png")|>
+magick::image_read("https://github.com/NOAA-EDAB/ecodata/raw/dev/data-raw/workshop/images/20240702_Long_Island_algae_bloom-cropped_KimHyde-2025.png")|>
   magick::image_resize("800x1800")
 
 ```
