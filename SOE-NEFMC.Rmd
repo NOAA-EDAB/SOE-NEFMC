@@ -930,7 +930,7 @@ Offshore wind indicators are based on federal logbook data and do not include al
 
 #knitr::include_graphics("https://github.com/NOAA-EDAB/ecodata/raw/dev/data-raw/workshop/images/SoE2025_TimelineandFootprint_Sept2024-AngelaSilva_2025.pdf")
 
-magick::image_read("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/dev/data-raw/workshop/images/UpdatedWindFigure49(MAFMC)andFig50(NEFMC)-AngelaSilva_2025.png")%>%
+magick::image_read_pdf("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/dev/data-raw/workshop/images/UpdatedWindFigure49(MAFMC)andFig50(NEFMC)-AngelaSilva_2025.pdf")%>%
   magick::image_resize('1000x2000')
 
 ```
