@@ -654,12 +654,12 @@ ecodata::plot_benthos_index(plottype = "cog", varName = "Macrobenthos", n=10)+ g
 ```
 
 Ocean temperatures influence the distribution, seasonal timing of migrations and spawning, as well as the productivity of managed species (see sections below). New England has experienced a continued warming trend for [surface waters](https://noaa-edab.github.io/catalog/seasonal_oisst_anom.html) (Fig.\ref{fig:longterm-sst}) in all seasons.
-```{r longterm-sst, fig.cap="Mean sea surface temperature across the entire Mid-Atlantic shelf.", fig.width = 7.5, fig.asp = .3}
+```{r longterm-sst, fig.cap="Mean sea surface temperature in New England.", fig.width = 7.5, fig.asp = .3}
 #overlaid onto 2021 seasonal spatial anomalies, code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_MAB.Rmd-seasonal-sst-anom-gridded.R")
 
 #ecodata::plot_seasonal_sst_anomaly_gridded()
 #ecodata::plot_seasonal_oisst_anom(report = "NewEngland",EPU = 'GOM')
-ecodata::plot_long_term_sst(n=10)
+ecodata::plot_long_term_sst(n=10, report = 'NewEngland')
 
 ```
 
