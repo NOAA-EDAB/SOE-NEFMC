@@ -666,7 +666,7 @@ Ocean temperatures influence the distribution, seasonal timing of migrations and
 
 #ecodata::plot_seasonal_sst_anomaly_gridded()
 #ecodata::plot_seasonal_oisst_anom(report = "NewEngland",EPU = 'GOM')
-ecodata::plot_long_term_sst(n=10)
+ecodata::plot_long_term_sst(n=10, report = 'NewEngland')
 
 ```
 
