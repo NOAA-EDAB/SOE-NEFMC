@@ -223,16 +223,17 @@ ecodata::plot_recdat(report = "NewEngland", varName = "landings", n=10)
 ```
 
 ```{r rec-hms, fig.cap = "Recreational shark landings from Marine Recreational Information Program (left) and Large Pelagics Survey (right)", fig.width=8,fig.asp = 0.4, results='hide', error=FALSE}
+
 #, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-rec_hms.R")
 
-a <- ecodata::plot_rec_hms(report="NewEngland", n=100)+
+a <- ecodata::plot_rec_hms(report="NewEngland", n=44)+
     ggplot2::scale_color_discrete(        
     limits = c("LargeCoastal", "Prohibited", "SmallCoastal"),         
     labels = c("Large Coastal", "Prohibited", "Small Coastal")
     ) 
 #  scale_color_manual(values = c('#F8766D','#7CAE00','#00BFC4','#C77CFF'),labels = c('Large Coastal','Pelagic','Prohibited','Small Coastal'))
 
-b <- ecodata::plot_lps_sharks(report="NewEngland", n=100)
+b <- ecodata::plot_lps_sharks(report="NewEngland", n=25)
 
 a+b
 
@@ -245,6 +246,7 @@ Declining commercial seafood and recreational landings are driven by many intera
 #### Stock Status
 
 Single species [management objectives](https://noaa-edab.github.io/catalog/stock_status.html)  (1. maintaining biomass above minimum thresholds and 2. maintaining fishing mortality below overfishing limits) are not being met for some NEFMC managed species. Thirteen stocks are currently estimated to be below B~MSY~ (Fig. \ref{fig:stock-status}), while status relative to B~MSY~ could not be assessed for 13 additional stocks (Table \ref{tab:stock-status-table}). Therefore, stock status and associated management constraints are likely contributing to decreased landings. To better address the role of management in future reports, we could examine how the total allowable catch (TAC) and the percentage of the TAC taken for each species has changed through time. 
+
 
 ```{r stock-status, fig.cap = "Summary of single species status for NEFMC and jointly federally managed stocks (goosefish and spiny dogfish).  The dotted vertical line at one is the target biomass reference point of B.  The dashed lines are the management thresholds of B (vertical) or F (horizontal). Colors denote stocks with B/B\\textsubscript{MSY} < 0.5 or F/F\\textsubscript{MSY} (orange), stocks 0.5<B/B\\textsubscript{MSY}<1 (blue), and stocks B/B\\textsubscript{MSY}>1 (green).CCGOM = Cape Cod Gulf of Maine, GOM = Gulf of Maine, GB = Georges Bank, SNEMA = Southern New England Mid Atlantic", fig.width = 6, fig.asp = 0.8}
 #, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-stock-status.R")
@@ -277,7 +279,11 @@ flextable::flextable(a$unknown) |>
   flextable::set_header_labels(F.Fmsy = "F/Fmsy",
                                B.Bmsy = "B/Bmsy") |>
   flextable::colformat_num(na_str = "-") |>
-  flextable::set_caption("Unknown or partially known stock status for NEFMC and jointly managed species. Atlantic cod stock status recommendations for the four new stocks were not available in time for this report.") |>
+
+  flextable::set_caption("Unknown or partially known stock status for MAFMC and jointly managed species.") |>
+  flextable::footnote(i = 1:2, j = 1,value =flextable::as_paragraph('The most recent cod assessment made stock status recommendations for the four new stocks (Eastern Gulf of Maine, Western Gulf of Maine, Georges Bank, and Southern New England) but were not available yet for this report.'),
+                      ref_symbols = c('1'))|>
+
   flextable::autofit() 
 # a <- ecodata::plot_stock_status(report = "NewEngland")$unknown %>%
 #   mutate(F.Fmsy = round(F.Fmsy,2),
@@ -672,6 +678,7 @@ ecodata::plot_long_term_sst(n=10, report = 'NewEngland')
 
 Species’ suitable habitat can expand or contract when changes in temperature and major oceanographic conditions alter distinct water mass habitats. The variability of the Gulf Stream is a major driver of the predominant oceanographic conditions of the Northeast U.S. continental shelf. The [Gulf Stream](https://noaa-edab.github.io/catalog/gsi.html) is a major driver of oceanographic conditions on the Northeast U.S. shelf and has been less stable over the last decade (Fig.  \ref{fig:west-GSI}). A more northerly Gulf Stream is related to higher proportions of [Warm Slope Water](https://noaa-edab.github.io/catalog/slopewater.html) entering the Gulf of Maine through the Northeast Channel. There is a long-term northward trend of the western portion of the Gulf Stream, but in 2024 the full extent of the Gulf Stream to the Grand Banks was south of the mean Gulf Stream position. When the Gulf Stream is closer to the Grand Banks, the supply of cold, fresh, and oxygen-rich Labrador waters is reduced (see [2024 Highlights section](#highlights)). 
 
+
 ```{r west-GSI, fig.cap = "Index representing changes in the location of the western Gulf Stream north wall. Positive values represent a more northerly Gulf Stream position.", fig.width = 7.5, fig.asp = .3}
 #, code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_MAB.Rmd-gsi.R")
 
@@ -713,7 +720,9 @@ Along with the overall warming trends in New England, ocean summer conditions ha
 ecodata::plot_trans_dates(report = "NewEngland", varName = 'length', n=10)+
   ggtitle('New England: Number of days between spring and fall transition dates')
 ```
+
 The Middle Atlantic Bight [Cold Pool](https://noaa-edab.github.io/catalog/cold_pool.html) is a summer to early fall feature that creates seasonally suitable habitat for many species, including some managed by the NEFMC. Since the mid-2000s, the cold pool has persisted for a shorter portion of the year (Fig. \ref{fig:cold-pool-time}). In 2024, however, all cold pool indices were near the long-term average and likely related to the influx of northern waters into the system (see 2024 highlights section). A change in the timing of the autumn breakdown of the cold pool may impact the recruitment of species that rely on it for seasonal cues and habitat. Southern New England-Mid Atlantic yellowtail flounder recruitment and settlement are related to the strength of the cold pool (a factor of extent and persistence). The correlation of pre-recruit settlers to the cold pool is thought to represent a bottleneck in yellowtail flounder life history, whereby a local and temporary increase in bottom temperature can negatively impact the survival of settlers. Including the effect of cold pool variations on yellowtail recruitment reduced retrospective patterns and improved predictive skill in a stock assessment model. This is especially important given the long-term decline in the duration of the cold pool. 
+
 
 ```{r cold-pool-time, fig.cap="Cold pool persistence index based on bias-corrected ROMS-NWA (open circles) and GLORYS (closed circles).", fig.width = 7.5, fig.asp=.3, results='hide'}
 #, fig.width = 5,  code=readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/LTL_MAB.Rmd-cold_pool.R")
@@ -1122,7 +1131,9 @@ magick::image_read("https://github.com/NOAA-EDAB/ecodata/raw/dev/data-raw/worksh
 
 ```
 
+
 In 2023, Labrador Slope water accounted for more than 50% of the [source water](https://noaa-edab.github.io/catalog/slopewater.html) entering the Gulf of Maine through the Northeast Channel (Fig. \ref{fig:slopewater}); data are still being processed for 2024. Colder, fresher water detected deep in the Jordan Basin for the [first half of 2024](https://noaa-edab.github.io/catalog/observation_synthesis_2024.html) suggests an increased influx of Labrador Slope and Scotian Shelf water, which resulted in colder and fresher conditions throughout the Northwest Atlantic and contributed to the increased size and colder temperatures of the  Mid-Atlantic [Cold Pool](https://noaa-edab.github.io/catalog/cold_pool.html). 
+
 
 ```{r slopewater, fig.cap="The proportion of Warm Slope Water (WSW) and Labrador Slope Water (LSW) enter the Gulf of Maine through the Northeast Channel. The orange and teal dashed lines represent the long-term proportion averages for the WSW and LSW respectively."}
 
