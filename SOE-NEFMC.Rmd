@@ -21,7 +21,7 @@ urlcolor: blue
 always_allow_html: true
 ---
 
-```{r setup, include=FALSE}
+```{r global.options, include=F}
 
 # library(tint)
 # # invalidate cache when the package version changes
@@ -35,7 +35,7 @@ knitr::opts_chunk$set(echo = FALSE,
                       warning = FALSE,
                       fig.width = 4,
                       fig.asp = 0.45,
-                      fig.align = 'center'
+                      fig.align = 'left'
                       ) #allows for inserting R code into captions
 
 #Plotting and data libraries
@@ -215,7 +215,7 @@ ecodata::plot_community_climate_vulnerability(report = "NewEngland",plottype = '
 
 Overall, [recreational harvest](https://noaa-edab.github.io/catalog/recdat.html) (retained fish presumed to be eaten) has declined in New England (Fig. \ref{fig:rec-landings}). However, recent harvest has remained above the historical low level in 2020. Recreational [shark landings](https://noaa-edab.github.io/catalog/rec_hms.html) of pelagic and prohibited sharks have declined since 2018 (Fig  \ref{fig:rec-hms}), which is likely influenced by regulatory changes implemented in 2018 intended to rebuild shortfin mako stocks and comply with binding recommendations by the International Commission for the Conservation of Atlantic Tunas (ICCAT).
 
-```{r rec-landings, fig.cap = paste0("Total recreational seafood harvest (millions of pounds) in the New England region."),fig.width = 8,fig.asp = 0.4}
+```{r rec-landings, fig.cap = "Total recreational seafood harvest (millions of pounds) in the New England region.",fig.width = 8,fig.asp = 0.4}
 #, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-recdat-landings.R")
 
 ecodata::plot_recdat(report = "NewEngland", varName = "landings", n=10)
@@ -534,7 +534,7 @@ flextable::flextable(b$t) |>
   
 ```
 
-### Indicators: Community Climate Vulnerability in the Mid-Atlantic
+### Indicators: Community Climate Vulnerability in the New England
 
 The [Community Climate Change Risk Indicators](https://noaa-edab.github.io/catalog/community_climate_vulnerability.html) are calculated by multiplying the percent contribution of species to the total value landed in a community by their respective Total Vulnerability scores (based on NOAA’s Climate Vulnerability Assessment) for different sensitivity and exposure factors and then summing the resulting values by year. As a community (or region) shifts towards climate vulnerable species, its risk score increases. While there is not a long-term trend in total climate vulnerability across New England communities as a whole, the proportion of communities with moderate vulnerability is decreasing and shifting more towards high or very high vulnerability scores (Fig. \ref{fig:commvulprop}). This suggests that some communities are shifting towards being more dependent on climate-vulnerable species, particularly shellfish.
 
@@ -639,7 +639,7 @@ ecodata::plot_cetacean_dist() + ggplot2::ggtitle("Whale and Dolphin Distribution
 
 #### Drivers
 
-Mobile populations are shifting distributions to maintain suitable temperature and prey fields, possibly expanding if new suitable habitat exists. Changes in managed species distribution is related, in part, to the [distribution of forage biomass](https://noaa-edab.github.io/catalog/forage_index.html). Since 1982, the fall center of gravity of forage fish (20 species combined) has moved to the north and east (Fig. \ref{Fig:forage_cog}). Spring forage fish center of gravity has been more variable over time.
+Mobile populations are shifting distributions to maintain suitable temperature and prey fields, possibly expanding if new suitable habitat exists. Changes in managed species distribution is related, in part, to the [distribution of forage biomass](https://noaa-edab.github.io/catalog/forage_index.html). Since 1982, the fall center of gravity of forage fish (20 species combined) has moved to the north and east (Fig. \ref{Fig:forage-cog}). Spring forage fish center of gravity has been more variable over time.
 
 ```{r forage-cog, fig.cap = "Eastward (left) and northward (right) shifts in the center of gravity for 20 forage fish species on the Northeast U.S. Shelf.", fig.width = 7.5, fig.asp = .3}
 
@@ -660,7 +660,7 @@ ecodata::plot_zooplankton_index(report = "NewEngland", varName = 'Calfin',plotty
 
 In contrast, [macrobenthos center of gravity](https://noaa-edab.github.io/catalog/benthos_index.html) has shifted westward (Fig. \ref{fig:macrobenthosshifts}). Macrobenthos are small bottom-dwelling invertebrates including polychaete worms, small crustaceans, bivalves (non-commercial), gastropods, nemerteans, tunicates, cnidarians, brittle stars, sea cucumbers, and sand dollars and are prey for many benthic species.
 
-```{r macrobenthosshifts, fig.cap="Eastward (left) and northward (right) shifts in the center of gravity for macrobenthos species on the Northeast U.S. Shelf", fig.width = 8,fig.asp = .3}
+```{r macrobenthosshifts, fig.cap="Eastward (left) and northward (right) shifts in the center of gravity for macrobenthos species on the Northeast U.S. Shelf", fig.width = 8,fig.asp = .4}
 #, fig.asp = .3
 ecodata::plot_benthos_index(plottype = "cog", varName = "Macrobenthos", n=10)+ ggplot2::coord_cartesian(xlim = c(1982, 2022))
 ```
@@ -889,9 +889,9 @@ In 2024, only one [surface marine heatwave](https://noaa-edab.github.io/catalog/
 # magick::image_read(here::here('images','thermal_habitat_2012_cropped.png'))
 #knitr::include_graphics(here::here('images','thermal_habitat_2012_cropped.png'))
 
-ecodata::plot_thermal_habitat_gridded()
+ecodata::plot_thermal_habitat_gridded()+
+  ggplot2::theme(plot.margin = unit(c(0, 0, 0, 0), "cm"))
 ```
-
 [Ocean acidification](https://noaa-edab.github.io/catalog/ocean_acidification.html) (OA) risks vary among species and include reduced survival, growth, reproduction, and productivity, where high OA risk indicates potential negative effects to species. OA risk can also be heightened during colder conditions due to increased CO2 absorption by the water or by transport of high CO2 water masses (see [highlights section](#highlights)). Higher OA risk conditions were observed for Atlantic sea scallop and longfin squid in Long Island Sound and the nearshore and mid shelf regions of the New Jersey shelf during summers of 2016, 2018, 2019, 2023, and 2024 (Fig. \ref{fig:oa-2024} ). The OA indicator observed on the Mid-Atlantic coastal shelf during summer 2024 was the most extreme recorded when compared to all of the years sampled (since 2007). 
 ```{r oa-2024, out.width="100%", fig.cap= "Locations where bottom aragonite saturation state ($\\Omega_{Arag}$; summer only: June-August) were at or below the laboratory-derived sensitivity level for Atlantic sea scallop (left panel) and longfin squid (right panel) for the time periods 2007-2022 (dark cyan) and 2023 only (magenta). Gray circles indicate locations where bottom $\\Omega_{Arag}$ values were above the species specific sensitivity values."}
 
