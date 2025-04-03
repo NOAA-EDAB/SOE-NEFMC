@@ -97,7 +97,7 @@ mng_obj <- data.frame("Objective Categories" = c("Seafood Production",
 
 # knitr::kable(mng_obj, linesep = "",
 #       col.names = c("Objective Categories","Indicators reported"),
-#       caption = "Ecosystem-scale fishery management objectives in the Mid-Atlantic Bight",
+#       caption = "Ecosystem-scale fishery management objectives in New England",
 #       #align = 'c',
 #       booktabs = T) %>%
 #   kable_styling(latex_options = "hold_position", "scale_down") %>%
@@ -117,7 +117,7 @@ flextable::as_grouped_data(mng_obj, groups = "service") %>%
   flextable::bold(i = ~ !is.na(service), bold = TRUE) %>%
   flextable::set_header_labels(Objective.Categories = "Objective categories",
                                Indicators.reported = "Indicators reported") %>%
-  flextable::set_caption("Ecosystem-scale fishery management objectives in the Mid-Atlantic Bight") %>%
+  flextable::set_caption("Ecosystem-scale fishery management objectives in New England") %>%
   flextable::autofit() 
   
 
@@ -150,7 +150,7 @@ mng_obj <- data.frame("Risks" = c("Risks to Managing Spatially",
 
 # knitr::kable(mng_obj, linesep = "",
 #       col.names = c("Objective Categories","Indicators reported"),
-#       caption = "Ecosystem-scale fishery management objectives in the Mid-Atlantic Bight",
+#       caption = "Ecosystem-scale fishery management objectives in New England",
 #       #align = 'c',
 #       booktabs = T) %>%
 #   kable_styling(latex_options = "hold_position", "scale_down") %>%
@@ -171,7 +171,7 @@ tab <- flextable::as_grouped_data(mng_obj, groups = "service") %>%
   flextable::set_header_labels(Risks = "Risk categories",
                                Observation.Indicators = "Observation indicators reported",
                                Potential.Driver.Indicators = "Potential driver indicators reported") %>%
-  flextable::set_caption("Risks to meeting fishery management objectives in the Mid-Atlantic Bight") #%>%
+  flextable::set_caption("Risks to meeting fishery management objectives in the New England") #%>%
   #flextable::autofit() 
   
 FitFlextableToPage(tab)
