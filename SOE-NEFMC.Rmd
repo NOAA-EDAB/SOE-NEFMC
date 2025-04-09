@@ -280,7 +280,7 @@ flextable::flextable(a$unknown) |>
                                B.Bmsy = "B/Bmsy") |>
   flextable::colformat_num(na_str = "-") |>
 
-  flextable::set_caption("Unknown or partially known stock status for MAFMC and jointly managed species.") |>
+  flextable::set_caption("Unknown or partially known stock status for NEFMC and jointly managed species.") |>
   flextable::footnote(i = 1:2, j = 1,value =flextable::as_paragraph('The most recent cod assessment made stock status recommendations for the four new stocks (Eastern Gulf of Maine, Western Gulf of Maine, Georges Bank, and Southern New England) but were not available yet for this report.'),
                       ref_symbols = c('1'))|>
 
@@ -294,7 +294,7 @@ flextable::flextable(a$unknown) |>
 # flextable::flextable(a) %>%
 #     flextable::set_header_labels(F.Fmsy = "F/Fmsy",
 #                                B.Bmsy = "B/Bmsy") %>%
-#   flextable::set_caption("Unknown or partially known stock status for MAFMC and jointly managed species.") %>%
+#   flextable::set_caption("Unknown or partially known stock status for NEFMC and jointly managed species.") %>%
 #   flextable::autofit()
 ```
 
